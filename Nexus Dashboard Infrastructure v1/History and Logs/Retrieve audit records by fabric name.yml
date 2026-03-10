@@ -1,0 +1,590 @@
+info:
+  name: Retrieve audit records by fabric name
+  type: http
+  seq: 2
+
+http:
+  method: GET
+  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabricAuditRecords"
+  headers:
+    - name: X-Content-Type
+      value: ""
+      description: Content type header to indicate if response should be in CSV or JSON format
+      disabled: true
+  params:
+    - name: clusterName
+      value: ""
+      type: query
+      description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+      disabled: true
+    - name: fabricName
+      value: ""
+      type: query
+      description: Name of the fabric
+      disabled: true
+    - name: startDate
+      value: ""
+      type: query
+      description: Start date
+      disabled: true
+    - name: endDate
+      value: ""
+      type: query
+      description: End date
+      disabled: true
+    - name: sort
+      value: ""
+      type: query
+      description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+      disabled: true
+    - name: filter
+      value: ""
+      type: query
+      description: Lucene format filter - Filter the response based on this filter field
+    - name: offset
+      value: ""
+      type: query
+      description: Number of records to skip for pagination
+      disabled: true
+    - name: max
+      value: ""
+      type: query
+      description: Number of records to return
+      disabled: true
+  auth:
+    type: oauth2
+    flow: implicit
+    authorizationUrl: https://example.com/login
+    callbackUrl: "{{oauth_callback_url}}"
+    credentials:
+      clientId: "{{oauth_client_id}}"
+    scope: observer fabric-admin support-engineer super-admin approver designer
+    state: "{{oauth_state}}"
+    tokenConfig:
+      placement:
+        header: Bearer
+    settings:
+      autoFetchToken: false
+      autoRefreshToken: true
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: OK
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabricAuditRecords"
+      method: GET
+      headers:
+        - name: X-Content-Type
+          value: ""
+          description: Content type header to indicate if response should be in CSV or JSON format
+          disabled: true
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+    response:
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "auditRecords": [
+              {
+                "action": "create",
+                "affectedResource": "/fabrics/fab1/switch/FDO26450GC5",
+                "clientIp": "10.10.10.195",
+                "creationTime": "2024-08-15T22:16:18Z",
+                "description": "device was set into maintenance mode",
+                "id": "1",
+                "resourceType": "security",
+                "username": "admin"
+              }
+            ],
+            "meta": {
+              "counts": {
+                "remaining": 50,
+                "total": 10
+              },
+              "links": {
+                "next": "https://api.example.com/api/v1/infra/fabricAuditRecords?offset=40&max=10",
+                "previous": "https://api.example.com/api/v1/infra/fabricAuditRecords?offset=20&max=10"
+              }
+            }
+          }
+  - name: exampleAuditRecordCsv
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabricAuditRecords"
+      method: GET
+      headers:
+        - name: X-Content-Type
+          value: ""
+          description: Content type header to indicate if response should be in CSV or JSON format
+          disabled: true
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+    response:
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: text/csv
+      body:
+        type: text
+        data: |
+          id,creationTime,resourceType,action,affectedResource,resourceOverviewUrl,username,clientIp,traceId,description,fabricName
+          1003074427004583937,2024-08-15T22:16:18Z,tenantFabric,create,/tenants/66e36428afb751bfc9eba6b4,https://10.195.223.213/mso/manage/tenants/edit/66e36428afb751bfc9eba6b4,admin,10.24.69.220,28be38df-6acb-4988-8785-92d60b1763f8,Event is associated: Tenant-Fabric mininet197 was associated with tenant Tenant 2,mininet197
+  - name: exampleAuditRecordSchemaOnlyCsv
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabricAuditRecords"
+      method: GET
+      headers:
+        - name: X-Content-Type
+          value: ""
+          description: Content type header to indicate if response should be in CSV or JSON format
+          disabled: true
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+    response:
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: text/csv
+      body:
+        type: text
+        data: |
+          id,creationTime,resourceType,action,affectedResource,resourceOverviewUrl,username,clientIp,traceId,description,fabricName
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabricAuditRecords"
+      method: GET
+      headers:
+        - name: X-Content-Type
+          value: ""
+          description: Content type header to indicate if response should be in CSV or JSON format
+          disabled: true
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+    response:
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabricAuditRecords"
+      method: GET
+      headers:
+        - name: X-Content-Type
+          value: ""
+          description: Content type header to indicate if response should be in CSV or JSON format
+          disabled: true
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+    response:
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 403 Response
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabricAuditRecords"
+      method: GET
+      headers:
+        - name: X-Content-Type
+          value: ""
+          description: Content type header to indicate if response should be in CSV or JSON format
+          disabled: true
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+    response:
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 404 Response
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabricAuditRecords"
+      method: GET
+      headers:
+        - name: X-Content-Type
+          value: ""
+          description: Content type header to indicate if response should be in CSV or JSON format
+          disabled: true
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+    response:
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 500 Response
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabricAuditRecords"
+      method: GET
+      headers:
+        - name: X-Content-Type
+          value: ""
+          description: Content type header to indicate if response should be in CSV or JSON format
+          disabled: true
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+    response:
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }

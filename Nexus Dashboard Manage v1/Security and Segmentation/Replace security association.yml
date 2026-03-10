@@ -1,0 +1,590 @@
+info:
+  name: Replace security association
+  type: http
+  seq: 10
+
+http:
+  method: PUT
+  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityAssociations/:securityAssociationName"
+  params:
+    - name: clusterName
+      value: ""
+      type: query
+      description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+      disabled: true
+    - name: fabricName
+      value: ""
+      type: path
+      description: Name of the fabric
+    - name: securityAssociationName
+      value: ""
+      type: path
+      description: Security Association Name path parameter
+  body:
+    type: json
+    data: |-
+      {
+        "name": "",
+        "tenantName": "",
+        "displayName": "",
+        "description": "",
+        "contractName": "",
+        "srcSecurityGroupName": "",
+        "srcVrfName": "",
+        "dstSecurityGroupName": "",
+        "dstVrfName": "",
+        "attach": false
+      }
+  auth:
+    type: oauth2
+    flow: implicit
+    authorizationUrl: https://example.com/login
+    callbackUrl: "{{oauth_callback_url}}"
+    credentials:
+      clientId: "{{oauth_client_id}}"
+    scope: observer fabric-admin support-engineer super-admin approver designer
+    state: "{{oauth_state}}"
+    tokenConfig:
+      placement:
+        header: Bearer
+    settings:
+      autoFetchToken: false
+      autoRefreshToken: true
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 204 Response (Replace a security association with tenant)
+    description: No Content
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityAssociations/:securityAssociationName"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: securityAssociationName
+          value: ""
+          type: path
+          description: Security Association Name path parameter
+      body:
+        type: json
+        data: |-
+          {
+            "attach": true,
+            "contractName": "tenantSales~deny-http",
+            "displayName": "MySecurityAssociation_10000",
+            "dstSecurityGroupName": "tenantSales~SG_20000",
+            "dstVrfName": "tenantSales~MyVRF_50000",
+            "name": "tenantSales~SA_10000",
+            "srcSecurityGroupName": "tenantSales~SG_10000",
+            "srcVrfName": "tenantSales~MyVRF_50000",
+            "tenantName": "tenantSales"
+          }
+    response:
+      statusText: No Content
+      body:
+        type: text
+        data: ""
+  - name: 204 Response (Replace a security association)
+    description: No Content
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityAssociations/:securityAssociationName"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: securityAssociationName
+          value: ""
+          type: path
+          description: Security Association Name path parameter
+      body:
+        type: json
+        data: |-
+          {
+            "attach": false,
+            "contractName": "deny-icmp",
+            "displayName": "MySecurityAssociation_10000",
+            "dstSecurityGroupName": "SG_20000",
+            "dstVrfName": "MyVRF_50000",
+            "name": "SA_10000",
+            "srcSecurityGroupName": "SG_10000",
+            "srcVrfName": "MyVRF_50000"
+          }
+    response:
+      statusText: No Content
+      body:
+        type: text
+        data: ""
+  - name: 400 Response (Replace a security association with tenant)
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityAssociations/:securityAssociationName"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: securityAssociationName
+          value: ""
+          type: path
+          description: Security Association Name path parameter
+      body:
+        type: json
+        data: |-
+          {
+            "attach": true,
+            "contractName": "tenantSales~deny-http",
+            "displayName": "MySecurityAssociation_10000",
+            "dstSecurityGroupName": "tenantSales~SG_20000",
+            "dstVrfName": "tenantSales~MyVRF_50000",
+            "name": "tenantSales~SA_10000",
+            "srcSecurityGroupName": "tenantSales~SG_10000",
+            "srcVrfName": "tenantSales~MyVRF_50000",
+            "tenantName": "tenantSales"
+          }
+    response:
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 400 Response (Replace a security association)
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityAssociations/:securityAssociationName"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: securityAssociationName
+          value: ""
+          type: path
+          description: Security Association Name path parameter
+      body:
+        type: json
+        data: |-
+          {
+            "attach": false,
+            "contractName": "deny-icmp",
+            "displayName": "MySecurityAssociation_10000",
+            "dstSecurityGroupName": "SG_20000",
+            "dstVrfName": "MyVRF_50000",
+            "name": "SA_10000",
+            "srcSecurityGroupName": "SG_10000",
+            "srcVrfName": "MyVRF_50000"
+          }
+    response:
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 401 Response (Replace a security association with tenant)
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityAssociations/:securityAssociationName"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: securityAssociationName
+          value: ""
+          type: path
+          description: Security Association Name path parameter
+      body:
+        type: json
+        data: |-
+          {
+            "attach": true,
+            "contractName": "tenantSales~deny-http",
+            "displayName": "MySecurityAssociation_10000",
+            "dstSecurityGroupName": "tenantSales~SG_20000",
+            "dstVrfName": "tenantSales~MyVRF_50000",
+            "name": "tenantSales~SA_10000",
+            "srcSecurityGroupName": "tenantSales~SG_10000",
+            "srcVrfName": "tenantSales~MyVRF_50000",
+            "tenantName": "tenantSales"
+          }
+    response:
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 401 Response (Replace a security association)
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityAssociations/:securityAssociationName"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: securityAssociationName
+          value: ""
+          type: path
+          description: Security Association Name path parameter
+      body:
+        type: json
+        data: |-
+          {
+            "attach": false,
+            "contractName": "deny-icmp",
+            "displayName": "MySecurityAssociation_10000",
+            "dstSecurityGroupName": "SG_20000",
+            "dstVrfName": "MyVRF_50000",
+            "name": "SA_10000",
+            "srcSecurityGroupName": "SG_10000",
+            "srcVrfName": "MyVRF_50000"
+          }
+    response:
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 403 Response (Replace a security association with tenant)
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityAssociations/:securityAssociationName"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: securityAssociationName
+          value: ""
+          type: path
+          description: Security Association Name path parameter
+      body:
+        type: json
+        data: |-
+          {
+            "attach": true,
+            "contractName": "tenantSales~deny-http",
+            "displayName": "MySecurityAssociation_10000",
+            "dstSecurityGroupName": "tenantSales~SG_20000",
+            "dstVrfName": "tenantSales~MyVRF_50000",
+            "name": "tenantSales~SA_10000",
+            "srcSecurityGroupName": "tenantSales~SG_10000",
+            "srcVrfName": "tenantSales~MyVRF_50000",
+            "tenantName": "tenantSales"
+          }
+    response:
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 403 Response (Replace a security association)
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityAssociations/:securityAssociationName"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: securityAssociationName
+          value: ""
+          type: path
+          description: Security Association Name path parameter
+      body:
+        type: json
+        data: |-
+          {
+            "attach": false,
+            "contractName": "deny-icmp",
+            "displayName": "MySecurityAssociation_10000",
+            "dstSecurityGroupName": "SG_20000",
+            "dstVrfName": "MyVRF_50000",
+            "name": "SA_10000",
+            "srcSecurityGroupName": "SG_10000",
+            "srcVrfName": "MyVRF_50000"
+          }
+    response:
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 404 Response (Replace a security association with tenant)
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityAssociations/:securityAssociationName"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: securityAssociationName
+          value: ""
+          type: path
+          description: Security Association Name path parameter
+      body:
+        type: json
+        data: |-
+          {
+            "attach": true,
+            "contractName": "tenantSales~deny-http",
+            "displayName": "MySecurityAssociation_10000",
+            "dstSecurityGroupName": "tenantSales~SG_20000",
+            "dstVrfName": "tenantSales~MyVRF_50000",
+            "name": "tenantSales~SA_10000",
+            "srcSecurityGroupName": "tenantSales~SG_10000",
+            "srcVrfName": "tenantSales~MyVRF_50000",
+            "tenantName": "tenantSales"
+          }
+    response:
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 404 Response (Replace a security association)
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityAssociations/:securityAssociationName"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: securityAssociationName
+          value: ""
+          type: path
+          description: Security Association Name path parameter
+      body:
+        type: json
+        data: |-
+          {
+            "attach": false,
+            "contractName": "deny-icmp",
+            "displayName": "MySecurityAssociation_10000",
+            "dstSecurityGroupName": "SG_20000",
+            "dstVrfName": "MyVRF_50000",
+            "name": "SA_10000",
+            "srcSecurityGroupName": "SG_10000",
+            "srcVrfName": "MyVRF_50000"
+          }
+    response:
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 500 Response (Replace a security association with tenant)
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityAssociations/:securityAssociationName"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: securityAssociationName
+          value: ""
+          type: path
+          description: Security Association Name path parameter
+      body:
+        type: json
+        data: |-
+          {
+            "attach": true,
+            "contractName": "tenantSales~deny-http",
+            "displayName": "MySecurityAssociation_10000",
+            "dstSecurityGroupName": "tenantSales~SG_20000",
+            "dstVrfName": "tenantSales~MyVRF_50000",
+            "name": "tenantSales~SA_10000",
+            "srcSecurityGroupName": "tenantSales~SG_10000",
+            "srcVrfName": "tenantSales~MyVRF_50000",
+            "tenantName": "tenantSales"
+          }
+    response:
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }
+  - name: 500 Response (Replace a security association)
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityAssociations/:securityAssociationName"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: securityAssociationName
+          value: ""
+          type: path
+          description: Security Association Name path parameter
+      body:
+        type: json
+        data: |-
+          {
+            "attach": false,
+            "contractName": "deny-icmp",
+            "displayName": "MySecurityAssociation_10000",
+            "dstSecurityGroupName": "SG_20000",
+            "dstVrfName": "MyVRF_50000",
+            "name": "SA_10000",
+            "srcSecurityGroupName": "SG_10000",
+            "srcVrfName": "MyVRF_50000"
+          }
+    response:
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }

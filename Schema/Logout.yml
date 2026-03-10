@@ -1,0 +1,19 @@
+info:
+  name: Logout
+  type: http
+  seq: 8
+
+http:
+  method: POST
+  url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/logout?timeout"
+  params:
+    - name: timeout
+      value: ""
+      type: query
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

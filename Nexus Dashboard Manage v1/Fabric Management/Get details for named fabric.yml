@@ -1,0 +1,479 @@
+info:
+  name: Get details for named fabric
+  type: http
+  seq: 7
+
+http:
+  method: GET
+  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/F1_New"
+  params:
+    - name: clusterName
+      value: ""
+      type: query
+      description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+      disabled: true
+  auth:
+    type: oauth2
+    flow: implicit
+    authorizationUrl: https://example.com/login
+    callbackUrl: "{{oauth_callback_url}}"
+    credentials:
+      clientId: "{{oauth_client_id}}"
+    scope: observer fabric-admin support-engineer super-admin approver designer
+    state: "{{oauth_state}}"
+    tokenConfig:
+      placement:
+        header: Bearer
+    settings:
+      autoFetchToken: false
+      autoRefreshToken: true
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: classicFabricGroup
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+    response:
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "category": "fabricGroup",
+            "management": {
+              "type": "classic"
+            },
+            "name": "fgC"
+          }
+  - name: ebgpVxlan
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+    response:
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "category": "fabric",
+            "licenseTier": "advantage",
+            "location": {
+              "latitude": 37.33939,
+              "longitude": -121.89496
+            },
+            "management": {
+              "aaa": false,
+              "advancedSshOption": false,
+              "aimlQos": false,
+              "allowLeafSameAs": false,
+              "allowVlanOnLeafTorPairing": "none",
+              "anycastBorderGatewayAdvertisePhysicalIp": false,
+              "anycastGatewayMac": "2020.0000.00aa",
+              "anycastLoopbackId": 10,
+              "anycastRendezvousPointIpRange": "10.254.254.0/24",
+              "autoGenerateMulticastGroupAddress": false,
+              "autoUniqueVrfLiteIpPrefix": false,
+              "bfd": false,
+              "bfdAuthentication": false,
+              "bfdAuthenticationKeyId": 100,
+              "bfdIbgp": false,
+              "bgpAllowAsInNum": 1,
+              "bgpAsMode": "multiAS",
+              "bgpAsn": "23",
+              "bgpAuthentication": false,
+              "bgpLoopbackId": 0,
+              "bgpLoopbackIpRange": "10.2.0.0/22",
+              "bgpMaxPath": 4,
+              "bgpUnderlayFailureProtect": false,
+              "cdp": false,
+              "coppPolicy": "strict",
+              "defaultQueuingPolicy": false,
+              "disableRouteMapTag": false,
+              "evpn": true,
+              "fabricMtu": 9216,
+              "fabricVpcDomainId": false,
+              "fabricVpcQos": false,
+              "fabricVpcQosPolicyName": "spine_qos_for_fabric_vpc_peering",
+              "firstHopRedundancyProtocol": "hsrp",
+              "greenfieldDebugFlag": "disable",
+              "heartbeatInterval": 190,
+              "interfaceStatisticsLoadInterval": 10,
+              "intraFabricSubnetRange": "10.4.0.0/16",
+              "l2HostInterfaceMtu": 9216,
+              "l2VniRange": "30000-49000",
+              "l3VniNoVlanDefaultOption": false,
+              "l3VniRange": "50000-59000",
+              "leafTorIdRange": false,
+              "localDhcpServer": false,
+              "macsec": false,
+              "macsecReportTimer": 5,
+              "managementIpv4Prefix": 24,
+              "managementIpv6Prefix": 64,
+              "multicastGroupSubnet": "239.1.1.0/25",
+              "mvpnVrfRouteImportId": false,
+              "netflowSettings": {
+                "netflow": false
+              },
+              "networkExtensionTemplate": "Default_Network_Extension_Universal",
+              "networkTemplate": "Default_Network_Universal",
+              "networkVlanRange": "2300-2999",
+              "nextGenerationOAM": true,
+              "ngoamSouthBoundLoopDetect": false,
+              "ngoamSouthBoundLoopDetectProbeInterval": 300,
+              "ngoamSouthBoundLoopDetectRecoveryInterval": 600,
+              "nveHoldDownTimer": 180,
+              "nveLoopbackId": 1,
+              "nveLoopbackIpRange": "10.3.0.0/22",
+              "nxapi": true,
+              "nxapiHttp": true,
+              "nxapiHttpPort": 80,
+              "nxapiHttpsPort": 443,
+              "overlayMode": "cli",
+              "perVrfLoopbackAutoProvision": false,
+              "perVrfLoopbackAutoProvisionIpv6": false,
+              "performanceMonitoring": false,
+              "phantomRendezvousPointLoopbackId1": 2,
+              "phantomRendezvousPointLoopbackId2": 3,
+              "phantomRendezvousPointLoopbackId3": 4,
+              "phantomRendezvousPointLoopbackId4": 5,
+              "pimHelloAuthentication": false,
+              "powerRedundancyMode": "redundant",
+              "privateVlan": false,
+              "ptp": false,
+              "ptpDomainId": 0,
+              "ptpLoopbackId": 0,
+              "realTimeInterfaceStatisticsCollection": false,
+              "rendezvousPointCount": 2,
+              "rendezvousPointLoopbackId": 254,
+              "rendezvousPointMode": "asm",
+              "replicationMode": "multicast",
+              "routeMapTag": 12345,
+              "sharedVpcDomainId": 1,
+              "siteId": "23",
+              "snmpTrap": true,
+              "staticUnderlayIpAllocation": false,
+              "strictConfigComplianceMode": false,
+              "subInterfaceDot1qRange": "2-511",
+              "targetSubnetMask": 30,
+              "tcamAllocation": true,
+              "tenantDhcp": true,
+              "tenantRoutedMulticast": false,
+              "tenantRoutedMulticastIpv6": false,
+              "type": "vxlanEbgp",
+              "underlayIpv6": false,
+              "underlayMulticastGroupAddressLimit": 128,
+              "vpcAutoRecoveryTimer": 360,
+              "vpcDelayRestoreTimer": 150,
+              "vpcDomainIdRange": "1-1000",
+              "vpcIpv6NeighborDiscoverySync": true,
+              "vpcLayer3PeerRouter": true,
+              "vpcPeerKeepAliveOption": "management",
+              "vpcPeerLinkEnableNativeVlan": false,
+              "vpcPeerLinkPortChannelId": "500",
+              "vpcPeerLinkVlan": "3600",
+              "vpcTorDelayRestoreTimer": 30,
+              "vrfExtensionTemplate": "Default_VRF_Extension_Universal",
+              "vrfLiteAutoConfig": "manual",
+              "vrfLiteIpv6SubnetRange": "fd00::a33:0/112",
+              "vrfLiteIpv6SubnetTargetMask": 126,
+              "vrfLiteSubnetRange": "10.33.0.0/16",
+              "vrfLiteSubnetTargetMask": 30,
+              "vrfTemplate": "Default_VRF_Universal",
+              "vrfVlanRange": "2000-2299"
+            },
+            "name": "eBgpFabric",
+            "securityDomain": "all",
+            "telemetryCollection": true,
+            "telemetryCollectionType": "inBand",
+            "telemetrySourceInterface": "loopback0",
+            "telemetrySourceVrf": "default",
+            "telemetryStreamingProtocol": "ipv4"
+          }
+  - name: ibgpVxlan
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+    response:
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "category": "fabric",
+            "licenseTier": "essentials",
+            "location": {
+              "latitude": 37.33939,
+              "longitude": -121.89496
+            },
+            "management": {
+              "bgpAsn": "11",
+              "type": "vxlanIbgp"
+            },
+            "name": "iBgpFabric",
+            "securityDomain": "all",
+            "telemetryCollection": false
+          }
+  - name: vxlanFabricGroup
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+    response:
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "category": "fabricGroup",
+            "management": {
+              "anycastGatewayMac": "2020.0000.00aa",
+              "autoConfigureCloudSec": false,
+              "autoMultisiteUnderlayInterConnect": false,
+              "bgpBfd": false,
+              "bgpLogNeighborChange": false,
+              "bgpSendCommunity": false,
+              "borderGatewayRoutingTag": 54321,
+              "cloudSecAlgorithm": "AES_128_CMAC",
+              "cloudSecEnforcement": "strict",
+              "cloudSecKey": "0123456789abcdefABCDEF",
+              "cloudSecReportTimer": 5,
+              "defaultPrivateVlanSecondaryNetworkTemplate": "Pvlan_Secondary_Network",
+              "downstreamL2VniRange": "",
+              "downstreamL3VniRange": "",
+              "downstreamVni": false,
+              "enableMsOverlayIfcBgpDesc": false,
+              "l2VniRange": "30000-49000",
+              "l3VniRange": "50000-59000",
+              "multisiteDelayRestore": 300,
+              "multisiteInterConnectBgpAuthKeyType": "3des",
+              "multisiteInterConnectBgpAuthentication": false,
+              "multisiteInterConnectBgpKey": "0123456789abcdefABCDEF",
+              "multisiteLoopbackId": 100,
+              "multisiteLoopbackIpRange": "10.10.0.0/24",
+              "multisiteOverlayInterConnectType": "manual",
+              "multisiteUnderlaySubnetRange": "10.10.1.0/24",
+              "multisiteUnderlaySubnetTargetMask": 30,
+              "networkExtensionTemplate": "Default_Network_Extension_Universal",
+              "networkTemplate": "Default_Network_Universal",
+              "privateVlan": false,
+              "routeServerCollection": [
+                {
+                  "routeServerIp": "5.5.5.5"
+                },
+                {
+                  "routeServerAsn": "65002",
+                  "routeServerIp": "6.6.6.6"
+                }
+              ],
+              "routeServerRedistributeDirectRouteMap": false,
+              "routeServerRoutingTag": 54321,
+              "scheduledBackupTime": "02:00",
+              "securityGroupTag": "loose",
+              "securityGroupTagIdRange": "10000-14000",
+              "securityGroupTagPrefix": "SG_",
+              "securityGroupTagPreprovision": false,
+              "tenantRoutedMulticastV4V6": false,
+              "type": "vxlan",
+              "underlayIpv6": false,
+              "vrfExtensionTemplate": "Default_VRF_Extension_Universal",
+              "vrfTemplate": "Default_VRF_Universal"
+            },
+            "name": "vx1"
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+    response:
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+    response:
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 403 Response
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+    response:
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 404 Response
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+    response:
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 500 Response
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+    response:
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }

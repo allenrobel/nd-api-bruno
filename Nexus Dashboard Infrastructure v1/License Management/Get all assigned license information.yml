@@ -1,0 +1,192 @@
+info:
+  name: Get all assigned license information
+  type: http
+  seq: 2
+
+http:
+  method: GET
+  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/license/assignments"
+  params:
+    - name: clusterName
+      value: ""
+      type: query
+      description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+      disabled: true
+  auth:
+    type: oauth2
+    flow: implicit
+    authorizationUrl: https://example.com/login
+    callbackUrl: "{{oauth_callback_url}}"
+    credentials:
+      clientId: "{{oauth_client_id}}"
+    scope: observer fabric-admin support-engineer super-admin approver designer
+    state: "{{oauth_state}}"
+    tokenConfig:
+      placement:
+        header: Bearer
+    settings:
+      autoFetchToken: false
+      autoRefreshToken: true
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Switch license assignments
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/license/assignments"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+    response:
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "assignments": [
+              {
+                "fabricName": "FabricA",
+                "fabricOrLanDbId": 3010,
+                "fabricOrLanId": 10,
+                "ipAddress": "172.22.46.233",
+                "licenseId": 3,
+                "licenseState": "Permanent",
+                "licenseType": "Switch",
+                "licenseable": true,
+                "managed": true,
+                "productType": 1,
+                "swDbID": 3020,
+                "switchKey": "20:00:00:0d:ec:08:66:c0",
+                "switchModel": "DS-C9216i",
+                "switchType": 472,
+                "systemName": "sw172-22-46-233",
+                "vdc": false
+              },
+              {
+                "expirationOrHonorDate": "2024-07-25T20:55:35.628Z",
+                "fabricName": "Mani",
+                "fabricOrLanDbId": 3010,
+                "fabricOrLanId": 10,
+                "ipAddress": "172.22.47.20",
+                "licenseId": 10,
+                "licenseState": "Honor",
+                "licenseType": "NexusDashboard-Server",
+                "licenseable": true,
+                "managed": true,
+                "productType": 1,
+                "swDbID": 3030,
+                "switchKey": "20:00:00:0d:ec:50:0b:80",
+                "switchModel": "DS-C9134",
+                "switchType": 616,
+                "systemName": "sw172-22-47-20",
+                "vdc": false
+              }
+            ]
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/license/assignments"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+    response:
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/license/assignments"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+    response:
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 403 Response
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/license/assignments"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+    response:
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 500 Response
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/license/assignments"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+    response:
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }

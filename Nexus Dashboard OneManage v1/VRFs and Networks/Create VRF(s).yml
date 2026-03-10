@@ -1,0 +1,958 @@
+info:
+  name: Create VRF(s)
+  type: http
+  seq: 27
+  tags:
+    - VRFs and Networks
+
+http:
+  method: POST
+  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/vrfs"
+  params:
+    - name: fabricName
+      value: ""
+      type: path
+      description: Name of the fabric
+  body:
+    type: json
+    data: |-
+      {
+        "vrfs": [
+          {
+            "fabricName": "MCF",
+            "serviceVrfTemplateName": "",
+            "vlanId": 1001,
+            "vrfExtensionTemplateName": "Default_VRF_Extension_Universal",
+            "vrfId": 50001,
+            "vrfName": "MyVRF_50001",
+            "vrfTemplateConfig": {
+              "asn": "",
+              "disableRtAuto": "false",
+              "ipv6LinkLocalFlag": "true",
+              "maxBgpPaths": "1",
+              "maxIbgpPaths": "2",
+              "mtu": "9216",
+              "nveId": "1",
+              "routeTargetExport": "",
+              "routeTargetExportEvpn": "",
+              "routeTargetImport": "",
+              "routeTargetImportEvpn": "65100:1000,65101:2000,65102:3000",
+              "tag": "12345",
+              "vrfDescription": "",
+              "vrfIntfDescription": "",
+              "vrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET",
+              "vrfVlanId": "1001",
+              "vrfVlanName": ""
+            },
+            "vrfTemplateName": "Default_VRF_Universal",
+            "vrfType": "userDefined"
+          }
+        ]
+      }
+  auth:
+    type: oauth2
+    flow: implicit
+    authorizationUrl: https://example.com/login
+    callbackUrl: "{{oauth_callback_url}}"
+    credentials:
+      clientId: "{{oauth_client_id}}"
+    scope: observer fabric-admin support-engineer super-admin approver designer
+    state: "{{oauth_state}}"
+    tokenConfig:
+      placement:
+        header: Bearer
+    settings:
+      autoFetchToken: false
+      autoRefreshToken: true
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Single success (Custom VRF)
+    description: Create one VRF
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/vrfs"
+      method: POST
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "vrfs": [
+              {
+                "fabricName": "MCF",
+                "serviceVrfTemplateName": "",
+                "vlanId": 1001,
+                "vrfExtensionTemplateName": "Default_VRF_Extension_Universal",
+                "vrfId": 50001,
+                "vrfName": "MyVRF_50001",
+                "vrfTemplateConfig": {
+                  "asn": "",
+                  "disableRtAuto": "false",
+                  "ipv6LinkLocalFlag": "true",
+                  "maxBgpPaths": "1",
+                  "maxIbgpPaths": "2",
+                  "mtu": "9216",
+                  "nveId": "1",
+                  "routeTargetExport": "",
+                  "routeTargetExportEvpn": "",
+                  "routeTargetImport": "",
+                  "routeTargetImportEvpn": "65100:1000,65101:2000,65102:3000",
+                  "tag": "12345",
+                  "vrfDescription": "",
+                  "vrfIntfDescription": "",
+                  "vrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET",
+                  "vrfVlanId": "1001",
+                  "vrfVlanName": ""
+                },
+                "vrfTemplateName": "Default_VRF_Universal",
+                "vrfType": "userDefined"
+              }
+            ]
+          }
+    response:
+      status: 207
+      statusText: Multi-Status
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "results": [
+              {
+                "status": "success",
+                "vrfId": 50000,
+                "vrfName": "MyVRF_50000"
+              }
+            ]
+          }
+  - name: Single success (VXLAN VRF)
+    description: Create one VRF
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/vrfs"
+      method: POST
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "vrfs": [
+              {
+                "coreData": {
+                  "evpnRouteTargetExport": [
+                    "65000:1002"
+                  ],
+                  "evpnRouteTargetImport": [
+                    "65000:1002"
+                  ],
+                  "ipv6LinkLocal": true,
+                  "maxBgpPaths": 1,
+                  "maxIbgpPaths": 2,
+                  "mtu": 9216,
+                  "routeTargetExport": [
+                    "65000:1001"
+                  ],
+                  "routeTargetImport": [
+                    "65000:1001"
+                  ],
+                  "routingTag": 12345,
+                  "v6VrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET",
+                  "vrfDescription": "VXLAN VRF for Production",
+                  "vrfInterfaceDescription": "Interface for VLAN 1000",
+                  "vrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET",
+                  "vrfVlanName": "VLAN1000"
+                },
+                "fabricData": {
+                  "advertiseDefaultRoute": true,
+                  "advertiseHostRoute": false,
+                  "asn": "1234",
+                  "configureStaticDefaultRoute": true,
+                  "disableRtAuto": false,
+                  "netflow": true,
+                  "netflowMonitor": "Netflow_123",
+                  "trmData": {
+                    "ipv4Trm": true,
+                    "l3VniMulticastGroup": "239.1.1.1",
+                    "mvpnRouteTargetExport": [
+                      "65000:100"
+                    ],
+                    "mvpnRouteTargetImport": [
+                      "65000:100"
+                    ],
+                    "trmOnBgw": false,
+                    "v4MulticastGroup": "224.1.0.0/4",
+                    "v4RpAbsent": false,
+                    "v4RpAddress": "10.1.0.1",
+                    "v4RpExternal": false
+                  }
+                },
+                "fabricName": "MCF",
+                "vlanId": 1000,
+                "vrfId": 50000,
+                "vrfName": "MyVRF_50000",
+                "vrfType": "vxlan"
+              }
+            ]
+          }
+    response:
+      status: 207
+      statusText: Multi-Status
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "results": [
+              {
+                "status": "success",
+                "vrfId": 50000,
+                "vrfName": "MyVRF_50000"
+              }
+            ]
+          }
+  - name: 400 Response (Custom VRF)
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/vrfs"
+      method: POST
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "vrfs": [
+              {
+                "fabricName": "MCF",
+                "serviceVrfTemplateName": "",
+                "vlanId": 1001,
+                "vrfExtensionTemplateName": "Default_VRF_Extension_Universal",
+                "vrfId": 50001,
+                "vrfName": "MyVRF_50001",
+                "vrfTemplateConfig": {
+                  "asn": "",
+                  "disableRtAuto": "false",
+                  "ipv6LinkLocalFlag": "true",
+                  "maxBgpPaths": "1",
+                  "maxIbgpPaths": "2",
+                  "mtu": "9216",
+                  "nveId": "1",
+                  "routeTargetExport": "",
+                  "routeTargetExportEvpn": "",
+                  "routeTargetImport": "",
+                  "routeTargetImportEvpn": "65100:1000,65101:2000,65102:3000",
+                  "tag": "12345",
+                  "vrfDescription": "",
+                  "vrfIntfDescription": "",
+                  "vrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET",
+                  "vrfVlanId": "1001",
+                  "vrfVlanName": ""
+                },
+                "vrfTemplateName": "Default_VRF_Universal",
+                "vrfType": "userDefined"
+              }
+            ]
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 400 Response (VXLAN VRF)
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/vrfs"
+      method: POST
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "vrfs": [
+              {
+                "coreData": {
+                  "evpnRouteTargetExport": [
+                    "65000:1002"
+                  ],
+                  "evpnRouteTargetImport": [
+                    "65000:1002"
+                  ],
+                  "ipv6LinkLocal": true,
+                  "maxBgpPaths": 1,
+                  "maxIbgpPaths": 2,
+                  "mtu": 9216,
+                  "routeTargetExport": [
+                    "65000:1001"
+                  ],
+                  "routeTargetImport": [
+                    "65000:1001"
+                  ],
+                  "routingTag": 12345,
+                  "v6VrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET",
+                  "vrfDescription": "VXLAN VRF for Production",
+                  "vrfInterfaceDescription": "Interface for VLAN 1000",
+                  "vrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET",
+                  "vrfVlanName": "VLAN1000"
+                },
+                "fabricData": {
+                  "advertiseDefaultRoute": true,
+                  "advertiseHostRoute": false,
+                  "asn": "1234",
+                  "configureStaticDefaultRoute": true,
+                  "disableRtAuto": false,
+                  "netflow": true,
+                  "netflowMonitor": "Netflow_123",
+                  "trmData": {
+                    "ipv4Trm": true,
+                    "l3VniMulticastGroup": "239.1.1.1",
+                    "mvpnRouteTargetExport": [
+                      "65000:100"
+                    ],
+                    "mvpnRouteTargetImport": [
+                      "65000:100"
+                    ],
+                    "trmOnBgw": false,
+                    "v4MulticastGroup": "224.1.0.0/4",
+                    "v4RpAbsent": false,
+                    "v4RpAddress": "10.1.0.1",
+                    "v4RpExternal": false
+                  }
+                },
+                "fabricName": "MCF",
+                "vlanId": 1000,
+                "vrfId": 50000,
+                "vrfName": "MyVRF_50000",
+                "vrfType": "vxlan"
+              }
+            ]
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 401 Response (Custom VRF)
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/vrfs"
+      method: POST
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "vrfs": [
+              {
+                "fabricName": "MCF",
+                "serviceVrfTemplateName": "",
+                "vlanId": 1001,
+                "vrfExtensionTemplateName": "Default_VRF_Extension_Universal",
+                "vrfId": 50001,
+                "vrfName": "MyVRF_50001",
+                "vrfTemplateConfig": {
+                  "asn": "",
+                  "disableRtAuto": "false",
+                  "ipv6LinkLocalFlag": "true",
+                  "maxBgpPaths": "1",
+                  "maxIbgpPaths": "2",
+                  "mtu": "9216",
+                  "nveId": "1",
+                  "routeTargetExport": "",
+                  "routeTargetExportEvpn": "",
+                  "routeTargetImport": "",
+                  "routeTargetImportEvpn": "65100:1000,65101:2000,65102:3000",
+                  "tag": "12345",
+                  "vrfDescription": "",
+                  "vrfIntfDescription": "",
+                  "vrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET",
+                  "vrfVlanId": "1001",
+                  "vrfVlanName": ""
+                },
+                "vrfTemplateName": "Default_VRF_Universal",
+                "vrfType": "userDefined"
+              }
+            ]
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 401 Response (VXLAN VRF)
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/vrfs"
+      method: POST
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "vrfs": [
+              {
+                "coreData": {
+                  "evpnRouteTargetExport": [
+                    "65000:1002"
+                  ],
+                  "evpnRouteTargetImport": [
+                    "65000:1002"
+                  ],
+                  "ipv6LinkLocal": true,
+                  "maxBgpPaths": 1,
+                  "maxIbgpPaths": 2,
+                  "mtu": 9216,
+                  "routeTargetExport": [
+                    "65000:1001"
+                  ],
+                  "routeTargetImport": [
+                    "65000:1001"
+                  ],
+                  "routingTag": 12345,
+                  "v6VrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET",
+                  "vrfDescription": "VXLAN VRF for Production",
+                  "vrfInterfaceDescription": "Interface for VLAN 1000",
+                  "vrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET",
+                  "vrfVlanName": "VLAN1000"
+                },
+                "fabricData": {
+                  "advertiseDefaultRoute": true,
+                  "advertiseHostRoute": false,
+                  "asn": "1234",
+                  "configureStaticDefaultRoute": true,
+                  "disableRtAuto": false,
+                  "netflow": true,
+                  "netflowMonitor": "Netflow_123",
+                  "trmData": {
+                    "ipv4Trm": true,
+                    "l3VniMulticastGroup": "239.1.1.1",
+                    "mvpnRouteTargetExport": [
+                      "65000:100"
+                    ],
+                    "mvpnRouteTargetImport": [
+                      "65000:100"
+                    ],
+                    "trmOnBgw": false,
+                    "v4MulticastGroup": "224.1.0.0/4",
+                    "v4RpAbsent": false,
+                    "v4RpAddress": "10.1.0.1",
+                    "v4RpExternal": false
+                  }
+                },
+                "fabricName": "MCF",
+                "vlanId": 1000,
+                "vrfId": 50000,
+                "vrfName": "MyVRF_50000",
+                "vrfType": "vxlan"
+              }
+            ]
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 403 Response (Custom VRF)
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/vrfs"
+      method: POST
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "vrfs": [
+              {
+                "fabricName": "MCF",
+                "serviceVrfTemplateName": "",
+                "vlanId": 1001,
+                "vrfExtensionTemplateName": "Default_VRF_Extension_Universal",
+                "vrfId": 50001,
+                "vrfName": "MyVRF_50001",
+                "vrfTemplateConfig": {
+                  "asn": "",
+                  "disableRtAuto": "false",
+                  "ipv6LinkLocalFlag": "true",
+                  "maxBgpPaths": "1",
+                  "maxIbgpPaths": "2",
+                  "mtu": "9216",
+                  "nveId": "1",
+                  "routeTargetExport": "",
+                  "routeTargetExportEvpn": "",
+                  "routeTargetImport": "",
+                  "routeTargetImportEvpn": "65100:1000,65101:2000,65102:3000",
+                  "tag": "12345",
+                  "vrfDescription": "",
+                  "vrfIntfDescription": "",
+                  "vrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET",
+                  "vrfVlanId": "1001",
+                  "vrfVlanName": ""
+                },
+                "vrfTemplateName": "Default_VRF_Universal",
+                "vrfType": "userDefined"
+              }
+            ]
+          }
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 403 Response (VXLAN VRF)
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/vrfs"
+      method: POST
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "vrfs": [
+              {
+                "coreData": {
+                  "evpnRouteTargetExport": [
+                    "65000:1002"
+                  ],
+                  "evpnRouteTargetImport": [
+                    "65000:1002"
+                  ],
+                  "ipv6LinkLocal": true,
+                  "maxBgpPaths": 1,
+                  "maxIbgpPaths": 2,
+                  "mtu": 9216,
+                  "routeTargetExport": [
+                    "65000:1001"
+                  ],
+                  "routeTargetImport": [
+                    "65000:1001"
+                  ],
+                  "routingTag": 12345,
+                  "v6VrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET",
+                  "vrfDescription": "VXLAN VRF for Production",
+                  "vrfInterfaceDescription": "Interface for VLAN 1000",
+                  "vrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET",
+                  "vrfVlanName": "VLAN1000"
+                },
+                "fabricData": {
+                  "advertiseDefaultRoute": true,
+                  "advertiseHostRoute": false,
+                  "asn": "1234",
+                  "configureStaticDefaultRoute": true,
+                  "disableRtAuto": false,
+                  "netflow": true,
+                  "netflowMonitor": "Netflow_123",
+                  "trmData": {
+                    "ipv4Trm": true,
+                    "l3VniMulticastGroup": "239.1.1.1",
+                    "mvpnRouteTargetExport": [
+                      "65000:100"
+                    ],
+                    "mvpnRouteTargetImport": [
+                      "65000:100"
+                    ],
+                    "trmOnBgw": false,
+                    "v4MulticastGroup": "224.1.0.0/4",
+                    "v4RpAbsent": false,
+                    "v4RpAddress": "10.1.0.1",
+                    "v4RpExternal": false
+                  }
+                },
+                "fabricName": "MCF",
+                "vlanId": 1000,
+                "vrfId": 50000,
+                "vrfName": "MyVRF_50000",
+                "vrfType": "vxlan"
+              }
+            ]
+          }
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 404 Response (Custom VRF)
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/vrfs"
+      method: POST
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "vrfs": [
+              {
+                "fabricName": "MCF",
+                "serviceVrfTemplateName": "",
+                "vlanId": 1001,
+                "vrfExtensionTemplateName": "Default_VRF_Extension_Universal",
+                "vrfId": 50001,
+                "vrfName": "MyVRF_50001",
+                "vrfTemplateConfig": {
+                  "asn": "",
+                  "disableRtAuto": "false",
+                  "ipv6LinkLocalFlag": "true",
+                  "maxBgpPaths": "1",
+                  "maxIbgpPaths": "2",
+                  "mtu": "9216",
+                  "nveId": "1",
+                  "routeTargetExport": "",
+                  "routeTargetExportEvpn": "",
+                  "routeTargetImport": "",
+                  "routeTargetImportEvpn": "65100:1000,65101:2000,65102:3000",
+                  "tag": "12345",
+                  "vrfDescription": "",
+                  "vrfIntfDescription": "",
+                  "vrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET",
+                  "vrfVlanId": "1001",
+                  "vrfVlanName": ""
+                },
+                "vrfTemplateName": "Default_VRF_Universal",
+                "vrfType": "userDefined"
+              }
+            ]
+          }
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 404 Response (VXLAN VRF)
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/vrfs"
+      method: POST
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "vrfs": [
+              {
+                "coreData": {
+                  "evpnRouteTargetExport": [
+                    "65000:1002"
+                  ],
+                  "evpnRouteTargetImport": [
+                    "65000:1002"
+                  ],
+                  "ipv6LinkLocal": true,
+                  "maxBgpPaths": 1,
+                  "maxIbgpPaths": 2,
+                  "mtu": 9216,
+                  "routeTargetExport": [
+                    "65000:1001"
+                  ],
+                  "routeTargetImport": [
+                    "65000:1001"
+                  ],
+                  "routingTag": 12345,
+                  "v6VrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET",
+                  "vrfDescription": "VXLAN VRF for Production",
+                  "vrfInterfaceDescription": "Interface for VLAN 1000",
+                  "vrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET",
+                  "vrfVlanName": "VLAN1000"
+                },
+                "fabricData": {
+                  "advertiseDefaultRoute": true,
+                  "advertiseHostRoute": false,
+                  "asn": "1234",
+                  "configureStaticDefaultRoute": true,
+                  "disableRtAuto": false,
+                  "netflow": true,
+                  "netflowMonitor": "Netflow_123",
+                  "trmData": {
+                    "ipv4Trm": true,
+                    "l3VniMulticastGroup": "239.1.1.1",
+                    "mvpnRouteTargetExport": [
+                      "65000:100"
+                    ],
+                    "mvpnRouteTargetImport": [
+                      "65000:100"
+                    ],
+                    "trmOnBgw": false,
+                    "v4MulticastGroup": "224.1.0.0/4",
+                    "v4RpAbsent": false,
+                    "v4RpAddress": "10.1.0.1",
+                    "v4RpExternal": false
+                  }
+                },
+                "fabricName": "MCF",
+                "vlanId": 1000,
+                "vrfId": 50000,
+                "vrfName": "MyVRF_50000",
+                "vrfType": "vxlan"
+              }
+            ]
+          }
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 500 Response (Custom VRF)
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/vrfs"
+      method: POST
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "vrfs": [
+              {
+                "fabricName": "MCF",
+                "serviceVrfTemplateName": "",
+                "vlanId": 1001,
+                "vrfExtensionTemplateName": "Default_VRF_Extension_Universal",
+                "vrfId": 50001,
+                "vrfName": "MyVRF_50001",
+                "vrfTemplateConfig": {
+                  "asn": "",
+                  "disableRtAuto": "false",
+                  "ipv6LinkLocalFlag": "true",
+                  "maxBgpPaths": "1",
+                  "maxIbgpPaths": "2",
+                  "mtu": "9216",
+                  "nveId": "1",
+                  "routeTargetExport": "",
+                  "routeTargetExportEvpn": "",
+                  "routeTargetImport": "",
+                  "routeTargetImportEvpn": "65100:1000,65101:2000,65102:3000",
+                  "tag": "12345",
+                  "vrfDescription": "",
+                  "vrfIntfDescription": "",
+                  "vrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET",
+                  "vrfVlanId": "1001",
+                  "vrfVlanName": ""
+                },
+                "vrfTemplateName": "Default_VRF_Universal",
+                "vrfType": "userDefined"
+              }
+            ]
+          }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }
+  - name: 500 Response (VXLAN VRF)
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/vrfs"
+      method: POST
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "vrfs": [
+              {
+                "coreData": {
+                  "evpnRouteTargetExport": [
+                    "65000:1002"
+                  ],
+                  "evpnRouteTargetImport": [
+                    "65000:1002"
+                  ],
+                  "ipv6LinkLocal": true,
+                  "maxBgpPaths": 1,
+                  "maxIbgpPaths": 2,
+                  "mtu": 9216,
+                  "routeTargetExport": [
+                    "65000:1001"
+                  ],
+                  "routeTargetImport": [
+                    "65000:1001"
+                  ],
+                  "routingTag": 12345,
+                  "v6VrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET",
+                  "vrfDescription": "VXLAN VRF for Production",
+                  "vrfInterfaceDescription": "Interface for VLAN 1000",
+                  "vrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET",
+                  "vrfVlanName": "VLAN1000"
+                },
+                "fabricData": {
+                  "advertiseDefaultRoute": true,
+                  "advertiseHostRoute": false,
+                  "asn": "1234",
+                  "configureStaticDefaultRoute": true,
+                  "disableRtAuto": false,
+                  "netflow": true,
+                  "netflowMonitor": "Netflow_123",
+                  "trmData": {
+                    "ipv4Trm": true,
+                    "l3VniMulticastGroup": "239.1.1.1",
+                    "mvpnRouteTargetExport": [
+                      "65000:100"
+                    ],
+                    "mvpnRouteTargetImport": [
+                      "65000:100"
+                    ],
+                    "trmOnBgw": false,
+                    "v4MulticastGroup": "224.1.0.0/4",
+                    "v4RpAbsent": false,
+                    "v4RpAddress": "10.1.0.1",
+                    "v4RpExternal": false
+                  }
+                },
+                "fabricName": "MCF",
+                "vlanId": 1000,
+                "vrfId": 50000,
+                "vrfName": "MyVRF_50000",
+                "vrfType": "vxlan"
+              }
+            ]
+          }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }

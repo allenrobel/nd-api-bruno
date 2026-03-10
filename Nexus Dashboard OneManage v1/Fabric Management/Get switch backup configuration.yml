@@ -1,0 +1,378 @@
+info:
+  name: Get switch backup configuration
+  type: http
+  seq: 18
+  tags:
+    - Fabric Management
+
+http:
+  method: GET
+  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/backups/:backupVersion/switchConfigs"
+  params:
+    - name: fabricName
+      value: ""
+      type: path
+      description: Name of the fabric
+    - name: backupVersion
+      value: ""
+      type: path
+      description: Backup version of the fabric backup
+    - name: switchId
+      value: ""
+      type: query
+      description: Serial Number or Id of the switch/leaf
+      disabled: true
+  auth:
+    type: oauth2
+    flow: implicit
+    authorizationUrl: https://example.com/login
+    callbackUrl: "{{oauth_callback_url}}"
+    credentials:
+      clientId: "{{oauth_client_id}}"
+    scope: observer fabric-admin support-engineer super-admin approver designer
+    state: "{{oauth_state}}"
+    tokenConfig:
+      placement:
+        header: Bearer
+    settings:
+      autoFetchToken: false
+      autoRefreshToken: true
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Example response for an external fabric configuration
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/backups/:backupVersion/switchConfigs"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: backupVersion
+          value: ""
+          type: path
+          description: Backup version of the fabric backup
+        - name: switchId
+          value: ""
+          type: query
+          description: Serial Number or Id of the switch/leaf
+          disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "configResponseType": "other",
+            "items": [
+              {
+                "backupConfig": [
+                  "vrf context management",
+                  "   ip route 0.0.0.0/0 172.22.31.2"
+                ],
+                "runningConfig": [
+                  "vrf context management",
+                  "   ip route 0.0.0.0/0 172.22.31.2"
+                ],
+                "sideBySideDiff": [
+                  {
+                    "differenceType": "insert",
+                    "expectedConfig": "feature bgp",
+                    "runningConfig": ""
+                  },
+                  {
+                    "differenceType": "delete",
+                    "expectedConfig": "",
+                    "runningConfig": "no feature dhcp"
+                  },
+                  {
+                    "differenceType": "equal",
+                    "expectedConfig": "configure terminal",
+                    "runningConfig": "configure terminal"
+                  }
+                ],
+                "switchId": "87X70T9OBH5"
+              }
+            ]
+          }
+  - name: Example response for a managed fabric configuration
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/backups/:backupVersion/switchConfigs"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: backupVersion
+          value: ""
+          type: path
+          description: Backup version of the fabric backup
+        - name: switchId
+          value: ""
+          type: query
+          description: Serial Number or Id of the switch/leaf
+          disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "configResponseType": "managed",
+            "items": [
+              {
+                "briefCount": 54,
+                "deployMode": "config",
+                "diffConfigs": [
+                  {
+                    "differenceType": "equal",
+                    "expectedConfig": "cfs eth distribute",
+                    "runningConfig": "cfs eth distribute"
+                  },
+                  {
+                    "differenceType": "insert",
+                    "expectedConfig": "feature dhcp",
+                    "runningConfig": ""
+                  },
+                  {
+                    "differenceType": "delete",
+                    "expectedConfig": "",
+                    "runningConfig": "no feature dhcp"
+                  }
+                ],
+                "entityCollection": [
+                  {
+                    "commands": [
+                      "vlan 2000",
+                      "  vn-segment 50000",
+                      "configure terminal"
+                    ],
+                    "entityName": "MyVRF_50000",
+                    "entityStatus": "outOfSync",
+                    "entityType": "Config_Profile",
+                    "secondaryEntityName": "",
+                    "secondaryEntityType": ""
+                  },
+                  {
+                    "commands": [
+                      "vrf context myvrf_50000",
+                      "  vni 50000",
+                      "  rd auto",
+                      "  address-family ipv4 unicast",
+                      "    route-target both auto",
+                      "    route-target both auto evpn",
+                      "  address-family ipv6 unicast",
+                      "    route-target both auto",
+                      "    route-target both auto evpn",
+                      "exit"
+                    ],
+                    "entityName": "MyVRF_50000",
+                    "entityStatus": "outOfSync",
+                    "entityType": "Config_Profile",
+                    "secondaryEntityName": "",
+                    "secondaryEntityType": ""
+                  }
+                ],
+                "expectedConfigs": [
+                  "vrf context management",
+                  "ip route 0.0.0.0/0 10.1.1.254"
+                ],
+                "fabricName": "fab1",
+                "pendingConfigs": [
+                  "cfs eth distribute",
+                  "feature dhcp",
+                  "nv overlay evpn"
+                ],
+                "runningConfigs": [
+                  "vrf context management",
+                  "ip route 0.0.0.0/0 10.1.1.1"
+                ],
+                "status": "outOfSync",
+                "statusMessage": "outOfSync",
+                "switchId": "99X70W9ORI1",
+                "switchIp": "10.127.117.129",
+                "switchName": "bgl-vp-leaf2",
+                "switchRole": "leaf"
+              }
+            ]
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/backups/:backupVersion/switchConfigs"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: backupVersion
+          value: ""
+          type: path
+          description: Backup version of the fabric backup
+        - name: switchId
+          value: ""
+          type: query
+          description: Serial Number or Id of the switch/leaf
+          disabled: true
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/backups/:backupVersion/switchConfigs"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: backupVersion
+          value: ""
+          type: path
+          description: Backup version of the fabric backup
+        - name: switchId
+          value: ""
+          type: query
+          description: Serial Number or Id of the switch/leaf
+          disabled: true
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 403 Response
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/backups/:backupVersion/switchConfigs"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: backupVersion
+          value: ""
+          type: path
+          description: Backup version of the fabric backup
+        - name: switchId
+          value: ""
+          type: query
+          description: Serial Number or Id of the switch/leaf
+          disabled: true
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 404 Response
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/backups/:backupVersion/switchConfigs"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: backupVersion
+          value: ""
+          type: path
+          description: Backup version of the fabric backup
+        - name: switchId
+          value: ""
+          type: query
+          description: Serial Number or Id of the switch/leaf
+          disabled: true
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 500 Response
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/backups/:backupVersion/switchConfigs"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: backupVersion
+          value: ""
+          type: path
+          description: Backup version of the fabric backup
+        - name: switchId
+          value: ""
+          type: query
+          description: Serial Number or Id of the switch/leaf
+          disabled: true
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }

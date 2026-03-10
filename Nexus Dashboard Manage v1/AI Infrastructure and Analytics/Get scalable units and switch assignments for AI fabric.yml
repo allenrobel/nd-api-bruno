@@ -1,0 +1,412 @@
+info:
+  name: Get scalable units and switch assignments for AI fabric
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/scalableUnits"
+  params:
+    - name: clusterName
+      value: ""
+      type: query
+      description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+      disabled: true
+    - name: fabricName
+      value: ""
+      type: path
+      description: Name of the fabric
+    - name: scalableUnit
+      value: ""
+      type: query
+      description: Get switches for a specific scalable unit only. If omitted, returns all scalable units with their assignments
+      disabled: true
+    - name: includeUnassigned
+      value: ""
+      type: query
+      description: Include switches not assigned to any scalable unit (only applicable when scalableUnit parameter is not provided)
+      disabled: true
+  auth:
+    type: oauth2
+    flow: implicit
+    authorizationUrl: https://example.com/login
+    callbackUrl: "{{oauth_callback_url}}"
+    credentials:
+      clientId: "{{oauth_client_id}}"
+    scope: observer fabric-admin support-engineer super-admin approver designer
+    state: "{{oauth_state}}"
+    tokenConfig:
+      placement:
+        header: Bearer
+    settings:
+      autoFetchToken: false
+      autoRefreshToken: true
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: All scalable units with their switch assignments
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/scalableUnits"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: scalableUnit
+          value: ""
+          type: query
+          description: Get switches for a specific scalable unit only. If omitted, returns all scalable units with their assignments
+          disabled: true
+        - name: includeUnassigned
+          value: ""
+          type: query
+          description: Include switches not assigned to any scalable unit (only applicable when scalableUnit parameter is not provided)
+          disabled: true
+    response:
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "scalableUnits": [
+              {
+                "name": "scalable-unit-1",
+                "switches": [
+                  {
+                    "description": "Backend compute scalable unit leaf 1",
+                    "switchId": "FLM2518055U"
+                  },
+                  {
+                    "description": "Backend compute scalable unit leaf 2",
+                    "switchId": "FLM2518056V"
+                  }
+                ]
+              },
+              {
+                "name": "scalable-unit-2",
+                "switches": [
+                  {
+                    "description": "Frontend web scalable unit leaf 1",
+                    "switchId": "FLM2518057W"
+                  },
+                  {
+                    "description": "Frontend web scalable unit leaf 2",
+                    "switchId": "FLM2518058X"
+                  }
+                ]
+              },
+              {
+                "name": "unassigned",
+                "switches": [
+                  {
+                    "switchId": "FLM2518059Y"
+                  },
+                  {
+                    "switchId": "FLM2518060Z"
+                  }
+                ]
+              }
+            ]
+          }
+  - name: Response with includeUnassigned=true but no unassigned switches
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/scalableUnits"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: scalableUnit
+          value: ""
+          type: query
+          description: Get switches for a specific scalable unit only. If omitted, returns all scalable units with their assignments
+          disabled: true
+        - name: includeUnassigned
+          value: ""
+          type: query
+          description: Include switches not assigned to any scalable unit (only applicable when scalableUnit parameter is not provided)
+          disabled: true
+    response:
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "scalableUnits": [
+              {
+                "name": "scalable-unit-1",
+                "switches": [
+                  {
+                    "description": "Backend compute scalable unit leaf 1",
+                    "switchId": "FLM2518055U"
+                  }
+                ]
+              },
+              {
+                "name": "unassigned",
+                "switches": []
+              }
+            ]
+          }
+  - name: Single scalable unit switch assignments
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/scalableUnits"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: scalableUnit
+          value: ""
+          type: query
+          description: Get switches for a specific scalable unit only. If omitted, returns all scalable units with their assignments
+          disabled: true
+        - name: includeUnassigned
+          value: ""
+          type: query
+          description: Include switches not assigned to any scalable unit (only applicable when scalableUnit parameter is not provided)
+          disabled: true
+    response:
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "scalableUnits": [
+              {
+                "name": "scalable-unit-1",
+                "switches": [
+                  {
+                    "description": "Backend compute scalable unit leaf 1",
+                    "switchId": "FLM2518055U"
+                  },
+                  {
+                    "description": "Backend compute scalable unit leaf 2",
+                    "switchId": "FLM2518056V"
+                  }
+                ]
+              }
+            ]
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/scalableUnits"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: scalableUnit
+          value: ""
+          type: query
+          description: Get switches for a specific scalable unit only. If omitted, returns all scalable units with their assignments
+          disabled: true
+        - name: includeUnassigned
+          value: ""
+          type: query
+          description: Include switches not assigned to any scalable unit (only applicable when scalableUnit parameter is not provided)
+          disabled: true
+    response:
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/scalableUnits"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: scalableUnit
+          value: ""
+          type: query
+          description: Get switches for a specific scalable unit only. If omitted, returns all scalable units with their assignments
+          disabled: true
+        - name: includeUnassigned
+          value: ""
+          type: query
+          description: Include switches not assigned to any scalable unit (only applicable when scalableUnit parameter is not provided)
+          disabled: true
+    response:
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 403 Response
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/scalableUnits"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: scalableUnit
+          value: ""
+          type: query
+          description: Get switches for a specific scalable unit only. If omitted, returns all scalable units with their assignments
+          disabled: true
+        - name: includeUnassigned
+          value: ""
+          type: query
+          description: Include switches not assigned to any scalable unit (only applicable when scalableUnit parameter is not provided)
+          disabled: true
+    response:
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 404 Response
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/scalableUnits"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: scalableUnit
+          value: ""
+          type: query
+          description: Get switches for a specific scalable unit only. If omitted, returns all scalable units with their assignments
+          disabled: true
+        - name: includeUnassigned
+          value: ""
+          type: query
+          description: Include switches not assigned to any scalable unit (only applicable when scalableUnit parameter is not provided)
+          disabled: true
+    response:
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 500 Response
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/scalableUnits"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: scalableUnit
+          value: ""
+          type: query
+          description: Get switches for a specific scalable unit only. If omitted, returns all scalable units with their assignments
+          disabled: true
+        - name: includeUnassigned
+          value: ""
+          type: query
+          description: Include switches not assigned to any scalable unit (only applicable when scalableUnit parameter is not provided)
+          disabled: true
+    response:
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }

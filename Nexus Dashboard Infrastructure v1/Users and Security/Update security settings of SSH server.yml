@@ -1,0 +1,458 @@
+info:
+  name: Update security settings of SSH server
+  type: http
+  seq: 42
+
+http:
+  method: POST
+  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/security/sshConfig"
+  params:
+    - name: clusterName
+      value: ""
+      type: query
+      description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+      disabled: true
+  body:
+    type: json
+    data: |-
+      {
+        "allowedSubnets": [],
+        "cryptoConfig": {
+          "data": {
+            "ciphers": [],
+            "hostKeyAlgorithms": [],
+            "kexAlgorithms": [],
+            "macs": []
+          },
+          "management": {}
+        },
+        "enabled": false,
+        "idleTimeout": 0,
+        "supportedCrypto": {}
+      }
+  auth:
+    type: oauth2
+    flow: implicit
+    authorizationUrl: https://example.com/login
+    callbackUrl: "{{oauth_callback_url}}"
+    credentials:
+      clientId: "{{oauth_client_id}}"
+    scope: observer fabric-admin support-engineer super-admin approver designer
+    state: "{{oauth_state}}"
+    tokenConfig:
+      placement:
+        header: Bearer
+    settings:
+      autoFetchToken: false
+      autoRefreshToken: true
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: OK
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/security/sshConfig"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "SSHConfig": {
+              "allowedSubnets": [
+                "100.34.22.0/24",
+                "200.0.0.0/16",
+                "2b01:720:27c1:90a:0:0:0:123/112",
+                "2001:db8::ff00:42:8329/64"
+              ],
+              "cryptoConfig": {
+                "data": {
+                  "hostKeyAlgorithms": [
+                    "ecdsa-sha2-nistp256"
+                  ],
+                  "macs": [
+                    "hmac-sha2-256-etm@openssh.com",
+                    "hmac-sha2-512-etm@openssh.com"
+                  ]
+                },
+                "management": {
+                  "ciphers": [
+                    "aes128-ctr",
+                    "aes256-gcm@openssh.com"
+                  ],
+                  "kexAlgorithms": [
+                    "ecdh-sha2-nistp256",
+                    "ecdh-sha2-nistp521",
+                    "diffie-hellman-group16-sha512"
+                  ]
+                }
+              },
+              "enabled": true,
+              "idleTimeout": 600
+            }
+          }
+    response:
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "SSHConfig": {
+              "allowedSubnets": [
+                "100.34.22.0/24",
+                "200.0.0.0/16",
+                "2b01:720:27c1:90a:0:0:0:123/112",
+                "2001:db8::ff00:42:8329/64"
+              ],
+              "cryptoConfig": {
+                "data": {
+                  "ciphers": [
+                    "aes128-ctr",
+                    "aes192-ctr",
+                    "aes256-ctr",
+                    "aes256-gcm@openssh.com"
+                  ],
+                  "hostKeyAlgorithms": [
+                    "ecdsa-sha2-nistp256"
+                  ],
+                  "kexAlgorithms": [
+                    "ecdh-sha2-nistp256",
+                    "ecdh-sha2-nistp384",
+                    "ecdh-sha2-nistp521",
+                    "diffie-hellman-group14-sha256",
+                    "diffie-hellman-group16-sha512",
+                    "curve25519-sha256"
+                  ],
+                  "macs": [
+                    "hmac-sha2-256-etm@openssh.com",
+                    "hmac-sha2-512-etm@openssh.com"
+                  ]
+                },
+                "management": {
+                  "ciphers": [
+                    "aes128-ctr",
+                    "aes256-gcm@openssh.com"
+                  ],
+                  "hostKeyAlgorithms": [
+                    "rsa-sha2-256",
+                    "rsa-sha2-512",
+                    "ssh-ed25519",
+                    "ecdsa-sha2-nistp256",
+                    "ecdsa-sha2-nistp384",
+                    "ecdsa-sha2-nistp521"
+                  ],
+                  "kexAlgorithms": [
+                    "ecdh-sha2-nistp256",
+                    "ecdh-sha2-nistp521",
+                    "diffie-hellman-group16-sha512"
+                  ],
+                  "macs": [
+                    "hmac-sha2-256",
+                    "hmac-sha2-512",
+                    "hmac-sha2-256-etm@openssh.com",
+                    "hmac-sha2-512-etm@openssh.com"
+                  ]
+                }
+              },
+              "enabled": true,
+              "idleTimeout": 600,
+              "supportedCrypto": {
+                "ciphers": [
+                  "aes128-ctr",
+                  "aes192-ctr",
+                  "aes256-ctr",
+                  "aes128-gcm@openssh.com",
+                  "aes256-gcm@openssh.com",
+                  "chacha20-poly1305@openssh.com"
+                ],
+                "hostKeyAlgorithms": [
+                  "rsa-sha2-256",
+                  "rsa-sha2-512",
+                  "ssh-ed25519",
+                  "ecdsa-sha2-nistp256",
+                  "ecdsa-sha2-nistp384",
+                  "ecdsa-sha2-nistp521",
+                  "ssh-ed25519-cert-v01@openssh.com",
+                  "ecdsa-sha2-nistp256-cert-v01@openssh.com",
+                  "ecdsa-sha2-nistp384-cert-v01@openssh.com",
+                  "ecdsa-sha2-nistp521-cert-v01@openssh.com"
+                ],
+                "kexAlgorithms": [
+                  "ecdh-sha2-nistp256",
+                  "ecdh-sha2-nistp384",
+                  "ecdh-sha2-nistp521",
+                  "diffie-hellman-group14-sha256",
+                  "diffie-hellman-group16-sha512",
+                  "curve25519-sha256@libssh.org",
+                  "curve25519-sha256",
+                  "curve448-sha512",
+                  "diffie-hellman-group14-sha1",
+                  "diffie-hellman-group15-sha512"
+                ],
+                "macs": [
+                  "hmac-sha2-256",
+                  "hmac-sha2-512",
+                  "hmac-sha2-256-etm@openssh.com",
+                  "hmac-sha2-512-etm@openssh.com",
+                  "hmac-sha1"
+                ]
+              }
+            }
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/security/sshConfig"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "SSHConfig": {
+              "allowedSubnets": [
+                "100.34.22.0/24",
+                "200.0.0.0/16",
+                "2b01:720:27c1:90a:0:0:0:123/112",
+                "2001:db8::ff00:42:8329/64"
+              ],
+              "cryptoConfig": {
+                "data": {
+                  "hostKeyAlgorithms": [
+                    "ecdsa-sha2-nistp256"
+                  ],
+                  "macs": [
+                    "hmac-sha2-256-etm@openssh.com",
+                    "hmac-sha2-512-etm@openssh.com"
+                  ]
+                },
+                "management": {
+                  "ciphers": [
+                    "aes128-ctr",
+                    "aes256-gcm@openssh.com"
+                  ],
+                  "kexAlgorithms": [
+                    "ecdh-sha2-nistp256",
+                    "ecdh-sha2-nistp521",
+                    "diffie-hellman-group16-sha512"
+                  ]
+                }
+              },
+              "enabled": true,
+              "idleTimeout": 600
+            }
+          }
+    response:
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/security/sshConfig"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "SSHConfig": {
+              "allowedSubnets": [
+                "100.34.22.0/24",
+                "200.0.0.0/16",
+                "2b01:720:27c1:90a:0:0:0:123/112",
+                "2001:db8::ff00:42:8329/64"
+              ],
+              "cryptoConfig": {
+                "data": {
+                  "hostKeyAlgorithms": [
+                    "ecdsa-sha2-nistp256"
+                  ],
+                  "macs": [
+                    "hmac-sha2-256-etm@openssh.com",
+                    "hmac-sha2-512-etm@openssh.com"
+                  ]
+                },
+                "management": {
+                  "ciphers": [
+                    "aes128-ctr",
+                    "aes256-gcm@openssh.com"
+                  ],
+                  "kexAlgorithms": [
+                    "ecdh-sha2-nistp256",
+                    "ecdh-sha2-nistp521",
+                    "diffie-hellman-group16-sha512"
+                  ]
+                }
+              },
+              "enabled": true,
+              "idleTimeout": 600
+            }
+          }
+    response:
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 403 Response
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/security/sshConfig"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "SSHConfig": {
+              "allowedSubnets": [
+                "100.34.22.0/24",
+                "200.0.0.0/16",
+                "2b01:720:27c1:90a:0:0:0:123/112",
+                "2001:db8::ff00:42:8329/64"
+              ],
+              "cryptoConfig": {
+                "data": {
+                  "hostKeyAlgorithms": [
+                    "ecdsa-sha2-nistp256"
+                  ],
+                  "macs": [
+                    "hmac-sha2-256-etm@openssh.com",
+                    "hmac-sha2-512-etm@openssh.com"
+                  ]
+                },
+                "management": {
+                  "ciphers": [
+                    "aes128-ctr",
+                    "aes256-gcm@openssh.com"
+                  ],
+                  "kexAlgorithms": [
+                    "ecdh-sha2-nistp256",
+                    "ecdh-sha2-nistp521",
+                    "diffie-hellman-group16-sha512"
+                  ]
+                }
+              },
+              "enabled": true,
+              "idleTimeout": 600
+            }
+          }
+    response:
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 500 Response
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/security/sshConfig"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "SSHConfig": {
+              "allowedSubnets": [
+                "100.34.22.0/24",
+                "200.0.0.0/16",
+                "2b01:720:27c1:90a:0:0:0:123/112",
+                "2001:db8::ff00:42:8329/64"
+              ],
+              "cryptoConfig": {
+                "data": {
+                  "hostKeyAlgorithms": [
+                    "ecdsa-sha2-nistp256"
+                  ],
+                  "macs": [
+                    "hmac-sha2-256-etm@openssh.com",
+                    "hmac-sha2-512-etm@openssh.com"
+                  ]
+                },
+                "management": {
+                  "ciphers": [
+                    "aes128-ctr",
+                    "aes256-gcm@openssh.com"
+                  ],
+                  "kexAlgorithms": [
+                    "ecdh-sha2-nistp256",
+                    "ecdh-sha2-nistp521",
+                    "diffie-hellman-group16-sha512"
+                  ]
+                }
+              },
+              "enabled": true,
+              "idleTimeout": 600
+            }
+          }
+    response:
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }

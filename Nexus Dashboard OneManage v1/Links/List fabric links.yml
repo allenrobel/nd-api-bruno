@@ -1,0 +1,468 @@
+info:
+  name: List fabric links
+  type: http
+  seq: 6
+  tags:
+    - Links
+
+http:
+  method: GET
+  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/links"
+  params:
+    - name: fabricName
+      value: ""
+      type: query
+      description: Name of the fabric
+    - name: max
+      value: ""
+      type: query
+      description: Number of records to return
+      disabled: true
+    - name: offset
+      value: ""
+      type: query
+      description: Number of records to skip for pagination
+      disabled: true
+    - name: sort
+      value: ""
+      type: query
+      description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+      disabled: true
+    - name: filter
+      value: ""
+      type: query
+      description: Lucene format filter - Filter the response based on this filter field
+      disabled: true
+  auth:
+    type: oauth2
+    flow: implicit
+    authorizationUrl: https://example.com/login
+    callbackUrl: "{{oauth_callback_url}}"
+    credentials:
+      clientId: "{{oauth_client_id}}"
+    scope: observer fabric-admin support-engineer super-admin approver designer
+    state: "{{oauth_state}}"
+    tokenConfig:
+      placement:
+        header: Bearer
+    settings:
+      autoFetchToken: false
+      autoRefreshToken: true
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: OK
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/links"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "links": [
+              {
+                "configData": {
+                  "policyType": "multisiteOverlay",
+                  "templateInputs": {
+                    "dstEbgpAsn": "100",
+                    "dstIpAddress": "10.2.0.3",
+                    "ebgpAuthKeyEncryptionType": "3des",
+                    "ebgpPassword": "",
+                    "enableEbgpPassword": true,
+                    "inheritEbgpPasswordMsdSettings": true,
+                    "srcEbgpAsn": "200",
+                    "srcIpAddress": ""
+                  },
+                  "templateName": "ext_evpn_multisite_overlay_setup"
+                },
+                "dstClusterName": "cluster-187",
+                "dstFabricName": "fab1",
+                "dstInterfaceName": "Loopback0",
+                "dstSwitchId": "9KNKM8KEZ1W",
+                "dstSwitchInfo": {
+                  "interfaceAdminStatus": "up",
+                  "interfaceOperReason": "",
+                  "interfaceOperStatus": "up",
+                  "switchModelName": "N9K-C9300v",
+                  "switchRole": "border gateway spine",
+                  "vdc": false,
+                  "vdcId": 0
+                },
+                "dstSwitchName": "v1-bgw1",
+                "linkDiscovered": false,
+                "linkId": "MC-LINK-UUID-ff49f439-af06-4d97-a500-be809d6abf34",
+                "linkPlanned": true,
+                "linkPresent": false,
+                "linkState": "up",
+                "linkType": "multi_cluster_planned_link",
+                "portChannel": false,
+                "srcClusterName": "cluster-191",
+                "srcFabricName": "fab2",
+                "srcInterfaceName": "Loopback0",
+                "srcSwitchId": "9EK6FGYK6G6",
+                "srcSwitchInfo": {
+                  "interfaceAdminStatus": "up",
+                  "interfaceOperReason": "",
+                  "interfaceOperStatus": "up",
+                  "switchModelName": "N9K-C9300v",
+                  "switchRole": "border gateway",
+                  "vdc": false,
+                  "vdcId": 0
+                },
+                "srcSwitchName": "v1-bgw3"
+              },
+              {
+                "configData": {
+                  "policyType": "ebgpVrfLite",
+                  "templateInputs": {
+                    "dstEbgpAsn": "65000",
+                    "dstInterfaceConfig": "",
+                    "dstInterfaceDescription": "",
+                    "dstIpAddress": "3.3.3.15",
+                    "linkMtu": 9216,
+                    "routingTag": "",
+                    "srcEbgpAsn": "200",
+                    "srcInterfaceConfig": "",
+                    "srcInterfaceDescription": "",
+                    "srcIpAddressMask": "3.3.3.14/31"
+                  }
+                },
+                "dstClusterName": "cluster-187",
+                "dstFabricName": "ext",
+                "dstInterfaceName": "Ethernet1/15",
+                "dstSwitchId": "9JZNIGB07J9",
+                "dstSwitchInfo": {
+                  "interfaceAdminStatus": "up",
+                  "interfaceOperReason": "Link not connected",
+                  "interfaceOperStatus": "down",
+                  "switchModelName": "N9K-C9300v",
+                  "switchRole": "core router",
+                  "vdc": false,
+                  "vdcId": 0
+                },
+                "dstSwitchName": "v1-rs1",
+                "linkDiscovered": false,
+                "linkId": "MC-LINK-UUID-3fb03f23-6a35-45a5-91ba-23f57b4a8cfb",
+                "linkPlanned": true,
+                "linkPresent": false,
+                "linkState": "up",
+                "linkType": "multi_cluster_planned_link",
+                "portChannel": false,
+                "srcClusterName": "cluster-191",
+                "srcFabricName": "fab2",
+                "srcInterfaceName": "Ethernet1/15",
+                "srcSwitchId": "9EK6FGYK6G6",
+                "srcSwitchInfo": {
+                  "interfaceAdminStatus": "up",
+                  "interfaceOperReason": "Link not connected",
+                  "interfaceOperStatus": "down",
+                  "switchModelName": "N9K-C9300v",
+                  "switchRole": "border gateway",
+                  "vdc": false,
+                  "vdcId": 0
+                },
+                "srcSwitchName": "v1-bgw3"
+              }
+            ]
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/links"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/links"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 403 Response
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/links"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 404 Response
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/links"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 409 Response
+    description: Conflict
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/links"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
+    response:
+      status: 409
+      statusText: Conflict
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Conflict",
+            "description": "The request could not be completed due to a conflict with the current state of the resource.",
+            "code": 409
+          }
+  - name: 500 Response
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/links"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }

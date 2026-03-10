@@ -1,0 +1,689 @@
+info:
+  name: Reconcile configuration drift for a switch
+  type: http
+  seq: 8
+
+http:
+  method: POST
+  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/switchActions/:switchId/configurationDriftReconcile"
+  params:
+    - name: clusterName
+      value: ""
+      type: query
+      description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+      disabled: true
+    - name: switchId
+      value: ""
+      type: path
+      description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+  body:
+    type: json
+    data: |-
+      {
+        "reconcileConfig": []
+      }
+  auth:
+    type: oauth2
+    flow: implicit
+    authorizationUrl: https://example.com/login
+    callbackUrl: "{{oauth_callback_url}}"
+    credentials:
+      clientId: "{{oauth_client_id}}"
+    scope: observer fabric-admin support-engineer super-admin approver designer
+    state: "{{oauth_state}}"
+    tokenConfig:
+      placement:
+        header: Bearer
+    settings:
+      autoFetchToken: false
+      autoRefreshToken: true
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response (Reconcile specific NTP server configurations)
+    description: Reconcile task completed
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/switchActions/:switchId/configurationDriftReconcile"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+      body:
+        type: json
+        data: |-
+          {
+            "reconcileConfig": [
+              "ntp server 10.20.30.40 use-vrf management",
+              "ntp server 10.20.30.50 use-vrf management"
+            ]
+          }
+    response:
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "status": "reconcile task success"
+          }
+  - name: 200 Response (Full switch configuration reconcile (empty payload))
+    description: Reconcile task completed
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/switchActions/:switchId/configurationDriftReconcile"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+      body:
+        type: json
+        data: |-
+          {
+            "reconcileConfig": []
+          }
+    response:
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "status": "reconcile task success"
+          }
+  - name: 200 Response (Reconcile specific SNMP configurations)
+    description: Reconcile task completed
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/switchActions/:switchId/configurationDriftReconcile"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+      body:
+        type: json
+        data: |-
+          {
+            "reconcileConfig": [
+              "snmp-server host 172.16.1.100 traps version 2c public",
+              "snmp-server contact admin@example.com"
+            ]
+          }
+    response:
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "status": "reconcile task success"
+          }
+  - name: 400 Response (Reconcile specific NTP server configurations)
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/switchActions/:switchId/configurationDriftReconcile"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+      body:
+        type: json
+        data: |-
+          {
+            "reconcileConfig": [
+              "ntp server 10.20.30.40 use-vrf management",
+              "ntp server 10.20.30.50 use-vrf management"
+            ]
+          }
+    response:
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 400 Response (Full switch configuration reconcile (empty payload))
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/switchActions/:switchId/configurationDriftReconcile"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+      body:
+        type: json
+        data: |-
+          {
+            "reconcileConfig": []
+          }
+    response:
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 400 Response (Reconcile specific SNMP configurations)
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/switchActions/:switchId/configurationDriftReconcile"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+      body:
+        type: json
+        data: |-
+          {
+            "reconcileConfig": [
+              "snmp-server host 172.16.1.100 traps version 2c public",
+              "snmp-server contact admin@example.com"
+            ]
+          }
+    response:
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 401 Response (Reconcile specific NTP server configurations)
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/switchActions/:switchId/configurationDriftReconcile"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+      body:
+        type: json
+        data: |-
+          {
+            "reconcileConfig": [
+              "ntp server 10.20.30.40 use-vrf management",
+              "ntp server 10.20.30.50 use-vrf management"
+            ]
+          }
+    response:
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 401 Response (Full switch configuration reconcile (empty payload))
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/switchActions/:switchId/configurationDriftReconcile"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+      body:
+        type: json
+        data: |-
+          {
+            "reconcileConfig": []
+          }
+    response:
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 401 Response (Reconcile specific SNMP configurations)
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/switchActions/:switchId/configurationDriftReconcile"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+      body:
+        type: json
+        data: |-
+          {
+            "reconcileConfig": [
+              "snmp-server host 172.16.1.100 traps version 2c public",
+              "snmp-server contact admin@example.com"
+            ]
+          }
+    response:
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 403 Response (Reconcile specific NTP server configurations)
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/switchActions/:switchId/configurationDriftReconcile"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+      body:
+        type: json
+        data: |-
+          {
+            "reconcileConfig": [
+              "ntp server 10.20.30.40 use-vrf management",
+              "ntp server 10.20.30.50 use-vrf management"
+            ]
+          }
+    response:
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 403 Response (Full switch configuration reconcile (empty payload))
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/switchActions/:switchId/configurationDriftReconcile"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+      body:
+        type: json
+        data: |-
+          {
+            "reconcileConfig": []
+          }
+    response:
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 403 Response (Reconcile specific SNMP configurations)
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/switchActions/:switchId/configurationDriftReconcile"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+      body:
+        type: json
+        data: |-
+          {
+            "reconcileConfig": [
+              "snmp-server host 172.16.1.100 traps version 2c public",
+              "snmp-server contact admin@example.com"
+            ]
+          }
+    response:
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 404 Response (Reconcile specific NTP server configurations)
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/switchActions/:switchId/configurationDriftReconcile"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+      body:
+        type: json
+        data: |-
+          {
+            "reconcileConfig": [
+              "ntp server 10.20.30.40 use-vrf management",
+              "ntp server 10.20.30.50 use-vrf management"
+            ]
+          }
+    response:
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 404 Response (Full switch configuration reconcile (empty payload))
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/switchActions/:switchId/configurationDriftReconcile"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+      body:
+        type: json
+        data: |-
+          {
+            "reconcileConfig": []
+          }
+    response:
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 404 Response (Reconcile specific SNMP configurations)
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/switchActions/:switchId/configurationDriftReconcile"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+      body:
+        type: json
+        data: |-
+          {
+            "reconcileConfig": [
+              "snmp-server host 172.16.1.100 traps version 2c public",
+              "snmp-server contact admin@example.com"
+            ]
+          }
+    response:
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 500 Response (Reconcile specific NTP server configurations)
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/switchActions/:switchId/configurationDriftReconcile"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+      body:
+        type: json
+        data: |-
+          {
+            "reconcileConfig": [
+              "ntp server 10.20.30.40 use-vrf management",
+              "ntp server 10.20.30.50 use-vrf management"
+            ]
+          }
+    response:
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }
+  - name: 500 Response (Full switch configuration reconcile (empty payload))
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/switchActions/:switchId/configurationDriftReconcile"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+      body:
+        type: json
+        data: |-
+          {
+            "reconcileConfig": []
+          }
+    response:
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }
+  - name: 500 Response (Reconcile specific SNMP configurations)
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/switchActions/:switchId/configurationDriftReconcile"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+      body:
+        type: json
+        data: |-
+          {
+            "reconcileConfig": [
+              "snmp-server host 172.16.1.100 traps version 2c public",
+              "snmp-server contact admin@example.com"
+            ]
+          }
+    response:
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }

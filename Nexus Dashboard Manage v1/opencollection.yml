@@ -1,0 +1,32 @@
+opencollection: 1.0.0
+
+info:
+  name: Nexus Dashboard Manage v1
+config:
+  proxy:
+    inherit: true
+    config:
+      protocol: http
+      hostname: ""
+      port: ""
+      auth:
+        username: ""
+        password: ""
+      bypassProxy: ""
+
+request:
+  scripts:
+    - type: before-request
+      code: |-
+        // Skip token check for login request itself
+        if (req.getUrl().includes('/login')) {
+          return;
+        }
+
+        // Check if token exists
+        const token = bru.getVar("nd_auth_token");
+        if (!token) {
+          console.log("No auth token found. Please run the login request first.");
+        }
+bundled: false
+extensions: {}

@@ -1,0 +1,271 @@
+info:
+  name: Export fabric VRF list
+  type: http
+  seq: 17
+  tags:
+    - VRFs and Networks
+
+http:
+  method: POST
+  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/vrfActions/export"
+  params:
+    - name: fabricName
+      value: ""
+      type: path
+      description: Name of the fabric
+  body:
+    type: json
+    data: |-
+      {
+        "vrfNames": [
+          "MyVRF_50000",
+          "MyVRF_60000"
+        ]
+      }
+  auth:
+    type: oauth2
+    flow: implicit
+    authorizationUrl: https://example.com/login
+    callbackUrl: "{{oauth_callback_url}}"
+    credentials:
+      clientId: "{{oauth_client_id}}"
+    scope: observer fabric-admin support-engineer super-admin approver designer
+    state: "{{oauth_state}}"
+    tokenConfig:
+      placement:
+        header: Bearer
+    settings:
+      autoFetchToken: false
+      autoRefreshToken: true
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: When there are multiple types of VRFs in the fabric, the response will be a zip file containing multiple csv files for each type of VRF
+    description: |
+      When there are multiple types of VRFs in the fabric, the response will be a zip file containing multiple csv files for each type of VRF.  Each csv file will be named as 'vrfs_<vrfType>_<fabricName>_<timestamp>.csv', e.g., 'vrfs_vxlan_fab1_20251031211500000.csv' for vxlan type VRFs
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/vrfActions/export"
+      method: POST
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "vrfNames": [
+              "MyVRF_50000",
+              "MyVRF_60000"
+            ]
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/zip
+      body:
+        type: text
+        data: <binary data representation of a zip file>
+  - name: 200 Response
+    description: OK
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/vrfActions/export"
+      method: POST
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "vrfNames": [
+              "MyVRF_50000",
+              "MyVRF_60000"
+            ]
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: text/csv
+      body:
+        type: text
+        data: |
+          fabricName,vrfName,vrfId,vrfType,vrfVlanId,vrfDescription,vrfInterfaceDescription,vrfVlanName,mtu,routingTag,vrfRouteMap,v6VrfRouteMap,maxBgpPaths,maxIbgpPaths,ipv6LinkLocal,disableRtAuto,routeTargetImport,routeTargetExport,evpnRouteTargetImport,evpnRouteTargetExport,advertiseHostRoute,advertiseDefaultRoute,configureStaticDefaultRoute,bgpPassword,bgpPasswordKeyType,netflow,netflowMonitor,l3VniMulticastGroup,trmOnBgw,v4RpAbsent,v4RpExternal,v4RpAddress,v4MulticastGroup,mvpnRouteTargetImport,mvpnRouteTargetExport,defaultSecurityAction,defaultSecurityGroupTag
+          vxlanfabric1,MyVRF_50000,50000,vxlan,2000,Production VRF for VXLAN,Interface for Production VRF,MyNetwork_2000,9216,12345,FABRIC-RMAP-REDIST-SUBNET,FABRIC-RMAP-REDIST-SUBNET,1,2,true,false,"65000:1001;65001:1002","65000:1001;65001:1002","65000:2001;65001:2002","65000:2001;65001:2002",false,true,true,a3f5b6,3,true,MyNetwork_Netflow_123,239.1.1.1,false,false,false,10.1.0.1,224.1.0.0/4,"65000:100;65001:200","65000:100;65001:200",enforcedPermit,18
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/vrfActions/export"
+      method: POST
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "vrfNames": [
+              "MyVRF_50000",
+              "MyVRF_60000"
+            ]
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/vrfActions/export"
+      method: POST
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "vrfNames": [
+              "MyVRF_50000",
+              "MyVRF_60000"
+            ]
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 403 Response
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/vrfActions/export"
+      method: POST
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "vrfNames": [
+              "MyVRF_50000",
+              "MyVRF_60000"
+            ]
+          }
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 404 Response
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/vrfActions/export"
+      method: POST
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "vrfNames": [
+              "MyVRF_50000",
+              "MyVRF_60000"
+            ]
+          }
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 500 Response
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/vrfActions/export"
+      method: POST
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "vrfNames": [
+              "MyVRF_50000",
+              "MyVRF_60000"
+            ]
+          }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }

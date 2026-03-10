@@ -1,0 +1,40 @@
+info:
+  name: Login (Legacy)
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{controllerProtocol}}{{controllerIp}}/login"
+  body:
+    type: json
+    data: |-
+      {
+        "userName": "{{nd_username}}",
+        "userPasswd": "{{nd_password}}",
+        "domain": "{{nd_domain}}"
+      }
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        // Parse the response
+        const data = res.body;
+
+        // Set the token as a collection variable
+        bru.setVar("nd_auth_token", data.token);
+
+        // Optional: Store expiration time if returned
+        if (data.expiresAt) {
+          bru.setVar("nd_token_expires", data.expiresAt);
+        }
+
+        console.log("Authentication token captured and stored");
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

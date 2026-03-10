@@ -1,0 +1,612 @@
+info:
+  name: List VRF attachments
+  type: http
+  seq: 28
+
+http:
+  method: POST
+  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/vrfAttachments/query"
+  params:
+    - name: clusterName
+      value: ""
+      type: query
+      description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+      disabled: true
+    - name: fabricName
+      value: fabric1
+      type: path
+      description: Name of the fabric
+    - name: offset
+      value: ""
+      type: query
+      description: Number of records to skip for pagination
+      disabled: true
+    - name: max
+      value: ""
+      type: query
+      description: Number of records to return
+      disabled: true
+    - name: sort
+      value: ""
+      type: query
+      description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+      disabled: true
+    - name: filter
+      value: ""
+      type: query
+      description: Lucene format filter - Filter the response based on this filter field
+    - name: includeAll
+      value: ""
+      type: query
+      description: When true, returns all attachments. When false, does not return attachments that were never attached.
+      disabled: true
+  body:
+    type: json
+    data: |
+      {
+        "switchIds":["945V7U23QJ7"],
+        "vrfNames":["MyVRF_50000"]
+      }
+  auth:
+    type: oauth2
+    flow: implicit
+    authorizationUrl: https://example.com/login
+    callbackUrl: "{{oauth_callback_url}}"
+    credentials:
+      clientId: "{{oauth_client_id}}"
+    scope: observer fabric-admin support-engineer super-admin approver designer
+    state: "{{oauth_state}}"
+    tokenConfig:
+      placement:
+        header: Bearer
+    settings:
+      autoFetchToken: false
+      autoRefreshToken: true
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Detailed query (Example payload)
+    description: Complete details of the requested attachments
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/vrfAttachments/query"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+        - name: includeAll
+          value: ""
+          type: query
+          description: When true, returns all attachments. When false, does not return attachments that were never attached.
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "switchIds": [
+              "99X70W9ORI1",
+              "98AM4PTG8V0"
+            ],
+            "vrfNames": [
+              "MyVRF_50000",
+              "MyVRF_50001"
+            ]
+          }
+    response:
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "attachments": [
+              {
+                "attach": true,
+                "errorMessage": "vlanId already exists",
+                "extensionValues": [
+                  {
+                    "autoPeerConfig": false,
+                    "dot1qId": 2,
+                    "interfaceName": "Ethernet1/8",
+                    "ipv4Address": "1.10.13.123/24",
+                    "ipv6Address": "2001:db8::/32",
+                    "ipv6RouteMapIn": "",
+                    "ipv6RouteMapOut": "EXTCON-RMAP-FILTER-V6",
+                    "mtu": 9216,
+                    "neighborAsn": "6578",
+                    "neighborIpv4Address": "1.10.13.124",
+                    "neighborIpv6Address": "2001:db8::1",
+                    "netflow": false,
+                    "peerVrfName": "MyVRF_50001",
+                    "routeMapIn": "",
+                    "routeMapOut": "EXTCON-RMAP-FILTER",
+                    "routeTag": 1
+                  },
+                  {
+                    "autoPeerConfig": false,
+                    "dot1qId": 2,
+                    "interfaceName": "Ethernet1/8",
+                    "ipv4Address": "1.10.13.123/24",
+                    "ipv6Address": "2001:db8::/32",
+                    "ipv6RouteMapIn": "",
+                    "ipv6RouteMapOut": "EXTCON-RMAP-FILTER-V6",
+                    "mtu": 9216,
+                    "neighborAsn": "6578",
+                    "neighborIpv4Address": "1.10.13.124",
+                    "neighborIpv6Address": "2001:db8::1",
+                    "netflow": false,
+                    "peerVrfName": "MyVRF_50001",
+                    "routeMapIn": "",
+                    "routeMapOut": "EXTCON-RMAP-FILTER",
+                    "routeTag": 1
+                  }
+                ],
+                "extraConfig": "interface Ethernet1/3\n  description High-speed connection\n  no shutdown\n",
+                "instanceValues": {
+                  "loopbackId": 26,
+                  "loopbackIpv4": "1.1.1.6",
+                  "loopbackIpv6": "2051:18:200::11"
+                },
+                "peerswitchId": "9YVKXMATL9J",
+                "showVlan": true,
+                "status": "notApplicable",
+                "switchId": "9UA832KA3LO",
+                "switchName": "sw1",
+                "switchRole": "leaf",
+                "vlan": 2000,
+                "vlanModifiable": true,
+                "vrfId": 50000,
+                "vrfName": "MyVRF_50000"
+              }
+            ],
+            "meta": {
+              "counts": {
+                "remaining": 0,
+                "total": 1
+              }
+            }
+          }
+  - name: Enhanced classic LAN attachment (Example payload)
+    description: Complete details of the requested attachments from an enhanced classic LAN fabric
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/vrfAttachments/query"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+        - name: includeAll
+          value: ""
+          type: query
+          description: When true, returns all attachments. When false, does not return attachments that were never attached.
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "switchIds": [
+              "99X70W9ORI1",
+              "98AM4PTG8V0"
+            ],
+            "vrfNames": [
+              "MyVRF_50000",
+              "MyVRF_50001"
+            ]
+          }
+    response:
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "attachments": [
+              {
+                "attach": true,
+                "instanceValues": {
+                  "sviIpv4Address": "10.10.10.1",
+                  "sviNeighborIpv4Address": "10.10.10.2",
+                  "vrfInterfaceDescription": "SVI for MyVRF_50000"
+                },
+                "peerswitchId": "9YVKXMATL9J",
+                "showVlan": true,
+                "status": "notApplicable",
+                "switchId": "9UA832KA3LO",
+                "switchName": "sw1",
+                "switchRole": "aggregate",
+                "vlan": 2000,
+                "vlanModifiable": true,
+                "vrfName": "MyVRF_50000"
+              }
+            ],
+            "meta": {
+              "counts": {
+                "remaining": 0,
+                "total": 1
+              }
+            }
+          }
+  - name: 400 Response (Example payload)
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/vrfAttachments/query"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+        - name: includeAll
+          value: ""
+          type: query
+          description: When true, returns all attachments. When false, does not return attachments that were never attached.
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "switchIds": [
+              "99X70W9ORI1",
+              "98AM4PTG8V0"
+            ],
+            "vrfNames": [
+              "MyVRF_50000",
+              "MyVRF_50001"
+            ]
+          }
+    response:
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 401 Response (Example payload)
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/vrfAttachments/query"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+        - name: includeAll
+          value: ""
+          type: query
+          description: When true, returns all attachments. When false, does not return attachments that were never attached.
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "switchIds": [
+              "99X70W9ORI1",
+              "98AM4PTG8V0"
+            ],
+            "vrfNames": [
+              "MyVRF_50000",
+              "MyVRF_50001"
+            ]
+          }
+    response:
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 403 Response (Example payload)
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/vrfAttachments/query"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+        - name: includeAll
+          value: ""
+          type: query
+          description: When true, returns all attachments. When false, does not return attachments that were never attached.
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "switchIds": [
+              "99X70W9ORI1",
+              "98AM4PTG8V0"
+            ],
+            "vrfNames": [
+              "MyVRF_50000",
+              "MyVRF_50001"
+            ]
+          }
+    response:
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 404 Response (Example payload)
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/vrfAttachments/query"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+        - name: includeAll
+          value: ""
+          type: query
+          description: When true, returns all attachments. When false, does not return attachments that were never attached.
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "switchIds": [
+              "99X70W9ORI1",
+              "98AM4PTG8V0"
+            ],
+            "vrfNames": [
+              "MyVRF_50000",
+              "MyVRF_50001"
+            ]
+          }
+    response:
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 500 Response (Example payload)
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/vrfAttachments/query"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+        - name: includeAll
+          value: ""
+          type: query
+          description: When true, returns all attachments. When false, does not return attachments that were never attached.
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "switchIds": [
+              "99X70W9ORI1",
+              "98AM4PTG8V0"
+            ],
+            "vrfNames": [
+              "MyVRF_50000",
+              "MyVRF_50001"
+            ]
+          }
+    response:
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }

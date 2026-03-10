@@ -1,0 +1,541 @@
+info:
+  name: Deploy VRF configuration
+  type: http
+  seq: 16
+  tags:
+    - VRFs and Networks
+
+http:
+  method: POST
+  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/vrfActions/deploy"
+  params:
+    - name: fabricName
+      value: ""
+      type: path
+      description: Name of the fabric
+  body:
+    type: json
+    data: |-
+      {
+        "switchIds": [
+          "99X70W9ORI1"
+        ],
+        "vrfNames": [
+          "MyVRF_50001"
+        ]
+      }
+  auth:
+    type: oauth2
+    flow: implicit
+    authorizationUrl: https://example.com/login
+    callbackUrl: "{{oauth_callback_url}}"
+    credentials:
+      clientId: "{{oauth_client_id}}"
+    scope: observer fabric-admin support-engineer super-admin approver designer
+    state: "{{oauth_state}}"
+    tokenConfig:
+      placement:
+        header: Bearer
+    settings:
+      autoFetchToken: false
+      autoRefreshToken: true
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: DeploymentInitiated (Deploy configuration changes of a single VRF to a single switch)
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/vrfActions/deploy"
+      method: POST
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "switchIds": [
+              "99X70W9ORI1"
+            ],
+            "vrfNames": [
+              "MyVRF_50001"
+            ]
+          }
+    response:
+      status: 202
+      statusText: Accepted
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "status": "Deployment of VRFs has been initiated successfully"
+          }
+  - name: DeploymentInitiated (Deploy configuration changes of multiple VRFs to multiple switches)
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/vrfActions/deploy"
+      method: POST
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "switchIds": [
+              "99X70W9ORI1",
+              "98AM4PTG8V0"
+            ],
+            "vrfNames": [
+              "MyVRF_50001",
+              "MyVRF_50002"
+            ]
+          }
+    response:
+      status: 202
+      statusText: Accepted
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "status": "Deployment of VRFs has been initiated successfully"
+          }
+  - name: NoPendingStatus (Deploy configuration changes of a single VRF to a single switch)
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/vrfActions/deploy"
+      method: POST
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "switchIds": [
+              "99X70W9ORI1"
+            ],
+            "vrfNames": [
+              "MyVRF_50001"
+            ]
+          }
+    response:
+      status: 202
+      statusText: Accepted
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "status": "No switches PENDING for deployment."
+          }
+  - name: NoPendingStatus (Deploy configuration changes of multiple VRFs to multiple switches)
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/vrfActions/deploy"
+      method: POST
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "switchIds": [
+              "99X70W9ORI1",
+              "98AM4PTG8V0"
+            ],
+            "vrfNames": [
+              "MyVRF_50001",
+              "MyVRF_50002"
+            ]
+          }
+    response:
+      status: 202
+      statusText: Accepted
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "status": "No switches PENDING for deployment."
+          }
+  - name: 400 Response (Deploy configuration changes of a single VRF to a single switch)
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/vrfActions/deploy"
+      method: POST
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "switchIds": [
+              "99X70W9ORI1"
+            ],
+            "vrfNames": [
+              "MyVRF_50001"
+            ]
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 400 Response (Deploy configuration changes of multiple VRFs to multiple switches)
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/vrfActions/deploy"
+      method: POST
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "switchIds": [
+              "99X70W9ORI1",
+              "98AM4PTG8V0"
+            ],
+            "vrfNames": [
+              "MyVRF_50001",
+              "MyVRF_50002"
+            ]
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 401 Response (Deploy configuration changes of a single VRF to a single switch)
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/vrfActions/deploy"
+      method: POST
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "switchIds": [
+              "99X70W9ORI1"
+            ],
+            "vrfNames": [
+              "MyVRF_50001"
+            ]
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 401 Response (Deploy configuration changes of multiple VRFs to multiple switches)
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/vrfActions/deploy"
+      method: POST
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "switchIds": [
+              "99X70W9ORI1",
+              "98AM4PTG8V0"
+            ],
+            "vrfNames": [
+              "MyVRF_50001",
+              "MyVRF_50002"
+            ]
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 403 Response (Deploy configuration changes of a single VRF to a single switch)
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/vrfActions/deploy"
+      method: POST
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "switchIds": [
+              "99X70W9ORI1"
+            ],
+            "vrfNames": [
+              "MyVRF_50001"
+            ]
+          }
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 403 Response (Deploy configuration changes of multiple VRFs to multiple switches)
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/vrfActions/deploy"
+      method: POST
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "switchIds": [
+              "99X70W9ORI1",
+              "98AM4PTG8V0"
+            ],
+            "vrfNames": [
+              "MyVRF_50001",
+              "MyVRF_50002"
+            ]
+          }
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 404 Response (Deploy configuration changes of a single VRF to a single switch)
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/vrfActions/deploy"
+      method: POST
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "switchIds": [
+              "99X70W9ORI1"
+            ],
+            "vrfNames": [
+              "MyVRF_50001"
+            ]
+          }
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 404 Response (Deploy configuration changes of multiple VRFs to multiple switches)
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/vrfActions/deploy"
+      method: POST
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "switchIds": [
+              "99X70W9ORI1",
+              "98AM4PTG8V0"
+            ],
+            "vrfNames": [
+              "MyVRF_50001",
+              "MyVRF_50002"
+            ]
+          }
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 500 Response (Deploy configuration changes of a single VRF to a single switch)
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/vrfActions/deploy"
+      method: POST
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "switchIds": [
+              "99X70W9ORI1"
+            ],
+            "vrfNames": [
+              "MyVRF_50001"
+            ]
+          }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }
+  - name: 500 Response (Deploy configuration changes of multiple VRFs to multiple switches)
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/vrfActions/deploy"
+      method: POST
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "switchIds": [
+              "99X70W9ORI1",
+              "98AM4PTG8V0"
+            ],
+            "vrfNames": [
+              "MyVRF_50001",
+              "MyVRF_50002"
+            ]
+          }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }

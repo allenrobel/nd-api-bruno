@@ -1,0 +1,238 @@
+info:
+  name: listBackups
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/backups"
+  params:
+    - name: clusterName
+      value: ""
+      type: query
+      description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+      disabled: true
+  auth:
+    type: oauth2
+    flow: implicit
+    authorizationUrl: https://example.com/login
+    callbackUrl: "{{oauth_callback_url}}"
+    credentials:
+      clientId: "{{oauth_client_id}}"
+    scope: observer fabric-admin support-engineer super-admin approver designer
+    state: "{{oauth_state}}"
+    tokenConfig:
+      placement:
+        header: Bearer
+    settings:
+      autoFetchToken: false
+      autoRefreshToken: true
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: OK
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/backups"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+    response:
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "backups": [
+              {
+                "destination": "sftp-server",
+                "details": {
+                  "endTime": "2024-05-20T09:44:16Z",
+                  "progress": 100,
+                  "progressMessage": "",
+                  "servicesProgress": {
+                    "cisco-ndfc": {
+                      "details": [
+                        {
+                          "currentProgress": 100,
+                          "name": "Fabric Manager",
+                          "progressWeight": 5
+                        },
+                        {
+                          "currentProgress": 100,
+                          "name": "Performance Management",
+                          "progressWeight": 5
+                        }
+                      ],
+                      "progress": 100
+                    },
+                    "nd-core": {
+                      "details": [
+                        {
+                          "currentProgress": 100,
+                          "name": "system",
+                          "progressWeight": 25
+                        },
+                        {
+                          "currentProgress": 100,
+                          "name": "confd",
+                          "progressWeight": 50
+                        }
+                      ],
+                      "progress": 100
+                    }
+                  },
+                  "startTime": "2024-05-20T09:43:00Z"
+                },
+                "endTime": "2024-05-20T09:44:16Z",
+                "name": "backup-sch1-20240520-094300-utc",
+                "path": "/tmp/backup-sch1-20240520-094300-utc.tar.gz",
+                "schedule": "sch1",
+                "services": [
+                  "cisco-ndfc"
+                ],
+                "size": 123456,
+                "startTime": "2024-05-20T09:43:00Z",
+                "status": "completed",
+                "type": "full",
+                "user": "admin"
+              },
+              {
+                "destination": "sftp-server",
+                "details": {
+                  "endTime": "2024-05-21T09:44:40Z",
+                  "progress": 100,
+                  "progressMessage": "",
+                  "servicesProgress": {
+                    "cisco-ndfc": {
+                      "details": [
+                        {
+                          "currentProgress": 100,
+                          "name": "Service Chain Configuration",
+                          "progressWeight": 5
+                        },
+                        {
+                          "currentProgress": 100,
+                          "name": "Switch Interaction Manager",
+                          "progressWeight": 5
+                        }
+                      ],
+                      "progress": 100
+                    },
+                    "nd-core": {
+                      "details": [
+                        {
+                          "currentProgress": 100,
+                          "name": "system",
+                          "progressWeight": 25
+                        },
+                        {
+                          "currentProgress": 100,
+                          "name": "confd",
+                          "progressWeight": 50
+                        }
+                      ],
+                      "progress": 100
+                    }
+                  },
+                  "startTime": "2024-05-21T09:43:00Z"
+                },
+                "endTime": "2024-05-21T09:44:40Z",
+                "name": "backup-sch1-20240521-094300-utc",
+                "path": "/tmp/backup-sch1-20240521-094300-utc.tar.gz",
+                "schedule": "sch1",
+                "services": [
+                  "cisco-ndfc"
+                ],
+                "size": 987654,
+                "startTime": "2024-05-21T09:43:00Z",
+                "status": "completed",
+                "type": "full",
+                "user": "admin"
+              }
+            ]
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/backups"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+    response:
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 403 Response
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/backups"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+    response:
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 500 Response
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/backups"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+    response:
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }

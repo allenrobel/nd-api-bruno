@@ -1,0 +1,656 @@
+info:
+  name: Update probe
+  type: http
+  seq: 29
+
+http:
+  method: PUT
+  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/probes/:probeName"
+  params:
+    - name: probeName
+      value: ""
+      type: path
+      description: Probe name used for sharing if needed
+    - name: fabricName
+      value: ""
+      type: path
+      description: Name of the fabric
+  body:
+    type: json
+    data: |-
+      {
+        "lastUpdateTimestamp": "",
+        "probeData": "",
+        "probeName": "",
+        "vrfName": ""
+      }
+  auth:
+    type: oauth2
+    flow: implicit
+    authorizationUrl: https://example.com/login
+    callbackUrl: "{{oauth_callback_url}}"
+    credentials:
+      clientId: "{{oauth_client_id}}"
+    scope: observer fabric-admin support-engineer super-admin approver designer
+    state: "{{oauth_state}}"
+    tokenConfig:
+      placement:
+        header: Bearer
+    settings:
+      autoFetchToken: false
+      autoRefreshToken: true
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Probe with customized template
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/probes/:probeName"
+      method: PUT
+      params:
+        - name: probeName
+          value: ""
+          type: path
+          description: Probe name used for sharing if needed
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "probeData": {
+              "probeDataType": "custom",
+              "templateName": "my_service_endpoint",
+              "templateParams": {
+                "delayDown": "30",
+                "delayUp": "30",
+                "probe": "true",
+                "frequency": "10",
+                "httpGet": "",
+                "port": "443",
+                "protocol": "icmp",
+                "srcLoopbackIp": "192.168.126.1",
+                "srcLoopbackIpv6": "",
+                "threshold": "",
+                "timeout": "",
+                "useAutoCreatedLoopback": "false",
+                "vrfName": "Sales"
+              }
+            },
+            "probeName": "probe1",
+            "vrfName": "Vrf1"
+          }
+    response:
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "probeData": {
+              "probeDataType": "custom",
+              "templateName": "my_service_endpoint",
+              "templateParams": {
+                "delayDown": "30",
+                "delayUp": "30",
+                "probe": "true",
+                "frequency": "10",
+                "httpGet": "",
+                "port": "443",
+                "protocol": "icmp",
+                "srcLoopbackIp": "192.168.126.1",
+                "srcLoopbackIpv6": "",
+                "threshold": "",
+                "timeout": "",
+                "useAutoCreatedLoopback": "false",
+                "vrfName": "Sales"
+              }
+            },
+            "probeName": "probe1",
+            "vrfName": "Vrf1"
+          }
+  - name: Probe with core attributes
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/probes/:probeName"
+      method: PUT
+      params:
+        - name: probeName
+          value: ""
+          type: path
+          description: Probe name used for sharing if needed
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "probeData": {
+              "delayDown": 30,
+              "delayUp": 30,
+              "frequency": 10,
+              "probeDataType": "default",
+              "probe": true,
+              "protocol": "icmp",
+              "threshold": 10,
+              "timeout": 30
+            },
+            "probeName": "probe1",
+            "vrfName": "Vrf1"
+          }
+    response:
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "probeData": {
+              "delayDown": 30,
+              "delayUp": 30,
+              "frequency": 10,
+              "probeDataType": "default",
+              "probe": true,
+              "protocol": "icmp",
+              "threshold": 10,
+              "timeout": 30
+            },
+            "probeName": "probe1",
+            "vrfName": "Vrf1"
+          }
+  - name: 400 Response (Probe with customized template)
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/probes/:probeName"
+      method: PUT
+      params:
+        - name: probeName
+          value: ""
+          type: path
+          description: Probe name used for sharing if needed
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "probeData": {
+              "probeDataType": "custom",
+              "templateName": "my_service_endpoint",
+              "templateParams": {
+                "delayDown": "30",
+                "delayUp": "30",
+                "probe": "true",
+                "frequency": "10",
+                "httpGet": "",
+                "port": "443",
+                "protocol": "icmp",
+                "srcLoopbackIp": "192.168.126.1",
+                "srcLoopbackIpv6": "",
+                "threshold": "",
+                "timeout": "",
+                "useAutoCreatedLoopback": "false",
+                "vrfName": "Sales"
+              }
+            },
+            "probeName": "probe1",
+            "vrfName": "Vrf1"
+          }
+    response:
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 400 Response (Probe with core attributes)
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/probes/:probeName"
+      method: PUT
+      params:
+        - name: probeName
+          value: ""
+          type: path
+          description: Probe name used for sharing if needed
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "probeData": {
+              "delayDown": 30,
+              "delayUp": 30,
+              "frequency": 10,
+              "probeDataType": "default",
+              "probe": true,
+              "protocol": "icmp",
+              "threshold": 10,
+              "timeout": 30
+            },
+            "probeName": "probe1",
+            "vrfName": "Vrf1"
+          }
+    response:
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 401 Response (Probe with customized template)
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/probes/:probeName"
+      method: PUT
+      params:
+        - name: probeName
+          value: ""
+          type: path
+          description: Probe name used for sharing if needed
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "probeData": {
+              "probeDataType": "custom",
+              "templateName": "my_service_endpoint",
+              "templateParams": {
+                "delayDown": "30",
+                "delayUp": "30",
+                "probe": "true",
+                "frequency": "10",
+                "httpGet": "",
+                "port": "443",
+                "protocol": "icmp",
+                "srcLoopbackIp": "192.168.126.1",
+                "srcLoopbackIpv6": "",
+                "threshold": "",
+                "timeout": "",
+                "useAutoCreatedLoopback": "false",
+                "vrfName": "Sales"
+              }
+            },
+            "probeName": "probe1",
+            "vrfName": "Vrf1"
+          }
+    response:
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 401 Response (Probe with core attributes)
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/probes/:probeName"
+      method: PUT
+      params:
+        - name: probeName
+          value: ""
+          type: path
+          description: Probe name used for sharing if needed
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "probeData": {
+              "delayDown": 30,
+              "delayUp": 30,
+              "frequency": 10,
+              "probeDataType": "default",
+              "probe": true,
+              "protocol": "icmp",
+              "threshold": 10,
+              "timeout": 30
+            },
+            "probeName": "probe1",
+            "vrfName": "Vrf1"
+          }
+    response:
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 403 Response (Probe with customized template)
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/probes/:probeName"
+      method: PUT
+      params:
+        - name: probeName
+          value: ""
+          type: path
+          description: Probe name used for sharing if needed
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "probeData": {
+              "probeDataType": "custom",
+              "templateName": "my_service_endpoint",
+              "templateParams": {
+                "delayDown": "30",
+                "delayUp": "30",
+                "probe": "true",
+                "frequency": "10",
+                "httpGet": "",
+                "port": "443",
+                "protocol": "icmp",
+                "srcLoopbackIp": "192.168.126.1",
+                "srcLoopbackIpv6": "",
+                "threshold": "",
+                "timeout": "",
+                "useAutoCreatedLoopback": "false",
+                "vrfName": "Sales"
+              }
+            },
+            "probeName": "probe1",
+            "vrfName": "Vrf1"
+          }
+    response:
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 403 Response (Probe with core attributes)
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/probes/:probeName"
+      method: PUT
+      params:
+        - name: probeName
+          value: ""
+          type: path
+          description: Probe name used for sharing if needed
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "probeData": {
+              "delayDown": 30,
+              "delayUp": 30,
+              "frequency": 10,
+              "probeDataType": "default",
+              "probe": true,
+              "protocol": "icmp",
+              "threshold": 10,
+              "timeout": 30
+            },
+            "probeName": "probe1",
+            "vrfName": "Vrf1"
+          }
+    response:
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 404 Response (Probe with customized template)
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/probes/:probeName"
+      method: PUT
+      params:
+        - name: probeName
+          value: ""
+          type: path
+          description: Probe name used for sharing if needed
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "probeData": {
+              "probeDataType": "custom",
+              "templateName": "my_service_endpoint",
+              "templateParams": {
+                "delayDown": "30",
+                "delayUp": "30",
+                "probe": "true",
+                "frequency": "10",
+                "httpGet": "",
+                "port": "443",
+                "protocol": "icmp",
+                "srcLoopbackIp": "192.168.126.1",
+                "srcLoopbackIpv6": "",
+                "threshold": "",
+                "timeout": "",
+                "useAutoCreatedLoopback": "false",
+                "vrfName": "Sales"
+              }
+            },
+            "probeName": "probe1",
+            "vrfName": "Vrf1"
+          }
+    response:
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 404 Response (Probe with core attributes)
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/probes/:probeName"
+      method: PUT
+      params:
+        - name: probeName
+          value: ""
+          type: path
+          description: Probe name used for sharing if needed
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "probeData": {
+              "delayDown": 30,
+              "delayUp": 30,
+              "frequency": 10,
+              "probeDataType": "default",
+              "probe": true,
+              "protocol": "icmp",
+              "threshold": 10,
+              "timeout": 30
+            },
+            "probeName": "probe1",
+            "vrfName": "Vrf1"
+          }
+    response:
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 500 Response (Probe with customized template)
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/probes/:probeName"
+      method: PUT
+      params:
+        - name: probeName
+          value: ""
+          type: path
+          description: Probe name used for sharing if needed
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "probeData": {
+              "probeDataType": "custom",
+              "templateName": "my_service_endpoint",
+              "templateParams": {
+                "delayDown": "30",
+                "delayUp": "30",
+                "probe": "true",
+                "frequency": "10",
+                "httpGet": "",
+                "port": "443",
+                "protocol": "icmp",
+                "srcLoopbackIp": "192.168.126.1",
+                "srcLoopbackIpv6": "",
+                "threshold": "",
+                "timeout": "",
+                "useAutoCreatedLoopback": "false",
+                "vrfName": "Sales"
+              }
+            },
+            "probeName": "probe1",
+            "vrfName": "Vrf1"
+          }
+    response:
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }
+  - name: 500 Response (Probe with core attributes)
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/probes/:probeName"
+      method: PUT
+      params:
+        - name: probeName
+          value: ""
+          type: path
+          description: Probe name used for sharing if needed
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "probeData": {
+              "delayDown": 30,
+              "delayUp": 30,
+              "frequency": 10,
+              "probeDataType": "default",
+              "probe": true,
+              "protocol": "icmp",
+              "threshold": 10,
+              "timeout": 30
+            },
+            "probeName": "probe1",
+            "vrfName": "Vrf1"
+          }
+    response:
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }

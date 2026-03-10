@@ -1,0 +1,7 @@
+info:
+  name: Fabric Software Management
+  type: folder
+  seq: 10
+
+request:
+  auth: inherit

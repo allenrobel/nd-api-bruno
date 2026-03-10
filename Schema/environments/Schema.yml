@@ -1,0 +1,14 @@
+name: Schema
+variables:
+  - name: basePath
+    value: /api/v1
+  - name: managePath
+    value: "{{basePath}}/manage"
+  - name: infraPath
+    value: "{{basePath}}/infra"
+  - name: analyzePath
+    value: "{{basePath}}/analyze"
+  - name: oneManagePath
+    value: "{{basePath}}/oneManage"
+  - name: msoPath
+    value: /mso

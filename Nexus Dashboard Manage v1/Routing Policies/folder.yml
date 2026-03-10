@@ -1,0 +1,7 @@
+info:
+  name: Routing Policies
+  type: folder
+  seq: 19
+
+request:
+  auth: inherit

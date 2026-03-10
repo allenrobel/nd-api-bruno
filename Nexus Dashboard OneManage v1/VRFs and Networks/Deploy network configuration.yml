@@ -1,0 +1,476 @@
+info:
+  name: Deploy network configuration
+  type: http
+  seq: 1
+  tags:
+    - VRFs and Networks
+
+http:
+  method: POST
+  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/networkActions/deploy"
+  params:
+    - name: fabricName
+      value: ""
+      type: path
+      description: Name of the fabric
+  body:
+    type: json
+    data: |-
+      {
+        "networkNames": [
+          "MyNetwork_30001",
+          "MyNetwork_30002"
+        ],
+        "switchIds": [
+          "99X70W9ORI1"
+        ]
+      }
+  auth:
+    type: oauth2
+    flow: implicit
+    authorizationUrl: https://example.com/login
+    callbackUrl: "{{oauth_callback_url}}"
+    credentials:
+      clientId: "{{oauth_client_id}}"
+    scope: observer fabric-admin support-engineer super-admin approver designer
+    state: "{{oauth_state}}"
+    tokenConfig:
+      placement:
+        header: Bearer
+    settings:
+      autoFetchToken: false
+      autoRefreshToken: true
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: deploymentInitiated (exampleOne)
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/networkActions/deploy"
+      method: POST
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "networkNames": [
+              "MyNetwork_30001",
+              "MyNetwork_30002"
+            ],
+            "switchIds": [
+              "99X70W9ORI1"
+            ]
+          }
+    response:
+      status: 202
+      statusText: Accepted
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "status": "Deployment of network(s) has been initiated successfully"
+          }
+  - name: deploymentInitiated (exampleTwo)
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/networkActions/deploy"
+      method: POST
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "networkNames": [
+              "MyNetwork_30002",
+              "MyNetwork_30001"
+            ],
+            "switchIds": [
+              "99X70W9ORI1",
+              "98AM4PTG8V0"
+            ]
+          }
+    response:
+      status: 202
+      statusText: Accepted
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "status": "Deployment of network(s) has been initiated successfully"
+          }
+  - name: noPendingStatus (exampleOne)
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/networkActions/deploy"
+      method: POST
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "networkNames": [
+              "MyNetwork_30001",
+              "MyNetwork_30002"
+            ],
+            "switchIds": [
+              "99X70W9ORI1"
+            ]
+          }
+    response:
+      status: 202
+      statusText: Accepted
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "status": "No switches PENDING for deployment"
+          }
+  - name: noPendingStatus (exampleTwo)
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/networkActions/deploy"
+      method: POST
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "networkNames": [
+              "MyNetwork_30002",
+              "MyNetwork_30001"
+            ],
+            "switchIds": [
+              "99X70W9ORI1",
+              "98AM4PTG8V0"
+            ]
+          }
+    response:
+      status: 202
+      statusText: Accepted
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "status": "No switches PENDING for deployment"
+          }
+  - name: 400 Response (exampleOne)
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/networkActions/deploy"
+      method: POST
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "networkNames": [
+              "MyNetwork_30001",
+              "MyNetwork_30002"
+            ],
+            "switchIds": [
+              "99X70W9ORI1"
+            ]
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 400 Response (exampleTwo)
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/networkActions/deploy"
+      method: POST
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "networkNames": [
+              "MyNetwork_30002",
+              "MyNetwork_30001"
+            ],
+            "switchIds": [
+              "99X70W9ORI1",
+              "98AM4PTG8V0"
+            ]
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 401 Response (exampleOne)
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/networkActions/deploy"
+      method: POST
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "networkNames": [
+              "MyNetwork_30001",
+              "MyNetwork_30002"
+            ],
+            "switchIds": [
+              "99X70W9ORI1"
+            ]
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 401 Response (exampleTwo)
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/networkActions/deploy"
+      method: POST
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "networkNames": [
+              "MyNetwork_30002",
+              "MyNetwork_30001"
+            ],
+            "switchIds": [
+              "99X70W9ORI1",
+              "98AM4PTG8V0"
+            ]
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 404 Response (exampleOne)
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/networkActions/deploy"
+      method: POST
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "networkNames": [
+              "MyNetwork_30001",
+              "MyNetwork_30002"
+            ],
+            "switchIds": [
+              "99X70W9ORI1"
+            ]
+          }
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 404 Response (exampleTwo)
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/networkActions/deploy"
+      method: POST
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "networkNames": [
+              "MyNetwork_30002",
+              "MyNetwork_30001"
+            ],
+            "switchIds": [
+              "99X70W9ORI1",
+              "98AM4PTG8V0"
+            ]
+          }
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 500 Response (exampleOne)
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/networkActions/deploy"
+      method: POST
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "networkNames": [
+              "MyNetwork_30001",
+              "MyNetwork_30002"
+            ],
+            "switchIds": [
+              "99X70W9ORI1"
+            ]
+          }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }
+  - name: 500 Response (exampleTwo)
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/networkActions/deploy"
+      method: POST
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "networkNames": [
+              "MyNetwork_30002",
+              "MyNetwork_30001"
+            ],
+            "switchIds": [
+              "99X70W9ORI1",
+              "98AM4PTG8V0"
+            ]
+          }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }

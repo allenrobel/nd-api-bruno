@@ -1,0 +1,312 @@
+info:
+  name: Get ND node configuration and status
+  type: http
+  seq: 2
+
+http:
+  method: GET
+  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/cluster/nodes"
+  params:
+    - name: clusterName
+      value: ""
+      type: query
+      description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+      disabled: true
+    - name: nodeName
+      value: ""
+      type: query
+      description: Filter nodes by node name.
+      disabled: true
+    - name: nodeRole
+      value: ""
+      type: query
+      description: Filter nodes by role.
+      disabled: true
+    - name: nodeBootstrapState
+      value: ""
+      type: query
+      description: Filter nodes by bootstrapping state.
+      disabled: true
+    - name: nodeOperationalState
+      value: ""
+      type: query
+      description: Filter nodes by operational state.
+      disabled: true
+  auth:
+    type: oauth2
+    flow: implicit
+    authorizationUrl: https://example.com/login
+    callbackUrl: "{{oauth_callback_url}}"
+    credentials:
+      clientId: "{{oauth_client_id}}"
+    scope: observer fabric-admin support-engineer super-admin approver designer
+    state: "{{oauth_state}}"
+    tokenConfig:
+      placement:
+        header: Bearer
+    settings:
+      autoFetchToken: false
+      autoRefreshToken: true
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: OK
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/cluster/nodes"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: nodeName
+          value: ""
+          type: query
+          description: Filter nodes by node name.
+          disabled: true
+        - name: nodeRole
+          value: ""
+          type: query
+          description: Filter nodes by role.
+          disabled: true
+        - name: nodeBootstrapState
+          value: ""
+          type: query
+          description: Filter nodes by bootstrapping state.
+          disabled: true
+        - name: nodeOperationalState
+          value: ""
+          type: query
+          description: Filter nodes by operational state.
+          disabled: true
+    response:
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "nodes": [
+              {
+                "bootTime": "2024-10-22T19:51:13Z",
+                "bootstrapState": "registered",
+                "dataNetwork": {
+                  "gateway": {
+                    "ipv4": "192.2.0.254"
+                  },
+                  "network": {
+                    "cidrv4": "192.2.0.106/24"
+                  },
+                  "vlanId": 102
+                },
+                "firmwareVersion": "4.0.0.49.1",
+                "managementNetwork": {
+                  "gateway": {
+                    "ipv4": "10.195.219.1"
+                  },
+                  "network": {
+                    "cidrv4": "10.195.219.111/24"
+                  }
+                },
+                "model": "ND-NODE-L4T",
+                "name": "sjc15-3m6-03-sn1",
+                "nodeController": {
+                  "authentication": {
+                    "password": "<hidden>",
+                    "user": "admin"
+                  },
+                  "serverAddress": "172.20.43.41"
+                },
+                "operationalState": "active",
+                "platformType": "physical",
+                "role": "primary",
+                "serialNumber": "WZP26150GQ7",
+                "uuid": "0fd25aad-af9e-418c-b5c2-8f470cad14f5"
+              }
+            ]
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/cluster/nodes"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: nodeName
+          value: ""
+          type: query
+          description: Filter nodes by node name.
+          disabled: true
+        - name: nodeRole
+          value: ""
+          type: query
+          description: Filter nodes by role.
+          disabled: true
+        - name: nodeBootstrapState
+          value: ""
+          type: query
+          description: Filter nodes by bootstrapping state.
+          disabled: true
+        - name: nodeOperationalState
+          value: ""
+          type: query
+          description: Filter nodes by operational state.
+          disabled: true
+    response:
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 403 Response
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/cluster/nodes"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: nodeName
+          value: ""
+          type: query
+          description: Filter nodes by node name.
+          disabled: true
+        - name: nodeRole
+          value: ""
+          type: query
+          description: Filter nodes by role.
+          disabled: true
+        - name: nodeBootstrapState
+          value: ""
+          type: query
+          description: Filter nodes by bootstrapping state.
+          disabled: true
+        - name: nodeOperationalState
+          value: ""
+          type: query
+          description: Filter nodes by operational state.
+          disabled: true
+    response:
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 404 Response
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/cluster/nodes"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: nodeName
+          value: ""
+          type: query
+          description: Filter nodes by node name.
+          disabled: true
+        - name: nodeRole
+          value: ""
+          type: query
+          description: Filter nodes by role.
+          disabled: true
+        - name: nodeBootstrapState
+          value: ""
+          type: query
+          description: Filter nodes by bootstrapping state.
+          disabled: true
+        - name: nodeOperationalState
+          value: ""
+          type: query
+          description: Filter nodes by operational state.
+          disabled: true
+    response:
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 500 Response
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/cluster/nodes"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: nodeName
+          value: ""
+          type: query
+          description: Filter nodes by node name.
+          disabled: true
+        - name: nodeRole
+          value: ""
+          type: query
+          description: Filter nodes by role.
+          disabled: true
+        - name: nodeBootstrapState
+          value: ""
+          type: query
+          description: Filter nodes by bootstrapping state.
+          disabled: true
+        - name: nodeOperationalState
+          value: ""
+          type: query
+          description: Filter nodes by operational state.
+          disabled: true
+    response:
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }

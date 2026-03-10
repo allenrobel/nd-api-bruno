@@ -1,0 +1,328 @@
+info:
+  name: Update admin state
+  type: http
+  seq: 9
+
+http:
+  method: POST
+  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceActions/updateAdminState"
+  params:
+    - name: clusterName
+      value: ""
+      type: query
+      description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+      disabled: true
+    - name: fabricName
+      value: ""
+      type: path
+      description: Name of the fabric
+    - name: ticketId
+      value: ""
+      type: query
+      description: Change Control Ticket Id
+      disabled: true
+  body:
+    type: json
+    data: |-
+      {
+        "interfaces": [
+          {
+            "adminState": "",
+            "interfaceName": "",
+            "switchId": ""
+          }
+        ]
+      }
+  auth:
+    type: oauth2
+    flow: implicit
+    authorizationUrl: https://example.com/login
+    callbackUrl: "{{oauth_callback_url}}"
+    credentials:
+      clientId: "{{oauth_client_id}}"
+    scope: observer fabric-admin support-engineer super-admin approver designer
+    state: "{{oauth_state}}"
+    tokenConfig:
+      placement:
+        header: Bearer
+    settings:
+      autoFetchToken: false
+      autoRefreshToken: true
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 207 Response
+    description: Response for update admin state
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceActions/updateAdminState"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "interfaces": [
+              {
+                "adminState": "shut",
+                "interfaceName": "Port-channel100",
+                "switchId": "FOX1930GDYK"
+              },
+              {
+                "adminState": "noShut",
+                "interfaceName": "Ethernet1/2",
+                "switchId": "FOX1930GDYK"
+              }
+            ]
+          }
+    response:
+      statusText: Multi-Status
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "results": [
+              {
+                "adminStatus": "up",
+                "switchId": "FDO2137X0L1",
+                "interfaceName": "loopback25",
+                "status": "success",
+                "message": "Status updated successfully"
+              },
+              {
+                "adminStatus": "up",
+                "switchId": "FDO2137X0L1",
+                "interfaceName": "loopback100",
+                "status": "failed",
+                "message": "Failed to update status"
+              },
+              {
+                "adminStatus": "up",
+                "switchId": "FDO2137X0L1",
+                "interfaceName": "loopback20",
+                "status": "failed",
+                "message": "Failed to update status"
+              }
+            ]
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceActions/updateAdminState"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "interfaces": [
+              {
+                "adminState": "shut",
+                "interfaceName": "Port-channel100",
+                "switchId": "FOX1930GDYK"
+              },
+              {
+                "adminState": "noShut",
+                "interfaceName": "Ethernet1/2",
+                "switchId": "FOX1930GDYK"
+              }
+            ]
+          }
+    response:
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceActions/updateAdminState"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "interfaces": [
+              {
+                "adminState": "shut",
+                "interfaceName": "Port-channel100",
+                "switchId": "FOX1930GDYK"
+              },
+              {
+                "adminState": "noShut",
+                "interfaceName": "Ethernet1/2",
+                "switchId": "FOX1930GDYK"
+              }
+            ]
+          }
+    response:
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 404 Response
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceActions/updateAdminState"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "interfaces": [
+              {
+                "adminState": "shut",
+                "interfaceName": "Port-channel100",
+                "switchId": "FOX1930GDYK"
+              },
+              {
+                "adminState": "noShut",
+                "interfaceName": "Ethernet1/2",
+                "switchId": "FOX1930GDYK"
+              }
+            ]
+          }
+    response:
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 500 Response
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceActions/updateAdminState"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "interfaces": [
+              {
+                "adminState": "shut",
+                "interfaceName": "Port-channel100",
+                "switchId": "FOX1930GDYK"
+              },
+              {
+                "adminState": "noShut",
+                "interfaceName": "Ethernet1/2",
+                "switchId": "FOX1930GDYK"
+              }
+            ]
+          }
+    response:
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }

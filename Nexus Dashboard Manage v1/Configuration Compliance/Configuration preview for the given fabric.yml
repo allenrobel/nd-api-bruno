@@ -1,0 +1,445 @@
+info:
+  name: Configuration preview for the given fabric
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/actions/preview"
+  params:
+    - name: clusterName
+      value: ""
+      type: query
+      description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+      disabled: true
+    - name: fabricName
+      value: ""
+      type: path
+      description: Name of the fabric
+    - name: forceShowRun
+      value: ""
+      type: query
+      description: If true, Config compliance fetches the latest running config from the Device. If false, Config compliance uses the cached version for computation.
+      disabled: true
+    - name: showBrief
+      value: ""
+      type: query
+      description: If true, API provides line count of the pending config. If false, detailed output is provided.
+      disabled: true
+    - name: includeAllFabricGroupSwitches
+      value: ""
+      type: query
+      description: If this passed as true and the queried fabric is a VXLAN fabric group aka Multi-Site Domain (MSD) fabric, then all of the child fabric switches configuration preview is provided, if passed as false switches in migration state will not be used for configuration preview. If fabric is not a Multi-Site Domain, this flag is ignored.
+      disabled: true
+  auth:
+    type: oauth2
+    flow: implicit
+    authorizationUrl: https://example.com/login
+    callbackUrl: "{{oauth_callback_url}}"
+    credentials:
+      clientId: "{{oauth_client_id}}"
+    scope: observer fabric-admin support-engineer super-admin approver designer
+    state: "{{oauth_state}}"
+    tokenConfig:
+      placement:
+        header: Bearer
+    settings:
+      autoFetchToken: false
+      autoRefreshToken: true
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Get configuration preview for the fabric MyFabric
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/actions/preview"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: forceShowRun
+          value: ""
+          type: query
+          description: If true, Config compliance fetches the latest running config from the Device. If false, Config compliance uses the cached version for computation.
+          disabled: true
+        - name: showBrief
+          value: ""
+          type: query
+          description: If true, API provides line count of the pending config. If false, detailed output is provided.
+          disabled: true
+        - name: includeAllFabricGroupSwitches
+          value: ""
+          type: query
+          description: If this passed as true and the queried fabric is a VXLAN fabric group aka Multi-Site Domain (MSD) fabric, then all of the child fabric switches configuration preview is provided, if passed as false switches in migration state will not be used for configuration preview. If fabric is not a Multi-Site Domain, this flag is ignored.
+          disabled: true
+    response:
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "items": [
+              {
+                "deployMode": "config",
+                "entityCollection": [
+                  {
+                    "commands": [
+                      "no interface loopback3"
+                    ],
+                    "entityName": "loopback3",
+                    "entityStatus": "outOfSync",
+                    "entityType": "INTERFACE",
+                    "secondaryEntityName": "",
+                    "secondaryEntityType": ""
+                  },
+                  {
+                    "commands": [
+                      "snmp-server host 1.1.1.2 traps version 2c public udp-port 2162"
+                    ],
+                    "entityName": "SWITCH",
+                    "entityStatus": "outOfSync",
+                    "entityType": "SWITCH",
+                    "secondaryEntityName": "",
+                    "secondaryEntityType": ""
+                  },
+                  {
+                    "commands": [
+                      "interface loopback4",
+                      "  no shutdown",
+                      "  ip address 4.4.4.2/32 tag 12345",
+                      "  description new description",
+                      "  ip router ospf UNDERLAY area 0.0.0.0"
+                    ],
+                    "entityName": "loopback4",
+                    "entityStatus": "outOfSync",
+                    "entityType": "INTERFACE",
+                    "secondaryEntityName": "",
+                    "secondaryEntityType": ""
+                  }
+                ],
+                "expectedConfigs": [
+                  "snmp-server host 1.1.1.2 traps version 2c public udp-port 2162",
+                  "hostname n9kv-89",
+                  "interface loopback4",
+                  "  no shutdown",
+                  "  ip address 4.4.4.2/32 tag 12345",
+                  "  description new description",
+                  "  ip router ospf UNDERLAY area 0.0.0.0"
+                ],
+                "fabricName": "MyFabric",
+                "pendingConfigs": [
+                  "no interface loopback3",
+                  "snmp-server host 1.1.1.2 traps version 2c public udp-port 2162",
+                  "interface loopback4",
+                  "  no shutdown",
+                  "  ip address 4.4.4.2/32 tag 12345",
+                  "  description new description",
+                  "  ip router ospf UNDERLAY area 0.0.0.0"
+                ],
+                "runningConfigs": [
+                  "hostname n9kv-89",
+                  "interface loopback3",
+                  "  no shutdown",
+                  "  ip address 3.3.3.2/32 tag 12345",
+                  "  ip router ospf UNDERLAY area 0.0.0.0",
+                  "interface loopback4",
+                  "  no shutdown",
+                  "  ip address 4.4.4.2/32 tag 12345",
+                  "  ip router ospf UNDERLAY area 0.0.0.0"
+                ],
+                "status": "outOfSync",
+                "statusMessage": "Out of Sync",
+                "switchId": "SAL18432P2T",
+                "switchIp": "1.1.1.1",
+                "switchName": "Leaf1",
+                "switchRole": "leaf"
+              }
+            ]
+          }
+  - name: Get configuration preview for the fabric MyFabric with showBrief passed as true
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/actions/preview"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: forceShowRun
+          value: ""
+          type: query
+          description: If true, Config compliance fetches the latest running config from the Device. If false, Config compliance uses the cached version for computation.
+          disabled: true
+        - name: showBrief
+          value: ""
+          type: query
+          description: If true, API provides line count of the pending config. If false, detailed output is provided.
+          disabled: true
+        - name: includeAllFabricGroupSwitches
+          value: ""
+          type: query
+          description: If this passed as true and the queried fabric is a VXLAN fabric group aka Multi-Site Domain (MSD) fabric, then all of the child fabric switches configuration preview is provided, if passed as false switches in migration state will not be used for configuration preview. If fabric is not a Multi-Site Domain, this flag is ignored.
+          disabled: true
+    response:
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "items": [
+              {
+                "addConfigCount": 2,
+                "briefCount": 7,
+                "deployMode": "config",
+                "entityCollection": [],
+                "expectedConfigs": [],
+                "fabricName": "fab-1",
+                "pendingConfigs": [],
+                "removeConfigCount": 4,
+                "runningConfigs": [],
+                "status": "outOfSync",
+                "statusMessage": "Out of Sync",
+                "switchId": "SAL18432P2T",
+                "switchIp": "1.1.1.1",
+                "switchName": "Leaf1",
+                "switchRole": "leaf"
+              }
+            ]
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/actions/preview"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: forceShowRun
+          value: ""
+          type: query
+          description: If true, Config compliance fetches the latest running config from the Device. If false, Config compliance uses the cached version for computation.
+          disabled: true
+        - name: showBrief
+          value: ""
+          type: query
+          description: If true, API provides line count of the pending config. If false, detailed output is provided.
+          disabled: true
+        - name: includeAllFabricGroupSwitches
+          value: ""
+          type: query
+          description: If this passed as true and the queried fabric is a VXLAN fabric group aka Multi-Site Domain (MSD) fabric, then all of the child fabric switches configuration preview is provided, if passed as false switches in migration state will not be used for configuration preview. If fabric is not a Multi-Site Domain, this flag is ignored.
+          disabled: true
+    response:
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/actions/preview"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: forceShowRun
+          value: ""
+          type: query
+          description: If true, Config compliance fetches the latest running config from the Device. If false, Config compliance uses the cached version for computation.
+          disabled: true
+        - name: showBrief
+          value: ""
+          type: query
+          description: If true, API provides line count of the pending config. If false, detailed output is provided.
+          disabled: true
+        - name: includeAllFabricGroupSwitches
+          value: ""
+          type: query
+          description: If this passed as true and the queried fabric is a VXLAN fabric group aka Multi-Site Domain (MSD) fabric, then all of the child fabric switches configuration preview is provided, if passed as false switches in migration state will not be used for configuration preview. If fabric is not a Multi-Site Domain, this flag is ignored.
+          disabled: true
+    response:
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 403 Response
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/actions/preview"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: forceShowRun
+          value: ""
+          type: query
+          description: If true, Config compliance fetches the latest running config from the Device. If false, Config compliance uses the cached version for computation.
+          disabled: true
+        - name: showBrief
+          value: ""
+          type: query
+          description: If true, API provides line count of the pending config. If false, detailed output is provided.
+          disabled: true
+        - name: includeAllFabricGroupSwitches
+          value: ""
+          type: query
+          description: If this passed as true and the queried fabric is a VXLAN fabric group aka Multi-Site Domain (MSD) fabric, then all of the child fabric switches configuration preview is provided, if passed as false switches in migration state will not be used for configuration preview. If fabric is not a Multi-Site Domain, this flag is ignored.
+          disabled: true
+    response:
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 404 Response
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/actions/preview"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: forceShowRun
+          value: ""
+          type: query
+          description: If true, Config compliance fetches the latest running config from the Device. If false, Config compliance uses the cached version for computation.
+          disabled: true
+        - name: showBrief
+          value: ""
+          type: query
+          description: If true, API provides line count of the pending config. If false, detailed output is provided.
+          disabled: true
+        - name: includeAllFabricGroupSwitches
+          value: ""
+          type: query
+          description: If this passed as true and the queried fabric is a VXLAN fabric group aka Multi-Site Domain (MSD) fabric, then all of the child fabric switches configuration preview is provided, if passed as false switches in migration state will not be used for configuration preview. If fabric is not a Multi-Site Domain, this flag is ignored.
+          disabled: true
+    response:
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 500 Response
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/actions/preview"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: forceShowRun
+          value: ""
+          type: query
+          description: If true, Config compliance fetches the latest running config from the Device. If false, Config compliance uses the cached version for computation.
+          disabled: true
+        - name: showBrief
+          value: ""
+          type: query
+          description: If true, API provides line count of the pending config. If false, detailed output is provided.
+          disabled: true
+        - name: includeAllFabricGroupSwitches
+          value: ""
+          type: query
+          description: If this passed as true and the queried fabric is a VXLAN fabric group aka Multi-Site Domain (MSD) fabric, then all of the child fabric switches configuration preview is provided, if passed as false switches in migration state will not be used for configuration preview. If fabric is not a Multi-Site Domain, this flag is ignored.
+          disabled: true
+    response:
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }

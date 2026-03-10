@@ -1,0 +1,7 @@
+info:
+  name: Multi-Cluster Connectivity
+  type: folder
+  seq: 1
+
+request:
+  auth: inherit

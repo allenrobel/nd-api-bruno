@@ -1,0 +1,461 @@
+info:
+  name: Get all anomaly post processing rules
+  type: http
+  seq: 10
+
+http:
+  method: GET
+  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/anomalyRules/postProcessingRules"
+  params:
+    - name: clusterName
+      value: ""
+      type: query
+      description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+      disabled: true
+    - name: max
+      value: ""
+      type: query
+      description: Number of records to return
+      disabled: true
+    - name: offset
+      value: ""
+      type: query
+      description: Number of records to skip for pagination
+      disabled: true
+    - name: sort
+      value: ""
+      type: query
+      description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+      disabled: true
+    - name: filter
+      value: ""
+      type: query
+      description: Lucene format filter - Filter the response based on this filter field
+    - name: includeMatchCriteria
+      value: ""
+      type: query
+      description: Set to true to include match criteria in the response
+  auth:
+    type: oauth2
+    flow: implicit
+    authorizationUrl: https://example.com/login
+    callbackUrl: "{{oauth_callback_url}}"
+    credentials:
+      clientId: "{{oauth_client_id}}"
+    scope: observer fabric-admin support-engineer super-admin approver designer
+    state: "{{oauth_state}}"
+    tokenConfig:
+      placement:
+        header: Bearer
+    settings:
+      autoFetchToken: false
+      autoRefreshToken: true
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: OK
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/anomalyRules/postProcessingRules"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+        - name: includeMatchCriteria
+          value: ""
+          type: query
+          description: Set to true to include match criteria in the response
+    response:
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "meta": {
+              "remaining": 0,
+              "total": 2
+            },
+            "rules": [
+              {
+                "actions": [
+                  {
+                    "action": "acknowledge",
+                    "applyToActiveAnomalies": true
+                  }
+                ],
+                "description": "Acknowledge EPG with invalid BD anomaly",
+                "enabled": true,
+                "lastModifiedTime": "2022-01-01T00:00:00Z",
+                "matchCriteria": [
+                  {
+                    "anomalyTitleMatchCriteria": [
+                      {
+                        "valueEquals": "EPG_HAS_INVALID_BD"
+                      }
+                    ],
+                    "categoryMatchCriteria": [
+                      {
+                        "valueEquals": "configuration"
+                      }
+                    ],
+                    "fabricName": "fabric1",
+                    "severityMatchCriteria": [
+                      {
+                        "valueEquals": "warning"
+                      }
+                    ]
+                  }
+                ],
+                "name": "EPG Invalid BD Rule",
+                "uuid": "12345678-1234-1234-1234-123456789abc"
+              },
+              {
+                "actions": [
+                  {
+                    "action": "customize",
+                    "applyToActiveAnomalies": false
+                  }
+                ],
+                "anomalyCustomization": {
+                  "customMessage": "Custom recommendation for anomaly 2"
+                },
+                "description": "Custom recommendation for anomaly 2",
+                "enabled": false,
+                "lastModifiedTime": "2022-02-02T00:00:00Z",
+                "matchCriteria": [
+                  {
+                    "anomalyTitleMatchCriteria": [
+                      {
+                        "valueEquals": "INTERFACE_DOWN"
+                      }
+                    ],
+                    "categoryMatchCriteria": [
+                      {
+                        "valueEquals": "connectivity"
+                      }
+                    ],
+                    "fabricName": "fabric1",
+                    "severityMatchCriteria": [
+                      {
+                        "valueEquals": "critical"
+                      }
+                    ]
+                  }
+                ],
+                "name": "Customize interface down",
+                "uuid": "87654321-4321-4321-4321-987654321cba"
+              }
+            ]
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/anomalyRules/postProcessingRules"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+        - name: includeMatchCriteria
+          value: ""
+          type: query
+          description: Set to true to include match criteria in the response
+    response:
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/anomalyRules/postProcessingRules"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+        - name: includeMatchCriteria
+          value: ""
+          type: query
+          description: Set to true to include match criteria in the response
+    response:
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 403 Response
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/anomalyRules/postProcessingRules"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+        - name: includeMatchCriteria
+          value: ""
+          type: query
+          description: Set to true to include match criteria in the response
+    response:
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 404 Response
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/anomalyRules/postProcessingRules"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+        - name: includeMatchCriteria
+          value: ""
+          type: query
+          description: Set to true to include match criteria in the response
+    response:
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 409 Response
+    description: Conflict
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/anomalyRules/postProcessingRules"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+        - name: includeMatchCriteria
+          value: ""
+          type: query
+          description: Set to true to include match criteria in the response
+    response:
+      statusText: Conflict
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Conflict",
+            "description": "The request could not be completed due to a conflict with the current state of the resource.",
+            "code": 409
+          }
+  - name: 500 Response
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/anomalyRules/postProcessingRules"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+        - name: includeMatchCriteria
+          value: ""
+          type: query
+          description: Set to true to include match criteria in the response
+    response:
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }

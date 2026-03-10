@@ -1,0 +1,333 @@
+info:
+  name: Get network
+  type: http
+  seq: 14
+  tags:
+    - VRFs and Networks
+
+http:
+  method: GET
+  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/networks/:networkName"
+  params:
+    - name: fabricName
+      value: ""
+      type: path
+      description: Name of the fabric
+    - name: networkName
+      value: ""
+      type: path
+      description: Then name of the network
+    - name: fetchMembers
+      value: ""
+      type: query
+      description: If true, fetches the members details of a policy
+      disabled: true
+  auth:
+    type: oauth2
+    flow: implicit
+    authorizationUrl: https://example.com/login
+    callbackUrl: "{{oauth_callback_url}}"
+    credentials:
+      clientId: "{{oauth_client_id}}"
+    scope: observer fabric-admin support-engineer super-admin approver designer
+    state: "{{oauth_state}}"
+    tokenConfig:
+      placement:
+        header: Bearer
+    settings:
+      autoFetchToken: false
+      autoRefreshToken: true
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: networkOne
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/networks/:networkName"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: networkName
+          value: ""
+          type: path
+          description: Then name of the network
+        - name: fetchMembers
+          value: ""
+          type: query
+          description: If true, fetches the members details of a policy
+          disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "displayName": "MyNetwork_30000",
+            "fabricName": "fab1",
+            "l2Data": {
+              "fabricData": {
+                "stretch": "bgw1"
+              },
+              "rtAuto": true,
+              "vlanName": "VLAN3000"
+            },
+            "l3Data": {
+              "gatewayIpv4Address": "192.168.30.1/24",
+              "secondaryGatewayIpv4Collection": [
+                "192.168.30.2/24"
+              ],
+              "secondaryGatewayIpv6Collection": [
+                "2001:db8:30::1/64"
+              ]
+            },
+            "layer": "layer3",
+            "networkId": 30000,
+            "networkMode": "layer3",
+            "networkName": "MyNetwork_30000",
+            "networkStatus": "inSync",
+            "networkType": "vxlan",
+            "vlanId": 3000,
+            "vrfName": "MyVRF_50000"
+          }
+  - name: networkThree
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/networks/:networkName"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: networkName
+          value: ""
+          type: path
+          description: Then name of the network
+        - name: fetchMembers
+          value: ""
+          type: query
+          description: If true, fetches the members details of a policy
+          disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "displayName": "MyNetwork_50000",
+            "fabricName": "fab1",
+            "l2Data": {
+              "vlanName": "VLAN2000"
+            },
+            "l3Data": {
+              "activePrimaryInterfaceIpv4": "192.168.50.2/24",
+              "activePrimarySwitchPriority": 120,
+              "gatewayIp": "192.168.50.1/24",
+              "hsrpVersion": 2,
+              "hsrpVrrpGroupNumber": 1,
+              "hsrpVrrpGroupNumberV6": 95,
+              "mtu": 9216,
+              "netflow": false,
+              "preempt": true,
+              "routingTag": 50000,
+              "standbyBackupInterfaceIpv4": "192.168.50.3/24",
+              "standbyBackupSwitchPriority": 100,
+              "vlanInterfaceDescription": "Classic Network Interface"
+            },
+            "layer": "layer3",
+            "networkId": 20000,
+            "networkMode": "layer3",
+            "networkName": "MyNetwork_50000",
+            "networkType": "classicLanEnhanced",
+            "vlanId": 2000,
+            "vrfName": "MyVRF_70000"
+          }
+  - name: networkTwo
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/networks/:networkName"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: networkName
+          value: ""
+          type: path
+          description: Then name of the network
+        - name: fetchMembers
+          value: ""
+          type: query
+          description: If true, fetches the members details of a policy
+          disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "displayName": "MyNetwork_40000",
+            "fabricName": "fab1",
+            "networkExtensionTemplateName": "CustomExtTemplate1",
+            "networkId": 40000,
+            "networkName": "MyNetwork_40000",
+            "networkStatus": "deployed",
+            "networkTemplateConfig": {
+              "param1": "value1",
+              "param2": "value2"
+            },
+            "networkTemplateName": "CustomTemplate1",
+            "networkType": "userDefined",
+            "vlanId": 4000,
+            "vrfName": "MyVRF_60000"
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/networks/:networkName"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: networkName
+          value: ""
+          type: path
+          description: Then name of the network
+        - name: fetchMembers
+          value: ""
+          type: query
+          description: If true, fetches the members details of a policy
+          disabled: true
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/networks/:networkName"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: networkName
+          value: ""
+          type: path
+          description: Then name of the network
+        - name: fetchMembers
+          value: ""
+          type: query
+          description: If true, fetches the members details of a policy
+          disabled: true
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 404 Response
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/networks/:networkName"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: networkName
+          value: ""
+          type: path
+          description: Then name of the network
+        - name: fetchMembers
+          value: ""
+          type: query
+          description: If true, fetches the members details of a policy
+          disabled: true
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 500 Response
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/networks/:networkName"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: networkName
+          value: ""
+          type: path
+          description: Then name of the network
+        - name: fetchMembers
+          value: ""
+          type: query
+          description: If true, fetches the members details of a policy
+          disabled: true
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }

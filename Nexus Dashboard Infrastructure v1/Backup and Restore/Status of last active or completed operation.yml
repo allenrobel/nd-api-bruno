@@ -1,0 +1,263 @@
+info:
+  name: Status of last active or completed operation
+  type: http
+  seq: 12
+
+http:
+  method: GET
+  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/backups/status"
+  params:
+    - name: clusterName
+      value: ""
+      type: query
+      description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+      disabled: true
+  auth:
+    type: oauth2
+    flow: implicit
+    authorizationUrl: https://example.com/login
+    callbackUrl: "{{oauth_callback_url}}"
+    credentials:
+      clientId: "{{oauth_client_id}}"
+    scope: observer fabric-admin support-engineer super-admin approver designer
+    state: "{{oauth_state}}"
+    tokenConfig:
+      placement:
+        header: Bearer
+    settings:
+      autoFetchToken: false
+      autoRefreshToken: true
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: OK
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/backups/status"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+    response:
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "details": {
+              "progress": 75,
+              "progressMessage": "",
+              "servicesProgress": {
+                "cisco-mso": {
+                  "details": [
+                    {
+                      "currentProgress": 100,
+                      "name": "Restoring config,",
+                      "progressWeight": 50,
+                      "successMessage": "Successlly restored the config",
+                      "timeout": 300
+                    },
+                    {
+                      "currentProgress": 100,
+                      "failureReason": "Warning: some templates must be manually fixed",
+                      "name": "Template restore",
+                      "progressWeight": 50,
+                      "timeout": 300
+                    }
+                  ],
+                  "progress": 100
+                },
+                "cisco-ndfc": {
+                  "details": [
+                    {
+                      "name": "Template Manager",
+                      "progressWeight": 5
+                    },
+                    {
+                      "name": "Event Manager",
+                      "progressWeight": 5
+                    },
+                    {
+                      "name": "Fabric Manager",
+                      "progressWeight": 5
+                    },
+                    {
+                      "name": "Report Manager",
+                      "progressWeight": 5
+                    },
+                    {
+                      "name": "Feature Manager",
+                      "progressWeight": 5
+                    },
+                    {
+                      "name": "One Manage",
+                      "progressWeight": 5
+                    },
+                    {
+                      "name": "Security Group Manager",
+                      "progressWeight": 5
+                    },
+                    {
+                      "name": "Services Configuration",
+                      "progressWeight": 5
+                    },
+                    {
+                      "name": "Site Manager",
+                      "progressWeight": 4
+                    },
+                    {
+                      "name": "Endpoint Locator",
+                      "progressWeight": 4
+                    },
+                    {
+                      "name": "Entity Status Manager",
+                      "progressWeight": 4
+                    },
+                    {
+                      "name": "Fabric Discovery",
+                      "progressWeight": 4
+                    },
+                    {
+                      "name": "Performance Management",
+                      "progressWeight": 4
+                    },
+                    {
+                      "name": "Server Settings",
+                      "progressWeight": 4
+                    },
+                    {
+                      "name": "Switch Interaction Manager",
+                      "progressWeight": 4
+                    },
+                    {
+                      "name": "Virtual Machine Visualizer",
+                      "progressWeight": 4
+                    },
+                    {
+                      "name": "Alarm Manager",
+                      "progressWeight": 4
+                    },
+                    {
+                      "name": "IPAM Integration",
+                      "progressWeight": 4
+                    },
+                    {
+                      "name": "Image Management",
+                      "progressWeight": 4
+                    },
+                    {
+                      "name": "Telemetry Manager",
+                      "progressWeight": 4
+                    },
+                    {
+                      "name": "Kubernetes Visualizer",
+                      "progressWeight": 4
+                    },
+                    {
+                      "name": "License Management",
+                      "progressWeight": 4
+                    },
+                    {
+                      "name": "Service Chain Configuration",
+                      "progressWeight": 4
+                    }
+                  ],
+                  "progress": 0
+                },
+                "nd-core": {
+                  "details": [
+                    {
+                      "currentProgress": 100,
+                      "name": "system",
+                      "progressWeight": 25
+                    },
+                    {
+                      "currentProgress": 100,
+                      "name": "confd",
+                      "progressWeight": 50
+                    },
+                    {
+                      "currentProgress": 100,
+                      "name": "federation",
+                      "progressWeight": 15
+                    },
+                    {
+                      "currentProgress": 100,
+                      "name": "licensemgr",
+                      "progressWeight": 10
+                    }
+                  ],
+                  "progress": 100
+                }
+              },
+              "startTime": "2024-05-20T09:43:00Z"
+            },
+            "error": "",
+            "id": "mybackup1",
+            "operation": "backup",
+            "restoreConfiguration": {
+              "path": "/tmp/testbackup.tar.gz",
+              "source": "dcnm224",
+              "type": "configOnly"
+            },
+            "state": "processing"
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/backups/status"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+    response:
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 500 Response
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/backups/status"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+    response:
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }

@@ -1,0 +1,408 @@
+info:
+  name: Validate the specified configuration template content
+  type: http
+  seq: 9
+
+http:
+  method: POST
+  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/configTemplateActions/validate"
+  params:
+    - name: clusterName
+      value: ""
+      type: query
+      description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+      disabled: true
+  body:
+    type: text
+    data: ""
+  auth:
+    type: oauth2
+    flow: implicit
+    authorizationUrl: https://example.com/login
+    callbackUrl: "{{oauth_callback_url}}"
+    credentials:
+      clientId: "{{oauth_client_id}}"
+    scope: observer fabric-admin support-engineer super-admin approver designer
+    state: "{{oauth_state}}"
+    tokenConfig:
+      placement:
+        header: Bearer
+    settings:
+      autoFetchToken: false
+      autoRefreshToken: true
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Validation with errors
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/configTemplateActions/validate"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+      body:
+        type: text
+        data: |
+          ##template properties
+          name =feature_lldp;
+          description = ;
+          tags = ;
+          userDefined = false;
+          supportedPlatforms = N9K;
+          templateType = POLICY;
+          templateSubType = DEVICE;
+          contentType = TEMPLATE_CLI;
+          implements = ;
+          dependencies = ;
+          published = false;
+          imports = ;
+          ##
+          ##template variables
+
+          #    Copyright (c) 2022 by Cisco Systems, Inc.
+          #    All rights reserved.
+
+          ##
+          ##template content
+
+          feature lldp
+
+          ##
+    response:
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "reportItems": [
+              {
+                "endColumn": 6,
+                "endLine": 6,
+                "message": "Encountered \" <PARAMETER_NAME> \"dummy \"\" at line 6, column 1.\nWas expecting one of:\n    <EOF> \n    \"@\" ...\n    \"struct\" ...\n    \"boolean\" ...\n    \"enum\" ...\n    \"float\" ...\n    \"floatRange\" ...\n    \"integer\" ...\n    \"long\" ...\n    \"integerRange\" ...\n    \"interface\" ...\n    \"interfaceRange\" ...\n    \"ipV4Address\" ...\n    \"ipV4AddressWithSubnet\" ...\n    \"ipV4AddressRange\" ...\n    \"ipV6Address\" ...\n    \"ipV6AddressWithPrefix\" ...\n    \"ipV6AddressWithSubnet\" ...\n    \"ipAddressWithoutPrefix\" ...\n    \"ipAddress\" ...\n    \"ipAddressList\" ...\n    \"ISISNetAddress\" ...\n    \"macAddress\" ...\n    \"string\" ...\n    \"wwn\" ...\n    \"string[]\" ...\n    \"ipAddress[]\" ...\n    ",
+                "reportItemType": "error",
+                "startColumn": 1,
+                "startLine": 6
+              }
+            ],
+            "status": "fail"
+          }
+  - name: Successful validation
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/configTemplateActions/validate"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+      body:
+        type: text
+        data: |
+          ##template properties
+          name =feature_lldp;
+          description = ;
+          tags = ;
+          userDefined = false;
+          supportedPlatforms = N9K;
+          templateType = POLICY;
+          templateSubType = DEVICE;
+          contentType = TEMPLATE_CLI;
+          implements = ;
+          dependencies = ;
+          published = false;
+          imports = ;
+          ##
+          ##template variables
+
+          #    Copyright (c) 2022 by Cisco Systems, Inc.
+          #    All rights reserved.
+
+          ##
+          ##template content
+
+          feature lldp
+
+          ##
+    response:
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "status": "pass"
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/configTemplateActions/validate"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+      body:
+        type: text
+        data: |
+          ##template properties
+          name =feature_lldp;
+          description = ;
+          tags = ;
+          userDefined = false;
+          supportedPlatforms = N9K;
+          templateType = POLICY;
+          templateSubType = DEVICE;
+          contentType = TEMPLATE_CLI;
+          implements = ;
+          dependencies = ;
+          published = false;
+          imports = ;
+          ##
+          ##template variables
+
+          #    Copyright (c) 2022 by Cisco Systems, Inc.
+          #    All rights reserved.
+
+          ##
+          ##template content
+
+          feature lldp
+
+          ##
+    response:
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/configTemplateActions/validate"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+      body:
+        type: text
+        data: |
+          ##template properties
+          name =feature_lldp;
+          description = ;
+          tags = ;
+          userDefined = false;
+          supportedPlatforms = N9K;
+          templateType = POLICY;
+          templateSubType = DEVICE;
+          contentType = TEMPLATE_CLI;
+          implements = ;
+          dependencies = ;
+          published = false;
+          imports = ;
+          ##
+          ##template variables
+
+          #    Copyright (c) 2022 by Cisco Systems, Inc.
+          #    All rights reserved.
+
+          ##
+          ##template content
+
+          feature lldp
+
+          ##
+    response:
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 403 Response
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/configTemplateActions/validate"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+      body:
+        type: text
+        data: |
+          ##template properties
+          name =feature_lldp;
+          description = ;
+          tags = ;
+          userDefined = false;
+          supportedPlatforms = N9K;
+          templateType = POLICY;
+          templateSubType = DEVICE;
+          contentType = TEMPLATE_CLI;
+          implements = ;
+          dependencies = ;
+          published = false;
+          imports = ;
+          ##
+          ##template variables
+
+          #    Copyright (c) 2022 by Cisco Systems, Inc.
+          #    All rights reserved.
+
+          ##
+          ##template content
+
+          feature lldp
+
+          ##
+    response:
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 404 Response
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/configTemplateActions/validate"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+      body:
+        type: text
+        data: |
+          ##template properties
+          name =feature_lldp;
+          description = ;
+          tags = ;
+          userDefined = false;
+          supportedPlatforms = N9K;
+          templateType = POLICY;
+          templateSubType = DEVICE;
+          contentType = TEMPLATE_CLI;
+          implements = ;
+          dependencies = ;
+          published = false;
+          imports = ;
+          ##
+          ##template variables
+
+          #    Copyright (c) 2022 by Cisco Systems, Inc.
+          #    All rights reserved.
+
+          ##
+          ##template content
+
+          feature lldp
+
+          ##
+    response:
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 500 Response
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/configTemplateActions/validate"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+      body:
+        type: text
+        data: |
+          ##template properties
+          name =feature_lldp;
+          description = ;
+          tags = ;
+          userDefined = false;
+          supportedPlatforms = N9K;
+          templateType = POLICY;
+          templateSubType = DEVICE;
+          contentType = TEMPLATE_CLI;
+          implements = ;
+          dependencies = ;
+          published = false;
+          imports = ;
+          ##
+          ##template variables
+
+          #    Copyright (c) 2022 by Cisco Systems, Inc.
+          #    All rights reserved.
+
+          ##
+          ##template content
+
+          feature lldp
+
+          ##
+    response:
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }

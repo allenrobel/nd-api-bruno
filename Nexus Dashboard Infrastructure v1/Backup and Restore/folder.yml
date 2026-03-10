@@ -1,0 +1,7 @@
+info:
+  name: Backup and Restore
+  type: folder
+  seq: 1
+
+request:
+  auth: inherit

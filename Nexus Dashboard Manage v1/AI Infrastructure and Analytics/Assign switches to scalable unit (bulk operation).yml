@@ -1,0 +1,592 @@
+info:
+  name: Assign switches to scalable unit (bulk operation)
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/scalableUnits/:scalableUnit/actions/addMembers"
+  params:
+    - name: clusterName
+      value: ""
+      type: query
+      description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+      disabled: true
+    - name: fabricName
+      value: ""
+      type: path
+      description: Name of the fabric
+    - name: scalableUnit
+      value: ""
+      type: path
+      description: Name of the scalable unit
+  body:
+    type: json
+    data: |-
+      {
+        "switches": [
+          {
+            "description": "",
+            "switchId": ""
+          }
+        ]
+      }
+  auth:
+    type: oauth2
+    flow: implicit
+    authorizationUrl: https://example.com/login
+    callbackUrl: "{{oauth_callback_url}}"
+    credentials:
+      clientId: "{{oauth_client_id}}"
+    scope: observer fabric-admin support-engineer super-admin approver designer
+    state: "{{oauth_state}}"
+    tokenConfig:
+      placement:
+        header: Bearer
+    settings:
+      autoFetchToken: false
+      autoRefreshToken: true
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response (Assign multiple switches using serial numbers)
+    description: OK
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/scalableUnits/:scalableUnit/actions/addMembers"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: scalableUnit
+          value: ""
+          type: path
+          description: Name of the scalable unit
+      body:
+        type: json
+        data: |-
+          {
+            "switches": [
+              {
+                "description": "Backend compute scalable unit leaf 1",
+                "switchId": "FLM2518055U"
+              },
+              {
+                "description": "Backend compute scalable unit leaf 2",
+                "switchId": "FLM2518056V"
+              }
+            ]
+          }
+    response:
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Successfully assigned 2 switches to scalable unit scalable-unit-1"
+          }
+  - name: 200 Response (Assign single switch by serial number)
+    description: OK
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/scalableUnits/:scalableUnit/actions/addMembers"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: scalableUnit
+          value: ""
+          type: path
+          description: Name of the scalable unit
+      body:
+        type: json
+        data: |-
+          {
+            "switches": [
+              {
+                "description": "Backend compute scalable unit for AI training",
+                "switchId": "FLM2518055U"
+              }
+            ]
+          }
+    response:
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Successfully assigned 2 switches to scalable unit scalable-unit-1"
+          }
+  - name: 400 Response (Assign multiple switches using serial numbers)
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/scalableUnits/:scalableUnit/actions/addMembers"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: scalableUnit
+          value: ""
+          type: path
+          description: Name of the scalable unit
+      body:
+        type: json
+        data: |-
+          {
+            "switches": [
+              {
+                "description": "Backend compute scalable unit leaf 1",
+                "switchId": "FLM2518055U"
+              },
+              {
+                "description": "Backend compute scalable unit leaf 2",
+                "switchId": "FLM2518056V"
+              }
+            ]
+          }
+    response:
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 400 Response (Assign single switch by serial number)
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/scalableUnits/:scalableUnit/actions/addMembers"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: scalableUnit
+          value: ""
+          type: path
+          description: Name of the scalable unit
+      body:
+        type: json
+        data: |-
+          {
+            "switches": [
+              {
+                "description": "Backend compute scalable unit for AI training",
+                "switchId": "FLM2518055U"
+              }
+            ]
+          }
+    response:
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 401 Response (Assign multiple switches using serial numbers)
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/scalableUnits/:scalableUnit/actions/addMembers"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: scalableUnit
+          value: ""
+          type: path
+          description: Name of the scalable unit
+      body:
+        type: json
+        data: |-
+          {
+            "switches": [
+              {
+                "description": "Backend compute scalable unit leaf 1",
+                "switchId": "FLM2518055U"
+              },
+              {
+                "description": "Backend compute scalable unit leaf 2",
+                "switchId": "FLM2518056V"
+              }
+            ]
+          }
+    response:
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 401 Response (Assign single switch by serial number)
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/scalableUnits/:scalableUnit/actions/addMembers"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: scalableUnit
+          value: ""
+          type: path
+          description: Name of the scalable unit
+      body:
+        type: json
+        data: |-
+          {
+            "switches": [
+              {
+                "description": "Backend compute scalable unit for AI training",
+                "switchId": "FLM2518055U"
+              }
+            ]
+          }
+    response:
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 403 Response (Assign multiple switches using serial numbers)
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/scalableUnits/:scalableUnit/actions/addMembers"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: scalableUnit
+          value: ""
+          type: path
+          description: Name of the scalable unit
+      body:
+        type: json
+        data: |-
+          {
+            "switches": [
+              {
+                "description": "Backend compute scalable unit leaf 1",
+                "switchId": "FLM2518055U"
+              },
+              {
+                "description": "Backend compute scalable unit leaf 2",
+                "switchId": "FLM2518056V"
+              }
+            ]
+          }
+    response:
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 403 Response (Assign single switch by serial number)
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/scalableUnits/:scalableUnit/actions/addMembers"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: scalableUnit
+          value: ""
+          type: path
+          description: Name of the scalable unit
+      body:
+        type: json
+        data: |-
+          {
+            "switches": [
+              {
+                "description": "Backend compute scalable unit for AI training",
+                "switchId": "FLM2518055U"
+              }
+            ]
+          }
+    response:
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 404 Response (Assign multiple switches using serial numbers)
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/scalableUnits/:scalableUnit/actions/addMembers"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: scalableUnit
+          value: ""
+          type: path
+          description: Name of the scalable unit
+      body:
+        type: json
+        data: |-
+          {
+            "switches": [
+              {
+                "description": "Backend compute scalable unit leaf 1",
+                "switchId": "FLM2518055U"
+              },
+              {
+                "description": "Backend compute scalable unit leaf 2",
+                "switchId": "FLM2518056V"
+              }
+            ]
+          }
+    response:
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 404 Response (Assign single switch by serial number)
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/scalableUnits/:scalableUnit/actions/addMembers"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: scalableUnit
+          value: ""
+          type: path
+          description: Name of the scalable unit
+      body:
+        type: json
+        data: |-
+          {
+            "switches": [
+              {
+                "description": "Backend compute scalable unit for AI training",
+                "switchId": "FLM2518055U"
+              }
+            ]
+          }
+    response:
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 500 Response (Assign multiple switches using serial numbers)
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/scalableUnits/:scalableUnit/actions/addMembers"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: scalableUnit
+          value: ""
+          type: path
+          description: Name of the scalable unit
+      body:
+        type: json
+        data: |-
+          {
+            "switches": [
+              {
+                "description": "Backend compute scalable unit leaf 1",
+                "switchId": "FLM2518055U"
+              },
+              {
+                "description": "Backend compute scalable unit leaf 2",
+                "switchId": "FLM2518056V"
+              }
+            ]
+          }
+    response:
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }
+  - name: 500 Response (Assign single switch by serial number)
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/scalableUnits/:scalableUnit/actions/addMembers"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: scalableUnit
+          value: ""
+          type: path
+          description: Name of the scalable unit
+      body:
+        type: json
+        data: |-
+          {
+            "switches": [
+              {
+                "description": "Backend compute scalable unit for AI training",
+                "switchId": "FLM2518055U"
+              }
+            ]
+          }
+    response:
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }

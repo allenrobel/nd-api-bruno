@@ -1,0 +1,7 @@
+info:
+  name: AI Infrastructure and Analytics
+  type: folder
+  seq: 2
+
+request:
+  auth: inherit

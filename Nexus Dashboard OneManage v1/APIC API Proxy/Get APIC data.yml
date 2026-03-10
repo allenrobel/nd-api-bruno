@@ -1,0 +1,460 @@
+info:
+  name: Get APIC data
+  type: http
+  seq: 2
+  tags:
+    - APIC API Proxy
+
+http:
+  method: GET
+  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/apics/:clusterName/:apicPath"
+  params:
+    - name: clusterName
+      value: ""
+      type: path
+      description: APIC cluster name
+    - name: apicPath
+      value: ""
+      type: path
+      description: APIC GET URL
+  auth:
+    type: oauth2
+    flow: implicit
+    authorizationUrl: https://example.com/login
+    callbackUrl: "{{oauth_callback_url}}"
+    credentials:
+      clientId: "{{oauth_client_id}}"
+    scope: observer fabric-admin support-engineer super-admin approver designer
+    state: "{{oauth_state}}"
+    tokenConfig:
+      placement:
+        header: Bearer
+    settings:
+      autoFetchToken: false
+      autoRefreshToken: true
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Empty list of tenants in APIC
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/apics/:clusterName/:apicPath"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: path
+          description: APIC cluster name
+        - name: apicPath
+          value: ""
+          type: path
+          description: APIC GET URL
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "imdata": [],
+            "totalCount": "0"
+          }
+  - name: List of tenants in APIC
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/apics/:clusterName/:apicPath"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: path
+          description: APIC cluster name
+        - name: apicPath
+          value: ""
+          type: path
+          description: APIC GET URL
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "imdata": [
+              {
+                "fvTenant": {
+                  "attributes": {
+                    "annotation": "",
+                    "childAction": "",
+                    "descr": "",
+                    "dn": "uni/tn-tenant2",
+                    "extMngdBy": "",
+                    "lcOwn": "local",
+                    "modTs": "2024-06-18T15:40:59.556-07:00",
+                    "monPolDn": "uni/tn-common/monepg-default",
+                    "name": "tenant2",
+                    "nameAlias": "",
+                    "ownerKey": "",
+                    "ownerTag": "",
+                    "status": "",
+                    "uid": "15374",
+                    "userdom": ":all:common:"
+                  }
+                }
+              },
+              {
+                "fvTenant": {
+                  "attributes": {
+                    "annotation": "",
+                    "childAction": "",
+                    "descr": "",
+                    "dn": "uni/tn-tenant1",
+                    "extMngdBy": "",
+                    "lcOwn": "local",
+                    "modTs": "2024-06-08T11:55:19.083-07:00",
+                    "monPolDn": "uni/tn-common/monepg-default",
+                    "name": "tenant1",
+                    "nameAlias": "",
+                    "ownerKey": "",
+                    "ownerTag": "",
+                    "status": "",
+                    "uid": "15374",
+                    "userdom": ":all:common:"
+                  }
+                }
+              },
+              {
+                "fvTenant": {
+                  "attributes": {
+                    "annotation": "",
+                    "childAction": "",
+                    "descr": "",
+                    "dn": "uni/tn-mgmt",
+                    "extMngdBy": "",
+                    "lcOwn": "local",
+                    "modTs": "2023-01-27T18:00:50.602-07:00",
+                    "monPolDn": "uni/tn-common/monepg-default",
+                    "name": "mgmt",
+                    "nameAlias": "",
+                    "ownerKey": "",
+                    "ownerTag": "",
+                    "status": "",
+                    "uid": "0",
+                    "userdom": "all"
+                  }
+                }
+              },
+              {
+                "fvTenant": {
+                  "attributes": {
+                    "annotation": "",
+                    "childAction": "",
+                    "descr": "",
+                    "dn": "uni/tn-infra",
+                    "extMngdBy": "",
+                    "lcOwn": "local",
+                    "modTs": "2023-01-27T18:00:50.764-07:00",
+                    "monPolDn": "uni/tn-common/monepg-default",
+                    "name": "infra",
+                    "nameAlias": "",
+                    "ownerKey": "",
+                    "ownerTag": "",
+                    "status": "",
+                    "uid": "0",
+                    "userdom": "all"
+                  }
+                }
+              },
+              {
+                "fvTenant": {
+                  "attributes": {
+                    "annotation": "orchestrator:msc",
+                    "childAction": "",
+                    "descr": "",
+                    "dn": "uni/tn-ndo1",
+                    "extMngdBy": "",
+                    "lcOwn": "local",
+                    "modTs": "2024-08-28T17:20:12.651-07:00",
+                    "monPolDn": "uni/tn-common/monepg-default",
+                    "name": "ndo1",
+                    "nameAlias": "",
+                    "ownerKey": "",
+                    "ownerTag": "",
+                    "status": "",
+                    "uid": "0",
+                    "userdom": ":all:"
+                  }
+                }
+              },
+              {
+                "fvTenant": {
+                  "attributes": {
+                    "annotation": "",
+                    "childAction": "",
+                    "descr": "",
+                    "dn": "uni/tn-common",
+                    "extMngdBy": "",
+                    "lcOwn": "local",
+                    "modTs": "2024-10-31T20:31:29.088-07:00",
+                    "monPolDn": "uni/tn-common/monepg-default",
+                    "name": "common",
+                    "nameAlias": "",
+                    "ownerKey": "",
+                    "ownerTag": "",
+                    "status": "",
+                    "uid": "0",
+                    "userdom": "all"
+                  }
+                }
+              },
+              {
+                "fvTenant": {
+                  "attributes": {
+                    "annotation": "orchestrator:msc",
+                    "childAction": "",
+                    "descr": "",
+                    "dn": "uni/tn-tenant3",
+                    "extMngdBy": "",
+                    "lcOwn": "local",
+                    "modTs": "2025-02-28T17:24:04.386-07:00",
+                    "monPolDn": "uni/tn-common/monepg-default",
+                    "name": "tenant3",
+                    "nameAlias": "",
+                    "ownerKey": "",
+                    "ownerTag": "",
+                    "status": "",
+                    "uid": "0",
+                    "userdom": ":all:"
+                  }
+                }
+              },
+              {
+                "fvTenant": {
+                  "attributes": {
+                    "annotation": "",
+                    "childAction": "",
+                    "descr": "",
+                    "dn": "uni/tn-test-nd-tenant1",
+                    "extMngdBy": "",
+                    "lcOwn": "local",
+                    "modTs": "2025-03-17T15:31:31.264-07:00",
+                    "monPolDn": "uni/tn-common/monepg-default",
+                    "name": "test-nd-tenant1",
+                    "nameAlias": "",
+                    "ownerKey": "",
+                    "ownerTag": "",
+                    "status": "",
+                    "uid": "15374",
+                    "userdom": ":all:common:"
+                  }
+                }
+              }
+            ],
+            "totalCount": "8"
+          }
+  - name: Empty list of tenants in APIC
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/apics/:clusterName/:apicPath"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: path
+          description: APIC cluster name
+        - name: apicPath
+          value: ""
+          type: path
+          description: APIC GET URL
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/xml
+      body:
+        type: xml
+        data: |
+          <?xml version="1.0" encoding="UTF-8"?>
+          <imdata totalCount="0"></imdata>
+  - name: List of tenants in APIC
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/apics/:clusterName/:apicPath"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: path
+          description: APIC cluster name
+        - name: apicPath
+          value: ""
+          type: path
+          description: APIC GET URL
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/xml
+      body:
+        type: xml
+        data: |
+          <?xml version="1.0" encoding="UTF-8"?>
+          <imdata totalCount="8">
+            <fvTenant annotation="" childAction="" descr="" dn="uni/tn-tenant2" extMngdBy="" lcOwn="local" modTs="2024-06-18T15:40:59.556-07:00" monPolDn="uni/tn-common/monepg-default" name="tenant2" nameAlias="" ownerKey="" ownerTag="" status="" uid="15374" userdom=":all:common:"/>
+            <fvTenant annotation="" childAction="" descr="" dn="uni/tn-tenant1" extMngdBy="" lcOwn="local" modTs="2024-06-08T11:55:19.083-07:00" monPolDn="uni/tn-common/monepg-default" name="tenant1" nameAlias="" ownerKey="" ownerTag="" status="" uid="15374" userdom=":all:common:"/>
+            <fvTenant annotation="" childAction="" descr="" dn="uni/tn-mgmt" extMngdBy="" lcOwn="local" modTs="2023-01-27T18:00:50.602-07:00" monPolDn="uni/tn-common/monepg-default" name="mgmt" nameAlias="" ownerKey="" ownerTag="" status="" uid="0" userdom=":all:"/>
+            <fvTenant annotation="" childAction="" descr="" dn="uni/tn-infra" extMngdBy="" lcOwn="local" modTs="2023-01-27T18:00:50.764-07:00" monPolDn="uni/tn-common/monepg-default" name="infra" nameAlias="" ownerKey="" ownerTag="" status="" uid="0" userdom=":all:"/>
+            <fvTenant annotation="orchestrator:msc" childAction="" descr="" dn="uni/tn-ndo1" extMngdBy="" lcOwn="local" modTs="2024-08-28T17:20:12.651-07:00" monPolDn="uni/tn-common/monepg-default" name="ndo1" nameAlias="" ownerKey="" ownerTag="" status="" uid="0" userdom=":all:"/>
+            <fvTenant annotation="" childAction="" descr="" dn="uni/tn-common" extMngdBy="" lcOwn="local" modTs="2024-10-31T20:31:29.088-07:00" monPolDn="uni/tn-common/monepg-default" name="common" nameAlias="" ownerKey="" ownerTag="" status="" uid="0" userdom=":all:"/>
+            <fvTenant annotation="orchestrator:msc" childAction="" descr="" dn="uni/tn-tenant3" extMngdBy="" lcOwn="local" modTs="2025-02-28T17:24:04.386-07:00" monPolDn="uni/tn-common/monepg-default" name="tenant3" nameAlias="" ownerKey="" ownerTag="" status="" uid="0" userdom=":all:"/>
+            <fvTenant annotation="" childAction="" descr="" dn="uni/tn-test-nd-tenant1" extMngdBy="" lcOwn="local" modTs="2025-03-17T15:31:31.264-07:00" monPolDn="uni/tn-common/monepg-default" name="test-nd-tenant1" nameAlias="" ownerKey="" ownerTag="" status="" uid="15374" userdom=":all:common:"/>
+          </imdata>
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/apics/:clusterName/:apicPath"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: path
+          description: APIC cluster name
+        - name: apicPath
+          value: ""
+          type: path
+          description: APIC GET URL
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/apics/:clusterName/:apicPath"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: path
+          description: APIC cluster name
+        - name: apicPath
+          value: ""
+          type: path
+          description: APIC GET URL
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 403 Response
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/apics/:clusterName/:apicPath"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: path
+          description: APIC cluster name
+        - name: apicPath
+          value: ""
+          type: path
+          description: APIC GET URL
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 404 Response
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/apics/:clusterName/:apicPath"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: path
+          description: APIC cluster name
+        - name: apicPath
+          value: ""
+          type: path
+          description: APIC GET URL
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 500 Response
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/apics/:clusterName/:apicPath"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: path
+          description: APIC cluster name
+        - name: apicPath
+          value: ""
+          type: path
+          description: APIC GET URL
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }

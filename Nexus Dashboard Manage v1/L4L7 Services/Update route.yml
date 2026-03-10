@@ -1,0 +1,1068 @@
+info:
+  name: Update route
+  type: http
+  seq: 34
+
+http:
+  method: PUT
+  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/routes/:routeName"
+  params:
+    - name: routeName
+      value: ""
+      type: path
+      description: Route name
+    - name: fabricName
+      value: ""
+      type: path
+      description: Name of the fabric
+  body:
+    type: json
+    data: |-
+      {
+        "lastUpdateTimestamp": "",
+        "routeData": "",
+        "routeName": "",
+        "vrfName": ""
+      }
+  auth:
+    type: oauth2
+    flow: implicit
+    authorizationUrl: https://example.com/login
+    callbackUrl: "{{oauth_callback_url}}"
+    credentials:
+      clientId: "{{oauth_client_id}}"
+    scope: observer fabric-admin support-engineer super-admin approver designer
+    state: "{{oauth_state}}"
+    tokenConfig:
+      placement:
+        header: Bearer
+    settings:
+      autoFetchToken: false
+      autoRefreshToken: true
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Route with customized template
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/routes/:routeName"
+      method: PUT
+      params:
+        - name: routeName
+          value: ""
+          type: path
+          description: Route name
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "routeData": {
+              "routeDataType": "custom",
+              "templateName": "my_service_ebgp_route",
+              "templateParams": {
+                "adminState": "true"
+              }
+            },
+            "routeName": "route3",
+            "vrfName": "Vrf1"
+          }
+    response:
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "routeData": {
+              "routeDataType": "custom",
+              "templateName": "my_service_ebgp_route",
+              "templateParams": {
+                "adminState": "true"
+              }
+            },
+            "routeName": "route3",
+            "vrfName": "Vrf1"
+          }
+  - name: eBGP dynamic route
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/routes/:routeName"
+      method: PUT
+      params:
+        - name: routeName
+          value: ""
+          type: path
+          description: Route name
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "routeData": {
+              "adminState": true,
+              "advertiseHostRoute": false,
+              "bgpAuthentication": {
+                "authenticationKeyType": "3des",
+                "password": "mysecret",
+                "passwordFabricInherit": true
+              },
+              "bgpPassword": false,
+              "localAsn": "100",
+              "exportGatewayIp": true,
+              "loopbackInterfaceDescription": "loopback interface description",
+              "loopbackIps": {
+                "ipv4Loopback": "192.168.1.1",
+                "ipv6Loopback": "FEDC:B123::1",
+                "ipv4PeerLoopback": "192.168.1.2",
+                "ipv6PeerLoopback": "FEDC:B123::2"
+              },
+              "routeDataType": "eBGP",
+              "routeMapTag": 12345,
+              "routeMaps": {
+                "ipv4RouteMapIn": "routeMap1",
+                "ipv6RouteMapIn": "routeMap3",
+                "ipv4RouteMapOut": "routeMap2",
+                "ipv6RouteMapOut": "routeMap4"
+              },
+              "serviceNodeAsn": "200",
+              "ipv4ServiceNodeAddress": "1.2.3.1/24",
+              "ipv6ServiceNodeAddress": "FEDC:BA98::1/96",
+              "useAutoCreatedLoopback": true,
+              "vpcPeerLinkPeeringConfig": {
+                "ipv4Destination": "192.168.10.2",
+                "ipv6Destination": "2001:db9::2",
+                "peeringVlanId": 1825,
+                "ipv6SourceSubnet": "2001:db9::1/120",
+                "ipv4SourceSubnet": "192.168.10.1/30"
+              },
+              "vpcPeerLinkPeering": false
+            },
+            "routeName": "route2",
+            "vrfName": "Vrf1"
+          }
+    response:
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "routeData": {
+              "adminState": true,
+              "advertiseHostRoute": false,
+              "bgpAuthentication": {
+                "authenticationKeyType": "3des",
+                "password": "mysecret",
+                "passwordFabricInherit": true
+              },
+              "bgpPassword": false,
+              "localAsn": "100",
+              "exportGatewayIp": true,
+              "loopbackInterfaceDescription": "loopback interface description",
+              "loopbackIps": {
+                "ipv4Loopback": "192.168.1.1",
+                "ipv6Loopback": "FEDC:B123::1",
+                "ipv4PeerLoopback": "192.168.1.2",
+                "ipv6PeerLoopback": "FEDC:B123::2"
+              },
+              "routeDataType": "eBGP",
+              "routeMapTag": 12345,
+              "routeMaps": {
+                "ipv4RouteMapIn": "routeMap1",
+                "ipv6RouteMapIn": "routeMap3",
+                "ipv4RouteMapOut": "routeMap2",
+                "ipv6RouteMapOut": "routeMap4"
+              },
+              "serviceNodeAsn": "200",
+              "ipv4ServiceNodeAddress": "1.2.3.1/24",
+              "ipv6ServiceNodeAddress": "FEDC:BA98::1/96",
+              "useAutoCreatedLoopback": true,
+              "vpcPeerLinkPeeringConfig": {
+                "ipv4Destination": "192.168.10.2",
+                "ipv6Destination": "2001:db9::2",
+                "peeringVlanId": 1825,
+                "ipv6SourceSubnet": "2001:db9::1/120",
+                "ipv4SourceSubnet": "192.168.10.1/30"
+              },
+              "vpcPeerLinkPeering": false
+            },
+            "routeName": "route2",
+            "vrfName": "Vrf1"
+          }
+  - name: Static route
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/routes/:routeName"
+      method: PUT
+      params:
+        - name: routeName
+          value: ""
+          type: path
+          description: Route name
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "routeData": {
+              "ipv6DestinationSubnets": [
+                "FEDC:BA98::1/96"
+              ],
+              "ipv4DestinationSubnets": [
+                "1.2.3.1/24",
+                "5.6.7.8/32"
+              ],
+              "exportGatewayIp": true,
+              "routeDataType": "static",
+              "ipv4ServiceNodeAddress": "10.10.10.10",
+              "ipv6ServiceNodeAddress": "fe80:10::10"
+            },
+            "routeName": "route1",
+            "vrfName": "Vrf1"
+          }
+    response:
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "routeData": {
+              "ipv6DestinationSubnets": [
+                "FEDC:BA98::1/96"
+              ],
+              "ipv4DestinationSubnets": [
+                "1.2.3.1/24",
+                "5.6.7.8/32"
+              ],
+              "exportGatewayIp": true,
+              "routeDataType": "static",
+              "ipv4ServiceNodeAddress": "10.10.10.10",
+              "ipv6ServiceNodeAddress": "fe80:10::10"
+            },
+            "routeName": "route1",
+            "vrfName": "Vrf1"
+          }
+  - name: 400 Response (Route with customized template)
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/routes/:routeName"
+      method: PUT
+      params:
+        - name: routeName
+          value: ""
+          type: path
+          description: Route name
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "routeData": {
+              "routeDataType": "custom",
+              "templateName": "my_service_ebgp_route",
+              "templateParams": {
+                "adminState": "true"
+              }
+            },
+            "routeName": "route3",
+            "vrfName": "Vrf1"
+          }
+    response:
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 400 Response (eBGP dynamic route)
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/routes/:routeName"
+      method: PUT
+      params:
+        - name: routeName
+          value: ""
+          type: path
+          description: Route name
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "routeData": {
+              "adminState": true,
+              "advertiseHostRoute": false,
+              "bgpAuthentication": {
+                "authenticationKeyType": "3des",
+                "password": "mysecret",
+                "passwordFabricInherit": true
+              },
+              "bgpPassword": false,
+              "localAsn": "100",
+              "exportGatewayIp": true,
+              "loopbackInterfaceDescription": "loopback interface description",
+              "loopbackIps": {
+                "ipv4Loopback": "192.168.1.1",
+                "ipv6Loopback": "FEDC:B123::1",
+                "ipv4PeerLoopback": "192.168.1.2",
+                "ipv6PeerLoopback": "FEDC:B123::2"
+              },
+              "routeDataType": "eBGP",
+              "routeMapTag": 12345,
+              "routeMaps": {
+                "ipv4RouteMapIn": "routeMap1",
+                "ipv6RouteMapIn": "routeMap3",
+                "ipv4RouteMapOut": "routeMap2",
+                "ipv6RouteMapOut": "routeMap4"
+              },
+              "serviceNodeAsn": "200",
+              "ipv4ServiceNodeAddress": "1.2.3.1/24",
+              "ipv6ServiceNodeAddress": "FEDC:BA98::1/96",
+              "useAutoCreatedLoopback": true,
+              "vpcPeerLinkPeeringConfig": {
+                "ipv4Destination": "192.168.10.2",
+                "ipv6Destination": "2001:db9::2",
+                "peeringVlanId": 1825,
+                "ipv6SourceSubnet": "2001:db9::1/120",
+                "ipv4SourceSubnet": "192.168.10.1/30"
+              },
+              "vpcPeerLinkPeering": false
+            },
+            "routeName": "route2",
+            "vrfName": "Vrf1"
+          }
+    response:
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 400 Response (Static route)
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/routes/:routeName"
+      method: PUT
+      params:
+        - name: routeName
+          value: ""
+          type: path
+          description: Route name
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "routeData": {
+              "ipv6DestinationSubnets": [
+                "FEDC:BA98::1/96"
+              ],
+              "ipv4DestinationSubnets": [
+                "1.2.3.1/24",
+                "5.6.7.8/32"
+              ],
+              "exportGatewayIp": true,
+              "routeDataType": "static",
+              "ipv4ServiceNodeAddress": "10.10.10.10",
+              "ipv6ServiceNodeAddress": "fe80:10::10"
+            },
+            "routeName": "route1",
+            "vrfName": "Vrf1"
+          }
+    response:
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 401 Response (Route with customized template)
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/routes/:routeName"
+      method: PUT
+      params:
+        - name: routeName
+          value: ""
+          type: path
+          description: Route name
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "routeData": {
+              "routeDataType": "custom",
+              "templateName": "my_service_ebgp_route",
+              "templateParams": {
+                "adminState": "true"
+              }
+            },
+            "routeName": "route3",
+            "vrfName": "Vrf1"
+          }
+    response:
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 401 Response (eBGP dynamic route)
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/routes/:routeName"
+      method: PUT
+      params:
+        - name: routeName
+          value: ""
+          type: path
+          description: Route name
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "routeData": {
+              "adminState": true,
+              "advertiseHostRoute": false,
+              "bgpAuthentication": {
+                "authenticationKeyType": "3des",
+                "password": "mysecret",
+                "passwordFabricInherit": true
+              },
+              "bgpPassword": false,
+              "localAsn": "100",
+              "exportGatewayIp": true,
+              "loopbackInterfaceDescription": "loopback interface description",
+              "loopbackIps": {
+                "ipv4Loopback": "192.168.1.1",
+                "ipv6Loopback": "FEDC:B123::1",
+                "ipv4PeerLoopback": "192.168.1.2",
+                "ipv6PeerLoopback": "FEDC:B123::2"
+              },
+              "routeDataType": "eBGP",
+              "routeMapTag": 12345,
+              "routeMaps": {
+                "ipv4RouteMapIn": "routeMap1",
+                "ipv6RouteMapIn": "routeMap3",
+                "ipv4RouteMapOut": "routeMap2",
+                "ipv6RouteMapOut": "routeMap4"
+              },
+              "serviceNodeAsn": "200",
+              "ipv4ServiceNodeAddress": "1.2.3.1/24",
+              "ipv6ServiceNodeAddress": "FEDC:BA98::1/96",
+              "useAutoCreatedLoopback": true,
+              "vpcPeerLinkPeeringConfig": {
+                "ipv4Destination": "192.168.10.2",
+                "ipv6Destination": "2001:db9::2",
+                "peeringVlanId": 1825,
+                "ipv6SourceSubnet": "2001:db9::1/120",
+                "ipv4SourceSubnet": "192.168.10.1/30"
+              },
+              "vpcPeerLinkPeering": false
+            },
+            "routeName": "route2",
+            "vrfName": "Vrf1"
+          }
+    response:
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 401 Response (Static route)
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/routes/:routeName"
+      method: PUT
+      params:
+        - name: routeName
+          value: ""
+          type: path
+          description: Route name
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "routeData": {
+              "ipv6DestinationSubnets": [
+                "FEDC:BA98::1/96"
+              ],
+              "ipv4DestinationSubnets": [
+                "1.2.3.1/24",
+                "5.6.7.8/32"
+              ],
+              "exportGatewayIp": true,
+              "routeDataType": "static",
+              "ipv4ServiceNodeAddress": "10.10.10.10",
+              "ipv6ServiceNodeAddress": "fe80:10::10"
+            },
+            "routeName": "route1",
+            "vrfName": "Vrf1"
+          }
+    response:
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 403 Response (Route with customized template)
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/routes/:routeName"
+      method: PUT
+      params:
+        - name: routeName
+          value: ""
+          type: path
+          description: Route name
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "routeData": {
+              "routeDataType": "custom",
+              "templateName": "my_service_ebgp_route",
+              "templateParams": {
+                "adminState": "true"
+              }
+            },
+            "routeName": "route3",
+            "vrfName": "Vrf1"
+          }
+    response:
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 403 Response (eBGP dynamic route)
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/routes/:routeName"
+      method: PUT
+      params:
+        - name: routeName
+          value: ""
+          type: path
+          description: Route name
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "routeData": {
+              "adminState": true,
+              "advertiseHostRoute": false,
+              "bgpAuthentication": {
+                "authenticationKeyType": "3des",
+                "password": "mysecret",
+                "passwordFabricInherit": true
+              },
+              "bgpPassword": false,
+              "localAsn": "100",
+              "exportGatewayIp": true,
+              "loopbackInterfaceDescription": "loopback interface description",
+              "loopbackIps": {
+                "ipv4Loopback": "192.168.1.1",
+                "ipv6Loopback": "FEDC:B123::1",
+                "ipv4PeerLoopback": "192.168.1.2",
+                "ipv6PeerLoopback": "FEDC:B123::2"
+              },
+              "routeDataType": "eBGP",
+              "routeMapTag": 12345,
+              "routeMaps": {
+                "ipv4RouteMapIn": "routeMap1",
+                "ipv6RouteMapIn": "routeMap3",
+                "ipv4RouteMapOut": "routeMap2",
+                "ipv6RouteMapOut": "routeMap4"
+              },
+              "serviceNodeAsn": "200",
+              "ipv4ServiceNodeAddress": "1.2.3.1/24",
+              "ipv6ServiceNodeAddress": "FEDC:BA98::1/96",
+              "useAutoCreatedLoopback": true,
+              "vpcPeerLinkPeeringConfig": {
+                "ipv4Destination": "192.168.10.2",
+                "ipv6Destination": "2001:db9::2",
+                "peeringVlanId": 1825,
+                "ipv6SourceSubnet": "2001:db9::1/120",
+                "ipv4SourceSubnet": "192.168.10.1/30"
+              },
+              "vpcPeerLinkPeering": false
+            },
+            "routeName": "route2",
+            "vrfName": "Vrf1"
+          }
+    response:
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 403 Response (Static route)
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/routes/:routeName"
+      method: PUT
+      params:
+        - name: routeName
+          value: ""
+          type: path
+          description: Route name
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "routeData": {
+              "ipv6DestinationSubnets": [
+                "FEDC:BA98::1/96"
+              ],
+              "ipv4DestinationSubnets": [
+                "1.2.3.1/24",
+                "5.6.7.8/32"
+              ],
+              "exportGatewayIp": true,
+              "routeDataType": "static",
+              "ipv4ServiceNodeAddress": "10.10.10.10",
+              "ipv6ServiceNodeAddress": "fe80:10::10"
+            },
+            "routeName": "route1",
+            "vrfName": "Vrf1"
+          }
+    response:
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 404 Response (Route with customized template)
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/routes/:routeName"
+      method: PUT
+      params:
+        - name: routeName
+          value: ""
+          type: path
+          description: Route name
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "routeData": {
+              "routeDataType": "custom",
+              "templateName": "my_service_ebgp_route",
+              "templateParams": {
+                "adminState": "true"
+              }
+            },
+            "routeName": "route3",
+            "vrfName": "Vrf1"
+          }
+    response:
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 404 Response (eBGP dynamic route)
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/routes/:routeName"
+      method: PUT
+      params:
+        - name: routeName
+          value: ""
+          type: path
+          description: Route name
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "routeData": {
+              "adminState": true,
+              "advertiseHostRoute": false,
+              "bgpAuthentication": {
+                "authenticationKeyType": "3des",
+                "password": "mysecret",
+                "passwordFabricInherit": true
+              },
+              "bgpPassword": false,
+              "localAsn": "100",
+              "exportGatewayIp": true,
+              "loopbackInterfaceDescription": "loopback interface description",
+              "loopbackIps": {
+                "ipv4Loopback": "192.168.1.1",
+                "ipv6Loopback": "FEDC:B123::1",
+                "ipv4PeerLoopback": "192.168.1.2",
+                "ipv6PeerLoopback": "FEDC:B123::2"
+              },
+              "routeDataType": "eBGP",
+              "routeMapTag": 12345,
+              "routeMaps": {
+                "ipv4RouteMapIn": "routeMap1",
+                "ipv6RouteMapIn": "routeMap3",
+                "ipv4RouteMapOut": "routeMap2",
+                "ipv6RouteMapOut": "routeMap4"
+              },
+              "serviceNodeAsn": "200",
+              "ipv4ServiceNodeAddress": "1.2.3.1/24",
+              "ipv6ServiceNodeAddress": "FEDC:BA98::1/96",
+              "useAutoCreatedLoopback": true,
+              "vpcPeerLinkPeeringConfig": {
+                "ipv4Destination": "192.168.10.2",
+                "ipv6Destination": "2001:db9::2",
+                "peeringVlanId": 1825,
+                "ipv6SourceSubnet": "2001:db9::1/120",
+                "ipv4SourceSubnet": "192.168.10.1/30"
+              },
+              "vpcPeerLinkPeering": false
+            },
+            "routeName": "route2",
+            "vrfName": "Vrf1"
+          }
+    response:
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 404 Response (Static route)
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/routes/:routeName"
+      method: PUT
+      params:
+        - name: routeName
+          value: ""
+          type: path
+          description: Route name
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "routeData": {
+              "ipv6DestinationSubnets": [
+                "FEDC:BA98::1/96"
+              ],
+              "ipv4DestinationSubnets": [
+                "1.2.3.1/24",
+                "5.6.7.8/32"
+              ],
+              "exportGatewayIp": true,
+              "routeDataType": "static",
+              "ipv4ServiceNodeAddress": "10.10.10.10",
+              "ipv6ServiceNodeAddress": "fe80:10::10"
+            },
+            "routeName": "route1",
+            "vrfName": "Vrf1"
+          }
+    response:
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 500 Response (Route with customized template)
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/routes/:routeName"
+      method: PUT
+      params:
+        - name: routeName
+          value: ""
+          type: path
+          description: Route name
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "routeData": {
+              "routeDataType": "custom",
+              "templateName": "my_service_ebgp_route",
+              "templateParams": {
+                "adminState": "true"
+              }
+            },
+            "routeName": "route3",
+            "vrfName": "Vrf1"
+          }
+    response:
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }
+  - name: 500 Response (eBGP dynamic route)
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/routes/:routeName"
+      method: PUT
+      params:
+        - name: routeName
+          value: ""
+          type: path
+          description: Route name
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "routeData": {
+              "adminState": true,
+              "advertiseHostRoute": false,
+              "bgpAuthentication": {
+                "authenticationKeyType": "3des",
+                "password": "mysecret",
+                "passwordFabricInherit": true
+              },
+              "bgpPassword": false,
+              "localAsn": "100",
+              "exportGatewayIp": true,
+              "loopbackInterfaceDescription": "loopback interface description",
+              "loopbackIps": {
+                "ipv4Loopback": "192.168.1.1",
+                "ipv6Loopback": "FEDC:B123::1",
+                "ipv4PeerLoopback": "192.168.1.2",
+                "ipv6PeerLoopback": "FEDC:B123::2"
+              },
+              "routeDataType": "eBGP",
+              "routeMapTag": 12345,
+              "routeMaps": {
+                "ipv4RouteMapIn": "routeMap1",
+                "ipv6RouteMapIn": "routeMap3",
+                "ipv4RouteMapOut": "routeMap2",
+                "ipv6RouteMapOut": "routeMap4"
+              },
+              "serviceNodeAsn": "200",
+              "ipv4ServiceNodeAddress": "1.2.3.1/24",
+              "ipv6ServiceNodeAddress": "FEDC:BA98::1/96",
+              "useAutoCreatedLoopback": true,
+              "vpcPeerLinkPeeringConfig": {
+                "ipv4Destination": "192.168.10.2",
+                "ipv6Destination": "2001:db9::2",
+                "peeringVlanId": 1825,
+                "ipv6SourceSubnet": "2001:db9::1/120",
+                "ipv4SourceSubnet": "192.168.10.1/30"
+              },
+              "vpcPeerLinkPeering": false
+            },
+            "routeName": "route2",
+            "vrfName": "Vrf1"
+          }
+    response:
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }
+  - name: 500 Response (Static route)
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/routes/:routeName"
+      method: PUT
+      params:
+        - name: routeName
+          value: ""
+          type: path
+          description: Route name
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "routeData": {
+              "ipv6DestinationSubnets": [
+                "FEDC:BA98::1/96"
+              ],
+              "ipv4DestinationSubnets": [
+                "1.2.3.1/24",
+                "5.6.7.8/32"
+              ],
+              "exportGatewayIp": true,
+              "routeDataType": "static",
+              "ipv4ServiceNodeAddress": "10.10.10.10",
+              "ipv6ServiceNodeAddress": "fe80:10::10"
+            },
+            "routeName": "route1",
+            "vrfName": "Vrf1"
+          }
+    response:
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }

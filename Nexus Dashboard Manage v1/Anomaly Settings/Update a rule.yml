@@ -1,0 +1,2011 @@
+info:
+  name: Update a rule
+  type: http
+  seq: 8
+
+http:
+  method: PUT
+  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/anomalyRules/complianceRules/:ruleId"
+  params:
+    - name: clusterName
+      value: ""
+      type: query
+      description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+      disabled: true
+    - name: ruleId
+      value: ""
+      type: path
+      description: The ID of the rule that is updated
+  body:
+    type: json
+    data: |-
+      {
+        "associatedFabrics": [
+          {
+            "assuredNetworkType": "",
+            "fabricName": "",
+            "isEnabled": false,
+            "uuid": ""
+          }
+        ],
+        "baseSnapshotCollectionDate": "",
+        "baseSnapshotCollectionTimestamp": 0,
+        "baseSnapshotId": "",
+        "communicationRuleMatchType": "",
+        "communicationRuleType": "",
+        "configComplianceCriteria": {
+          "andParameters": [
+            {
+              "operator": "",
+              "parameter": "",
+              "value": ""
+            }
+          ],
+          "associationType": "",
+          "lowerBound": 0,
+          "parameterType": "",
+          "upperBound": 0
+        },
+        "configurationType": "",
+        "createDate": "",
+        "description": "",
+        "fromObjects": {
+          "description": "",
+          "excludes": [
+            {
+              "matches": [
+                {
+                  "applicationEpgMatch": {
+                    "applicationEpg": {
+                      "pattern": "",
+                      "type": ""
+                    },
+                    "applicationProfile": {},
+                    "objectAttribute": "",
+                    "tenant": {}
+                  },
+                  "applicationProfileMatch": {
+                    "applicationProfile": {},
+                    "objectAttribute": "",
+                    "tenant": {}
+                  },
+                  "bridgeDomainMatch": {
+                    "bridgeDomain": {},
+                    "objectAttribute": "",
+                    "tenant": {}
+                  },
+                  "contractMatch": {
+                    "contract": {},
+                    "objectAttribute": "",
+                    "tenant": {}
+                  },
+                  "filterMatch": {
+                    "filter": {},
+                    "objectAttribute": "",
+                    "tenant": {}
+                  },
+                  "l2ExtInstpMatch": {
+                    "l2ExtInstp": {},
+                    "l2ExtOut": {},
+                    "objectAttribute": "",
+                    "tenant": {}
+                  },
+                  "l2ExtOutMatch": {
+                    "l2ExtOut": {},
+                    "objectAttribute": "",
+                    "tenant": {}
+                  },
+                  "l3ExtInstpMatch": {
+                    "l3ExtInstp": {},
+                    "l3ExtOut": {},
+                    "objectAttribute": "",
+                    "tenant": {}
+                  },
+                  "l3ExtOutMatch": {
+                    "l3ExtOut": {},
+                    "objectAttribute": "",
+                    "tenant": {}
+                  },
+                  "loopbackInterfaceMatch": {
+                    "loopbackInterface": {},
+                    "objectAttribute": "",
+                    "switch": {}
+                  },
+                  "pcInterfaceMatch": {
+                    "objectAttribute": "",
+                    "pcInterface": {},
+                    "switch": {}
+                  },
+                  "physicalInterfaceMatch": {
+                    "objectAttribute": "",
+                    "physicalInterface": {},
+                    "switch": {}
+                  },
+                  "serviceGraphMatch": {
+                    "objectAttribute": "",
+                    "serviceGraph": {},
+                    "tenant": {}
+                  },
+                  "subjectMatch": {
+                    "contract": {},
+                    "objectAttribute": "",
+                    "subject": {},
+                    "tenant": {}
+                  },
+                  "sviInterfaceMatch": {
+                    "objectAttribute": "",
+                    "sviInterface": {},
+                    "switch": {}
+                  },
+                  "switchMatch": {
+                    "objectAttribute": "",
+                    "switch": {}
+                  },
+                  "tenantMatch": {
+                    "objectAttribute": "",
+                    "tenant": {}
+                  },
+                  "vlanMatch": {
+                    "objectAttribute": "",
+                    "switch": {},
+                    "vlan": {}
+                  },
+                  "vniInterfaceMatch": {
+                    "objectAttribute": "",
+                    "switch": {},
+                    "vniInterface": {}
+                  },
+                  "vpcInterfaceMatch": {
+                    "objectAttribute": "",
+                    "switch": {},
+                    "vpcInterface": {}
+                  },
+                  "vrfMatch": {
+                    "objectAttribute": "",
+                    "tenant": {},
+                    "vrf": {}
+                  }
+                }
+              ]
+            }
+          ],
+          "includes": [
+            {}
+          ],
+          "isSelectorBasedOnTagsActive": false,
+          "name": "",
+          "ruleName": "",
+          "selectorType": "",
+          "uuid": ""
+        },
+        "isAggregatedEventForTenant": false,
+        "isAllTraffic": false,
+        "isEnabled": false,
+        "isEqualityCheckActive": false,
+        "isRemovedNonConfigAttribute": false,
+        "isTagBasedSelectorActive": false,
+        "lastModifiedTime": "",
+        "name": "",
+        "requiredPathObjects": [
+          {
+            "includes": [
+              {}
+            ],
+            "selectorType": ""
+          }
+        ],
+        "toObjects": {},
+        "trafficSelector": {
+          "description": "",
+          "includes": {
+            "selectors": [
+              {
+                "selectors": [
+                  {
+                    "etherType": "",
+                    "ipProtocol": "",
+                    "isReversePortActive": false,
+                    "portSelectorAtoB": {
+                      "dstPort": "",
+                      "isLogFlagActive": false,
+                      "isTcpFlagActive": false,
+                      "notSetTcpFlags": [],
+                      "setTcpFlags": [],
+                      "srcPort": ""
+                    },
+                    "portSelectorBtoA": {}
+                  }
+                ]
+              }
+            ]
+          },
+          "name": "",
+          "uuid": ""
+        },
+        "uploadFileType": "",
+        "uploadedFileExtension": "",
+        "uploadedFileName": "",
+        "uploadedFileSize": 0,
+        "uploadedFileUploadDate": "",
+        "uuid": ""
+      }
+  auth:
+    type: oauth2
+    flow: implicit
+    authorizationUrl: https://example.com/login
+    callbackUrl: "{{oauth_callback_url}}"
+    credentials:
+      clientId: "{{oauth_client_id}}"
+    scope: observer fabric-admin support-engineer super-admin approver designer
+    state: "{{oauth_state}}"
+    tokenConfig:
+      placement:
+        header: Bearer
+    settings:
+      autoFetchToken: false
+      autoRefreshToken: true
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: OK
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/anomalyRules/complianceRules/:ruleId"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: ruleId
+          value: ""
+          type: path
+          description: The ID of the rule that is updated
+      body:
+        type: json
+        data: |-
+          {
+            "associatedFabrics": [
+              {
+                "assuredNetworkType": "Type",
+                "fabricName": "FabricName",
+                "isEnabled": true,
+                "uuid": "123e4567-e89b-12d3-a456-426614174000"
+              },
+              {
+                "assuredNetworkType": "Type",
+                "fabricName": "FabricName1",
+                "isEnabled": true,
+                "uuid": "123e4567-e89b-12d3-a456-426614174001"
+              }
+            ],
+            "baseSnapshotCollectionDate": "2021-07-25T12:00:00Z",
+            "baseSnapshotCollectionTimestamp": 1627184800,
+            "baseSnapshotId": "2",
+            "communicationRuleMatchType": "must",
+            "communicationRuleType": "sla",
+            "configComplianceCriteria": {
+              "andParameters": [
+                {
+                  "operator": "exampleOperator",
+                  "parameter": "exampleParameter",
+                  "value": "exampleValue"
+                },
+                {
+                  "operator": "exampleOperator",
+                  "parameter": "exampleParameter2",
+                  "value": "exampleValue"
+                }
+              ],
+              "associationType": "bdToEpg",
+              "lowerBound": 10,
+              "parameterType": "mustHave",
+              "upperBound": 20
+            },
+            "configurationType": "configurationComplianceBaseEpoch",
+            "createDate": "2021-07-25T12:00:00Z",
+            "description": "This is a new compliance rule.",
+            "fromObjects": {
+              "description": "Description",
+              "enableSelectorBasedOnTags": true,
+              "excludes": [
+                {
+                  "matches": [
+                    {
+                      "applicationEpgMatch": {
+                        "applicationEpg": {
+                          "pattern": "app",
+                          "type": "contains"
+                        },
+                        "applicationProfile": {
+                          "pattern": "app",
+                          "type": "contains"
+                        },
+                        "objectAttribute": "exampleAttribute",
+                        "tenant": {
+                          "pattern": "app",
+                          "type": "contains"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "includes": [
+                {
+                  "matches": [
+                    {
+                      "applicationEpgMatch": {
+                        "applicationEpg": {
+                          "pattern": "app",
+                          "type": "contains"
+                        },
+                        "applicationProfile": {
+                          "pattern": "app",
+                          "type": "contains"
+                        },
+                        "objectAttribute": "exampleAttribute",
+                        "tenant": {
+                          "pattern": "app",
+                          "type": "contains"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "name": "Example Selector",
+              "ruleName": "Example Rule",
+              "selectorType": "EPG",
+              "uuid": "123e4567-e89b-12d3-a456-426614174000"
+            },
+            "isAggregatedEventForTenant": false,
+            "isAllTraffic": true,
+            "isEnabled": false,
+            "isEqualityCheckActive": true,
+            "isRemovedNonConfigAttribute": false,
+            "isTagBasedSelectorActive": false,
+            "lastModifiedTime": "2021-07-25T12:00:00Z",
+            "name": "New Compliance Rule",
+            "requiredPathObjects": [
+              {
+                "includes": [
+                  {
+                    "matches": [
+                      {
+                        "serviceGraphMatch": {
+                          "objectAttribute": "exampleAttribute",
+                          "serviceGraph": {
+                            "pattern": "firewall",
+                            "type": "contains"
+                          },
+                          "tenant": {
+                            "pattern": "coke",
+                            "type": "contains"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "selectorType": "serviceGraph"
+              }
+            ],
+            "toObjects": {
+              "description": "Description",
+              "enableSelectorBasedOnTags": true,
+              "excludes": [
+                {
+                  "matches": [
+                    {
+                      "applicationEpgMatch": {
+                        "applicationEpg": {
+                          "pattern": "app",
+                          "type": "contains"
+                        },
+                        "applicationProfile": {
+                          "pattern": "app",
+                          "type": "contains"
+                        },
+                        "objectAttribute": "exampleAttribute",
+                        "tenant": {
+                          "pattern": "app",
+                          "type": "contains"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "includes": [
+                {
+                  "matches": [
+                    {
+                      "applicationEpgMatch": {
+                        "applicationEpg": {
+                          "pattern": "app",
+                          "type": "contains"
+                        },
+                        "applicationProfile": {
+                          "pattern": "app",
+                          "type": "contains"
+                        },
+                        "objectAttribute": "exampleAttribute",
+                        "tenant": {
+                          "pattern": "app",
+                          "type": "contains"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "name": "Example Selector",
+              "ruleName": "Example Rule",
+              "selectorType": "EPG",
+              "uuid": "123e4567-e89b-12d3-a456-426614174000"
+            },
+            "trafficSelector": {
+              "description": "IP traffic selector description",
+              "includes": {
+                "selectors": [
+                  {
+                    "selectors": [
+                      {
+                        "etherType": "IP",
+                        "ipProtocol": "TCP",
+                        "reversePort": false
+                      },
+                      {
+                        "etherType": "ARP",
+                        "reversePort": false
+                      }
+                    ]
+                  },
+                  {
+                    "selectors": [
+                      {
+                        "etherType": "IP",
+                        "ipProtocol": "TCP",
+                        "reversePort": false
+                      },
+                      {
+                        "etherType": "ARP",
+                        "reversePort": false
+                      }
+                    ]
+                  }
+                ]
+              },
+              "name": "name",
+              "uuid": "123e4567-e89b-12d3-a456-426614174000"
+            },
+            "uploadFileType": "templateBasedConfig",
+            "uploadedFileExtension": ".txt",
+            "uploadedFileName": "new_rule.txt",
+            "uploadedFileSize": 2048,
+            "uploadedFileUploadDate": "2021-07-25T12:00:00Z",
+            "uuid": "987e6543-e21b-45d3-a456-426614174001"
+          }
+    response:
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "rule": {
+              "associatedFabrics": [
+                {
+                  "assuredNetworkType": "Type",
+                  "fabricName": "FabricName",
+                  "isEnabled": true,
+                  "uuid": "123e4567-e89b-12d3-a456-426614174000"
+                },
+                {
+                  "assuredNetworkType": "Type",
+                  "fabricName": "FabricName1",
+                  "isEnabled": true,
+                  "uuid": "123e4567-e89b-12d3-a456-426614174001"
+                }
+              ],
+              "baseSnapshotCollectionDate": "2021-07-25T12:00:00Z",
+              "baseSnapshotCollectionTimestamp": 1627184800,
+              "baseSnapshotId": "2",
+              "communicationRuleMatchType": "must",
+              "communicationRuleType": "sla",
+              "configComplianceCriteria": {
+                "andParameters": [
+                  {
+                    "operator": "exampleOperator",
+                    "parameter": "exampleParameter",
+                    "value": "exampleValue"
+                  },
+                  {
+                    "operator": "exampleOperator",
+                    "parameter": "exampleParameter2",
+                    "value": "exampleValue"
+                  }
+                ],
+                "associationType": "bdToEpg",
+                "lowerBound": 10,
+                "parameterType": "mustHave",
+                "upperBound": 20
+              },
+              "configurationType": "configurationComplianceBaseEpoch",
+              "createDate": "2021-07-25T12:00:00Z",
+              "description": "This is a new compliance rule.",
+              "fromObjects": {
+                "description": "Description",
+                "enableSelectorBasedOnTags": true,
+                "excludes": [
+                  {
+                    "matches": [
+                      {
+                        "applicationEpgMatch": {
+                          "applicationEpg": {
+                            "pattern": "app",
+                            "type": "contains"
+                          },
+                          "applicationProfile": {
+                            "pattern": "app",
+                            "type": "contains"
+                          },
+                          "objectAttribute": "exampleAttribute",
+                          "tenant": {
+                            "pattern": "app",
+                            "type": "contains"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "includes": [
+                  {
+                    "matches": [
+                      {
+                        "applicationEpgMatch": {
+                          "applicationEpg": {
+                            "pattern": "app",
+                            "type": "contains"
+                          },
+                          "applicationProfile": {
+                            "pattern": "app",
+                            "type": "contains"
+                          },
+                          "objectAttribute": "exampleAttribute",
+                          "tenant": {
+                            "pattern": "app",
+                            "type": "contains"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "name": "Example Selector",
+                "ruleName": "Example Rule",
+                "selectorType": "EPG",
+                "uuid": "123e4567-e89b-12d3-a456-426614174000"
+              },
+              "isAggregatedEventForTenant": false,
+              "isAllTraffic": true,
+              "isEnabled": false,
+              "isEqualityCheckActive": true,
+              "isRemovedNonConfigAttribute": false,
+              "isTagBasedSelectorActive": false,
+              "lastModifiedTime": "2021-07-25T12:00:00Z",
+              "name": "New Compliance Rule",
+              "requiredPathObjects": [
+                {
+                  "includes": [
+                    {
+                      "matches": [
+                        {
+                          "serviceGraphMatch": {
+                            "objectAttribute": "DN",
+                            "serviceGraph": {
+                              "pattern": "firewall",
+                              "type": "contains"
+                            },
+                            "tenant": {
+                              "pattern": "coke",
+                              "type": "contains"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "matches": [
+                        {
+                          "tenantMatch": {
+                            "objectAttribute": "DN",
+                            "tenant": {
+                              "pattern": "pepsi",
+                              "type": "contains"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "selectorType": "serviceGraph"
+                }
+              ],
+              "toObjects": {
+                "description": "Description",
+                "enableSelectorBasedOnTags": true,
+                "excludes": [
+                  {
+                    "matches": [
+                      {
+                        "applicationEpgMatch": {
+                          "applicationEpg": {
+                            "pattern": "app",
+                            "type": "contains"
+                          },
+                          "applicationProfile": {
+                            "pattern": "app",
+                            "type": "contains"
+                          },
+                          "objectAttribute": "exampleAttribute",
+                          "tenant": {
+                            "pattern": "app",
+                            "type": "contains"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "includes": [
+                  {
+                    "matches": [
+                      {
+                        "applicationEpgMatch": {
+                          "applicationEpg": {
+                            "pattern": "app",
+                            "type": "contains"
+                          },
+                          "applicationProfile": {
+                            "pattern": "app",
+                            "type": "contains"
+                          },
+                          "objectAttribute": "exampleAttribute",
+                          "tenant": {
+                            "pattern": "app",
+                            "type": "contains"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "name": "Example Selector",
+                "ruleName": "Example Rule",
+                "selectorType": "EPG",
+                "uuid": "123e4567-e89b-12d3-a456-426614174000"
+              },
+              "trafficSelector": {
+                "description": "IP traffic selector description",
+                "includes": {
+                  "selectors": [
+                    {
+                      "selectors": [
+                        {
+                          "etherType": "IP",
+                          "ipProtocol": "TCP",
+                          "reversePort": false
+                        },
+                        {
+                          "etherType": "ARP",
+                          "reversePort": false
+                        }
+                      ]
+                    },
+                    {
+                      "selectors": [
+                        {
+                          "etherType": "IP",
+                          "ipProtocol": "TCP",
+                          "reversePort": false
+                        },
+                        {
+                          "etherType": "ARP",
+                          "reversePort": false
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "name": "name",
+                "uuid": "123e4567-e89b-12d3-a456-426614174000"
+              },
+              "uploadFileType": "templateBasedConfig",
+              "uploadedFileExtension": ".txt",
+              "uploadedFileName": "new_rule.txt",
+              "uploadedFileSize": 2048,
+              "uploadedFileUploadDate": "2021-07-25T12:00:00Z",
+              "uuid": "987e6543-e21b-45d3-a456-426614174001"
+            }
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/anomalyRules/complianceRules/:ruleId"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: ruleId
+          value: ""
+          type: path
+          description: The ID of the rule that is updated
+      body:
+        type: json
+        data: |-
+          {
+            "associatedFabrics": [
+              {
+                "assuredNetworkType": "Type",
+                "fabricName": "FabricName",
+                "isEnabled": true,
+                "uuid": "123e4567-e89b-12d3-a456-426614174000"
+              },
+              {
+                "assuredNetworkType": "Type",
+                "fabricName": "FabricName1",
+                "isEnabled": true,
+                "uuid": "123e4567-e89b-12d3-a456-426614174001"
+              }
+            ],
+            "baseSnapshotCollectionDate": "2021-07-25T12:00:00Z",
+            "baseSnapshotCollectionTimestamp": 1627184800,
+            "baseSnapshotId": "2",
+            "communicationRuleMatchType": "must",
+            "communicationRuleType": "sla",
+            "configComplianceCriteria": {
+              "andParameters": [
+                {
+                  "operator": "exampleOperator",
+                  "parameter": "exampleParameter",
+                  "value": "exampleValue"
+                },
+                {
+                  "operator": "exampleOperator",
+                  "parameter": "exampleParameter2",
+                  "value": "exampleValue"
+                }
+              ],
+              "associationType": "bdToEpg",
+              "lowerBound": 10,
+              "parameterType": "mustHave",
+              "upperBound": 20
+            },
+            "configurationType": "configurationComplianceBaseEpoch",
+            "createDate": "2021-07-25T12:00:00Z",
+            "description": "This is a new compliance rule.",
+            "fromObjects": {
+              "description": "Description",
+              "enableSelectorBasedOnTags": true,
+              "excludes": [
+                {
+                  "matches": [
+                    {
+                      "applicationEpgMatch": {
+                        "applicationEpg": {
+                          "pattern": "app",
+                          "type": "contains"
+                        },
+                        "applicationProfile": {
+                          "pattern": "app",
+                          "type": "contains"
+                        },
+                        "objectAttribute": "exampleAttribute",
+                        "tenant": {
+                          "pattern": "app",
+                          "type": "contains"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "includes": [
+                {
+                  "matches": [
+                    {
+                      "applicationEpgMatch": {
+                        "applicationEpg": {
+                          "pattern": "app",
+                          "type": "contains"
+                        },
+                        "applicationProfile": {
+                          "pattern": "app",
+                          "type": "contains"
+                        },
+                        "objectAttribute": "exampleAttribute",
+                        "tenant": {
+                          "pattern": "app",
+                          "type": "contains"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "name": "Example Selector",
+              "ruleName": "Example Rule",
+              "selectorType": "EPG",
+              "uuid": "123e4567-e89b-12d3-a456-426614174000"
+            },
+            "isAggregatedEventForTenant": false,
+            "isAllTraffic": true,
+            "isEnabled": false,
+            "isEqualityCheckActive": true,
+            "isRemovedNonConfigAttribute": false,
+            "isTagBasedSelectorActive": false,
+            "lastModifiedTime": "2021-07-25T12:00:00Z",
+            "name": "New Compliance Rule",
+            "requiredPathObjects": [
+              {
+                "includes": [
+                  {
+                    "matches": [
+                      {
+                        "serviceGraphMatch": {
+                          "objectAttribute": "exampleAttribute",
+                          "serviceGraph": {
+                            "pattern": "firewall",
+                            "type": "contains"
+                          },
+                          "tenant": {
+                            "pattern": "coke",
+                            "type": "contains"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "selectorType": "serviceGraph"
+              }
+            ],
+            "toObjects": {
+              "description": "Description",
+              "enableSelectorBasedOnTags": true,
+              "excludes": [
+                {
+                  "matches": [
+                    {
+                      "applicationEpgMatch": {
+                        "applicationEpg": {
+                          "pattern": "app",
+                          "type": "contains"
+                        },
+                        "applicationProfile": {
+                          "pattern": "app",
+                          "type": "contains"
+                        },
+                        "objectAttribute": "exampleAttribute",
+                        "tenant": {
+                          "pattern": "app",
+                          "type": "contains"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "includes": [
+                {
+                  "matches": [
+                    {
+                      "applicationEpgMatch": {
+                        "applicationEpg": {
+                          "pattern": "app",
+                          "type": "contains"
+                        },
+                        "applicationProfile": {
+                          "pattern": "app",
+                          "type": "contains"
+                        },
+                        "objectAttribute": "exampleAttribute",
+                        "tenant": {
+                          "pattern": "app",
+                          "type": "contains"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "name": "Example Selector",
+              "ruleName": "Example Rule",
+              "selectorType": "EPG",
+              "uuid": "123e4567-e89b-12d3-a456-426614174000"
+            },
+            "trafficSelector": {
+              "description": "IP traffic selector description",
+              "includes": {
+                "selectors": [
+                  {
+                    "selectors": [
+                      {
+                        "etherType": "IP",
+                        "ipProtocol": "TCP",
+                        "reversePort": false
+                      },
+                      {
+                        "etherType": "ARP",
+                        "reversePort": false
+                      }
+                    ]
+                  },
+                  {
+                    "selectors": [
+                      {
+                        "etherType": "IP",
+                        "ipProtocol": "TCP",
+                        "reversePort": false
+                      },
+                      {
+                        "etherType": "ARP",
+                        "reversePort": false
+                      }
+                    ]
+                  }
+                ]
+              },
+              "name": "name",
+              "uuid": "123e4567-e89b-12d3-a456-426614174000"
+            },
+            "uploadFileType": "templateBasedConfig",
+            "uploadedFileExtension": ".txt",
+            "uploadedFileName": "new_rule.txt",
+            "uploadedFileSize": 2048,
+            "uploadedFileUploadDate": "2021-07-25T12:00:00Z",
+            "uuid": "987e6543-e21b-45d3-a456-426614174001"
+          }
+    response:
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/anomalyRules/complianceRules/:ruleId"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: ruleId
+          value: ""
+          type: path
+          description: The ID of the rule that is updated
+      body:
+        type: json
+        data: |-
+          {
+            "associatedFabrics": [
+              {
+                "assuredNetworkType": "Type",
+                "fabricName": "FabricName",
+                "isEnabled": true,
+                "uuid": "123e4567-e89b-12d3-a456-426614174000"
+              },
+              {
+                "assuredNetworkType": "Type",
+                "fabricName": "FabricName1",
+                "isEnabled": true,
+                "uuid": "123e4567-e89b-12d3-a456-426614174001"
+              }
+            ],
+            "baseSnapshotCollectionDate": "2021-07-25T12:00:00Z",
+            "baseSnapshotCollectionTimestamp": 1627184800,
+            "baseSnapshotId": "2",
+            "communicationRuleMatchType": "must",
+            "communicationRuleType": "sla",
+            "configComplianceCriteria": {
+              "andParameters": [
+                {
+                  "operator": "exampleOperator",
+                  "parameter": "exampleParameter",
+                  "value": "exampleValue"
+                },
+                {
+                  "operator": "exampleOperator",
+                  "parameter": "exampleParameter2",
+                  "value": "exampleValue"
+                }
+              ],
+              "associationType": "bdToEpg",
+              "lowerBound": 10,
+              "parameterType": "mustHave",
+              "upperBound": 20
+            },
+            "configurationType": "configurationComplianceBaseEpoch",
+            "createDate": "2021-07-25T12:00:00Z",
+            "description": "This is a new compliance rule.",
+            "fromObjects": {
+              "description": "Description",
+              "enableSelectorBasedOnTags": true,
+              "excludes": [
+                {
+                  "matches": [
+                    {
+                      "applicationEpgMatch": {
+                        "applicationEpg": {
+                          "pattern": "app",
+                          "type": "contains"
+                        },
+                        "applicationProfile": {
+                          "pattern": "app",
+                          "type": "contains"
+                        },
+                        "objectAttribute": "exampleAttribute",
+                        "tenant": {
+                          "pattern": "app",
+                          "type": "contains"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "includes": [
+                {
+                  "matches": [
+                    {
+                      "applicationEpgMatch": {
+                        "applicationEpg": {
+                          "pattern": "app",
+                          "type": "contains"
+                        },
+                        "applicationProfile": {
+                          "pattern": "app",
+                          "type": "contains"
+                        },
+                        "objectAttribute": "exampleAttribute",
+                        "tenant": {
+                          "pattern": "app",
+                          "type": "contains"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "name": "Example Selector",
+              "ruleName": "Example Rule",
+              "selectorType": "EPG",
+              "uuid": "123e4567-e89b-12d3-a456-426614174000"
+            },
+            "isAggregatedEventForTenant": false,
+            "isAllTraffic": true,
+            "isEnabled": false,
+            "isEqualityCheckActive": true,
+            "isRemovedNonConfigAttribute": false,
+            "isTagBasedSelectorActive": false,
+            "lastModifiedTime": "2021-07-25T12:00:00Z",
+            "name": "New Compliance Rule",
+            "requiredPathObjects": [
+              {
+                "includes": [
+                  {
+                    "matches": [
+                      {
+                        "serviceGraphMatch": {
+                          "objectAttribute": "exampleAttribute",
+                          "serviceGraph": {
+                            "pattern": "firewall",
+                            "type": "contains"
+                          },
+                          "tenant": {
+                            "pattern": "coke",
+                            "type": "contains"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "selectorType": "serviceGraph"
+              }
+            ],
+            "toObjects": {
+              "description": "Description",
+              "enableSelectorBasedOnTags": true,
+              "excludes": [
+                {
+                  "matches": [
+                    {
+                      "applicationEpgMatch": {
+                        "applicationEpg": {
+                          "pattern": "app",
+                          "type": "contains"
+                        },
+                        "applicationProfile": {
+                          "pattern": "app",
+                          "type": "contains"
+                        },
+                        "objectAttribute": "exampleAttribute",
+                        "tenant": {
+                          "pattern": "app",
+                          "type": "contains"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "includes": [
+                {
+                  "matches": [
+                    {
+                      "applicationEpgMatch": {
+                        "applicationEpg": {
+                          "pattern": "app",
+                          "type": "contains"
+                        },
+                        "applicationProfile": {
+                          "pattern": "app",
+                          "type": "contains"
+                        },
+                        "objectAttribute": "exampleAttribute",
+                        "tenant": {
+                          "pattern": "app",
+                          "type": "contains"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "name": "Example Selector",
+              "ruleName": "Example Rule",
+              "selectorType": "EPG",
+              "uuid": "123e4567-e89b-12d3-a456-426614174000"
+            },
+            "trafficSelector": {
+              "description": "IP traffic selector description",
+              "includes": {
+                "selectors": [
+                  {
+                    "selectors": [
+                      {
+                        "etherType": "IP",
+                        "ipProtocol": "TCP",
+                        "reversePort": false
+                      },
+                      {
+                        "etherType": "ARP",
+                        "reversePort": false
+                      }
+                    ]
+                  },
+                  {
+                    "selectors": [
+                      {
+                        "etherType": "IP",
+                        "ipProtocol": "TCP",
+                        "reversePort": false
+                      },
+                      {
+                        "etherType": "ARP",
+                        "reversePort": false
+                      }
+                    ]
+                  }
+                ]
+              },
+              "name": "name",
+              "uuid": "123e4567-e89b-12d3-a456-426614174000"
+            },
+            "uploadFileType": "templateBasedConfig",
+            "uploadedFileExtension": ".txt",
+            "uploadedFileName": "new_rule.txt",
+            "uploadedFileSize": 2048,
+            "uploadedFileUploadDate": "2021-07-25T12:00:00Z",
+            "uuid": "987e6543-e21b-45d3-a456-426614174001"
+          }
+    response:
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 403 Response
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/anomalyRules/complianceRules/:ruleId"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: ruleId
+          value: ""
+          type: path
+          description: The ID of the rule that is updated
+      body:
+        type: json
+        data: |-
+          {
+            "associatedFabrics": [
+              {
+                "assuredNetworkType": "Type",
+                "fabricName": "FabricName",
+                "isEnabled": true,
+                "uuid": "123e4567-e89b-12d3-a456-426614174000"
+              },
+              {
+                "assuredNetworkType": "Type",
+                "fabricName": "FabricName1",
+                "isEnabled": true,
+                "uuid": "123e4567-e89b-12d3-a456-426614174001"
+              }
+            ],
+            "baseSnapshotCollectionDate": "2021-07-25T12:00:00Z",
+            "baseSnapshotCollectionTimestamp": 1627184800,
+            "baseSnapshotId": "2",
+            "communicationRuleMatchType": "must",
+            "communicationRuleType": "sla",
+            "configComplianceCriteria": {
+              "andParameters": [
+                {
+                  "operator": "exampleOperator",
+                  "parameter": "exampleParameter",
+                  "value": "exampleValue"
+                },
+                {
+                  "operator": "exampleOperator",
+                  "parameter": "exampleParameter2",
+                  "value": "exampleValue"
+                }
+              ],
+              "associationType": "bdToEpg",
+              "lowerBound": 10,
+              "parameterType": "mustHave",
+              "upperBound": 20
+            },
+            "configurationType": "configurationComplianceBaseEpoch",
+            "createDate": "2021-07-25T12:00:00Z",
+            "description": "This is a new compliance rule.",
+            "fromObjects": {
+              "description": "Description",
+              "enableSelectorBasedOnTags": true,
+              "excludes": [
+                {
+                  "matches": [
+                    {
+                      "applicationEpgMatch": {
+                        "applicationEpg": {
+                          "pattern": "app",
+                          "type": "contains"
+                        },
+                        "applicationProfile": {
+                          "pattern": "app",
+                          "type": "contains"
+                        },
+                        "objectAttribute": "exampleAttribute",
+                        "tenant": {
+                          "pattern": "app",
+                          "type": "contains"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "includes": [
+                {
+                  "matches": [
+                    {
+                      "applicationEpgMatch": {
+                        "applicationEpg": {
+                          "pattern": "app",
+                          "type": "contains"
+                        },
+                        "applicationProfile": {
+                          "pattern": "app",
+                          "type": "contains"
+                        },
+                        "objectAttribute": "exampleAttribute",
+                        "tenant": {
+                          "pattern": "app",
+                          "type": "contains"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "name": "Example Selector",
+              "ruleName": "Example Rule",
+              "selectorType": "EPG",
+              "uuid": "123e4567-e89b-12d3-a456-426614174000"
+            },
+            "isAggregatedEventForTenant": false,
+            "isAllTraffic": true,
+            "isEnabled": false,
+            "isEqualityCheckActive": true,
+            "isRemovedNonConfigAttribute": false,
+            "isTagBasedSelectorActive": false,
+            "lastModifiedTime": "2021-07-25T12:00:00Z",
+            "name": "New Compliance Rule",
+            "requiredPathObjects": [
+              {
+                "includes": [
+                  {
+                    "matches": [
+                      {
+                        "serviceGraphMatch": {
+                          "objectAttribute": "exampleAttribute",
+                          "serviceGraph": {
+                            "pattern": "firewall",
+                            "type": "contains"
+                          },
+                          "tenant": {
+                            "pattern": "coke",
+                            "type": "contains"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "selectorType": "serviceGraph"
+              }
+            ],
+            "toObjects": {
+              "description": "Description",
+              "enableSelectorBasedOnTags": true,
+              "excludes": [
+                {
+                  "matches": [
+                    {
+                      "applicationEpgMatch": {
+                        "applicationEpg": {
+                          "pattern": "app",
+                          "type": "contains"
+                        },
+                        "applicationProfile": {
+                          "pattern": "app",
+                          "type": "contains"
+                        },
+                        "objectAttribute": "exampleAttribute",
+                        "tenant": {
+                          "pattern": "app",
+                          "type": "contains"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "includes": [
+                {
+                  "matches": [
+                    {
+                      "applicationEpgMatch": {
+                        "applicationEpg": {
+                          "pattern": "app",
+                          "type": "contains"
+                        },
+                        "applicationProfile": {
+                          "pattern": "app",
+                          "type": "contains"
+                        },
+                        "objectAttribute": "exampleAttribute",
+                        "tenant": {
+                          "pattern": "app",
+                          "type": "contains"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "name": "Example Selector",
+              "ruleName": "Example Rule",
+              "selectorType": "EPG",
+              "uuid": "123e4567-e89b-12d3-a456-426614174000"
+            },
+            "trafficSelector": {
+              "description": "IP traffic selector description",
+              "includes": {
+                "selectors": [
+                  {
+                    "selectors": [
+                      {
+                        "etherType": "IP",
+                        "ipProtocol": "TCP",
+                        "reversePort": false
+                      },
+                      {
+                        "etherType": "ARP",
+                        "reversePort": false
+                      }
+                    ]
+                  },
+                  {
+                    "selectors": [
+                      {
+                        "etherType": "IP",
+                        "ipProtocol": "TCP",
+                        "reversePort": false
+                      },
+                      {
+                        "etherType": "ARP",
+                        "reversePort": false
+                      }
+                    ]
+                  }
+                ]
+              },
+              "name": "name",
+              "uuid": "123e4567-e89b-12d3-a456-426614174000"
+            },
+            "uploadFileType": "templateBasedConfig",
+            "uploadedFileExtension": ".txt",
+            "uploadedFileName": "new_rule.txt",
+            "uploadedFileSize": 2048,
+            "uploadedFileUploadDate": "2021-07-25T12:00:00Z",
+            "uuid": "987e6543-e21b-45d3-a456-426614174001"
+          }
+    response:
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 404 Response
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/anomalyRules/complianceRules/:ruleId"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: ruleId
+          value: ""
+          type: path
+          description: The ID of the rule that is updated
+      body:
+        type: json
+        data: |-
+          {
+            "associatedFabrics": [
+              {
+                "assuredNetworkType": "Type",
+                "fabricName": "FabricName",
+                "isEnabled": true,
+                "uuid": "123e4567-e89b-12d3-a456-426614174000"
+              },
+              {
+                "assuredNetworkType": "Type",
+                "fabricName": "FabricName1",
+                "isEnabled": true,
+                "uuid": "123e4567-e89b-12d3-a456-426614174001"
+              }
+            ],
+            "baseSnapshotCollectionDate": "2021-07-25T12:00:00Z",
+            "baseSnapshotCollectionTimestamp": 1627184800,
+            "baseSnapshotId": "2",
+            "communicationRuleMatchType": "must",
+            "communicationRuleType": "sla",
+            "configComplianceCriteria": {
+              "andParameters": [
+                {
+                  "operator": "exampleOperator",
+                  "parameter": "exampleParameter",
+                  "value": "exampleValue"
+                },
+                {
+                  "operator": "exampleOperator",
+                  "parameter": "exampleParameter2",
+                  "value": "exampleValue"
+                }
+              ],
+              "associationType": "bdToEpg",
+              "lowerBound": 10,
+              "parameterType": "mustHave",
+              "upperBound": 20
+            },
+            "configurationType": "configurationComplianceBaseEpoch",
+            "createDate": "2021-07-25T12:00:00Z",
+            "description": "This is a new compliance rule.",
+            "fromObjects": {
+              "description": "Description",
+              "enableSelectorBasedOnTags": true,
+              "excludes": [
+                {
+                  "matches": [
+                    {
+                      "applicationEpgMatch": {
+                        "applicationEpg": {
+                          "pattern": "app",
+                          "type": "contains"
+                        },
+                        "applicationProfile": {
+                          "pattern": "app",
+                          "type": "contains"
+                        },
+                        "objectAttribute": "exampleAttribute",
+                        "tenant": {
+                          "pattern": "app",
+                          "type": "contains"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "includes": [
+                {
+                  "matches": [
+                    {
+                      "applicationEpgMatch": {
+                        "applicationEpg": {
+                          "pattern": "app",
+                          "type": "contains"
+                        },
+                        "applicationProfile": {
+                          "pattern": "app",
+                          "type": "contains"
+                        },
+                        "objectAttribute": "exampleAttribute",
+                        "tenant": {
+                          "pattern": "app",
+                          "type": "contains"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "name": "Example Selector",
+              "ruleName": "Example Rule",
+              "selectorType": "EPG",
+              "uuid": "123e4567-e89b-12d3-a456-426614174000"
+            },
+            "isAggregatedEventForTenant": false,
+            "isAllTraffic": true,
+            "isEnabled": false,
+            "isEqualityCheckActive": true,
+            "isRemovedNonConfigAttribute": false,
+            "isTagBasedSelectorActive": false,
+            "lastModifiedTime": "2021-07-25T12:00:00Z",
+            "name": "New Compliance Rule",
+            "requiredPathObjects": [
+              {
+                "includes": [
+                  {
+                    "matches": [
+                      {
+                        "serviceGraphMatch": {
+                          "objectAttribute": "exampleAttribute",
+                          "serviceGraph": {
+                            "pattern": "firewall",
+                            "type": "contains"
+                          },
+                          "tenant": {
+                            "pattern": "coke",
+                            "type": "contains"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "selectorType": "serviceGraph"
+              }
+            ],
+            "toObjects": {
+              "description": "Description",
+              "enableSelectorBasedOnTags": true,
+              "excludes": [
+                {
+                  "matches": [
+                    {
+                      "applicationEpgMatch": {
+                        "applicationEpg": {
+                          "pattern": "app",
+                          "type": "contains"
+                        },
+                        "applicationProfile": {
+                          "pattern": "app",
+                          "type": "contains"
+                        },
+                        "objectAttribute": "exampleAttribute",
+                        "tenant": {
+                          "pattern": "app",
+                          "type": "contains"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "includes": [
+                {
+                  "matches": [
+                    {
+                      "applicationEpgMatch": {
+                        "applicationEpg": {
+                          "pattern": "app",
+                          "type": "contains"
+                        },
+                        "applicationProfile": {
+                          "pattern": "app",
+                          "type": "contains"
+                        },
+                        "objectAttribute": "exampleAttribute",
+                        "tenant": {
+                          "pattern": "app",
+                          "type": "contains"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "name": "Example Selector",
+              "ruleName": "Example Rule",
+              "selectorType": "EPG",
+              "uuid": "123e4567-e89b-12d3-a456-426614174000"
+            },
+            "trafficSelector": {
+              "description": "IP traffic selector description",
+              "includes": {
+                "selectors": [
+                  {
+                    "selectors": [
+                      {
+                        "etherType": "IP",
+                        "ipProtocol": "TCP",
+                        "reversePort": false
+                      },
+                      {
+                        "etherType": "ARP",
+                        "reversePort": false
+                      }
+                    ]
+                  },
+                  {
+                    "selectors": [
+                      {
+                        "etherType": "IP",
+                        "ipProtocol": "TCP",
+                        "reversePort": false
+                      },
+                      {
+                        "etherType": "ARP",
+                        "reversePort": false
+                      }
+                    ]
+                  }
+                ]
+              },
+              "name": "name",
+              "uuid": "123e4567-e89b-12d3-a456-426614174000"
+            },
+            "uploadFileType": "templateBasedConfig",
+            "uploadedFileExtension": ".txt",
+            "uploadedFileName": "new_rule.txt",
+            "uploadedFileSize": 2048,
+            "uploadedFileUploadDate": "2021-07-25T12:00:00Z",
+            "uuid": "987e6543-e21b-45d3-a456-426614174001"
+          }
+    response:
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 500 Response
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/anomalyRules/complianceRules/:ruleId"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: ruleId
+          value: ""
+          type: path
+          description: The ID of the rule that is updated
+      body:
+        type: json
+        data: |-
+          {
+            "associatedFabrics": [
+              {
+                "assuredNetworkType": "Type",
+                "fabricName": "FabricName",
+                "isEnabled": true,
+                "uuid": "123e4567-e89b-12d3-a456-426614174000"
+              },
+              {
+                "assuredNetworkType": "Type",
+                "fabricName": "FabricName1",
+                "isEnabled": true,
+                "uuid": "123e4567-e89b-12d3-a456-426614174001"
+              }
+            ],
+            "baseSnapshotCollectionDate": "2021-07-25T12:00:00Z",
+            "baseSnapshotCollectionTimestamp": 1627184800,
+            "baseSnapshotId": "2",
+            "communicationRuleMatchType": "must",
+            "communicationRuleType": "sla",
+            "configComplianceCriteria": {
+              "andParameters": [
+                {
+                  "operator": "exampleOperator",
+                  "parameter": "exampleParameter",
+                  "value": "exampleValue"
+                },
+                {
+                  "operator": "exampleOperator",
+                  "parameter": "exampleParameter2",
+                  "value": "exampleValue"
+                }
+              ],
+              "associationType": "bdToEpg",
+              "lowerBound": 10,
+              "parameterType": "mustHave",
+              "upperBound": 20
+            },
+            "configurationType": "configurationComplianceBaseEpoch",
+            "createDate": "2021-07-25T12:00:00Z",
+            "description": "This is a new compliance rule.",
+            "fromObjects": {
+              "description": "Description",
+              "enableSelectorBasedOnTags": true,
+              "excludes": [
+                {
+                  "matches": [
+                    {
+                      "applicationEpgMatch": {
+                        "applicationEpg": {
+                          "pattern": "app",
+                          "type": "contains"
+                        },
+                        "applicationProfile": {
+                          "pattern": "app",
+                          "type": "contains"
+                        },
+                        "objectAttribute": "exampleAttribute",
+                        "tenant": {
+                          "pattern": "app",
+                          "type": "contains"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "includes": [
+                {
+                  "matches": [
+                    {
+                      "applicationEpgMatch": {
+                        "applicationEpg": {
+                          "pattern": "app",
+                          "type": "contains"
+                        },
+                        "applicationProfile": {
+                          "pattern": "app",
+                          "type": "contains"
+                        },
+                        "objectAttribute": "exampleAttribute",
+                        "tenant": {
+                          "pattern": "app",
+                          "type": "contains"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "name": "Example Selector",
+              "ruleName": "Example Rule",
+              "selectorType": "EPG",
+              "uuid": "123e4567-e89b-12d3-a456-426614174000"
+            },
+            "isAggregatedEventForTenant": false,
+            "isAllTraffic": true,
+            "isEnabled": false,
+            "isEqualityCheckActive": true,
+            "isRemovedNonConfigAttribute": false,
+            "isTagBasedSelectorActive": false,
+            "lastModifiedTime": "2021-07-25T12:00:00Z",
+            "name": "New Compliance Rule",
+            "requiredPathObjects": [
+              {
+                "includes": [
+                  {
+                    "matches": [
+                      {
+                        "serviceGraphMatch": {
+                          "objectAttribute": "exampleAttribute",
+                          "serviceGraph": {
+                            "pattern": "firewall",
+                            "type": "contains"
+                          },
+                          "tenant": {
+                            "pattern": "coke",
+                            "type": "contains"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "selectorType": "serviceGraph"
+              }
+            ],
+            "toObjects": {
+              "description": "Description",
+              "enableSelectorBasedOnTags": true,
+              "excludes": [
+                {
+                  "matches": [
+                    {
+                      "applicationEpgMatch": {
+                        "applicationEpg": {
+                          "pattern": "app",
+                          "type": "contains"
+                        },
+                        "applicationProfile": {
+                          "pattern": "app",
+                          "type": "contains"
+                        },
+                        "objectAttribute": "exampleAttribute",
+                        "tenant": {
+                          "pattern": "app",
+                          "type": "contains"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "includes": [
+                {
+                  "matches": [
+                    {
+                      "applicationEpgMatch": {
+                        "applicationEpg": {
+                          "pattern": "app",
+                          "type": "contains"
+                        },
+                        "applicationProfile": {
+                          "pattern": "app",
+                          "type": "contains"
+                        },
+                        "objectAttribute": "exampleAttribute",
+                        "tenant": {
+                          "pattern": "app",
+                          "type": "contains"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "name": "Example Selector",
+              "ruleName": "Example Rule",
+              "selectorType": "EPG",
+              "uuid": "123e4567-e89b-12d3-a456-426614174000"
+            },
+            "trafficSelector": {
+              "description": "IP traffic selector description",
+              "includes": {
+                "selectors": [
+                  {
+                    "selectors": [
+                      {
+                        "etherType": "IP",
+                        "ipProtocol": "TCP",
+                        "reversePort": false
+                      },
+                      {
+                        "etherType": "ARP",
+                        "reversePort": false
+                      }
+                    ]
+                  },
+                  {
+                    "selectors": [
+                      {
+                        "etherType": "IP",
+                        "ipProtocol": "TCP",
+                        "reversePort": false
+                      },
+                      {
+                        "etherType": "ARP",
+                        "reversePort": false
+                      }
+                    ]
+                  }
+                ]
+              },
+              "name": "name",
+              "uuid": "123e4567-e89b-12d3-a456-426614174000"
+            },
+            "uploadFileType": "templateBasedConfig",
+            "uploadedFileExtension": ".txt",
+            "uploadedFileName": "new_rule.txt",
+            "uploadedFileSize": 2048,
+            "uploadedFileUploadDate": "2021-07-25T12:00:00Z",
+            "uuid": "987e6543-e21b-45d3-a456-426614174001"
+          }
+    response:
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }

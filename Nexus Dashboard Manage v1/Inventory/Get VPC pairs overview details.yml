@@ -1,0 +1,822 @@
+info:
+  name: Get VPC pairs overview details
+  type: http
+  seq: 41
+
+http:
+  method: GET
+  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPairOverview"
+  params:
+    - name: componentType
+      value: ""
+      type: query
+      description: Get specific overview component details
+    - name: switchId
+      value: ""
+      type: path
+      description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+    - name: fabricName
+      value: ""
+      type: path
+      description: Name of the fabric
+    - name: clusterName
+      value: ""
+      type: query
+      description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+      disabled: true
+  auth:
+    type: oauth2
+    flow: implicit
+    authorizationUrl: https://example.com/login
+    callbackUrl: "{{oauth_callback_url}}"
+    credentials:
+      clientId: "{{oauth_client_id}}"
+    scope: observer fabric-admin support-engineer super-admin approver designer
+    state: "{{oauth_state}}"
+    tokenConfig:
+      placement:
+        header: Bearer
+    settings:
+      autoFetchToken: false
+      autoRefreshToken: true
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: fullOverviewExample
+    description: Full VPC overview response with all details
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPairOverview"
+      method: GET
+      params:
+        - name: componentType
+          value: ""
+          type: query
+          description: Get specific overview component details
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+    response:
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "anomalies": {
+              "anomaliesCount": {
+                "critical": 0,
+                "major": 1,
+                "minor": 5,
+                "warning": 2
+              },
+              "peerSwitchId": "FDO22240HJP",
+              "switchId": "FDO222419B7"
+            },
+            "componentType": "full",
+            "health": {
+              "cpu": {
+                "peerSwitch": 15,
+                "switch": 25
+              },
+              "health": {
+                "peerSwitch": "MINOR",
+                "switch": "MAJOR"
+              },
+              "memory": {
+                "peerSwitch": 45,
+                "switch": 50
+              },
+              "peerSwitchId": "FDO22240HJP",
+              "switchId": "FDO222419B7",
+              "temperature": {
+                "peerSwitch": 35,
+                "switch": 40
+              }
+            },
+            "inventory": {
+              "adminStatus": {
+                "down": 2,
+                "up": 120
+              },
+              "logicalInterfaces": {
+                "VPC": 0,
+                "loopback": 4,
+                "portChannel": 2,
+                "vlan": 4
+              },
+              "nve": 2,
+              "operationalStatus": {
+                "down": 101,
+                "up": 19
+              },
+              "peerSwitch": "FDO22240HJP",
+              "switch": "FDO222419B7",
+              "syncStatus": {
+                "inSync": 120,
+                "na": 2,
+                "pending": 2
+              }
+            },
+            "module": {
+              "fexDetails": {
+                "fex1": "connected",
+                "fex2": "disconnected"
+              },
+              "moduleInformation": {
+                "module1": "active",
+                "module2": "standby"
+              },
+              "peerSwitchId": "FDO22240HJP",
+              "switchId": "FDO222419B7"
+            },
+            "overlay": {
+              "networkCount": {
+                "inProgress": 0,
+                "inSync": 10,
+                "outOfSync": 1,
+                "pending": 2
+              },
+              "vrfCount": {
+                "inProgress": 0,
+                "inSync": 5,
+                "outOfSync": 0,
+                "pending": 1
+              }
+            },
+            "pairsInfo": {
+              "connectivityStatus": {
+                "peerSwitch": "OK",
+                "switch": "OK"
+              },
+              "domainId": {
+                "peerSwitch": 1,
+                "switch": 1
+              },
+              "fabricName": "fabric1",
+              "ipAddress": {
+                "peerSwitch": "10.127.117.42",
+                "switch": "10.127.117.40"
+              },
+              "isConsistent": {
+                "peerSwitch": true,
+                "switch": true
+              },
+              "maintenanceMode": {
+                "peerSwitch": "normal",
+                "switch": "normal"
+              },
+              "model": {
+                "peerSwitch": "N9K-C93180YC-EX",
+                "switch": "N9K-C93180YC-EX"
+              },
+              "platformType": {
+                "peerSwitch": "N9K",
+                "switch": "N9K"
+              },
+              "switchId": {
+                "peerSwitch": "FDO22240HJP",
+                "switch": "FDO222419B7"
+              },
+              "switchName": {
+                "peerSwitch": "N9K-42",
+                "switch": "N9K-40"
+              },
+              "switchRole": {
+                "peerSwitch": "leaf",
+                "switch": "leaf"
+              },
+              "uptime": {
+                "peerSwitch": "2024-07-23 10:00:00+00:00",
+                "switch": "2024-07-23 10:00:00+00:00"
+              }
+            },
+            "vxlan": {
+              "multisiteLoopback": {
+                "peerSwitch": "Loopback100",
+                "switch": "Loopback100"
+              },
+              "multisiteLoopbackPrimaryIp": {
+                "peerSwitch": "10.5.0.2",
+                "switch": "10.5.0.1"
+              },
+              "multisiteLoopbackStatus": {
+                "peerSwitch": "down",
+                "switch": "down"
+              },
+              "nveInterface": {
+                "peerSwitch": "nve1",
+                "switch": "nve1"
+              },
+              "nveStatus": {
+                "peerSwitch": "up",
+                "switch": "up"
+              },
+              "peerSwitchId": "FDO22240HJP",
+              "routingLoopback": {
+                "peerSwitch": "Loopback0",
+                "switch": "Loopback0"
+              },
+              "routingLoopbackPrimaryIp": {
+                "peerSwitch": "10.1.0.2",
+                "switch": "10.1.0.1"
+              },
+              "routingLoopbackSecondaryIp": {
+                "peerSwitch": "10.2.0.2",
+                "switch": "10.2.0.1"
+              },
+              "routingLoopbackStatus": {
+                "peerSwitch": "up",
+                "switch": "up"
+              },
+              "switchId": "FDO222419B7",
+              "vtepLoopback": {
+                "peerSwitch": "Loopback1",
+                "switch": "Loopback1"
+              },
+              "vtepLoopbackPrimaryIp": {
+                "peerSwitch": "10.3.0.2",
+                "switch": "10.3.0.1"
+              },
+              "vtepLoopbackSecondaryIp": {
+                "peerSwitch": "10.4.0.2",
+                "switch": "10.4.0.1"
+              },
+              "vtepLoopbackStatus": {
+                "peerSwitch": "down",
+                "switch": "up"
+              }
+            }
+          }
+  - name: vpcPairAnomaliesExample
+    description: Sample response VPC pair anomalies
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPairOverview"
+      method: GET
+      params:
+        - name: componentType
+          value: ""
+          type: query
+          description: Get specific overview component details
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+    response:
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "anomalies": {
+              "anomaliesCount": {
+                "critical": 0,
+                "major": 0,
+                "minor": 8,
+                "warning": 0
+              },
+              "peerSwitchId": "FDO22240HJP",
+              "switchId": "FDO222419B7"
+            },
+            "componentType": "anomalies"
+          }
+  - name: vpcPairHealthExample
+    description: Sample response for VPC pair health
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPairOverview"
+      method: GET
+      params:
+        - name: componentType
+          value: ""
+          type: query
+          description: Get specific overview component details
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+    response:
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "componentType": "health",
+            "health": {
+              "cpu": {
+                "peerSwitch": 3,
+                "switch": 16
+              },
+              "health": {
+                "peerSwitch": "MINOR",
+                "switch": "MINOR"
+              },
+              "memory": {
+                "peerSwitch": 39,
+                "switch": 27
+              },
+              "peerSwitchId": "FDO22240HJP",
+              "switchId": "FDO222419B7",
+              "temperature": {
+                "peerSwitch": 35,
+                "switch": 20
+              }
+            }
+          }
+  - name: vpcPairInfoExample
+    description: Sample response VPC pair information
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPairOverview"
+      method: GET
+      params:
+        - name: componentType
+          value: ""
+          type: query
+          description: Get specific overview component details
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+    response:
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "componentType": "pairsInfo",
+            "info": {
+              "connectivityStatus": {
+                "peerSwitch": "OK",
+                "switch": "OK"
+              },
+              "domainId": {
+                "peerSwitch": 1,
+                "switch": 1
+              },
+              "fabricName": "fabric1",
+              "ipAddress": {
+                "peerSwitch": "10.127.117.42",
+                "switch": "10.127.117.40"
+              },
+              "isConsistent": {
+                "peerSwitch": true,
+                "switch": true
+              },
+              "maintenanceMode": {
+                "peerSwitch": "normal",
+                "switch": "normal"
+              },
+              "model": {
+                "peerSwitch": "N9K-C93180YC-EX",
+                "switch": "N9K-C93180YC-EX"
+              },
+              "platformType": {
+                "peerSwitch": "N9K",
+                "switch": "N9K"
+              },
+              "softwareVersion": {
+                "peerSwitch": "10.3(3)",
+                "switch": "9.3(12)"
+              },
+              "switchId": {
+                "peerSwitch": "FDO22240HJP",
+                "switch": "FDO222419B7"
+              },
+              "switchName": {
+                "peerSwitch": "N9K-42",
+                "switch": "N9K-40"
+              },
+              "switchRole": {
+                "peerSwitch": "leaf",
+                "switch": "leaf"
+              },
+              "uptime": {
+                "peerSwitch": "2024-07-23 10:00:00+00:00",
+                "switch": "2024-07-23 10:00:00+00:00"
+              }
+            }
+          }
+  - name: vpcPairInventoryExample
+    description: Sample response for VPC pair inventory
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPairOverview"
+      method: GET
+      params:
+        - name: componentType
+          value: ""
+          type: query
+          description: Get specific overview component details
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+    response:
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "componentType": "inventory",
+            "inventory": {
+              "adminStatus": {
+                "down": 2,
+                "up": 120
+              },
+              "operationalStatus": {
+                "down": 101,
+                "up": 19
+              },
+              "peerSwitchId": "FDO22240HJP",
+              "switchId": "FDO222419B7",
+              "syncStatus": {
+                "inSync": 120,
+                "na": 2,
+                "pending": 2
+              }
+            }
+          }
+  - name: vpcPairModuleExample
+    description: Sample response VPC modules
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPairOverview"
+      method: GET
+      params:
+        - name: componentType
+          value: ""
+          type: query
+          description: Get specific overview component details
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+    response:
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "componentType": "module",
+            "module": {
+              "fexDetails": {},
+              "moduleInfo": {},
+              "peerSwitchId": "FDO22240HJP",
+              "switchId": "FDO222419B7"
+            }
+          }
+  - name: vpcPairOverlayExample
+    description: Sample response VPC pair overlay
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPairOverview"
+      method: GET
+      params:
+        - name: componentType
+          value: ""
+          type: query
+          description: Get specific overview component details
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+    response:
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "componentType": "overlay",
+            "overlay": {
+              "networkCount": {
+                "inProgress": 0,
+                "inSync": 0,
+                "outOfSync": 0,
+                "pending": 0
+              },
+              "vrfCount": {
+                "inProgress": 0,
+                "inSync": 0,
+                "outOfSync": 0,
+                "pending": 0
+              }
+            }
+          }
+  - name: vpcPairVxlanExample
+    description: Sample response VPC pairs VXLAN
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPairOverview"
+      method: GET
+      params:
+        - name: componentType
+          value: ""
+          type: query
+          description: Get specific overview component details
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+    response:
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "componentType": "vxlan",
+            "vxlan": {
+              "multisiteLoopback": {
+                "peerSwitch": "Loopback100",
+                "switch": "Loopback100"
+              },
+              "multisiteLoopbackPrimaryIp": {
+                "peerSwitch": "10.5.0.2",
+                "switch": "10.5.0.1"
+              },
+              "multisiteLoopbackStatus": {
+                "peerSwitch": "down",
+                "switch": "down"
+              },
+              "nveInterface": {
+                "peerSwitch": "nve1",
+                "switch": "nve1"
+              },
+              "nveStatus": {
+                "peerSwitch": "up",
+                "switch": "up"
+              },
+              "peerSwitchId": "FDO22240HJP",
+              "routingLoopback": {
+                "peerSwitch": "Loopback0",
+                "switch": "Loopback0"
+              },
+              "routingLoopbackPrimaryIp": {
+                "peerSwitch": "10.1.0.2",
+                "switch": "10.1.0.1"
+              },
+              "routingLoopbackSecondaryIp": {
+                "peerSwitch": "10.2.0.2",
+                "switch": "10.2.0.1"
+              },
+              "routingLoopbackStatus": {
+                "peerSwitch": "up",
+                "switch": "up"
+              },
+              "switchId": "FDO222419B7",
+              "vtepLoopback": {
+                "peerSwitch": "Loopback1",
+                "switch": "Loopback1"
+              },
+              "vtepLoopbackPrimaryIp": {
+                "peerSwitch": "10.3.0.2",
+                "switch": "10.3.0.1"
+              },
+              "vtepLoopbackSecondaryIp": {
+                "peerSwitch": "10.4.0.2",
+                "switch": "10.4.0.1"
+              },
+              "vtepLoopbackStatus": {
+                "peerSwitch": "down",
+                "switch": "down"
+              }
+            }
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPairOverview"
+      method: GET
+      params:
+        - name: componentType
+          value: ""
+          type: query
+          description: Get specific overview component details
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+    response:
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPairOverview"
+      method: GET
+      params:
+        - name: componentType
+          value: ""
+          type: query
+          description: Get specific overview component details
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+    response:
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 404 Response
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPairOverview"
+      method: GET
+      params:
+        - name: componentType
+          value: ""
+          type: query
+          description: Get specific overview component details
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+    response:
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 500 Response
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPairOverview"
+      method: GET
+      params:
+        - name: componentType
+          value: ""
+          type: query
+          description: Get specific overview component details
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+    response:
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }

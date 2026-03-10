@@ -1,0 +1,1425 @@
+info:
+  name: Manage a VPC pair (pair or unpair)
+  type: http
+  seq: 39
+
+http:
+  method: PUT
+  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
+  params:
+    - name: clusterName
+      value: ""
+      type: query
+      description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+      disabled: true
+    - name: switchId
+      value: ""
+      type: path
+      description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+    - name: ticketId
+      value: ""
+      type: query
+      description: Change Control Ticket Id
+      disabled: true
+    - name: fabricName
+      value: ""
+      type: path
+      description: Name of the fabric
+  body:
+    type: json
+    data: "{}"
+  auth:
+    type: oauth2
+    flow: implicit
+    authorizationUrl: https://example.com/login
+    callbackUrl: "{{oauth_callback_url}}"
+    credentials:
+      clientId: "{{oauth_client_id}}"
+    scope: observer fabric-admin support-engineer super-admin approver designer
+    state: "{{oauth_state}}"
+    tokenConfig:
+      placement:
+        header: Bearer
+    settings:
+      autoFetchToken: false
+      autoRefreshToken: true
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 204 Response (pairingWithCustomTemplate)
+    description: No content
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "peerSwitchId": "FDO23040Q86",
+            "switchId": "FDO23040Q85",
+            "useVirtualPeerLink": true,
+            "vpcAction": "pair",
+            "vpcPairDetails": {
+              "templateConfig": {
+                "customConfig": "vpc domain 20\n  peer-keepalive destination 10.1.1.2 source 10.1.1.1 vrf management\n  role priority 2000",
+                "customField1": "custom-value-1",
+                "domainId": "20"
+              },
+              "templateName": "my_custom_template",
+              "type": "custom"
+            }
+          }
+    response:
+      statusText: No Content
+      body:
+        type: text
+        data: ""
+  - name: 204 Response (pairingWithTemplate)
+    description: No content
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "peerSwitchId": "FDO23040Q86",
+            "switchId": "FDO23040Q85",
+            "useVirtualPeerLink": true,
+            "vpcAction": "pair",
+            "vpcPairDetails": {
+              "adminState": true,
+              "allowedVlans": "1-100",
+              "domainId": 10,
+              "enableMirrorConfig": true,
+              "fabricName": "Fabric1",
+              "fabricPathSwitchId": 100,
+              "isVpcPlus": true,
+              "isVteps": true,
+              "keepAliveHoldTimeout": 5,
+              "keepAliveVrf": "default",
+              "loopbackSecondaryIp": "192.168.3.1",
+              "nveInterface": 2,
+              "peerSwitchDomainConfig": "peer-keepalive destination 10.1.1.2 source 10.1.1.1 vrf mgmt\nauto-recovery\ndelay restore 150\nkeepalive hold-timeout 5",
+              "peerSwitchKeepAliveLocalIp": "192.168.1.2",
+              "peerSwitchMemberInterfaces": [
+                "eth1/6",
+                "eth1/8",
+                "eth1/9",
+                "eth1/10"
+              ],
+              "peerSwitchNativeVlan": 2,
+              "peerSwitchPoConfig": "mtu 9216\npriority-flow-control mode on\nno shutdown",
+              "peerSwitchPoDescription": "Peer-2 Port-Channel Description",
+              "peerSwitchPoId": 201,
+              "peerSwitchPrimaryIp": "192.168.2.2",
+              "peerSwitchSourceLoopback": 11,
+              "poMode": "active",
+              "switchDomainConfig": "peer-keepalive destination 10.1.1.2 source 10.1.1.1 vrf mgmt\nauto-recovery\ndelay restore 150\nkeepalive hold-timeout 5",
+              "switchKeepAliveLocalIp": "192.168.1.1",
+              "switchMemberInterfaces": [
+                "eth1/5",
+                "eth1/7",
+                "eth1/8",
+                "eth1/9"
+              ],
+              "switchNativeVlan": 1,
+              "switchPoConfig": "mtu 9216\npriority-flow-control mode on\nno shutdown",
+              "switchPoDescription": "Peer-1 Port-Channel Description",
+              "switchPoId": 200,
+              "switchPrimaryIp": "192.168.2.1",
+              "switchSourceLoopback": 10,
+              "type": "default"
+            }
+          }
+    response:
+      statusText: No Content
+      body:
+        type: text
+        data: ""
+  - name: 204 Response (pairingWithoutTemplate)
+    description: No content
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "peerSwitchId": "FDO23040Q86",
+            "switchId": "FDO23040Q85",
+            "useVirtualPeerLink": false,
+            "vpcAction": "pair"
+          }
+    response:
+      statusText: No Content
+      body:
+        type: text
+        data: ""
+  - name: 204 Response (unpairing)
+    description: No content
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "vpcAction": "unPair"
+          }
+    response:
+      statusText: No Content
+      body:
+        type: text
+        data: ""
+  - name: 400 Response (pairingWithCustomTemplate)
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "peerSwitchId": "FDO23040Q86",
+            "switchId": "FDO23040Q85",
+            "useVirtualPeerLink": true,
+            "vpcAction": "pair",
+            "vpcPairDetails": {
+              "templateConfig": {
+                "customConfig": "vpc domain 20\n  peer-keepalive destination 10.1.1.2 source 10.1.1.1 vrf management\n  role priority 2000",
+                "customField1": "custom-value-1",
+                "domainId": "20"
+              },
+              "templateName": "my_custom_template",
+              "type": "custom"
+            }
+          }
+    response:
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 400 Response (pairingWithTemplate)
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "peerSwitchId": "FDO23040Q86",
+            "switchId": "FDO23040Q85",
+            "useVirtualPeerLink": true,
+            "vpcAction": "pair",
+            "vpcPairDetails": {
+              "adminState": true,
+              "allowedVlans": "1-100",
+              "domainId": 10,
+              "enableMirrorConfig": true,
+              "fabricName": "Fabric1",
+              "fabricPathSwitchId": 100,
+              "isVpcPlus": true,
+              "isVteps": true,
+              "keepAliveHoldTimeout": 5,
+              "keepAliveVrf": "default",
+              "loopbackSecondaryIp": "192.168.3.1",
+              "nveInterface": 2,
+              "peerSwitchDomainConfig": "peer-keepalive destination 10.1.1.2 source 10.1.1.1 vrf mgmt\nauto-recovery\ndelay restore 150\nkeepalive hold-timeout 5",
+              "peerSwitchKeepAliveLocalIp": "192.168.1.2",
+              "peerSwitchMemberInterfaces": [
+                "eth1/6",
+                "eth1/8",
+                "eth1/9",
+                "eth1/10"
+              ],
+              "peerSwitchNativeVlan": 2,
+              "peerSwitchPoConfig": "mtu 9216\npriority-flow-control mode on\nno shutdown",
+              "peerSwitchPoDescription": "Peer-2 Port-Channel Description",
+              "peerSwitchPoId": 201,
+              "peerSwitchPrimaryIp": "192.168.2.2",
+              "peerSwitchSourceLoopback": 11,
+              "poMode": "active",
+              "switchDomainConfig": "peer-keepalive destination 10.1.1.2 source 10.1.1.1 vrf mgmt\nauto-recovery\ndelay restore 150\nkeepalive hold-timeout 5",
+              "switchKeepAliveLocalIp": "192.168.1.1",
+              "switchMemberInterfaces": [
+                "eth1/5",
+                "eth1/7",
+                "eth1/8",
+                "eth1/9"
+              ],
+              "switchNativeVlan": 1,
+              "switchPoConfig": "mtu 9216\npriority-flow-control mode on\nno shutdown",
+              "switchPoDescription": "Peer-1 Port-Channel Description",
+              "switchPoId": 200,
+              "switchPrimaryIp": "192.168.2.1",
+              "switchSourceLoopback": 10,
+              "type": "default"
+            }
+          }
+    response:
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 400 Response (pairingWithoutTemplate)
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "peerSwitchId": "FDO23040Q86",
+            "switchId": "FDO23040Q85",
+            "useVirtualPeerLink": false,
+            "vpcAction": "pair"
+          }
+    response:
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 400 Response (unpairing)
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "vpcAction": "unPair"
+          }
+    response:
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 401 Response (pairingWithCustomTemplate)
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "peerSwitchId": "FDO23040Q86",
+            "switchId": "FDO23040Q85",
+            "useVirtualPeerLink": true,
+            "vpcAction": "pair",
+            "vpcPairDetails": {
+              "templateConfig": {
+                "customConfig": "vpc domain 20\n  peer-keepalive destination 10.1.1.2 source 10.1.1.1 vrf management\n  role priority 2000",
+                "customField1": "custom-value-1",
+                "domainId": "20"
+              },
+              "templateName": "my_custom_template",
+              "type": "custom"
+            }
+          }
+    response:
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 401 Response (pairingWithTemplate)
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "peerSwitchId": "FDO23040Q86",
+            "switchId": "FDO23040Q85",
+            "useVirtualPeerLink": true,
+            "vpcAction": "pair",
+            "vpcPairDetails": {
+              "adminState": true,
+              "allowedVlans": "1-100",
+              "domainId": 10,
+              "enableMirrorConfig": true,
+              "fabricName": "Fabric1",
+              "fabricPathSwitchId": 100,
+              "isVpcPlus": true,
+              "isVteps": true,
+              "keepAliveHoldTimeout": 5,
+              "keepAliveVrf": "default",
+              "loopbackSecondaryIp": "192.168.3.1",
+              "nveInterface": 2,
+              "peerSwitchDomainConfig": "peer-keepalive destination 10.1.1.2 source 10.1.1.1 vrf mgmt\nauto-recovery\ndelay restore 150\nkeepalive hold-timeout 5",
+              "peerSwitchKeepAliveLocalIp": "192.168.1.2",
+              "peerSwitchMemberInterfaces": [
+                "eth1/6",
+                "eth1/8",
+                "eth1/9",
+                "eth1/10"
+              ],
+              "peerSwitchNativeVlan": 2,
+              "peerSwitchPoConfig": "mtu 9216\npriority-flow-control mode on\nno shutdown",
+              "peerSwitchPoDescription": "Peer-2 Port-Channel Description",
+              "peerSwitchPoId": 201,
+              "peerSwitchPrimaryIp": "192.168.2.2",
+              "peerSwitchSourceLoopback": 11,
+              "poMode": "active",
+              "switchDomainConfig": "peer-keepalive destination 10.1.1.2 source 10.1.1.1 vrf mgmt\nauto-recovery\ndelay restore 150\nkeepalive hold-timeout 5",
+              "switchKeepAliveLocalIp": "192.168.1.1",
+              "switchMemberInterfaces": [
+                "eth1/5",
+                "eth1/7",
+                "eth1/8",
+                "eth1/9"
+              ],
+              "switchNativeVlan": 1,
+              "switchPoConfig": "mtu 9216\npriority-flow-control mode on\nno shutdown",
+              "switchPoDescription": "Peer-1 Port-Channel Description",
+              "switchPoId": 200,
+              "switchPrimaryIp": "192.168.2.1",
+              "switchSourceLoopback": 10,
+              "type": "default"
+            }
+          }
+    response:
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 401 Response (pairingWithoutTemplate)
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "peerSwitchId": "FDO23040Q86",
+            "switchId": "FDO23040Q85",
+            "useVirtualPeerLink": false,
+            "vpcAction": "pair"
+          }
+    response:
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 401 Response (unpairing)
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "vpcAction": "unPair"
+          }
+    response:
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 403 Response (pairingWithCustomTemplate)
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "peerSwitchId": "FDO23040Q86",
+            "switchId": "FDO23040Q85",
+            "useVirtualPeerLink": true,
+            "vpcAction": "pair",
+            "vpcPairDetails": {
+              "templateConfig": {
+                "customConfig": "vpc domain 20\n  peer-keepalive destination 10.1.1.2 source 10.1.1.1 vrf management\n  role priority 2000",
+                "customField1": "custom-value-1",
+                "domainId": "20"
+              },
+              "templateName": "my_custom_template",
+              "type": "custom"
+            }
+          }
+    response:
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 403 Response (pairingWithTemplate)
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "peerSwitchId": "FDO23040Q86",
+            "switchId": "FDO23040Q85",
+            "useVirtualPeerLink": true,
+            "vpcAction": "pair",
+            "vpcPairDetails": {
+              "adminState": true,
+              "allowedVlans": "1-100",
+              "domainId": 10,
+              "enableMirrorConfig": true,
+              "fabricName": "Fabric1",
+              "fabricPathSwitchId": 100,
+              "isVpcPlus": true,
+              "isVteps": true,
+              "keepAliveHoldTimeout": 5,
+              "keepAliveVrf": "default",
+              "loopbackSecondaryIp": "192.168.3.1",
+              "nveInterface": 2,
+              "peerSwitchDomainConfig": "peer-keepalive destination 10.1.1.2 source 10.1.1.1 vrf mgmt\nauto-recovery\ndelay restore 150\nkeepalive hold-timeout 5",
+              "peerSwitchKeepAliveLocalIp": "192.168.1.2",
+              "peerSwitchMemberInterfaces": [
+                "eth1/6",
+                "eth1/8",
+                "eth1/9",
+                "eth1/10"
+              ],
+              "peerSwitchNativeVlan": 2,
+              "peerSwitchPoConfig": "mtu 9216\npriority-flow-control mode on\nno shutdown",
+              "peerSwitchPoDescription": "Peer-2 Port-Channel Description",
+              "peerSwitchPoId": 201,
+              "peerSwitchPrimaryIp": "192.168.2.2",
+              "peerSwitchSourceLoopback": 11,
+              "poMode": "active",
+              "switchDomainConfig": "peer-keepalive destination 10.1.1.2 source 10.1.1.1 vrf mgmt\nauto-recovery\ndelay restore 150\nkeepalive hold-timeout 5",
+              "switchKeepAliveLocalIp": "192.168.1.1",
+              "switchMemberInterfaces": [
+                "eth1/5",
+                "eth1/7",
+                "eth1/8",
+                "eth1/9"
+              ],
+              "switchNativeVlan": 1,
+              "switchPoConfig": "mtu 9216\npriority-flow-control mode on\nno shutdown",
+              "switchPoDescription": "Peer-1 Port-Channel Description",
+              "switchPoId": 200,
+              "switchPrimaryIp": "192.168.2.1",
+              "switchSourceLoopback": 10,
+              "type": "default"
+            }
+          }
+    response:
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 403 Response (pairingWithoutTemplate)
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "peerSwitchId": "FDO23040Q86",
+            "switchId": "FDO23040Q85",
+            "useVirtualPeerLink": false,
+            "vpcAction": "pair"
+          }
+    response:
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 403 Response (unpairing)
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "vpcAction": "unPair"
+          }
+    response:
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 404 Response (pairingWithCustomTemplate)
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "peerSwitchId": "FDO23040Q86",
+            "switchId": "FDO23040Q85",
+            "useVirtualPeerLink": true,
+            "vpcAction": "pair",
+            "vpcPairDetails": {
+              "templateConfig": {
+                "customConfig": "vpc domain 20\n  peer-keepalive destination 10.1.1.2 source 10.1.1.1 vrf management\n  role priority 2000",
+                "customField1": "custom-value-1",
+                "domainId": "20"
+              },
+              "templateName": "my_custom_template",
+              "type": "custom"
+            }
+          }
+    response:
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 404 Response (pairingWithTemplate)
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "peerSwitchId": "FDO23040Q86",
+            "switchId": "FDO23040Q85",
+            "useVirtualPeerLink": true,
+            "vpcAction": "pair",
+            "vpcPairDetails": {
+              "adminState": true,
+              "allowedVlans": "1-100",
+              "domainId": 10,
+              "enableMirrorConfig": true,
+              "fabricName": "Fabric1",
+              "fabricPathSwitchId": 100,
+              "isVpcPlus": true,
+              "isVteps": true,
+              "keepAliveHoldTimeout": 5,
+              "keepAliveVrf": "default",
+              "loopbackSecondaryIp": "192.168.3.1",
+              "nveInterface": 2,
+              "peerSwitchDomainConfig": "peer-keepalive destination 10.1.1.2 source 10.1.1.1 vrf mgmt\nauto-recovery\ndelay restore 150\nkeepalive hold-timeout 5",
+              "peerSwitchKeepAliveLocalIp": "192.168.1.2",
+              "peerSwitchMemberInterfaces": [
+                "eth1/6",
+                "eth1/8",
+                "eth1/9",
+                "eth1/10"
+              ],
+              "peerSwitchNativeVlan": 2,
+              "peerSwitchPoConfig": "mtu 9216\npriority-flow-control mode on\nno shutdown",
+              "peerSwitchPoDescription": "Peer-2 Port-Channel Description",
+              "peerSwitchPoId": 201,
+              "peerSwitchPrimaryIp": "192.168.2.2",
+              "peerSwitchSourceLoopback": 11,
+              "poMode": "active",
+              "switchDomainConfig": "peer-keepalive destination 10.1.1.2 source 10.1.1.1 vrf mgmt\nauto-recovery\ndelay restore 150\nkeepalive hold-timeout 5",
+              "switchKeepAliveLocalIp": "192.168.1.1",
+              "switchMemberInterfaces": [
+                "eth1/5",
+                "eth1/7",
+                "eth1/8",
+                "eth1/9"
+              ],
+              "switchNativeVlan": 1,
+              "switchPoConfig": "mtu 9216\npriority-flow-control mode on\nno shutdown",
+              "switchPoDescription": "Peer-1 Port-Channel Description",
+              "switchPoId": 200,
+              "switchPrimaryIp": "192.168.2.1",
+              "switchSourceLoopback": 10,
+              "type": "default"
+            }
+          }
+    response:
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 404 Response (pairingWithoutTemplate)
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "peerSwitchId": "FDO23040Q86",
+            "switchId": "FDO23040Q85",
+            "useVirtualPeerLink": false,
+            "vpcAction": "pair"
+          }
+    response:
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 404 Response (unpairing)
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "vpcAction": "unPair"
+          }
+    response:
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 500 Response (pairingWithCustomTemplate)
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "peerSwitchId": "FDO23040Q86",
+            "switchId": "FDO23040Q85",
+            "useVirtualPeerLink": true,
+            "vpcAction": "pair",
+            "vpcPairDetails": {
+              "templateConfig": {
+                "customConfig": "vpc domain 20\n  peer-keepalive destination 10.1.1.2 source 10.1.1.1 vrf management\n  role priority 2000",
+                "customField1": "custom-value-1",
+                "domainId": "20"
+              },
+              "templateName": "my_custom_template",
+              "type": "custom"
+            }
+          }
+    response:
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }
+  - name: 500 Response (pairingWithTemplate)
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "peerSwitchId": "FDO23040Q86",
+            "switchId": "FDO23040Q85",
+            "useVirtualPeerLink": true,
+            "vpcAction": "pair",
+            "vpcPairDetails": {
+              "adminState": true,
+              "allowedVlans": "1-100",
+              "domainId": 10,
+              "enableMirrorConfig": true,
+              "fabricName": "Fabric1",
+              "fabricPathSwitchId": 100,
+              "isVpcPlus": true,
+              "isVteps": true,
+              "keepAliveHoldTimeout": 5,
+              "keepAliveVrf": "default",
+              "loopbackSecondaryIp": "192.168.3.1",
+              "nveInterface": 2,
+              "peerSwitchDomainConfig": "peer-keepalive destination 10.1.1.2 source 10.1.1.1 vrf mgmt\nauto-recovery\ndelay restore 150\nkeepalive hold-timeout 5",
+              "peerSwitchKeepAliveLocalIp": "192.168.1.2",
+              "peerSwitchMemberInterfaces": [
+                "eth1/6",
+                "eth1/8",
+                "eth1/9",
+                "eth1/10"
+              ],
+              "peerSwitchNativeVlan": 2,
+              "peerSwitchPoConfig": "mtu 9216\npriority-flow-control mode on\nno shutdown",
+              "peerSwitchPoDescription": "Peer-2 Port-Channel Description",
+              "peerSwitchPoId": 201,
+              "peerSwitchPrimaryIp": "192.168.2.2",
+              "peerSwitchSourceLoopback": 11,
+              "poMode": "active",
+              "switchDomainConfig": "peer-keepalive destination 10.1.1.2 source 10.1.1.1 vrf mgmt\nauto-recovery\ndelay restore 150\nkeepalive hold-timeout 5",
+              "switchKeepAliveLocalIp": "192.168.1.1",
+              "switchMemberInterfaces": [
+                "eth1/5",
+                "eth1/7",
+                "eth1/8",
+                "eth1/9"
+              ],
+              "switchNativeVlan": 1,
+              "switchPoConfig": "mtu 9216\npriority-flow-control mode on\nno shutdown",
+              "switchPoDescription": "Peer-1 Port-Channel Description",
+              "switchPoId": 200,
+              "switchPrimaryIp": "192.168.2.1",
+              "switchSourceLoopback": 10,
+              "type": "default"
+            }
+          }
+    response:
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }
+  - name: 500 Response (pairingWithoutTemplate)
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "peerSwitchId": "FDO23040Q86",
+            "switchId": "FDO23040Q85",
+            "useVirtualPeerLink": false,
+            "vpcAction": "pair"
+          }
+    response:
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }
+  - name: 500 Response (unpairing)
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "vpcAction": "unPair"
+          }
+    response:
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }

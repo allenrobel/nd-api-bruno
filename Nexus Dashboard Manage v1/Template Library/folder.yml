@@ -1,0 +1,7 @@
+info:
+  name: Template Library
+  type: folder
+  seq: 21
+
+request:
+  auth: inherit

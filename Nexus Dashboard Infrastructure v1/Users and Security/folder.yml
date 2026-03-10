@@ -1,0 +1,7 @@
+info:
+  name: Users and Security
+  type: folder
+  seq: 1
+
+request:
+  auth: inherit

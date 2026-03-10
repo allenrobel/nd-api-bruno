@@ -1,0 +1,911 @@
+info:
+  name: Create security contracts
+  type: http
+  seq: 15
+
+http:
+  method: POST
+  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityContracts"
+  params:
+    - name: clusterName
+      value: ""
+      type: query
+      description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+      disabled: true
+    - name: fabricName
+      value: ""
+      type: path
+      description: Name of the fabric
+  body:
+    type: json
+    data: |-
+      {
+        "securityContracts": [
+          {
+            "name": "",
+            "tenantName": "",
+            "displayName": "",
+            "description": "",
+            "direction": "",
+            "rules": [
+              {
+                "ruleDirection": "",
+                "action": "",
+                "protocolDefinitionName": "",
+                "protocolDefinitionMatchSummary": ""
+              }
+            ]
+          }
+        ]
+      }
+  auth:
+    type: oauth2
+    flow: implicit
+    authorizationUrl: https://example.com/login
+    callbackUrl: "{{oauth_callback_url}}"
+    credentials:
+      clientId: "{{oauth_client_id}}"
+    scope: observer fabric-admin support-engineer super-admin approver designer
+    state: "{{oauth_state}}"
+    tokenConfig:
+      placement:
+        header: Bearer
+    settings:
+      autoFetchToken: false
+      autoRefreshToken: true
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Example of creating one security contract (Create one security contract with multi directional rules without tenant)
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityContracts"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "securityContracts": [
+              {
+                "description": "Allow web traffic",
+                "direction": "custom",
+                "name": "permit-web",
+                "rules": [
+                  {
+                    "action": "permit",
+                    "protocolDefinitionName": "https",
+                    "ruleDirection": "bidirectional"
+                  },
+                  {
+                    "action": "permit",
+                    "protocolDefinitionName": "http",
+                    "ruleDirection": "unidirectional"
+                  }
+                ]
+              }
+            ]
+          }
+    response:
+      statusText: Multi-Status
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "securityContracts": [
+              {
+                "name": "permit-web",
+                "status": "success",
+                "message": "Successfully created security contract: permit-web"
+              }
+            ]
+          }
+  - name: Example of creating one security contract (Create two security contracts with rules)
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityContracts"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "securityContracts": [
+              {
+                "description": "Allow web traffic",
+                "direction": "bidirectional",
+                "name": "tenantSales~permit-web",
+                "rules": [
+                  {
+                    "action": "permit",
+                    "protocolDefinitionName": "tenantSales~https",
+                    "ruleDirection": "bidirectional"
+                  },
+                  {
+                    "action": "permit",
+                    "protocolDefinitionName": "ssh",
+                    "ruleDirection": "bidirectional"
+                  }
+                ],
+                "tenantName": "tenantSales"
+              },
+              {
+                "description": "Deny ICMP traffic",
+                "direction": "bidirectional",
+                "name": "tenantSales~deny-icmp",
+                "rules": [
+                  {
+                    "action": "deny",
+                    "protocolDefinitionName": "tenantSales~icmp",
+                    "ruleDirection": "bidirectional"
+                  }
+                ],
+                "tenantName": "tenantSales"
+              }
+            ]
+          }
+    response:
+      statusText: Multi-Status
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "securityContracts": [
+              {
+                "name": "permit-web",
+                "status": "success",
+                "message": "Successfully created security contract: permit-web"
+              }
+            ]
+          }
+  - name: Example of creating two security contracts (Create one security contract with multi directional rules without tenant)
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityContracts"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "securityContracts": [
+              {
+                "description": "Allow web traffic",
+                "direction": "custom",
+                "name": "permit-web",
+                "rules": [
+                  {
+                    "action": "permit",
+                    "protocolDefinitionName": "https",
+                    "ruleDirection": "bidirectional"
+                  },
+                  {
+                    "action": "permit",
+                    "protocolDefinitionName": "http",
+                    "ruleDirection": "unidirectional"
+                  }
+                ]
+              }
+            ]
+          }
+    response:
+      statusText: Multi-Status
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "securityContracts": [
+              {
+                "name": "permit-web",
+                "status": "success",
+                "message": "Successfully created security contract: permit-web"
+              },
+              {
+                "name": "deny-icmp",
+                "status": "failed",
+                "message": "Failed to create security contract: deny-icmp. Error: db error"
+              }
+            ]
+          }
+  - name: Example of creating two security contracts (Create two security contracts with rules)
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityContracts"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "securityContracts": [
+              {
+                "description": "Allow web traffic",
+                "direction": "bidirectional",
+                "name": "tenantSales~permit-web",
+                "rules": [
+                  {
+                    "action": "permit",
+                    "protocolDefinitionName": "tenantSales~https",
+                    "ruleDirection": "bidirectional"
+                  },
+                  {
+                    "action": "permit",
+                    "protocolDefinitionName": "ssh",
+                    "ruleDirection": "bidirectional"
+                  }
+                ],
+                "tenantName": "tenantSales"
+              },
+              {
+                "description": "Deny ICMP traffic",
+                "direction": "bidirectional",
+                "name": "tenantSales~deny-icmp",
+                "rules": [
+                  {
+                    "action": "deny",
+                    "protocolDefinitionName": "tenantSales~icmp",
+                    "ruleDirection": "bidirectional"
+                  }
+                ],
+                "tenantName": "tenantSales"
+              }
+            ]
+          }
+    response:
+      statusText: Multi-Status
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "securityContracts": [
+              {
+                "name": "permit-web",
+                "status": "success",
+                "message": "Successfully created security contract: permit-web"
+              },
+              {
+                "name": "deny-icmp",
+                "status": "failed",
+                "message": "Failed to create security contract: deny-icmp. Error: db error"
+              }
+            ]
+          }
+  - name: 400 Response (Create one security contract with multi directional rules without tenant)
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityContracts"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "securityContracts": [
+              {
+                "description": "Allow web traffic",
+                "direction": "custom",
+                "name": "permit-web",
+                "rules": [
+                  {
+                    "action": "permit",
+                    "protocolDefinitionName": "https",
+                    "ruleDirection": "bidirectional"
+                  },
+                  {
+                    "action": "permit",
+                    "protocolDefinitionName": "http",
+                    "ruleDirection": "unidirectional"
+                  }
+                ]
+              }
+            ]
+          }
+    response:
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 400 Response (Create two security contracts with rules)
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityContracts"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "securityContracts": [
+              {
+                "description": "Allow web traffic",
+                "direction": "bidirectional",
+                "name": "tenantSales~permit-web",
+                "rules": [
+                  {
+                    "action": "permit",
+                    "protocolDefinitionName": "tenantSales~https",
+                    "ruleDirection": "bidirectional"
+                  },
+                  {
+                    "action": "permit",
+                    "protocolDefinitionName": "ssh",
+                    "ruleDirection": "bidirectional"
+                  }
+                ],
+                "tenantName": "tenantSales"
+              },
+              {
+                "description": "Deny ICMP traffic",
+                "direction": "bidirectional",
+                "name": "tenantSales~deny-icmp",
+                "rules": [
+                  {
+                    "action": "deny",
+                    "protocolDefinitionName": "tenantSales~icmp",
+                    "ruleDirection": "bidirectional"
+                  }
+                ],
+                "tenantName": "tenantSales"
+              }
+            ]
+          }
+    response:
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 401 Response (Create one security contract with multi directional rules without tenant)
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityContracts"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "securityContracts": [
+              {
+                "description": "Allow web traffic",
+                "direction": "custom",
+                "name": "permit-web",
+                "rules": [
+                  {
+                    "action": "permit",
+                    "protocolDefinitionName": "https",
+                    "ruleDirection": "bidirectional"
+                  },
+                  {
+                    "action": "permit",
+                    "protocolDefinitionName": "http",
+                    "ruleDirection": "unidirectional"
+                  }
+                ]
+              }
+            ]
+          }
+    response:
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 401 Response (Create two security contracts with rules)
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityContracts"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "securityContracts": [
+              {
+                "description": "Allow web traffic",
+                "direction": "bidirectional",
+                "name": "tenantSales~permit-web",
+                "rules": [
+                  {
+                    "action": "permit",
+                    "protocolDefinitionName": "tenantSales~https",
+                    "ruleDirection": "bidirectional"
+                  },
+                  {
+                    "action": "permit",
+                    "protocolDefinitionName": "ssh",
+                    "ruleDirection": "bidirectional"
+                  }
+                ],
+                "tenantName": "tenantSales"
+              },
+              {
+                "description": "Deny ICMP traffic",
+                "direction": "bidirectional",
+                "name": "tenantSales~deny-icmp",
+                "rules": [
+                  {
+                    "action": "deny",
+                    "protocolDefinitionName": "tenantSales~icmp",
+                    "ruleDirection": "bidirectional"
+                  }
+                ],
+                "tenantName": "tenantSales"
+              }
+            ]
+          }
+    response:
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 403 Response (Create one security contract with multi directional rules without tenant)
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityContracts"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "securityContracts": [
+              {
+                "description": "Allow web traffic",
+                "direction": "custom",
+                "name": "permit-web",
+                "rules": [
+                  {
+                    "action": "permit",
+                    "protocolDefinitionName": "https",
+                    "ruleDirection": "bidirectional"
+                  },
+                  {
+                    "action": "permit",
+                    "protocolDefinitionName": "http",
+                    "ruleDirection": "unidirectional"
+                  }
+                ]
+              }
+            ]
+          }
+    response:
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 403 Response (Create two security contracts with rules)
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityContracts"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "securityContracts": [
+              {
+                "description": "Allow web traffic",
+                "direction": "bidirectional",
+                "name": "tenantSales~permit-web",
+                "rules": [
+                  {
+                    "action": "permit",
+                    "protocolDefinitionName": "tenantSales~https",
+                    "ruleDirection": "bidirectional"
+                  },
+                  {
+                    "action": "permit",
+                    "protocolDefinitionName": "ssh",
+                    "ruleDirection": "bidirectional"
+                  }
+                ],
+                "tenantName": "tenantSales"
+              },
+              {
+                "description": "Deny ICMP traffic",
+                "direction": "bidirectional",
+                "name": "tenantSales~deny-icmp",
+                "rules": [
+                  {
+                    "action": "deny",
+                    "protocolDefinitionName": "tenantSales~icmp",
+                    "ruleDirection": "bidirectional"
+                  }
+                ],
+                "tenantName": "tenantSales"
+              }
+            ]
+          }
+    response:
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 404 Response (Create one security contract with multi directional rules without tenant)
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityContracts"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "securityContracts": [
+              {
+                "description": "Allow web traffic",
+                "direction": "custom",
+                "name": "permit-web",
+                "rules": [
+                  {
+                    "action": "permit",
+                    "protocolDefinitionName": "https",
+                    "ruleDirection": "bidirectional"
+                  },
+                  {
+                    "action": "permit",
+                    "protocolDefinitionName": "http",
+                    "ruleDirection": "unidirectional"
+                  }
+                ]
+              }
+            ]
+          }
+    response:
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 404 Response (Create two security contracts with rules)
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityContracts"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "securityContracts": [
+              {
+                "description": "Allow web traffic",
+                "direction": "bidirectional",
+                "name": "tenantSales~permit-web",
+                "rules": [
+                  {
+                    "action": "permit",
+                    "protocolDefinitionName": "tenantSales~https",
+                    "ruleDirection": "bidirectional"
+                  },
+                  {
+                    "action": "permit",
+                    "protocolDefinitionName": "ssh",
+                    "ruleDirection": "bidirectional"
+                  }
+                ],
+                "tenantName": "tenantSales"
+              },
+              {
+                "description": "Deny ICMP traffic",
+                "direction": "bidirectional",
+                "name": "tenantSales~deny-icmp",
+                "rules": [
+                  {
+                    "action": "deny",
+                    "protocolDefinitionName": "tenantSales~icmp",
+                    "ruleDirection": "bidirectional"
+                  }
+                ],
+                "tenantName": "tenantSales"
+              }
+            ]
+          }
+    response:
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 500 Response (Create one security contract with multi directional rules without tenant)
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityContracts"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "securityContracts": [
+              {
+                "description": "Allow web traffic",
+                "direction": "custom",
+                "name": "permit-web",
+                "rules": [
+                  {
+                    "action": "permit",
+                    "protocolDefinitionName": "https",
+                    "ruleDirection": "bidirectional"
+                  },
+                  {
+                    "action": "permit",
+                    "protocolDefinitionName": "http",
+                    "ruleDirection": "unidirectional"
+                  }
+                ]
+              }
+            ]
+          }
+    response:
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }
+  - name: 500 Response (Create two security contracts with rules)
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityContracts"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "securityContracts": [
+              {
+                "description": "Allow web traffic",
+                "direction": "bidirectional",
+                "name": "tenantSales~permit-web",
+                "rules": [
+                  {
+                    "action": "permit",
+                    "protocolDefinitionName": "tenantSales~https",
+                    "ruleDirection": "bidirectional"
+                  },
+                  {
+                    "action": "permit",
+                    "protocolDefinitionName": "ssh",
+                    "ruleDirection": "bidirectional"
+                  }
+                ],
+                "tenantName": "tenantSales"
+              },
+              {
+                "description": "Deny ICMP traffic",
+                "direction": "bidirectional",
+                "name": "tenantSales~deny-icmp",
+                "rules": [
+                  {
+                    "action": "deny",
+                    "protocolDefinitionName": "tenantSales~icmp",
+                    "ruleDirection": "bidirectional"
+                  }
+                ],
+                "tenantName": "tenantSales"
+              }
+            ]
+          }
+    response:
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }

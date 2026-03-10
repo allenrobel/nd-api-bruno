@@ -1,0 +1,1326 @@
+info:
+  name: Update details for named fabric
+  type: http
+  seq: 8
+
+http:
+  method: PUT
+  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName"
+  params:
+    - name: clusterName
+      value: ""
+      type: query
+      description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+      disabled: true
+    - name: fabricName
+      value: ""
+      type: path
+      description: Name of the fabric
+  body:
+    type: json
+    data: "{}"
+  auth:
+    type: oauth2
+    flow: implicit
+    authorizationUrl: https://example.com/login
+    callbackUrl: "{{oauth_callback_url}}"
+    credentials:
+      clientId: "{{oauth_client_id}}"
+    scope: observer fabric-admin support-engineer super-admin approver designer
+    state: "{{oauth_state}}"
+    tokenConfig:
+      placement:
+        header: Bearer
+    settings:
+      autoFetchToken: false
+      autoRefreshToken: true
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: routed
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "category": "fabric",
+            "licenseTier": "essentials",
+            "location": {
+              "latitude": 37.33939,
+              "longitude": -121.89496
+            },
+            "management": {
+              "aaa": false,
+              "advancedSshOption": false,
+              "aimlQos": false,
+              "allowLeafSameAs": false,
+              "anycastLoopbackId": 10,
+              "assignIpv4ToLoopback0": false,
+              "autoGenerateMulticastGroupAddress": false,
+              "bfd": false,
+              "bfdAuthentication": false,
+              "bfdAuthenticationKeyId": 100,
+              "bfdIbgp": false,
+              "bgpAllowAsInNum": 1,
+              "bgpAsMode": "multiAS",
+              "bgpAsn": "33",
+              "bgpAuthentication": false,
+              "bgpLoopbackId": 0,
+              "bgpLoopbackIpRange": "10.2.0.0/22",
+              "bgpMaxPath": 4,
+              "bgpUnderlayFailureProtect": false,
+              "cdp": false,
+              "coppPolicy": "strict",
+              "day0Bootstrap": false,
+              "defaultQueuingPolicy": false,
+              "disableRouteMapTag": false,
+              "fabricMtu": 9216,
+              "fabricVpcDomainId": false,
+              "fabricVpcQos": false,
+              "fabricVpcQosPolicyName": "spine_qos_for_fabric_vpc_peering",
+              "firstHopRedundancyProtocol": "hsrp",
+              "greenfieldDebugFlag": "disable",
+              "heartbeatInterval": 190,
+              "interfaceStatisticsLoadInterval": 10,
+              "intraFabricSubnetRange": "10.4.0.0/16",
+              "l2HostInterfaceMtu": 9216,
+              "localDhcpServer": false,
+              "macsec": false,
+              "macsecReportTimer": 5,
+              "managementIpv4Prefix": 24,
+              "managementIpv6Prefix": 64,
+              "netflowSettings": {
+                "netflow": false
+              },
+              "networkVlanRange": "2300-2999",
+              "nxapi": true,
+              "nxapiHttp": true,
+              "nxapiHttpPort": 80,
+              "nxapiHttpsPort": 443,
+              "performanceMonitoring": false,
+              "powerRedundancyMode": "redundant",
+              "ptp": false,
+              "ptpDomainId": 0,
+              "ptpLoopbackId": 0,
+              "realTimeInterfaceStatisticsCollection": false,
+              "routeMapTag": 12345,
+              "sharedVpcDomainId": 1,
+              "snmpTrap": true,
+              "staticUnderlayIpAllocation": false,
+              "strictConfigComplianceMode": false,
+              "subInterfaceDot1qRange": "2-511",
+              "targetSubnetMask": 30,
+              "tcamAllocation": true,
+              "type": "routed",
+              "underlayIpv6": false,
+              "vpcAutoRecoveryTimer": 360,
+              "vpcDelayRestoreTimer": 150,
+              "vpcDomainIdRange": "1-1000",
+              "vpcIpv6NeighborDiscoverySync": true,
+              "vpcLayer3PeerRouter": true,
+              "vpcPeerKeepAliveOption": "management",
+              "vpcPeerLinkEnableNativeVlan": false,
+              "vpcPeerLinkPortChannelId": "500",
+              "vpcPeerLinkVlan": "3600",
+              "vrfLiteIpv6SubnetRange": "fd00::a33:0/112",
+              "vrfLiteIpv6SubnetTargetMask": 126,
+              "vrfLiteSubnetRange": "10.33.0.0/16",
+              "vrfLiteSubnetTargetMask": 30
+            },
+            "name": "rr1",
+            "securityDomain": "all",
+            "telemetryCollection": false
+          }
+    response:
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "category": "fabric",
+            "licenseTier": "essentials",
+            "location": {
+              "latitude": 37.33939,
+              "longitude": -121.89496
+            },
+            "management": {
+              "aaa": false,
+              "advancedSshOption": false,
+              "aimlQos": false,
+              "allowLeafSameAs": false,
+              "anycastLoopbackId": 10,
+              "assignIpv4ToLoopback0": false,
+              "autoGenerateMulticastGroupAddress": false,
+              "bfd": false,
+              "bfdAuthentication": false,
+              "bfdAuthenticationKeyId": 100,
+              "bfdIbgp": false,
+              "bgpAllowAsInNum": 1,
+              "bgpAsMode": "multiAS",
+              "bgpAsn": "33",
+              "bgpAuthentication": false,
+              "bgpLoopbackId": 0,
+              "bgpLoopbackIpRange": "10.2.0.0/22",
+              "bgpMaxPath": 4,
+              "bgpUnderlayFailureProtect": false,
+              "cdp": false,
+              "coppPolicy": "strict",
+              "day0Bootstrap": false,
+              "defaultQueuingPolicy": false,
+              "disableRouteMapTag": false,
+              "fabricMtu": 9216,
+              "fabricVpcDomainId": false,
+              "fabricVpcQos": false,
+              "fabricVpcQosPolicyName": "spine_qos_for_fabric_vpc_peering",
+              "firstHopRedundancyProtocol": "hsrp",
+              "greenfieldDebugFlag": "disable",
+              "heartbeatInterval": 190,
+              "interfaceStatisticsLoadInterval": 10,
+              "intraFabricSubnetRange": "10.4.0.0/16",
+              "l2HostInterfaceMtu": 9216,
+              "localDhcpServer": false,
+              "macsec": false,
+              "macsecReportTimer": 5,
+              "managementIpv4Prefix": 24,
+              "managementIpv6Prefix": 64,
+              "netflowSettings": {
+                "netflow": false
+              },
+              "networkVlanRange": "2300-2999",
+              "nxapi": true,
+              "nxapiHttp": true,
+              "nxapiHttpPort": 80,
+              "nxapiHttpsPort": 443,
+              "performanceMonitoring": false,
+              "powerRedundancyMode": "redundant",
+              "ptp": false,
+              "ptpDomainId": 0,
+              "ptpLoopbackId": 0,
+              "realTimeInterfaceStatisticsCollection": false,
+              "routeMapTag": 12345,
+              "sharedVpcDomainId": 1,
+              "snmpTrap": true,
+              "staticUnderlayIpAllocation": false,
+              "strictConfigComplianceMode": false,
+              "subInterfaceDot1qRange": "2-511",
+              "targetSubnetMask": 30,
+              "tcamAllocation": true,
+              "type": "routed",
+              "underlayIpv6": false,
+              "vpcAutoRecoveryTimer": 360,
+              "vpcDelayRestoreTimer": 150,
+              "vpcDomainIdRange": "1-1000",
+              "vpcIpv6NeighborDiscoverySync": true,
+              "vpcLayer3PeerRouter": true,
+              "vpcPeerKeepAliveOption": "management",
+              "vpcPeerLinkEnableNativeVlan": false,
+              "vpcPeerLinkPortChannelId": "500",
+              "vpcPeerLinkVlan": "3600",
+              "vrfLiteIpv6SubnetRange": "fd00::a33:0/112",
+              "vrfLiteIpv6SubnetTargetMask": 126,
+              "vrfLiteSubnetRange": "10.33.0.0/16",
+              "vrfLiteSubnetTargetMask": 30
+            },
+            "name": "rr1",
+            "securityDomain": "all",
+            "telemetryCollection": false
+          }
+  - name: 202 Response (routed)
+    description: Accepted
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "category": "fabric",
+            "licenseTier": "essentials",
+            "location": {
+              "latitude": 37.33939,
+              "longitude": -121.89496
+            },
+            "management": {
+              "aaa": false,
+              "advancedSshOption": false,
+              "aimlQos": false,
+              "allowLeafSameAs": false,
+              "anycastLoopbackId": 10,
+              "assignIpv4ToLoopback0": false,
+              "autoGenerateMulticastGroupAddress": false,
+              "bfd": false,
+              "bfdAuthentication": false,
+              "bfdAuthenticationKeyId": 100,
+              "bfdIbgp": false,
+              "bgpAllowAsInNum": 1,
+              "bgpAsMode": "multiAS",
+              "bgpAsn": "33",
+              "bgpAuthentication": false,
+              "bgpLoopbackId": 0,
+              "bgpLoopbackIpRange": "10.2.0.0/22",
+              "bgpMaxPath": 4,
+              "bgpUnderlayFailureProtect": false,
+              "cdp": false,
+              "coppPolicy": "strict",
+              "day0Bootstrap": false,
+              "defaultQueuingPolicy": false,
+              "disableRouteMapTag": false,
+              "fabricMtu": 9216,
+              "fabricVpcDomainId": false,
+              "fabricVpcQos": false,
+              "fabricVpcQosPolicyName": "spine_qos_for_fabric_vpc_peering",
+              "firstHopRedundancyProtocol": "hsrp",
+              "greenfieldDebugFlag": "disable",
+              "heartbeatInterval": 190,
+              "interfaceStatisticsLoadInterval": 10,
+              "intraFabricSubnetRange": "10.4.0.0/16",
+              "l2HostInterfaceMtu": 9216,
+              "localDhcpServer": false,
+              "macsec": false,
+              "macsecReportTimer": 5,
+              "managementIpv4Prefix": 24,
+              "managementIpv6Prefix": 64,
+              "netflowSettings": {
+                "netflow": false
+              },
+              "networkVlanRange": "2300-2999",
+              "nxapi": true,
+              "nxapiHttp": true,
+              "nxapiHttpPort": 80,
+              "nxapiHttpsPort": 443,
+              "performanceMonitoring": false,
+              "powerRedundancyMode": "redundant",
+              "ptp": false,
+              "ptpDomainId": 0,
+              "ptpLoopbackId": 0,
+              "realTimeInterfaceStatisticsCollection": false,
+              "routeMapTag": 12345,
+              "sharedVpcDomainId": 1,
+              "snmpTrap": true,
+              "staticUnderlayIpAllocation": false,
+              "strictConfigComplianceMode": false,
+              "subInterfaceDot1qRange": "2-511",
+              "targetSubnetMask": 30,
+              "tcamAllocation": true,
+              "type": "routed",
+              "underlayIpv6": false,
+              "vpcAutoRecoveryTimer": 360,
+              "vpcDelayRestoreTimer": 150,
+              "vpcDomainIdRange": "1-1000",
+              "vpcIpv6NeighborDiscoverySync": true,
+              "vpcLayer3PeerRouter": true,
+              "vpcPeerKeepAliveOption": "management",
+              "vpcPeerLinkEnableNativeVlan": false,
+              "vpcPeerLinkPortChannelId": "500",
+              "vpcPeerLinkVlan": "3600",
+              "vrfLiteIpv6SubnetRange": "fd00::a33:0/112",
+              "vrfLiteIpv6SubnetTargetMask": 126,
+              "vrfLiteSubnetRange": "10.33.0.0/16",
+              "vrfLiteSubnetTargetMask": 30
+            },
+            "name": "rr1",
+            "securityDomain": "all",
+            "telemetryCollection": false
+          }
+    response:
+      statusText: Accepted
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "id": "fabric1",
+            "statusUrl": "/api/v1/manage/fabrics/fabric1/acceptedStatus"
+          }
+  - name: 400 Response (routed)
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "category": "fabric",
+            "licenseTier": "essentials",
+            "location": {
+              "latitude": 37.33939,
+              "longitude": -121.89496
+            },
+            "management": {
+              "aaa": false,
+              "advancedSshOption": false,
+              "aimlQos": false,
+              "allowLeafSameAs": false,
+              "anycastLoopbackId": 10,
+              "assignIpv4ToLoopback0": false,
+              "autoGenerateMulticastGroupAddress": false,
+              "bfd": false,
+              "bfdAuthentication": false,
+              "bfdAuthenticationKeyId": 100,
+              "bfdIbgp": false,
+              "bgpAllowAsInNum": 1,
+              "bgpAsMode": "multiAS",
+              "bgpAsn": "33",
+              "bgpAuthentication": false,
+              "bgpLoopbackId": 0,
+              "bgpLoopbackIpRange": "10.2.0.0/22",
+              "bgpMaxPath": 4,
+              "bgpUnderlayFailureProtect": false,
+              "cdp": false,
+              "coppPolicy": "strict",
+              "day0Bootstrap": false,
+              "defaultQueuingPolicy": false,
+              "disableRouteMapTag": false,
+              "fabricMtu": 9216,
+              "fabricVpcDomainId": false,
+              "fabricVpcQos": false,
+              "fabricVpcQosPolicyName": "spine_qos_for_fabric_vpc_peering",
+              "firstHopRedundancyProtocol": "hsrp",
+              "greenfieldDebugFlag": "disable",
+              "heartbeatInterval": 190,
+              "interfaceStatisticsLoadInterval": 10,
+              "intraFabricSubnetRange": "10.4.0.0/16",
+              "l2HostInterfaceMtu": 9216,
+              "localDhcpServer": false,
+              "macsec": false,
+              "macsecReportTimer": 5,
+              "managementIpv4Prefix": 24,
+              "managementIpv6Prefix": 64,
+              "netflowSettings": {
+                "netflow": false
+              },
+              "networkVlanRange": "2300-2999",
+              "nxapi": true,
+              "nxapiHttp": true,
+              "nxapiHttpPort": 80,
+              "nxapiHttpsPort": 443,
+              "performanceMonitoring": false,
+              "powerRedundancyMode": "redundant",
+              "ptp": false,
+              "ptpDomainId": 0,
+              "ptpLoopbackId": 0,
+              "realTimeInterfaceStatisticsCollection": false,
+              "routeMapTag": 12345,
+              "sharedVpcDomainId": 1,
+              "snmpTrap": true,
+              "staticUnderlayIpAllocation": false,
+              "strictConfigComplianceMode": false,
+              "subInterfaceDot1qRange": "2-511",
+              "targetSubnetMask": 30,
+              "tcamAllocation": true,
+              "type": "routed",
+              "underlayIpv6": false,
+              "vpcAutoRecoveryTimer": 360,
+              "vpcDelayRestoreTimer": 150,
+              "vpcDomainIdRange": "1-1000",
+              "vpcIpv6NeighborDiscoverySync": true,
+              "vpcLayer3PeerRouter": true,
+              "vpcPeerKeepAliveOption": "management",
+              "vpcPeerLinkEnableNativeVlan": false,
+              "vpcPeerLinkPortChannelId": "500",
+              "vpcPeerLinkVlan": "3600",
+              "vrfLiteIpv6SubnetRange": "fd00::a33:0/112",
+              "vrfLiteIpv6SubnetTargetMask": 126,
+              "vrfLiteSubnetRange": "10.33.0.0/16",
+              "vrfLiteSubnetTargetMask": 30
+            },
+            "name": "rr1",
+            "securityDomain": "all",
+            "telemetryCollection": false
+          }
+    response:
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 401 Response (routed)
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "category": "fabric",
+            "licenseTier": "essentials",
+            "location": {
+              "latitude": 37.33939,
+              "longitude": -121.89496
+            },
+            "management": {
+              "aaa": false,
+              "advancedSshOption": false,
+              "aimlQos": false,
+              "allowLeafSameAs": false,
+              "anycastLoopbackId": 10,
+              "assignIpv4ToLoopback0": false,
+              "autoGenerateMulticastGroupAddress": false,
+              "bfd": false,
+              "bfdAuthentication": false,
+              "bfdAuthenticationKeyId": 100,
+              "bfdIbgp": false,
+              "bgpAllowAsInNum": 1,
+              "bgpAsMode": "multiAS",
+              "bgpAsn": "33",
+              "bgpAuthentication": false,
+              "bgpLoopbackId": 0,
+              "bgpLoopbackIpRange": "10.2.0.0/22",
+              "bgpMaxPath": 4,
+              "bgpUnderlayFailureProtect": false,
+              "cdp": false,
+              "coppPolicy": "strict",
+              "day0Bootstrap": false,
+              "defaultQueuingPolicy": false,
+              "disableRouteMapTag": false,
+              "fabricMtu": 9216,
+              "fabricVpcDomainId": false,
+              "fabricVpcQos": false,
+              "fabricVpcQosPolicyName": "spine_qos_for_fabric_vpc_peering",
+              "firstHopRedundancyProtocol": "hsrp",
+              "greenfieldDebugFlag": "disable",
+              "heartbeatInterval": 190,
+              "interfaceStatisticsLoadInterval": 10,
+              "intraFabricSubnetRange": "10.4.0.0/16",
+              "l2HostInterfaceMtu": 9216,
+              "localDhcpServer": false,
+              "macsec": false,
+              "macsecReportTimer": 5,
+              "managementIpv4Prefix": 24,
+              "managementIpv6Prefix": 64,
+              "netflowSettings": {
+                "netflow": false
+              },
+              "networkVlanRange": "2300-2999",
+              "nxapi": true,
+              "nxapiHttp": true,
+              "nxapiHttpPort": 80,
+              "nxapiHttpsPort": 443,
+              "performanceMonitoring": false,
+              "powerRedundancyMode": "redundant",
+              "ptp": false,
+              "ptpDomainId": 0,
+              "ptpLoopbackId": 0,
+              "realTimeInterfaceStatisticsCollection": false,
+              "routeMapTag": 12345,
+              "sharedVpcDomainId": 1,
+              "snmpTrap": true,
+              "staticUnderlayIpAllocation": false,
+              "strictConfigComplianceMode": false,
+              "subInterfaceDot1qRange": "2-511",
+              "targetSubnetMask": 30,
+              "tcamAllocation": true,
+              "type": "routed",
+              "underlayIpv6": false,
+              "vpcAutoRecoveryTimer": 360,
+              "vpcDelayRestoreTimer": 150,
+              "vpcDomainIdRange": "1-1000",
+              "vpcIpv6NeighborDiscoverySync": true,
+              "vpcLayer3PeerRouter": true,
+              "vpcPeerKeepAliveOption": "management",
+              "vpcPeerLinkEnableNativeVlan": false,
+              "vpcPeerLinkPortChannelId": "500",
+              "vpcPeerLinkVlan": "3600",
+              "vrfLiteIpv6SubnetRange": "fd00::a33:0/112",
+              "vrfLiteIpv6SubnetTargetMask": 126,
+              "vrfLiteSubnetRange": "10.33.0.0/16",
+              "vrfLiteSubnetTargetMask": 30
+            },
+            "name": "rr1",
+            "securityDomain": "all",
+            "telemetryCollection": false
+          }
+    response:
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 403 Response (routed)
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "category": "fabric",
+            "licenseTier": "essentials",
+            "location": {
+              "latitude": 37.33939,
+              "longitude": -121.89496
+            },
+            "management": {
+              "aaa": false,
+              "advancedSshOption": false,
+              "aimlQos": false,
+              "allowLeafSameAs": false,
+              "anycastLoopbackId": 10,
+              "assignIpv4ToLoopback0": false,
+              "autoGenerateMulticastGroupAddress": false,
+              "bfd": false,
+              "bfdAuthentication": false,
+              "bfdAuthenticationKeyId": 100,
+              "bfdIbgp": false,
+              "bgpAllowAsInNum": 1,
+              "bgpAsMode": "multiAS",
+              "bgpAsn": "33",
+              "bgpAuthentication": false,
+              "bgpLoopbackId": 0,
+              "bgpLoopbackIpRange": "10.2.0.0/22",
+              "bgpMaxPath": 4,
+              "bgpUnderlayFailureProtect": false,
+              "cdp": false,
+              "coppPolicy": "strict",
+              "day0Bootstrap": false,
+              "defaultQueuingPolicy": false,
+              "disableRouteMapTag": false,
+              "fabricMtu": 9216,
+              "fabricVpcDomainId": false,
+              "fabricVpcQos": false,
+              "fabricVpcQosPolicyName": "spine_qos_for_fabric_vpc_peering",
+              "firstHopRedundancyProtocol": "hsrp",
+              "greenfieldDebugFlag": "disable",
+              "heartbeatInterval": 190,
+              "interfaceStatisticsLoadInterval": 10,
+              "intraFabricSubnetRange": "10.4.0.0/16",
+              "l2HostInterfaceMtu": 9216,
+              "localDhcpServer": false,
+              "macsec": false,
+              "macsecReportTimer": 5,
+              "managementIpv4Prefix": 24,
+              "managementIpv6Prefix": 64,
+              "netflowSettings": {
+                "netflow": false
+              },
+              "networkVlanRange": "2300-2999",
+              "nxapi": true,
+              "nxapiHttp": true,
+              "nxapiHttpPort": 80,
+              "nxapiHttpsPort": 443,
+              "performanceMonitoring": false,
+              "powerRedundancyMode": "redundant",
+              "ptp": false,
+              "ptpDomainId": 0,
+              "ptpLoopbackId": 0,
+              "realTimeInterfaceStatisticsCollection": false,
+              "routeMapTag": 12345,
+              "sharedVpcDomainId": 1,
+              "snmpTrap": true,
+              "staticUnderlayIpAllocation": false,
+              "strictConfigComplianceMode": false,
+              "subInterfaceDot1qRange": "2-511",
+              "targetSubnetMask": 30,
+              "tcamAllocation": true,
+              "type": "routed",
+              "underlayIpv6": false,
+              "vpcAutoRecoveryTimer": 360,
+              "vpcDelayRestoreTimer": 150,
+              "vpcDomainIdRange": "1-1000",
+              "vpcIpv6NeighborDiscoverySync": true,
+              "vpcLayer3PeerRouter": true,
+              "vpcPeerKeepAliveOption": "management",
+              "vpcPeerLinkEnableNativeVlan": false,
+              "vpcPeerLinkPortChannelId": "500",
+              "vpcPeerLinkVlan": "3600",
+              "vrfLiteIpv6SubnetRange": "fd00::a33:0/112",
+              "vrfLiteIpv6SubnetTargetMask": 126,
+              "vrfLiteSubnetRange": "10.33.0.0/16",
+              "vrfLiteSubnetTargetMask": 30
+            },
+            "name": "rr1",
+            "securityDomain": "all",
+            "telemetryCollection": false
+          }
+    response:
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 404 Response (routed)
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "category": "fabric",
+            "licenseTier": "essentials",
+            "location": {
+              "latitude": 37.33939,
+              "longitude": -121.89496
+            },
+            "management": {
+              "aaa": false,
+              "advancedSshOption": false,
+              "aimlQos": false,
+              "allowLeafSameAs": false,
+              "anycastLoopbackId": 10,
+              "assignIpv4ToLoopback0": false,
+              "autoGenerateMulticastGroupAddress": false,
+              "bfd": false,
+              "bfdAuthentication": false,
+              "bfdAuthenticationKeyId": 100,
+              "bfdIbgp": false,
+              "bgpAllowAsInNum": 1,
+              "bgpAsMode": "multiAS",
+              "bgpAsn": "33",
+              "bgpAuthentication": false,
+              "bgpLoopbackId": 0,
+              "bgpLoopbackIpRange": "10.2.0.0/22",
+              "bgpMaxPath": 4,
+              "bgpUnderlayFailureProtect": false,
+              "cdp": false,
+              "coppPolicy": "strict",
+              "day0Bootstrap": false,
+              "defaultQueuingPolicy": false,
+              "disableRouteMapTag": false,
+              "fabricMtu": 9216,
+              "fabricVpcDomainId": false,
+              "fabricVpcQos": false,
+              "fabricVpcQosPolicyName": "spine_qos_for_fabric_vpc_peering",
+              "firstHopRedundancyProtocol": "hsrp",
+              "greenfieldDebugFlag": "disable",
+              "heartbeatInterval": 190,
+              "interfaceStatisticsLoadInterval": 10,
+              "intraFabricSubnetRange": "10.4.0.0/16",
+              "l2HostInterfaceMtu": 9216,
+              "localDhcpServer": false,
+              "macsec": false,
+              "macsecReportTimer": 5,
+              "managementIpv4Prefix": 24,
+              "managementIpv6Prefix": 64,
+              "netflowSettings": {
+                "netflow": false
+              },
+              "networkVlanRange": "2300-2999",
+              "nxapi": true,
+              "nxapiHttp": true,
+              "nxapiHttpPort": 80,
+              "nxapiHttpsPort": 443,
+              "performanceMonitoring": false,
+              "powerRedundancyMode": "redundant",
+              "ptp": false,
+              "ptpDomainId": 0,
+              "ptpLoopbackId": 0,
+              "realTimeInterfaceStatisticsCollection": false,
+              "routeMapTag": 12345,
+              "sharedVpcDomainId": 1,
+              "snmpTrap": true,
+              "staticUnderlayIpAllocation": false,
+              "strictConfigComplianceMode": false,
+              "subInterfaceDot1qRange": "2-511",
+              "targetSubnetMask": 30,
+              "tcamAllocation": true,
+              "type": "routed",
+              "underlayIpv6": false,
+              "vpcAutoRecoveryTimer": 360,
+              "vpcDelayRestoreTimer": 150,
+              "vpcDomainIdRange": "1-1000",
+              "vpcIpv6NeighborDiscoverySync": true,
+              "vpcLayer3PeerRouter": true,
+              "vpcPeerKeepAliveOption": "management",
+              "vpcPeerLinkEnableNativeVlan": false,
+              "vpcPeerLinkPortChannelId": "500",
+              "vpcPeerLinkVlan": "3600",
+              "vrfLiteIpv6SubnetRange": "fd00::a33:0/112",
+              "vrfLiteIpv6SubnetTargetMask": 126,
+              "vrfLiteSubnetRange": "10.33.0.0/16",
+              "vrfLiteSubnetTargetMask": 30
+            },
+            "name": "rr1",
+            "securityDomain": "all",
+            "telemetryCollection": false
+          }
+    response:
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 405 Response (routed)
+    description: Method Not Allowed
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "category": "fabric",
+            "licenseTier": "essentials",
+            "location": {
+              "latitude": 37.33939,
+              "longitude": -121.89496
+            },
+            "management": {
+              "aaa": false,
+              "advancedSshOption": false,
+              "aimlQos": false,
+              "allowLeafSameAs": false,
+              "anycastLoopbackId": 10,
+              "assignIpv4ToLoopback0": false,
+              "autoGenerateMulticastGroupAddress": false,
+              "bfd": false,
+              "bfdAuthentication": false,
+              "bfdAuthenticationKeyId": 100,
+              "bfdIbgp": false,
+              "bgpAllowAsInNum": 1,
+              "bgpAsMode": "multiAS",
+              "bgpAsn": "33",
+              "bgpAuthentication": false,
+              "bgpLoopbackId": 0,
+              "bgpLoopbackIpRange": "10.2.0.0/22",
+              "bgpMaxPath": 4,
+              "bgpUnderlayFailureProtect": false,
+              "cdp": false,
+              "coppPolicy": "strict",
+              "day0Bootstrap": false,
+              "defaultQueuingPolicy": false,
+              "disableRouteMapTag": false,
+              "fabricMtu": 9216,
+              "fabricVpcDomainId": false,
+              "fabricVpcQos": false,
+              "fabricVpcQosPolicyName": "spine_qos_for_fabric_vpc_peering",
+              "firstHopRedundancyProtocol": "hsrp",
+              "greenfieldDebugFlag": "disable",
+              "heartbeatInterval": 190,
+              "interfaceStatisticsLoadInterval": 10,
+              "intraFabricSubnetRange": "10.4.0.0/16",
+              "l2HostInterfaceMtu": 9216,
+              "localDhcpServer": false,
+              "macsec": false,
+              "macsecReportTimer": 5,
+              "managementIpv4Prefix": 24,
+              "managementIpv6Prefix": 64,
+              "netflowSettings": {
+                "netflow": false
+              },
+              "networkVlanRange": "2300-2999",
+              "nxapi": true,
+              "nxapiHttp": true,
+              "nxapiHttpPort": 80,
+              "nxapiHttpsPort": 443,
+              "performanceMonitoring": false,
+              "powerRedundancyMode": "redundant",
+              "ptp": false,
+              "ptpDomainId": 0,
+              "ptpLoopbackId": 0,
+              "realTimeInterfaceStatisticsCollection": false,
+              "routeMapTag": 12345,
+              "sharedVpcDomainId": 1,
+              "snmpTrap": true,
+              "staticUnderlayIpAllocation": false,
+              "strictConfigComplianceMode": false,
+              "subInterfaceDot1qRange": "2-511",
+              "targetSubnetMask": 30,
+              "tcamAllocation": true,
+              "type": "routed",
+              "underlayIpv6": false,
+              "vpcAutoRecoveryTimer": 360,
+              "vpcDelayRestoreTimer": 150,
+              "vpcDomainIdRange": "1-1000",
+              "vpcIpv6NeighborDiscoverySync": true,
+              "vpcLayer3PeerRouter": true,
+              "vpcPeerKeepAliveOption": "management",
+              "vpcPeerLinkEnableNativeVlan": false,
+              "vpcPeerLinkPortChannelId": "500",
+              "vpcPeerLinkVlan": "3600",
+              "vrfLiteIpv6SubnetRange": "fd00::a33:0/112",
+              "vrfLiteIpv6SubnetTargetMask": 126,
+              "vrfLiteSubnetRange": "10.33.0.0/16",
+              "vrfLiteSubnetTargetMask": 30
+            },
+            "name": "rr1",
+            "securityDomain": "all",
+            "telemetryCollection": false
+          }
+    response:
+      statusText: Method Not Allowed
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Method Not Allowed",
+            "description": "The server understands the request method but it's not supported for the specific resource.",
+            "code": 405
+          }
+  - name: 409 Response (routed)
+    description: Conflict
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "category": "fabric",
+            "licenseTier": "essentials",
+            "location": {
+              "latitude": 37.33939,
+              "longitude": -121.89496
+            },
+            "management": {
+              "aaa": false,
+              "advancedSshOption": false,
+              "aimlQos": false,
+              "allowLeafSameAs": false,
+              "anycastLoopbackId": 10,
+              "assignIpv4ToLoopback0": false,
+              "autoGenerateMulticastGroupAddress": false,
+              "bfd": false,
+              "bfdAuthentication": false,
+              "bfdAuthenticationKeyId": 100,
+              "bfdIbgp": false,
+              "bgpAllowAsInNum": 1,
+              "bgpAsMode": "multiAS",
+              "bgpAsn": "33",
+              "bgpAuthentication": false,
+              "bgpLoopbackId": 0,
+              "bgpLoopbackIpRange": "10.2.0.0/22",
+              "bgpMaxPath": 4,
+              "bgpUnderlayFailureProtect": false,
+              "cdp": false,
+              "coppPolicy": "strict",
+              "day0Bootstrap": false,
+              "defaultQueuingPolicy": false,
+              "disableRouteMapTag": false,
+              "fabricMtu": 9216,
+              "fabricVpcDomainId": false,
+              "fabricVpcQos": false,
+              "fabricVpcQosPolicyName": "spine_qos_for_fabric_vpc_peering",
+              "firstHopRedundancyProtocol": "hsrp",
+              "greenfieldDebugFlag": "disable",
+              "heartbeatInterval": 190,
+              "interfaceStatisticsLoadInterval": 10,
+              "intraFabricSubnetRange": "10.4.0.0/16",
+              "l2HostInterfaceMtu": 9216,
+              "localDhcpServer": false,
+              "macsec": false,
+              "macsecReportTimer": 5,
+              "managementIpv4Prefix": 24,
+              "managementIpv6Prefix": 64,
+              "netflowSettings": {
+                "netflow": false
+              },
+              "networkVlanRange": "2300-2999",
+              "nxapi": true,
+              "nxapiHttp": true,
+              "nxapiHttpPort": 80,
+              "nxapiHttpsPort": 443,
+              "performanceMonitoring": false,
+              "powerRedundancyMode": "redundant",
+              "ptp": false,
+              "ptpDomainId": 0,
+              "ptpLoopbackId": 0,
+              "realTimeInterfaceStatisticsCollection": false,
+              "routeMapTag": 12345,
+              "sharedVpcDomainId": 1,
+              "snmpTrap": true,
+              "staticUnderlayIpAllocation": false,
+              "strictConfigComplianceMode": false,
+              "subInterfaceDot1qRange": "2-511",
+              "targetSubnetMask": 30,
+              "tcamAllocation": true,
+              "type": "routed",
+              "underlayIpv6": false,
+              "vpcAutoRecoveryTimer": 360,
+              "vpcDelayRestoreTimer": 150,
+              "vpcDomainIdRange": "1-1000",
+              "vpcIpv6NeighborDiscoverySync": true,
+              "vpcLayer3PeerRouter": true,
+              "vpcPeerKeepAliveOption": "management",
+              "vpcPeerLinkEnableNativeVlan": false,
+              "vpcPeerLinkPortChannelId": "500",
+              "vpcPeerLinkVlan": "3600",
+              "vrfLiteIpv6SubnetRange": "fd00::a33:0/112",
+              "vrfLiteIpv6SubnetTargetMask": 126,
+              "vrfLiteSubnetRange": "10.33.0.0/16",
+              "vrfLiteSubnetTargetMask": 30
+            },
+            "name": "rr1",
+            "securityDomain": "all",
+            "telemetryCollection": false
+          }
+    response:
+      statusText: Conflict
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Conflict",
+            "description": "The request could not be completed due to a conflict with the current state of the resource.",
+            "code": 409
+          }
+  - name: 412 Response (routed)
+    description: Precondition Failed
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "category": "fabric",
+            "licenseTier": "essentials",
+            "location": {
+              "latitude": 37.33939,
+              "longitude": -121.89496
+            },
+            "management": {
+              "aaa": false,
+              "advancedSshOption": false,
+              "aimlQos": false,
+              "allowLeafSameAs": false,
+              "anycastLoopbackId": 10,
+              "assignIpv4ToLoopback0": false,
+              "autoGenerateMulticastGroupAddress": false,
+              "bfd": false,
+              "bfdAuthentication": false,
+              "bfdAuthenticationKeyId": 100,
+              "bfdIbgp": false,
+              "bgpAllowAsInNum": 1,
+              "bgpAsMode": "multiAS",
+              "bgpAsn": "33",
+              "bgpAuthentication": false,
+              "bgpLoopbackId": 0,
+              "bgpLoopbackIpRange": "10.2.0.0/22",
+              "bgpMaxPath": 4,
+              "bgpUnderlayFailureProtect": false,
+              "cdp": false,
+              "coppPolicy": "strict",
+              "day0Bootstrap": false,
+              "defaultQueuingPolicy": false,
+              "disableRouteMapTag": false,
+              "fabricMtu": 9216,
+              "fabricVpcDomainId": false,
+              "fabricVpcQos": false,
+              "fabricVpcQosPolicyName": "spine_qos_for_fabric_vpc_peering",
+              "firstHopRedundancyProtocol": "hsrp",
+              "greenfieldDebugFlag": "disable",
+              "heartbeatInterval": 190,
+              "interfaceStatisticsLoadInterval": 10,
+              "intraFabricSubnetRange": "10.4.0.0/16",
+              "l2HostInterfaceMtu": 9216,
+              "localDhcpServer": false,
+              "macsec": false,
+              "macsecReportTimer": 5,
+              "managementIpv4Prefix": 24,
+              "managementIpv6Prefix": 64,
+              "netflowSettings": {
+                "netflow": false
+              },
+              "networkVlanRange": "2300-2999",
+              "nxapi": true,
+              "nxapiHttp": true,
+              "nxapiHttpPort": 80,
+              "nxapiHttpsPort": 443,
+              "performanceMonitoring": false,
+              "powerRedundancyMode": "redundant",
+              "ptp": false,
+              "ptpDomainId": 0,
+              "ptpLoopbackId": 0,
+              "realTimeInterfaceStatisticsCollection": false,
+              "routeMapTag": 12345,
+              "sharedVpcDomainId": 1,
+              "snmpTrap": true,
+              "staticUnderlayIpAllocation": false,
+              "strictConfigComplianceMode": false,
+              "subInterfaceDot1qRange": "2-511",
+              "targetSubnetMask": 30,
+              "tcamAllocation": true,
+              "type": "routed",
+              "underlayIpv6": false,
+              "vpcAutoRecoveryTimer": 360,
+              "vpcDelayRestoreTimer": 150,
+              "vpcDomainIdRange": "1-1000",
+              "vpcIpv6NeighborDiscoverySync": true,
+              "vpcLayer3PeerRouter": true,
+              "vpcPeerKeepAliveOption": "management",
+              "vpcPeerLinkEnableNativeVlan": false,
+              "vpcPeerLinkPortChannelId": "500",
+              "vpcPeerLinkVlan": "3600",
+              "vrfLiteIpv6SubnetRange": "fd00::a33:0/112",
+              "vrfLiteIpv6SubnetTargetMask": 126,
+              "vrfLiteSubnetRange": "10.33.0.0/16",
+              "vrfLiteSubnetTargetMask": 30
+            },
+            "name": "rr1",
+            "securityDomain": "all",
+            "telemetryCollection": false
+          }
+    response:
+      statusText: Precondition Failed
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Precondition Failed",
+            "description": "The client has indicated preconditions in its headers that the server does not meet.",
+            "code": 412
+          }
+  - name: 500 Response (routed)
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "category": "fabric",
+            "licenseTier": "essentials",
+            "location": {
+              "latitude": 37.33939,
+              "longitude": -121.89496
+            },
+            "management": {
+              "aaa": false,
+              "advancedSshOption": false,
+              "aimlQos": false,
+              "allowLeafSameAs": false,
+              "anycastLoopbackId": 10,
+              "assignIpv4ToLoopback0": false,
+              "autoGenerateMulticastGroupAddress": false,
+              "bfd": false,
+              "bfdAuthentication": false,
+              "bfdAuthenticationKeyId": 100,
+              "bfdIbgp": false,
+              "bgpAllowAsInNum": 1,
+              "bgpAsMode": "multiAS",
+              "bgpAsn": "33",
+              "bgpAuthentication": false,
+              "bgpLoopbackId": 0,
+              "bgpLoopbackIpRange": "10.2.0.0/22",
+              "bgpMaxPath": 4,
+              "bgpUnderlayFailureProtect": false,
+              "cdp": false,
+              "coppPolicy": "strict",
+              "day0Bootstrap": false,
+              "defaultQueuingPolicy": false,
+              "disableRouteMapTag": false,
+              "fabricMtu": 9216,
+              "fabricVpcDomainId": false,
+              "fabricVpcQos": false,
+              "fabricVpcQosPolicyName": "spine_qos_for_fabric_vpc_peering",
+              "firstHopRedundancyProtocol": "hsrp",
+              "greenfieldDebugFlag": "disable",
+              "heartbeatInterval": 190,
+              "interfaceStatisticsLoadInterval": 10,
+              "intraFabricSubnetRange": "10.4.0.0/16",
+              "l2HostInterfaceMtu": 9216,
+              "localDhcpServer": false,
+              "macsec": false,
+              "macsecReportTimer": 5,
+              "managementIpv4Prefix": 24,
+              "managementIpv6Prefix": 64,
+              "netflowSettings": {
+                "netflow": false
+              },
+              "networkVlanRange": "2300-2999",
+              "nxapi": true,
+              "nxapiHttp": true,
+              "nxapiHttpPort": 80,
+              "nxapiHttpsPort": 443,
+              "performanceMonitoring": false,
+              "powerRedundancyMode": "redundant",
+              "ptp": false,
+              "ptpDomainId": 0,
+              "ptpLoopbackId": 0,
+              "realTimeInterfaceStatisticsCollection": false,
+              "routeMapTag": 12345,
+              "sharedVpcDomainId": 1,
+              "snmpTrap": true,
+              "staticUnderlayIpAllocation": false,
+              "strictConfigComplianceMode": false,
+              "subInterfaceDot1qRange": "2-511",
+              "targetSubnetMask": 30,
+              "tcamAllocation": true,
+              "type": "routed",
+              "underlayIpv6": false,
+              "vpcAutoRecoveryTimer": 360,
+              "vpcDelayRestoreTimer": 150,
+              "vpcDomainIdRange": "1-1000",
+              "vpcIpv6NeighborDiscoverySync": true,
+              "vpcLayer3PeerRouter": true,
+              "vpcPeerKeepAliveOption": "management",
+              "vpcPeerLinkEnableNativeVlan": false,
+              "vpcPeerLinkPortChannelId": "500",
+              "vpcPeerLinkVlan": "3600",
+              "vrfLiteIpv6SubnetRange": "fd00::a33:0/112",
+              "vrfLiteIpv6SubnetTargetMask": 126,
+              "vrfLiteSubnetRange": "10.33.0.0/16",
+              "vrfLiteSubnetTargetMask": 30
+            },
+            "name": "rr1",
+            "securityDomain": "all",
+            "telemetryCollection": false
+          }
+    response:
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }

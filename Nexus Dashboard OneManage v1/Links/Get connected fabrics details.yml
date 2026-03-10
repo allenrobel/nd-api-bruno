@@ -1,0 +1,606 @@
+info:
+  name: Get connected fabrics details
+  type: http
+  seq: 2
+  tags:
+    - Links
+
+http:
+  method: GET
+  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/analyze/interFabrics/detail"
+  params:
+    - name: fabricName
+      value: ""
+      type: query
+      description: Name of the fabric
+      disabled: true
+    - name: filter
+      value: ""
+      type: query
+      description: Lucene format filter - Filter the response based on this filter field
+      disabled: true
+    - name: max
+      value: ""
+      type: query
+      description: Number of records to return
+      disabled: true
+    - name: offset
+      value: ""
+      type: query
+      description: Number of records to skip for pagination
+      disabled: true
+    - name: sort
+      value: ""
+      type: query
+      description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+      disabled: true
+  auth:
+    type: oauth2
+    flow: implicit
+    authorizationUrl: https://example.com/login
+    callbackUrl: "{{oauth_callback_url}}"
+    credentials:
+      clientId: "{{oauth_client_id}}"
+    scope: observer fabric-admin support-engineer super-admin approver designer
+    state: "{{oauth_state}}"
+    tokenConfig:
+      placement:
+        header: Bearer
+    settings:
+      autoFetchToken: false
+      autoRefreshToken: true
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: OK
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/analyze/interFabrics/detail"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "entries": [
+              {
+                "dstFabricGroup": "default",
+                "dstFabricName": "mas2-site1",
+                "dstFabricType": "aci",
+                "isDstInterFabricCapable": true,
+                "isSrcInterFabricCapable": true,
+                "overlayBgpPeer": {
+                  "enabled": 1,
+                  "entries": [
+                    {
+                      "dstInterfaceName": "loopback20",
+                      "dstIp": "12.1.1.1",
+                      "dstNodeName": "mas2-spine1",
+                      "dstNodeSerialNumber": "FDO23111UBL",
+                      "operStatus": "up",
+                      "routingProtocol": "bgp",
+                      "srcInterfaceName": "loopback10",
+                      "srcIp": "11.1.1.1",
+                      "srcNodeName": "mas1-spine1",
+                      "srcNodeSerialNumber": "FDO21111UBL"
+                    }
+                  ],
+                  "stats": {
+                    "routingProtocolStats": [
+                      {
+                        "count": 1,
+                        "value": "bgp"
+                      },
+                      {
+                        "count": 0,
+                        "value": "ospf"
+                      }
+                    ],
+                    "routingProtocolStatusStats": [
+                      {
+                        "count": 1,
+                        "value": "up"
+                      },
+                      {
+                        "count": 0,
+                        "value": "down"
+                      }
+                    ]
+                  },
+                  "total": 1
+                },
+                "overlayTunnel": {
+                  "enabled": 1,
+                  "entries": [
+                    {
+                      "adminStatus": "up",
+                      "anomalyLevel": "healthy",
+                      "dstInterfaceName": "lo4",
+                      "dstIp": "20.1.1.1",
+                      "dstNodeName": "mas1-spine2",
+                      "dstNodeSerialNumber": "FDO22111UBL",
+                      "interfaceName": "tunnel10",
+                      "operStatus": "up",
+                      "portSpeed": "auto",
+                      "srcInterfaceName": "lo3",
+                      "srcIp": "12.1.1.1",
+                      "srcNodeName": "mas1-spine1",
+                      "srcNodeSerialNumber": "FDO21111UBL",
+                      "tunnelType": "ivxlan"
+                    }
+                  ],
+                  "stats": {
+                    "adminStatusStats": [
+                      {
+                        "count": 1,
+                        "value": "up"
+                      }
+                    ],
+                    "operStatusStats": [
+                      {
+                        "count": 1,
+                        "value": "up"
+                      }
+                    ],
+                    "tunnelTypeStats": [
+                      {
+                        "count": 1,
+                        "value": "ivxlan"
+                      }
+                    ]
+                  },
+                  "total": 1
+                },
+                "physicalLinks": {
+                  "enabled": 0,
+                  "entries": [],
+                  "stats": {},
+                  "total": 0
+                },
+                "reachabilityProtocol": {
+                  "enabled": 0,
+                  "entries": [],
+                  "stats": {},
+                  "total": 0
+                },
+                "srcFabricGroup": "default",
+                "srcFabricName": "mas1-site1",
+                "srcFabricType": "aci",
+                "status": "connected"
+              },
+              {
+                "dstFabricGroup": "default",
+                "dstFabricName": "ms1-external-fabric",
+                "dstFabricType": "vxlanIbgp",
+                "isDstInterFabricCapable": true,
+                "isSrcInterFabricCapable": true,
+                "overlayBgpPeer": {
+                  "enabled": 0,
+                  "entries": [],
+                  "stats": {},
+                  "total": 0
+                },
+                "overlayTunnel": {
+                  "enabled": 0,
+                  "entries": [],
+                  "stats": {},
+                  "total": 0
+                },
+                "physicalLinks": {
+                  "enabled": 1,
+                  "entries": [
+                    {
+                      "adminStatus": "up",
+                      "dstInterfaceName": "ethernet1/20",
+                      "dstNodeName": "ms-ext1",
+                      "dstNodeSerialNumber": "FDO28111UBL",
+                      "operStatus": "up",
+                      "srcInterfaceName": "ethernet1/20",
+                      "srcNodeName": "mas1-spine1",
+                      "srcNodeSerialNumber": "FDO21111UBL"
+                    }
+                  ],
+                  "stats": {
+                    "adminStatusStats": [
+                      {
+                        "count": 1,
+                        "value": "up"
+                      },
+                      {
+                        "count": 0,
+                        "value": "down"
+                      }
+                    ],
+                    "operStatusStats": [
+                      {
+                        "count": 1,
+                        "value": "up"
+                      },
+                      {
+                        "count": 0,
+                        "value": "down"
+                      }
+                    ]
+                  },
+                  "total": 1
+                },
+                "reachabilityProtocol": {
+                  "enabled": 1,
+                  "entries": [
+                    {
+                      "dstInterfaceName": "ethernet1/20",
+                      "dstIp": "12.1.1.1",
+                      "dstNodeName": "ms-ext1",
+                      "dstNodeSerialNumber": "FDO28111UBL",
+                      "operStatus": "up",
+                      "routingProtocol": "ospf",
+                      "srcInterfaceName": "ethernet1/20",
+                      "srcIp": "11.1.1.1",
+                      "srcNodeName": "mas1-spine1",
+                      "srcNodeSerialNumber": "FDO21111UBL"
+                    }
+                  ],
+                  "stats": {
+                    "routingProtocolStats": [
+                      {
+                        "count": 1,
+                        "value": "bgp"
+                      },
+                      {
+                        "count": 0,
+                        "value": "ospf"
+                      }
+                    ],
+                    "routingProtocolStatusStats": [
+                      {
+                        "count": 1,
+                        "value": "up"
+                      },
+                      {
+                        "count": 0,
+                        "value": "down"
+                      }
+                    ]
+                  },
+                  "total": 1
+                },
+                "srcFabricGroup": "default",
+                "srcFabricName": "mas1-site1",
+                "srcFabricType": "aci",
+                "status": "connected"
+              }
+            ],
+            "meta": {
+              "counts": {
+                "remaining": 0,
+                "total": 7
+              }
+            },
+            "stats": {
+              "fabricTypeStats": [
+                {
+                  "count": 1,
+                  "value": "aci"
+                },
+                {
+                  "count": 1,
+                  "value": "vxlanIbgp"
+                }
+              ],
+              "overlayBgpPeerStats": [
+                {
+                  "count": 1,
+                  "value": "up"
+                },
+                {
+                  "count": 0,
+                  "value": "down"
+                }
+              ],
+              "overlayTunnelStats": [
+                {
+                  "count": 0,
+                  "value": "up"
+                },
+                {
+                  "count": 0,
+                  "value": "down"
+                }
+              ],
+              "physicalLinksStats": [
+                {
+                  "count": 1,
+                  "value": "up"
+                },
+                {
+                  "count": 1,
+                  "value": "down"
+                }
+              ],
+              "reachabilityProtocolStats": [
+                {
+                  "count": 1,
+                  "value": "up"
+                },
+                {
+                  "count": 0,
+                  "value": "down"
+                }
+              ],
+              "statusStats": [
+                {
+                  "count": 2,
+                  "value": "connected"
+                },
+                {
+                  "count": 0,
+                  "value": "degraded"
+                },
+                {
+                  "count": 0,
+                  "value": "failed"
+                }
+              ]
+            }
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/analyze/interFabrics/detail"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          disabled: true
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/analyze/interFabrics/detail"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          disabled: true
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 403 Response
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/analyze/interFabrics/detail"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          disabled: true
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 404 Response
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/analyze/interFabrics/detail"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          disabled: true
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 500 Response
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/analyze/interFabrics/detail"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          disabled: true
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }
