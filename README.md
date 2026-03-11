@@ -42,7 +42,9 @@ To import a Nexus Dashboard schema, do the following.  After importing, we'll ru
 
 ![Choose files](assets/images/03_choose_files.png)
 
-#### 2.4 
+#### 2.4 Open the file(s)
+
+![Open files](assets/images/04_open_file.png)
 
 ### 3. Configure the Global environment
 
