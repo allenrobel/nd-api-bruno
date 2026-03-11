@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/integrations/appdynamics/details"
+  url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/integrations/appdynamics/details"
   params:
     - name: object
       value: ""
@@ -81,7 +81,7 @@ examples:
   - name: 200 Response
     description: OK
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/integrations/appdynamics/details"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/integrations/appdynamics/details"
       method: GET
       params:
         - name: object
@@ -143,7 +143,7 @@ examples:
   - name: 400 Response
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/integrations/appdynamics/details"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/integrations/appdynamics/details"
       method: GET
       params:
         - name: object
@@ -210,7 +210,7 @@ examples:
   - name: 401 Response
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/integrations/appdynamics/details"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/integrations/appdynamics/details"
       method: GET
       params:
         - name: object
@@ -277,7 +277,7 @@ examples:
   - name: 403 Response
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/integrations/appdynamics/details"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/integrations/appdynamics/details"
       method: GET
       params:
         - name: object
@@ -344,7 +344,7 @@ examples:
   - name: 500 Response
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/integrations/appdynamics/details"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/integrations/appdynamics/details"
       method: GET
       params:
         - name: object

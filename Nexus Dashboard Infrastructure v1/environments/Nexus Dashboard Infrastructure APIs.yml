@@ -1,4 +1,1 @@
 name: Nexus Dashboard Infrastructure APIs
-variables:
-  - name: basePath
-    value: /api/v1/infra

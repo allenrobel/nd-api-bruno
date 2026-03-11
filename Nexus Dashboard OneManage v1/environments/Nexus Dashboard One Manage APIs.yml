@@ -1,4 +1,1 @@
 name: Nexus Dashboard One Manage APIs
-variables:
-  - name: basePath
-    value: /api/v1/oneManage

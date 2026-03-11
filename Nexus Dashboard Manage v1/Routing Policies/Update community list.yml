@@ -5,7 +5,7 @@ info:
 
 http:
   method: PUT
-  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/communityLists/:communityListName"
+  url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/communityLists/:communityListName"
   params:
     - name: clusterName
       value: ""
@@ -49,7 +49,7 @@ examples:
   - name: 204 Response (TenantSalesStandard)
     description: No Content
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/communityLists/:communityListName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/communityLists/:communityListName"
       method: PUT
       params:
         - name: clusterName
@@ -98,7 +98,7 @@ examples:
   - name: 204 Response (expanded)
     description: No Content
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/communityLists/:communityListName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/communityLists/:communityListName"
       method: PUT
       params:
         - name: clusterName
@@ -142,7 +142,7 @@ examples:
   - name: 204 Response (standard)
     description: No Content
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/communityLists/:communityListName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/communityLists/:communityListName"
       method: PUT
       params:
         - name: clusterName
@@ -190,7 +190,7 @@ examples:
   - name: 400 Response (TenantSalesStandard)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/communityLists/:communityListName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/communityLists/:communityListName"
       method: PUT
       params:
         - name: clusterName
@@ -247,7 +247,7 @@ examples:
   - name: 400 Response (expanded)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/communityLists/:communityListName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/communityLists/:communityListName"
       method: PUT
       params:
         - name: clusterName
@@ -299,7 +299,7 @@ examples:
   - name: 400 Response (standard)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/communityLists/:communityListName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/communityLists/:communityListName"
       method: PUT
       params:
         - name: clusterName
@@ -355,7 +355,7 @@ examples:
   - name: 401 Response (TenantSalesStandard)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/communityLists/:communityListName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/communityLists/:communityListName"
       method: PUT
       params:
         - name: clusterName
@@ -412,7 +412,7 @@ examples:
   - name: 401 Response (expanded)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/communityLists/:communityListName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/communityLists/:communityListName"
       method: PUT
       params:
         - name: clusterName
@@ -464,7 +464,7 @@ examples:
   - name: 401 Response (standard)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/communityLists/:communityListName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/communityLists/:communityListName"
       method: PUT
       params:
         - name: clusterName
@@ -520,7 +520,7 @@ examples:
   - name: 403 Response (TenantSalesStandard)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/communityLists/:communityListName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/communityLists/:communityListName"
       method: PUT
       params:
         - name: clusterName
@@ -577,7 +577,7 @@ examples:
   - name: 403 Response (expanded)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/communityLists/:communityListName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/communityLists/:communityListName"
       method: PUT
       params:
         - name: clusterName
@@ -629,7 +629,7 @@ examples:
   - name: 403 Response (standard)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/communityLists/:communityListName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/communityLists/:communityListName"
       method: PUT
       params:
         - name: clusterName
@@ -685,7 +685,7 @@ examples:
   - name: 404 Response (TenantSalesStandard)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/communityLists/:communityListName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/communityLists/:communityListName"
       method: PUT
       params:
         - name: clusterName
@@ -742,7 +742,7 @@ examples:
   - name: 404 Response (expanded)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/communityLists/:communityListName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/communityLists/:communityListName"
       method: PUT
       params:
         - name: clusterName
@@ -794,7 +794,7 @@ examples:
   - name: 404 Response (standard)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/communityLists/:communityListName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/communityLists/:communityListName"
       method: PUT
       params:
         - name: clusterName
@@ -850,7 +850,7 @@ examples:
   - name: 500 Response (TenantSalesStandard)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/communityLists/:communityListName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/communityLists/:communityListName"
       method: PUT
       params:
         - name: clusterName
@@ -907,7 +907,7 @@ examples:
   - name: 500 Response (expanded)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/communityLists/:communityListName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/communityLists/:communityListName"
       method: PUT
       params:
         - name: clusterName
@@ -959,7 +959,7 @@ examples:
   - name: 500 Response (standard)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/communityLists/:communityListName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/communityLists/:communityListName"
       method: PUT
       params:
         - name: clusterName

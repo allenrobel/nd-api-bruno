@@ -7,7 +7,7 @@ info:
 
 http:
   method: POST
-  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/vrfActions/deploy"
+  url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/vrfActions/deploy"
   params:
     - name: fabricName
       value: ""
@@ -49,7 +49,7 @@ settings:
 examples:
   - name: DeploymentInitiated (Deploy configuration changes of a single VRF to a single switch)
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/vrfActions/deploy"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/vrfActions/deploy"
       method: POST
       params:
         - name: fabricName
@@ -81,7 +81,7 @@ examples:
           }
   - name: DeploymentInitiated (Deploy configuration changes of multiple VRFs to multiple switches)
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/vrfActions/deploy"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/vrfActions/deploy"
       method: POST
       params:
         - name: fabricName
@@ -115,7 +115,7 @@ examples:
           }
   - name: NoPendingStatus (Deploy configuration changes of a single VRF to a single switch)
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/vrfActions/deploy"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/vrfActions/deploy"
       method: POST
       params:
         - name: fabricName
@@ -147,7 +147,7 @@ examples:
           }
   - name: NoPendingStatus (Deploy configuration changes of multiple VRFs to multiple switches)
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/vrfActions/deploy"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/vrfActions/deploy"
       method: POST
       params:
         - name: fabricName
@@ -182,7 +182,7 @@ examples:
   - name: 400 Response (Deploy configuration changes of a single VRF to a single switch)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/vrfActions/deploy"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/vrfActions/deploy"
       method: POST
       params:
         - name: fabricName
@@ -217,7 +217,7 @@ examples:
   - name: 400 Response (Deploy configuration changes of multiple VRFs to multiple switches)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/vrfActions/deploy"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/vrfActions/deploy"
       method: POST
       params:
         - name: fabricName
@@ -254,7 +254,7 @@ examples:
   - name: 401 Response (Deploy configuration changes of a single VRF to a single switch)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/vrfActions/deploy"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/vrfActions/deploy"
       method: POST
       params:
         - name: fabricName
@@ -289,7 +289,7 @@ examples:
   - name: 401 Response (Deploy configuration changes of multiple VRFs to multiple switches)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/vrfActions/deploy"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/vrfActions/deploy"
       method: POST
       params:
         - name: fabricName
@@ -326,7 +326,7 @@ examples:
   - name: 403 Response (Deploy configuration changes of a single VRF to a single switch)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/vrfActions/deploy"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/vrfActions/deploy"
       method: POST
       params:
         - name: fabricName
@@ -361,7 +361,7 @@ examples:
   - name: 403 Response (Deploy configuration changes of multiple VRFs to multiple switches)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/vrfActions/deploy"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/vrfActions/deploy"
       method: POST
       params:
         - name: fabricName
@@ -398,7 +398,7 @@ examples:
   - name: 404 Response (Deploy configuration changes of a single VRF to a single switch)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/vrfActions/deploy"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/vrfActions/deploy"
       method: POST
       params:
         - name: fabricName
@@ -433,7 +433,7 @@ examples:
   - name: 404 Response (Deploy configuration changes of multiple VRFs to multiple switches)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/vrfActions/deploy"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/vrfActions/deploy"
       method: POST
       params:
         - name: fabricName
@@ -470,7 +470,7 @@ examples:
   - name: 500 Response (Deploy configuration changes of a single VRF to a single switch)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/vrfActions/deploy"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/vrfActions/deploy"
       method: POST
       params:
         - name: fabricName
@@ -505,7 +505,7 @@ examples:
   - name: 500 Response (Deploy configuration changes of multiple VRFs to multiple switches)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/vrfActions/deploy"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/vrfActions/deploy"
       method: POST
       params:
         - name: fabricName

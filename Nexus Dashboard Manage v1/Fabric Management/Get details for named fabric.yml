@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/F1_New"
+  url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/F1_New"
   params:
     - name: clusterName
       value: ""
@@ -37,7 +37,7 @@ settings:
 examples:
   - name: classicFabricGroup
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName"
       method: GET
       params:
         - name: clusterName
@@ -66,7 +66,7 @@ examples:
           }
   - name: ebgpVxlan
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName"
       method: GET
       params:
         - name: clusterName
@@ -223,7 +223,7 @@ examples:
           }
   - name: ibgpVxlan
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName"
       method: GET
       params:
         - name: clusterName
@@ -260,7 +260,7 @@ examples:
           }
   - name: vxlanFabricGroup
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName"
       method: GET
       params:
         - name: clusterName
@@ -340,7 +340,7 @@ examples:
   - name: 400 Response
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName"
       method: GET
       params:
         - name: clusterName
@@ -368,7 +368,7 @@ examples:
   - name: 401 Response
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName"
       method: GET
       params:
         - name: clusterName
@@ -396,7 +396,7 @@ examples:
   - name: 403 Response
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName"
       method: GET
       params:
         - name: clusterName
@@ -424,7 +424,7 @@ examples:
   - name: 404 Response
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName"
       method: GET
       params:
         - name: clusterName
@@ -452,7 +452,7 @@ examples:
   - name: 500 Response
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName"
       method: GET
       params:
         - name: clusterName

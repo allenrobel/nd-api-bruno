@@ -5,7 +5,7 @@ info:
 
 http:
   method: PUT
-  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/ipv4PrefixLists/:ipv4PrefixListName"
+  url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/ipv4PrefixLists/:ipv4PrefixListName"
   params:
     - name: clusterName
       value: ""
@@ -66,7 +66,7 @@ examples:
   - name: 204 Response (standardPrefixList)
     description: No Content
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/ipv4PrefixLists/:ipv4PrefixListName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/ipv4PrefixLists/:ipv4PrefixListName"
       method: PUT
       params:
         - name: clusterName
@@ -106,7 +106,7 @@ examples:
   - name: 204 Response (tenantSpecificExpandedPrefixList)
     description: No Content
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/ipv4PrefixLists/:ipv4PrefixListName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/ipv4PrefixLists/:ipv4PrefixListName"
       method: PUT
       params:
         - name: clusterName
@@ -147,7 +147,7 @@ examples:
   - name: 400 Response (standardPrefixList)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/ipv4PrefixLists/:ipv4PrefixListName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/ipv4PrefixLists/:ipv4PrefixListName"
       method: PUT
       params:
         - name: clusterName
@@ -195,7 +195,7 @@ examples:
   - name: 400 Response (tenantSpecificExpandedPrefixList)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/ipv4PrefixLists/:ipv4PrefixListName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/ipv4PrefixLists/:ipv4PrefixListName"
       method: PUT
       params:
         - name: clusterName
@@ -244,7 +244,7 @@ examples:
   - name: 401 Response (standardPrefixList)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/ipv4PrefixLists/:ipv4PrefixListName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/ipv4PrefixLists/:ipv4PrefixListName"
       method: PUT
       params:
         - name: clusterName
@@ -292,7 +292,7 @@ examples:
   - name: 401 Response (tenantSpecificExpandedPrefixList)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/ipv4PrefixLists/:ipv4PrefixListName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/ipv4PrefixLists/:ipv4PrefixListName"
       method: PUT
       params:
         - name: clusterName
@@ -341,7 +341,7 @@ examples:
   - name: 403 Response (standardPrefixList)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/ipv4PrefixLists/:ipv4PrefixListName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/ipv4PrefixLists/:ipv4PrefixListName"
       method: PUT
       params:
         - name: clusterName
@@ -389,7 +389,7 @@ examples:
   - name: 403 Response (tenantSpecificExpandedPrefixList)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/ipv4PrefixLists/:ipv4PrefixListName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/ipv4PrefixLists/:ipv4PrefixListName"
       method: PUT
       params:
         - name: clusterName
@@ -438,7 +438,7 @@ examples:
   - name: 404 Response (standardPrefixList)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/ipv4PrefixLists/:ipv4PrefixListName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/ipv4PrefixLists/:ipv4PrefixListName"
       method: PUT
       params:
         - name: clusterName
@@ -486,7 +486,7 @@ examples:
   - name: 404 Response (tenantSpecificExpandedPrefixList)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/ipv4PrefixLists/:ipv4PrefixListName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/ipv4PrefixLists/:ipv4PrefixListName"
       method: PUT
       params:
         - name: clusterName
@@ -535,7 +535,7 @@ examples:
   - name: 500 Response (standardPrefixList)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/ipv4PrefixLists/:ipv4PrefixListName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/ipv4PrefixLists/:ipv4PrefixListName"
       method: PUT
       params:
         - name: clusterName
@@ -583,7 +583,7 @@ examples:
   - name: 500 Response (tenantSpecificExpandedPrefixList)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/ipv4PrefixLists/:ipv4PrefixListName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/ipv4PrefixLists/:ipv4PrefixListName"
       method: PUT
       params:
         - name: clusterName

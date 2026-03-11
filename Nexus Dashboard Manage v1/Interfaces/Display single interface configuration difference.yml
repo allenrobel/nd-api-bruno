@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/interfaces/:interfaceName/diff"
+  url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/interfaces/:interfaceName/diff"
   params:
     - name: clusterName
       value: ""
@@ -50,7 +50,7 @@ examples:
   - name: 200 Response
     description: OK
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/interfaces/:interfaceName/diff"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/interfaces/:interfaceName/diff"
       method: GET
       params:
         - name: clusterName
@@ -101,7 +101,7 @@ examples:
   - name: 400 Response
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/interfaces/:interfaceName/diff"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/interfaces/:interfaceName/diff"
       method: GET
       params:
         - name: clusterName
@@ -137,7 +137,7 @@ examples:
   - name: 401 Response
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/interfaces/:interfaceName/diff"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/interfaces/:interfaceName/diff"
       method: GET
       params:
         - name: clusterName
@@ -173,7 +173,7 @@ examples:
   - name: 404 Response
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/interfaces/:interfaceName/diff"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/interfaces/:interfaceName/diff"
       method: GET
       params:
         - name: clusterName
@@ -209,7 +209,7 @@ examples:
   - name: 500 Response
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/interfaces/:interfaceName/diff"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/interfaces/:interfaceName/diff"
       method: GET
       params:
         - name: clusterName

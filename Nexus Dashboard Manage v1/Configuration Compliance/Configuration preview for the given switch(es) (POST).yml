@@ -5,7 +5,7 @@ info:
 
 http:
   method: POST
-  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/inventory/switchActions/preview"
+  url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/inventory/switchActions/preview"
   params:
     - name: clusterName
       value: ""
@@ -59,7 +59,7 @@ settings:
 examples:
   - name: Get configuration preview for the switch SAL18432P2T
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/inventory/switchActions/preview"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/inventory/switchActions/preview"
       method: POST
       params:
         - name: clusterName
@@ -180,7 +180,7 @@ examples:
           }
   - name: Get configuration preview for a switch with showBrief passed as true
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/inventory/switchActions/preview"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/inventory/switchActions/preview"
       method: POST
       params:
         - name: clusterName
@@ -244,7 +244,7 @@ examples:
   - name: 400 Response (Configuration preview for a single switch)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/inventory/switchActions/preview"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/inventory/switchActions/preview"
       method: POST
       params:
         - name: clusterName
@@ -292,7 +292,7 @@ examples:
   - name: 400 Response (Configuration preview for a switch with showBrief passed as true)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/inventory/switchActions/preview"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/inventory/switchActions/preview"
       method: POST
       params:
         - name: clusterName
@@ -340,7 +340,7 @@ examples:
   - name: 401 Response (Configuration preview for a single switch)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/inventory/switchActions/preview"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/inventory/switchActions/preview"
       method: POST
       params:
         - name: clusterName
@@ -388,7 +388,7 @@ examples:
   - name: 401 Response (Configuration preview for a switch with showBrief passed as true)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/inventory/switchActions/preview"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/inventory/switchActions/preview"
       method: POST
       params:
         - name: clusterName
@@ -436,7 +436,7 @@ examples:
   - name: 403 Response (Configuration preview for a single switch)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/inventory/switchActions/preview"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/inventory/switchActions/preview"
       method: POST
       params:
         - name: clusterName
@@ -484,7 +484,7 @@ examples:
   - name: 403 Response (Configuration preview for a switch with showBrief passed as true)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/inventory/switchActions/preview"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/inventory/switchActions/preview"
       method: POST
       params:
         - name: clusterName
@@ -532,7 +532,7 @@ examples:
   - name: 404 Response (Configuration preview for a single switch)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/inventory/switchActions/preview"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/inventory/switchActions/preview"
       method: POST
       params:
         - name: clusterName
@@ -580,7 +580,7 @@ examples:
   - name: 404 Response (Configuration preview for a switch with showBrief passed as true)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/inventory/switchActions/preview"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/inventory/switchActions/preview"
       method: POST
       params:
         - name: clusterName
@@ -628,7 +628,7 @@ examples:
   - name: 500 Response (Configuration preview for a single switch)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/inventory/switchActions/preview"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/inventory/switchActions/preview"
       method: POST
       params:
         - name: clusterName
@@ -676,7 +676,7 @@ examples:
   - name: 500 Response (Configuration preview for a switch with showBrief passed as true)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/inventory/switchActions/preview"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/inventory/switchActions/preview"
       method: POST
       params:
         - name: clusterName

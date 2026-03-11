@@ -5,7 +5,7 @@ info:
 
 http:
   method: PUT
-  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/routes/:routeName"
+  url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/routes/:routeName"
   params:
     - name: routeName
       value: ""
@@ -49,7 +49,7 @@ settings:
 examples:
   - name: Route with customized template
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/routes/:routeName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/routes/:routeName"
       method: PUT
       params:
         - name: routeName
@@ -95,7 +95,7 @@ examples:
           }
   - name: eBGP dynamic route
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/routes/:routeName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/routes/:routeName"
       method: PUT
       params:
         - name: routeName
@@ -205,7 +205,7 @@ examples:
           }
   - name: Static route
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/routes/:routeName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/routes/:routeName"
       method: PUT
       params:
         - name: routeName
@@ -264,7 +264,7 @@ examples:
   - name: 400 Response (Route with customized template)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/routes/:routeName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/routes/:routeName"
       method: PUT
       params:
         - name: routeName
@@ -305,7 +305,7 @@ examples:
   - name: 400 Response (eBGP dynamic route)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/routes/:routeName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/routes/:routeName"
       method: PUT
       params:
         - name: routeName
@@ -378,7 +378,7 @@ examples:
   - name: 400 Response (Static route)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/routes/:routeName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/routes/:routeName"
       method: PUT
       params:
         - name: routeName
@@ -425,7 +425,7 @@ examples:
   - name: 401 Response (Route with customized template)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/routes/:routeName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/routes/:routeName"
       method: PUT
       params:
         - name: routeName
@@ -466,7 +466,7 @@ examples:
   - name: 401 Response (eBGP dynamic route)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/routes/:routeName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/routes/:routeName"
       method: PUT
       params:
         - name: routeName
@@ -539,7 +539,7 @@ examples:
   - name: 401 Response (Static route)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/routes/:routeName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/routes/:routeName"
       method: PUT
       params:
         - name: routeName
@@ -586,7 +586,7 @@ examples:
   - name: 403 Response (Route with customized template)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/routes/:routeName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/routes/:routeName"
       method: PUT
       params:
         - name: routeName
@@ -627,7 +627,7 @@ examples:
   - name: 403 Response (eBGP dynamic route)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/routes/:routeName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/routes/:routeName"
       method: PUT
       params:
         - name: routeName
@@ -700,7 +700,7 @@ examples:
   - name: 403 Response (Static route)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/routes/:routeName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/routes/:routeName"
       method: PUT
       params:
         - name: routeName
@@ -747,7 +747,7 @@ examples:
   - name: 404 Response (Route with customized template)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/routes/:routeName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/routes/:routeName"
       method: PUT
       params:
         - name: routeName
@@ -788,7 +788,7 @@ examples:
   - name: 404 Response (eBGP dynamic route)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/routes/:routeName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/routes/:routeName"
       method: PUT
       params:
         - name: routeName
@@ -861,7 +861,7 @@ examples:
   - name: 404 Response (Static route)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/routes/:routeName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/routes/:routeName"
       method: PUT
       params:
         - name: routeName
@@ -908,7 +908,7 @@ examples:
   - name: 500 Response (Route with customized template)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/routes/:routeName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/routes/:routeName"
       method: PUT
       params:
         - name: routeName
@@ -949,7 +949,7 @@ examples:
   - name: 500 Response (eBGP dynamic route)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/routes/:routeName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/routes/:routeName"
       method: PUT
       params:
         - name: routeName
@@ -1022,7 +1022,7 @@ examples:
   - name: 500 Response (Static route)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/routes/:routeName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/routes/:routeName"
       method: PUT
       params:
         - name: routeName

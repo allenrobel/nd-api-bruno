@@ -5,7 +5,7 @@ info:
 
 http:
   method: POST
-  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/networkActions/import"
+  url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkActions/import"
   params:
     - name: clusterName
       value: ""
@@ -46,7 +46,7 @@ settings:
 examples:
   - name: Network import response with success and failure (Classic network import)
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/networkActions/import"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkActions/import"
       method: POST
       params:
         - name: clusterName
@@ -88,7 +88,7 @@ examples:
           }
   - name: Network import response with success and failure (Custom network import)
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/networkActions/import"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkActions/import"
       method: POST
       params:
         - name: clusterName
@@ -130,7 +130,7 @@ examples:
           }
   - name: Network import response with success and failure (VXLAN network import)
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/networkActions/import"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkActions/import"
       method: POST
       params:
         - name: clusterName
@@ -173,7 +173,7 @@ examples:
   - name: 400 Response (Classic network import)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/networkActions/import"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkActions/import"
       method: POST
       params:
         - name: clusterName
@@ -206,7 +206,7 @@ examples:
   - name: 400 Response (Custom network import)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/networkActions/import"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkActions/import"
       method: POST
       params:
         - name: clusterName
@@ -239,7 +239,7 @@ examples:
   - name: 400 Response (VXLAN network import)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/networkActions/import"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkActions/import"
       method: POST
       params:
         - name: clusterName
@@ -272,7 +272,7 @@ examples:
   - name: 401 Response (Classic network import)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/networkActions/import"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkActions/import"
       method: POST
       params:
         - name: clusterName
@@ -305,7 +305,7 @@ examples:
   - name: 401 Response (Custom network import)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/networkActions/import"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkActions/import"
       method: POST
       params:
         - name: clusterName
@@ -338,7 +338,7 @@ examples:
   - name: 401 Response (VXLAN network import)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/networkActions/import"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkActions/import"
       method: POST
       params:
         - name: clusterName
@@ -371,7 +371,7 @@ examples:
   - name: 403 Response (Classic network import)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/networkActions/import"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkActions/import"
       method: POST
       params:
         - name: clusterName
@@ -404,7 +404,7 @@ examples:
   - name: 403 Response (Custom network import)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/networkActions/import"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkActions/import"
       method: POST
       params:
         - name: clusterName
@@ -437,7 +437,7 @@ examples:
   - name: 403 Response (VXLAN network import)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/networkActions/import"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkActions/import"
       method: POST
       params:
         - name: clusterName
@@ -470,7 +470,7 @@ examples:
   - name: 404 Response (Classic network import)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/networkActions/import"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkActions/import"
       method: POST
       params:
         - name: clusterName
@@ -503,7 +503,7 @@ examples:
   - name: 404 Response (Custom network import)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/networkActions/import"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkActions/import"
       method: POST
       params:
         - name: clusterName
@@ -536,7 +536,7 @@ examples:
   - name: 404 Response (VXLAN network import)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/networkActions/import"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkActions/import"
       method: POST
       params:
         - name: clusterName
@@ -569,7 +569,7 @@ examples:
   - name: 500 Response (Classic network import)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/networkActions/import"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkActions/import"
       method: POST
       params:
         - name: clusterName
@@ -602,7 +602,7 @@ examples:
   - name: 500 Response (Custom network import)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/networkActions/import"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkActions/import"
       method: POST
       params:
         - name: clusterName
@@ -635,7 +635,7 @@ examples:
   - name: 500 Response (VXLAN network import)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/networkActions/import"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkActions/import"
       method: POST
       params:
         - name: clusterName

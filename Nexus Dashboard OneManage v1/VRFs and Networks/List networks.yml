@@ -7,7 +7,7 @@ info:
 
 http:
   method: GET
-  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/networks"
+  url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/networks"
   params:
     - name: fabricName
       value: ""
@@ -63,7 +63,7 @@ settings:
 examples:
   - name: customNetwork
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/networks"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/networks"
       method: GET
       params:
         - name: fabricName
@@ -138,7 +138,7 @@ examples:
           }
   - name: vxlanNetwork
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/networks"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/networks"
       method: GET
       params:
         - name: fabricName
@@ -241,7 +241,7 @@ examples:
   - name: 400 Response
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/networks"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/networks"
       method: GET
       params:
         - name: fabricName
@@ -290,7 +290,7 @@ examples:
   - name: 401 Response
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/networks"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/networks"
       method: GET
       params:
         - name: fabricName
@@ -339,7 +339,7 @@ examples:
   - name: 404 Response
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/networks"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/networks"
       method: GET
       params:
         - name: fabricName
@@ -388,7 +388,7 @@ examples:
   - name: 500 Response
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/networks"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/networks"
       method: GET
       params:
         - name: fabricName

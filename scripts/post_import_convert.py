@@ -4,18 +4,20 @@ post_import_convert.py
 
 Converts a freshly-imported Bruno collection from the native OpenAPI
 {{baseUrl}} URL format to the project's standard format using
-{{controllerProtocol}}{{controllerIp}}{{basePath}}.
+{{controllerProtocol}}{{controllerIp}}{{<pathVar>}}.
 
 Idempotent: safe to run multiple times on the same collection.
 
 Usage:
     python scripts/post_import_convert.py "Nexus Dashboard OneManage v1"
+    python scripts/post_import_convert.py "Nexus Dashboard Infrastructure v1" --path-var infraPath
 
 What it does:
-    1. Replaces {{baseUrl}} -> {{controllerProtocol}}{{controllerIp}}{{basePath}}
-       in all .yml request files (skips files already converted)
-    2. Rewrites the environment file: baseUrl -> basePath with the path
-       extracted from the original baseUrl value (skips if already converted)
+    1. Replaces {{baseUrl}} -> {{controllerProtocol}}{{controllerIp}}{{<pathVar>}}
+       in all .yml request files (also converts {{basePath}} -> {{<pathVar>}}
+       for previously converted collections)
+    2. Removes basePath/baseUrl from the collection environment file
+       (these are now defined in the Global environment)
     3. Adds the collection-level auth token pre-request script to
        opencollection.yml (skips if already present)
 """
@@ -25,8 +27,16 @@ import sys
 from pathlib import Path
 from urllib.parse import urlparse
 
-OLD_VAR = "{{baseUrl}}"
-NEW_VAR = "{{controllerProtocol}}{{controllerIp}}{{basePath}}"
+# Mapping from basePath suffix to the global path variable name
+PATH_SUFFIX_MAP = {
+    "/infra": "infraPath",
+    "/manage": "managePath",
+    "/oneManage": "oneManagePath",
+    "/analyze": "analyzePath",
+}
+
+OLD_BASE_URL = "{{baseUrl}}"
+OLD_BASE_PATH = "{{basePath}}"
 
 BEFORE_REQUEST_SCRIPT = """\
 // Skip token check for login request itself
@@ -67,22 +77,84 @@ extensions: {{}}
 """
 
 
-def replace_urls(collection_dir: Path) -> tuple[int, int]:
-    """Replace {{baseUrl}} with the standard variable format in all request .yml files."""
+def detect_path_var(collection_dir: Path, explicit_path_var: str | None) -> str:
+    """Determine the correct path variable for this collection.
+
+    Priority: --path-var CLI arg > environment file basePath/baseUrl > error.
+    """
+    if explicit_path_var:
+        return explicit_path_var
+
+    env_dir = collection_dir / "environments"
+    if env_dir.is_dir():
+        for env_file in env_dir.glob("*.yml"):
+            content = env_file.read_text()
+            # Try to find a basePath or baseUrl value
+            base_path_value = _extract_env_var_value(content, "basePath")
+            if base_path_value:
+                return _suffix_to_path_var(base_path_value)
+
+            base_url_value = _extract_env_var_value(content, "baseUrl")
+            if base_url_value:
+                parsed = urlparse(base_url_value)
+                return _suffix_to_path_var(parsed.path)
+
+    print("Error: Could not auto-detect path variable from environment file.")
+    print("       Use --path-var to specify it explicitly.")
+    sys.exit(1)
+
+
+def _extract_env_var_value(content: str, var_name: str) -> str | None:
+    """Extract the value of a named variable from a Bruno environment YAML."""
+    lines = content.splitlines()
+    for i, line in enumerate(lines):
+        if f"name: {var_name}" in line:
+            for j in range(i + 1, len(lines)):
+                if "value:" in lines[j]:
+                    return lines[j].split("value:", 1)[1].strip()
+            break
+    return None
+
+
+def _suffix_to_path_var(path: str) -> str:
+    """Map a full path like /api/v1/infra to its path variable name."""
+    for suffix, var_name in PATH_SUFFIX_MAP.items():
+        if path.endswith(suffix):
+            return var_name
+    print(f"Error: Unknown path suffix in '{path}'.")
+    print(f"       Known suffixes: {list(PATH_SUFFIX_MAP.keys())}")
+    print("       Use --path-var to specify the variable explicitly.")
+    sys.exit(1)
+
+
+def replace_urls(collection_dir: Path, path_var: str) -> tuple[int, int]:
+    """Replace {{baseUrl}} and {{basePath}} with the collection-specific path variable."""
+    new_var = "{{controllerProtocol}}{{controllerIp}}{{" + path_var + "}}"
+    old_base_path_var = "{{basePath}}"
+    new_path_var = "{{" + path_var + "}}"
+
     converted = 0
     skipped = 0
 
     for yml_file in collection_dir.rglob("*.yml"):
-        # Skip environment files and opencollection.yml
         if "environments" in yml_file.parts:
             continue
         if yml_file.name == "opencollection.yml":
             continue
 
         content = yml_file.read_text()
+        new_content = content
 
-        if OLD_VAR in content:
-            yml_file.write_text(content.replace(OLD_VAR, NEW_VAR))
+        # Replace {{baseUrl}} (fresh import)
+        if OLD_BASE_URL in new_content:
+            new_content = new_content.replace(OLD_BASE_URL, new_var)
+
+        # Replace {{basePath}} with collection-specific variable (re-conversion)
+        if old_base_path_var in new_content:
+            new_content = new_content.replace(old_base_path_var, new_path_var)
+
+        if new_content != content:
+            yml_file.write_text(new_content)
             converted += 1
         else:
             skipped += 1
@@ -91,7 +163,7 @@ def replace_urls(collection_dir: Path) -> tuple[int, int]:
 
 
 def convert_environment(collection_dir: Path) -> None:
-    """Rewrite environment files: replace baseUrl with basePath."""
+    """Clean up environment file: remove basePath/baseUrl (now in Global env)."""
     env_dir = collection_dir / "environments"
     if not env_dir.is_dir():
         print("Step 2: No environments/ directory found — skipping")
@@ -100,52 +172,30 @@ def convert_environment(collection_dir: Path) -> None:
     for env_file in env_dir.glob("*.yml"):
         content = env_file.read_text()
 
-        if "name: baseUrl" not in content:
-            print(f"Step 2: Environment file")
-            print(f"  Skipped (already converted): {env_file.name}")
+        has_base_url = "name: baseUrl" in content
+        has_base_path = "name: basePath" in content
+
+        if not has_base_url and not has_base_path:
+            print("Step 2: Environment file")
+            print(f"  Skipped (already clean): {env_file.name}")
             return
 
-        # Parse the baseUrl value and extract just the path
+        # Extract just the environment name
         env_name = None
-        base_url_value = None
         for line in content.splitlines():
             stripped = line.strip()
             if stripped.startswith("name:") and env_name is None:
                 env_name = stripped.split("name:", 1)[1].strip()
-            # Look for the value line that follows "name: baseUrl"
-            if base_url_value is None and "name: baseUrl" in content:
-                # Find the value on the line after "name: baseUrl"
-                lines = content.splitlines()
-                for i, l in enumerate(lines):
-                    if "name: baseUrl" in l:
-                        for j in range(i + 1, len(lines)):
-                            if "value:" in lines[j]:
-                                base_url_value = lines[j].split("value:", 1)[1].strip()
-                                break
-                        break
 
-        if not base_url_value:
-            print(f"  Warning: Could not extract baseUrl value from {env_file.name}")
-            return
+        if not env_name:
+            env_name = env_file.stem
 
-        # Extract path from URL (e.g., "https://example.com/api/v1/oneManage" -> "/api/v1/oneManage")
-        parsed = urlparse(base_url_value)
-        base_path = parsed.path
+        # Write a clean env file with just the name (path vars are global now)
+        env_file.write_text(f"name: {env_name}\n")
 
-        if not base_path:
-            print(f"  Warning: Could not extract path from baseUrl: {base_url_value}")
-            return
-
-        env_file.write_text(
-            f"name: {env_name}\n"
-            f"variables:\n"
-            f"  - name: basePath\n"
-            f"    value: {base_path}\n"
-        )
-
-        print(f"Step 2: Environment file")
+        print("Step 2: Environment file")
         print(f"  Updated: {env_file.name}")
-        print(f"  basePath: {base_path}")
+        print("  Removed basePath/baseUrl (now in Global environment)")
 
 
 def add_prerequest_script(collection_dir: Path) -> None:
@@ -167,7 +217,6 @@ def add_prerequest_script(collection_dir: Path) -> None:
     collection_name = None
     for line in content.splitlines():
         if "name:" in line and collection_name is None:
-            # Skip the opencollection: line; grab the first name: under info:
             stripped = line.strip()
             if stripped.startswith("name:"):
                 collection_name = stripped.split("name:", 1)[1].strip()
@@ -197,6 +246,11 @@ def main():
         "collection",
         help='Collection directory name (e.g., "Nexus Dashboard OneManage v1")',
     )
+    parser.add_argument(
+        "--path-var",
+        help="Path variable name to use (e.g., infraPath, managePath, oneManagePath). "
+             "Auto-detected from environment file if not specified.",
+    )
     args = parser.parse_args()
 
     repo_root = Path(__file__).resolve().parent.parent
@@ -206,10 +260,13 @@ def main():
         print(f"Error: Collection directory not found: {collection_dir}")
         sys.exit(1)
 
-    print(f"Converting collection: {args.collection}\n")
+    # Detect path variable before modifying the environment file
+    path_var = detect_path_var(collection_dir, args.path_var)
+    print(f"Converting collection: {args.collection}")
+    print(f"Path variable: {{{{{path_var}}}}}\n")
 
     # Step 1
-    converted, skipped = replace_urls(collection_dir)
+    converted, skipped = replace_urls(collection_dir, path_var)
     print("Step 1: URL replacement")
     print(f"  Converted: {converted} files")
     print(f"  Skipped (already converted): {skipped} files")

@@ -5,7 +5,7 @@ info:
 
 http:
   method: DELETE
-  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/probes/:probeName"
+  url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/probes/:probeName"
   params:
     - name: probeName
       value: ""
@@ -41,7 +41,7 @@ examples:
   - name: 204 Response
     description: No Content
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/probes/:probeName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/probes/:probeName"
       method: DELETE
       params:
         - name: probeName
@@ -60,7 +60,7 @@ examples:
   - name: 400 Response
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/probes/:probeName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/probes/:probeName"
       method: DELETE
       params:
         - name: probeName
@@ -87,7 +87,7 @@ examples:
   - name: 401 Response
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/probes/:probeName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/probes/:probeName"
       method: DELETE
       params:
         - name: probeName
@@ -114,7 +114,7 @@ examples:
   - name: 403 Response
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/probes/:probeName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/probes/:probeName"
       method: DELETE
       params:
         - name: probeName
@@ -141,7 +141,7 @@ examples:
   - name: 404 Response
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/probes/:probeName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/probes/:probeName"
       method: DELETE
       params:
         - name: probeName
@@ -168,7 +168,7 @@ examples:
   - name: 500 Response
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/probes/:probeName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/probes/:probeName"
       method: DELETE
       params:
         - name: probeName

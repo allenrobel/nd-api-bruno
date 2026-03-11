@@ -5,7 +5,7 @@ info:
 
 http:
   method: PUT
-  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityProtocolDefinitions/:protocolDefinitionName"
+  url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityProtocolDefinitions/:protocolDefinitionName"
   params:
     - name: clusterName
       value: ""
@@ -69,7 +69,7 @@ examples:
   - name: 204 Response (Replace a security protocol definition with match criteria)
     description: No Content
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityProtocolDefinitions/:protocolDefinitionName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityProtocolDefinitions/:protocolDefinitionName"
       method: PUT
       params:
         - name: clusterName
@@ -108,7 +108,7 @@ examples:
   - name: 400 Response (Replace a security protocol definition with match criteria)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityProtocolDefinitions/:protocolDefinitionName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityProtocolDefinitions/:protocolDefinitionName"
       method: PUT
       params:
         - name: clusterName
@@ -155,7 +155,7 @@ examples:
   - name: 401 Response (Replace a security protocol definition with match criteria)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityProtocolDefinitions/:protocolDefinitionName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityProtocolDefinitions/:protocolDefinitionName"
       method: PUT
       params:
         - name: clusterName
@@ -202,7 +202,7 @@ examples:
   - name: 403 Response (Replace a security protocol definition with match criteria)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityProtocolDefinitions/:protocolDefinitionName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityProtocolDefinitions/:protocolDefinitionName"
       method: PUT
       params:
         - name: clusterName
@@ -249,7 +249,7 @@ examples:
   - name: 404 Response (Replace a security protocol definition with match criteria)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityProtocolDefinitions/:protocolDefinitionName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityProtocolDefinitions/:protocolDefinitionName"
       method: PUT
       params:
         - name: clusterName
@@ -296,7 +296,7 @@ examples:
   - name: 500 Response (Replace a security protocol definition with match criteria)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityProtocolDefinitions/:protocolDefinitionName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityProtocolDefinitions/:protocolDefinitionName"
       method: PUT
       params:
         - name: clusterName

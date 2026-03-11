@@ -5,7 +5,7 @@ info:
 
 http:
   method: POST
-  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityGroupActions/export"
+  url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityGroupActions/export"
   params:
     - name: clusterName
       value: ""
@@ -48,7 +48,7 @@ examples:
   - name: 200 Response (Export a security group)
     description: OK
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityGroupActions/export"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityGroupActions/export"
       method: POST
       params:
         - name: clusterName
@@ -85,7 +85,7 @@ examples:
   - name: 200 Response (Export multiple security groups)
     description: OK
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityGroupActions/export"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityGroupActions/export"
       method: POST
       params:
         - name: clusterName
@@ -123,7 +123,7 @@ examples:
   - name: 400 Response (Export a security group)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityGroupActions/export"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityGroupActions/export"
       method: POST
       params:
         - name: clusterName
@@ -159,7 +159,7 @@ examples:
   - name: 400 Response (Export multiple security groups)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityGroupActions/export"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityGroupActions/export"
       method: POST
       params:
         - name: clusterName
@@ -196,7 +196,7 @@ examples:
   - name: 401 Response (Export a security group)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityGroupActions/export"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityGroupActions/export"
       method: POST
       params:
         - name: clusterName
@@ -232,7 +232,7 @@ examples:
   - name: 401 Response (Export multiple security groups)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityGroupActions/export"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityGroupActions/export"
       method: POST
       params:
         - name: clusterName
@@ -269,7 +269,7 @@ examples:
   - name: 403 Response (Export a security group)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityGroupActions/export"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityGroupActions/export"
       method: POST
       params:
         - name: clusterName
@@ -305,7 +305,7 @@ examples:
   - name: 403 Response (Export multiple security groups)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityGroupActions/export"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityGroupActions/export"
       method: POST
       params:
         - name: clusterName
@@ -342,7 +342,7 @@ examples:
   - name: 404 Response (Export a security group)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityGroupActions/export"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityGroupActions/export"
       method: POST
       params:
         - name: clusterName
@@ -378,7 +378,7 @@ examples:
   - name: 404 Response (Export multiple security groups)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityGroupActions/export"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityGroupActions/export"
       method: POST
       params:
         - name: clusterName
@@ -415,7 +415,7 @@ examples:
   - name: 500 Response (Export a security group)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityGroupActions/export"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityGroupActions/export"
       method: POST
       params:
         - name: clusterName
@@ -451,7 +451,7 @@ examples:
   - name: 500 Response (Export multiple security groups)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityGroupActions/export"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityGroupActions/export"
       method: POST
       params:
         - name: clusterName

@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/accessAssociations"
+  url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/accessAssociations"
   params:
     - name: aggregationOrLeafSwitchId
       value: ""
@@ -69,7 +69,7 @@ examples:
   - name: aggregation vpc
     description: Single access or ToR switch attached to a VPC pair of aggregation or leaf switches. Aggregation or leaf switch(es) not paired with access or ToR switch.
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/accessAssociations"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/accessAssociations"
       method: GET
       params:
         - name: aggregationOrLeafSwitchId
@@ -138,7 +138,7 @@ examples:
   - name: back-to-back VPC
     description: A VPC pair of access or ToR switches attached to a VPC pair of aggregation or leaf switches. Aggregation or leaf switch(es) paired with access or ToR switch.
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/accessAssociations"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/accessAssociations"
       method: GET
       params:
         - name: aggregationOrLeafSwitchId
@@ -210,7 +210,7 @@ examples:
   - name: single
     description: Single access or ToR switch attached to single aggregation or leaf switch
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/accessAssociations"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/accessAssociations"
       method: GET
       params:
         - name: aggregationOrLeafSwitchId
@@ -281,7 +281,7 @@ examples:
   - name: 400 Response
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/accessAssociations"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/accessAssociations"
       method: GET
       params:
         - name: aggregationOrLeafSwitchId
@@ -336,7 +336,7 @@ examples:
   - name: 401 Response
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/accessAssociations"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/accessAssociations"
       method: GET
       params:
         - name: aggregationOrLeafSwitchId
@@ -391,7 +391,7 @@ examples:
   - name: 404 Response
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/accessAssociations"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/accessAssociations"
       method: GET
       params:
         - name: aggregationOrLeafSwitchId
@@ -446,7 +446,7 @@ examples:
   - name: 500 Response
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/accessAssociations"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/accessAssociations"
       method: GET
       params:
         - name: aggregationOrLeafSwitchId

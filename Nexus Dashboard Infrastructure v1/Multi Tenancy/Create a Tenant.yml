@@ -5,7 +5,7 @@ info:
 
 http:
   method: POST
-  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/tenants"
+  url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/tenants"
   params:
     - name: clusterName
       value: ""
@@ -45,7 +45,7 @@ examples:
   - name: 201 Response
     description: Created
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/tenants"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/tenants"
       method: POST
       params:
         - name: clusterName
@@ -75,7 +75,7 @@ examples:
   - name: 400 Response
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/tenants"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/tenants"
       method: POST
       params:
         - name: clusterName
@@ -106,7 +106,7 @@ examples:
   - name: 401 Response
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/tenants"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/tenants"
       method: POST
       params:
         - name: clusterName
@@ -137,7 +137,7 @@ examples:
   - name: 403 Response
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/tenants"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/tenants"
       method: POST
       params:
         - name: clusterName
@@ -168,7 +168,7 @@ examples:
   - name: 409 Response
     description: Conflict
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/tenants"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/tenants"
       method: POST
       params:
         - name: clusterName
@@ -199,7 +199,7 @@ examples:
   - name: 429 Response
     description: Too many requests.
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/tenants"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/tenants"
       method: POST
       params:
         - name: clusterName
@@ -230,7 +230,7 @@ examples:
   - name: 500 Response
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/tenants"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/tenants"
       method: POST
       params:
         - name: clusterName

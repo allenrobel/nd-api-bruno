@@ -5,7 +5,7 @@ info:
 
 http:
   method: DELETE
-  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/integrations/slurm/:integrationId"
+  url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/integrations/slurm/:integrationId"
   params:
     - name: clusterName
       value: ""
@@ -42,7 +42,7 @@ examples:
   - name: 204 Response
     description: No Content
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/integrations/slurm/:integrationId"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/integrations/slurm/:integrationId"
       method: DELETE
       params:
         - name: clusterName
@@ -62,7 +62,7 @@ examples:
   - name: 400 Response
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/integrations/slurm/:integrationId"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/integrations/slurm/:integrationId"
       method: DELETE
       params:
         - name: clusterName
@@ -90,7 +90,7 @@ examples:
   - name: 401 Response
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/integrations/slurm/:integrationId"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/integrations/slurm/:integrationId"
       method: DELETE
       params:
         - name: clusterName
@@ -118,7 +118,7 @@ examples:
   - name: 403 Response
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/integrations/slurm/:integrationId"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/integrations/slurm/:integrationId"
       method: DELETE
       params:
         - name: clusterName
@@ -146,7 +146,7 @@ examples:
   - name: 500 Response
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/integrations/slurm/:integrationId"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/integrations/slurm/:integrationId"
       method: DELETE
       params:
         - name: clusterName

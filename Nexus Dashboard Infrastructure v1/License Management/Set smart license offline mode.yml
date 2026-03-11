@@ -5,7 +5,7 @@ info:
 
 http:
   method: POST
-  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/license/offlineMode"
+  url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/license/offlineMode"
   params:
     - name: clusterName
       value: ""
@@ -43,7 +43,7 @@ settings:
 examples:
   - name: Error setting offline mode (Disable offline mode)
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/license/offlineMode"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/license/offlineMode"
       method: POST
       params:
         - name: clusterName
@@ -73,7 +73,7 @@ examples:
           }
   - name: Error setting offline mode (Enable offline mode)
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/license/offlineMode"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/license/offlineMode"
       method: POST
       params:
         - name: clusterName
@@ -103,7 +103,7 @@ examples:
           }
   - name: Offline mode disabled (Disable offline mode)
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/license/offlineMode"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/license/offlineMode"
       method: POST
       params:
         - name: clusterName
@@ -133,7 +133,7 @@ examples:
           }
   - name: Offline mode disabled (Enable offline mode)
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/license/offlineMode"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/license/offlineMode"
       method: POST
       params:
         - name: clusterName
@@ -163,7 +163,7 @@ examples:
           }
   - name: Offline mode enabled (Disable offline mode)
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/license/offlineMode"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/license/offlineMode"
       method: POST
       params:
         - name: clusterName
@@ -193,7 +193,7 @@ examples:
           }
   - name: Offline mode enabled (Enable offline mode)
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/license/offlineMode"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/license/offlineMode"
       method: POST
       params:
         - name: clusterName
@@ -224,7 +224,7 @@ examples:
   - name: 400 Response (Disable offline mode)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/license/offlineMode"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/license/offlineMode"
       method: POST
       params:
         - name: clusterName
@@ -254,7 +254,7 @@ examples:
   - name: 400 Response (Enable offline mode)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/license/offlineMode"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/license/offlineMode"
       method: POST
       params:
         - name: clusterName
@@ -284,7 +284,7 @@ examples:
   - name: 401 Response (Disable offline mode)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/license/offlineMode"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/license/offlineMode"
       method: POST
       params:
         - name: clusterName
@@ -314,7 +314,7 @@ examples:
   - name: 401 Response (Enable offline mode)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/license/offlineMode"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/license/offlineMode"
       method: POST
       params:
         - name: clusterName
@@ -344,7 +344,7 @@ examples:
   - name: 403 Response (Disable offline mode)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/license/offlineMode"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/license/offlineMode"
       method: POST
       params:
         - name: clusterName
@@ -374,7 +374,7 @@ examples:
   - name: 403 Response (Enable offline mode)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/license/offlineMode"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/license/offlineMode"
       method: POST
       params:
         - name: clusterName
@@ -404,7 +404,7 @@ examples:
   - name: 500 Response (Disable offline mode)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/license/offlineMode"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/license/offlineMode"
       method: POST
       params:
         - name: clusterName
@@ -434,7 +434,7 @@ examples:
   - name: 500 Response (Enable offline mode)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/license/offlineMode"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/license/offlineMode"
       method: POST
       params:
         - name: clusterName

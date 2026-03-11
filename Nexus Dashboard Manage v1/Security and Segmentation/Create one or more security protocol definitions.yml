@@ -5,7 +5,7 @@ info:
 
 http:
   method: POST
-  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityProtocolDefinitions"
+  url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityProtocolDefinitions"
   params:
     - name: clusterName
       value: ""
@@ -68,7 +68,7 @@ settings:
 examples:
   - name: Example of creating one security protocol definition (Create one security protocol definition with match criteria)
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityProtocolDefinitions"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityProtocolDefinitions"
       method: POST
       params:
         - name: clusterName
@@ -118,7 +118,7 @@ examples:
           }
   - name: Example of creating one security protocol definition (Create two security protocol definitions with match criteria)
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityProtocolDefinitions"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityProtocolDefinitions"
       method: POST
       params:
         - name: clusterName
@@ -181,7 +181,7 @@ examples:
           }
   - name: Example of creating two security protocol definitions (Create one security protocol definition with match criteria)
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityProtocolDefinitions"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityProtocolDefinitions"
       method: POST
       params:
         - name: clusterName
@@ -236,7 +236,7 @@ examples:
           }
   - name: Example of creating two security protocol definitions (Create two security protocol definitions with match criteria)
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityProtocolDefinitions"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityProtocolDefinitions"
       method: POST
       params:
         - name: clusterName
@@ -305,7 +305,7 @@ examples:
   - name: 400 Response (Create one security protocol definition with match criteria)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityProtocolDefinitions"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityProtocolDefinitions"
       method: POST
       params:
         - name: clusterName
@@ -352,7 +352,7 @@ examples:
   - name: 400 Response (Create two security protocol definitions with match criteria)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityProtocolDefinitions"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityProtocolDefinitions"
       method: POST
       params:
         - name: clusterName
@@ -412,7 +412,7 @@ examples:
   - name: 401 Response (Create one security protocol definition with match criteria)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityProtocolDefinitions"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityProtocolDefinitions"
       method: POST
       params:
         - name: clusterName
@@ -459,7 +459,7 @@ examples:
   - name: 401 Response (Create two security protocol definitions with match criteria)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityProtocolDefinitions"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityProtocolDefinitions"
       method: POST
       params:
         - name: clusterName
@@ -519,7 +519,7 @@ examples:
   - name: 403 Response (Create one security protocol definition with match criteria)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityProtocolDefinitions"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityProtocolDefinitions"
       method: POST
       params:
         - name: clusterName
@@ -566,7 +566,7 @@ examples:
   - name: 403 Response (Create two security protocol definitions with match criteria)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityProtocolDefinitions"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityProtocolDefinitions"
       method: POST
       params:
         - name: clusterName
@@ -626,7 +626,7 @@ examples:
   - name: 404 Response (Create one security protocol definition with match criteria)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityProtocolDefinitions"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityProtocolDefinitions"
       method: POST
       params:
         - name: clusterName
@@ -673,7 +673,7 @@ examples:
   - name: 404 Response (Create two security protocol definitions with match criteria)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityProtocolDefinitions"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityProtocolDefinitions"
       method: POST
       params:
         - name: clusterName
@@ -733,7 +733,7 @@ examples:
   - name: 500 Response (Create one security protocol definition with match criteria)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityProtocolDefinitions"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityProtocolDefinitions"
       method: POST
       params:
         - name: clusterName
@@ -780,7 +780,7 @@ examples:
   - name: 500 Response (Create two security protocol definitions with match criteria)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityProtocolDefinitions"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityProtocolDefinitions"
       method: POST
       params:
         - name: clusterName

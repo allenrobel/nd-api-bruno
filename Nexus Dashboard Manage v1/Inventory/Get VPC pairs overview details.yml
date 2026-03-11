@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPairOverview"
+  url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/vpcPairOverview"
   params:
     - name: componentType
       value: ""
@@ -50,7 +50,7 @@ examples:
   - name: fullOverviewExample
     description: Full VPC overview response with all details
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPairOverview"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/vpcPairOverview"
       method: GET
       params:
         - name: componentType
@@ -267,7 +267,7 @@ examples:
   - name: vpcPairAnomaliesExample
     description: Sample response VPC pair anomalies
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPairOverview"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/vpcPairOverview"
       method: GET
       params:
         - name: componentType
@@ -311,7 +311,7 @@ examples:
   - name: vpcPairHealthExample
     description: Sample response for VPC pair health
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPairOverview"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/vpcPairOverview"
       method: GET
       params:
         - name: componentType
@@ -365,7 +365,7 @@ examples:
   - name: vpcPairInfoExample
     description: Sample response VPC pair information
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPairOverview"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/vpcPairOverview"
       method: GET
       params:
         - name: componentType
@@ -450,7 +450,7 @@ examples:
   - name: vpcPairInventoryExample
     description: Sample response for VPC pair inventory
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPairOverview"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/vpcPairOverview"
       method: GET
       params:
         - name: componentType
@@ -501,7 +501,7 @@ examples:
   - name: vpcPairModuleExample
     description: Sample response VPC modules
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPairOverview"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/vpcPairOverview"
       method: GET
       params:
         - name: componentType
@@ -541,7 +541,7 @@ examples:
   - name: vpcPairOverlayExample
     description: Sample response VPC pair overlay
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPairOverview"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/vpcPairOverview"
       method: GET
       params:
         - name: componentType
@@ -589,7 +589,7 @@ examples:
   - name: vpcPairVxlanExample
     description: Sample response VPC pairs VXLAN
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPairOverview"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/vpcPairOverview"
       method: GET
       params:
         - name: componentType
@@ -679,7 +679,7 @@ examples:
   - name: 400 Response
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPairOverview"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/vpcPairOverview"
       method: GET
       params:
         - name: componentType
@@ -715,7 +715,7 @@ examples:
   - name: 401 Response
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPairOverview"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/vpcPairOverview"
       method: GET
       params:
         - name: componentType
@@ -751,7 +751,7 @@ examples:
   - name: 404 Response
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPairOverview"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/vpcPairOverview"
       method: GET
       params:
         - name: componentType
@@ -787,7 +787,7 @@ examples:
   - name: 500 Response
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPairOverview"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/vpcPairOverview"
       method: GET
       params:
         - name: componentType

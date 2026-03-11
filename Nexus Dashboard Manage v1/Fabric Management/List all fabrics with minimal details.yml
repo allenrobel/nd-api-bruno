@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabricsSummaryBrief"
+  url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabricsSummaryBrief"
   params:
     - name: clusterName
       value: ""
@@ -38,7 +38,7 @@ examples:
   - name: One
     description: Sample response for fabric summary brief
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabricsSummaryBrief"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabricsSummaryBrief"
       method: GET
       params:
         - name: clusterName
@@ -83,7 +83,7 @@ examples:
   - name: 401 Response
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabricsSummaryBrief"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabricsSummaryBrief"
       method: GET
       params:
         - name: clusterName
@@ -111,7 +111,7 @@ examples:
   - name: 403 Response
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabricsSummaryBrief"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabricsSummaryBrief"
       method: GET
       params:
         - name: clusterName
@@ -139,7 +139,7 @@ examples:
   - name: 500 Response
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabricsSummaryBrief"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabricsSummaryBrief"
       method: GET
       params:
         - name: clusterName

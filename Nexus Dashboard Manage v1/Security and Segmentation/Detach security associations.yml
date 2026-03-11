@@ -5,7 +5,7 @@ info:
 
 http:
   method: POST
-  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityAssociationActions/detach"
+  url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityAssociationActions/detach"
   params:
     - name: clusterName
       value: ""
@@ -47,7 +47,7 @@ settings:
 examples:
   - name: Example of detaching one security association (Detach a single security association)
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityAssociationActions/detach"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityAssociationActions/detach"
       method: POST
       params:
         - name: clusterName
@@ -86,7 +86,7 @@ examples:
           }
   - name: Example of detaching one security association (Detach multiple security associations)
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityAssociationActions/detach"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityAssociationActions/detach"
       method: POST
       params:
         - name: clusterName
@@ -126,7 +126,7 @@ examples:
           }
   - name: Example of detaching two security associations (Detach a single security association)
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityAssociationActions/detach"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityAssociationActions/detach"
       method: POST
       params:
         - name: clusterName
@@ -170,7 +170,7 @@ examples:
           }
   - name: Example of detaching two security associations (Detach multiple security associations)
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityAssociationActions/detach"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityAssociationActions/detach"
       method: POST
       params:
         - name: clusterName
@@ -216,7 +216,7 @@ examples:
   - name: 400 Response (Detach a single security association)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityAssociationActions/detach"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityAssociationActions/detach"
       method: POST
       params:
         - name: clusterName
@@ -252,7 +252,7 @@ examples:
   - name: 400 Response (Detach multiple security associations)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityAssociationActions/detach"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityAssociationActions/detach"
       method: POST
       params:
         - name: clusterName
@@ -289,7 +289,7 @@ examples:
   - name: 401 Response (Detach a single security association)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityAssociationActions/detach"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityAssociationActions/detach"
       method: POST
       params:
         - name: clusterName
@@ -325,7 +325,7 @@ examples:
   - name: 401 Response (Detach multiple security associations)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityAssociationActions/detach"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityAssociationActions/detach"
       method: POST
       params:
         - name: clusterName
@@ -362,7 +362,7 @@ examples:
   - name: 403 Response (Detach a single security association)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityAssociationActions/detach"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityAssociationActions/detach"
       method: POST
       params:
         - name: clusterName
@@ -398,7 +398,7 @@ examples:
   - name: 403 Response (Detach multiple security associations)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityAssociationActions/detach"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityAssociationActions/detach"
       method: POST
       params:
         - name: clusterName
@@ -435,7 +435,7 @@ examples:
   - name: 404 Response (Detach a single security association)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityAssociationActions/detach"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityAssociationActions/detach"
       method: POST
       params:
         - name: clusterName
@@ -471,7 +471,7 @@ examples:
   - name: 404 Response (Detach multiple security associations)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityAssociationActions/detach"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityAssociationActions/detach"
       method: POST
       params:
         - name: clusterName
@@ -508,7 +508,7 @@ examples:
   - name: 500 Response (Detach a single security association)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityAssociationActions/detach"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityAssociationActions/detach"
       method: POST
       params:
         - name: clusterName
@@ -544,7 +544,7 @@ examples:
   - name: 500 Response (Detach multiple security associations)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityAssociationActions/detach"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityAssociationActions/detach"
       method: POST
       params:
         - name: clusterName

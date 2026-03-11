@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/license/assignments"
+  url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/license/assignments"
   params:
     - name: clusterName
       value: ""
@@ -37,7 +37,7 @@ settings:
 examples:
   - name: Switch license assignments
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/license/assignments"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/license/assignments"
       method: GET
       params:
         - name: clusterName
@@ -97,7 +97,7 @@ examples:
   - name: 400 Response
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/license/assignments"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/license/assignments"
       method: GET
       params:
         - name: clusterName
@@ -121,7 +121,7 @@ examples:
   - name: 401 Response
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/license/assignments"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/license/assignments"
       method: GET
       params:
         - name: clusterName
@@ -145,7 +145,7 @@ examples:
   - name: 403 Response
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/license/assignments"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/license/assignments"
       method: GET
       params:
         - name: clusterName
@@ -169,7 +169,7 @@ examples:
   - name: 500 Response
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/license/assignments"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/license/assignments"
       method: GET
       params:
         - name: clusterName

@@ -5,7 +5,7 @@ info:
 
 http:
   method: POST
-  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/l3Outs"
+  url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/l3Outs"
   params:
     - name: clusterName
       value: ""
@@ -60,7 +60,7 @@ examples:
   - name: Single success (Create multiple layer-3 outs)
     description: Create a layer-3 out.
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/l3Outs"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/l3Outs"
       method: POST
       params:
         - name: clusterName
@@ -187,7 +187,7 @@ examples:
   - name: Single success (Create a layer-3 out)
     description: Create a layer-3 out.
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/l3Outs"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/l3Outs"
       method: POST
       params:
         - name: clusterName
@@ -270,7 +270,7 @@ examples:
   - name: 400 Response (Create multiple layer-3 outs)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/l3Outs"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/l3Outs"
       method: POST
       params:
         - name: clusterName
@@ -393,7 +393,7 @@ examples:
   - name: 400 Response (Create a layer-3 out)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/l3Outs"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/l3Outs"
       method: POST
       params:
         - name: clusterName
@@ -472,7 +472,7 @@ examples:
   - name: 401 Response (Create multiple layer-3 outs)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/l3Outs"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/l3Outs"
       method: POST
       params:
         - name: clusterName
@@ -595,7 +595,7 @@ examples:
   - name: 401 Response (Create a layer-3 out)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/l3Outs"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/l3Outs"
       method: POST
       params:
         - name: clusterName
@@ -674,7 +674,7 @@ examples:
   - name: 403 Response (Create multiple layer-3 outs)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/l3Outs"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/l3Outs"
       method: POST
       params:
         - name: clusterName
@@ -797,7 +797,7 @@ examples:
   - name: 403 Response (Create a layer-3 out)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/l3Outs"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/l3Outs"
       method: POST
       params:
         - name: clusterName
@@ -876,7 +876,7 @@ examples:
   - name: 404 Response (Create multiple layer-3 outs)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/l3Outs"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/l3Outs"
       method: POST
       params:
         - name: clusterName
@@ -999,7 +999,7 @@ examples:
   - name: 404 Response (Create a layer-3 out)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/l3Outs"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/l3Outs"
       method: POST
       params:
         - name: clusterName
@@ -1078,7 +1078,7 @@ examples:
   - name: 409 Response (Create multiple layer-3 outs)
     description: Conflict
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/l3Outs"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/l3Outs"
       method: POST
       params:
         - name: clusterName
@@ -1201,7 +1201,7 @@ examples:
   - name: 409 Response (Create a layer-3 out)
     description: Conflict
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/l3Outs"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/l3Outs"
       method: POST
       params:
         - name: clusterName
@@ -1280,7 +1280,7 @@ examples:
   - name: 500 Response (Create multiple layer-3 outs)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/l3Outs"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/l3Outs"
       method: POST
       params:
         - name: clusterName
@@ -1403,7 +1403,7 @@ examples:
   - name: 500 Response (Create a layer-3 out)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/l3Outs"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/l3Outs"
       method: POST
       params:
         - name: clusterName

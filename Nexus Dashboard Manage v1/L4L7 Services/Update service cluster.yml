@@ -5,7 +5,7 @@ info:
 
 http:
   method: PUT
-  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
+  url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
   params:
     - name: clusterName
       value: ""
@@ -65,7 +65,7 @@ settings:
 examples:
   - name: Service cluster that has service node with customized link
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
       method: PUT
       params:
         - name: clusterName
@@ -147,7 +147,7 @@ examples:
           }
   - name: Service cluster that has service node with ethernet trunk interface link
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
       method: PUT
       params:
         - name: clusterName
@@ -257,7 +257,7 @@ examples:
           }
   - name: Service cluster that has service node with port-channel trunk interface link
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
       method: PUT
       params:
         - name: clusterName
@@ -375,7 +375,7 @@ examples:
           }
   - name: Service cluster that has service node with vPC interface link
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
       method: PUT
       params:
         - name: clusterName
@@ -444,7 +444,7 @@ examples:
   - name: 400 Response (Service cluster that has service node with customized link)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
       method: PUT
       params:
         - name: clusterName
@@ -503,7 +503,7 @@ examples:
   - name: 400 Response (Service cluster that has service node with ethernet trunk interface link)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
       method: PUT
       params:
         - name: clusterName
@@ -576,7 +576,7 @@ examples:
   - name: 400 Response (Service cluster that has service node with port-channel trunk interface link)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
       method: PUT
       params:
         - name: clusterName
@@ -653,7 +653,7 @@ examples:
   - name: 400 Response (Service cluster that has service node with vPC interface link)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
       method: PUT
       params:
         - name: clusterName
@@ -705,7 +705,7 @@ examples:
   - name: 401 Response (Service cluster that has service node with customized link)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
       method: PUT
       params:
         - name: clusterName
@@ -764,7 +764,7 @@ examples:
   - name: 401 Response (Service cluster that has service node with ethernet trunk interface link)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
       method: PUT
       params:
         - name: clusterName
@@ -837,7 +837,7 @@ examples:
   - name: 401 Response (Service cluster that has service node with port-channel trunk interface link)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
       method: PUT
       params:
         - name: clusterName
@@ -914,7 +914,7 @@ examples:
   - name: 401 Response (Service cluster that has service node with vPC interface link)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
       method: PUT
       params:
         - name: clusterName
@@ -966,7 +966,7 @@ examples:
   - name: 403 Response (Service cluster that has service node with customized link)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
       method: PUT
       params:
         - name: clusterName
@@ -1025,7 +1025,7 @@ examples:
   - name: 403 Response (Service cluster that has service node with ethernet trunk interface link)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
       method: PUT
       params:
         - name: clusterName
@@ -1098,7 +1098,7 @@ examples:
   - name: 403 Response (Service cluster that has service node with port-channel trunk interface link)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
       method: PUT
       params:
         - name: clusterName
@@ -1175,7 +1175,7 @@ examples:
   - name: 403 Response (Service cluster that has service node with vPC interface link)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
       method: PUT
       params:
         - name: clusterName
@@ -1227,7 +1227,7 @@ examples:
   - name: 404 Response (Service cluster that has service node with customized link)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
       method: PUT
       params:
         - name: clusterName
@@ -1286,7 +1286,7 @@ examples:
   - name: 404 Response (Service cluster that has service node with ethernet trunk interface link)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
       method: PUT
       params:
         - name: clusterName
@@ -1359,7 +1359,7 @@ examples:
   - name: 404 Response (Service cluster that has service node with port-channel trunk interface link)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
       method: PUT
       params:
         - name: clusterName
@@ -1436,7 +1436,7 @@ examples:
   - name: 404 Response (Service cluster that has service node with vPC interface link)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
       method: PUT
       params:
         - name: clusterName
@@ -1488,7 +1488,7 @@ examples:
   - name: 500 Response (Service cluster that has service node with customized link)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
       method: PUT
       params:
         - name: clusterName
@@ -1547,7 +1547,7 @@ examples:
   - name: 500 Response (Service cluster that has service node with ethernet trunk interface link)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
       method: PUT
       params:
         - name: clusterName
@@ -1620,7 +1620,7 @@ examples:
   - name: 500 Response (Service cluster that has service node with port-channel trunk interface link)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
       method: PUT
       params:
         - name: clusterName
@@ -1697,7 +1697,7 @@ examples:
   - name: 500 Response (Service cluster that has service node with vPC interface link)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
       method: PUT
       params:
         - name: clusterName

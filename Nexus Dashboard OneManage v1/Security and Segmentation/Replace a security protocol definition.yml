@@ -7,7 +7,7 @@ info:
 
 http:
   method: PUT
-  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/securityProtocolDefinitions/:protocolDefinitionName"
+  url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/securityProtocolDefinitions/:protocolDefinitionName"
   params:
     - name: fabricName
       value: ""
@@ -65,7 +65,7 @@ examples:
   - name: 204 Response
     description: No Content
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/securityProtocolDefinitions/:protocolDefinitionName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/securityProtocolDefinitions/:protocolDefinitionName"
       method: PUT
       params:
         - name: fabricName
@@ -107,7 +107,7 @@ examples:
   - name: 400 Response
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/securityProtocolDefinitions/:protocolDefinitionName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/securityProtocolDefinitions/:protocolDefinitionName"
       method: PUT
       params:
         - name: fabricName
@@ -157,7 +157,7 @@ examples:
   - name: 401 Response
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/securityProtocolDefinitions/:protocolDefinitionName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/securityProtocolDefinitions/:protocolDefinitionName"
       method: PUT
       params:
         - name: fabricName
@@ -207,7 +207,7 @@ examples:
   - name: 403 Response
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/securityProtocolDefinitions/:protocolDefinitionName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/securityProtocolDefinitions/:protocolDefinitionName"
       method: PUT
       params:
         - name: fabricName
@@ -257,7 +257,7 @@ examples:
   - name: 404 Response
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/securityProtocolDefinitions/:protocolDefinitionName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/securityProtocolDefinitions/:protocolDefinitionName"
       method: PUT
       params:
         - name: fabricName
@@ -307,7 +307,7 @@ examples:
   - name: 500 Response
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/securityProtocolDefinitions/:protocolDefinitionName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/securityProtocolDefinitions/:protocolDefinitionName"
       method: PUT
       params:
         - name: fabricName

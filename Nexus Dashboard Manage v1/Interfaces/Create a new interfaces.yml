@@ -5,7 +5,7 @@ info:
 
 http:
   method: POST
-  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/interfaces"
+  url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/interfaces"
   params:
     - name: clusterName
       value: ""
@@ -59,7 +59,7 @@ settings:
 examples:
   - name: ethernetL2InterfaceExample (createInterfaceExamples)
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/interfaces"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/interfaces"
       method: POST
       params:
         - name: clusterName
@@ -138,7 +138,7 @@ examples:
   - name: 400 Response (createInterfaceExamples)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/interfaces"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/interfaces"
       method: POST
       params:
         - name: clusterName
@@ -213,7 +213,7 @@ examples:
   - name: 401 Response (createInterfaceExamples)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/interfaces"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/interfaces"
       method: POST
       params:
         - name: clusterName
@@ -288,7 +288,7 @@ examples:
   - name: 404 Response (createInterfaceExamples)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/interfaces"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/interfaces"
       method: POST
       params:
         - name: clusterName
@@ -363,7 +363,7 @@ examples:
   - name: 500 Response (createInterfaceExamples)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/interfaces"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/interfaces"
       method: POST
       params:
         - name: clusterName

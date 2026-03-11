@@ -7,7 +7,7 @@ info:
 
 http:
   method: POST
-  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/securityGroupActions/attach"
+  url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/securityGroupActions/attach"
   params:
     - name: fabricName
       value: ""
@@ -46,7 +46,7 @@ settings:
 examples:
   - name: Example of attaching one security group (Attach a security group)
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/securityGroupActions/attach"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/securityGroupActions/attach"
       method: POST
       params:
         - name: fabricName
@@ -81,7 +81,7 @@ examples:
           }
   - name: Example of attaching one security group (Attach multiple security groups)
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/securityGroupActions/attach"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/securityGroupActions/attach"
       method: POST
       params:
         - name: fabricName
@@ -117,7 +117,7 @@ examples:
           }
   - name: Example of attaching two security groups (Attach a security group)
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/securityGroupActions/attach"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/securityGroupActions/attach"
       method: POST
       params:
         - name: fabricName
@@ -157,7 +157,7 @@ examples:
           }
   - name: Example of attaching two security groups (Attach multiple security groups)
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/securityGroupActions/attach"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/securityGroupActions/attach"
       method: POST
       params:
         - name: fabricName
@@ -199,7 +199,7 @@ examples:
   - name: 400 Response (Attach a security group)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/securityGroupActions/attach"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/securityGroupActions/attach"
       method: POST
       params:
         - name: fabricName
@@ -231,7 +231,7 @@ examples:
   - name: 400 Response (Attach multiple security groups)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/securityGroupActions/attach"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/securityGroupActions/attach"
       method: POST
       params:
         - name: fabricName
@@ -264,7 +264,7 @@ examples:
   - name: 401 Response (Attach a security group)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/securityGroupActions/attach"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/securityGroupActions/attach"
       method: POST
       params:
         - name: fabricName
@@ -296,7 +296,7 @@ examples:
   - name: 401 Response (Attach multiple security groups)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/securityGroupActions/attach"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/securityGroupActions/attach"
       method: POST
       params:
         - name: fabricName
@@ -329,7 +329,7 @@ examples:
   - name: 403 Response (Attach a security group)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/securityGroupActions/attach"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/securityGroupActions/attach"
       method: POST
       params:
         - name: fabricName
@@ -361,7 +361,7 @@ examples:
   - name: 403 Response (Attach multiple security groups)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/securityGroupActions/attach"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/securityGroupActions/attach"
       method: POST
       params:
         - name: fabricName
@@ -394,7 +394,7 @@ examples:
   - name: 404 Response (Attach a security group)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/securityGroupActions/attach"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/securityGroupActions/attach"
       method: POST
       params:
         - name: fabricName
@@ -426,7 +426,7 @@ examples:
   - name: 404 Response (Attach multiple security groups)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/securityGroupActions/attach"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/securityGroupActions/attach"
       method: POST
       params:
         - name: fabricName
@@ -459,7 +459,7 @@ examples:
   - name: 500 Response (Attach a security group)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/securityGroupActions/attach"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/securityGroupActions/attach"
       method: POST
       params:
         - name: fabricName
@@ -491,7 +491,7 @@ examples:
   - name: 500 Response (Attach multiple security groups)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/securityGroupActions/attach"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/securityGroupActions/attach"
       method: POST
       params:
         - name: fabricName

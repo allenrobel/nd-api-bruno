@@ -5,7 +5,7 @@ info:
 
 http:
   method: POST
-  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/networkAttachments/query"
+  url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkAttachments/query"
   params:
     - name: clusterName
       value: ""
@@ -78,7 +78,7 @@ settings:
 examples:
   - name: queryResponse (exampleOne)
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/networkAttachments/query"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkAttachments/query"
       method: POST
       params:
         - name: clusterName
@@ -191,7 +191,7 @@ examples:
           }
   - name: queryResponse (exampleTwo)
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/networkAttachments/query"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkAttachments/query"
       method: POST
       params:
         - name: clusterName
@@ -306,7 +306,7 @@ examples:
   - name: 400 Response (exampleOne)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/networkAttachments/query"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkAttachments/query"
       method: POST
       params:
         - name: clusterName
@@ -379,7 +379,7 @@ examples:
   - name: 400 Response (exampleTwo)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/networkAttachments/query"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkAttachments/query"
       method: POST
       params:
         - name: clusterName
@@ -453,7 +453,7 @@ examples:
   - name: 401 Response (exampleOne)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/networkAttachments/query"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkAttachments/query"
       method: POST
       params:
         - name: clusterName
@@ -526,7 +526,7 @@ examples:
   - name: 401 Response (exampleTwo)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/networkAttachments/query"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkAttachments/query"
       method: POST
       params:
         - name: clusterName
@@ -600,7 +600,7 @@ examples:
   - name: 403 Response (exampleOne)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/networkAttachments/query"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkAttachments/query"
       method: POST
       params:
         - name: clusterName
@@ -673,7 +673,7 @@ examples:
   - name: 403 Response (exampleTwo)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/networkAttachments/query"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkAttachments/query"
       method: POST
       params:
         - name: clusterName
@@ -747,7 +747,7 @@ examples:
   - name: 404 Response (exampleOne)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/networkAttachments/query"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkAttachments/query"
       method: POST
       params:
         - name: clusterName
@@ -820,7 +820,7 @@ examples:
   - name: 404 Response (exampleTwo)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/networkAttachments/query"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkAttachments/query"
       method: POST
       params:
         - name: clusterName
@@ -894,7 +894,7 @@ examples:
   - name: 500 Response (exampleOne)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/networkAttachments/query"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkAttachments/query"
       method: POST
       params:
         - name: clusterName
@@ -967,7 +967,7 @@ examples:
   - name: 500 Response (exampleTwo)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/networkAttachments/query"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkAttachments/query"
       method: POST
       params:
         - name: clusterName

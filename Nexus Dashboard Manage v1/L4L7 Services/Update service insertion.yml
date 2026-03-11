@@ -5,7 +5,7 @@ info:
 
 http:
   method: PUT
-  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/insertions/:insertionName"
+  url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/insertions/:insertionName"
   params:
     - name: insertionName
       value: ""
@@ -50,7 +50,7 @@ settings:
 examples:
   - name: Service as a Gateway use case
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/insertions/:insertionName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/insertions/:insertionName"
       method: PUT
       params:
         - name: insertionName
@@ -100,7 +100,7 @@ examples:
           }
   - name: Perimeter service use case
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/insertions/:insertionName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/insertions/:insertionName"
       method: PUT
       params:
         - name: insertionName
@@ -146,7 +146,7 @@ examples:
           }
   - name: Service chain (ePBR) use case
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/insertions/:insertionName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/insertions/:insertionName"
       method: PUT
       params:
         - name: insertionName
@@ -258,7 +258,7 @@ examples:
           }
   - name: Legacy service redirect (PBR) use case
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/insertions/:insertionName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/insertions/:insertionName"
       method: PUT
       params:
         - name: insertionName
@@ -365,7 +365,7 @@ examples:
   - name: 400 Response (Service as a Gateway use case)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/insertions/:insertionName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/insertions/:insertionName"
       method: PUT
       params:
         - name: insertionName
@@ -408,7 +408,7 @@ examples:
   - name: 400 Response (Perimeter service use case)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/insertions/:insertionName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/insertions/:insertionName"
       method: PUT
       params:
         - name: insertionName
@@ -449,7 +449,7 @@ examples:
   - name: 400 Response (Service chain (ePBR) use case)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/insertions/:insertionName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/insertions/:insertionName"
       method: PUT
       params:
         - name: insertionName
@@ -523,7 +523,7 @@ examples:
   - name: 400 Response (Legacy service redirect (PBR) use case)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/insertions/:insertionName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/insertions/:insertionName"
       method: PUT
       params:
         - name: insertionName
@@ -594,7 +594,7 @@ examples:
   - name: 401 Response (Service as a Gateway use case)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/insertions/:insertionName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/insertions/:insertionName"
       method: PUT
       params:
         - name: insertionName
@@ -637,7 +637,7 @@ examples:
   - name: 401 Response (Perimeter service use case)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/insertions/:insertionName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/insertions/:insertionName"
       method: PUT
       params:
         - name: insertionName
@@ -678,7 +678,7 @@ examples:
   - name: 401 Response (Service chain (ePBR) use case)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/insertions/:insertionName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/insertions/:insertionName"
       method: PUT
       params:
         - name: insertionName
@@ -752,7 +752,7 @@ examples:
   - name: 401 Response (Legacy service redirect (PBR) use case)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/insertions/:insertionName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/insertions/:insertionName"
       method: PUT
       params:
         - name: insertionName
@@ -823,7 +823,7 @@ examples:
   - name: 403 Response (Service as a Gateway use case)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/insertions/:insertionName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/insertions/:insertionName"
       method: PUT
       params:
         - name: insertionName
@@ -866,7 +866,7 @@ examples:
   - name: 403 Response (Perimeter service use case)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/insertions/:insertionName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/insertions/:insertionName"
       method: PUT
       params:
         - name: insertionName
@@ -907,7 +907,7 @@ examples:
   - name: 403 Response (Service chain (ePBR) use case)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/insertions/:insertionName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/insertions/:insertionName"
       method: PUT
       params:
         - name: insertionName
@@ -981,7 +981,7 @@ examples:
   - name: 403 Response (Legacy service redirect (PBR) use case)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/insertions/:insertionName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/insertions/:insertionName"
       method: PUT
       params:
         - name: insertionName
@@ -1052,7 +1052,7 @@ examples:
   - name: 404 Response (Service as a Gateway use case)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/insertions/:insertionName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/insertions/:insertionName"
       method: PUT
       params:
         - name: insertionName
@@ -1095,7 +1095,7 @@ examples:
   - name: 404 Response (Perimeter service use case)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/insertions/:insertionName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/insertions/:insertionName"
       method: PUT
       params:
         - name: insertionName
@@ -1136,7 +1136,7 @@ examples:
   - name: 404 Response (Service chain (ePBR) use case)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/insertions/:insertionName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/insertions/:insertionName"
       method: PUT
       params:
         - name: insertionName
@@ -1210,7 +1210,7 @@ examples:
   - name: 404 Response (Legacy service redirect (PBR) use case)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/insertions/:insertionName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/insertions/:insertionName"
       method: PUT
       params:
         - name: insertionName
@@ -1281,7 +1281,7 @@ examples:
   - name: 500 Response (Service as a Gateway use case)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/insertions/:insertionName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/insertions/:insertionName"
       method: PUT
       params:
         - name: insertionName
@@ -1324,7 +1324,7 @@ examples:
   - name: 500 Response (Perimeter service use case)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/insertions/:insertionName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/insertions/:insertionName"
       method: PUT
       params:
         - name: insertionName
@@ -1365,7 +1365,7 @@ examples:
   - name: 500 Response (Service chain (ePBR) use case)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/insertions/:insertionName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/insertions/:insertionName"
       method: PUT
       params:
         - name: insertionName
@@ -1439,7 +1439,7 @@ examples:
   - name: 500 Response (Legacy service redirect (PBR) use case)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/l4l7Services/insertions/:insertionName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/insertions/:insertionName"
       method: PUT
       params:
         - name: insertionName

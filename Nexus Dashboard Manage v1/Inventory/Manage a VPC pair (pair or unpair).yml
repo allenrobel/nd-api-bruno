@@ -5,7 +5,7 @@ info:
 
 http:
   method: PUT
-  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
+  url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
   params:
     - name: clusterName
       value: ""
@@ -54,7 +54,7 @@ examples:
   - name: 204 Response (pairingWithCustomTemplate)
     description: No content
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
       method: PUT
       params:
         - name: clusterName
@@ -101,7 +101,7 @@ examples:
   - name: 204 Response (pairingWithTemplate)
     description: No content
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
       method: PUT
       params:
         - name: clusterName
@@ -183,7 +183,7 @@ examples:
   - name: 204 Response (pairingWithoutTemplate)
     description: No content
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
       method: PUT
       params:
         - name: clusterName
@@ -221,7 +221,7 @@ examples:
   - name: 204 Response (unpairing)
     description: No content
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
       method: PUT
       params:
         - name: clusterName
@@ -256,7 +256,7 @@ examples:
   - name: 400 Response (pairingWithCustomTemplate)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
       method: PUT
       params:
         - name: clusterName
@@ -311,7 +311,7 @@ examples:
   - name: 400 Response (pairingWithTemplate)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
       method: PUT
       params:
         - name: clusterName
@@ -401,7 +401,7 @@ examples:
   - name: 400 Response (pairingWithoutTemplate)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
       method: PUT
       params:
         - name: clusterName
@@ -447,7 +447,7 @@ examples:
   - name: 400 Response (unpairing)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
       method: PUT
       params:
         - name: clusterName
@@ -490,7 +490,7 @@ examples:
   - name: 401 Response (pairingWithCustomTemplate)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
       method: PUT
       params:
         - name: clusterName
@@ -545,7 +545,7 @@ examples:
   - name: 401 Response (pairingWithTemplate)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
       method: PUT
       params:
         - name: clusterName
@@ -635,7 +635,7 @@ examples:
   - name: 401 Response (pairingWithoutTemplate)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
       method: PUT
       params:
         - name: clusterName
@@ -681,7 +681,7 @@ examples:
   - name: 401 Response (unpairing)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
       method: PUT
       params:
         - name: clusterName
@@ -724,7 +724,7 @@ examples:
   - name: 403 Response (pairingWithCustomTemplate)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
       method: PUT
       params:
         - name: clusterName
@@ -779,7 +779,7 @@ examples:
   - name: 403 Response (pairingWithTemplate)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
       method: PUT
       params:
         - name: clusterName
@@ -869,7 +869,7 @@ examples:
   - name: 403 Response (pairingWithoutTemplate)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
       method: PUT
       params:
         - name: clusterName
@@ -915,7 +915,7 @@ examples:
   - name: 403 Response (unpairing)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
       method: PUT
       params:
         - name: clusterName
@@ -958,7 +958,7 @@ examples:
   - name: 404 Response (pairingWithCustomTemplate)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
       method: PUT
       params:
         - name: clusterName
@@ -1013,7 +1013,7 @@ examples:
   - name: 404 Response (pairingWithTemplate)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
       method: PUT
       params:
         - name: clusterName
@@ -1103,7 +1103,7 @@ examples:
   - name: 404 Response (pairingWithoutTemplate)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
       method: PUT
       params:
         - name: clusterName
@@ -1149,7 +1149,7 @@ examples:
   - name: 404 Response (unpairing)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
       method: PUT
       params:
         - name: clusterName
@@ -1192,7 +1192,7 @@ examples:
   - name: 500 Response (pairingWithCustomTemplate)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
       method: PUT
       params:
         - name: clusterName
@@ -1247,7 +1247,7 @@ examples:
   - name: 500 Response (pairingWithTemplate)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
       method: PUT
       params:
         - name: clusterName
@@ -1337,7 +1337,7 @@ examples:
   - name: 500 Response (pairingWithoutTemplate)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
       method: PUT
       params:
         - name: clusterName
@@ -1383,7 +1383,7 @@ examples:
   - name: 500 Response (unpairing)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/vpcPair"
       method: PUT
       params:
         - name: clusterName

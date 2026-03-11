@@ -5,7 +5,7 @@ info:
 
 http:
   method: POST
-  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/vrfs"
+  url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfs"
   params:
     - name: clusterName
       value: ""
@@ -112,7 +112,7 @@ examples:
   - name: Single success (Custom VRF)
     description: Create one VRF
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/vrfs"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfs"
       method: POST
       params:
         - name: clusterName
@@ -169,7 +169,7 @@ examples:
   - name: Single success (VXLAN VRF)
     description: Create one VRF
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/vrfs"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfs"
       method: POST
       params:
         - name: clusterName
@@ -270,7 +270,7 @@ examples:
   - name: Multi-tenant example (Custom VRF)
     description: Example response for a multi-tenant environment. Each VRF name is prefixed with the tenant name.
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/vrfs"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfs"
       method: POST
       params:
         - name: clusterName
@@ -332,7 +332,7 @@ examples:
   - name: Multi-tenant example (VXLAN VRF)
     description: Example response for a multi-tenant environment. Each VRF name is prefixed with the tenant name.
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/vrfs"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfs"
       method: POST
       params:
         - name: clusterName
@@ -438,7 +438,7 @@ examples:
   - name: Multiple status (Custom VRF)
     description: Mixed success and failure statuses
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/vrfs"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfs"
       method: POST
       params:
         - name: clusterName
@@ -500,7 +500,7 @@ examples:
   - name: Multiple status (VXLAN VRF)
     description: Mixed success and failure statuses
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/vrfs"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfs"
       method: POST
       params:
         - name: clusterName
@@ -606,7 +606,7 @@ examples:
   - name: 400 Response (Custom VRF)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/vrfs"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfs"
       method: POST
       params:
         - name: clusterName
@@ -659,7 +659,7 @@ examples:
   - name: 400 Response (VXLAN VRF)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/vrfs"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfs"
       method: POST
       params:
         - name: clusterName
@@ -756,7 +756,7 @@ examples:
   - name: 401 Response (Custom VRF)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/vrfs"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfs"
       method: POST
       params:
         - name: clusterName
@@ -809,7 +809,7 @@ examples:
   - name: 401 Response (VXLAN VRF)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/vrfs"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfs"
       method: POST
       params:
         - name: clusterName
@@ -906,7 +906,7 @@ examples:
   - name: 403 Response (Custom VRF)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/vrfs"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfs"
       method: POST
       params:
         - name: clusterName
@@ -959,7 +959,7 @@ examples:
   - name: 403 Response (VXLAN VRF)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/vrfs"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfs"
       method: POST
       params:
         - name: clusterName
@@ -1056,7 +1056,7 @@ examples:
   - name: 404 Response (Custom VRF)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/vrfs"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfs"
       method: POST
       params:
         - name: clusterName
@@ -1109,7 +1109,7 @@ examples:
   - name: 404 Response (VXLAN VRF)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/vrfs"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfs"
       method: POST
       params:
         - name: clusterName
@@ -1206,7 +1206,7 @@ examples:
   - name: 500 Response (Custom VRF)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/vrfs"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfs"
       method: POST
       params:
         - name: clusterName
@@ -1259,7 +1259,7 @@ examples:
   - name: 500 Response (VXLAN VRF)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/vrfs"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfs"
       method: POST
       params:
         - name: clusterName

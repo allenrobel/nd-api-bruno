@@ -5,7 +5,7 @@ info:
 
 http:
   method: PUT
-  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/anomalyRules/system/fabricManagement/:anomalyType"
+  url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/anomalyRules/system/fabricManagement/:anomalyType"
   params:
     - name: clusterName
       value: ""
@@ -45,7 +45,7 @@ examples:
   - name: 204 Response (basicAnomaly)
     description: No Content
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/anomalyRules/system/fabricManagement/:anomalyType"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/anomalyRules/system/fabricManagement/:anomalyType"
       method: PUT
       params:
         - name: clusterName
@@ -78,7 +78,7 @@ examples:
   - name: 204 Response (fabricConfigurationAnomaly)
     description: No Content
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/anomalyRules/system/fabricManagement/:anomalyType"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/anomalyRules/system/fabricManagement/:anomalyType"
       method: PUT
       params:
         - name: clusterName
@@ -112,7 +112,7 @@ examples:
   - name: 204 Response (regExAnomaly)
     description: No Content
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/anomalyRules/system/fabricManagement/:anomalyType"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/anomalyRules/system/fabricManagement/:anomalyType"
       method: PUT
       params:
         - name: clusterName
@@ -146,7 +146,7 @@ examples:
   - name: 204 Response (thresholdAnomaly)
     description: No Content
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/anomalyRules/system/fabricManagement/:anomalyType"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/anomalyRules/system/fabricManagement/:anomalyType"
       method: PUT
       params:
         - name: clusterName
@@ -188,7 +188,7 @@ examples:
   - name: 400 Response (basicAnomaly)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/anomalyRules/system/fabricManagement/:anomalyType"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/anomalyRules/system/fabricManagement/:anomalyType"
       method: PUT
       params:
         - name: clusterName
@@ -229,7 +229,7 @@ examples:
   - name: 400 Response (fabricConfigurationAnomaly)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/anomalyRules/system/fabricManagement/:anomalyType"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/anomalyRules/system/fabricManagement/:anomalyType"
       method: PUT
       params:
         - name: clusterName
@@ -271,7 +271,7 @@ examples:
   - name: 400 Response (regExAnomaly)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/anomalyRules/system/fabricManagement/:anomalyType"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/anomalyRules/system/fabricManagement/:anomalyType"
       method: PUT
       params:
         - name: clusterName
@@ -313,7 +313,7 @@ examples:
   - name: 400 Response (thresholdAnomaly)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/anomalyRules/system/fabricManagement/:anomalyType"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/anomalyRules/system/fabricManagement/:anomalyType"
       method: PUT
       params:
         - name: clusterName
@@ -363,7 +363,7 @@ examples:
   - name: 401 Response (basicAnomaly)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/anomalyRules/system/fabricManagement/:anomalyType"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/anomalyRules/system/fabricManagement/:anomalyType"
       method: PUT
       params:
         - name: clusterName
@@ -404,7 +404,7 @@ examples:
   - name: 401 Response (fabricConfigurationAnomaly)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/anomalyRules/system/fabricManagement/:anomalyType"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/anomalyRules/system/fabricManagement/:anomalyType"
       method: PUT
       params:
         - name: clusterName
@@ -446,7 +446,7 @@ examples:
   - name: 401 Response (regExAnomaly)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/anomalyRules/system/fabricManagement/:anomalyType"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/anomalyRules/system/fabricManagement/:anomalyType"
       method: PUT
       params:
         - name: clusterName
@@ -488,7 +488,7 @@ examples:
   - name: 401 Response (thresholdAnomaly)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/anomalyRules/system/fabricManagement/:anomalyType"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/anomalyRules/system/fabricManagement/:anomalyType"
       method: PUT
       params:
         - name: clusterName
@@ -538,7 +538,7 @@ examples:
   - name: 403 Response (basicAnomaly)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/anomalyRules/system/fabricManagement/:anomalyType"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/anomalyRules/system/fabricManagement/:anomalyType"
       method: PUT
       params:
         - name: clusterName
@@ -579,7 +579,7 @@ examples:
   - name: 403 Response (fabricConfigurationAnomaly)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/anomalyRules/system/fabricManagement/:anomalyType"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/anomalyRules/system/fabricManagement/:anomalyType"
       method: PUT
       params:
         - name: clusterName
@@ -621,7 +621,7 @@ examples:
   - name: 403 Response (regExAnomaly)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/anomalyRules/system/fabricManagement/:anomalyType"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/anomalyRules/system/fabricManagement/:anomalyType"
       method: PUT
       params:
         - name: clusterName
@@ -663,7 +663,7 @@ examples:
   - name: 403 Response (thresholdAnomaly)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/anomalyRules/system/fabricManagement/:anomalyType"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/anomalyRules/system/fabricManagement/:anomalyType"
       method: PUT
       params:
         - name: clusterName
@@ -713,7 +713,7 @@ examples:
   - name: 404 Response (basicAnomaly)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/anomalyRules/system/fabricManagement/:anomalyType"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/anomalyRules/system/fabricManagement/:anomalyType"
       method: PUT
       params:
         - name: clusterName
@@ -754,7 +754,7 @@ examples:
   - name: 404 Response (fabricConfigurationAnomaly)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/anomalyRules/system/fabricManagement/:anomalyType"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/anomalyRules/system/fabricManagement/:anomalyType"
       method: PUT
       params:
         - name: clusterName
@@ -796,7 +796,7 @@ examples:
   - name: 404 Response (regExAnomaly)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/anomalyRules/system/fabricManagement/:anomalyType"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/anomalyRules/system/fabricManagement/:anomalyType"
       method: PUT
       params:
         - name: clusterName
@@ -838,7 +838,7 @@ examples:
   - name: 404 Response (thresholdAnomaly)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/anomalyRules/system/fabricManagement/:anomalyType"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/anomalyRules/system/fabricManagement/:anomalyType"
       method: PUT
       params:
         - name: clusterName
@@ -888,7 +888,7 @@ examples:
   - name: 500 Response (basicAnomaly)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/anomalyRules/system/fabricManagement/:anomalyType"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/anomalyRules/system/fabricManagement/:anomalyType"
       method: PUT
       params:
         - name: clusterName
@@ -929,7 +929,7 @@ examples:
   - name: 500 Response (fabricConfigurationAnomaly)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/anomalyRules/system/fabricManagement/:anomalyType"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/anomalyRules/system/fabricManagement/:anomalyType"
       method: PUT
       params:
         - name: clusterName
@@ -971,7 +971,7 @@ examples:
   - name: 500 Response (regExAnomaly)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/anomalyRules/system/fabricManagement/:anomalyType"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/anomalyRules/system/fabricManagement/:anomalyType"
       method: PUT
       params:
         - name: clusterName
@@ -1013,7 +1013,7 @@ examples:
   - name: 500 Response (thresholdAnomaly)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/anomalyRules/system/fabricManagement/:anomalyType"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/anomalyRules/system/fabricManagement/:anomalyType"
       method: PUT
       params:
         - name: clusterName

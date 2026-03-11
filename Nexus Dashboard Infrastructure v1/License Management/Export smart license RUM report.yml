@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/license/smartExport"
+  url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/license/smartExport"
   params:
     - name: clusterName
       value: ""
@@ -37,7 +37,7 @@ settings:
 examples:
   - name: Example smart license RUM report
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/license/smartExport"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/license/smartExport"
       method: GET
       params:
         - name: clusterName
@@ -57,7 +57,7 @@ examples:
   - name: 400 Response
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/license/smartExport"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/license/smartExport"
       method: GET
       params:
         - name: clusterName
@@ -81,7 +81,7 @@ examples:
   - name: 401 Response
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/license/smartExport"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/license/smartExport"
       method: GET
       params:
         - name: clusterName
@@ -105,7 +105,7 @@ examples:
   - name: 403 Response
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/license/smartExport"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/license/smartExport"
       method: GET
       params:
         - name: clusterName
@@ -128,7 +128,7 @@ examples:
           }
   - name: Export failed
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/license/smartExport"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/license/smartExport"
       method: GET
       params:
         - name: clusterName

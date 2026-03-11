@@ -7,7 +7,7 @@ info:
 
 http:
   method: GET
-  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabricsSummaryBrief"
+  url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabricsSummaryBrief"
   params:
     - name: filter
       value: ""
@@ -40,7 +40,7 @@ examples:
   - name: One
     description: Sample response for fabric summary brief
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabricsSummaryBrief"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabricsSummaryBrief"
       method: GET
       params:
         - name: filter
@@ -82,7 +82,7 @@ examples:
   - name: 401 Response
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabricsSummaryBrief"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabricsSummaryBrief"
       method: GET
       params:
         - name: filter
@@ -107,7 +107,7 @@ examples:
   - name: 403 Response
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabricsSummaryBrief"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabricsSummaryBrief"
       method: GET
       params:
         - name: filter
@@ -132,7 +132,7 @@ examples:
   - name: 500 Response
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabricsSummaryBrief"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabricsSummaryBrief"
       method: GET
       params:
         - name: filter

@@ -5,7 +5,7 @@ info:
 
 http:
   method: POST
-  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups"
+  url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups"
   params:
     - name: clusterName
       value: ""
@@ -53,7 +53,7 @@ examples:
   - name: createMultipleInterfaceGroups (any)
     description: any interface group
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups"
       method: POST
       params:
         - name: clusterName
@@ -127,7 +127,7 @@ examples:
   - name: createMultipleInterfaceGroups (ethernetCustom)
     description: ethernet with custom template
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups"
       method: POST
       params:
         - name: clusterName
@@ -223,7 +223,7 @@ examples:
   - name: createMultipleInterfaceGroups (ethernetWithPolicy)
     description: Create ethernet interface group with policy
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups"
       method: POST
       params:
         - name: clusterName
@@ -318,7 +318,7 @@ examples:
   - name: createMultipleInterfaceGroups (ethernetWithoutPolicy)
     description: ethernet without policy
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups"
       method: POST
       params:
         - name: clusterName
@@ -393,7 +393,7 @@ examples:
   - name: createMultipleInterfaceGroups (portChannel)
     description: Port channel example
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups"
       method: POST
       params:
         - name: clusterName
@@ -467,7 +467,7 @@ examples:
   - name: createMultipleInterfaceGroups (vpc)
     description: vpc interface group
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups"
       method: POST
       params:
         - name: clusterName
@@ -541,7 +541,7 @@ examples:
   - name: createOneInterfaceGroup (any)
     description: any interface group
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups"
       method: POST
       params:
         - name: clusterName
@@ -610,7 +610,7 @@ examples:
   - name: createOneInterfaceGroup (ethernetCustom)
     description: ethernet with custom template
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups"
       method: POST
       params:
         - name: clusterName
@@ -701,7 +701,7 @@ examples:
   - name: createOneInterfaceGroup (ethernetWithPolicy)
     description: Create ethernet interface group with policy
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups"
       method: POST
       params:
         - name: clusterName
@@ -791,7 +791,7 @@ examples:
   - name: createOneInterfaceGroup (ethernetWithoutPolicy)
     description: ethernet without policy
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups"
       method: POST
       params:
         - name: clusterName
@@ -861,7 +861,7 @@ examples:
   - name: createOneInterfaceGroup (portChannel)
     description: Port channel example
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups"
       method: POST
       params:
         - name: clusterName
@@ -930,7 +930,7 @@ examples:
   - name: createOneInterfaceGroup (vpc)
     description: vpc interface group
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups"
       method: POST
       params:
         - name: clusterName
@@ -999,7 +999,7 @@ examples:
   - name: 400 Response (any)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups"
       method: POST
       params:
         - name: clusterName
@@ -1064,7 +1064,7 @@ examples:
   - name: 400 Response (ethernetCustom)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups"
       method: POST
       params:
         - name: clusterName
@@ -1151,7 +1151,7 @@ examples:
   - name: 400 Response (ethernetWithPolicy)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups"
       method: POST
       params:
         - name: clusterName
@@ -1237,7 +1237,7 @@ examples:
   - name: 400 Response (ethernetWithoutPolicy)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups"
       method: POST
       params:
         - name: clusterName
@@ -1303,7 +1303,7 @@ examples:
   - name: 400 Response (portChannel)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups"
       method: POST
       params:
         - name: clusterName
@@ -1368,7 +1368,7 @@ examples:
   - name: 400 Response (vpc)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups"
       method: POST
       params:
         - name: clusterName
@@ -1433,7 +1433,7 @@ examples:
   - name: 401 Response (any)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups"
       method: POST
       params:
         - name: clusterName
@@ -1498,7 +1498,7 @@ examples:
   - name: 401 Response (ethernetCustom)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups"
       method: POST
       params:
         - name: clusterName
@@ -1585,7 +1585,7 @@ examples:
   - name: 401 Response (ethernetWithPolicy)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups"
       method: POST
       params:
         - name: clusterName
@@ -1671,7 +1671,7 @@ examples:
   - name: 401 Response (ethernetWithoutPolicy)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups"
       method: POST
       params:
         - name: clusterName
@@ -1737,7 +1737,7 @@ examples:
   - name: 401 Response (portChannel)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups"
       method: POST
       params:
         - name: clusterName
@@ -1802,7 +1802,7 @@ examples:
   - name: 401 Response (vpc)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups"
       method: POST
       params:
         - name: clusterName
@@ -1867,7 +1867,7 @@ examples:
   - name: 403 Response (any)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups"
       method: POST
       params:
         - name: clusterName
@@ -1932,7 +1932,7 @@ examples:
   - name: 403 Response (ethernetCustom)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups"
       method: POST
       params:
         - name: clusterName
@@ -2019,7 +2019,7 @@ examples:
   - name: 403 Response (ethernetWithPolicy)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups"
       method: POST
       params:
         - name: clusterName
@@ -2105,7 +2105,7 @@ examples:
   - name: 403 Response (ethernetWithoutPolicy)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups"
       method: POST
       params:
         - name: clusterName
@@ -2171,7 +2171,7 @@ examples:
   - name: 403 Response (portChannel)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups"
       method: POST
       params:
         - name: clusterName
@@ -2236,7 +2236,7 @@ examples:
   - name: 403 Response (vpc)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups"
       method: POST
       params:
         - name: clusterName
@@ -2301,7 +2301,7 @@ examples:
   - name: 404 Response (any)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups"
       method: POST
       params:
         - name: clusterName
@@ -2366,7 +2366,7 @@ examples:
   - name: 404 Response (ethernetCustom)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups"
       method: POST
       params:
         - name: clusterName
@@ -2453,7 +2453,7 @@ examples:
   - name: 404 Response (ethernetWithPolicy)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups"
       method: POST
       params:
         - name: clusterName
@@ -2539,7 +2539,7 @@ examples:
   - name: 404 Response (ethernetWithoutPolicy)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups"
       method: POST
       params:
         - name: clusterName
@@ -2605,7 +2605,7 @@ examples:
   - name: 404 Response (portChannel)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups"
       method: POST
       params:
         - name: clusterName
@@ -2670,7 +2670,7 @@ examples:
   - name: 404 Response (vpc)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups"
       method: POST
       params:
         - name: clusterName
@@ -2735,7 +2735,7 @@ examples:
   - name: 500 Response (any)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups"
       method: POST
       params:
         - name: clusterName
@@ -2800,7 +2800,7 @@ examples:
   - name: 500 Response (ethernetCustom)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups"
       method: POST
       params:
         - name: clusterName
@@ -2887,7 +2887,7 @@ examples:
   - name: 500 Response (ethernetWithPolicy)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups"
       method: POST
       params:
         - name: clusterName
@@ -2973,7 +2973,7 @@ examples:
   - name: 500 Response (ethernetWithoutPolicy)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups"
       method: POST
       params:
         - name: clusterName
@@ -3039,7 +3039,7 @@ examples:
   - name: 500 Response (portChannel)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups"
       method: POST
       params:
         - name: clusterName
@@ -3104,7 +3104,7 @@ examples:
   - name: 500 Response (vpc)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups"
       method: POST
       params:
         - name: clusterName

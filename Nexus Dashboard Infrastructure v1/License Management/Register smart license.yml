@@ -5,7 +5,7 @@ info:
 
 http:
   method: POST
-  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/license/registerSmartLicense"
+  url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/license/registerSmartLicense"
   params:
     - name: clusterName
       value: ""
@@ -43,7 +43,7 @@ settings:
 examples:
   - name: Registration failed (Register with token)
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/license/registerSmartLicense"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/license/registerSmartLicense"
       method: POST
       params:
         - name: clusterName
@@ -73,7 +73,7 @@ examples:
           }
   - name: Registration successful (Register with token)
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/license/registerSmartLicense"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/license/registerSmartLicense"
       method: POST
       params:
         - name: clusterName
@@ -104,7 +104,7 @@ examples:
   - name: 400 Response (Register with token)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/license/registerSmartLicense"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/license/registerSmartLicense"
       method: POST
       params:
         - name: clusterName
@@ -134,7 +134,7 @@ examples:
   - name: 401 Response (Register with token)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/license/registerSmartLicense"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/license/registerSmartLicense"
       method: POST
       params:
         - name: clusterName
@@ -164,7 +164,7 @@ examples:
   - name: 403 Response (Register with token)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/license/registerSmartLicense"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/license/registerSmartLicense"
       method: POST
       params:
         - name: clusterName
@@ -194,7 +194,7 @@ examples:
   - name: 500 Response (Register with token)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/license/registerSmartLicense"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/license/registerSmartLicense"
       method: POST
       params:
         - name: clusterName

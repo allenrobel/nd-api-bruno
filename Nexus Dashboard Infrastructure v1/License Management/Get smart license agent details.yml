@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/license/smartAgentDetails"
+  url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/license/smartAgentDetails"
   params:
     - name: clusterName
       value: ""
@@ -37,7 +37,7 @@ settings:
 examples:
   - name: Registered agent
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/license/smartAgentDetails"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/license/smartAgentDetails"
       method: GET
       params:
         - name: clusterName
@@ -87,7 +87,7 @@ examples:
           }
   - name: Unconfigured agent
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/license/smartAgentDetails"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/license/smartAgentDetails"
       method: GET
       params:
         - name: clusterName
@@ -138,7 +138,7 @@ examples:
   - name: 400 Response
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/license/smartAgentDetails"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/license/smartAgentDetails"
       method: GET
       params:
         - name: clusterName
@@ -162,7 +162,7 @@ examples:
   - name: 401 Response
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/license/smartAgentDetails"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/license/smartAgentDetails"
       method: GET
       params:
         - name: clusterName
@@ -186,7 +186,7 @@ examples:
   - name: 403 Response
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/license/smartAgentDetails"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/license/smartAgentDetails"
       method: GET
       params:
         - name: clusterName
@@ -210,7 +210,7 @@ examples:
   - name: 500 Response
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/license/smartAgentDetails"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/license/smartAgentDetails"
       method: GET
       params:
         - name: clusterName

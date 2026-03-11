@@ -5,7 +5,7 @@ info:
 
 http:
   method: POST
-  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/networkActions/stretch"
+  url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkActions/stretch"
   params:
     - name: clusterName
       value: ""
@@ -52,7 +52,7 @@ settings:
 examples:
   - name: StretchResponse (Stretch and unstretch multiple networks)
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/networkActions/stretch"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkActions/stretch"
       method: POST
       params:
         - name: clusterName
@@ -104,7 +104,7 @@ examples:
           }
   - name: StretchResponse (Stretch a network)
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/networkActions/stretch"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkActions/stretch"
       method: POST
       params:
         - name: clusterName
@@ -152,7 +152,7 @@ examples:
           }
   - name: StretchResponse (Unstretch a network)
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/networkActions/stretch"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkActions/stretch"
       method: POST
       params:
         - name: clusterName
@@ -201,7 +201,7 @@ examples:
   - name: 400 Response (Stretch and unstretch multiple networks)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/networkActions/stretch"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkActions/stretch"
       method: POST
       params:
         - name: clusterName
@@ -244,7 +244,7 @@ examples:
   - name: 400 Response (Stretch a network)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/networkActions/stretch"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkActions/stretch"
       method: POST
       params:
         - name: clusterName
@@ -283,7 +283,7 @@ examples:
   - name: 400 Response (Unstretch a network)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/networkActions/stretch"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkActions/stretch"
       method: POST
       params:
         - name: clusterName
@@ -322,7 +322,7 @@ examples:
   - name: 401 Response (Stretch and unstretch multiple networks)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/networkActions/stretch"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkActions/stretch"
       method: POST
       params:
         - name: clusterName
@@ -365,7 +365,7 @@ examples:
   - name: 401 Response (Stretch a network)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/networkActions/stretch"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkActions/stretch"
       method: POST
       params:
         - name: clusterName
@@ -404,7 +404,7 @@ examples:
   - name: 401 Response (Unstretch a network)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/networkActions/stretch"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkActions/stretch"
       method: POST
       params:
         - name: clusterName
@@ -443,7 +443,7 @@ examples:
   - name: 403 Response (Stretch and unstretch multiple networks)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/networkActions/stretch"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkActions/stretch"
       method: POST
       params:
         - name: clusterName
@@ -486,7 +486,7 @@ examples:
   - name: 403 Response (Stretch a network)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/networkActions/stretch"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkActions/stretch"
       method: POST
       params:
         - name: clusterName
@@ -525,7 +525,7 @@ examples:
   - name: 403 Response (Unstretch a network)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/networkActions/stretch"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkActions/stretch"
       method: POST
       params:
         - name: clusterName
@@ -564,7 +564,7 @@ examples:
   - name: 404 Response (Stretch and unstretch multiple networks)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/networkActions/stretch"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkActions/stretch"
       method: POST
       params:
         - name: clusterName
@@ -607,7 +607,7 @@ examples:
   - name: 404 Response (Stretch a network)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/networkActions/stretch"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkActions/stretch"
       method: POST
       params:
         - name: clusterName
@@ -646,7 +646,7 @@ examples:
   - name: 404 Response (Unstretch a network)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/networkActions/stretch"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkActions/stretch"
       method: POST
       params:
         - name: clusterName
@@ -685,7 +685,7 @@ examples:
   - name: 500 Response (Stretch and unstretch multiple networks)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/networkActions/stretch"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkActions/stretch"
       method: POST
       params:
         - name: clusterName
@@ -728,7 +728,7 @@ examples:
   - name: 500 Response (Stretch a network)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/networkActions/stretch"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkActions/stretch"
       method: POST
       params:
         - name: clusterName
@@ -767,7 +767,7 @@ examples:
   - name: 500 Response (Unstretch a network)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/networkActions/stretch"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkActions/stretch"
       method: POST
       params:
         - name: clusterName

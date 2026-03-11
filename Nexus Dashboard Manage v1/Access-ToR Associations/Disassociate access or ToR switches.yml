@@ -5,7 +5,7 @@ info:
 
 http:
   method: POST
-  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/accessAssociationActions/disassociate"
+  url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/accessAssociationActions/disassociate"
   params:
     - name: clusterName
       value: ""
@@ -53,7 +53,7 @@ examples:
   - name: bulk disassociate
     description: Bulk disassociation operation
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/accessAssociationActions/disassociate"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/accessAssociationActions/disassociate"
       method: POST
       params:
         - name: clusterName
@@ -122,7 +122,7 @@ examples:
   - name: single
     description: Single access or ToR switch attached to single aggregation or leaf switch
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/accessAssociationActions/disassociate"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/accessAssociationActions/disassociate"
       method: POST
       params:
         - name: clusterName
@@ -169,7 +169,7 @@ examples:
   - name: 400 Response (aggregation vpc)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/accessAssociationActions/disassociate"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/accessAssociationActions/disassociate"
       method: POST
       params:
         - name: clusterName
@@ -212,7 +212,7 @@ examples:
   - name: 400 Response (back-to-back VPC)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/accessAssociationActions/disassociate"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/accessAssociationActions/disassociate"
       method: POST
       params:
         - name: clusterName
@@ -256,7 +256,7 @@ examples:
   - name: 400 Response (bulk disassociate)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/accessAssociationActions/disassociate"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/accessAssociationActions/disassociate"
       method: POST
       params:
         - name: clusterName
@@ -307,7 +307,7 @@ examples:
   - name: 400 Response (single)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/accessAssociationActions/disassociate"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/accessAssociationActions/disassociate"
       method: POST
       params:
         - name: clusterName
@@ -349,7 +349,7 @@ examples:
   - name: 401 Response (aggregation vpc)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/accessAssociationActions/disassociate"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/accessAssociationActions/disassociate"
       method: POST
       params:
         - name: clusterName
@@ -392,7 +392,7 @@ examples:
   - name: 401 Response (back-to-back VPC)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/accessAssociationActions/disassociate"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/accessAssociationActions/disassociate"
       method: POST
       params:
         - name: clusterName
@@ -436,7 +436,7 @@ examples:
   - name: 401 Response (bulk disassociate)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/accessAssociationActions/disassociate"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/accessAssociationActions/disassociate"
       method: POST
       params:
         - name: clusterName
@@ -487,7 +487,7 @@ examples:
   - name: 401 Response (single)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/accessAssociationActions/disassociate"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/accessAssociationActions/disassociate"
       method: POST
       params:
         - name: clusterName
@@ -529,7 +529,7 @@ examples:
   - name: 404 Response (aggregation vpc)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/accessAssociationActions/disassociate"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/accessAssociationActions/disassociate"
       method: POST
       params:
         - name: clusterName
@@ -572,7 +572,7 @@ examples:
   - name: 404 Response (back-to-back VPC)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/accessAssociationActions/disassociate"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/accessAssociationActions/disassociate"
       method: POST
       params:
         - name: clusterName
@@ -616,7 +616,7 @@ examples:
   - name: 404 Response (bulk disassociate)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/accessAssociationActions/disassociate"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/accessAssociationActions/disassociate"
       method: POST
       params:
         - name: clusterName
@@ -667,7 +667,7 @@ examples:
   - name: 404 Response (single)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/accessAssociationActions/disassociate"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/accessAssociationActions/disassociate"
       method: POST
       params:
         - name: clusterName
@@ -709,7 +709,7 @@ examples:
   - name: 500 Response (aggregation vpc)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/accessAssociationActions/disassociate"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/accessAssociationActions/disassociate"
       method: POST
       params:
         - name: clusterName
@@ -752,7 +752,7 @@ examples:
   - name: 500 Response (back-to-back VPC)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/accessAssociationActions/disassociate"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/accessAssociationActions/disassociate"
       method: POST
       params:
         - name: clusterName
@@ -796,7 +796,7 @@ examples:
   - name: 500 Response (bulk disassociate)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/accessAssociationActions/disassociate"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/accessAssociationActions/disassociate"
       method: POST
       params:
         - name: clusterName
@@ -847,7 +847,7 @@ examples:
   - name: 500 Response (single)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/accessAssociationActions/disassociate"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/accessAssociationActions/disassociate"
       method: POST
       params:
         - name: clusterName

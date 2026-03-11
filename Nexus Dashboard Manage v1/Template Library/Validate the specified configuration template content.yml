@@ -5,7 +5,7 @@ info:
 
 http:
   method: POST
-  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/configTemplateActions/validate"
+  url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/configTemplateActions/validate"
   params:
     - name: clusterName
       value: ""
@@ -40,7 +40,7 @@ settings:
 examples:
   - name: Validation with errors
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/configTemplateActions/validate"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/configTemplateActions/validate"
       method: POST
       params:
         - name: clusterName
@@ -99,7 +99,7 @@ examples:
           }
   - name: Successful validation
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/configTemplateActions/validate"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/configTemplateActions/validate"
       method: POST
       params:
         - name: clusterName
@@ -149,7 +149,7 @@ examples:
   - name: 400 Response
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/configTemplateActions/validate"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/configTemplateActions/validate"
       method: POST
       params:
         - name: clusterName
@@ -201,7 +201,7 @@ examples:
   - name: 401 Response
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/configTemplateActions/validate"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/configTemplateActions/validate"
       method: POST
       params:
         - name: clusterName
@@ -253,7 +253,7 @@ examples:
   - name: 403 Response
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/configTemplateActions/validate"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/configTemplateActions/validate"
       method: POST
       params:
         - name: clusterName
@@ -305,7 +305,7 @@ examples:
   - name: 404 Response
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/configTemplateActions/validate"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/configTemplateActions/validate"
       method: POST
       params:
         - name: clusterName
@@ -357,7 +357,7 @@ examples:
   - name: 500 Response
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/configTemplateActions/validate"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/configTemplateActions/validate"
       method: POST
       params:
         - name: clusterName

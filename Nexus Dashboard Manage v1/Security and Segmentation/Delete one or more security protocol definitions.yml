@@ -5,7 +5,7 @@ info:
 
 http:
   method: POST
-  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityProtocolDefinitionActions/remove"
+  url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityProtocolDefinitionActions/remove"
   params:
     - name: clusterName
       value: ""
@@ -47,7 +47,7 @@ settings:
 examples:
   - name: Example of deleting one security protocol definition (Delete a security protocol definition)
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityProtocolDefinitionActions/remove"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityProtocolDefinitionActions/remove"
       method: POST
       params:
         - name: clusterName
@@ -86,7 +86,7 @@ examples:
           }
   - name: Example of deleting one security protocol definition (Delete multiple security protocol definitions)
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityProtocolDefinitionActions/remove"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityProtocolDefinitionActions/remove"
       method: POST
       params:
         - name: clusterName
@@ -126,7 +126,7 @@ examples:
           }
   - name: Example of deleting two security protocol definitions (Delete a security protocol definition)
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityProtocolDefinitionActions/remove"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityProtocolDefinitionActions/remove"
       method: POST
       params:
         - name: clusterName
@@ -170,7 +170,7 @@ examples:
           }
   - name: Example of deleting two security protocol definitions (Delete multiple security protocol definitions)
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityProtocolDefinitionActions/remove"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityProtocolDefinitionActions/remove"
       method: POST
       params:
         - name: clusterName
@@ -216,7 +216,7 @@ examples:
   - name: 400 Response (Delete a security protocol definition)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityProtocolDefinitionActions/remove"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityProtocolDefinitionActions/remove"
       method: POST
       params:
         - name: clusterName
@@ -252,7 +252,7 @@ examples:
   - name: 400 Response (Delete multiple security protocol definitions)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityProtocolDefinitionActions/remove"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityProtocolDefinitionActions/remove"
       method: POST
       params:
         - name: clusterName
@@ -289,7 +289,7 @@ examples:
   - name: 401 Response (Delete a security protocol definition)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityProtocolDefinitionActions/remove"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityProtocolDefinitionActions/remove"
       method: POST
       params:
         - name: clusterName
@@ -325,7 +325,7 @@ examples:
   - name: 401 Response (Delete multiple security protocol definitions)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityProtocolDefinitionActions/remove"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityProtocolDefinitionActions/remove"
       method: POST
       params:
         - name: clusterName
@@ -362,7 +362,7 @@ examples:
   - name: 403 Response (Delete a security protocol definition)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityProtocolDefinitionActions/remove"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityProtocolDefinitionActions/remove"
       method: POST
       params:
         - name: clusterName
@@ -398,7 +398,7 @@ examples:
   - name: 403 Response (Delete multiple security protocol definitions)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityProtocolDefinitionActions/remove"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityProtocolDefinitionActions/remove"
       method: POST
       params:
         - name: clusterName
@@ -435,7 +435,7 @@ examples:
   - name: 404 Response (Delete a security protocol definition)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityProtocolDefinitionActions/remove"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityProtocolDefinitionActions/remove"
       method: POST
       params:
         - name: clusterName
@@ -471,7 +471,7 @@ examples:
   - name: 404 Response (Delete multiple security protocol definitions)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityProtocolDefinitionActions/remove"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityProtocolDefinitionActions/remove"
       method: POST
       params:
         - name: clusterName
@@ -508,7 +508,7 @@ examples:
   - name: 500 Response (Delete a security protocol definition)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityProtocolDefinitionActions/remove"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityProtocolDefinitionActions/remove"
       method: POST
       params:
         - name: clusterName
@@ -544,7 +544,7 @@ examples:
   - name: 500 Response (Delete multiple security protocol definitions)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityProtocolDefinitionActions/remove"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityProtocolDefinitionActions/remove"
       method: POST
       params:
         - name: clusterName

@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/anomalyRules/system/fabricManagement"
+  url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/anomalyRules/system/fabricManagement"
   params:
     - name: clusterName
       value: ""
@@ -38,7 +38,7 @@ examples:
   - name: policies
     description: Anomaly policy list
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/anomalyRules/system/fabricManagement"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/anomalyRules/system/fabricManagement"
       method: GET
       params:
         - name: clusterName
@@ -81,7 +81,7 @@ examples:
   - name: 400 Response
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/anomalyRules/system/fabricManagement"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/anomalyRules/system/fabricManagement"
       method: GET
       params:
         - name: clusterName
@@ -105,7 +105,7 @@ examples:
   - name: 401 Response
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/anomalyRules/system/fabricManagement"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/anomalyRules/system/fabricManagement"
       method: GET
       params:
         - name: clusterName
@@ -129,7 +129,7 @@ examples:
   - name: 403 Response
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/anomalyRules/system/fabricManagement"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/anomalyRules/system/fabricManagement"
       method: GET
       params:
         - name: clusterName
@@ -153,7 +153,7 @@ examples:
   - name: 404 Response
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/anomalyRules/system/fabricManagement"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/anomalyRules/system/fabricManagement"
       method: GET
       params:
         - name: clusterName
@@ -177,7 +177,7 @@ examples:
   - name: 500 Response
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/anomalyRules/system/fabricManagement"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/anomalyRules/system/fabricManagement"
       method: GET
       params:
         - name: clusterName

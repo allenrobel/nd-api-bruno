@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/interfaces/:interfaceName"
+  url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/interfaces/:interfaceName"
   params:
     - name: clusterName
       value: ""
@@ -53,7 +53,7 @@ settings:
 examples:
   - name: ethernetExample
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/interfaces/:interfaceName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/interfaces/:interfaceName"
       method: GET
       params:
         - name: clusterName
@@ -128,7 +128,7 @@ examples:
   - name: 400 Response
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/interfaces/:interfaceName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/interfaces/:interfaceName"
       method: GET
       params:
         - name: clusterName
@@ -168,7 +168,7 @@ examples:
   - name: 401 Response
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/interfaces/:interfaceName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/interfaces/:interfaceName"
       method: GET
       params:
         - name: clusterName
@@ -208,7 +208,7 @@ examples:
   - name: 404 Response
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/interfaces/:interfaceName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/interfaces/:interfaceName"
       method: GET
       params:
         - name: clusterName
@@ -248,7 +248,7 @@ examples:
   - name: 500 Response
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/switches/:switchId/interfaces/:interfaceName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/interfaces/:interfaceName"
       method: GET
       params:
         - name: clusterName

@@ -5,7 +5,7 @@ info:
 
 http:
   method: POST
-  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityContractActions/export"
+  url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityContractActions/export"
   params:
     - name: clusterName
       value: ""
@@ -48,7 +48,7 @@ examples:
   - name: 200 Response (Export a security contract)
     description: OK
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityContractActions/export"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityContractActions/export"
       method: POST
       params:
         - name: clusterName
@@ -83,7 +83,7 @@ examples:
   - name: 200 Response (Export multiple security contracts)
     description: OK
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityContractActions/export"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityContractActions/export"
       method: POST
       params:
         - name: clusterName
@@ -119,7 +119,7 @@ examples:
   - name: 400 Response (Export a security contract)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityContractActions/export"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityContractActions/export"
       method: POST
       params:
         - name: clusterName
@@ -155,7 +155,7 @@ examples:
   - name: 400 Response (Export multiple security contracts)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityContractActions/export"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityContractActions/export"
       method: POST
       params:
         - name: clusterName
@@ -192,7 +192,7 @@ examples:
   - name: 401 Response (Export a security contract)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityContractActions/export"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityContractActions/export"
       method: POST
       params:
         - name: clusterName
@@ -228,7 +228,7 @@ examples:
   - name: 401 Response (Export multiple security contracts)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityContractActions/export"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityContractActions/export"
       method: POST
       params:
         - name: clusterName
@@ -265,7 +265,7 @@ examples:
   - name: 403 Response (Export a security contract)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityContractActions/export"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityContractActions/export"
       method: POST
       params:
         - name: clusterName
@@ -301,7 +301,7 @@ examples:
   - name: 403 Response (Export multiple security contracts)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityContractActions/export"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityContractActions/export"
       method: POST
       params:
         - name: clusterName
@@ -338,7 +338,7 @@ examples:
   - name: 404 Response (Export a security contract)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityContractActions/export"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityContractActions/export"
       method: POST
       params:
         - name: clusterName
@@ -374,7 +374,7 @@ examples:
   - name: 404 Response (Export multiple security contracts)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityContractActions/export"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityContractActions/export"
       method: POST
       params:
         - name: clusterName
@@ -411,7 +411,7 @@ examples:
   - name: 500 Response (Export a security contract)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityContractActions/export"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityContractActions/export"
       method: POST
       params:
         - name: clusterName
@@ -447,7 +447,7 @@ examples:
   - name: 500 Response (Export multiple security contracts)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/securityContractActions/export"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/securityContractActions/export"
       method: POST
       params:
         - name: clusterName

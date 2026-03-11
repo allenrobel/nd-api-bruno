@@ -7,7 +7,7 @@ info:
 
 http:
   method: POST
-  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/securityAssociationActions/export"
+  url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/securityAssociationActions/export"
   params:
     - name: fabricName
       value: ""
@@ -48,7 +48,7 @@ examples:
   - name: 200 Response (Export multiple security associations)
     description: OK
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/securityAssociationActions/export"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/securityAssociationActions/export"
       method: POST
       params:
         - name: fabricName
@@ -79,7 +79,7 @@ examples:
   - name: 200 Response (Export a security association)
     description: OK
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/securityAssociationActions/export"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/securityAssociationActions/export"
       method: POST
       params:
         - name: fabricName
@@ -109,7 +109,7 @@ examples:
   - name: 400 Response (Export multiple security associations)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/securityAssociationActions/export"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/securityAssociationActions/export"
       method: POST
       params:
         - name: fabricName
@@ -142,7 +142,7 @@ examples:
   - name: 400 Response (Export a security association)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/securityAssociationActions/export"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/securityAssociationActions/export"
       method: POST
       params:
         - name: fabricName
@@ -174,7 +174,7 @@ examples:
   - name: 401 Response (Export multiple security associations)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/securityAssociationActions/export"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/securityAssociationActions/export"
       method: POST
       params:
         - name: fabricName
@@ -207,7 +207,7 @@ examples:
   - name: 401 Response (Export a security association)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/securityAssociationActions/export"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/securityAssociationActions/export"
       method: POST
       params:
         - name: fabricName
@@ -239,7 +239,7 @@ examples:
   - name: 403 Response (Export multiple security associations)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/securityAssociationActions/export"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/securityAssociationActions/export"
       method: POST
       params:
         - name: fabricName
@@ -272,7 +272,7 @@ examples:
   - name: 403 Response (Export a security association)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/securityAssociationActions/export"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/securityAssociationActions/export"
       method: POST
       params:
         - name: fabricName
@@ -304,7 +304,7 @@ examples:
   - name: 404 Response (Export multiple security associations)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/securityAssociationActions/export"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/securityAssociationActions/export"
       method: POST
       params:
         - name: fabricName
@@ -337,7 +337,7 @@ examples:
   - name: 404 Response (Export a security association)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/securityAssociationActions/export"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/securityAssociationActions/export"
       method: POST
       params:
         - name: fabricName
@@ -369,7 +369,7 @@ examples:
   - name: 500 Response (Export multiple security associations)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/securityAssociationActions/export"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/securityAssociationActions/export"
       method: POST
       params:
         - name: fabricName
@@ -402,7 +402,7 @@ examples:
   - name: 500 Response (Export a security association)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/securityAssociationActions/export"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/securityAssociationActions/export"
       method: POST
       params:
         - name: fabricName

@@ -5,7 +5,7 @@ info:
 
 http:
   method: POST
-  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/vrfAttachments"
+  url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfAttachments"
   params:
     - name: clusterName
       value: ""
@@ -110,7 +110,7 @@ examples:
   - name: Multi-tenant example (Multiple attach)
     description: Example response for a multi-tenant environment. Each VRF name is prefixed with the tenant name.
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/vrfAttachments"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfAttachments"
       method: POST
       params:
         - name: clusterName
@@ -218,7 +218,7 @@ examples:
   - name: Multi-tenant example (Single attach)
     description: Example response for a multi-tenant environment. Each VRF name is prefixed with the tenant name.
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/vrfAttachments"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfAttachments"
       method: POST
       params:
         - name: clusterName
@@ -282,7 +282,7 @@ examples:
   - name: Multi-tenant example (Single attach with extensions)
     description: Example response for a multi-tenant environment. Each VRF name is prefixed with the tenant name.
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/vrfAttachments"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfAttachments"
       method: POST
       params:
         - name: clusterName
@@ -366,7 +366,7 @@ examples:
   - name: TwoVRFAttachments (Multiple attach)
     description: Attach multiple VRFs to multiple switches
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/vrfAttachments"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfAttachments"
       method: POST
       params:
         - name: clusterName
@@ -474,7 +474,7 @@ examples:
   - name: TwoVRFAttachments (Single attach)
     description: Attach a single VRF to a single switch
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/vrfAttachments"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfAttachments"
       method: POST
       params:
         - name: clusterName
@@ -538,7 +538,7 @@ examples:
   - name: TwoVRFAttachments (Single attach with extensions)
     description: Attach a single VRF with extensions to a single switch
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/vrfAttachments"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfAttachments"
       method: POST
       params:
         - name: clusterName
@@ -622,7 +622,7 @@ examples:
   - name: 400 Response (Multiple attach)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/vrfAttachments"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfAttachments"
       method: POST
       params:
         - name: clusterName
@@ -718,7 +718,7 @@ examples:
   - name: 400 Response (Single attach)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/vrfAttachments"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfAttachments"
       method: POST
       params:
         - name: clusterName
@@ -770,7 +770,7 @@ examples:
   - name: 400 Response (Single attach with extensions)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/vrfAttachments"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfAttachments"
       method: POST
       params:
         - name: clusterName
@@ -842,7 +842,7 @@ examples:
   - name: 401 Response (Multiple attach)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/vrfAttachments"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfAttachments"
       method: POST
       params:
         - name: clusterName
@@ -938,7 +938,7 @@ examples:
   - name: 401 Response (Single attach)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/vrfAttachments"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfAttachments"
       method: POST
       params:
         - name: clusterName
@@ -990,7 +990,7 @@ examples:
   - name: 401 Response (Single attach with extensions)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/vrfAttachments"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfAttachments"
       method: POST
       params:
         - name: clusterName
@@ -1062,7 +1062,7 @@ examples:
   - name: 403 Response (Multiple attach)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/vrfAttachments"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfAttachments"
       method: POST
       params:
         - name: clusterName
@@ -1158,7 +1158,7 @@ examples:
   - name: 403 Response (Single attach)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/vrfAttachments"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfAttachments"
       method: POST
       params:
         - name: clusterName
@@ -1210,7 +1210,7 @@ examples:
   - name: 403 Response (Single attach with extensions)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/vrfAttachments"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfAttachments"
       method: POST
       params:
         - name: clusterName
@@ -1282,7 +1282,7 @@ examples:
   - name: 404 Response (Multiple attach)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/vrfAttachments"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfAttachments"
       method: POST
       params:
         - name: clusterName
@@ -1378,7 +1378,7 @@ examples:
   - name: 404 Response (Single attach)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/vrfAttachments"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfAttachments"
       method: POST
       params:
         - name: clusterName
@@ -1430,7 +1430,7 @@ examples:
   - name: 404 Response (Single attach with extensions)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/vrfAttachments"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfAttachments"
       method: POST
       params:
         - name: clusterName
@@ -1502,7 +1502,7 @@ examples:
   - name: 500 Response (Multiple attach)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/vrfAttachments"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfAttachments"
       method: POST
       params:
         - name: clusterName
@@ -1598,7 +1598,7 @@ examples:
   - name: 500 Response (Single attach)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/vrfAttachments"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfAttachments"
       method: POST
       params:
         - name: clusterName
@@ -1650,7 +1650,7 @@ examples:
   - name: 500 Response (Single attach with extensions)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/vrfAttachments"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfAttachments"
       method: POST
       params:
         - name: clusterName

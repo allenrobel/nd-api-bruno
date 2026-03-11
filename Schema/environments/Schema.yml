@@ -2,13 +2,19 @@ name: Schema
 variables:
   - name: basePath
     value: /api/v1
+    disabled: true
   - name: managePath
     value: "{{basePath}}/manage"
+    disabled: true
   - name: infraPath
     value: "{{basePath}}/infra"
+    disabled: true
   - name: analyzePath
     value: "{{basePath}}/analyze"
+    disabled: true
   - name: oneManagePath
     value: "{{basePath}}/oneManage"
+    disabled: true
   - name: msoPath
     value: /mso
+    disabled: true

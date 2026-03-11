@@ -5,7 +5,7 @@ info:
 
 http:
   method: POST
-  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/l3OutActions/attach"
+  url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/l3OutActions/attach"
   params:
     - name: clusterName
       value: ""
@@ -48,7 +48,7 @@ settings:
 examples:
   - name: AttachDetachL3Outs (exampleOne)
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/l3OutActions/attach"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/l3OutActions/attach"
       method: POST
       params:
         - name: clusterName
@@ -100,7 +100,7 @@ examples:
           }
   - name: AttachL3Outs (exampleOne)
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/l3OutActions/attach"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/l3OutActions/attach"
       method: POST
       params:
         - name: clusterName
@@ -147,7 +147,7 @@ examples:
           }
   - name: AttachOneL3Out (exampleOne)
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/l3OutActions/attach"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/l3OutActions/attach"
       method: POST
       params:
         - name: clusterName
@@ -189,7 +189,7 @@ examples:
           }
   - name: DetachL3Outs (exampleOne)
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/l3OutActions/attach"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/l3OutActions/attach"
       method: POST
       params:
         - name: clusterName
@@ -236,7 +236,7 @@ examples:
           }
   - name: DetachOneL3Out (exampleOne)
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/l3OutActions/attach"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/l3OutActions/attach"
       method: POST
       params:
         - name: clusterName
@@ -279,7 +279,7 @@ examples:
   - name: 400 Response (exampleOne)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/l3OutActions/attach"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/l3OutActions/attach"
       method: POST
       params:
         - name: clusterName
@@ -318,7 +318,7 @@ examples:
   - name: 401 Response (exampleOne)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/l3OutActions/attach"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/l3OutActions/attach"
       method: POST
       params:
         - name: clusterName
@@ -357,7 +357,7 @@ examples:
   - name: 403 Response (exampleOne)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/l3OutActions/attach"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/l3OutActions/attach"
       method: POST
       params:
         - name: clusterName
@@ -396,7 +396,7 @@ examples:
   - name: 404 Response (exampleOne)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/l3OutActions/attach"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/l3OutActions/attach"
       method: POST
       params:
         - name: clusterName
@@ -435,7 +435,7 @@ examples:
   - name: 409 Response (exampleOne)
     description: Conflict
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/l3OutActions/attach"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/l3OutActions/attach"
       method: POST
       params:
         - name: clusterName
@@ -474,7 +474,7 @@ examples:
   - name: 500 Response (exampleOne)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/l3OutActions/attach"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/l3OutActions/attach"
       method: POST
       params:
         - name: clusterName

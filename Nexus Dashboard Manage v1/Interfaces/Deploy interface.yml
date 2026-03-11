@@ -5,7 +5,7 @@ info:
 
 http:
   method: POST
-  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceActions/deploy"
+  url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/deploy"
   params:
     - name: clusterName
       value: ""
@@ -63,7 +63,7 @@ examples:
   - name: 207 Response
     description: Response for interface deploy with partial success and failure
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceActions/deploy"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/deploy"
       method: POST
       params:
         - name: clusterName
@@ -124,7 +124,7 @@ examples:
   - name: 400 Response
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceActions/deploy"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/deploy"
       method: POST
       params:
         - name: clusterName
@@ -168,7 +168,7 @@ examples:
   - name: 401 Response
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceActions/deploy"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/deploy"
       method: POST
       params:
         - name: clusterName
@@ -212,7 +212,7 @@ examples:
   - name: 404 Response
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceActions/deploy"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/deploy"
       method: POST
       params:
         - name: clusterName
@@ -256,7 +256,7 @@ examples:
   - name: 500 Response
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceActions/deploy"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/deploy"
       method: POST
       params:
         - name: clusterName

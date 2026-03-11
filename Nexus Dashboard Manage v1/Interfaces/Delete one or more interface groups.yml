@@ -5,7 +5,7 @@ info:
 
 http:
   method: POST
-  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups/actions/remove"
+  url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups/actions/remove"
   params:
     - name: clusterName
       value: ""
@@ -52,7 +52,7 @@ settings:
 examples:
   - name: deleteMultipleInterfaceGroups
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups/actions/remove"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups/actions/remove"
       method: POST
       params:
         - name: clusterName
@@ -102,7 +102,7 @@ examples:
           }
   - name: deleteOneInterfaceGroup
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups/actions/remove"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups/actions/remove"
       method: POST
       params:
         - name: clusterName
@@ -147,7 +147,7 @@ examples:
   - name: 400 Response (Delete multiple interface groups)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups/actions/remove"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups/actions/remove"
       method: POST
       params:
         - name: clusterName
@@ -189,7 +189,7 @@ examples:
   - name: 400 Response (Delete an interface group)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups/actions/remove"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups/actions/remove"
       method: POST
       params:
         - name: clusterName
@@ -230,7 +230,7 @@ examples:
   - name: 401 Response (Delete multiple interface groups)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups/actions/remove"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups/actions/remove"
       method: POST
       params:
         - name: clusterName
@@ -272,7 +272,7 @@ examples:
   - name: 401 Response (Delete an interface group)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups/actions/remove"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups/actions/remove"
       method: POST
       params:
         - name: clusterName
@@ -313,7 +313,7 @@ examples:
   - name: 403 Response (Delete multiple interface groups)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups/actions/remove"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups/actions/remove"
       method: POST
       params:
         - name: clusterName
@@ -355,7 +355,7 @@ examples:
   - name: 403 Response (Delete an interface group)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups/actions/remove"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups/actions/remove"
       method: POST
       params:
         - name: clusterName
@@ -396,7 +396,7 @@ examples:
   - name: 404 Response (Delete multiple interface groups)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups/actions/remove"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups/actions/remove"
       method: POST
       params:
         - name: clusterName
@@ -438,7 +438,7 @@ examples:
   - name: 404 Response (Delete an interface group)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups/actions/remove"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups/actions/remove"
       method: POST
       params:
         - name: clusterName
@@ -479,7 +479,7 @@ examples:
   - name: 409 Response (Delete multiple interface groups)
     description: Conflict
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups/actions/remove"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups/actions/remove"
       method: POST
       params:
         - name: clusterName
@@ -521,7 +521,7 @@ examples:
   - name: 409 Response (Delete an interface group)
     description: Conflict
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups/actions/remove"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups/actions/remove"
       method: POST
       params:
         - name: clusterName
@@ -562,7 +562,7 @@ examples:
   - name: 500 Response (Delete multiple interface groups)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups/actions/remove"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups/actions/remove"
       method: POST
       params:
         - name: clusterName
@@ -604,7 +604,7 @@ examples:
   - name: 500 Response (Delete an interface group)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups/actions/remove"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups/actions/remove"
       method: POST
       params:
         - name: clusterName

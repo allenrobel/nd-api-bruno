@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups/:interfaceGroupName"
+  url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups/:interfaceGroupName"
   params:
     - name: clusterName
       value: ""
@@ -46,7 +46,7 @@ examples:
   - name: any
     description: any
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups/:interfaceGroupName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups/:interfaceGroupName"
       method: GET
       params:
         - name: clusterName
@@ -98,7 +98,7 @@ examples:
   - name: ethernetCustom
     description: Ethernet with Custom template
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups/:interfaceGroupName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups/:interfaceGroupName"
       method: GET
       params:
         - name: clusterName
@@ -174,7 +174,7 @@ examples:
   - name: ethernetWithPolicy
     description: Ethernet with Policy
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups/:interfaceGroupName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups/:interfaceGroupName"
       method: GET
       params:
         - name: clusterName
@@ -250,7 +250,7 @@ examples:
   - name: ethernetWithoutPolicy
     description: Ethernet without Policy
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups/:interfaceGroupName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups/:interfaceGroupName"
       method: GET
       params:
         - name: clusterName
@@ -305,7 +305,7 @@ examples:
   - name: portChannel
     description: portChannel
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups/:interfaceGroupName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups/:interfaceGroupName"
       method: GET
       params:
         - name: clusterName
@@ -359,7 +359,7 @@ examples:
   - name: vpc
     description: vpc
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups/:interfaceGroupName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups/:interfaceGroupName"
       method: GET
       params:
         - name: clusterName
@@ -413,7 +413,7 @@ examples:
   - name: 400 Response
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups/:interfaceGroupName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups/:interfaceGroupName"
       method: GET
       params:
         - name: clusterName
@@ -445,7 +445,7 @@ examples:
   - name: 401 Response
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups/:interfaceGroupName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups/:interfaceGroupName"
       method: GET
       params:
         - name: clusterName
@@ -477,7 +477,7 @@ examples:
   - name: 403 Response
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups/:interfaceGroupName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups/:interfaceGroupName"
       method: GET
       params:
         - name: clusterName
@@ -509,7 +509,7 @@ examples:
   - name: 404 Response
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups/:interfaceGroupName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups/:interfaceGroupName"
       method: GET
       params:
         - name: clusterName
@@ -541,7 +541,7 @@ examples:
   - name: 500 Response
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/interfaceGroups/:interfaceGroupName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups/:interfaceGroupName"
       method: GET
       params:
         - name: clusterName

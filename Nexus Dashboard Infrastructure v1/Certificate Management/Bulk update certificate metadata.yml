@@ -5,7 +5,7 @@ info:
 
 http:
   method: POST
-  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/security/certificates/actions/modify"
+  url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/security/certificates/actions/modify"
   params:
     - name: clusterName
       value: ""
@@ -55,7 +55,7 @@ examples:
   - name: 207 Response
     description: OK
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/security/certificates/actions/modify"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/security/certificates/actions/modify"
       method: POST
       params:
         - name: clusterName
@@ -113,7 +113,7 @@ examples:
   - name: 400 Response
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/security/certificates/actions/modify"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/security/certificates/actions/modify"
       method: POST
       params:
         - name: clusterName
@@ -160,7 +160,7 @@ examples:
   - name: 401 Response
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/security/certificates/actions/modify"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/security/certificates/actions/modify"
       method: POST
       params:
         - name: clusterName
@@ -207,7 +207,7 @@ examples:
   - name: 403 Response
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/security/certificates/actions/modify"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/security/certificates/actions/modify"
       method: POST
       params:
         - name: clusterName
@@ -254,7 +254,7 @@ examples:
   - name: 500 Response
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/security/certificates/actions/modify"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/security/certificates/actions/modify"
       method: POST
       params:
         - name: clusterName

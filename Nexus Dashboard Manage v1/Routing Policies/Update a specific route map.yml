@@ -5,7 +5,7 @@ info:
 
 http:
   method: PUT
-  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/routeMaps/:routeMapName"
+  url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/routeMaps/:routeMapName"
   params:
     - name: clusterName
       value: ""
@@ -61,7 +61,7 @@ examples:
   - name: 204 Response (updateRouteMapWithDefaultTenant)
     description: No Content
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/routeMaps/:routeMapName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/routeMaps/:routeMapName"
       method: PUT
       params:
         - name: clusterName
@@ -111,7 +111,7 @@ examples:
   - name: 204 Response (updateRouteMapWithTenant)
     description: No Content
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/routeMaps/:routeMapName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/routeMaps/:routeMapName"
       method: PUT
       params:
         - name: clusterName
@@ -162,7 +162,7 @@ examples:
   - name: 400 Response (updateRouteMapWithDefaultTenant)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/routeMaps/:routeMapName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/routeMaps/:routeMapName"
       method: PUT
       params:
         - name: clusterName
@@ -220,7 +220,7 @@ examples:
   - name: 400 Response (updateRouteMapWithTenant)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/routeMaps/:routeMapName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/routeMaps/:routeMapName"
       method: PUT
       params:
         - name: clusterName
@@ -279,7 +279,7 @@ examples:
   - name: 401 Response (updateRouteMapWithDefaultTenant)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/routeMaps/:routeMapName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/routeMaps/:routeMapName"
       method: PUT
       params:
         - name: clusterName
@@ -337,7 +337,7 @@ examples:
   - name: 401 Response (updateRouteMapWithTenant)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/routeMaps/:routeMapName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/routeMaps/:routeMapName"
       method: PUT
       params:
         - name: clusterName
@@ -396,7 +396,7 @@ examples:
   - name: 403 Response (updateRouteMapWithDefaultTenant)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/routeMaps/:routeMapName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/routeMaps/:routeMapName"
       method: PUT
       params:
         - name: clusterName
@@ -454,7 +454,7 @@ examples:
   - name: 403 Response (updateRouteMapWithTenant)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/routeMaps/:routeMapName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/routeMaps/:routeMapName"
       method: PUT
       params:
         - name: clusterName
@@ -513,7 +513,7 @@ examples:
   - name: 404 Response (updateRouteMapWithDefaultTenant)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/routeMaps/:routeMapName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/routeMaps/:routeMapName"
       method: PUT
       params:
         - name: clusterName
@@ -571,7 +571,7 @@ examples:
   - name: 404 Response (updateRouteMapWithTenant)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/routeMaps/:routeMapName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/routeMaps/:routeMapName"
       method: PUT
       params:
         - name: clusterName
@@ -630,7 +630,7 @@ examples:
   - name: 500 Response (updateRouteMapWithDefaultTenant)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/routeMaps/:routeMapName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/routeMaps/:routeMapName"
       method: PUT
       params:
         - name: clusterName
@@ -688,7 +688,7 @@ examples:
   - name: 500 Response (updateRouteMapWithTenant)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/routeMaps/:routeMapName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/routeMaps/:routeMapName"
       method: PUT
       params:
         - name: clusterName

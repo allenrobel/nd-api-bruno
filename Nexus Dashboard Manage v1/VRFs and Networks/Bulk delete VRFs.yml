@@ -5,7 +5,7 @@ info:
 
 http:
   method: POST
-  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/vrfActions/remove"
+  url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfActions/remove"
   params:
     - name: clusterName
       value: ""
@@ -52,7 +52,7 @@ settings:
 examples:
   - name: DeleteOneVRF (Schema for VRFs to be deleted)
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/vrfActions/remove"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfActions/remove"
       method: POST
       params:
         - name: clusterName
@@ -96,7 +96,7 @@ examples:
           }
   - name: DeleteVRFs (Schema for VRFs to be deleted)
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/vrfActions/remove"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfActions/remove"
       method: POST
       params:
         - name: clusterName
@@ -146,7 +146,7 @@ examples:
   - name: Multi-tenant example (Schema for VRFs to be deleted)
     description: Example response for a multi-tenant environment. Each VRF name is prefixed with the tenant name.
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/vrfActions/remove"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfActions/remove"
       method: POST
       params:
         - name: clusterName
@@ -200,7 +200,7 @@ examples:
   - name: 400 Response (Schema for VRFs to be deleted)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/vrfActions/remove"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfActions/remove"
       method: POST
       params:
         - name: clusterName
@@ -242,7 +242,7 @@ examples:
   - name: 401 Response (Schema for VRFs to be deleted)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/vrfActions/remove"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfActions/remove"
       method: POST
       params:
         - name: clusterName
@@ -284,7 +284,7 @@ examples:
   - name: 403 Response (Schema for VRFs to be deleted)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/vrfActions/remove"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfActions/remove"
       method: POST
       params:
         - name: clusterName
@@ -326,7 +326,7 @@ examples:
   - name: 404 Response (Schema for VRFs to be deleted)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/vrfActions/remove"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfActions/remove"
       method: POST
       params:
         - name: clusterName
@@ -368,7 +368,7 @@ examples:
   - name: 500 Response (Schema for VRFs to be deleted)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/vrfActions/remove"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfActions/remove"
       method: POST
       params:
         - name: clusterName

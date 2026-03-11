@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/vpcPairs"
+  url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vpcPairs"
   params:
     - name: clusterName
       value: ""
@@ -66,7 +66,7 @@ examples:
   - name: discoveredVpcPairs
     description: Discovered vPC pairs
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/vpcPairs"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vpcPairs"
       method: GET
       params:
         - name: clusterName
@@ -134,7 +134,7 @@ examples:
   - name: intendedVpcPairs
     description: Intended vPC pairs
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/vpcPairs"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vpcPairs"
       method: GET
       params:
         - name: clusterName
@@ -199,7 +199,7 @@ examples:
   - name: 400 Response
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/vpcPairs"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vpcPairs"
       method: GET
       params:
         - name: clusterName
@@ -251,7 +251,7 @@ examples:
   - name: 401 Response
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/vpcPairs"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vpcPairs"
       method: GET
       params:
         - name: clusterName
@@ -303,7 +303,7 @@ examples:
   - name: 403 Response
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/vpcPairs"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vpcPairs"
       method: GET
       params:
         - name: clusterName
@@ -355,7 +355,7 @@ examples:
   - name: 404 Response
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/vpcPairs"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vpcPairs"
       method: GET
       params:
         - name: clusterName
@@ -407,7 +407,7 @@ examples:
   - name: 500 Response
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/fabrics/:fabricName/vpcPairs"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vpcPairs"
       method: GET
       params:
         - name: clusterName

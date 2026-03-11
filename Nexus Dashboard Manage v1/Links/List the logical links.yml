@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/logicalLinks"
+  url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/logicalLinks"
   params:
     - name: clusterName
       value: ""
@@ -67,7 +67,7 @@ examples:
   - name: 200 Response
     description: OK
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/logicalLinks"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/logicalLinks"
       method: GET
       params:
         - name: clusterName
@@ -194,7 +194,7 @@ examples:
   - name: 400 Response
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/logicalLinks"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/logicalLinks"
       method: GET
       params:
         - name: clusterName
@@ -247,7 +247,7 @@ examples:
   - name: 401 Response
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/logicalLinks"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/logicalLinks"
       method: GET
       params:
         - name: clusterName
@@ -300,7 +300,7 @@ examples:
   - name: 403 Response
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/logicalLinks"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/logicalLinks"
       method: GET
       params:
         - name: clusterName
@@ -353,7 +353,7 @@ examples:
   - name: 404 Response
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/logicalLinks"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/logicalLinks"
       method: GET
       params:
         - name: clusterName
@@ -406,7 +406,7 @@ examples:
   - name: 409 Response
     description: Conflict
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/logicalLinks"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/logicalLinks"
       method: GET
       params:
         - name: clusterName
@@ -459,7 +459,7 @@ examples:
   - name: 500 Response
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/logicalLinks"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/logicalLinks"
       method: GET
       params:
         - name: clusterName

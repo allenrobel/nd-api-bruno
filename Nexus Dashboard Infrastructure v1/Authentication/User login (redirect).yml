@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/login"
+  url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/login"
   params:
     - name: clusterName
       value: ""
@@ -42,7 +42,7 @@ examples:
   - name: 302 Response
     description: Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/login"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/login"
       method: GET
       params:
         - name: clusterName
@@ -62,7 +62,7 @@ examples:
   - name: 500 Response
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/login"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/login"
       method: GET
       params:
         - name: clusterName

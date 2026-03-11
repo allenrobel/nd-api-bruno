@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/license/smartLicenseStatus"
+  url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/license/smartLicenseStatus"
   params:
     - name: clusterName
       value: ""
@@ -37,7 +37,7 @@ settings:
 examples:
   - name: Deregistered
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/license/smartLicenseStatus"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/license/smartLicenseStatus"
       method: GET
       params:
         - name: clusterName
@@ -61,7 +61,7 @@ examples:
           }
   - name: Deregistering
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/license/smartLicenseStatus"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/license/smartLicenseStatus"
       method: GET
       params:
         - name: clusterName
@@ -85,7 +85,7 @@ examples:
           }
   - name: Disabled
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/license/smartLicenseStatus"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/license/smartLicenseStatus"
       method: GET
       params:
         - name: clusterName
@@ -109,7 +109,7 @@ examples:
           }
   - name: Offline mode
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/license/smartLicenseStatus"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/license/smartLicenseStatus"
       method: GET
       params:
         - name: clusterName
@@ -133,7 +133,7 @@ examples:
           }
   - name: Registered
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/license/smartLicenseStatus"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/license/smartLicenseStatus"
       method: GET
       params:
         - name: clusterName
@@ -157,7 +157,7 @@ examples:
           }
   - name: Unconfigured
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/license/smartLicenseStatus"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/license/smartLicenseStatus"
       method: GET
       params:
         - name: clusterName
@@ -182,7 +182,7 @@ examples:
   - name: 400 Response
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/license/smartLicenseStatus"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/license/smartLicenseStatus"
       method: GET
       params:
         - name: clusterName
@@ -206,7 +206,7 @@ examples:
   - name: 401 Response
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/license/smartLicenseStatus"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/license/smartLicenseStatus"
       method: GET
       params:
         - name: clusterName
@@ -230,7 +230,7 @@ examples:
   - name: 403 Response
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/license/smartLicenseStatus"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/license/smartLicenseStatus"
       method: GET
       params:
         - name: clusterName
@@ -254,7 +254,7 @@ examples:
   - name: 500 Response
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/license/smartLicenseStatus"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/license/smartLicenseStatus"
       method: GET
       params:
         - name: clusterName

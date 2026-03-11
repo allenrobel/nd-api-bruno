@@ -7,7 +7,7 @@ info:
 
 http:
   method: POST
-  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/vrfActions/import"
+  url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/vrfActions/import"
   params:
     - name: fabricName
       value: ""
@@ -38,7 +38,7 @@ settings:
 examples:
   - name: VRF import response with success and failure (Custom VRF CSV import)
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/vrfActions/import"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/vrfActions/import"
       method: POST
       params:
         - name: fabricName
@@ -71,7 +71,7 @@ examples:
           }
   - name: VRF import response with success and failure (VXLAN VRF CSV import)
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/vrfActions/import"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/vrfActions/import"
       method: POST
       params:
         - name: fabricName
@@ -105,7 +105,7 @@ examples:
   - name: 400 Response (Custom VRF CSV import)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/vrfActions/import"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/vrfActions/import"
       method: POST
       params:
         - name: fabricName
@@ -129,7 +129,7 @@ examples:
   - name: 400 Response (VXLAN VRF CSV import)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/vrfActions/import"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/vrfActions/import"
       method: POST
       params:
         - name: fabricName
@@ -153,7 +153,7 @@ examples:
   - name: 401 Response (Custom VRF CSV import)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/vrfActions/import"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/vrfActions/import"
       method: POST
       params:
         - name: fabricName
@@ -177,7 +177,7 @@ examples:
   - name: 401 Response (VXLAN VRF CSV import)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/vrfActions/import"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/vrfActions/import"
       method: POST
       params:
         - name: fabricName
@@ -201,7 +201,7 @@ examples:
   - name: 403 Response (Custom VRF CSV import)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/vrfActions/import"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/vrfActions/import"
       method: POST
       params:
         - name: fabricName
@@ -225,7 +225,7 @@ examples:
   - name: 403 Response (VXLAN VRF CSV import)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/vrfActions/import"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/vrfActions/import"
       method: POST
       params:
         - name: fabricName
@@ -249,7 +249,7 @@ examples:
   - name: 404 Response (Custom VRF CSV import)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/vrfActions/import"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/vrfActions/import"
       method: POST
       params:
         - name: fabricName
@@ -273,7 +273,7 @@ examples:
   - name: 404 Response (VXLAN VRF CSV import)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/vrfActions/import"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/vrfActions/import"
       method: POST
       params:
         - name: fabricName
@@ -297,7 +297,7 @@ examples:
   - name: 500 Response (Custom VRF CSV import)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/vrfActions/import"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/vrfActions/import"
       method: POST
       params:
         - name: fabricName
@@ -321,7 +321,7 @@ examples:
   - name: 500 Response (VXLAN VRF CSV import)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/vrfActions/import"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/vrfActions/import"
       method: POST
       params:
         - name: fabricName

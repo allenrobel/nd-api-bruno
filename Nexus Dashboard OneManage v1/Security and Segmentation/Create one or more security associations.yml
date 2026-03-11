@@ -7,7 +7,7 @@ info:
 
 http:
   method: POST
-  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/securityAssociations"
+  url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/securityAssociations"
   params:
     - name: fabricName
       value: ""
@@ -56,7 +56,7 @@ settings:
 examples:
   - name: Example of creating one security contract association (Create a security association)
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/securityAssociations"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/securityAssociations"
       method: POST
       params:
         - name: fabricName
@@ -101,7 +101,7 @@ examples:
           }
   - name: Example of creating two security contract associations (Create a security association)
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/securityAssociations"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/securityAssociations"
       method: POST
       params:
         - name: fabricName
@@ -152,7 +152,7 @@ examples:
   - name: 400 Response (Create a security association)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/securityAssociations"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/securityAssociations"
       method: POST
       params:
         - name: fabricName
@@ -194,7 +194,7 @@ examples:
   - name: 401 Response (Create a security association)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/securityAssociations"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/securityAssociations"
       method: POST
       params:
         - name: fabricName
@@ -236,7 +236,7 @@ examples:
   - name: 403 Response (Create a security association)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/securityAssociations"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/securityAssociations"
       method: POST
       params:
         - name: fabricName
@@ -278,7 +278,7 @@ examples:
   - name: 404 Response (Create a security association)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/securityAssociations"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/securityAssociations"
       method: POST
       params:
         - name: fabricName
@@ -320,7 +320,7 @@ examples:
   - name: 500 Response (Create a security association)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/manage/fabrics/:fabricName/securityAssociations"
+      url: "{{controllerProtocol}}{{controllerIp}}{{oneManagePath}}/manage/fabrics/:fabricName/securityAssociations"
       method: POST
       params:
         - name: fabricName

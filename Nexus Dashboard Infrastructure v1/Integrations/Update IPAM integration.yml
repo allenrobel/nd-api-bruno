@@ -5,7 +5,7 @@ info:
 
 http:
   method: PUT
-  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/integrations/ipam/:integrationId"
+  url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/integrations/ipam/:integrationId"
   params:
     - name: integrationId
       value: ""
@@ -45,7 +45,7 @@ examples:
   - name: 204 Response
     description: No Content
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/integrations/ipam/:integrationId"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/integrations/ipam/:integrationId"
       method: PUT
       params:
         - name: integrationId
@@ -75,7 +75,7 @@ examples:
   - name: 400 Response
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/integrations/ipam/:integrationId"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/integrations/ipam/:integrationId"
       method: PUT
       params:
         - name: integrationId
@@ -113,7 +113,7 @@ examples:
   - name: 401 Response
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/integrations/ipam/:integrationId"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/integrations/ipam/:integrationId"
       method: PUT
       params:
         - name: integrationId
@@ -151,7 +151,7 @@ examples:
   - name: 403 Response
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/integrations/ipam/:integrationId"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/integrations/ipam/:integrationId"
       method: PUT
       params:
         - name: integrationId
@@ -189,7 +189,7 @@ examples:
   - name: 500 Response
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/integrations/ipam/:integrationId"
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/integrations/ipam/:integrationId"
       method: PUT
       params:
         - name: integrationId

@@ -5,7 +5,7 @@ info:
 
 http:
   method: POST
-  url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/switchActions/:switchId/configurationDriftReconcile"
+  url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/switchActions/:switchId/configurationDriftReconcile"
   params:
     - name: clusterName
       value: ""
@@ -48,7 +48,7 @@ examples:
   - name: 200 Response (Reconcile specific NTP server configurations)
     description: Reconcile task completed
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/switchActions/:switchId/configurationDriftReconcile"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/switchActions/:switchId/configurationDriftReconcile"
       method: POST
       params:
         - name: clusterName
@@ -83,7 +83,7 @@ examples:
   - name: 200 Response (Full switch configuration reconcile (empty payload))
     description: Reconcile task completed
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/switchActions/:switchId/configurationDriftReconcile"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/switchActions/:switchId/configurationDriftReconcile"
       method: POST
       params:
         - name: clusterName
@@ -115,7 +115,7 @@ examples:
   - name: 200 Response (Reconcile specific SNMP configurations)
     description: Reconcile task completed
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/switchActions/:switchId/configurationDriftReconcile"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/switchActions/:switchId/configurationDriftReconcile"
       method: POST
       params:
         - name: clusterName
@@ -150,7 +150,7 @@ examples:
   - name: 400 Response (Reconcile specific NTP server configurations)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/switchActions/:switchId/configurationDriftReconcile"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/switchActions/:switchId/configurationDriftReconcile"
       method: POST
       params:
         - name: clusterName
@@ -187,7 +187,7 @@ examples:
   - name: 400 Response (Full switch configuration reconcile (empty payload))
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/switchActions/:switchId/configurationDriftReconcile"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/switchActions/:switchId/configurationDriftReconcile"
       method: POST
       params:
         - name: clusterName
@@ -221,7 +221,7 @@ examples:
   - name: 400 Response (Reconcile specific SNMP configurations)
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/switchActions/:switchId/configurationDriftReconcile"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/switchActions/:switchId/configurationDriftReconcile"
       method: POST
       params:
         - name: clusterName
@@ -258,7 +258,7 @@ examples:
   - name: 401 Response (Reconcile specific NTP server configurations)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/switchActions/:switchId/configurationDriftReconcile"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/switchActions/:switchId/configurationDriftReconcile"
       method: POST
       params:
         - name: clusterName
@@ -295,7 +295,7 @@ examples:
   - name: 401 Response (Full switch configuration reconcile (empty payload))
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/switchActions/:switchId/configurationDriftReconcile"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/switchActions/:switchId/configurationDriftReconcile"
       method: POST
       params:
         - name: clusterName
@@ -329,7 +329,7 @@ examples:
   - name: 401 Response (Reconcile specific SNMP configurations)
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/switchActions/:switchId/configurationDriftReconcile"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/switchActions/:switchId/configurationDriftReconcile"
       method: POST
       params:
         - name: clusterName
@@ -366,7 +366,7 @@ examples:
   - name: 403 Response (Reconcile specific NTP server configurations)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/switchActions/:switchId/configurationDriftReconcile"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/switchActions/:switchId/configurationDriftReconcile"
       method: POST
       params:
         - name: clusterName
@@ -403,7 +403,7 @@ examples:
   - name: 403 Response (Full switch configuration reconcile (empty payload))
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/switchActions/:switchId/configurationDriftReconcile"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/switchActions/:switchId/configurationDriftReconcile"
       method: POST
       params:
         - name: clusterName
@@ -437,7 +437,7 @@ examples:
   - name: 403 Response (Reconcile specific SNMP configurations)
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/switchActions/:switchId/configurationDriftReconcile"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/switchActions/:switchId/configurationDriftReconcile"
       method: POST
       params:
         - name: clusterName
@@ -474,7 +474,7 @@ examples:
   - name: 404 Response (Reconcile specific NTP server configurations)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/switchActions/:switchId/configurationDriftReconcile"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/switchActions/:switchId/configurationDriftReconcile"
       method: POST
       params:
         - name: clusterName
@@ -511,7 +511,7 @@ examples:
   - name: 404 Response (Full switch configuration reconcile (empty payload))
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/switchActions/:switchId/configurationDriftReconcile"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/switchActions/:switchId/configurationDriftReconcile"
       method: POST
       params:
         - name: clusterName
@@ -545,7 +545,7 @@ examples:
   - name: 404 Response (Reconcile specific SNMP configurations)
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/switchActions/:switchId/configurationDriftReconcile"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/switchActions/:switchId/configurationDriftReconcile"
       method: POST
       params:
         - name: clusterName
@@ -582,7 +582,7 @@ examples:
   - name: 500 Response (Reconcile specific NTP server configurations)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/switchActions/:switchId/configurationDriftReconcile"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/switchActions/:switchId/configurationDriftReconcile"
       method: POST
       params:
         - name: clusterName
@@ -619,7 +619,7 @@ examples:
   - name: 500 Response (Full switch configuration reconcile (empty payload))
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/switchActions/:switchId/configurationDriftReconcile"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/switchActions/:switchId/configurationDriftReconcile"
       method: POST
       params:
         - name: clusterName
@@ -653,7 +653,7 @@ examples:
   - name: 500 Response (Reconcile specific SNMP configurations)
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{basePath}}/switchActions/:switchId/configurationDriftReconcile"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/switchActions/:switchId/configurationDriftReconcile"
       method: POST
       params:
         - name: clusterName
