@@ -38,21 +38,7 @@ http:
         When set to `true`, returns essential server summary data only (9 fields listed above).
         When omitted or `false`, returns full server objects with complete details.
       disabled: true
-  auth:
-    type: oauth2
-    flow: implicit
-    authorizationUrl: https://example.com/login
-    callbackUrl: "{{oauth_callback_url}}"
-    credentials:
-      clientId: "{{oauth_client_id}}"
-    scope: observer fabric-admin support-engineer super-admin approver designer
-    state: "{{oauth_state}}"
-    tokenConfig:
-      placement:
-        header: Bearer
-    settings:
-      autoFetchToken: false
-      autoRefreshToken: true
+  auth: inherit
 
 settings:
   encodeUrl: true

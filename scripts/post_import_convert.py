@@ -18,11 +18,14 @@ What it does:
        for previously converted collections)
     2. Removes basePath/baseUrl from the collection environment file
        (these are now defined in the Global environment)
-    3. Adds the collection-level auth token pre-request script to
-       opencollection.yml (skips if already present)
+    3. Adds the collection-level auth token pre-request script and bearer
+       auth to opencollection.yml (skips if already present)
+    4. Replaces per-request oauth2 auth blocks with auth: inherit so
+       requests inherit bearer auth from the collection level
 """
 
 import argparse
+import re
 import sys
 from pathlib import Path
 from urllib.parse import urlparse
@@ -37,6 +40,25 @@ PATH_SUFFIX_MAP = {
 
 OLD_BASE_URL = "{{baseUrl}}"
 OLD_BASE_PATH = "{{basePath}}"
+
+# Regex matching the oauth2 auth block that Bruno generates from OpenAPI imports
+OAUTH2_AUTH_PATTERN = re.compile(
+    r"  auth:\n"
+    r"    type: oauth2\n"
+    r"    flow: implicit\n"
+    r"    authorizationUrl: https://example\.com/login\n"
+    r'    callbackUrl: "\{\{oauth_callback_url\}\}"\n'
+    r"    credentials:\n"
+    r'      clientId: "\{\{oauth_client_id\}\}"\n'
+    r"    scope: observer fabric-admin support-engineer super-admin approver designer\n"
+    r'    state: "\{\{oauth_state\}\}"\n'
+    r"    tokenConfig:\n"
+    r"      placement:\n"
+    r"        header: Bearer\n"
+    r"    settings:\n"
+    r"      autoFetchToken: false\n"
+    r"      autoRefreshToken: true\n"
+)
 
 BEFORE_REQUEST_SCRIPT = """\
 // Skip token check for login request itself
@@ -68,6 +90,9 @@ config:
       bypassProxy: ""
 
 request:
+  auth:
+    type: bearer
+    token: "{{{{nd_auth_token}}}}"
   scripts:
     - type: before-request
       code: |-
@@ -238,6 +263,33 @@ def add_prerequest_script(collection_dir: Path) -> None:
     print("  Added auth token script to opencollection.yml")
 
 
+def replace_oauth2_auth(collection_dir: Path) -> tuple[int, int]:
+    """Replace per-request oauth2 auth blocks with auth: inherit."""
+    converted = 0
+    skipped = 0
+
+    for yml_file in collection_dir.rglob("*.yml"):
+        if "environments" in yml_file.parts:
+            continue
+        if yml_file.name == "opencollection.yml":
+            continue
+
+        content = yml_file.read_text()
+
+        if "type: oauth2" in content:
+            new_content = OAUTH2_AUTH_PATTERN.sub("  auth: inherit\n", content)
+            if new_content != content:
+                yml_file.write_text(new_content)
+                converted += 1
+            else:
+                print(f"  Warning: oauth2 block did not match expected pattern in {yml_file.name}")
+                skipped += 1
+        else:
+            skipped += 1
+
+    return converted, skipped
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="Convert an imported Bruno collection to use standard URL variables."
@@ -278,6 +330,13 @@ def main():
 
     # Step 3
     add_prerequest_script(collection_dir)
+    print()
+
+    # Step 4
+    converted, skipped = replace_oauth2_auth(collection_dir)
+    print("Step 4: Auth replacement (oauth2 -> inherit)")
+    print(f"  Converted: {converted} files")
+    print(f"  Skipped (already converted): {skipped} files")
 
     print(f"\nDone. Collection '{args.collection}' has been converted.")
 

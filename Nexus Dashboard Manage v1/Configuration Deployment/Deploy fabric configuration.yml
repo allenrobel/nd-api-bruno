@@ -27,21 +27,7 @@ http:
       description: |
         inclAllFabricGroupSwitches (Include all Fabric Groups Switches): If set to true, and you specify a fabric group name, changes will be deployed to all member fabrics within the group. If set to false, changes will not be deployed to the member fabrics
       disabled: true
-  auth:
-    type: oauth2
-    flow: implicit
-    authorizationUrl: https://example.com/login
-    callbackUrl: "{{oauth_callback_url}}"
-    credentials:
-      clientId: "{{oauth_client_id}}"
-    scope: observer fabric-admin support-engineer super-admin approver designer
-    state: "{{oauth_state}}"
-    tokenConfig:
-      placement:
-        header: Bearer
-    settings:
-      autoFetchToken: false
-      autoRefreshToken: true
+  auth: inherit
 
 settings:
   encodeUrl: true

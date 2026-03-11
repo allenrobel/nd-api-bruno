@@ -15,6 +15,9 @@ config:
       bypassProxy: ""
 
 request:
+  auth:
+    type: bearer
+    token: "{{nd_auth_token}}"
   scripts:
     - type: before-request
       code: |-

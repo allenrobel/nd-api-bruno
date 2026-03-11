@@ -18,6 +18,9 @@ request:
   variables:
     - name: basePath
       value: /api/v1
+  auth:
+    type: bearer
+    token: "{{nd_auth_token}}"
   scripts:
     - type: before-request
       code: |-

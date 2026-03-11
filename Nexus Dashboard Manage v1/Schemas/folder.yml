@@ -1,7 +1,0 @@
-info:
-  name: Schemas
-  type: folder
-  seq: 24
-
-request:
-  auth: inherit

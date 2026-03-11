@@ -6,21 +6,7 @@ info:
 http:
   method: POST
   url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/systemSoftware/notifications/actions/snooze"
-  auth:
-    type: oauth2
-    flow: implicit
-    authorizationUrl: https://example.com/login
-    callbackUrl: "{{oauth_callback_url}}"
-    credentials:
-      clientId: "{{oauth_client_id}}"
-    scope: observer fabric-admin support-engineer super-admin approver designer
-    state: "{{oauth_state}}"
-    tokenConfig:
-      placement:
-        header: Bearer
-    settings:
-      autoFetchToken: false
-      autoRefreshToken: true
+  auth: inherit
 
 settings:
   encodeUrl: true
