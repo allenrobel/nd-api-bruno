@@ -91,7 +91,7 @@ Save the JSON response to a file (e.g., `schemas/manage.json`) to use for import
 
 ### 1. Import in Bruno
 
-<!-- TODO: Add steps for importing an OpenAPI schema as a new collection in Bruno -->
+See sections 2.1 through 2.4 above.
 
 ### 2. Run the post-import conversion script
 
