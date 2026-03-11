@@ -28,7 +28,21 @@ cd nd-api-bruno
 
 ### 2. Open collections in Bruno
 
-<!-- TODO: Add steps for opening/importing collections in Bruno -->
+To import a Nexus Dashboard schema, do the following.  After importing, we'll run the conversion script to modify it for use with our Bruno Global environment.
+
+#### 2.1 Click the '+' icon in the Collections bar
+
+![New Collection](assets/images/01_new_collection.png)
+
+#### 2.2 Select "Import collection"
+
+![Import collection](assets/images/02_import_collection.png)
+
+#### 2.3 Click the "choose files" link
+
+![Choose files](assets/images/03_choose_files.png)
+
+#### 2.4 
 
 ### 3. Configure the Global environment
 
