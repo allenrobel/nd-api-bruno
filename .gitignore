@@ -1,6 +1,9 @@
 # Secrets
 .env*
 
+# Virtual environments
+.venv/
+
 # Dependencies
 node_modules
 
