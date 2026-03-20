@@ -2,6 +2,8 @@ info:
   name: Delete access control lists
   type: http
   seq: 1
+  tags:
+    - Routing Policies
 
 http:
   method: POST
@@ -20,7 +22,14 @@ http:
     type: json
     data: |-
       {
-        "accessControlListNames": []
+        "accessControlListNames": [
+          "acl1",
+          "acl2",
+          "tenant1~acl3",
+          "tenant1~acl4",
+          "aclPortRange",
+          "aclAdvanced"
+        ]
       }
   auth: inherit
 
@@ -53,10 +62,14 @@ examples:
             "accessControlListNames": [
               "acl1",
               "acl2",
-              "tenantSales~acl3"
+              "tenant1~acl3",
+              "tenant1~acl4",
+              "aclPortRange",
+              "aclAdvanced"
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -72,13 +85,28 @@ examples:
                 "status": "success"
               },
               {
-                "message": "Access control list acl2 not found",
+                "message": "Successfully deleted access control list acl2",
                 "name": "acl2",
-                "status": "failed"
+                "status": "success"
               },
               {
-                "message": "Successfully deleted access control list tenantSales~acl3",
-                "name": "tenantSales~acl3",
+                "message": "Successfully deleted access control list tenant1~acl3",
+                "name": "tenant1~acl3",
+                "status": "success"
+              },
+              {
+                "message": "Successfully deleted access control list tenant1~acl4",
+                "name": "tenant1~acl4",
+                "status": "success"
+              },
+              {
+                "message": "Successfully deleted access control list aclPortRange",
+                "name": "aclPortRange",
+                "status": "success"
+              },
+              {
+                "message": "Successfully deleted access control list aclAdvanced",
+                "name": "aclAdvanced",
                 "status": "success"
               }
             ]
@@ -105,10 +133,14 @@ examples:
             "accessControlListNames": [
               "acl1",
               "acl2",
-              "tenantSales~acl3"
+              "tenant1~acl3",
+              "tenant1~acl4",
+              "aclPortRange",
+              "aclAdvanced"
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -143,10 +175,14 @@ examples:
             "accessControlListNames": [
               "acl1",
               "acl2",
-              "tenantSales~acl3"
+              "tenant1~acl3",
+              "tenant1~acl4",
+              "aclPortRange",
+              "aclAdvanced"
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -181,10 +217,14 @@ examples:
             "accessControlListNames": [
               "acl1",
               "acl2",
-              "tenantSales~acl3"
+              "tenant1~acl3",
+              "tenant1~acl4",
+              "aclPortRange",
+              "aclAdvanced"
             ]
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -219,10 +259,14 @@ examples:
             "accessControlListNames": [
               "acl1",
               "acl2",
-              "tenantSales~acl3"
+              "tenant1~acl3",
+              "tenant1~acl4",
+              "aclPortRange",
+              "aclAdvanced"
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -257,10 +301,14 @@ examples:
             "accessControlListNames": [
               "acl1",
               "acl2",
-              "tenantSales~acl3"
+              "tenant1~acl3",
+              "tenant1~acl4",
+              "aclPortRange",
+              "aclAdvanced"
             ]
           }
     response:
+      status: 409
       statusText: Conflict
       headers:
         - name: Content-Type
@@ -295,10 +343,14 @@ examples:
             "accessControlListNames": [
               "acl1",
               "acl2",
-              "tenantSales~acl3"
+              "tenant1~acl3",
+              "tenant1~acl4",
+              "aclPortRange",
+              "aclAdvanced"
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

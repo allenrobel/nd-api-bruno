@@ -1,0 +1,352 @@
+info:
+  name: Get list of fabric upgrade reports
+  type: http
+  seq: 25
+  tags:
+    - Compliance Conformance and Update Analysis
+
+http:
+  method: GET
+  url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/fabricSoftware/upgradeReports"
+  params:
+    - name: fabricName
+      value: ""
+      type: query
+      description: Name of the fabric
+    - name: clusterName
+      value: ""
+      type: query
+      description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+      disabled: true
+    - name: summary
+      value: ""
+      type: query
+      description: Get summarized pre-upgrade check results
+      disabled: true
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: OK
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/fabricSoftware/upgradeReports"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: summary
+          value: ""
+          type: query
+          description: Get summarized pre-upgrade check results
+          disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "entries": [
+              {
+                "devices": [
+                  {
+                    "deviceName": "Device1",
+                    "deviceRole": "leaf",
+                    "model": "N9K-C93180YC-FX",
+                    "serialNumber": "XYZ12345A12",
+                    "version": "9.2(1)"
+                  },
+                  {
+                    "deviceName": "Device1",
+                    "deviceRole": "leaf",
+                    "model": "N9K-C93180YC-FX",
+                    "serialNumber": "XYZ12345A12",
+                    "version": "9.2(1)"
+                  }
+                ],
+                "endTime": "2024-07-11T10:06:47.395Z",
+                "errorMessage": "",
+                "fabricName": "Fabric1",
+                "fabricTargetVersion": "",
+                "instances": [
+                  {
+                    "instanceId": "12533779374010780699",
+                    "postUpgrade": {
+                      "deltaAnalysisJobId": "6324876245786487567",
+                      "deltaAnalysisPostUpgradeTimestamp": "2024-08-20T23:34:59.772Z",
+                      "deltaAnalysisPreUpgradeTimestamp": "2024-08-20T23:12:29.159Z",
+                      "devices": [
+                        {
+                          "deviceId": "112",
+                          "deviceName": "Device1",
+                          "deviceRole": "leaf",
+                          "fabricName": "Fabric1",
+                          "model": "N9K-C9336C-FX",
+                          "podId": "1",
+                          "serialNumber": "XYZ12345A12",
+                          "version": "n9000-14.2(4p)"
+                        }
+                      ],
+                      "endTime": "2021-01-21T23:08:49.732026",
+                      "errorMessage": "",
+                      "expiryTime": "2021-01-22T23:08:49.732026",
+                      "failedValidationCount": 2,
+                      "lastUpdateTime": "2021-01-21T23:08:49.732026",
+                      "latestPreValidationTimestamp": "2024-08-20T23:12:29.159Z",
+                      "passedValidationCount": 3,
+                      "preUpgradeEpochSnapshotId": "0e5604f9-ac754447-026a-3abf-8c3a-6752d8a44a7e",
+                      "startTime": "2021-01-21T23:08:48.666550",
+                      "status": "completed",
+                      "validationExpiryTime": "2024-08-20T23:50:00.120Z",
+                      "validationJobStatus": "completed",
+                      "validationResults": [
+                        {
+                          "failedDevices": [
+                            "112"
+                          ],
+                          "failedDevicesCount": 1,
+                          "pass": false,
+                          "ruleDescription": "Bootflash storage check",
+                          "ruleFailureMessage": "Following devices do not have space in the bootflash folder to download the image: 112",
+                          "ruleId": "checkBootflashStorageForSwitch",
+                          "ruleName": "Bootflash storage check",
+                          "ruleRecommendedAction": "Remove unnecessary files from the bootflash folder on the listed switch devices so that the devices can download the target firmware image from APICs. You can SSH to the listed devices and use ls -l /bootflash to check the existing files, then rm /bootflash/filename to remove unnecessary files. Make sure that you delete files you know that are unnecessary such as unused switch firmware images.",
+                          "ruleSeverity": "critical"
+                        }
+                      ]
+                    },
+                    "preUpgrade": {
+                      "devices": [
+                        {
+                          "deviceId": "112",
+                          "deviceName": "Device1",
+                          "deviceRole": "leaf",
+                          "fabricName": "Fabric1",
+                          "model": "N9K-C9336C-FX",
+                          "podId": "1",
+                          "serialNumber": "XYZ12345A12",
+                          "version": "n9000-14.2(4p)"
+                        }
+                      ],
+                      "endTime": "2021-01-21T23:08:49.732026",
+                      "failedValidationCount": 2,
+                      "lastUpdateTime": "2021-01-21T23:08:49.732031",
+                      "passedValidationCount": 3,
+                      "startTime": "2021-01-21T23:08:48.666550",
+                      "status": "completed",
+                      "validationResults": [
+                        {
+                          "failedDevices": [
+                            "112"
+                          ],
+                          "failedDevicesCount": 1,
+                          "pass": false,
+                          "ruleDescription": "Bootflash storage check",
+                          "ruleFailureMessage": "Following devices do not have space in the bootflash folder to download the image: 112",
+                          "ruleId": "checkBootflashStorageForSwitch",
+                          "ruleName": "Bootflash storage check",
+                          "ruleRecommendedAction": "Remove unnecessary files from the bootflash folder on the listed switch devices so that the devices can download the target firmware image from APICs. You can SSH to the listed devices and use ls -l /bootflash to check the existing files, then rm /bootflash/filename to remove unnecessary files. Make sure that you delete files you know that are unnecessary such as unused switch firmware images.",
+                          "ruleSeverity": "critical"
+                        }
+                      ]
+                    },
+                    "targetVersion": "6.1(0.332a)",
+                    "validationType": "node"
+                  }
+                ],
+                "jobName": "UpgradeJob",
+                "lastUpdateTime": "2024-07-11T10:06:47.395Z",
+                "nodeTargetVersion": "6.1(0.332a)",
+                "reportId": "9987699953518154842",
+                "startTime": "2024-07-11T10:06:47.395Z",
+                "status": "completed",
+                "vendor": "aci"
+              }
+            ]
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/fabricSoftware/upgradeReports"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: summary
+          value: ""
+          type: query
+          description: Get summarized pre-upgrade check results
+          disabled: true
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/fabricSoftware/upgradeReports"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: summary
+          value: ""
+          type: query
+          description: Get summarized pre-upgrade check results
+          disabled: true
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 403 Response
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/fabricSoftware/upgradeReports"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: summary
+          value: ""
+          type: query
+          description: Get summarized pre-upgrade check results
+          disabled: true
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 404 Response
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/fabricSoftware/upgradeReports"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: summary
+          value: ""
+          type: query
+          description: Get summarized pre-upgrade check results
+          disabled: true
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 500 Response
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/fabricSoftware/upgradeReports"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: summary
+          value: ""
+          type: query
+          description: Get summarized pre-upgrade check results
+          disabled: true
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }

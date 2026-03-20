@@ -2,6 +2,8 @@ info:
   name: Delete the specified local user
   type: http
   seq: 12
+  tags:
+    - Users and Security
 
 http:
   method: DELETE
@@ -13,7 +15,7 @@ http:
       description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
       disabled: true
     - name: pathLoginId
-      value: arobel
+      value: ""
       type: path
       description: User login ID
   auth: inherit
@@ -41,6 +43,7 @@ examples:
           type: path
           description: User login ID
     response:
+      status: 204
       statusText: No Content
       body:
         type: text
@@ -61,6 +64,7 @@ examples:
           type: path
           description: User login ID
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -89,6 +93,7 @@ examples:
           type: path
           description: User login ID
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -117,6 +122,7 @@ examples:
           type: path
           description: User login ID
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -145,6 +151,7 @@ examples:
           type: path
           description: User login ID
     response:
+      status: 429
       statusText: Too Many Requests
       headers:
         - name: Content-Type
@@ -173,6 +180,7 @@ examples:
           type: path
           description: User login ID
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

@@ -2,6 +2,8 @@ info:
   name: Update vCenter integration
   type: http
   seq: 80
+  tags:
+    - Integrations
 
 http:
   method: PUT
@@ -20,9 +22,9 @@ http:
     type: json
     data: |-
       {
-        "integrationName": "",
-        "password": "",
-        "username": ""
+        "integrationName": "d30-vCenter2",
+        "password": "pass",
+        "username": "administrator@vsphere.local"
       }
   auth: inherit
 
@@ -57,6 +59,7 @@ examples:
             "username": "administrator@vsphere.local"
           }
     response:
+      status: 204
       statusText: No Content
       body:
         type: text
@@ -85,6 +88,7 @@ examples:
             "username": "administrator@vsphere.local"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -121,6 +125,7 @@ examples:
             "username": "administrator@vsphere.local"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -157,6 +162,7 @@ examples:
             "username": "administrator@vsphere.local"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -193,6 +199,7 @@ examples:
             "username": "administrator@vsphere.local"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

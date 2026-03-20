@@ -2,6 +2,8 @@ info:
   name: Attach/Detach layer-3 outs
   type: http
   seq: 42
+  tags:
+    - Routing Policies
 
 http:
   method: POST
@@ -18,8 +20,12 @@ http:
       {
         "attachments": [
           {
-            "name": "",
-            "attach": false
+            "attach": true,
+            "name": "L3Out1"
+          },
+          {
+            "attach": false,
+            "name": "L3Out2"
           }
         ]
       }
@@ -58,6 +64,7 @@ examples:
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -110,6 +117,7 @@ examples:
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -157,6 +165,7 @@ examples:
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -199,6 +208,7 @@ examples:
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -246,6 +256,7 @@ examples:
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -289,6 +300,7 @@ examples:
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -328,6 +340,7 @@ examples:
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -367,6 +380,7 @@ examples:
             ]
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -406,6 +420,7 @@ examples:
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -445,6 +460,7 @@ examples:
             ]
           }
     response:
+      status: 409
       statusText: Conflict
       headers:
         - name: Content-Type
@@ -484,6 +500,7 @@ examples:
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

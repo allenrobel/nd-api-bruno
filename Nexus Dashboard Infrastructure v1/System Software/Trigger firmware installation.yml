@@ -2,6 +2,8 @@ info:
   name: Trigger firmware installation.
   type: http
   seq: 5
+  tags:
+    - System Software
 
 http:
   method: POST
@@ -15,7 +17,7 @@ http:
     type: json
     data: |-
       {
-        "upgradeType": ""
+        "upgradeType": "factoryInstall"
       }
   auth: inherit
 
@@ -43,6 +45,7 @@ examples:
             "upgradeType": "factoryInstall"
           }
     response:
+      status: 204
       statusText: No Content
       body:
         type: text
@@ -64,6 +67,7 @@ examples:
             "upgradeType": "upgrade"
           }
     response:
+      status: 204
       statusText: No Content
       body:
         type: text
@@ -85,6 +89,7 @@ examples:
             "upgradeType": "factoryInstall"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -114,6 +119,7 @@ examples:
             "upgradeType": "upgrade"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -143,6 +149,7 @@ examples:
             "upgradeType": "factoryInstall"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -172,6 +179,7 @@ examples:
             "upgradeType": "upgrade"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -201,6 +209,7 @@ examples:
             "upgradeType": "factoryInstall"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -230,6 +239,7 @@ examples:
             "upgradeType": "upgrade"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -259,6 +269,7 @@ examples:
             "upgradeType": "factoryInstall"
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -288,6 +299,7 @@ examples:
             "upgradeType": "upgrade"
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -317,6 +329,7 @@ examples:
             "upgradeType": "factoryInstall"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type
@@ -346,6 +359,7 @@ examples:
             "upgradeType": "upgrade"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

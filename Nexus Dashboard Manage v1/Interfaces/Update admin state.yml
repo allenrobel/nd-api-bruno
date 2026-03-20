@@ -2,6 +2,8 @@ info:
   name: Update admin state
   type: http
   seq: 9
+  tags:
+    - Interfaces
 
 http:
   method: POST
@@ -27,9 +29,24 @@ http:
       {
         "interfaces": [
           {
-            "adminState": "",
-            "interfaceName": "",
-            "switchId": ""
+            "adminState": "shut",
+            "interfaceName": "Port-channel100",
+            "switchId": "FOX1930GDYK"
+          },
+          {
+            "adminState": "noShut",
+            "interfaceName": "Ethernet1/2",
+            "switchId": "FOX1930GDYK"
+          },
+          {
+            "adminState": "shut",
+            "interfaceName": "Loopback10",
+            "switchId": "FOX1930GDYK"
+          },
+          {
+            "adminState": "noShut",
+            "interfaceName": "vlan2000",
+            "switchId": "FOX1930GDYK"
           }
         ]
       }
@@ -76,10 +93,21 @@ examples:
                 "adminState": "noShut",
                 "interfaceName": "Ethernet1/2",
                 "switchId": "FOX1930GDYK"
+              },
+              {
+                "adminState": "shut",
+                "interfaceName": "Loopback10",
+                "switchId": "FOX1930GDYK"
+              },
+              {
+                "adminState": "noShut",
+                "interfaceName": "vlan2000",
+                "switchId": "FOX1930GDYK"
               }
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -92,6 +120,7 @@ examples:
               {
                 "adminStatus": "up",
                 "switchId": "FDO2137X0L1",
+                "switchName": "N9K-41",
                 "interfaceName": "loopback25",
                 "status": "success",
                 "message": "Status updated successfully"
@@ -99,6 +128,7 @@ examples:
               {
                 "adminStatus": "up",
                 "switchId": "FDO2137X0L1",
+                "switchName": "N9K-41",
                 "interfaceName": "loopback100",
                 "status": "failed",
                 "message": "Failed to update status"
@@ -106,9 +136,31 @@ examples:
               {
                 "adminStatus": "up",
                 "switchId": "FDO2137X0L1",
+                "switchName": "N9K-41",
                 "interfaceName": "loopback20",
                 "status": "failed",
                 "message": "Failed to update status"
+              },
+              {
+                "adminStatus": "down",
+                "switchId": "FDO2137X0L1",
+                "interfaceName": "Ethernet1/10",
+                "status": "success",
+                "message": "Status updated successfully"
+              },
+              {
+                "adminStatus": "up",
+                "switchId": "FDO2137X0L1",
+                "interfaceName": "Port-channel501",
+                "status": "failed",
+                "message": "Failed to update status"
+              },
+              {
+                "adminStatus": "down",
+                "switchId": "FDO2137X0L1",
+                "interfaceName": "Vlan300",
+                "status": "success",
+                "message": "Status updated successfully"
               }
             ]
           }
@@ -146,10 +198,21 @@ examples:
                 "adminState": "noShut",
                 "interfaceName": "Ethernet1/2",
                 "switchId": "FOX1930GDYK"
+              },
+              {
+                "adminState": "shut",
+                "interfaceName": "Loopback10",
+                "switchId": "FOX1930GDYK"
+              },
+              {
+                "adminState": "noShut",
+                "interfaceName": "vlan2000",
+                "switchId": "FOX1930GDYK"
               }
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -196,10 +259,21 @@ examples:
                 "adminState": "noShut",
                 "interfaceName": "Ethernet1/2",
                 "switchId": "FOX1930GDYK"
+              },
+              {
+                "adminState": "shut",
+                "interfaceName": "Loopback10",
+                "switchId": "FOX1930GDYK"
+              },
+              {
+                "adminState": "noShut",
+                "interfaceName": "vlan2000",
+                "switchId": "FOX1930GDYK"
               }
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -246,10 +320,21 @@ examples:
                 "adminState": "noShut",
                 "interfaceName": "Ethernet1/2",
                 "switchId": "FOX1930GDYK"
+              },
+              {
+                "adminState": "shut",
+                "interfaceName": "Loopback10",
+                "switchId": "FOX1930GDYK"
+              },
+              {
+                "adminState": "noShut",
+                "interfaceName": "vlan2000",
+                "switchId": "FOX1930GDYK"
               }
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -296,10 +381,21 @@ examples:
                 "adminState": "noShut",
                 "interfaceName": "Ethernet1/2",
                 "switchId": "FOX1930GDYK"
+              },
+              {
+                "adminState": "shut",
+                "interfaceName": "Loopback10",
+                "switchId": "FOX1930GDYK"
+              },
+              {
+                "adminState": "noShut",
+                "interfaceName": "vlan2000",
+                "switchId": "FOX1930GDYK"
               }
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

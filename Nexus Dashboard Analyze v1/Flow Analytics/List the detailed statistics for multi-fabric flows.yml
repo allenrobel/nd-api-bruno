@@ -1,0 +1,526 @@
+info:
+  name: List the detailed statistics for multi-fabric flows
+  type: http
+  seq: 5
+  tags:
+    - Flow Analytics
+
+http:
+  method: GET
+  url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivity/multiFabricFlowDetails"
+  params:
+    - name: startDate
+      value: ""
+      type: query
+      description: Start timestamp
+    - name: endDate
+      value: ""
+      type: query
+      description: End timestamp
+    - name: sourceFabricName
+      value: ""
+      type: query
+      description: The name of the source fabric of the flow.
+    - name: sourceFabricFilter
+      value: ""
+      type: query
+      description: Lucene format filter {srcIp,srcPort,ingressVrf,ingressVlan,dstIp,dstPort,egressVrf,egressVlan} - The flow filter for the source fabric.
+    - name: destinationFabricName
+      value: ""
+      type: query
+      description: The name of the destination fabric of the flow.
+    - name: destinationFabricFilter
+      value: ""
+      type: query
+      description: Lucene format filter {srcIp,srcPort,ingressVrf,ingressVlan,dstIp,dstPort,egressVrf,egressVlan} - The flow filter for the destination fabric.
+    - name: clusterName
+      value: ""
+      type: query
+      description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+      disabled: true
+    - name: includePaths
+      value: ""
+      type: query
+      description: Include flow paths in the response.
+      disabled: true
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: OK
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivity/multiFabricFlowDetails"
+      method: GET
+      params:
+        - name: startDate
+          value: ""
+          type: query
+          description: Start timestamp
+        - name: endDate
+          value: ""
+          type: query
+          description: End timestamp
+        - name: sourceFabricName
+          value: ""
+          type: query
+          description: The name of the source fabric of the flow.
+        - name: sourceFabricFilter
+          value: ""
+          type: query
+          description: Lucene format filter {srcIp,srcPort,ingressVrf,ingressVlan,dstIp,dstPort,egressVrf,egressVlan} - The flow filter for the source fabric.
+        - name: destinationFabricName
+          value: ""
+          type: query
+          description: The name of the destination fabric of the flow.
+        - name: destinationFabricFilter
+          value: ""
+          type: query
+          description: Lucene format filter {srcIp,srcPort,ingressVrf,ingressVlan,dstIp,dstPort,egressVrf,egressVlan} - The flow filter for the destination fabric.
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: includePaths
+          value: ""
+          type: query
+          description: Include flow paths in the response.
+          disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "flowDetails": [
+              {
+                "details": {
+                  "entries": [
+                    {
+                      "dstEndpointGroup": "",
+                      "dstIp": "43.43.43.10",
+                      "dstPort": 60,
+                      "egressLogicalEncap": "vni-50000",
+                      "egressTenant": "",
+                      "egressVlan": 0,
+                      "egressVni": 50000,
+                      "egressVrf": "myvrf_50000",
+                      "fabricName": "tel7",
+                      "flowId": "98b6e8fdeb65b51fea5e052e5c85e38cb11b6663bbd50b467c774d2348be4161",
+                      "flowType": "IPv4",
+                      "ingressLogicalEncap": "vni-50000",
+                      "ingressTenant": "",
+                      "ingressVlan": 0,
+                      "ingressVni": 50000,
+                      "ingressVrf": "myvrf_50000",
+                      "protocol": 6,
+                      "protocolName": "TCP",
+                      "srcEndpointGroup": "",
+                      "srcIp": "42.42.42.10",
+                      "srcPort": 80,
+                      "statistics": [
+                        {
+                          "anomalyScore": 0,
+                          "dropNodeNames": [
+                            "leaf4"
+                          ],
+                          "dropPacketCount": 0,
+                          "dropReasons": [
+                            "buffer_drop"
+                          ],
+                          "egressBurst": 0,
+                          "egressBurstMax": 144,
+                          "egressByteCount": 31975168,
+                          "egressInterfaces": [
+                            "eth1/2"
+                          ],
+                          "egressNodeNames": [
+                            "tel7-gx-leaf4"
+                          ],
+                          "egressPacketCount": 219008,
+                          "fabricName": "tel7",
+                          "flowRecordCount": 360,
+                          "hashCollisionCount": 0,
+                          "ingressBurst": 0,
+                          "ingressBurstMax": 96,
+                          "ingressByteCount": 21900200,
+                          "ingressInterfaces": [
+                            "eth1/2"
+                          ],
+                          "ingressNodeNames": [
+                            "tel7-fx-leaf3"
+                          ],
+                          "ingressPacketCount": 219002,
+                          "latency": 0,
+                          "nodeNames": [
+                            "tel7-fx-leaf3",
+                            "tel7-gx-leaf4",
+                            "tel7-sc-spine2"
+                          ],
+                          "originDate": "2024-10-15T18:00:02.097Z",
+                          "srcEndpointGroup": "",
+                          "tcpRetransmit": false,
+                          "tcpRetransmitTypes": [
+                            "rtoOutside"
+                          ],
+                          "terminalDate": "2024-10-16T00:00:01.192Z",
+                          "timestamp": "2024-10-15T18:00:02.097Z"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "fabricName": "tel7"
+              }
+            ],
+            "paths": [
+              {
+                "fabricName": "tel7",
+                "paths": [
+                  [
+                    {
+                      "egressInterfaces": [
+                        "eth1/50"
+                      ],
+                      "ingressInterfaces": [
+                        "eth1/2"
+                      ],
+                      "nodeName": "tel7-fx-leaf3",
+                      "nodeType": "Leaf",
+                      "segment": {},
+                      "unknownPath": false
+                    },
+                    {
+                      "egressInterfaces": [
+                        "eth1/15"
+                      ],
+                      "ingressInterfaces": [
+                        "eth1/3"
+                      ],
+                      "nodeName": "tel7-sc-spine2",
+                      "nodeType": "Spine",
+                      "segment": {},
+                      "unknownPath": false
+                    },
+                    {
+                      "egressInterfaces": [
+                        "eth1/2"
+                      ],
+                      "ingressInterfaces": [
+                        "eth1/15"
+                      ],
+                      "nodeName": "tel7-gx-leaf4",
+                      "nodeType": "Leaf",
+                      "segment": {
+                        "fromNodeName": "tel7-fx-leaf3",
+                        "latency": 2.97
+                      },
+                      "unknownPath": false
+                    }
+                  ]
+                ]
+              },
+              {
+                "fabricName": "tel8",
+                "paths": [
+                  [
+                    {
+                      "dropCode": 6,
+                      "dropReason": "packet drop",
+                      "dropType": "info",
+                      "egressInterfaces": [
+                        "eth1/10"
+                      ],
+                      "ingressInterfaces": [
+                        "eth1/11"
+                      ],
+                      "nodeName": "tel8-fx-1",
+                      "nodeType": "Leaf",
+                      "segment": {},
+                      "unknownPath": true
+                    }
+                  ]
+                ]
+              }
+            ]
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivity/multiFabricFlowDetails"
+      method: GET
+      params:
+        - name: startDate
+          value: ""
+          type: query
+          description: Start timestamp
+        - name: endDate
+          value: ""
+          type: query
+          description: End timestamp
+        - name: sourceFabricName
+          value: ""
+          type: query
+          description: The name of the source fabric of the flow.
+        - name: sourceFabricFilter
+          value: ""
+          type: query
+          description: Lucene format filter {srcIp,srcPort,ingressVrf,ingressVlan,dstIp,dstPort,egressVrf,egressVlan} - The flow filter for the source fabric.
+        - name: destinationFabricName
+          value: ""
+          type: query
+          description: The name of the destination fabric of the flow.
+        - name: destinationFabricFilter
+          value: ""
+          type: query
+          description: Lucene format filter {srcIp,srcPort,ingressVrf,ingressVlan,dstIp,dstPort,egressVrf,egressVlan} - The flow filter for the destination fabric.
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: includePaths
+          value: ""
+          type: query
+          description: Include flow paths in the response.
+          disabled: true
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivity/multiFabricFlowDetails"
+      method: GET
+      params:
+        - name: startDate
+          value: ""
+          type: query
+          description: Start timestamp
+        - name: endDate
+          value: ""
+          type: query
+          description: End timestamp
+        - name: sourceFabricName
+          value: ""
+          type: query
+          description: The name of the source fabric of the flow.
+        - name: sourceFabricFilter
+          value: ""
+          type: query
+          description: Lucene format filter {srcIp,srcPort,ingressVrf,ingressVlan,dstIp,dstPort,egressVrf,egressVlan} - The flow filter for the source fabric.
+        - name: destinationFabricName
+          value: ""
+          type: query
+          description: The name of the destination fabric of the flow.
+        - name: destinationFabricFilter
+          value: ""
+          type: query
+          description: Lucene format filter {srcIp,srcPort,ingressVrf,ingressVlan,dstIp,dstPort,egressVrf,egressVlan} - The flow filter for the destination fabric.
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: includePaths
+          value: ""
+          type: query
+          description: Include flow paths in the response.
+          disabled: true
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 403 Response
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivity/multiFabricFlowDetails"
+      method: GET
+      params:
+        - name: startDate
+          value: ""
+          type: query
+          description: Start timestamp
+        - name: endDate
+          value: ""
+          type: query
+          description: End timestamp
+        - name: sourceFabricName
+          value: ""
+          type: query
+          description: The name of the source fabric of the flow.
+        - name: sourceFabricFilter
+          value: ""
+          type: query
+          description: Lucene format filter {srcIp,srcPort,ingressVrf,ingressVlan,dstIp,dstPort,egressVrf,egressVlan} - The flow filter for the source fabric.
+        - name: destinationFabricName
+          value: ""
+          type: query
+          description: The name of the destination fabric of the flow.
+        - name: destinationFabricFilter
+          value: ""
+          type: query
+          description: Lucene format filter {srcIp,srcPort,ingressVrf,ingressVlan,dstIp,dstPort,egressVrf,egressVlan} - The flow filter for the destination fabric.
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: includePaths
+          value: ""
+          type: query
+          description: Include flow paths in the response.
+          disabled: true
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 404 Response
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivity/multiFabricFlowDetails"
+      method: GET
+      params:
+        - name: startDate
+          value: ""
+          type: query
+          description: Start timestamp
+        - name: endDate
+          value: ""
+          type: query
+          description: End timestamp
+        - name: sourceFabricName
+          value: ""
+          type: query
+          description: The name of the source fabric of the flow.
+        - name: sourceFabricFilter
+          value: ""
+          type: query
+          description: Lucene format filter {srcIp,srcPort,ingressVrf,ingressVlan,dstIp,dstPort,egressVrf,egressVlan} - The flow filter for the source fabric.
+        - name: destinationFabricName
+          value: ""
+          type: query
+          description: The name of the destination fabric of the flow.
+        - name: destinationFabricFilter
+          value: ""
+          type: query
+          description: Lucene format filter {srcIp,srcPort,ingressVrf,ingressVlan,dstIp,dstPort,egressVrf,egressVlan} - The flow filter for the destination fabric.
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: includePaths
+          value: ""
+          type: query
+          description: Include flow paths in the response.
+          disabled: true
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 500 Response
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivity/multiFabricFlowDetails"
+      method: GET
+      params:
+        - name: startDate
+          value: ""
+          type: query
+          description: Start timestamp
+        - name: endDate
+          value: ""
+          type: query
+          description: End timestamp
+        - name: sourceFabricName
+          value: ""
+          type: query
+          description: The name of the source fabric of the flow.
+        - name: sourceFabricFilter
+          value: ""
+          type: query
+          description: Lucene format filter {srcIp,srcPort,ingressVrf,ingressVlan,dstIp,dstPort,egressVrf,egressVlan} - The flow filter for the source fabric.
+        - name: destinationFabricName
+          value: ""
+          type: query
+          description: The name of the destination fabric of the flow.
+        - name: destinationFabricFilter
+          value: ""
+          type: query
+          description: Lucene format filter {srcIp,srcPort,ingressVrf,ingressVlan,dstIp,dstPort,egressVrf,egressVlan} - The flow filter for the destination fabric.
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: includePaths
+          value: ""
+          type: query
+          description: Include flow paths in the response.
+          disabled: true
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }

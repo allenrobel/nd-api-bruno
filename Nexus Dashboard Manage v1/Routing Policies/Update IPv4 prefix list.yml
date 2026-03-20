@@ -2,6 +2,8 @@ info:
   name: Update IPv4 prefix list
   type: http
   seq: 27
+  tags:
+    - Routing Policies
 
 http:
   method: PUT
@@ -24,21 +26,17 @@ http:
     type: json
     data: |-
       {
-        "name": "",
-        "description": "",
-        "lastUpdateTimestamp": "",
-        "tenantName": "",
+        "description": "Border router prefixes",
         "entries": [
           {
-            "sequenceNumber": 0,
-            "action": "",
-            "prefix": "",
-            "exactLength": 0,
-            "minLength": 0,
-            "maxLength": 0,
-            "mask": ""
+            "action": "permit",
+            "mask": "255.255.1.0",
+            "minLength": 17,
+            "prefix": "21.1.0.0/16",
+            "sequenceNumber": 10
           }
-        ]
+        ],
+        "name": "prefixList1"
       }
   auth: inherit
 
@@ -85,6 +83,7 @@ examples:
             "name": "prefixList1"
           }
     response:
+      status: 204
       statusText: No Content
       body:
         type: text
@@ -126,6 +125,7 @@ examples:
             "tenantName": "tenantSales"
           }
     response:
+      status: 204
       statusText: No Content
       body:
         type: text
@@ -166,6 +166,7 @@ examples:
             "name": "prefixList1"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -215,6 +216,7 @@ examples:
             "tenantName": "tenantSales"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -263,6 +265,7 @@ examples:
             "name": "prefixList1"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -312,6 +315,7 @@ examples:
             "tenantName": "tenantSales"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -360,6 +364,7 @@ examples:
             "name": "prefixList1"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -409,6 +414,7 @@ examples:
             "tenantName": "tenantSales"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -457,6 +463,7 @@ examples:
             "name": "prefixList1"
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -506,6 +513,7 @@ examples:
             "tenantName": "tenantSales"
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -554,6 +562,7 @@ examples:
             "name": "prefixList1"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type
@@ -603,6 +612,7 @@ examples:
             "tenantName": "tenantSales"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

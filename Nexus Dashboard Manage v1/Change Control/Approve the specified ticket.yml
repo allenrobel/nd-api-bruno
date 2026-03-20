@@ -2,6 +2,8 @@ info:
   name: Approve the specified ticket
   type: http
   seq: 7
+  tags:
+    - Change Control
 
 http:
   method: POST
@@ -18,7 +20,7 @@ http:
       description: Change Control Ticket Id
   body:
     type: json
-    data: ""
+    data: '"Ticket approved"'
   auth: inherit
 
 settings:
@@ -45,8 +47,9 @@ examples:
           description: Change Control Ticket Id
       body:
         type: json
-        data: Approving the ticket after review
+        data: '"Approving the ticket after review"'
     response:
+      status: 200
       statusText: OK
       body:
         type: text
@@ -68,8 +71,9 @@ examples:
           description: Change Control Ticket Id
       body:
         type: json
-        data: Approving the ticket after review
+        data: '"Approving the ticket after review"'
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -99,8 +103,9 @@ examples:
           description: Change Control Ticket Id
       body:
         type: json
-        data: Approving the ticket after review
+        data: '"Approving the ticket after review"'
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -130,8 +135,9 @@ examples:
           description: Change Control Ticket Id
       body:
         type: json
-        data: Approving the ticket after review
+        data: '"Approving the ticket after review"'
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -161,8 +167,9 @@ examples:
           description: Change Control Ticket Id
       body:
         type: json
-        data: Approving the ticket after review
+        data: '"Approving the ticket after review"'
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -192,8 +199,9 @@ examples:
           description: Change Control Ticket Id
       body:
         type: json
-        data: Approving the ticket after review
+        data: '"Approving the ticket after review"'
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

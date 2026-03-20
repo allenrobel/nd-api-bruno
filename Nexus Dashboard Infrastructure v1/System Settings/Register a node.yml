@@ -2,6 +2,8 @@ info:
   name: Register a node
   type: http
   seq: 4
+  tags:
+    - System Settings
 
 http:
   method: POST
@@ -21,10 +23,10 @@ http:
     data: |-
       {
         "authentication": {
-          "user": "",
-          "password": ""
+          "password": "<hidden>",
+          "user": "admin"
         },
-        "serverAddress": ""
+        "serverAddress": "172.20.43.41"
       }
   auth: inherit
 
@@ -61,6 +63,7 @@ examples:
             "serverAddress": "172.20.43.41"
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -94,6 +97,7 @@ examples:
             "serverAddress": "172.20.43.41"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -132,6 +136,7 @@ examples:
             "serverAddress": "172.20.43.41"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -170,6 +175,7 @@ examples:
             "serverAddress": "172.20.43.41"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -208,6 +214,7 @@ examples:
             "serverAddress": "172.20.43.41"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

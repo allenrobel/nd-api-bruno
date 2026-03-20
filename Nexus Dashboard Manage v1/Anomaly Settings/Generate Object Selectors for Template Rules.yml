@@ -2,6 +2,8 @@ info:
   name: Generate Object Selectors for Template Rules
   type: http
   seq: 4
+  tags:
+    - Anomaly Settings
 
 http:
   method: POST
@@ -21,12 +23,10 @@ http:
     data:
       - name: file
         type: text
-        value: ""
-        description: File which contains data that is used to retrieve the objects for the rule
+        value: customer_template_2.json
       - name: ruleObjectSelectorData
         type: text
-        value: ""
-        description: Stringified JSON object of the schema /components/schemas/complianceAnomalyRuleObjectSelector that contains the compliance rule object selector data
+        value: '{"uuid": "123e4567-e89b-12d3-a456-426614174000", "name": "Example Selector", "description": "Description", "includes": [ { "matches": [ { "applicationEpgMatch": { "objectAttribute": "exampleAttribute", "tenant": { "type": "contains", "pattern": "app" }, "applicationProfile": { "type": "contains", "pattern": "app" }, "applicationEpg": { "type": "contains", "pattern": "app" } } } ] } ], "excludes": [ { "matches": [ { "applicationEpgMatch": { "objectAttribute": "exampleAttribute", "tenant": { "type": "contains", "pattern": "app" }, "applicationProfile": { "type": "contains", "pattern": "app" }, "applicationEpg": { "type": "contains", "pattern": "app" } } } ] } ], "selectorType": "EPG", "isSelectorBasedOnTagsActive": true, "ruleName": "Example Rule" }'
   auth: inherit
 
 settings:
@@ -56,13 +56,12 @@ examples:
         data:
           - name: file
             type: text
-            value: ""
-            description: File which contains data that is used to retrieve the objects for the rule
+            value: customer_template_2.json
           - name: ruleObjectSelectorData
             type: text
-            value: ""
-            description: Stringified JSON object of the schema /components/schemas/complianceAnomalyRuleObjectSelector that contains the compliance rule object selector data
+            value: '{"uuid": "123e4567-e89b-12d3-a456-426614174000", "name": "Example Selector", "description": "Description", "includes": [ { "matches": [ { "applicationEpgMatch": { "objectAttribute": "exampleAttribute", "tenant": { "type": "contains", "pattern": "app" }, "applicationProfile": { "type": "contains", "pattern": "app" }, "applicationEpg": { "type": "contains", "pattern": "app" } } } ] } ], "excludes": [ { "matches": [ { "applicationEpgMatch": { "objectAttribute": "exampleAttribute", "tenant": { "type": "contains", "pattern": "app" }, "applicationProfile": { "type": "contains", "pattern": "app" }, "applicationEpg": { "type": "contains", "pattern": "app" } } } ] } ], "selectorType": "EPG", "isSelectorBasedOnTagsActive": true, "ruleName": "Example Rule" }'
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -104,13 +103,12 @@ examples:
         data:
           - name: file
             type: text
-            value: ""
-            description: File which contains data that is used to retrieve the objects for the rule
+            value: customer_template_2.json
           - name: ruleObjectSelectorData
             type: text
-            value: ""
-            description: Stringified JSON object of the schema /components/schemas/complianceAnomalyRuleObjectSelector that contains the compliance rule object selector data
+            value: '{"uuid": "123e4567-e89b-12d3-a456-426614174000", "name": "Example Selector", "description": "Description", "includes": [ { "matches": [ { "applicationEpgMatch": { "objectAttribute": "exampleAttribute", "tenant": { "type": "contains", "pattern": "app" }, "applicationProfile": { "type": "contains", "pattern": "app" }, "applicationEpg": { "type": "contains", "pattern": "app" } } } ] } ], "excludes": [ { "matches": [ { "applicationEpgMatch": { "objectAttribute": "exampleAttribute", "tenant": { "type": "contains", "pattern": "app" }, "applicationProfile": { "type": "contains", "pattern": "app" }, "applicationEpg": { "type": "contains", "pattern": "app" } } } ] } ], "selectorType": "EPG", "isSelectorBasedOnTagsActive": true, "ruleName": "Example Rule" }'
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -143,13 +141,12 @@ examples:
         data:
           - name: file
             type: text
-            value: ""
-            description: File which contains data that is used to retrieve the objects for the rule
+            value: customer_template_2.json
           - name: ruleObjectSelectorData
             type: text
-            value: ""
-            description: Stringified JSON object of the schema /components/schemas/complianceAnomalyRuleObjectSelector that contains the compliance rule object selector data
+            value: '{"uuid": "123e4567-e89b-12d3-a456-426614174000", "name": "Example Selector", "description": "Description", "includes": [ { "matches": [ { "applicationEpgMatch": { "objectAttribute": "exampleAttribute", "tenant": { "type": "contains", "pattern": "app" }, "applicationProfile": { "type": "contains", "pattern": "app" }, "applicationEpg": { "type": "contains", "pattern": "app" } } } ] } ], "excludes": [ { "matches": [ { "applicationEpgMatch": { "objectAttribute": "exampleAttribute", "tenant": { "type": "contains", "pattern": "app" }, "applicationProfile": { "type": "contains", "pattern": "app" }, "applicationEpg": { "type": "contains", "pattern": "app" } } } ] } ], "selectorType": "EPG", "isSelectorBasedOnTagsActive": true, "ruleName": "Example Rule" }'
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -182,13 +179,12 @@ examples:
         data:
           - name: file
             type: text
-            value: ""
-            description: File which contains data that is used to retrieve the objects for the rule
+            value: customer_template_2.json
           - name: ruleObjectSelectorData
             type: text
-            value: ""
-            description: Stringified JSON object of the schema /components/schemas/complianceAnomalyRuleObjectSelector that contains the compliance rule object selector data
+            value: '{"uuid": "123e4567-e89b-12d3-a456-426614174000", "name": "Example Selector", "description": "Description", "includes": [ { "matches": [ { "applicationEpgMatch": { "objectAttribute": "exampleAttribute", "tenant": { "type": "contains", "pattern": "app" }, "applicationProfile": { "type": "contains", "pattern": "app" }, "applicationEpg": { "type": "contains", "pattern": "app" } } } ] } ], "excludes": [ { "matches": [ { "applicationEpgMatch": { "objectAttribute": "exampleAttribute", "tenant": { "type": "contains", "pattern": "app" }, "applicationProfile": { "type": "contains", "pattern": "app" }, "applicationEpg": { "type": "contains", "pattern": "app" } } } ] } ], "selectorType": "EPG", "isSelectorBasedOnTagsActive": true, "ruleName": "Example Rule" }'
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -221,13 +217,12 @@ examples:
         data:
           - name: file
             type: text
-            value: ""
-            description: File which contains data that is used to retrieve the objects for the rule
+            value: customer_template_2.json
           - name: ruleObjectSelectorData
             type: text
-            value: ""
-            description: Stringified JSON object of the schema /components/schemas/complianceAnomalyRuleObjectSelector that contains the compliance rule object selector data
+            value: '{"uuid": "123e4567-e89b-12d3-a456-426614174000", "name": "Example Selector", "description": "Description", "includes": [ { "matches": [ { "applicationEpgMatch": { "objectAttribute": "exampleAttribute", "tenant": { "type": "contains", "pattern": "app" }, "applicationProfile": { "type": "contains", "pattern": "app" }, "applicationEpg": { "type": "contains", "pattern": "app" } } } ] } ], "excludes": [ { "matches": [ { "applicationEpgMatch": { "objectAttribute": "exampleAttribute", "tenant": { "type": "contains", "pattern": "app" }, "applicationProfile": { "type": "contains", "pattern": "app" }, "applicationEpg": { "type": "contains", "pattern": "app" } } } ] } ], "selectorType": "EPG", "isSelectorBasedOnTagsActive": true, "ruleName": "Example Rule" }'
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -260,13 +255,12 @@ examples:
         data:
           - name: file
             type: text
-            value: ""
-            description: File which contains data that is used to retrieve the objects for the rule
+            value: customer_template_2.json
           - name: ruleObjectSelectorData
             type: text
-            value: ""
-            description: Stringified JSON object of the schema /components/schemas/complianceAnomalyRuleObjectSelector that contains the compliance rule object selector data
+            value: '{"uuid": "123e4567-e89b-12d3-a456-426614174000", "name": "Example Selector", "description": "Description", "includes": [ { "matches": [ { "applicationEpgMatch": { "objectAttribute": "exampleAttribute", "tenant": { "type": "contains", "pattern": "app" }, "applicationProfile": { "type": "contains", "pattern": "app" }, "applicationEpg": { "type": "contains", "pattern": "app" } } } ] } ], "excludes": [ { "matches": [ { "applicationEpgMatch": { "objectAttribute": "exampleAttribute", "tenant": { "type": "contains", "pattern": "app" }, "applicationProfile": { "type": "contains", "pattern": "app" }, "applicationEpg": { "type": "contains", "pattern": "app" } } } ] } ], "selectorType": "EPG", "isSelectorBasedOnTagsActive": true, "ruleName": "Example Rule" }'
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

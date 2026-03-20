@@ -2,6 +2,8 @@ info:
   name: User login (redirect)
   type: http
   seq: 2
+  tags:
+    - Authentication
 
 http:
   method: GET
@@ -13,9 +15,15 @@ http:
       description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
       disabled: true
     - name: oidcRedirect
-      value: ""
+      value: "true"
       type: query
       description: Set to 'true' to initiate OIDC redirect flow
+      disabled: true
+    - name: oidcRedirect
+      value: "false"
+      type: query
+      description: Set to 'true' to initiate OIDC redirect flow
+      disabled: true
   auth: inherit
 
 settings:
@@ -37,10 +45,17 @@ examples:
           description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
           disabled: true
         - name: oidcRedirect
-          value: ""
+          value: "true"
           type: query
           description: Set to 'true' to initiate OIDC redirect flow
+          disabled: true
+        - name: oidcRedirect
+          value: "false"
+          type: query
+          description: Set to 'true' to initiate OIDC redirect flow
+          disabled: true
     response:
+      status: 302
       statusText: Found
       body:
         type: text
@@ -57,10 +72,17 @@ examples:
           description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
           disabled: true
         - name: oidcRedirect
-          value: ""
+          value: "true"
           type: query
           description: Set to 'true' to initiate OIDC redirect flow
+          disabled: true
+        - name: oidcRedirect
+          value: "false"
+          type: query
+          description: Set to 'true' to initiate OIDC redirect flow
+          disabled: true
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

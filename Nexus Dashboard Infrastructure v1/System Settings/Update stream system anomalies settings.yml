@@ -2,6 +2,8 @@ info:
   name: Update stream system anomalies settings
   type: http
   seq: 41
+  tags:
+    - System Settings
 
 http:
   method: PUT
@@ -18,9 +20,11 @@ http:
       {
         "listStreamSystemAnomalies": [
           {
-            "anomalies": [],
-            "remoteStreamingServer": "",
-            "serverType": ""
+            "anomalies": [
+              "Critical",
+              "Major"
+            ],
+            "remoteStreamingServer": "Syslog1"
           }
         ]
       }
@@ -59,6 +63,7 @@ examples:
             ]
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -103,6 +108,7 @@ examples:
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -141,6 +147,7 @@ examples:
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -179,6 +186,7 @@ examples:
             ]
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -217,6 +225,7 @@ examples:
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -255,6 +264,7 @@ examples:
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

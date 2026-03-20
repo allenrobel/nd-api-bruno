@@ -2,6 +2,8 @@ info:
   name: Delete one or more links
   type: http
   seq: 3
+  tags:
+    - Links
 
 http:
   method: POST
@@ -18,15 +20,17 @@ http:
       description: Change Control Ticket Id
       disabled: true
     - name: isLogicalLink
-      value: ""
+      value: "false"
       type: query
       description: Indicates if the link is a logical link. Set to `true` for logical links, `false` otherwise
-      disabled: true
   body:
     type: json
     data: |-
       {
-        "links": []
+        "links": [
+          "LINK-UUID-366050",
+          "LINK-UUID-366060"
+        ]
       }
   auth: inherit
 
@@ -53,10 +57,9 @@ examples:
           description: Change Control Ticket Id
           disabled: true
         - name: isLogicalLink
-          value: ""
+          value: "false"
           type: query
           description: Indicates if the link is a logical link. Set to `true` for logical links, `false` otherwise
-          disabled: true
       body:
         type: json
         data: |-
@@ -67,6 +70,7 @@ examples:
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -78,7 +82,7 @@ examples:
             "links": [
               {
                 "linkId": "LINK-UUID-8540",
-                "message": "LINK-UUID-8540 delete successful",
+                "message": "LINK-UUID-8540 deleted successfully",
                 "status": "success"
               }
             ]
@@ -99,10 +103,9 @@ examples:
           description: Change Control Ticket Id
           disabled: true
         - name: isLogicalLink
-          value: ""
+          value: "false"
           type: query
           description: Indicates if the link is a logical link. Set to `true` for logical links, `false` otherwise
-          disabled: true
       body:
         type: json
         data: |-
@@ -113,6 +116,7 @@ examples:
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -124,12 +128,12 @@ examples:
             "links": [
               {
                 "linkId": "LINK-UUID-8540",
-                "message": "LINK-UUID-8540 delete successful",
+                "message": "LINK-UUID-8540 deleted successfully",
                 "status": "success"
               },
               {
                 "linkId": "LINK-UUID-8541",
-                "message": "LINK-UUID-8541 delete failed due to a database error.",
+                "message": "Deletion of link with id:LINK-UUID-8541 failed due to invalid linkId.",
                 "status": "failure"
               }
             ]
@@ -151,10 +155,9 @@ examples:
           description: Change Control Ticket Id
           disabled: true
         - name: isLogicalLink
-          value: ""
+          value: "false"
           type: query
           description: Indicates if the link is a logical link. Set to `true` for logical links, `false` otherwise
-          disabled: true
       body:
         type: json
         data: |-
@@ -165,6 +168,7 @@ examples:
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -194,10 +198,9 @@ examples:
           description: Change Control Ticket Id
           disabled: true
         - name: isLogicalLink
-          value: ""
+          value: "false"
           type: query
           description: Indicates if the link is a logical link. Set to `true` for logical links, `false` otherwise
-          disabled: true
       body:
         type: json
         data: |-
@@ -208,6 +211,7 @@ examples:
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -237,10 +241,9 @@ examples:
           description: Change Control Ticket Id
           disabled: true
         - name: isLogicalLink
-          value: ""
+          value: "false"
           type: query
           description: Indicates if the link is a logical link. Set to `true` for logical links, `false` otherwise
-          disabled: true
       body:
         type: json
         data: |-
@@ -251,6 +254,7 @@ examples:
             ]
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -280,10 +284,9 @@ examples:
           description: Change Control Ticket Id
           disabled: true
         - name: isLogicalLink
-          value: ""
+          value: "false"
           type: query
           description: Indicates if the link is a logical link. Set to `true` for logical links, `false` otherwise
-          disabled: true
       body:
         type: json
         data: |-
@@ -294,6 +297,7 @@ examples:
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -323,10 +327,9 @@ examples:
           description: Change Control Ticket Id
           disabled: true
         - name: isLogicalLink
-          value: ""
+          value: "false"
           type: query
           description: Indicates if the link is a logical link. Set to `true` for logical links, `false` otherwise
-          disabled: true
       body:
         type: json
         data: |-
@@ -337,6 +340,7 @@ examples:
             ]
           }
     response:
+      status: 409
       statusText: Conflict
       headers:
         - name: Content-Type
@@ -366,10 +370,9 @@ examples:
           description: Change Control Ticket Id
           disabled: true
         - name: isLogicalLink
-          value: ""
+          value: "false"
           type: query
           description: Indicates if the link is a logical link. Set to `true` for logical links, `false` otherwise
-          disabled: true
       body:
         type: json
         data: |-
@@ -380,6 +383,7 @@ examples:
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

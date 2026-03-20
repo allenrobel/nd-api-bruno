@@ -2,6 +2,8 @@ info:
   name: Change serial number for pre-provision switch
   type: http
   seq: 35
+  tags:
+    - Inventory
 
 http:
   method: POST
@@ -24,7 +26,7 @@ http:
     type: json
     data: |-
       {
-        "newSwitchId": ""
+        "newSwitchId": "SAL1948TRST"
       }
   auth: inherit
 
@@ -58,9 +60,10 @@ examples:
         type: json
         data: |-
           {
-            "newSwitchId": ""
+            "newSwitchId": "SAL1948TRST"
           }
     response:
+      status: 200
       statusText: OK
       body:
         type: text
@@ -88,9 +91,10 @@ examples:
         type: json
         data: |-
           {
-            "newSwitchId": ""
+            "newSwitchId": "SAL1948TRST"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -126,9 +130,10 @@ examples:
         type: json
         data: |-
           {
-            "newSwitchId": ""
+            "newSwitchId": "SAL1948TRST"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -164,9 +169,10 @@ examples:
         type: json
         data: |-
           {
-            "newSwitchId": ""
+            "newSwitchId": "SAL1948TRST"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -202,9 +208,10 @@ examples:
         type: json
         data: |-
           {
-            "newSwitchId": ""
+            "newSwitchId": "SAL1948TRST"
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -240,9 +247,10 @@ examples:
         type: json
         data: |-
           {
-            "newSwitchId": ""
+            "newSwitchId": "SAL1948TRST"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

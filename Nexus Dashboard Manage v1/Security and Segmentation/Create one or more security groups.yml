@@ -2,6 +2,8 @@ info:
   name: Create one or more security groups
   type: http
   seq: 26
+  tags:
+    - Security and Segmentation
 
 http:
   method: POST
@@ -22,21 +24,40 @@ http:
       {
         "securityGroups": [
           {
-            "name": "",
-            "tenantName": "",
-            "id": 0,
-            "displayName": "",
-            "description": "",
-            "attach": false,
-            "vrfNames": [],
+            "attach": true,
+            "id": 10000,
+            "name": "SG_10000",
             "selectors": [
               {
-                "type": ""
+                "ip": "10.10.2.2",
+                "type": "connectedEndpoint",
+                "vrfName": "MyVRF_50000"
+              },
+              {
+                "ip": "10.10.2.3",
+                "type": "connectedEndpoint",
+                "vrfName": "MyVRF_50000"
+              },
+              {
+                "ip": "20.10.2.0/16",
+                "type": "externalSubnet",
+                "vrfName": "MyVRF_50000"
+              },
+              {
+                "networkName": "MyNetwork_30000",
+                "type": "network",
+                "vrfName": "MyVRF_50000"
+              },
+              {
+                "interfaceName": "Ethernet1/1",
+                "networkName": "MyNetwork_30000",
+                "switchId": "MySwitch_10000",
+                "type": "networkPort"
               }
             ],
-            "aciData": {
-              "applicationProfileName": ""
-            }
+            "vrfNames": [
+              "MyVRF_50000"
+            ]
           }
         ]
       }
@@ -107,6 +128,7 @@ examples:
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -218,6 +240,7 @@ examples:
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -293,6 +316,7 @@ examples:
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -401,6 +425,7 @@ examples:
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -472,6 +497,7 @@ examples:
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -580,6 +606,7 @@ examples:
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -651,6 +678,7 @@ examples:
             ]
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -759,6 +787,7 @@ examples:
             ]
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -830,6 +859,7 @@ examples:
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -938,6 +968,7 @@ examples:
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -1009,6 +1040,7 @@ examples:
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type
@@ -1117,6 +1149,7 @@ examples:
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

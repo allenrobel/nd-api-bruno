@@ -2,15 +2,27 @@ info:
   name: API to enable a disabled service.
   type: http
   seq: 11
+  tags:
+    - System Software
 
 http:
   method: POST
   url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/systemSoftware/services/:serviceName/actions/enable"
   params:
     - name: serviceName
-      value: ""
+      value: fabric-management
       type: path
       description: Service name.
+    - name: serviceName
+      value: telemetry
+      type: path
+      description: Service name.
+      disabled: true
+    - name: serviceName
+      value: orchestration
+      type: path
+      description: Service name.
+      disabled: true
   auth: inherit
 
 settings:
@@ -27,10 +39,21 @@ examples:
       method: POST
       params:
         - name: serviceName
-          value: ""
+          value: fabric-management
           type: path
           description: Service name.
+        - name: serviceName
+          value: telemetry
+          type: path
+          description: Service name.
+          disabled: true
+        - name: serviceName
+          value: orchestration
+          type: path
+          description: Service name.
+          disabled: true
     response:
+      status: 204
       statusText: No Content
       body:
         type: text
@@ -42,10 +65,21 @@ examples:
       method: POST
       params:
         - name: serviceName
-          value: ""
+          value: fabric-management
           type: path
           description: Service name.
+        - name: serviceName
+          value: telemetry
+          type: path
+          description: Service name.
+          disabled: true
+        - name: serviceName
+          value: orchestration
+          type: path
+          description: Service name.
+          disabled: true
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -65,10 +99,21 @@ examples:
       method: POST
       params:
         - name: serviceName
-          value: ""
+          value: fabric-management
           type: path
           description: Service name.
+        - name: serviceName
+          value: telemetry
+          type: path
+          description: Service name.
+          disabled: true
+        - name: serviceName
+          value: orchestration
+          type: path
+          description: Service name.
+          disabled: true
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -88,10 +133,21 @@ examples:
       method: POST
       params:
         - name: serviceName
-          value: ""
+          value: fabric-management
           type: path
           description: Service name.
+        - name: serviceName
+          value: telemetry
+          type: path
+          description: Service name.
+          disabled: true
+        - name: serviceName
+          value: orchestration
+          type: path
+          description: Service name.
+          disabled: true
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -111,10 +167,21 @@ examples:
       method: POST
       params:
         - name: serviceName
-          value: ""
+          value: fabric-management
           type: path
           description: Service name.
+        - name: serviceName
+          value: telemetry
+          type: path
+          description: Service name.
+          disabled: true
+        - name: serviceName
+          value: orchestration
+          type: path
+          description: Service name.
+          disabled: true
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -134,10 +201,21 @@ examples:
       method: POST
       params:
         - name: serviceName
-          value: ""
+          value: fabric-management
           type: path
           description: Service name.
+        - name: serviceName
+          value: telemetry
+          type: path
+          description: Service name.
+          disabled: true
+        - name: serviceName
+          value: orchestration
+          type: path
+          description: Service name.
+          disabled: true
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

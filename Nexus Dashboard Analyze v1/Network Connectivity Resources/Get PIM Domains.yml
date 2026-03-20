@@ -1,0 +1,715 @@
+info:
+  name: Get PIM Domains
+  type: http
+  seq: 13
+  tags:
+    - Network Connectivity Resources
+
+http:
+  method: GET
+  url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivity/multicast/pimDomains"
+  params:
+    - name: fabricName
+      value: ""
+      type: query
+      description: Name of the fabric
+    - name: switchName
+      value: ""
+      type: query
+      description: Name of the switch
+    - name: clusterName
+      value: ""
+      type: query
+      description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+      disabled: true
+    - name: startDate
+      value: ""
+      type: query
+      description: Start date
+      disabled: true
+    - name: endDate
+      value: ""
+      type: query
+      description: End date
+      disabled: true
+    - name: sort
+      value: ""
+      type: query
+      description: |
+        Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+        Ascending order by default: "field1"
+        Specific order for one field: "field1:asc" or "field1:desc"
+        Specific order with multiple fields: "field1:asc,field2:desc"
+      disabled: true
+    - name: max
+      value: ""
+      type: query
+      description: Number of records to return
+      disabled: true
+    - name: filter
+      value: ""
+      type: query
+      description: Lucene format filter - Filter the response based on this filter field
+      disabled: true
+    - name: offset
+      value: ""
+      type: query
+      description: Number of records to skip for pagination
+      disabled: true
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: ACI Fabric
+    description: PIM Domains for ACI Fabric
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivity/multicast/pimDomains"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: switchName
+          value: ""
+          type: query
+          description: Name of the switch
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "pimDomains": [
+              {
+                "fabricName": "DC-trex",
+                "switchName": "nc-aci-trex-leaf01",
+                "sourceName": "pimvrf/vrf-tn1:ctx1",
+                "vrfVnid": 0,
+                "controlFlag": "",
+                "fastConvergenceEnabled": false,
+                "adminState": "enabled",
+                "vrfName": "ctx1",
+                "tenantName": "tn1",
+                "rendezvousPointIpCollection": [
+                  "99.99.99.99"
+                ],
+                "borderLeaf": "no",
+                "anomalyScore": 0,
+                "statisticalCounters": [
+                  {
+                    "counterName": "regRcvdSSM",
+                    "counterNameLabel": "Registration received SSM",
+                    "counterType": "error",
+                    "value": 0,
+                    "trending": "flat"
+                  },
+                  {
+                    "counterName": "bsrBsLenErr",
+                    "counterNameLabel": "Bsr bs length error",
+                    "counterType": "error",
+                    "value": 0,
+                    "trending": "flat"
+                  },
+                  {
+                    "counterName": "bsrBsRPFFail",
+                    "counterNameLabel": "Bootstrap messages for which RPF Failed",
+                    "counterType": "error",
+                    "value": 0,
+                    "trending": "flat"
+                  },
+                  {
+                    "counterName": "autoRPTTLExp",
+                    "counterNameLabel": "Auto RP TTL expired",
+                    "counterType": "error",
+                    "value": 0,
+                    "trending": "flat"
+                  },
+                  {
+                    "counterName": "regRcvdAndNotRP",
+                    "counterNameLabel": "Registration received and not RP",
+                    "counterType": "error",
+                    "value": 0,
+                    "trending": "flat"
+                  },
+                  {
+                    "counterName": "errorsTotal",
+                    "counterNameLabel": "Total Error Count",
+                    "counterType": "",
+                    "value": 0,
+                    "trending": "flat"
+                  },
+                  {
+                    "counterName": "autoRPRPFFailed",
+                    "counterNameLabel": "Auto RP RPF failed",
+                    "counterType": "error",
+                    "value": 0,
+                    "trending": "flat"
+                  },
+                  {
+                    "counterName": "autoRPInvalidType",
+                    "counterNameLabel": "Auto RP invalid type",
+                    "counterType": "error",
+                    "value": 0,
+                    "trending": "flat"
+                  },
+                  {
+                    "counterName": "bsrBsFromNonNbr",
+                    "counterNameLabel": "Bsr Bs from non neighbor",
+                    "counterType": "error",
+                    "value": 0,
+                    "trending": "flat"
+                  }
+                ]
+              }
+            ],
+            "meta": {
+              "counts": {
+                "total": 1,
+                "remaining": 0
+              },
+              "links": {
+                "next": "https://api.example.com/v1/analyze/connectivity/multicast/pimDomains?offset=40&max=10",
+                "previous": "https://api.example.com/v1/analyze/connectivity/multicast/pimDomains?offset=20&max=10"
+              }
+            }
+          }
+  - name: Non-ACI Fabric
+    description: PIM Domains for Non-ACI Fabric
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivity/multicast/pimDomains"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: switchName
+          value: ""
+          type: query
+          description: Name of the switch
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "pimDomains": [
+              {
+                "fabricName": "DC-trex-nx",
+                "switchName": "trex-nx-leaf4",
+                "sourceName": "pimvrf/vrf-default",
+                "vrfVnid": 0,
+                "controlFlag": "",
+                "fastConvergenceEnabled": false,
+                "adminState": "enabled",
+                "vrfName": "default",
+                "rendezvousPointIpCollection": [
+                  "50.50.50.50"
+                ],
+                "borderLeaf": "n/a",
+                "anomalyScore": 0,
+                "statisticalCounters": [
+                  {
+                    "counterName": "errorsTotal",
+                    "counterNameLabel": "Total Error Count",
+                    "counterType": "",
+                    "value": 0,
+                    "trending": "flat"
+                  },
+                  {
+                    "counterName": "bsrBsLenErr",
+                    "counterNameLabel": "Bsr bs length error",
+                    "counterType": "error",
+                    "value": 0,
+                    "trending": "flat"
+                  },
+                  {
+                    "counterName": "autoRPInvalidType",
+                    "counterNameLabel": "Auto RP invalid type",
+                    "counterType": "error",
+                    "value": 0,
+                    "trending": "flat"
+                  },
+                  {
+                    "counterName": "autoRPRPFFailed",
+                    "counterNameLabel": "Auto RP RPF failed",
+                    "counterType": "error",
+                    "value": 0,
+                    "trending": "flat"
+                  },
+                  {
+                    "counterName": "regRcvdAndNotRP",
+                    "counterNameLabel": "Registration received and not RP",
+                    "counterType": "error",
+                    "value": 0,
+                    "trending": "flat"
+                  },
+                  {
+                    "counterName": "bsrBsRPFFail",
+                    "counterNameLabel": "Bootstrap messages for which RPF Failed",
+                    "counterType": "error",
+                    "value": 0,
+                    "trending": "flat"
+                  },
+                  {
+                    "counterName": "autoRPTTLExp",
+                    "counterNameLabel": "Auto RP TTL expired",
+                    "counterType": "error",
+                    "value": 0,
+                    "trending": "flat"
+                  },
+                  {
+                    "counterName": "regRcvdSSM",
+                    "counterNameLabel": "Registration received SSM",
+                    "counterType": "error",
+                    "value": 0,
+                    "trending": "flat"
+                  },
+                  {
+                    "counterName": "bsrBsFromNonNbr",
+                    "counterNameLabel": "Bsr Bs from non neighbor",
+                    "counterType": "error",
+                    "value": 0,
+                    "trending": "flat"
+                  }
+                ]
+              }
+            ],
+            "meta": {
+              "counts": {
+                "total": 1,
+                "remaining": 0
+              },
+              "links": {
+                "next": "https://api.example.com/v1/analyze/connectivity/multicast/pimDomains?offset=40&max=10",
+                "previous": "https://api.example.com/v1/analyze/connectivity/multicast/pimDomains?offset=20&max=10"
+              }
+            }
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivity/multicast/pimDomains"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: switchName
+          value: ""
+          type: query
+          description: Name of the switch
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivity/multicast/pimDomains"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: switchName
+          value: ""
+          type: query
+          description: Name of the switch
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 403 Response
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivity/multicast/pimDomains"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: switchName
+          value: ""
+          type: query
+          description: Name of the switch
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 404 Response
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivity/multicast/pimDomains"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: switchName
+          value: ""
+          type: query
+          description: Name of the switch
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 500 Response
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivity/multicast/pimDomains"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: switchName
+          value: ""
+          type: query
+          description: Name of the switch
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }

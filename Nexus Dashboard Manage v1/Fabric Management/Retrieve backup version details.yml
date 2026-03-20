@@ -2,6 +2,8 @@ info:
   name: Retrieve backup version details
   type: http
   seq: 37
+  tags:
+    - Fabric Management
 
 http:
   method: GET
@@ -58,6 +60,7 @@ examples:
           description: Serial Number or Id of the switch/leaf
           disabled: true
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -71,12 +74,9 @@ examples:
             "backupType": "fabric",
             "backupVersion": 1,
             "displayBackupVersion": "Version_1_TAG:MyTag1",
-            "insyncSwitchCount": 0,
             "isGolden": false,
-            "outOfSyncSwitchCount": 2,
             "tag": "MyTag1",
-            "totalSwitchCount": 2,
-            "unknownSwitchCount": 0
+            "totalSwitchCount": 2
           }
   - name: fabricGroupsBackupResponse
     request:
@@ -102,6 +102,7 @@ examples:
           description: Serial Number or Id of the switch/leaf
           disabled: true
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -116,18 +117,15 @@ examples:
             "backupVersion": 1,
             "displayBackupVersion": "Version_1_TAG:MyTag1",
             "externalFabricCount": 1,
-            "insyncSwitchCount": 1,
             "isGolden": false,
             "memberFabricNames": [
               "Fabric1",
               "Fabric2",
               "ExtFabric1"
             ],
-            "outOfSyncSwitchCount": 2,
             "tag": "MyTag1",
             "totalFabricCount": 3,
             "totalSwitchCount": 3,
-            "unknownSwitchCount": 0,
             "vxlanFabricCount": 2
           }
   - name: switchBackupDetailsResponse
@@ -154,6 +152,7 @@ examples:
           description: Serial Number or Id of the switch/leaf
           disabled: true
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -195,6 +194,7 @@ examples:
           description: Serial Number or Id of the switch/leaf
           disabled: true
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -232,6 +232,7 @@ examples:
           description: Serial Number or Id of the switch/leaf
           disabled: true
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -269,6 +270,7 @@ examples:
           description: Serial Number or Id of the switch/leaf
           disabled: true
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -306,6 +308,7 @@ examples:
           description: Serial Number or Id of the switch/leaf
           disabled: true
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -343,6 +346,7 @@ examples:
           description: Serial Number or Id of the switch/leaf
           disabled: true
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

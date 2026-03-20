@@ -2,6 +2,8 @@ info:
   name: Preview pending VRF configuration
   type: http
   seq: 22
+  tags:
+    - VRFs and Networks
 
 http:
   method: POST
@@ -20,9 +22,12 @@ http:
     type: json
     data: |-
       {
-        "switchFabricNames": [],
-        "switchIds": [],
-        "vrfNames": []
+        "switchIds": [
+          "99X70W9ORI1"
+        ],
+        "vrfNames": [
+          "MyVRF_50001"
+        ]
       }
   auth: inherit
 
@@ -60,6 +65,7 @@ examples:
             ]
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -70,7 +76,7 @@ examples:
           {
             "attachments": [
               {
-                "fabricName": "vxlan-fab",
+                "fabricName": "fab1",
                 "pendingConfigs": [
                   "configure profile MyVRF_50001",
                   "  vlan 2001",
@@ -116,7 +122,7 @@ examples:
                 "vrfName": "MyVRF_50001"
               },
               {
-                "fabricName": "vxlan-fab",
+                "fabricName": "fab1",
                 "pendingConfigs": [
                   "configure profile MyVRF_50001",
                   "  vlan 2001",
@@ -162,7 +168,7 @@ examples:
                 "vrfName": "MyVRF_50001"
               },
               {
-                "fabricName": "vxlan-fab",
+                "fabricName": "fab1",
                 "pendingConfigs": [
                   "configure profile MyVRF_50001",
                   "  vlan 2001",
@@ -208,7 +214,7 @@ examples:
                 "vrfName": "MyVRF_50001"
               },
               {
-                "fabricName": "vxlan-fab",
+                "fabricName": "fab1",
                 "pendingConfigs": [
                   "configure profile MyVRF_50002",
                   "  vlan 2002",
@@ -284,6 +290,7 @@ examples:
             ]
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -294,7 +301,7 @@ examples:
           {
             "attachments": [
               {
-                "fabricName": "vxlan-fab",
+                "fabricName": "fab1",
                 "pendingConfigs": [
                   "configure profile MyVRF_50001",
                   "  vlan 2001",
@@ -340,7 +347,7 @@ examples:
                 "vrfName": "MyVRF_50001"
               },
               {
-                "fabricName": "vxlan-fab",
+                "fabricName": "fab1",
                 "pendingConfigs": [
                   "configure profile MyVRF_50001",
                   "  vlan 2001",
@@ -386,7 +393,7 @@ examples:
                 "vrfName": "MyVRF_50001"
               },
               {
-                "fabricName": "vxlan-fab",
+                "fabricName": "fab1",
                 "pendingConfigs": [
                   "configure profile MyVRF_50001",
                   "  vlan 2001",
@@ -432,7 +439,7 @@ examples:
                 "vrfName": "MyVRF_50001"
               },
               {
-                "fabricName": "vxlan-fab",
+                "fabricName": "fab1",
                 "pendingConfigs": [
                   "configure profile MyVRF_50002",
                   "  vlan 2002",
@@ -506,6 +513,7 @@ examples:
             ]
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -516,7 +524,7 @@ examples:
           {
             "attachments": [
               {
-                "fabricName": "vxlan-fab",
+                "fabricName": "fab1",
                 "pendingConfigs": [
                   "configure profile MyVRF_50001",
                   "  vlan 2001",
@@ -592,6 +600,7 @@ examples:
             ]
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -602,7 +611,7 @@ examples:
           {
             "attachments": [
               {
-                "fabricName": "vxlan-fab",
+                "fabricName": "fab1",
                 "pendingConfigs": [
                   "configure profile MyVRF_50001",
                   "  vlan 2001",
@@ -676,6 +685,7 @@ examples:
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -717,6 +727,7 @@ examples:
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -756,6 +767,7 @@ examples:
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -797,6 +809,7 @@ examples:
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -836,6 +849,7 @@ examples:
             ]
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -877,6 +891,7 @@ examples:
             ]
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -916,6 +931,7 @@ examples:
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -957,6 +973,7 @@ examples:
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -996,6 +1013,7 @@ examples:
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type
@@ -1037,6 +1055,7 @@ examples:
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

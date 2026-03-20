@@ -2,6 +2,8 @@ info:
   name: Get all anomaly post processing rules
   type: http
   seq: 10
+  tags:
+    - Anomaly Settings
 
 http:
   method: GET
@@ -25,16 +27,22 @@ http:
     - name: sort
       value: ""
       type: query
-      description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+      description: |
+        Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+        Ascending order by default: "field1"
+        Specific order for one field: "field1:asc" or "field1:desc"
+        Specific order with multiple fields: "field1:asc,field2:desc"
       disabled: true
     - name: filter
       value: ""
       type: query
       description: Lucene format filter - Filter the response based on this filter field
+      disabled: true
     - name: includeMatchCriteria
       value: ""
       type: query
       description: Set to true to include match criteria in the response
+      disabled: true
   auth: inherit
 
 settings:
@@ -68,17 +76,24 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
         - name: includeMatchCriteria
           value: ""
           type: query
           description: Set to true to include match criteria in the response
+          disabled: true
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -187,17 +202,24 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
         - name: includeMatchCriteria
           value: ""
           type: query
           description: Set to true to include match criteria in the response
+          disabled: true
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -234,17 +256,24 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
         - name: includeMatchCriteria
           value: ""
           type: query
           description: Set to true to include match criteria in the response
+          disabled: true
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -281,17 +310,24 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
         - name: includeMatchCriteria
           value: ""
           type: query
           description: Set to true to include match criteria in the response
+          disabled: true
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -328,17 +364,24 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
         - name: includeMatchCriteria
           value: ""
           type: query
           description: Set to true to include match criteria in the response
+          disabled: true
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -375,17 +418,24 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
         - name: includeMatchCriteria
           value: ""
           type: query
           description: Set to true to include match criteria in the response
+          disabled: true
     response:
+      status: 409
       statusText: Conflict
       headers:
         - name: Content-Type
@@ -422,17 +472,24 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
         - name: includeMatchCriteria
           value: ""
           type: query
           description: Set to true to include match criteria in the response
+          disabled: true
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

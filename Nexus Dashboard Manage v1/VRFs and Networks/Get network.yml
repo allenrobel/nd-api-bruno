@@ -2,6 +2,8 @@ info:
   name: Get network
   type: http
   seq: 16
+  tags:
+    - VRFs and Networks
 
 http:
   method: GET
@@ -58,6 +60,7 @@ examples:
           description: If true, fetches the members details of a policy
           disabled: true
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -82,9 +85,6 @@ examples:
             "displayName": "MyNetwork_30000",
             "fabricName": "fab1",
             "l2Data": {
-              "fabricData": {
-                "stretch": "bgw1"
-              },
               "rtAuto": true,
               "vlanName": "VLAN3000"
             },
@@ -97,12 +97,11 @@ examples:
                 "2001:db8:30::1/64"
               ]
             },
-            "layer": "layer3",
             "networkId": 30000,
+            "networkMode": "layer3",
             "networkName": "MyNetwork_30000",
             "networkStatus": "inSync",
-            "networkType": "vxlan",
-            "tenantName": "tenant1",
+            "networkType": "vxlanEbgp",
             "vlanId": 3000,
             "vrfName": "MyVRF_50000"
           }
@@ -130,6 +129,7 @@ examples:
           description: If true, fetches the members details of a policy
           disabled: true
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -138,42 +138,30 @@ examples:
         type: json
         data: |-
           {
-            "displayName": "MyNetwork_50000",
+            "displayName": "MyNetwork_30000",
             "fabricName": "fab1",
             "l2Data": {
-              "vlanName": "VLAN2000"
+              "vlanName": "VLAN3000"
             },
             "l3Data": {
               "activePrimaryInterfaceIpv4": "192.168.50.2/24",
               "activePrimarySwitchPriority": 120,
               "gatewayIpv4Address": "192.168.50.1/24",
               "hsrpVersion": 2,
-              "hsrpVrrpGroupNumber": {
-                "protocol": {
-                  "hsrpV2": 1
-                }
-              },
-              "hsrpVrrpGroupNumberV6": {
-                "protocol": {
-                  "hsrp": 170,
-                  "vrrp": 95
-                }
-              },
               "mtu": 9216,
               "netflow": false,
               "preempt": true,
-              "routingTag": 50000,
+              "routingTag": 30000,
               "standbyBackupInterfaceIpv4": "192.168.50.3/24",
               "standbyBackupSwitchPriority": 100,
               "vlanInterfaceDescription": "Classic Network Interface"
             },
-            "layer": "layer3",
-            "networkId": 20000,
-            "networkName": "MyNetwork_50000",
+            "networkId": 30000,
+            "networkMode": "layer3",
+            "networkName": "MyNetwork_30000",
             "networkType": "routed",
-            "tenantName": "tenant3",
-            "vlanId": 2000,
-            "vrfName": "MyVRF_70000"
+            "vlanId": 3000,
+            "vrfName": "MyVRF_50000"
           }
   - name: networkTwo
     request:
@@ -199,6 +187,7 @@ examples:
           description: If true, fetches the members details of a policy
           disabled: true
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -207,22 +196,21 @@ examples:
         type: json
         data: |-
           {
-            "displayName": "MyNetwork_40000",
+            "displayName": "MyNetwork_30001",
             "fabricName": "fab1",
-            "layer": "layer3",
-            "networkExtensionTemplateName": "CustomExtTemplate1",
-            "networkId": 40000,
-            "networkName": "MyNetwork_40000",
+            "networkExtensionTemplateName": "Custom_Network_Extension_Template",
+            "networkId": 30001,
+            "networkMode": "layer3",
+            "networkName": "MyNetwork_30001",
             "networkStatus": "deployed",
             "networkTemplateConfig": {
-              "param1": "value1",
-              "param2": "value2"
+              "networkName": "MyNetwork_30001",
+              "vlanId": "3001"
             },
-            "networkTemplateName": "CustomTemplate1",
+            "networkTemplateName": "Default_Network_Universal",
             "networkType": "userDefined",
-            "tenantName": "tenant2",
-            "vlanId": 4000,
-            "vrfName": "MyVRF_60000"
+            "vlanId": 3001,
+            "vrfName": "MyVRF_50001"
           }
   - name: 400 Response
     description: Bad Request
@@ -249,6 +237,7 @@ examples:
           description: If true, fetches the members details of a policy
           disabled: true
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -286,6 +275,7 @@ examples:
           description: If true, fetches the members details of a policy
           disabled: true
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -323,6 +313,7 @@ examples:
           description: If true, fetches the members details of a policy
           disabled: true
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -360,6 +351,7 @@ examples:
           description: If true, fetches the members details of a policy
           disabled: true
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

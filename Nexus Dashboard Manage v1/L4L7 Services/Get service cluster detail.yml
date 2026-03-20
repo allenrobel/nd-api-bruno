@@ -2,12 +2,14 @@ info:
   name: Get service cluster detail
   type: http
   seq: 9
+  tags:
+    - L4L7 Services
 
 http:
   method: GET
-  url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
+  url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters/:serviceClusterName"
   params:
-    - name: clusterName
+    - name: serviceClusterName
       value: ""
       type: path
       description: Service cluster name
@@ -26,10 +28,10 @@ settings:
 examples:
   - name: Service cluster that has service node with customized link
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters/:serviceClusterName"
       method: GET
       params:
-        - name: clusterName
+        - name: serviceClusterName
           value: ""
           type: path
           description: Service cluster name
@@ -38,6 +40,7 @@ examples:
           type: path
           description: Name of the fabric
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -46,7 +49,7 @@ examples:
         type: json
         data: |-
           {
-            "clusterName": "Cluster1",
+            "serviceClusterName": "Cluster1",
             "clusterType": "other",
             "formFactor": "physical",
             "nodeRedundancy": "standalone",
@@ -76,10 +79,10 @@ examples:
           }
   - name: Service cluster that has service node with ethernet trunk interface link
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters/:serviceClusterName"
       method: GET
       params:
-        - name: clusterName
+        - name: serviceClusterName
           value: ""
           type: path
           description: Service cluster name
@@ -88,6 +91,7 @@ examples:
           type: path
           description: Name of the fabric
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -96,7 +100,7 @@ examples:
         type: json
         data: |-
           {
-            "clusterName": "Cluster1",
+            "serviceClusterName": "Cluster1",
             "clusterType": "firewall",
             "formFactor": "physical",
             "nodeRedundancy": "standalone",
@@ -112,10 +116,10 @@ examples:
                     "linkData": {
                       "adminState": true,
                       "allowedVlans": "none",
-                      "bpduGuard": "no",
+                      "bpduGuard": "default",
                       "cdp": true,
-                      "srcInterfaceDescription": "source interface of service link",
-                      "srcInterfaceFreeformConfig": "",
+                      "svcLeafIntfDescription": "source interface of service link",
+                      "svcLeafIntfFreeformConfig": "",
                       "linkDataType": "ethernet",
                       "mtu": "jumbo",
                       "nativeVlanId": 1,
@@ -124,11 +128,11 @@ examples:
                       "netflowSampler": "sampler1",
                       "orphanPort": false,
                       "portDuplexMode": "auto",
-                      "portTypeFast": true,
-                      "priorityFlowControl": false,
+                      "portTypeEdgeTrunk": true,
+                      "pfc": false,
                       "qos": false,
                       "qosPolicy": "qosPolicy1",
-                      "queueingPolicy": "queuingPolicy1",
+                      "queuingPolicy": "queuingPolicy1",
                       "speed": "auto"
                     },
                     "nodeInterface": "G1/1",
@@ -140,10 +144,10 @@ examples:
           }
   - name: Service cluster that has service node with port-channel trunk interface link
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters/:serviceClusterName"
       method: GET
       params:
-        - name: clusterName
+        - name: serviceClusterName
           value: ""
           type: path
           description: Service cluster name
@@ -152,6 +156,7 @@ examples:
           type: path
           description: Name of the fabric
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -160,7 +165,7 @@ examples:
         type: json
         data: |-
           {
-            "clusterName": "Cluster1",
+            "serviceClusterName": "Cluster1",
             "clusterType": "firewall",
             "formFactor": "physical",
             "nodeRedundancy": "standalone",
@@ -176,7 +181,7 @@ examples:
                     "linkData": {
                       "adminState": true,
                       "allowedVlans": "none",
-                      "bpduGuard": "no",
+                      "bpduGuard": "default",
                       "cdp": true,
                       "copyDescription": false,
                       "lacpPortPriority": 32768,
@@ -190,14 +195,14 @@ examples:
                       "orphanPort": false,
                       "portChannelMode": "active",
                       "portDuplexMode": "auto",
-                      "portTypeFast": true,
-                      "priorityFlowControl": false,
+                      "portTypeEdgeTrunk": true,
+                      "pfc": false,
                       "qos": false,
                       "qosPolicy": "qosPolicy1",
-                      "queueingPolicy": "queuingPolicy1",
+                      "queuingPolicy": "queuingPolicy1",
                       "speed": "auto",
-                      "srcInterfaceDescription": "source interface of service link",
-                      "srcInterfaceFreeformConfig": ""
+                      "svcLeafIntfDescription": "source interface of service link",
+                      "svcLeafIntfFreeformConfig": ""
                     },
                     "nodeInterface": "G1/1",
                     "nodeInterfaceUsage": "insideOutside"
@@ -208,10 +213,10 @@ examples:
           }
   - name: Service cluster that has service node with vPC interface link
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters/:serviceClusterName"
       method: GET
       params:
-        - name: clusterName
+        - name: serviceClusterName
           value: ""
           type: path
           description: Service cluster name
@@ -220,6 +225,7 @@ examples:
           type: path
           description: Name of the fabric
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -228,7 +234,7 @@ examples:
         type: json
         data: |-
           {
-            "clusterName": "Cluster1",
+            "serviceClusterName": "Cluster1",
             "clusterType": "loadBalancer",
             "formFactor": "physical",
             "nodeRedundancy": "standalone",
@@ -252,10 +258,10 @@ examples:
   - name: 400 Response
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters/:serviceClusterName"
       method: GET
       params:
-        - name: clusterName
+        - name: serviceClusterName
           value: ""
           type: path
           description: Service cluster name
@@ -264,6 +270,7 @@ examples:
           type: path
           description: Name of the fabric
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -279,10 +286,10 @@ examples:
   - name: 401 Response
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters/:serviceClusterName"
       method: GET
       params:
-        - name: clusterName
+        - name: serviceClusterName
           value: ""
           type: path
           description: Service cluster name
@@ -291,6 +298,7 @@ examples:
           type: path
           description: Name of the fabric
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -306,10 +314,10 @@ examples:
   - name: 403 Response
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters/:serviceClusterName"
       method: GET
       params:
-        - name: clusterName
+        - name: serviceClusterName
           value: ""
           type: path
           description: Service cluster name
@@ -318,6 +326,7 @@ examples:
           type: path
           description: Name of the fabric
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -333,10 +342,10 @@ examples:
   - name: 404 Response
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters/:serviceClusterName"
       method: GET
       params:
-        - name: clusterName
+        - name: serviceClusterName
           value: ""
           type: path
           description: Service cluster name
@@ -345,6 +354,7 @@ examples:
           type: path
           description: Name of the fabric
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -360,10 +370,10 @@ examples:
   - name: 500 Response
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters/:serviceClusterName"
       method: GET
       params:
-        - name: clusterName
+        - name: serviceClusterName
           value: ""
           type: path
           description: Service cluster name
@@ -372,6 +382,7 @@ examples:
           type: path
           description: Name of the fabric
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

@@ -2,6 +2,8 @@ info:
   name: Create service functions
   type: http
   seq: 12
+  tags:
+    - L4L7 Services
 
 http:
   method: POST
@@ -21,34 +23,31 @@ http:
               {
                 "arms": [
                   {
-                    "armType": "",
-                    "peeringOption": "",
-                    "probeName": "",
-                    "peeringConfigs": [
+                    "armType": "firstOrOutsideArm",
+                    "peeringOption": "staticPeering",
+                    "probeName": "probe1",
+                    "PeeringConfigs": [
                       {
-                        "peerSwitches": [],
-                        "routeName": ""
+                        "peerSwitches": [
+                          "FDO12345ABC"
+                        ],
+                        "routeName": "route1"
                       }
                     ],
-                    "serviceNetworkName": ""
+                    "serviceNetworkName": "ServiceNet1"
                   }
                 ],
-                "clusterName": "",
-                "lastUpdateTimestamp": "",
+                "serviceClusterName": "Cluster1",
                 "serviceNodeIps": {
-                  "ipv4Address": "",
-                  "ipv6Address": "",
-                  "reverseIpv4Address": "",
-                  "reverseIpv6Address": ""
+                  "ipv4Address": "123.1.1.123",
+                  "ipv6Address": "1002::123"
                 }
               }
             ],
-            "clusterType": "",
-            "connectivityMode": "",
-            "functionName": "",
-            "lastUpdateTimestamp": "",
-            "vrf2Name": "",
-            "vrfName": ""
+            "clusterType": "firewall",
+            "connectivityMode": "oneArm",
+            "functionName": "FWFunc1",
+            "vrfName": "Vrf1"
           }
         ]
       }
@@ -81,38 +80,36 @@ examples:
                   {
                     "arms": [
                       {
-                        "armType": "",
-                        "peeringOption": "",
-                        "probeName": "",
-                        "peeringConfigs": [
+                        "armType": "firstOrOutsideArm",
+                        "peeringOption": "staticPeering",
+                        "probeName": "probe1",
+                        "PeeringConfigs": [
                           {
-                            "peerSwitches": [],
-                            "routeName": ""
+                            "peerSwitches": [
+                              "FDO12345ABC"
+                            ],
+                            "routeName": "route1"
                           }
                         ],
-                        "serviceNetworkName": ""
+                        "serviceNetworkName": "ServiceNet1"
                       }
                     ],
-                    "clusterName": "",
-                    "lastUpdateTimestamp": "",
+                    "serviceClusterName": "Cluster1",
                     "serviceNodeIps": {
-                      "ipv4Address": "",
-                      "ipv6Address": "",
-                      "reverseIpv4Address": "",
-                      "reverseIpv6Address": ""
+                      "ipv4Address": "123.1.1.123",
+                      "ipv6Address": "1002::123"
                     }
                   }
                 ],
-                "clusterType": "",
-                "connectivityMode": "",
-                "functionName": "",
-                "lastUpdateTimestamp": "",
-                "vrf2Name": "",
-                "vrfName": ""
+                "clusterType": "firewall",
+                "connectivityMode": "oneArm",
+                "functionName": "FWFunc1",
+                "vrfName": "Vrf1"
               }
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -159,38 +156,36 @@ examples:
                   {
                     "arms": [
                       {
-                        "armType": "",
-                        "peeringOption": "",
-                        "probeName": "",
-                        "peeringConfigs": [
+                        "armType": "firstOrOutsideArm",
+                        "peeringOption": "staticPeering",
+                        "probeName": "probe1",
+                        "PeeringConfigs": [
                           {
-                            "peerSwitches": [],
-                            "routeName": ""
+                            "peerSwitches": [
+                              "FDO12345ABC"
+                            ],
+                            "routeName": "route1"
                           }
                         ],
-                        "serviceNetworkName": ""
+                        "serviceNetworkName": "ServiceNet1"
                       }
                     ],
-                    "clusterName": "",
-                    "lastUpdateTimestamp": "",
+                    "serviceClusterName": "Cluster1",
                     "serviceNodeIps": {
-                      "ipv4Address": "",
-                      "ipv6Address": "",
-                      "reverseIpv4Address": "",
-                      "reverseIpv6Address": ""
+                      "ipv4Address": "123.1.1.123",
+                      "ipv6Address": "1002::123"
                     }
                   }
                 ],
-                "clusterType": "",
-                "connectivityMode": "",
-                "functionName": "",
-                "lastUpdateTimestamp": "",
-                "vrf2Name": "",
-                "vrfName": ""
+                "clusterType": "firewall",
+                "connectivityMode": "oneArm",
+                "functionName": "FWFunc1",
+                "vrfName": "Vrf1"
               }
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -223,38 +218,36 @@ examples:
                   {
                     "arms": [
                       {
-                        "armType": "",
-                        "peeringOption": "",
-                        "probeName": "",
-                        "peeringConfigs": [
+                        "armType": "firstOrOutsideArm",
+                        "peeringOption": "staticPeering",
+                        "probeName": "probe1",
+                        "PeeringConfigs": [
                           {
-                            "peerSwitches": [],
-                            "routeName": ""
+                            "peerSwitches": [
+                              "FDO12345ABC"
+                            ],
+                            "routeName": "route1"
                           }
                         ],
-                        "serviceNetworkName": ""
+                        "serviceNetworkName": "ServiceNet1"
                       }
                     ],
-                    "clusterName": "",
-                    "lastUpdateTimestamp": "",
+                    "serviceClusterName": "Cluster1",
                     "serviceNodeIps": {
-                      "ipv4Address": "",
-                      "ipv6Address": "",
-                      "reverseIpv4Address": "",
-                      "reverseIpv6Address": ""
+                      "ipv4Address": "123.1.1.123",
+                      "ipv6Address": "1002::123"
                     }
                   }
                 ],
-                "clusterType": "",
-                "connectivityMode": "",
-                "functionName": "",
-                "lastUpdateTimestamp": "",
-                "vrf2Name": "",
-                "vrfName": ""
+                "clusterType": "firewall",
+                "connectivityMode": "oneArm",
+                "functionName": "FWFunc1",
+                "vrfName": "Vrf1"
               }
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -287,38 +280,36 @@ examples:
                   {
                     "arms": [
                       {
-                        "armType": "",
-                        "peeringOption": "",
-                        "probeName": "",
-                        "peeringConfigs": [
+                        "armType": "firstOrOutsideArm",
+                        "peeringOption": "staticPeering",
+                        "probeName": "probe1",
+                        "PeeringConfigs": [
                           {
-                            "peerSwitches": [],
-                            "routeName": ""
+                            "peerSwitches": [
+                              "FDO12345ABC"
+                            ],
+                            "routeName": "route1"
                           }
                         ],
-                        "serviceNetworkName": ""
+                        "serviceNetworkName": "ServiceNet1"
                       }
                     ],
-                    "clusterName": "",
-                    "lastUpdateTimestamp": "",
+                    "serviceClusterName": "Cluster1",
                     "serviceNodeIps": {
-                      "ipv4Address": "",
-                      "ipv6Address": "",
-                      "reverseIpv4Address": "",
-                      "reverseIpv6Address": ""
+                      "ipv4Address": "123.1.1.123",
+                      "ipv6Address": "1002::123"
                     }
                   }
                 ],
-                "clusterType": "",
-                "connectivityMode": "",
-                "functionName": "",
-                "lastUpdateTimestamp": "",
-                "vrf2Name": "",
-                "vrfName": ""
+                "clusterType": "firewall",
+                "connectivityMode": "oneArm",
+                "functionName": "FWFunc1",
+                "vrfName": "Vrf1"
               }
             ]
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -351,38 +342,36 @@ examples:
                   {
                     "arms": [
                       {
-                        "armType": "",
-                        "peeringOption": "",
-                        "probeName": "",
-                        "peeringConfigs": [
+                        "armType": "firstOrOutsideArm",
+                        "peeringOption": "staticPeering",
+                        "probeName": "probe1",
+                        "PeeringConfigs": [
                           {
-                            "peerSwitches": [],
-                            "routeName": ""
+                            "peerSwitches": [
+                              "FDO12345ABC"
+                            ],
+                            "routeName": "route1"
                           }
                         ],
-                        "serviceNetworkName": ""
+                        "serviceNetworkName": "ServiceNet1"
                       }
                     ],
-                    "clusterName": "",
-                    "lastUpdateTimestamp": "",
+                    "serviceClusterName": "Cluster1",
                     "serviceNodeIps": {
-                      "ipv4Address": "",
-                      "ipv6Address": "",
-                      "reverseIpv4Address": "",
-                      "reverseIpv6Address": ""
+                      "ipv4Address": "123.1.1.123",
+                      "ipv6Address": "1002::123"
                     }
                   }
                 ],
-                "clusterType": "",
-                "connectivityMode": "",
-                "functionName": "",
-                "lastUpdateTimestamp": "",
-                "vrf2Name": "",
-                "vrfName": ""
+                "clusterType": "firewall",
+                "connectivityMode": "oneArm",
+                "functionName": "FWFunc1",
+                "vrfName": "Vrf1"
               }
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -415,38 +404,36 @@ examples:
                   {
                     "arms": [
                       {
-                        "armType": "",
-                        "peeringOption": "",
-                        "probeName": "",
-                        "peeringConfigs": [
+                        "armType": "firstOrOutsideArm",
+                        "peeringOption": "staticPeering",
+                        "probeName": "probe1",
+                        "PeeringConfigs": [
                           {
-                            "peerSwitches": [],
-                            "routeName": ""
+                            "peerSwitches": [
+                              "FDO12345ABC"
+                            ],
+                            "routeName": "route1"
                           }
                         ],
-                        "serviceNetworkName": ""
+                        "serviceNetworkName": "ServiceNet1"
                       }
                     ],
-                    "clusterName": "",
-                    "lastUpdateTimestamp": "",
+                    "serviceClusterName": "Cluster1",
                     "serviceNodeIps": {
-                      "ipv4Address": "",
-                      "ipv6Address": "",
-                      "reverseIpv4Address": "",
-                      "reverseIpv6Address": ""
+                      "ipv4Address": "123.1.1.123",
+                      "ipv6Address": "1002::123"
                     }
                   }
                 ],
-                "clusterType": "",
-                "connectivityMode": "",
-                "functionName": "",
-                "lastUpdateTimestamp": "",
-                "vrf2Name": "",
-                "vrfName": ""
+                "clusterType": "firewall",
+                "connectivityMode": "oneArm",
+                "functionName": "FWFunc1",
+                "vrfName": "Vrf1"
               }
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

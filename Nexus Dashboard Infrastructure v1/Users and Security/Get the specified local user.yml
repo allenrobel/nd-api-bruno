@@ -2,6 +2,8 @@ info:
   name: Get the specified local user
   type: http
   seq: 13
+  tags:
+    - Users and Security
 
 http:
   method: GET
@@ -17,11 +19,6 @@ http:
       type: path
       description: User login ID
   auth: inherit
-
-runtime:
-  variables:
-    - name: pathLoginId
-      value: admin
 
 settings:
   encodeUrl: true
@@ -46,6 +43,7 @@ examples:
           type: path
           description: User login ID
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -68,7 +66,7 @@ examples:
               "domains": {
                 "all": {
                   "roles": [
-                    "Observer"
+                    "observer"
                   ]
                 }
               },
@@ -94,6 +92,7 @@ examples:
           type: path
           description: User login ID
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -122,6 +121,7 @@ examples:
           type: path
           description: User login ID
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -150,6 +150,7 @@ examples:
           type: path
           description: User login ID
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -178,6 +179,7 @@ examples:
           type: path
           description: User login ID
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -206,6 +208,7 @@ examples:
           type: path
           description: User login ID
     response:
+      status: 429
       statusText: Too Many Requests
       headers:
         - name: Content-Type
@@ -234,6 +237,7 @@ examples:
           type: path
           description: User login ID
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

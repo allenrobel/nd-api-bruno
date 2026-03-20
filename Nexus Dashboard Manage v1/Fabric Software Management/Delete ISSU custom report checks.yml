@@ -1,7 +1,9 @@
 info:
   name: Delete ISSU custom report checks
   type: http
-  seq: 40
+  seq: 34
+  tags:
+    - Fabric Software Management
 
 http:
   method: DELETE
@@ -41,6 +43,7 @@ examples:
           type: path
           description: Name of the update report check
     response:
+      status: 204
       statusText: No Content
       body:
         type: text
@@ -61,6 +64,7 @@ examples:
           type: path
           description: Name of the update report check
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -89,6 +93,7 @@ examples:
           type: path
           description: Name of the update report check
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -117,6 +122,7 @@ examples:
           type: path
           description: Name of the update report check
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -145,6 +151,7 @@ examples:
           type: path
           description: Name of the update report check
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

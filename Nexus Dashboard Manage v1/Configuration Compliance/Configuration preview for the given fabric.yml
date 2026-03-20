@@ -2,6 +2,8 @@ info:
   name: Configuration preview for the given fabric
   type: http
   seq: 1
+  tags:
+    - Configuration Compliance
 
 http:
   method: GET
@@ -27,10 +29,9 @@ http:
       description: If true, API provides line count of the pending config. If false, detailed output is provided.
       disabled: true
     - name: includeAllFabricGroupSwitches
-      value: ""
+      value: "false"
       type: query
       description: If this passed as true and the queried fabric is a VXLAN fabric group aka Multi-Site Domain (MSD) fabric, then all of the child fabric switches configuration preview is provided, if passed as false switches in migration state will not be used for configuration preview. If fabric is not a Multi-Site Domain, this flag is ignored.
-      disabled: true
   auth: inherit
 
 settings:
@@ -65,11 +66,11 @@ examples:
           description: If true, API provides line count of the pending config. If false, detailed output is provided.
           disabled: true
         - name: includeAllFabricGroupSwitches
-          value: ""
+          value: "false"
           type: query
           description: If this passed as true and the queried fabric is a VXLAN fabric group aka Multi-Site Domain (MSD) fabric, then all of the child fabric switches configuration preview is provided, if passed as false switches in migration state will not be used for configuration preview. If fabric is not a Multi-Site Domain, this flag is ignored.
-          disabled: true
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -80,7 +81,10 @@ examples:
           {
             "items": [
               {
+                "addConfigCount": 0,
+                "briefCount": 0,
                 "deployMode": "config",
+                "diffConfigs": null,
                 "entityCollection": [
                   {
                     "commands": [
@@ -136,6 +140,7 @@ examples:
                   "  description new description",
                   "  ip router ospf UNDERLAY area 0.0.0.0"
                 ],
+                "removeConfigCount": 0,
                 "runningConfigs": [
                   "hostname n9kv-89",
                   "interface loopback3",
@@ -181,11 +186,11 @@ examples:
           description: If true, API provides line count of the pending config. If false, detailed output is provided.
           disabled: true
         - name: includeAllFabricGroupSwitches
-          value: ""
+          value: "false"
           type: query
           description: If this passed as true and the queried fabric is a VXLAN fabric group aka Multi-Site Domain (MSD) fabric, then all of the child fabric switches configuration preview is provided, if passed as false switches in migration state will not be used for configuration preview. If fabric is not a Multi-Site Domain, this flag is ignored.
-          disabled: true
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -199,9 +204,10 @@ examples:
                 "addConfigCount": 2,
                 "briefCount": 7,
                 "deployMode": "config",
+                "diffConfigs": null,
                 "entityCollection": [],
                 "expectedConfigs": [],
-                "fabricName": "fab-1",
+                "fabricName": "MyFabric",
                 "pendingConfigs": [],
                 "removeConfigCount": 4,
                 "runningConfigs": [],
@@ -240,11 +246,11 @@ examples:
           description: If true, API provides line count of the pending config. If false, detailed output is provided.
           disabled: true
         - name: includeAllFabricGroupSwitches
-          value: ""
+          value: "false"
           type: query
           description: If this passed as true and the queried fabric is a VXLAN fabric group aka Multi-Site Domain (MSD) fabric, then all of the child fabric switches configuration preview is provided, if passed as false switches in migration state will not be used for configuration preview. If fabric is not a Multi-Site Domain, this flag is ignored.
-          disabled: true
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -283,11 +289,11 @@ examples:
           description: If true, API provides line count of the pending config. If false, detailed output is provided.
           disabled: true
         - name: includeAllFabricGroupSwitches
-          value: ""
+          value: "false"
           type: query
           description: If this passed as true and the queried fabric is a VXLAN fabric group aka Multi-Site Domain (MSD) fabric, then all of the child fabric switches configuration preview is provided, if passed as false switches in migration state will not be used for configuration preview. If fabric is not a Multi-Site Domain, this flag is ignored.
-          disabled: true
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -326,11 +332,11 @@ examples:
           description: If true, API provides line count of the pending config. If false, detailed output is provided.
           disabled: true
         - name: includeAllFabricGroupSwitches
-          value: ""
+          value: "false"
           type: query
           description: If this passed as true and the queried fabric is a VXLAN fabric group aka Multi-Site Domain (MSD) fabric, then all of the child fabric switches configuration preview is provided, if passed as false switches in migration state will not be used for configuration preview. If fabric is not a Multi-Site Domain, this flag is ignored.
-          disabled: true
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -369,11 +375,11 @@ examples:
           description: If true, API provides line count of the pending config. If false, detailed output is provided.
           disabled: true
         - name: includeAllFabricGroupSwitches
-          value: ""
+          value: "false"
           type: query
           description: If this passed as true and the queried fabric is a VXLAN fabric group aka Multi-Site Domain (MSD) fabric, then all of the child fabric switches configuration preview is provided, if passed as false switches in migration state will not be used for configuration preview. If fabric is not a Multi-Site Domain, this flag is ignored.
-          disabled: true
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -412,11 +418,11 @@ examples:
           description: If true, API provides line count of the pending config. If false, detailed output is provided.
           disabled: true
         - name: includeAllFabricGroupSwitches
-          value: ""
+          value: "false"
           type: query
           description: If this passed as true and the queried fabric is a VXLAN fabric group aka Multi-Site Domain (MSD) fabric, then all of the child fabric switches configuration preview is provided, if passed as false switches in migration state will not be used for configuration preview. If fabric is not a Multi-Site Domain, this flag is ignored.
-          disabled: true
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

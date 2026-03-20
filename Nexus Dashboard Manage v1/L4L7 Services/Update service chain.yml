@@ -2,6 +2,8 @@ info:
   name: Update service chain
   type: http
   seq: 5
+  tags:
+    - L4L7 Services
 
 http:
   method: PUT
@@ -19,19 +21,24 @@ http:
     type: json
     data: |-
       {
-        "chainData": "",
+        "chainData": {
+          "chainDataType": "custom",
+          "templateName": "my_service_epbr",
+          "templateParams": {
+            "hashingBucket": "8"
+          }
+        },
         "chainEntries": [
           {
-            "clusterName": "",
-            "clusterType": "",
-            "probeFailAction": "",
-            "functionName": "",
-            "sequenceNumber": 0,
-            "vrfName": ""
+            "serviceClusterName": "Cluster1",
+            "clusterType": "firewall",
+            "probeFailAction": "drop",
+            "functionName": "function1",
+            "sequenceNumber": 10,
+            "vrfName": "Vrf1"
           }
         ],
-        "chainName": "",
-        "lastUpdateTimestamp": ""
+        "chainName": "chain1"
       }
   auth: inherit
 
@@ -68,9 +75,9 @@ examples:
             },
             "chainEntries": [
               {
-                "clusterName": "Cluster1",
+                "serviceClusterName": "Cluster1",
                 "clusterType": "firewall",
-                "failAction": "drop",
+                "probeFailAction": "drop",
                 "functionName": "function1",
                 "sequenceNumber": 10,
                 "vrfName": "Vrf1"
@@ -79,6 +86,7 @@ examples:
             "chainName": "chain1"
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -96,9 +104,9 @@ examples:
             },
             "chainEntries": [
               {
-                "clusterName": "Cluster1",
+                "serviceClusterName": "Cluster1",
                 "clusterType": "firewall",
-                "failAction": "drop",
+                "probeFailAction": "drop",
                 "functionName": "function1",
                 "sequenceNumber": 10,
                 "vrfName": "Vrf1"
@@ -130,9 +138,9 @@ examples:
             },
             "chainEntries": [
               {
-                "clusterName": "Cluster1",
+                "serviceClusterName": "Cluster1",
                 "clusterType": "firewall",
-                "failAction": "drop",
+                "probeFailAction": "drop",
                 "functionName": "function1",
                 "sequenceNumber": 10,
                 "vrfName": "Vrf1"
@@ -141,6 +149,7 @@ examples:
             "chainName": "chain1"
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -156,9 +165,9 @@ examples:
             },
             "chainEntries": [
               {
-                "clusterName": "Cluster1",
+                "serviceClusterName": "Cluster1",
                 "clusterType": "firewall",
-                "failAction": "drop",
+                "probeFailAction": "drop",
                 "functionName": "function1",
                 "sequenceNumber": 10,
                 "vrfName": "Vrf1"
@@ -193,9 +202,9 @@ examples:
             },
             "chainEntries": [
               {
-                "clusterName": "Cluster1",
+                "serviceClusterName": "Cluster1",
                 "clusterType": "firewall",
-                "failAction": "drop",
+                "probeFailAction": "drop",
                 "functionName": "function1",
                 "sequenceNumber": 10,
                 "vrfName": "Vrf1"
@@ -204,6 +213,7 @@ examples:
             "chainName": "chain1"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -241,9 +251,9 @@ examples:
             },
             "chainEntries": [
               {
-                "clusterName": "Cluster1",
+                "serviceClusterName": "Cluster1",
                 "clusterType": "firewall",
-                "failAction": "drop",
+                "probeFailAction": "drop",
                 "functionName": "function1",
                 "sequenceNumber": 10,
                 "vrfName": "Vrf1"
@@ -252,6 +262,7 @@ examples:
             "chainName": "chain1"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -291,9 +302,9 @@ examples:
             },
             "chainEntries": [
               {
-                "clusterName": "Cluster1",
+                "serviceClusterName": "Cluster1",
                 "clusterType": "firewall",
-                "failAction": "drop",
+                "probeFailAction": "drop",
                 "functionName": "function1",
                 "sequenceNumber": 10,
                 "vrfName": "Vrf1"
@@ -302,6 +313,7 @@ examples:
             "chainName": "chain1"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -339,9 +351,9 @@ examples:
             },
             "chainEntries": [
               {
-                "clusterName": "Cluster1",
+                "serviceClusterName": "Cluster1",
                 "clusterType": "firewall",
-                "failAction": "drop",
+                "probeFailAction": "drop",
                 "functionName": "function1",
                 "sequenceNumber": 10,
                 "vrfName": "Vrf1"
@@ -350,6 +362,7 @@ examples:
             "chainName": "chain1"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -389,9 +402,9 @@ examples:
             },
             "chainEntries": [
               {
-                "clusterName": "Cluster1",
+                "serviceClusterName": "Cluster1",
                 "clusterType": "firewall",
-                "failAction": "drop",
+                "probeFailAction": "drop",
                 "functionName": "function1",
                 "sequenceNumber": 10,
                 "vrfName": "Vrf1"
@@ -400,6 +413,7 @@ examples:
             "chainName": "chain1"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -437,9 +451,9 @@ examples:
             },
             "chainEntries": [
               {
-                "clusterName": "Cluster1",
+                "serviceClusterName": "Cluster1",
                 "clusterType": "firewall",
-                "failAction": "drop",
+                "probeFailAction": "drop",
                 "functionName": "function1",
                 "sequenceNumber": 10,
                 "vrfName": "Vrf1"
@@ -448,6 +462,7 @@ examples:
             "chainName": "chain1"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -487,9 +502,9 @@ examples:
             },
             "chainEntries": [
               {
-                "clusterName": "Cluster1",
+                "serviceClusterName": "Cluster1",
                 "clusterType": "firewall",
-                "failAction": "drop",
+                "probeFailAction": "drop",
                 "functionName": "function1",
                 "sequenceNumber": 10,
                 "vrfName": "Vrf1"
@@ -498,6 +513,7 @@ examples:
             "chainName": "chain1"
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -535,9 +551,9 @@ examples:
             },
             "chainEntries": [
               {
-                "clusterName": "Cluster1",
+                "serviceClusterName": "Cluster1",
                 "clusterType": "firewall",
-                "failAction": "drop",
+                "probeFailAction": "drop",
                 "functionName": "function1",
                 "sequenceNumber": 10,
                 "vrfName": "Vrf1"
@@ -546,6 +562,7 @@ examples:
             "chainName": "chain1"
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -585,9 +602,9 @@ examples:
             },
             "chainEntries": [
               {
-                "clusterName": "Cluster1",
+                "serviceClusterName": "Cluster1",
                 "clusterType": "firewall",
-                "failAction": "drop",
+                "probeFailAction": "drop",
                 "functionName": "function1",
                 "sequenceNumber": 10,
                 "vrfName": "Vrf1"
@@ -596,6 +613,7 @@ examples:
             "chainName": "chain1"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type
@@ -633,9 +651,9 @@ examples:
             },
             "chainEntries": [
               {
-                "clusterName": "Cluster1",
+                "serviceClusterName": "Cluster1",
                 "clusterType": "firewall",
-                "failAction": "drop",
+                "probeFailAction": "drop",
                 "functionName": "function1",
                 "sequenceNumber": 10,
                 "vrfName": "Vrf1"
@@ -644,6 +662,7 @@ examples:
             "chainName": "chain1"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

@@ -2,6 +2,8 @@ info:
   name: Get Interface Group details
   type: http
   seq: 14
+  tags:
+    - Interfaces
 
 http:
   method: GET
@@ -30,7 +32,6 @@ settings:
 
 examples:
   - name: any
-    description: any
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups/:interfaceGroupName"
       method: GET
@@ -49,6 +50,7 @@ examples:
           type: path
           description: Name of the Group
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -66,230 +68,26 @@ examples:
             "switchInterfaces": [
               {
                 "interfaceNames": [
-                  "portChannel501"
+                  "Ethernet1/1",
+                  "Ethernet1/2",
+                  "Ethernet1/3",
+                  "Ethernet1/4"
                 ],
                 "switchId": "FDO24490CQQ"
               },
               {
                 "interfaceNames": [
-                  "portChannel502",
-                  "portChannel503",
-                  "portChannel504"
+                  "Ethernet1/1",
+                  "Ethernet1/2",
+                  "Ethernet1/3",
+                  "Ethernet1/4"
                 ],
-                "switchId": "FOX1930GDYK"
+                "switchId": "FX1930GDYZ"
               }
             ],
             "type": "any"
           }
-  - name: ethernetCustom
-    description: Ethernet with Custom template
-    request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups/:interfaceGroupName"
-      method: GET
-      params:
-        - name: clusterName
-          value: ""
-          type: query
-          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
-          disabled: true
-        - name: fabricName
-          value: ""
-          type: path
-          description: Name of the fabric
-        - name: interfaceGroupName
-          value: ""
-          type: path
-          description: Name of the Group
-    response:
-      statusText: OK
-      headers:
-        - name: Content-Type
-          value: application/json
-      body:
-        type: json
-        data: |-
-          {
-            "description": "Ethernet with custom template",
-            "interfaceCount": 0,
-            "interfaceGroupName": "IG1_with_custom_template",
-            "networkCount": 0,
-            "networkNames": [
-              "MyNetwork_30003",
-              "MyNetwork_30004"
-            ],
-            "switchInterfaces": [
-              {
-                "interfaceNames": [
-                  "Ethernet1/1"
-                ],
-                "switchId": "FDO24490CQQ"
-              },
-              {
-                "interfaceNames": [
-                  "Ethernet1/2",
-                  "Ethernet1/3",
-                  "Ethernet1/4"
-                ],
-                "switchId": "FOX1930GDYK"
-              }
-            ],
-            "templateConfig": {
-              "adminStatus": true,
-              "autoNegotiation": "on",
-              "bpduGuard": "default",
-              "cdp": true,
-              "description": "ethernet interface group with custom template",
-              "extraConfig": "logging event port link-status",
-              "fex": false,
-              "mtu": "jumbo",
-              "nativeVlan": 1,
-              "netflow": false,
-              "netflowMonitor": "",
-              "netflowSampler": "",
-              "portDuplexMode": "auto",
-              "portTypeFast": true,
-              "ptp": false,
-              "ptpTimestampTagging": false,
-              "speed": "auto",
-              "trunkAllowedVlans": "none",
-              "vPCOrphanPort": false
-            },
-            "templateName": "int_shared_custom_trunk_host",
-            "type": "ethernetCustom"
-          }
-  - name: ethernetWithPolicy
-    description: Ethernet with Policy
-    request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups/:interfaceGroupName"
-      method: GET
-      params:
-        - name: clusterName
-          value: ""
-          type: query
-          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
-          disabled: true
-        - name: fabricName
-          value: ""
-          type: path
-          description: Name of the fabric
-        - name: interfaceGroupName
-          value: ""
-          type: path
-          description: Name of the Group
-    response:
-      statusText: OK
-      headers:
-        - name: Content-Type
-          value: application/json
-      body:
-        type: json
-        data: |-
-          {
-            "description": "Ethernet with Policy",
-            "ethernetAttributes": {
-              "adminStatus": true,
-              "autoNegotiation": "on",
-              "bpduGuard": "default",
-              "cdp": true,
-              "description": "Get ethernet interface group with policy details",
-              "extraConfig": "logging event port link-status",
-              "fex": false,
-              "mtu": "jumbo",
-              "nativeVlan": 1,
-              "netflow": false,
-              "netflowMonitor": "",
-              "netflowSampler": "",
-              "portDuplexMode": "auto",
-              "portTypeFast": true,
-              "ptp": false,
-              "ptpTimestampTagging": false,
-              "speed": "auto",
-              "trunkAllowedVlans": "none",
-              "vPCOrphanPort": false
-            },
-            "interfaceCount": 0,
-            "interfaceGroupName": "IG1_with_Policy",
-            "networkCount": 0,
-            "networkNames": [
-              "MyNetwork_30003",
-              "MyNetwork_30004"
-            ],
-            "policyId": "POLICY-SHARED-35020",
-            "switchInterfaces": [
-              {
-                "interfaceNames": [
-                  "Ethernet1/1"
-                ],
-                "switchId": "FDO24490CQQ"
-              },
-              {
-                "interfaceNames": [
-                  "Ethernet1/2",
-                  "Ethernet1/3",
-                  "Ethernet1/4"
-                ],
-                "switchId": "FOX1930GDYK"
-              }
-            ],
-            "type": "ethernetWithPolicy"
-          }
-  - name: ethernetWithoutPolicy
-    description: Ethernet without Policy
-    request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups/:interfaceGroupName"
-      method: GET
-      params:
-        - name: clusterName
-          value: ""
-          type: query
-          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
-          disabled: true
-        - name: fabricName
-          value: ""
-          type: path
-          description: Name of the fabric
-        - name: interfaceGroupName
-          value: ""
-          type: path
-          description: Name of the Group
-    response:
-      statusText: OK
-      headers:
-        - name: Content-Type
-          value: application/json
-      body:
-        type: json
-        data: |-
-          {
-            "description": "Ethernet without Policy",
-            "ethernetAttributes": {},
-            "interfaceCount": 0,
-            "interfaceGroupName": "IG1_without_Policy",
-            "networkCount": 0,
-            "networkNames": [
-              "MyNetwork_30003",
-              "MyNetwork_30004"
-            ],
-            "switchInterfaces": [
-              {
-                "interfaceNames": [
-                  "Ethernet1/1"
-                ],
-                "switchId": "FDO24490CQQ"
-              },
-              {
-                "interfaceNames": [
-                  "Ethernet1/2",
-                  "Ethernet1/3",
-                  "Ethernet1/4"
-                ],
-                "switchId": "FOX1930GDYK"
-              }
-            ],
-            "type": "ethernetWithoutPolicy"
-          }
   - name: portChannel
-    description: portChannel
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups/:interfaceGroupName"
       method: GET
@@ -308,6 +106,7 @@ examples:
           type: path
           description: Name of the Group
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -317,9 +116,9 @@ examples:
         data: |-
           {
             "description": "portChannel interface group",
-            "interfaceCount": 0,
+            "interfaceCount": 4,
             "interfaceGroupName": "IG1_PC",
-            "networkCount": 0,
+            "networkCount": 2,
             "networkNames": [
               "MyNetwork_30003",
               "MyNetwork_30004"
@@ -327,15 +126,15 @@ examples:
             "switchInterfaces": [
               {
                 "interfaceNames": [
-                  "portChannel501"
+                  "Port-channel501"
                 ],
                 "switchId": "FDO24490CQQ"
               },
               {
                 "interfaceNames": [
-                  "portChannel502",
-                  "portChannel503",
-                  "portChannel504"
+                  "Port-channel502",
+                  "Port-channel503",
+                  "Port-channel504"
                 ],
                 "switchId": "FOX1930GDYK"
               }
@@ -343,7 +142,6 @@ examples:
             "type": "portChannel"
           }
   - name: vpc
-    description: vpc
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups/:interfaceGroupName"
       method: GET
@@ -362,6 +160,7 @@ examples:
           type: path
           description: Name of the Group
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -370,10 +169,10 @@ examples:
         type: json
         data: |-
           {
-            "description": "vpc interface group",
-            "interfaceCount": 0,
-            "interfaceGroupName": "IG1_vpc",
-            "networkCount": 0,
+            "description": "vPC interface group",
+            "interfaceCount": 6,
+            "interfaceGroupName": "IG1_VPC",
+            "networkCount": 2,
             "networkNames": [
               "MyNetwork_30003",
               "MyNetwork_30004"
@@ -381,15 +180,17 @@ examples:
             "switchInterfaces": [
               {
                 "interfaceNames": [
-                  "vpc1"
+                  "vPC2",
+                  "vPC3",
+                  "vPC4"
                 ],
                 "switchId": "FDO24490CQQ"
               },
               {
                 "interfaceNames": [
-                  "vpc2",
-                  "vpc3",
-                  "vpc4"
+                  "vPC2",
+                  "vPC3",
+                  "vPC4"
                 ],
                 "switchId": "FOX1930GDYK"
               }
@@ -416,6 +217,7 @@ examples:
           type: path
           description: Name of the Group
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -448,6 +250,7 @@ examples:
           type: path
           description: Name of the Group
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -480,6 +283,7 @@ examples:
           type: path
           description: Name of the Group
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -512,6 +316,7 @@ examples:
           type: path
           description: Name of the Group
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -544,6 +349,7 @@ examples:
           type: path
           description: Name of the Group
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

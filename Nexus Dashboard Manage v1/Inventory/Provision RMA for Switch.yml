@@ -2,6 +2,8 @@ info:
   name: Provision RMA for Switch
   type: http
   seq: 36
+  tags:
+    - Inventory
 
 http:
   method: POST
@@ -27,7 +29,21 @@ http:
       disabled: true
   body:
     type: json
-    data: "{}"
+    data: |-
+      {
+        "newSwitchId": "SAL1948TRTT",
+        "model": "N9K-C93180YC-FX",
+        "softwareVersion": "10.3(3)",
+        "hostname": "leaf1",
+        "ip": "10.23.244.10",
+        "gatewayIpMask": "10.23.244.1/24",
+        "password": "secret",
+        "discoveryUsername": "admin",
+        "discoveryPassword": "secret",
+        "discoveryAuthProtocol": "md5",
+        "publicKey": "some public key",
+        "fingerPrint": "some fingerprint"
+      }
   auth: inherit
 
 settings:
@@ -79,6 +95,7 @@ examples:
             "fingerPrint": "some fingerprint"
           }
     response:
+      status: 200
       statusText: OK
       body:
         type: text
@@ -125,6 +142,7 @@ examples:
             "fingerPrint": "some fingerprint"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -179,6 +197,7 @@ examples:
             "fingerPrint": "some fingerprint"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -233,6 +252,7 @@ examples:
             "fingerPrint": "some fingerprint"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -287,6 +307,7 @@ examples:
             "fingerPrint": "some fingerprint"
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -341,6 +362,7 @@ examples:
             "fingerPrint": "some fingerprint"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

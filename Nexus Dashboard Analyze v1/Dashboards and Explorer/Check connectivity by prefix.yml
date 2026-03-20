@@ -1,0 +1,316 @@
+info:
+  name: Check connectivity by prefix
+  type: http
+  seq: 12
+  tags:
+    - Dashboards and Explorer
+
+http:
+  method: POST
+  url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/explorer/actions/validatePrefixConnectivity"
+  params:
+    - name: clusterName
+      value: ""
+      type: query
+      description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+      disabled: true
+  body:
+    type: json
+    data: |-
+      {
+        "analysisDate": "2025-01-22T20:38:22.269Z",
+        "dstPrefixIdentifier": "172.16.5.0/24|uni/tn-DMZ/ctx-ExternalVRF",
+        "fabricName": "Prod",
+        "healthStatus": "unhealthy",
+        "queryString": "Can Internal Service Prefix talk to DMZ Prefix",
+        "snapshotId": "123e4567-e89b-12d3-a456-426614174000",
+        "srcPrefixIdentifier": "10.20.1.0/24|uni/tn-Services/ctx-SharedServicesVRF"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: default
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/explorer/actions/validatePrefixConnectivity"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "analysisDate": "2025-01-22T20:38:22.269Z",
+            "dstPrefixIdentifier": "172.16.5.0/24|uni/tn-DMZ/ctx-ExternalVRF",
+            "fabricName": "Prod",
+            "healthStatus": "unhealthy",
+            "queryString": "Can Internal Service Prefix talk to DMZ Prefix",
+            "snapshotId": "123e4567-e89b-12d3-a456-426614174000",
+            "srcPrefixIdentifier": "10.20.1.0/24|uni/tn-Services/ctx-SharedServicesVRF"
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "canTalk": true,
+            "connectedPrefixDetails": [
+              {
+                "bridgeDomainList": [
+                  {
+                    "identifier": "uni/tn-Services/BD-AppServerBD",
+                    "name": "AppServerBD",
+                    "type": "bridgeDomain"
+                  }
+                ],
+                "identifier": "10.20.1.0/24|uni/tn-Services/ctx-SharedServicesVRF",
+                "name": "InternalServiceNet",
+                "tenant": {
+                  "identifier": "uni/tn-Services",
+                  "name": "Services",
+                  "type": "tenant"
+                },
+                "type": "vrf",
+                "vrf": {
+                  "identifier": "uni/tn-Services/ctx-SharedServicesVRF",
+                  "name": "SharedServicesVRF",
+                  "type": "vrf"
+                }
+              }
+            ],
+            "connections": [
+              {
+                "connectionHealth": "healthy",
+                "dstPrefix": {
+                  "identifier": "172.16.5.0/24|uni/tn-DMZ/ctx-ExternalVRF",
+                  "name": "DMZServerNet",
+                  "type": "vrf"
+                },
+                "dstPrefixAssociatedSecurityGroups": [
+                  "uni/tn-DMZ/ap-ExternalAccess/epg-PublicWeb"
+                ],
+                "srcPrefix": {
+                  "identifier": "10.20.1.0/24|uni/tn-Services/ctx-SharedServicesVRF",
+                  "name": "InternalServiceNet",
+                  "type": "vrf"
+                },
+                "srcPrefixAssociatedSecurityGroups": [
+                  "uni/tn-Services/ap-Infra/epg-AppServers"
+                ]
+              }
+            ],
+            "dstResourceCollection": [
+              {
+                "identifier": "172.16.5.0/24|uni/tn-DMZ/ctx-ExternalVRF",
+                "name": "DMZServerNet",
+                "type": "vrf"
+              }
+            ],
+            "srcResourceCollection": [
+              {
+                "identifier": "10.20.1.0/24|uni/tn-Services/ctx-SharedServicesVRF",
+                "name": "InternalServiceNet",
+                "type": "vrf"
+              }
+            ],
+            "totalConnections": 1
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/explorer/actions/validatePrefixConnectivity"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "analysisDate": "2025-01-22T20:38:22.269Z",
+            "dstPrefixIdentifier": "172.16.5.0/24|uni/tn-DMZ/ctx-ExternalVRF",
+            "fabricName": "Prod",
+            "healthStatus": "unhealthy",
+            "queryString": "Can Internal Service Prefix talk to DMZ Prefix",
+            "snapshotId": "123e4567-e89b-12d3-a456-426614174000",
+            "srcPrefixIdentifier": "10.20.1.0/24|uni/tn-Services/ctx-SharedServicesVRF"
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/explorer/actions/validatePrefixConnectivity"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "analysisDate": "2025-01-22T20:38:22.269Z",
+            "dstPrefixIdentifier": "172.16.5.0/24|uni/tn-DMZ/ctx-ExternalVRF",
+            "fabricName": "Prod",
+            "healthStatus": "unhealthy",
+            "queryString": "Can Internal Service Prefix talk to DMZ Prefix",
+            "snapshotId": "123e4567-e89b-12d3-a456-426614174000",
+            "srcPrefixIdentifier": "10.20.1.0/24|uni/tn-Services/ctx-SharedServicesVRF"
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 403 Response
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/explorer/actions/validatePrefixConnectivity"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "analysisDate": "2025-01-22T20:38:22.269Z",
+            "dstPrefixIdentifier": "172.16.5.0/24|uni/tn-DMZ/ctx-ExternalVRF",
+            "fabricName": "Prod",
+            "healthStatus": "unhealthy",
+            "queryString": "Can Internal Service Prefix talk to DMZ Prefix",
+            "snapshotId": "123e4567-e89b-12d3-a456-426614174000",
+            "srcPrefixIdentifier": "10.20.1.0/24|uni/tn-Services/ctx-SharedServicesVRF"
+          }
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 404 Response
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/explorer/actions/validatePrefixConnectivity"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "analysisDate": "2025-01-22T20:38:22.269Z",
+            "dstPrefixIdentifier": "172.16.5.0/24|uni/tn-DMZ/ctx-ExternalVRF",
+            "fabricName": "Prod",
+            "healthStatus": "unhealthy",
+            "queryString": "Can Internal Service Prefix talk to DMZ Prefix",
+            "snapshotId": "123e4567-e89b-12d3-a456-426614174000",
+            "srcPrefixIdentifier": "10.20.1.0/24|uni/tn-Services/ctx-SharedServicesVRF"
+          }
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 500 Response
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/explorer/actions/validatePrefixConnectivity"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "analysisDate": "2025-01-22T20:38:22.269Z",
+            "dstPrefixIdentifier": "172.16.5.0/24|uni/tn-DMZ/ctx-ExternalVRF",
+            "fabricName": "Prod",
+            "healthStatus": "unhealthy",
+            "queryString": "Can Internal Service Prefix talk to DMZ Prefix",
+            "snapshotId": "123e4567-e89b-12d3-a456-426614174000",
+            "srcPrefixIdentifier": "10.20.1.0/24|uni/tn-Services/ctx-SharedServicesVRF"
+          }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }

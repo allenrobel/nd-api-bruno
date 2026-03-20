@@ -2,6 +2,22 @@
 
 [Bruno](https://www.usebruno.com/) API collections for the **Cisco Nexus Dashboard** REST APIs, generated from the OpenAPI specifications exposed by Nexus Dashboard itself.
 
+## Security Considerations
+
+Let's get this out of the way up front.  Claude is configured (.claude/settings.local.json) with the following:
+
+```json
+{
+  "permissions": {
+    "allow": [
+      "Bash(find:*)"
+    ]
+  }
+}
+```
+
+Remove this if you do not want Claude to have this level of access.
+
 ## Collections
 
 | Collection | Base Path | Endpoints | Description |

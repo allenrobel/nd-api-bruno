@@ -2,6 +2,8 @@ info:
   name: Trigger fabric or switch restore
   type: http
   seq: 24
+  tags:
+    - Fabric Management
 
 http:
   method: POST
@@ -20,8 +22,11 @@ http:
     type: json
     data: |-
       {
-        "backupVersion": 0,
-        "switchIds": []
+        "backupVersion": 1,
+        "switchIds": [
+          "FDO2020095C",
+          "SAL1925HCYJ"
+        ]
       }
   auth: inherit
 
@@ -57,6 +62,7 @@ examples:
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -99,6 +105,7 @@ examples:
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -142,6 +149,7 @@ examples:
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -180,6 +188,7 @@ examples:
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -218,6 +227,7 @@ examples:
             ]
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -256,6 +266,7 @@ examples:
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -294,6 +305,7 @@ examples:
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

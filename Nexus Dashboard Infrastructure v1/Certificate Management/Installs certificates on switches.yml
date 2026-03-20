@@ -2,6 +2,8 @@ info:
   name: Installs certificates on switches
   type: http
   seq: 3
+  tags:
+    - Certificate Management
 
 http:
   method: POST
@@ -16,12 +18,16 @@ http:
     type: json
     data: |-
       {
-        "certificateType": "",
-        "password": "",
+        "certificateType": "fabric",
+        "password": "changeme123!",
         "switchCertificates": [
           {
-            "certificateName": "",
-            "switchName": ""
+            "certificateName": "server_cert.pem",
+            "switchName": "switch1"
+          },
+          {
+            "certificateName": "server_cert2.pem",
+            "switchName": "switch2"
           }
         ]
       }
@@ -63,6 +69,7 @@ examples:
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -117,6 +124,7 @@ examples:
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -158,6 +166,7 @@ examples:
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -199,6 +208,7 @@ examples:
             ]
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -240,6 +250,7 @@ examples:
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

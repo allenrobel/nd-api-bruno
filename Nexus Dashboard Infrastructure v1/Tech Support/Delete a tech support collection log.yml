@@ -2,6 +2,8 @@ info:
   name: Delete a tech support collection log
   type: http
   seq: 3
+  tags:
+    - Tech Support
 
 http:
   method: DELETE
@@ -41,6 +43,7 @@ examples:
           type: path
           description: The ID of the tech support collection
     response:
+      status: 204
       statusText: No Content
       body:
         type: text
@@ -61,6 +64,7 @@ examples:
           type: path
           description: The ID of the tech support collection
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -89,6 +93,7 @@ examples:
           type: path
           description: The ID of the tech support collection
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

@@ -2,6 +2,8 @@ info:
   name: Onboard an openshift cluster for visibility
   type: http
   seq: 46
+  tags:
+    - Integrations
 
 http:
   method: POST
@@ -16,15 +18,15 @@ http:
     type: json
     data: |-
       {
-        "integrationName": "",
-        "managed": "",
-        "orchType": "",
-        "host": "",
-        "tlsServerName": "",
-        "port": 0,
-        "userName": "",
-        "clientCert": "",
-        "clusterCert": ""
+        "clientCert": "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURCVENDQWUyZ0F3SUJ",
+        "clusterCert": "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURCVENDQWUyZ0F3SUJ",
+        "host": "1.1.1.1",
+        "integrationName": "ocp-1",
+        "managed": "managed",
+        "orchType": "openShift",
+        "port": 6443,
+        "tlsServerName": "api.example1.cluster.local",
+        "userName": "ndocpuser"
       }
   auth: inherit
 
@@ -61,6 +63,7 @@ examples:
             "userName": "ndocpuser"
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -69,8 +72,8 @@ examples:
         type: json
         data: |-
           {
-            "status": "",
-            "message": ""
+            "status": "add failed",
+            "message": "K8s login error, invalid user certificate 1.1.1.1"
           }
   - name: 400 Response
     description: Bad Request
@@ -98,6 +101,7 @@ examples:
             "userName": "ndocpuser"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -136,6 +140,7 @@ examples:
             "userName": "ndocpuser"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -174,6 +179,7 @@ examples:
             "userName": "ndocpuser"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -212,6 +218,7 @@ examples:
             "userName": "ndocpuser"
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -250,6 +257,7 @@ examples:
             "userName": "ndocpuser"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

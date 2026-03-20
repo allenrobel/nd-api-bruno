@@ -2,6 +2,8 @@ info:
   name: Rediscover interfaces of a given switchId
   type: http
   seq: 27
+  tags:
+    - Inventory
 
 http:
   method: POST
@@ -20,8 +22,10 @@ http:
     type: json
     data: |-
       {
-        "interfaceNames": [],
-        "switchId": ""
+        "interfaceNames": [
+          "Ethernet1/1"
+        ],
+        "switchId": "SAL1948TRST"
       }
   auth: inherit
 
@@ -51,10 +55,13 @@ examples:
         type: json
         data: |-
           {
-            "interfaceNames": [],
-            "switchId": ""
+            "interfaceNames": [
+              "Ethernet1/1"
+            ],
+            "switchId": "SAL1948TRST"
           }
     response:
+      status: 202
       statusText: Accepted
       body:
         type: text
@@ -78,10 +85,13 @@ examples:
         type: json
         data: |-
           {
-            "interfaceNames": [],
-            "switchId": ""
+            "interfaceNames": [
+              "Ethernet1/1"
+            ],
+            "switchId": "SAL1948TRST"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -113,10 +123,13 @@ examples:
         type: json
         data: |-
           {
-            "interfaceNames": [],
-            "switchId": ""
+            "interfaceNames": [
+              "Ethernet1/1"
+            ],
+            "switchId": "SAL1948TRST"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -148,10 +161,13 @@ examples:
         type: json
         data: |-
           {
-            "interfaceNames": [],
-            "switchId": ""
+            "interfaceNames": [
+              "Ethernet1/1"
+            ],
+            "switchId": "SAL1948TRST"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -183,10 +199,13 @@ examples:
         type: json
         data: |-
           {
-            "interfaceNames": [],
-            "switchId": ""
+            "interfaceNames": [
+              "Ethernet1/1"
+            ],
+            "switchId": "SAL1948TRST"
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -218,10 +237,13 @@ examples:
         type: json
         data: |-
           {
-            "interfaceNames": [],
-            "switchId": ""
+            "interfaceNames": [
+              "Ethernet1/1"
+            ],
+            "switchId": "SAL1948TRST"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

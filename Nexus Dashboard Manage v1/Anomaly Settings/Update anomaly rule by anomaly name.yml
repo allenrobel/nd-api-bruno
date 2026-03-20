@@ -2,6 +2,8 @@ info:
   name: Update anomaly rule by anomaly name
   type: http
   seq: 27
+  tags:
+    - Anomaly Settings
 
 http:
   method: PUT
@@ -20,25 +22,36 @@ http:
     type: json
     data: |-
       {
-        "uuid": "",
-        "anomaly": "",
-        "ruleType": "",
-        "description": "",
-        "category": "",
-        "status": "",
-        "configStatus": "",
+        "anomaly": "STORAGE_ISSUES",
         "lastModifiedTime": 0,
-        "title": "",
-        "applicablePlatforms": "",
+        "ruleType": "globalCategoryRules",
+        "description": "description",
         "attributes": [
           {
-            "defaultValue": 0,
-            "value": 0,
-            "attribute": "",
-            "enableGeneration": false
+            "defaultValue": 90,
+            "enableGeneration": true,
+            "attribute": "criticalSeverityThreshold",
+            "value": 95
+          },
+          {
+            "defaultValue": 80,
+            "enableGeneration": true,
+            "attribute": "majorSeverityThreshold",
+            "value": 85
+          },
+          {
+            "defaultValue": 70,
+            "enableGeneration": true,
+            "attribute": "warningSeverityThreshold",
+            "value": 76
           }
         ],
-        "links": ""
+        "links": "",
+        "configStatus": "updated",
+        "category": "hardware",
+        "title": "title",
+        "applicablePlatforms": "aci",
+        "status": "default"
       }
   auth: inherit
 
@@ -100,6 +113,7 @@ examples:
             "status": "default"
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -190,6 +204,7 @@ examples:
             "status": "default"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -253,6 +268,7 @@ examples:
             "status": "default"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -316,6 +332,7 @@ examples:
             "status": "default"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -379,6 +396,7 @@ examples:
             "status": "default"
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -442,6 +460,7 @@ examples:
             "status": "default"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

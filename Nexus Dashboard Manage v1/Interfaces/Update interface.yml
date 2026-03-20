@@ -1,0 +1,2304 @@
+info:
+  name: Update interface
+  type: http
+  seq: 22
+  tags:
+    - Interfaces
+
+http:
+  method: PUT
+  url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/interfaces/:interfaceName"
+  params:
+    - name: clusterName
+      value: ""
+      type: query
+      description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+      disabled: true
+    - name: fabricName
+      value: ""
+      type: path
+      description: Name of the fabric
+    - name: switchId
+      value: ""
+      type: path
+      description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+    - name: ticketId
+      value: ""
+      type: query
+      description: Change Control Ticket Id
+      disabled: true
+    - name: interfaceName
+      value: ""
+      type: path
+      description: Name of the interface
+  body:
+    type: json
+    data: |-
+      {
+        "configData": {
+          "mode": "access",
+          "networkOS": {
+            "networkOSType": "nx-os",
+            "policy": {
+              "accessVlan": 100,
+              "adminState": true,
+              "bpduGuard": "enable",
+              "cdp": true,
+              "duplexMode": "half",
+              "extraConfig": "logging event port link-status",
+              "mtu": "default",
+              "netflow": false,
+              "netflowMonitor": "Netflow Layer-2 monitor name for the interface",
+              "netflowSampler": "Netflow Layer-2 sampler name for the interface (only applicable for Nexus 7000 platforms)",
+              "orphanPort": true,
+              "pfc": false,
+              "policyType": "accessHost",
+              "portTypeEdgeTrunk": true,
+              "qos": false,
+              "qosPolicy": "Custom QoS Policy associated with the interface (must be defined apriori)",
+              "queueingPolicy": "Custom Queuing Policy associated with the interface (must be defined apriori)",
+              "speed": "auto"
+            }
+          }
+        },
+        "interfaceName": "Ethernet1/13",
+        "interfaceType": "ethernet",
+        "switchId": "FDO22412H7U"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 204 Response (updateInterfaceEthernet)
+    description: No Content
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/interfaces/:interfaceName"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+        - name: interfaceName
+          value: ""
+          type: path
+          description: Name of the interface
+      body:
+        type: json
+        data: |-
+          {
+            "configData": {
+              "mode": "access",
+              "networkOS": {
+                "networkOSType": "nx-os",
+                "policy": {
+                  "accessVlan": 100,
+                  "adminState": true,
+                  "bpduGuard": "enable",
+                  "cdp": true,
+                  "duplexMode": "half",
+                  "extraConfig": "logging event port link-status",
+                  "mtu": "default",
+                  "netflow": false,
+                  "netflowMonitor": "Netflow Layer-2 monitor name for the interface",
+                  "netflowSampler": "Netflow Layer-2 sampler name for the interface (only applicable for Nexus 7000 platforms)",
+                  "orphanPort": true,
+                  "pfc": false,
+                  "policyType": "accessHost",
+                  "portTypeEdgeTrunk": true,
+                  "qos": false,
+                  "qosPolicy": "Custom QoS Policy associated with the interface (must be defined apriori)",
+                  "queueingPolicy": "Custom Queuing Policy associated with the interface (must be defined apriori)",
+                  "speed": "auto"
+                }
+              }
+            },
+            "interfaceName": "Ethernet1/13",
+            "interfaceType": "ethernet",
+            "switchId": "FDO22412H7U"
+          }
+    response:
+      status: 204
+      statusText: No Content
+      body:
+        type: text
+        data: ""
+  - name: 204 Response (updateInterfaceLoopback)
+    description: No Content
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/interfaces/:interfaceName"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+        - name: interfaceName
+          value: ""
+          type: path
+          description: Name of the interface
+      body:
+        type: json
+        data: |-
+          {
+            "configData": {
+              "mode": "managed",
+              "networkOS": {
+                "networkOSType": "nx-os",
+                "policy": {
+                  "adminState": true,
+                  "ip": "2.3.4.5",
+                  "linkStateRoutingTag": "UNDERLAY",
+                  "policyType": "loopback",
+                  "routeMapTag": 54321
+                }
+              }
+            },
+            "interfaceName": "loopback0",
+            "interfaceType": "loopback",
+            "switchId": "FDO222425SE"
+          }
+    response:
+      status: 204
+      statusText: No Content
+      body:
+        type: text
+        data: ""
+  - name: 204 Response (updateInterfacePo)
+    description: No Content
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/interfaces/:interfaceName"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+        - name: interfaceName
+          value: ""
+          type: path
+          description: Name of the interface
+      body:
+        type: json
+        data: |-
+          {
+            "configData": {
+              "mode": "trunk",
+              "networkOS": {
+                "networkOSType": "nx-os",
+                "policy": {
+                  "adminState": true,
+                  "allowedVlans": "none",
+                  "bpduFilter": "default",
+                  "bpduGuard": "enable",
+                  "cdp": true,
+                  "copyDescription": false,
+                  "duplexMode": "auto",
+                  "lacpPortPriority": 32768,
+                  "lacpRate": "normal",
+                  "lacpSuspend": false,
+                  "linkType": "auto",
+                  "monitor": false,
+                  "mtu": "jumbo",
+                  "negotiateAuto": true,
+                  "netflow": false,
+                  "orphanPort": false,
+                  "pfc": false,
+                  "policyType": "trunkPoHost",
+                  "portChannelMode": "active",
+                  "portTypeFast": true,
+                  "ptp": false,
+                  "qos": false,
+                  "speed": "auto",
+                  "stormControl": false,
+                  "stormControlAction": "default",
+                  "vlanMapping": false
+                }
+              }
+            },
+            "interfaceName": "port-channel503",
+            "interfaceType": "portChannel",
+            "switchId": "FDO222425SE"
+          }
+    response:
+      status: 204
+      statusText: No Content
+      body:
+        type: text
+        data: ""
+  - name: 204 Response (updateInterfaceSvi)
+    description: No Content
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/interfaces/:interfaceName"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+        - name: interfaceName
+          value: ""
+          type: path
+          description: Name of the interface
+      body:
+        type: json
+        data: |-
+          {
+            "configData": {
+              "mode": "managed",
+              "networkOS": {
+                "networkOSType": "nx-os",
+                "policy": {
+                  "adminState": true,
+                  "advertiseSubnetInUnderlay": false,
+                  "hsrpGroup": 1,
+                  "ipRedirects": true,
+                  "netflow": false,
+                  "pimDrPriority": 1,
+                  "pimSparse": false,
+                  "policyType": "svi",
+                  "preempt": false
+                }
+              }
+            },
+            "interfaceName": "vlan3",
+            "interfaceType": "svi",
+            "switchId": "FDO222425SE"
+          }
+    response:
+      status: 204
+      statusText: No Content
+      body:
+        type: text
+        data: ""
+  - name: 204 Response (updateInterfacevPC)
+    description: No Content
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/interfaces/:interfaceName"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+        - name: interfaceName
+          value: ""
+          type: path
+          description: Name of the interface
+      body:
+        type: json
+        data: |-
+          {
+            "configData": {
+              "mode": "trunk",
+              "networkOS": {
+                "networkOSType": "nx-os",
+                "policy": {
+                  "adminState": true,
+                  "bpduFilter": "default",
+                  "bpduGuard": "enable",
+                  "cdp": true,
+                  "copyDescription": false,
+                  "duplexMode": "auto",
+                  "lacpPortPriority": 32768,
+                  "lacpRate": "normal",
+                  "lacpSuspend": false,
+                  "lacpVpcConvergence": false,
+                  "linkType": "auto",
+                  "mirrorConfig": false,
+                  "mtu": "jumbo",
+                  "negotiateAuto": true,
+                  "netflow": false,
+                  "peer1AllowedVlans": "none",
+                  "peer1PortChannelId": 1,
+                  "peer2AllowedVlans": "none",
+                  "peer2PortChannelId": 1,
+                  "peerSwitchId": "FDO22240HJP",
+                  "pfc": false,
+                  "policyType": "trunkVpcHost",
+                  "portChannelMode": "active",
+                  "portTypeFast": true,
+                  "ptp": false,
+                  "qos": false,
+                  "speed": "auto",
+                  "stormControl": false,
+                  "stormControlAction": "default",
+                  "vlanMapping": false
+                }
+              }
+            },
+            "interfaceName": "vpc1",
+            "interfaceType": "vpc",
+            "switchId": "FDO222425SE"
+          }
+    response:
+      status: 204
+      statusText: No Content
+      body:
+        type: text
+        data: ""
+  - name: 400 Response (updateInterfaceEthernet)
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/interfaces/:interfaceName"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+        - name: interfaceName
+          value: ""
+          type: path
+          description: Name of the interface
+      body:
+        type: json
+        data: |-
+          {
+            "configData": {
+              "mode": "access",
+              "networkOS": {
+                "networkOSType": "nx-os",
+                "policy": {
+                  "accessVlan": 100,
+                  "adminState": true,
+                  "bpduGuard": "enable",
+                  "cdp": true,
+                  "duplexMode": "half",
+                  "extraConfig": "logging event port link-status",
+                  "mtu": "default",
+                  "netflow": false,
+                  "netflowMonitor": "Netflow Layer-2 monitor name for the interface",
+                  "netflowSampler": "Netflow Layer-2 sampler name for the interface (only applicable for Nexus 7000 platforms)",
+                  "orphanPort": true,
+                  "pfc": false,
+                  "policyType": "accessHost",
+                  "portTypeEdgeTrunk": true,
+                  "qos": false,
+                  "qosPolicy": "Custom QoS Policy associated with the interface (must be defined apriori)",
+                  "queueingPolicy": "Custom Queuing Policy associated with the interface (must be defined apriori)",
+                  "speed": "auto"
+                }
+              }
+            },
+            "interfaceName": "Ethernet1/13",
+            "interfaceType": "ethernet",
+            "switchId": "FDO22412H7U"
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 400 Response (updateInterfaceLoopback)
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/interfaces/:interfaceName"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+        - name: interfaceName
+          value: ""
+          type: path
+          description: Name of the interface
+      body:
+        type: json
+        data: |-
+          {
+            "configData": {
+              "mode": "managed",
+              "networkOS": {
+                "networkOSType": "nx-os",
+                "policy": {
+                  "adminState": true,
+                  "ip": "2.3.4.5",
+                  "linkStateRoutingTag": "UNDERLAY",
+                  "policyType": "loopback",
+                  "routeMapTag": 54321
+                }
+              }
+            },
+            "interfaceName": "loopback0",
+            "interfaceType": "loopback",
+            "switchId": "FDO222425SE"
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 400 Response (updateInterfacePo)
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/interfaces/:interfaceName"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+        - name: interfaceName
+          value: ""
+          type: path
+          description: Name of the interface
+      body:
+        type: json
+        data: |-
+          {
+            "configData": {
+              "mode": "trunk",
+              "networkOS": {
+                "networkOSType": "nx-os",
+                "policy": {
+                  "adminState": true,
+                  "allowedVlans": "none",
+                  "bpduFilter": "default",
+                  "bpduGuard": "enable",
+                  "cdp": true,
+                  "copyDescription": false,
+                  "duplexMode": "auto",
+                  "lacpPortPriority": 32768,
+                  "lacpRate": "normal",
+                  "lacpSuspend": false,
+                  "linkType": "auto",
+                  "monitor": false,
+                  "mtu": "jumbo",
+                  "negotiateAuto": true,
+                  "netflow": false,
+                  "orphanPort": false,
+                  "pfc": false,
+                  "policyType": "trunkPoHost",
+                  "portChannelMode": "active",
+                  "portTypeFast": true,
+                  "ptp": false,
+                  "qos": false,
+                  "speed": "auto",
+                  "stormControl": false,
+                  "stormControlAction": "default",
+                  "vlanMapping": false
+                }
+              }
+            },
+            "interfaceName": "port-channel503",
+            "interfaceType": "portChannel",
+            "switchId": "FDO222425SE"
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 400 Response (updateInterfaceSvi)
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/interfaces/:interfaceName"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+        - name: interfaceName
+          value: ""
+          type: path
+          description: Name of the interface
+      body:
+        type: json
+        data: |-
+          {
+            "configData": {
+              "mode": "managed",
+              "networkOS": {
+                "networkOSType": "nx-os",
+                "policy": {
+                  "adminState": true,
+                  "advertiseSubnetInUnderlay": false,
+                  "hsrpGroup": 1,
+                  "ipRedirects": true,
+                  "netflow": false,
+                  "pimDrPriority": 1,
+                  "pimSparse": false,
+                  "policyType": "svi",
+                  "preempt": false
+                }
+              }
+            },
+            "interfaceName": "vlan3",
+            "interfaceType": "svi",
+            "switchId": "FDO222425SE"
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 400 Response (updateInterfacevPC)
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/interfaces/:interfaceName"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+        - name: interfaceName
+          value: ""
+          type: path
+          description: Name of the interface
+      body:
+        type: json
+        data: |-
+          {
+            "configData": {
+              "mode": "trunk",
+              "networkOS": {
+                "networkOSType": "nx-os",
+                "policy": {
+                  "adminState": true,
+                  "bpduFilter": "default",
+                  "bpduGuard": "enable",
+                  "cdp": true,
+                  "copyDescription": false,
+                  "duplexMode": "auto",
+                  "lacpPortPriority": 32768,
+                  "lacpRate": "normal",
+                  "lacpSuspend": false,
+                  "lacpVpcConvergence": false,
+                  "linkType": "auto",
+                  "mirrorConfig": false,
+                  "mtu": "jumbo",
+                  "negotiateAuto": true,
+                  "netflow": false,
+                  "peer1AllowedVlans": "none",
+                  "peer1PortChannelId": 1,
+                  "peer2AllowedVlans": "none",
+                  "peer2PortChannelId": 1,
+                  "peerSwitchId": "FDO22240HJP",
+                  "pfc": false,
+                  "policyType": "trunkVpcHost",
+                  "portChannelMode": "active",
+                  "portTypeFast": true,
+                  "ptp": false,
+                  "qos": false,
+                  "speed": "auto",
+                  "stormControl": false,
+                  "stormControlAction": "default",
+                  "vlanMapping": false
+                }
+              }
+            },
+            "interfaceName": "vpc1",
+            "interfaceType": "vpc",
+            "switchId": "FDO222425SE"
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 401 Response (updateInterfaceEthernet)
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/interfaces/:interfaceName"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+        - name: interfaceName
+          value: ""
+          type: path
+          description: Name of the interface
+      body:
+        type: json
+        data: |-
+          {
+            "configData": {
+              "mode": "access",
+              "networkOS": {
+                "networkOSType": "nx-os",
+                "policy": {
+                  "accessVlan": 100,
+                  "adminState": true,
+                  "bpduGuard": "enable",
+                  "cdp": true,
+                  "duplexMode": "half",
+                  "extraConfig": "logging event port link-status",
+                  "mtu": "default",
+                  "netflow": false,
+                  "netflowMonitor": "Netflow Layer-2 monitor name for the interface",
+                  "netflowSampler": "Netflow Layer-2 sampler name for the interface (only applicable for Nexus 7000 platforms)",
+                  "orphanPort": true,
+                  "pfc": false,
+                  "policyType": "accessHost",
+                  "portTypeEdgeTrunk": true,
+                  "qos": false,
+                  "qosPolicy": "Custom QoS Policy associated with the interface (must be defined apriori)",
+                  "queueingPolicy": "Custom Queuing Policy associated with the interface (must be defined apriori)",
+                  "speed": "auto"
+                }
+              }
+            },
+            "interfaceName": "Ethernet1/13",
+            "interfaceType": "ethernet",
+            "switchId": "FDO22412H7U"
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 401 Response (updateInterfaceLoopback)
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/interfaces/:interfaceName"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+        - name: interfaceName
+          value: ""
+          type: path
+          description: Name of the interface
+      body:
+        type: json
+        data: |-
+          {
+            "configData": {
+              "mode": "managed",
+              "networkOS": {
+                "networkOSType": "nx-os",
+                "policy": {
+                  "adminState": true,
+                  "ip": "2.3.4.5",
+                  "linkStateRoutingTag": "UNDERLAY",
+                  "policyType": "loopback",
+                  "routeMapTag": 54321
+                }
+              }
+            },
+            "interfaceName": "loopback0",
+            "interfaceType": "loopback",
+            "switchId": "FDO222425SE"
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 401 Response (updateInterfacePo)
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/interfaces/:interfaceName"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+        - name: interfaceName
+          value: ""
+          type: path
+          description: Name of the interface
+      body:
+        type: json
+        data: |-
+          {
+            "configData": {
+              "mode": "trunk",
+              "networkOS": {
+                "networkOSType": "nx-os",
+                "policy": {
+                  "adminState": true,
+                  "allowedVlans": "none",
+                  "bpduFilter": "default",
+                  "bpduGuard": "enable",
+                  "cdp": true,
+                  "copyDescription": false,
+                  "duplexMode": "auto",
+                  "lacpPortPriority": 32768,
+                  "lacpRate": "normal",
+                  "lacpSuspend": false,
+                  "linkType": "auto",
+                  "monitor": false,
+                  "mtu": "jumbo",
+                  "negotiateAuto": true,
+                  "netflow": false,
+                  "orphanPort": false,
+                  "pfc": false,
+                  "policyType": "trunkPoHost",
+                  "portChannelMode": "active",
+                  "portTypeFast": true,
+                  "ptp": false,
+                  "qos": false,
+                  "speed": "auto",
+                  "stormControl": false,
+                  "stormControlAction": "default",
+                  "vlanMapping": false
+                }
+              }
+            },
+            "interfaceName": "port-channel503",
+            "interfaceType": "portChannel",
+            "switchId": "FDO222425SE"
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 401 Response (updateInterfaceSvi)
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/interfaces/:interfaceName"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+        - name: interfaceName
+          value: ""
+          type: path
+          description: Name of the interface
+      body:
+        type: json
+        data: |-
+          {
+            "configData": {
+              "mode": "managed",
+              "networkOS": {
+                "networkOSType": "nx-os",
+                "policy": {
+                  "adminState": true,
+                  "advertiseSubnetInUnderlay": false,
+                  "hsrpGroup": 1,
+                  "ipRedirects": true,
+                  "netflow": false,
+                  "pimDrPriority": 1,
+                  "pimSparse": false,
+                  "policyType": "svi",
+                  "preempt": false
+                }
+              }
+            },
+            "interfaceName": "vlan3",
+            "interfaceType": "svi",
+            "switchId": "FDO222425SE"
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 401 Response (updateInterfacevPC)
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/interfaces/:interfaceName"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+        - name: interfaceName
+          value: ""
+          type: path
+          description: Name of the interface
+      body:
+        type: json
+        data: |-
+          {
+            "configData": {
+              "mode": "trunk",
+              "networkOS": {
+                "networkOSType": "nx-os",
+                "policy": {
+                  "adminState": true,
+                  "bpduFilter": "default",
+                  "bpduGuard": "enable",
+                  "cdp": true,
+                  "copyDescription": false,
+                  "duplexMode": "auto",
+                  "lacpPortPriority": 32768,
+                  "lacpRate": "normal",
+                  "lacpSuspend": false,
+                  "lacpVpcConvergence": false,
+                  "linkType": "auto",
+                  "mirrorConfig": false,
+                  "mtu": "jumbo",
+                  "negotiateAuto": true,
+                  "netflow": false,
+                  "peer1AllowedVlans": "none",
+                  "peer1PortChannelId": 1,
+                  "peer2AllowedVlans": "none",
+                  "peer2PortChannelId": 1,
+                  "peerSwitchId": "FDO22240HJP",
+                  "pfc": false,
+                  "policyType": "trunkVpcHost",
+                  "portChannelMode": "active",
+                  "portTypeFast": true,
+                  "ptp": false,
+                  "qos": false,
+                  "speed": "auto",
+                  "stormControl": false,
+                  "stormControlAction": "default",
+                  "vlanMapping": false
+                }
+              }
+            },
+            "interfaceName": "vpc1",
+            "interfaceType": "vpc",
+            "switchId": "FDO222425SE"
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 403 Response (updateInterfaceEthernet)
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/interfaces/:interfaceName"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+        - name: interfaceName
+          value: ""
+          type: path
+          description: Name of the interface
+      body:
+        type: json
+        data: |-
+          {
+            "configData": {
+              "mode": "access",
+              "networkOS": {
+                "networkOSType": "nx-os",
+                "policy": {
+                  "accessVlan": 100,
+                  "adminState": true,
+                  "bpduGuard": "enable",
+                  "cdp": true,
+                  "duplexMode": "half",
+                  "extraConfig": "logging event port link-status",
+                  "mtu": "default",
+                  "netflow": false,
+                  "netflowMonitor": "Netflow Layer-2 monitor name for the interface",
+                  "netflowSampler": "Netflow Layer-2 sampler name for the interface (only applicable for Nexus 7000 platforms)",
+                  "orphanPort": true,
+                  "pfc": false,
+                  "policyType": "accessHost",
+                  "portTypeEdgeTrunk": true,
+                  "qos": false,
+                  "qosPolicy": "Custom QoS Policy associated with the interface (must be defined apriori)",
+                  "queueingPolicy": "Custom Queuing Policy associated with the interface (must be defined apriori)",
+                  "speed": "auto"
+                }
+              }
+            },
+            "interfaceName": "Ethernet1/13",
+            "interfaceType": "ethernet",
+            "switchId": "FDO22412H7U"
+          }
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 403 Response (updateInterfaceLoopback)
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/interfaces/:interfaceName"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+        - name: interfaceName
+          value: ""
+          type: path
+          description: Name of the interface
+      body:
+        type: json
+        data: |-
+          {
+            "configData": {
+              "mode": "managed",
+              "networkOS": {
+                "networkOSType": "nx-os",
+                "policy": {
+                  "adminState": true,
+                  "ip": "2.3.4.5",
+                  "linkStateRoutingTag": "UNDERLAY",
+                  "policyType": "loopback",
+                  "routeMapTag": 54321
+                }
+              }
+            },
+            "interfaceName": "loopback0",
+            "interfaceType": "loopback",
+            "switchId": "FDO222425SE"
+          }
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 403 Response (updateInterfacePo)
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/interfaces/:interfaceName"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+        - name: interfaceName
+          value: ""
+          type: path
+          description: Name of the interface
+      body:
+        type: json
+        data: |-
+          {
+            "configData": {
+              "mode": "trunk",
+              "networkOS": {
+                "networkOSType": "nx-os",
+                "policy": {
+                  "adminState": true,
+                  "allowedVlans": "none",
+                  "bpduFilter": "default",
+                  "bpduGuard": "enable",
+                  "cdp": true,
+                  "copyDescription": false,
+                  "duplexMode": "auto",
+                  "lacpPortPriority": 32768,
+                  "lacpRate": "normal",
+                  "lacpSuspend": false,
+                  "linkType": "auto",
+                  "monitor": false,
+                  "mtu": "jumbo",
+                  "negotiateAuto": true,
+                  "netflow": false,
+                  "orphanPort": false,
+                  "pfc": false,
+                  "policyType": "trunkPoHost",
+                  "portChannelMode": "active",
+                  "portTypeFast": true,
+                  "ptp": false,
+                  "qos": false,
+                  "speed": "auto",
+                  "stormControl": false,
+                  "stormControlAction": "default",
+                  "vlanMapping": false
+                }
+              }
+            },
+            "interfaceName": "port-channel503",
+            "interfaceType": "portChannel",
+            "switchId": "FDO222425SE"
+          }
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 403 Response (updateInterfaceSvi)
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/interfaces/:interfaceName"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+        - name: interfaceName
+          value: ""
+          type: path
+          description: Name of the interface
+      body:
+        type: json
+        data: |-
+          {
+            "configData": {
+              "mode": "managed",
+              "networkOS": {
+                "networkOSType": "nx-os",
+                "policy": {
+                  "adminState": true,
+                  "advertiseSubnetInUnderlay": false,
+                  "hsrpGroup": 1,
+                  "ipRedirects": true,
+                  "netflow": false,
+                  "pimDrPriority": 1,
+                  "pimSparse": false,
+                  "policyType": "svi",
+                  "preempt": false
+                }
+              }
+            },
+            "interfaceName": "vlan3",
+            "interfaceType": "svi",
+            "switchId": "FDO222425SE"
+          }
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 403 Response (updateInterfacevPC)
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/interfaces/:interfaceName"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+        - name: interfaceName
+          value: ""
+          type: path
+          description: Name of the interface
+      body:
+        type: json
+        data: |-
+          {
+            "configData": {
+              "mode": "trunk",
+              "networkOS": {
+                "networkOSType": "nx-os",
+                "policy": {
+                  "adminState": true,
+                  "bpduFilter": "default",
+                  "bpduGuard": "enable",
+                  "cdp": true,
+                  "copyDescription": false,
+                  "duplexMode": "auto",
+                  "lacpPortPriority": 32768,
+                  "lacpRate": "normal",
+                  "lacpSuspend": false,
+                  "lacpVpcConvergence": false,
+                  "linkType": "auto",
+                  "mirrorConfig": false,
+                  "mtu": "jumbo",
+                  "negotiateAuto": true,
+                  "netflow": false,
+                  "peer1AllowedVlans": "none",
+                  "peer1PortChannelId": 1,
+                  "peer2AllowedVlans": "none",
+                  "peer2PortChannelId": 1,
+                  "peerSwitchId": "FDO22240HJP",
+                  "pfc": false,
+                  "policyType": "trunkVpcHost",
+                  "portChannelMode": "active",
+                  "portTypeFast": true,
+                  "ptp": false,
+                  "qos": false,
+                  "speed": "auto",
+                  "stormControl": false,
+                  "stormControlAction": "default",
+                  "vlanMapping": false
+                }
+              }
+            },
+            "interfaceName": "vpc1",
+            "interfaceType": "vpc",
+            "switchId": "FDO222425SE"
+          }
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 404 Response (updateInterfaceEthernet)
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/interfaces/:interfaceName"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+        - name: interfaceName
+          value: ""
+          type: path
+          description: Name of the interface
+      body:
+        type: json
+        data: |-
+          {
+            "configData": {
+              "mode": "access",
+              "networkOS": {
+                "networkOSType": "nx-os",
+                "policy": {
+                  "accessVlan": 100,
+                  "adminState": true,
+                  "bpduGuard": "enable",
+                  "cdp": true,
+                  "duplexMode": "half",
+                  "extraConfig": "logging event port link-status",
+                  "mtu": "default",
+                  "netflow": false,
+                  "netflowMonitor": "Netflow Layer-2 monitor name for the interface",
+                  "netflowSampler": "Netflow Layer-2 sampler name for the interface (only applicable for Nexus 7000 platforms)",
+                  "orphanPort": true,
+                  "pfc": false,
+                  "policyType": "accessHost",
+                  "portTypeEdgeTrunk": true,
+                  "qos": false,
+                  "qosPolicy": "Custom QoS Policy associated with the interface (must be defined apriori)",
+                  "queueingPolicy": "Custom Queuing Policy associated with the interface (must be defined apriori)",
+                  "speed": "auto"
+                }
+              }
+            },
+            "interfaceName": "Ethernet1/13",
+            "interfaceType": "ethernet",
+            "switchId": "FDO22412H7U"
+          }
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 404 Response (updateInterfaceLoopback)
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/interfaces/:interfaceName"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+        - name: interfaceName
+          value: ""
+          type: path
+          description: Name of the interface
+      body:
+        type: json
+        data: |-
+          {
+            "configData": {
+              "mode": "managed",
+              "networkOS": {
+                "networkOSType": "nx-os",
+                "policy": {
+                  "adminState": true,
+                  "ip": "2.3.4.5",
+                  "linkStateRoutingTag": "UNDERLAY",
+                  "policyType": "loopback",
+                  "routeMapTag": 54321
+                }
+              }
+            },
+            "interfaceName": "loopback0",
+            "interfaceType": "loopback",
+            "switchId": "FDO222425SE"
+          }
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 404 Response (updateInterfacePo)
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/interfaces/:interfaceName"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+        - name: interfaceName
+          value: ""
+          type: path
+          description: Name of the interface
+      body:
+        type: json
+        data: |-
+          {
+            "configData": {
+              "mode": "trunk",
+              "networkOS": {
+                "networkOSType": "nx-os",
+                "policy": {
+                  "adminState": true,
+                  "allowedVlans": "none",
+                  "bpduFilter": "default",
+                  "bpduGuard": "enable",
+                  "cdp": true,
+                  "copyDescription": false,
+                  "duplexMode": "auto",
+                  "lacpPortPriority": 32768,
+                  "lacpRate": "normal",
+                  "lacpSuspend": false,
+                  "linkType": "auto",
+                  "monitor": false,
+                  "mtu": "jumbo",
+                  "negotiateAuto": true,
+                  "netflow": false,
+                  "orphanPort": false,
+                  "pfc": false,
+                  "policyType": "trunkPoHost",
+                  "portChannelMode": "active",
+                  "portTypeFast": true,
+                  "ptp": false,
+                  "qos": false,
+                  "speed": "auto",
+                  "stormControl": false,
+                  "stormControlAction": "default",
+                  "vlanMapping": false
+                }
+              }
+            },
+            "interfaceName": "port-channel503",
+            "interfaceType": "portChannel",
+            "switchId": "FDO222425SE"
+          }
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 404 Response (updateInterfaceSvi)
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/interfaces/:interfaceName"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+        - name: interfaceName
+          value: ""
+          type: path
+          description: Name of the interface
+      body:
+        type: json
+        data: |-
+          {
+            "configData": {
+              "mode": "managed",
+              "networkOS": {
+                "networkOSType": "nx-os",
+                "policy": {
+                  "adminState": true,
+                  "advertiseSubnetInUnderlay": false,
+                  "hsrpGroup": 1,
+                  "ipRedirects": true,
+                  "netflow": false,
+                  "pimDrPriority": 1,
+                  "pimSparse": false,
+                  "policyType": "svi",
+                  "preempt": false
+                }
+              }
+            },
+            "interfaceName": "vlan3",
+            "interfaceType": "svi",
+            "switchId": "FDO222425SE"
+          }
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 404 Response (updateInterfacevPC)
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/interfaces/:interfaceName"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+        - name: interfaceName
+          value: ""
+          type: path
+          description: Name of the interface
+      body:
+        type: json
+        data: |-
+          {
+            "configData": {
+              "mode": "trunk",
+              "networkOS": {
+                "networkOSType": "nx-os",
+                "policy": {
+                  "adminState": true,
+                  "bpduFilter": "default",
+                  "bpduGuard": "enable",
+                  "cdp": true,
+                  "copyDescription": false,
+                  "duplexMode": "auto",
+                  "lacpPortPriority": 32768,
+                  "lacpRate": "normal",
+                  "lacpSuspend": false,
+                  "lacpVpcConvergence": false,
+                  "linkType": "auto",
+                  "mirrorConfig": false,
+                  "mtu": "jumbo",
+                  "negotiateAuto": true,
+                  "netflow": false,
+                  "peer1AllowedVlans": "none",
+                  "peer1PortChannelId": 1,
+                  "peer2AllowedVlans": "none",
+                  "peer2PortChannelId": 1,
+                  "peerSwitchId": "FDO22240HJP",
+                  "pfc": false,
+                  "policyType": "trunkVpcHost",
+                  "portChannelMode": "active",
+                  "portTypeFast": true,
+                  "ptp": false,
+                  "qos": false,
+                  "speed": "auto",
+                  "stormControl": false,
+                  "stormControlAction": "default",
+                  "vlanMapping": false
+                }
+              }
+            },
+            "interfaceName": "vpc1",
+            "interfaceType": "vpc",
+            "switchId": "FDO222425SE"
+          }
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 500 Response (updateInterfaceEthernet)
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/interfaces/:interfaceName"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+        - name: interfaceName
+          value: ""
+          type: path
+          description: Name of the interface
+      body:
+        type: json
+        data: |-
+          {
+            "configData": {
+              "mode": "access",
+              "networkOS": {
+                "networkOSType": "nx-os",
+                "policy": {
+                  "accessVlan": 100,
+                  "adminState": true,
+                  "bpduGuard": "enable",
+                  "cdp": true,
+                  "duplexMode": "half",
+                  "extraConfig": "logging event port link-status",
+                  "mtu": "default",
+                  "netflow": false,
+                  "netflowMonitor": "Netflow Layer-2 monitor name for the interface",
+                  "netflowSampler": "Netflow Layer-2 sampler name for the interface (only applicable for Nexus 7000 platforms)",
+                  "orphanPort": true,
+                  "pfc": false,
+                  "policyType": "accessHost",
+                  "portTypeEdgeTrunk": true,
+                  "qos": false,
+                  "qosPolicy": "Custom QoS Policy associated with the interface (must be defined apriori)",
+                  "queueingPolicy": "Custom Queuing Policy associated with the interface (must be defined apriori)",
+                  "speed": "auto"
+                }
+              }
+            },
+            "interfaceName": "Ethernet1/13",
+            "interfaceType": "ethernet",
+            "switchId": "FDO22412H7U"
+          }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }
+  - name: 500 Response (updateInterfaceLoopback)
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/interfaces/:interfaceName"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+        - name: interfaceName
+          value: ""
+          type: path
+          description: Name of the interface
+      body:
+        type: json
+        data: |-
+          {
+            "configData": {
+              "mode": "managed",
+              "networkOS": {
+                "networkOSType": "nx-os",
+                "policy": {
+                  "adminState": true,
+                  "ip": "2.3.4.5",
+                  "linkStateRoutingTag": "UNDERLAY",
+                  "policyType": "loopback",
+                  "routeMapTag": 54321
+                }
+              }
+            },
+            "interfaceName": "loopback0",
+            "interfaceType": "loopback",
+            "switchId": "FDO222425SE"
+          }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }
+  - name: 500 Response (updateInterfacePo)
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/interfaces/:interfaceName"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+        - name: interfaceName
+          value: ""
+          type: path
+          description: Name of the interface
+      body:
+        type: json
+        data: |-
+          {
+            "configData": {
+              "mode": "trunk",
+              "networkOS": {
+                "networkOSType": "nx-os",
+                "policy": {
+                  "adminState": true,
+                  "allowedVlans": "none",
+                  "bpduFilter": "default",
+                  "bpduGuard": "enable",
+                  "cdp": true,
+                  "copyDescription": false,
+                  "duplexMode": "auto",
+                  "lacpPortPriority": 32768,
+                  "lacpRate": "normal",
+                  "lacpSuspend": false,
+                  "linkType": "auto",
+                  "monitor": false,
+                  "mtu": "jumbo",
+                  "negotiateAuto": true,
+                  "netflow": false,
+                  "orphanPort": false,
+                  "pfc": false,
+                  "policyType": "trunkPoHost",
+                  "portChannelMode": "active",
+                  "portTypeFast": true,
+                  "ptp": false,
+                  "qos": false,
+                  "speed": "auto",
+                  "stormControl": false,
+                  "stormControlAction": "default",
+                  "vlanMapping": false
+                }
+              }
+            },
+            "interfaceName": "port-channel503",
+            "interfaceType": "portChannel",
+            "switchId": "FDO222425SE"
+          }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }
+  - name: 500 Response (updateInterfaceSvi)
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/interfaces/:interfaceName"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+        - name: interfaceName
+          value: ""
+          type: path
+          description: Name of the interface
+      body:
+        type: json
+        data: |-
+          {
+            "configData": {
+              "mode": "managed",
+              "networkOS": {
+                "networkOSType": "nx-os",
+                "policy": {
+                  "adminState": true,
+                  "advertiseSubnetInUnderlay": false,
+                  "hsrpGroup": 1,
+                  "ipRedirects": true,
+                  "netflow": false,
+                  "pimDrPriority": 1,
+                  "pimSparse": false,
+                  "policyType": "svi",
+                  "preempt": false
+                }
+              }
+            },
+            "interfaceName": "vlan3",
+            "interfaceType": "svi",
+            "switchId": "FDO222425SE"
+          }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }
+  - name: 500 Response (updateInterfacevPC)
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/interfaces/:interfaceName"
+      method: PUT
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+        - name: interfaceName
+          value: ""
+          type: path
+          description: Name of the interface
+      body:
+        type: json
+        data: |-
+          {
+            "configData": {
+              "mode": "trunk",
+              "networkOS": {
+                "networkOSType": "nx-os",
+                "policy": {
+                  "adminState": true,
+                  "bpduFilter": "default",
+                  "bpduGuard": "enable",
+                  "cdp": true,
+                  "copyDescription": false,
+                  "duplexMode": "auto",
+                  "lacpPortPriority": 32768,
+                  "lacpRate": "normal",
+                  "lacpSuspend": false,
+                  "lacpVpcConvergence": false,
+                  "linkType": "auto",
+                  "mirrorConfig": false,
+                  "mtu": "jumbo",
+                  "negotiateAuto": true,
+                  "netflow": false,
+                  "peer1AllowedVlans": "none",
+                  "peer1PortChannelId": 1,
+                  "peer2AllowedVlans": "none",
+                  "peer2PortChannelId": 1,
+                  "peerSwitchId": "FDO22240HJP",
+                  "pfc": false,
+                  "policyType": "trunkVpcHost",
+                  "portChannelMode": "active",
+                  "portTypeFast": true,
+                  "ptp": false,
+                  "qos": false,
+                  "speed": "auto",
+                  "stormControl": false,
+                  "stormControlAction": "default",
+                  "vlanMapping": false
+                }
+              }
+            },
+            "interfaceName": "vpc1",
+            "interfaceType": "vpc",
+            "switchId": "FDO222425SE"
+          }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }

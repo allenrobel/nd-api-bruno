@@ -2,6 +2,8 @@ info:
   name: Create VRF(s)
   type: http
   seq: 31
+  tags:
+    - VRFs and Networks
 
 http:
   method: POST
@@ -13,7 +15,7 @@ http:
       description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
       disabled: true
     - name: fabricName
-      value: fabric1
+      value: ""
       type: path
       description: Name of the fabric
     - name: ticketId
@@ -27,62 +29,27 @@ http:
       {
         "vrfs": [
           {
-            "fabricName": "fabric1",
-            "vrfName": "MyVRF_50001",
-            "vrfType": "vxlanIbgp",
-            "coreData": {
-              "vrfVlanName": "MyVLAN_2001",
-              "vrfInterfaceDescription": "VRF 50001, VLAN 2001",
-              "vrfDescription": "PROD",
-              "mtu": 9216,
-              "routingTag": 12345,
-              "vrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET",
-              "v6VrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET",
-              "maxBgpPaths": 1,
-              "maxIbgpPaths": 2,
-              "ipv6LinkLocal": true,
-              "rtAuto": false,
-              "routeTargetImport": [],
-              "routeTargetExport": [],
-              "evpnRouteTargetImport": [],
-              "evpnRouteTargetExport": []
-            },
-            "fabricData": {
-              "bgpBestPathRelax": false,
-              "bgpLogNeighborChange": false,
-              "trmData": {
-                "ipv4Trm": false,
-                "v4RpAbsent": false,
-                "v4RpExternal": false,
-                "v4RpAddress": "",
-                "loopbackNumber": null,
-                "l3VniMulticastGroup": "",
-                "v4MulticastGroup": "",
-                "ipv6Trm": false,
-                "v6RpAbsent": false,
-                "v6RpExternal": false,
-                "v6RpAddress": "",
-                "v6MulticastGroup": "",
-                "mvpnInterAs": false,
-                "trmOnBgw": false,
-                "mvpnRouteTargetImport": [],
-                "mvpnRouteTargetExport": []
-              },
-              "advertiseHostRoute": false,
-              "advertiseDefaultRoute": true,
+            "additionalData": {
+              "bgpAuth": false,
               "configureStaticDefaultRoute": true,
-              "bgpPassword": "",
-              "bgpPasswordKeyType": "",
-              "bgpAllowAsIn": false,
-              "bgpAllowAsInNum": 3,
-              "bgpAsOverride": false,
-              "bgpDisablePeerAsCheck": false,
-              "bgpSoftReconfigAlways": false,
+              "maxBgpPaths": 1,
               "netflow": false,
-              "netflowMonitor": ""
+              "ospfAuth": true,
+              "ospfAuthKey": "3des_encrypted_key_here",
+              "ospfAuthKeyId": 127,
+              "vrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET"
             },
-            "vrfId": 50001,
-            "vlanId": 2001
+            "coreData": {
+              "mtu": 9216,
+              "ospfAreaId": "0.0.0.1",
+              "ospfv3AreaId": "0.0.0.1",
+              "vpcPeering": true,
+              "vrfDescription": "Classic VRF for legacy network integration",
+              "vrfIpVersion": "both"
+            },
+            "fabricName": "fab1",
+            "vrfName": "MyVRF_50003",
+            "vrfType": "classicLanEnhanced"
           }
         ]
       }
@@ -95,6 +62,74 @@ settings:
   maxRedirects: 5
 
 examples:
+  - name: Single success (Classic LAN Enhanced VRF)
+    description: Create one VRF
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfs"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket ID. This is mandatory if Change Control is enabled
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "vrfs": [
+              {
+                "additionalData": {
+                  "bgpAuth": false,
+                  "configureStaticDefaultRoute": true,
+                  "maxBgpPaths": 1,
+                  "netflow": false,
+                  "ospfAuth": true,
+                  "ospfAuthKey": "3des_encrypted_key_here",
+                  "ospfAuthKeyId": 127,
+                  "vrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET"
+                },
+                "coreData": {
+                  "mtu": 9216,
+                  "ospfAreaId": "0.0.0.1",
+                  "ospfv3AreaId": "0.0.0.1",
+                  "vpcPeering": true,
+                  "vrfDescription": "Classic VRF for legacy network integration",
+                  "vrfIpVersion": "both"
+                },
+                "fabricName": "fab1",
+                "vrfName": "MyVRF_50003",
+                "vrfType": "classicLanEnhanced"
+              }
+            ]
+          }
+    response:
+      status: 207
+      statusText: Multi-Status
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "results": [
+              {
+                "status": "success",
+                "vrfId": 50000,
+                "vrfName": "MyVRF_50000"
+              }
+            ]
+          }
   - name: Single success (Custom VRF)
     description: Create one VRF
     request:
@@ -122,20 +157,163 @@ examples:
             "vrfs": [
               {
                 "fabricName": "fab1",
-                "vlanId": 101,
+                "vlanId": 2004,
                 "vrfExtensionTemplateName": "CustomExtTemplate1",
-                "vrfId": 50000,
-                "vrfName": "MyVRF_50000",
+                "vrfId": 50004,
+                "vrfName": "MyVRF_50004",
                 "vrfTemplateConfig": {
-                  "param1": "value1",
-                  "param2": "value2"
+                  "vrfDescription": "Custom VRF",
+                  "vrfIntfDescription": "VRF Interface",
+                  "vrfName": "MyVRF_50004",
+                  "vrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET",
+                  "vrfSegmentId": "50004"
                 },
-                "vrfTemplateName": "CustomTemplate1",
+                "vrfTemplateName": "Default_VRF_Universal",
                 "vrfType": "userDefined"
               }
             ]
           }
     response:
+      status: 207
+      statusText: Multi-Status
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "results": [
+              {
+                "status": "success",
+                "vrfId": 50000,
+                "vrfName": "MyVRF_50000"
+              }
+            ]
+          }
+  - name: Single success (VXLAN EBGP VRF)
+    description: Create one VRF
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfs"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket ID. This is mandatory if Change Control is enabled
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "vrfs": [
+              {
+                "coreData": {
+                  "maxBgpPaths": 8,
+                  "maxIbgpPaths": 2,
+                  "mtu": 9216,
+                  "routingTag": 54321,
+                  "rtAuto": true,
+                  "vrfDescription": "EBGP VRF for leaf-spine topology",
+                  "vrfInterfaceDescription": "L3 VNI interface for EBGP VRF",
+                  "vrfIpVersion": "both",
+                  "vrfVlanName": "MyVRF_50002_VLAN"
+                },
+                "fabricData": {
+                  "advertiseDefaultRoute": false,
+                  "configureStaticDefaultRoute": false
+                },
+                "fabricName": "fab1",
+                "vlanId": 2002,
+                "vrfId": 50002,
+                "vrfName": "MyVRF_50002",
+                "vrfType": "vxlanEbgp"
+              }
+            ]
+          }
+    response:
+      status: 207
+      statusText: Multi-Status
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "results": [
+              {
+                "status": "success",
+                "vrfId": 50000,
+                "vrfName": "MyVRF_50000"
+              }
+            ]
+          }
+  - name: Single success (VXLAN IBGP VRF)
+    description: Create one VRF
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfs"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket ID. This is mandatory if Change Control is enabled
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "vrfs": [
+              {
+                "coreData": {
+                  "ipv6LinkLocal": true,
+                  "maxBgpPaths": 4,
+                  "maxIbgpPaths": 2,
+                  "mtu": 9216,
+                  "routingTag": 12345,
+                  "rtAuto": true,
+                  "vrfDescription": "IBGP VRF for multi-site connectivity",
+                  "vrfInterfaceDescription": "L3 VNI interface for IBGP VRF",
+                  "vrfIpVersion": "both",
+                  "vrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET",
+                  "vrfVlanName": "MyVRF_50001_VLAN"
+                },
+                "fabricData": {
+                  "advertiseDefaultRoute": true,
+                  "advertiseHostRoute": false,
+                  "bgpBestPathRelax": true,
+                  "bgpLogNeighborChange": true,
+                  "configureStaticDefaultRoute": true
+                },
+                "fabricName": "fab1",
+                "vlanId": 2001,
+                "vrfId": 50001,
+                "vrfName": "MyVRF_50001",
+                "vrfType": "vxlanIbgp"
+              }
+            ]
+          }
+    response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -180,63 +358,59 @@ examples:
               {
                 "coreData": {
                   "evpnRouteTargetExport": [
-                    "65000:1002"
+                    "65000:50000"
                   ],
                   "evpnRouteTargetImport": [
-                    "65000:1002"
+                    "65000:50000"
                   ],
                   "ipv6LinkLocal": true,
                   "maxBgpPaths": 1,
                   "maxIbgpPaths": 2,
                   "mtu": 9216,
                   "routeTargetExport": [
-                    "65000:1001"
+                    "65000:50000"
                   ],
                   "routeTargetImport": [
-                    "65000:1001"
+                    "65000:50000"
                   ],
                   "routingTag": 12345,
+                  "rtAuto": false,
                   "v6VrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET",
-                  "vrfDescription": "VXLAN VRF for Production",
-                  "vrfInterfaceDescription": "Interface for VLAN 101",
+                  "vrfDescription": "Production VRF for tenant1",
+                  "vrfInterfaceDescription": "L3 VNI interface for VRF MyVRF_50000",
+                  "vrfIpVersion": "both",
                   "vrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET",
-                  "vrfVlanName": "VLAN101"
+                  "vrfVlanName": "MyVRF_50000_VLAN"
                 },
                 "fabricData": {
                   "advertiseDefaultRoute": true,
                   "advertiseHostRoute": false,
                   "asn": "1234",
-                  "bgpPassword": "a3f5b6",
-                  "bgpPasswordKeyType": 3,
                   "configureStaticDefaultRoute": true,
+                  "disableRtAuto": false,
                   "netflow": true,
                   "netflowMonitor": "Netflow_123",
-                  "rtAuto": false,
                   "trmData": {
                     "ipv4Trm": true,
                     "l3VniMulticastGroup": "239.1.1.1",
-                    "mvpnRouteTargetExport": [
-                      "65000:100"
-                    ],
-                    "mvpnRouteTargetImport": [
-                      "65000:100"
-                    ],
+                    "loopbackNumber": 100,
                     "trmOnBgw": false,
-                    "v4MulticastGroup": "224.1.0.0/4",
+                    "v4MulticastGroup": "239.1.1.0/25",
                     "v4RpAbsent": false,
-                    "v4RpAddress": "10.1.0.1",
+                    "v4RpAddress": "10.254.254.1",
                     "v4RpExternal": false
                   }
                 },
                 "fabricName": "fab1",
-                "vlanId": 101,
+                "vlanId": 2000,
                 "vrfId": 50000,
                 "vrfName": "MyVRF_50000",
-                "vrfType": "vxlan"
+                "vrfType": "vxlanEbgp"
               }
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -250,6 +424,79 @@ examples:
                 "status": "success",
                 "vrfId": 50000,
                 "vrfName": "MyVRF_50000"
+              }
+            ]
+          }
+  - name: Multi-tenant example (Classic LAN Enhanced VRF)
+    description: Example response for a multi-tenant environment. Each VRF name is prefixed with the tenant name.
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfs"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket ID. This is mandatory if Change Control is enabled
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "vrfs": [
+              {
+                "additionalData": {
+                  "bgpAuth": false,
+                  "configureStaticDefaultRoute": true,
+                  "maxBgpPaths": 1,
+                  "netflow": false,
+                  "ospfAuth": true,
+                  "ospfAuthKey": "3des_encrypted_key_here",
+                  "ospfAuthKeyId": 127,
+                  "vrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET"
+                },
+                "coreData": {
+                  "mtu": 9216,
+                  "ospfAreaId": "0.0.0.1",
+                  "ospfv3AreaId": "0.0.0.1",
+                  "vpcPeering": true,
+                  "vrfDescription": "Classic VRF for legacy network integration",
+                  "vrfIpVersion": "both"
+                },
+                "fabricName": "fab1",
+                "vrfName": "MyVRF_50003",
+                "vrfType": "classicLanEnhanced"
+              }
+            ]
+          }
+    response:
+      status: 207
+      statusText: Multi-Status
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "results": [
+              {
+                "status": "success",
+                "vrfId": 50000,
+                "vrfName": "tenant1~MyVRF_50000"
+              },
+              {
+                "status": "success",
+                "vrfId": 50001,
+                "vrfName": "tenant2~MyVRF_50001"
               }
             ]
           }
@@ -280,20 +527,24 @@ examples:
             "vrfs": [
               {
                 "fabricName": "fab1",
-                "vlanId": 101,
+                "vlanId": 2004,
                 "vrfExtensionTemplateName": "CustomExtTemplate1",
-                "vrfId": 50000,
-                "vrfName": "MyVRF_50000",
+                "vrfId": 50004,
+                "vrfName": "MyVRF_50004",
                 "vrfTemplateConfig": {
-                  "param1": "value1",
-                  "param2": "value2"
+                  "vrfDescription": "Custom VRF",
+                  "vrfIntfDescription": "VRF Interface",
+                  "vrfName": "MyVRF_50004",
+                  "vrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET",
+                  "vrfSegmentId": "50004"
                 },
-                "vrfTemplateName": "CustomTemplate1",
+                "vrfTemplateName": "Default_VRF_Universal",
                 "vrfType": "userDefined"
               }
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -306,12 +557,161 @@ examples:
               {
                 "status": "success",
                 "vrfId": 50000,
-                "vrfName": "TenantA~MyVRF_50000"
+                "vrfName": "tenant1~MyVRF_50000"
               },
               {
                 "status": "success",
                 "vrfId": 50001,
-                "vrfName": "TenantB~MyVRF_50001"
+                "vrfName": "tenant2~MyVRF_50001"
+              }
+            ]
+          }
+  - name: Multi-tenant example (VXLAN EBGP VRF)
+    description: Example response for a multi-tenant environment. Each VRF name is prefixed with the tenant name.
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfs"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket ID. This is mandatory if Change Control is enabled
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "vrfs": [
+              {
+                "coreData": {
+                  "maxBgpPaths": 8,
+                  "maxIbgpPaths": 2,
+                  "mtu": 9216,
+                  "routingTag": 54321,
+                  "rtAuto": true,
+                  "vrfDescription": "EBGP VRF for leaf-spine topology",
+                  "vrfInterfaceDescription": "L3 VNI interface for EBGP VRF",
+                  "vrfIpVersion": "both",
+                  "vrfVlanName": "MyVRF_50002_VLAN"
+                },
+                "fabricData": {
+                  "advertiseDefaultRoute": false,
+                  "configureStaticDefaultRoute": false
+                },
+                "fabricName": "fab1",
+                "vlanId": 2002,
+                "vrfId": 50002,
+                "vrfName": "MyVRF_50002",
+                "vrfType": "vxlanEbgp"
+              }
+            ]
+          }
+    response:
+      status: 207
+      statusText: Multi-Status
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "results": [
+              {
+                "status": "success",
+                "vrfId": 50000,
+                "vrfName": "tenant1~MyVRF_50000"
+              },
+              {
+                "status": "success",
+                "vrfId": 50001,
+                "vrfName": "tenant2~MyVRF_50001"
+              }
+            ]
+          }
+  - name: Multi-tenant example (VXLAN IBGP VRF)
+    description: Example response for a multi-tenant environment. Each VRF name is prefixed with the tenant name.
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfs"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket ID. This is mandatory if Change Control is enabled
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "vrfs": [
+              {
+                "coreData": {
+                  "ipv6LinkLocal": true,
+                  "maxBgpPaths": 4,
+                  "maxIbgpPaths": 2,
+                  "mtu": 9216,
+                  "routingTag": 12345,
+                  "rtAuto": true,
+                  "vrfDescription": "IBGP VRF for multi-site connectivity",
+                  "vrfInterfaceDescription": "L3 VNI interface for IBGP VRF",
+                  "vrfIpVersion": "both",
+                  "vrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET",
+                  "vrfVlanName": "MyVRF_50001_VLAN"
+                },
+                "fabricData": {
+                  "advertiseDefaultRoute": true,
+                  "advertiseHostRoute": false,
+                  "bgpBestPathRelax": true,
+                  "bgpLogNeighborChange": true,
+                  "configureStaticDefaultRoute": true
+                },
+                "fabricName": "fab1",
+                "vlanId": 2001,
+                "vrfId": 50001,
+                "vrfName": "MyVRF_50001",
+                "vrfType": "vxlanIbgp"
+              }
+            ]
+          }
+    response:
+      status: 207
+      statusText: Multi-Status
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "results": [
+              {
+                "status": "success",
+                "vrfId": 50000,
+                "vrfName": "tenant1~MyVRF_50000"
+              },
+              {
+                "status": "success",
+                "vrfId": 50001,
+                "vrfName": "tenant2~MyVRF_50001"
               }
             ]
           }
@@ -343,63 +743,59 @@ examples:
               {
                 "coreData": {
                   "evpnRouteTargetExport": [
-                    "65000:1002"
+                    "65000:50000"
                   ],
                   "evpnRouteTargetImport": [
-                    "65000:1002"
+                    "65000:50000"
                   ],
                   "ipv6LinkLocal": true,
                   "maxBgpPaths": 1,
                   "maxIbgpPaths": 2,
                   "mtu": 9216,
                   "routeTargetExport": [
-                    "65000:1001"
+                    "65000:50000"
                   ],
                   "routeTargetImport": [
-                    "65000:1001"
+                    "65000:50000"
                   ],
                   "routingTag": 12345,
+                  "rtAuto": false,
                   "v6VrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET",
-                  "vrfDescription": "VXLAN VRF for Production",
-                  "vrfInterfaceDescription": "Interface for VLAN 101",
+                  "vrfDescription": "Production VRF for tenant1",
+                  "vrfInterfaceDescription": "L3 VNI interface for VRF MyVRF_50000",
+                  "vrfIpVersion": "both",
                   "vrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET",
-                  "vrfVlanName": "VLAN101"
+                  "vrfVlanName": "MyVRF_50000_VLAN"
                 },
                 "fabricData": {
                   "advertiseDefaultRoute": true,
                   "advertiseHostRoute": false,
                   "asn": "1234",
-                  "bgpPassword": "a3f5b6",
-                  "bgpPasswordKeyType": 3,
                   "configureStaticDefaultRoute": true,
+                  "disableRtAuto": false,
                   "netflow": true,
                   "netflowMonitor": "Netflow_123",
-                  "rtAuto": false,
                   "trmData": {
                     "ipv4Trm": true,
                     "l3VniMulticastGroup": "239.1.1.1",
-                    "mvpnRouteTargetExport": [
-                      "65000:100"
-                    ],
-                    "mvpnRouteTargetImport": [
-                      "65000:100"
-                    ],
+                    "loopbackNumber": 100,
                     "trmOnBgw": false,
-                    "v4MulticastGroup": "224.1.0.0/4",
+                    "v4MulticastGroup": "239.1.1.0/25",
                     "v4RpAbsent": false,
-                    "v4RpAddress": "10.1.0.1",
+                    "v4RpAddress": "10.254.254.1",
                     "v4RpExternal": false
                   }
                 },
                 "fabricName": "fab1",
-                "vlanId": 101,
+                "vlanId": 2000,
                 "vrfId": 50000,
                 "vrfName": "MyVRF_50000",
-                "vrfType": "vxlan"
+                "vrfType": "vxlanEbgp"
               }
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -412,12 +808,85 @@ examples:
               {
                 "status": "success",
                 "vrfId": 50000,
-                "vrfName": "TenantA~MyVRF_50000"
+                "vrfName": "tenant1~MyVRF_50000"
               },
               {
                 "status": "success",
                 "vrfId": 50001,
-                "vrfName": "TenantB~MyVRF_50001"
+                "vrfName": "tenant2~MyVRF_50001"
+              }
+            ]
+          }
+  - name: Multiple status (Classic LAN Enhanced VRF)
+    description: Mixed success and failure statuses
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfs"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket ID. This is mandatory if Change Control is enabled
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "vrfs": [
+              {
+                "additionalData": {
+                  "bgpAuth": false,
+                  "configureStaticDefaultRoute": true,
+                  "maxBgpPaths": 1,
+                  "netflow": false,
+                  "ospfAuth": true,
+                  "ospfAuthKey": "3des_encrypted_key_here",
+                  "ospfAuthKeyId": 127,
+                  "vrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET"
+                },
+                "coreData": {
+                  "mtu": 9216,
+                  "ospfAreaId": "0.0.0.1",
+                  "ospfv3AreaId": "0.0.0.1",
+                  "vpcPeering": true,
+                  "vrfDescription": "Classic VRF for legacy network integration",
+                  "vrfIpVersion": "both"
+                },
+                "fabricName": "fab1",
+                "vrfName": "MyVRF_50003",
+                "vrfType": "classicLanEnhanced"
+              }
+            ]
+          }
+    response:
+      status: 207
+      statusText: Multi-Status
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "results": [
+              {
+                "status": "success",
+                "vrfId": 50000,
+                "vrfName": "MyVRF_50000"
+              },
+              {
+                "status": "failed",
+                "vrfId": 50001,
+                "vrfName": "MyVRF_50001"
               }
             ]
           }
@@ -448,20 +917,173 @@ examples:
             "vrfs": [
               {
                 "fabricName": "fab1",
-                "vlanId": 101,
+                "vlanId": 2004,
                 "vrfExtensionTemplateName": "CustomExtTemplate1",
-                "vrfId": 50000,
-                "vrfName": "MyVRF_50000",
+                "vrfId": 50004,
+                "vrfName": "MyVRF_50004",
                 "vrfTemplateConfig": {
-                  "param1": "value1",
-                  "param2": "value2"
+                  "vrfDescription": "Custom VRF",
+                  "vrfIntfDescription": "VRF Interface",
+                  "vrfName": "MyVRF_50004",
+                  "vrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET",
+                  "vrfSegmentId": "50004"
                 },
-                "vrfTemplateName": "CustomTemplate1",
+                "vrfTemplateName": "Default_VRF_Universal",
                 "vrfType": "userDefined"
               }
             ]
           }
     response:
+      status: 207
+      statusText: Multi-Status
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "results": [
+              {
+                "status": "success",
+                "vrfId": 50000,
+                "vrfName": "MyVRF_50000"
+              },
+              {
+                "status": "failed",
+                "vrfId": 50001,
+                "vrfName": "MyVRF_50001"
+              }
+            ]
+          }
+  - name: Multiple status (VXLAN EBGP VRF)
+    description: Mixed success and failure statuses
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfs"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket ID. This is mandatory if Change Control is enabled
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "vrfs": [
+              {
+                "coreData": {
+                  "maxBgpPaths": 8,
+                  "maxIbgpPaths": 2,
+                  "mtu": 9216,
+                  "routingTag": 54321,
+                  "rtAuto": true,
+                  "vrfDescription": "EBGP VRF for leaf-spine topology",
+                  "vrfInterfaceDescription": "L3 VNI interface for EBGP VRF",
+                  "vrfIpVersion": "both",
+                  "vrfVlanName": "MyVRF_50002_VLAN"
+                },
+                "fabricData": {
+                  "advertiseDefaultRoute": false,
+                  "configureStaticDefaultRoute": false
+                },
+                "fabricName": "fab1",
+                "vlanId": 2002,
+                "vrfId": 50002,
+                "vrfName": "MyVRF_50002",
+                "vrfType": "vxlanEbgp"
+              }
+            ]
+          }
+    response:
+      status: 207
+      statusText: Multi-Status
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "results": [
+              {
+                "status": "success",
+                "vrfId": 50000,
+                "vrfName": "MyVRF_50000"
+              },
+              {
+                "status": "failed",
+                "vrfId": 50001,
+                "vrfName": "MyVRF_50001"
+              }
+            ]
+          }
+  - name: Multiple status (VXLAN IBGP VRF)
+    description: Mixed success and failure statuses
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfs"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket ID. This is mandatory if Change Control is enabled
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "vrfs": [
+              {
+                "coreData": {
+                  "ipv6LinkLocal": true,
+                  "maxBgpPaths": 4,
+                  "maxIbgpPaths": 2,
+                  "mtu": 9216,
+                  "routingTag": 12345,
+                  "rtAuto": true,
+                  "vrfDescription": "IBGP VRF for multi-site connectivity",
+                  "vrfInterfaceDescription": "L3 VNI interface for IBGP VRF",
+                  "vrfIpVersion": "both",
+                  "vrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET",
+                  "vrfVlanName": "MyVRF_50001_VLAN"
+                },
+                "fabricData": {
+                  "advertiseDefaultRoute": true,
+                  "advertiseHostRoute": false,
+                  "bgpBestPathRelax": true,
+                  "bgpLogNeighborChange": true,
+                  "configureStaticDefaultRoute": true
+                },
+                "fabricName": "fab1",
+                "vlanId": 2001,
+                "vrfId": 50001,
+                "vrfName": "MyVRF_50001",
+                "vrfType": "vxlanIbgp"
+              }
+            ]
+          }
+    response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -511,63 +1133,59 @@ examples:
               {
                 "coreData": {
                   "evpnRouteTargetExport": [
-                    "65000:1002"
+                    "65000:50000"
                   ],
                   "evpnRouteTargetImport": [
-                    "65000:1002"
+                    "65000:50000"
                   ],
                   "ipv6LinkLocal": true,
                   "maxBgpPaths": 1,
                   "maxIbgpPaths": 2,
                   "mtu": 9216,
                   "routeTargetExport": [
-                    "65000:1001"
+                    "65000:50000"
                   ],
                   "routeTargetImport": [
-                    "65000:1001"
+                    "65000:50000"
                   ],
                   "routingTag": 12345,
+                  "rtAuto": false,
                   "v6VrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET",
-                  "vrfDescription": "VXLAN VRF for Production",
-                  "vrfInterfaceDescription": "Interface for VLAN 101",
+                  "vrfDescription": "Production VRF for tenant1",
+                  "vrfInterfaceDescription": "L3 VNI interface for VRF MyVRF_50000",
+                  "vrfIpVersion": "both",
                   "vrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET",
-                  "vrfVlanName": "VLAN101"
+                  "vrfVlanName": "MyVRF_50000_VLAN"
                 },
                 "fabricData": {
                   "advertiseDefaultRoute": true,
                   "advertiseHostRoute": false,
                   "asn": "1234",
-                  "bgpPassword": "a3f5b6",
-                  "bgpPasswordKeyType": 3,
                   "configureStaticDefaultRoute": true,
+                  "disableRtAuto": false,
                   "netflow": true,
                   "netflowMonitor": "Netflow_123",
-                  "rtAuto": false,
                   "trmData": {
                     "ipv4Trm": true,
                     "l3VniMulticastGroup": "239.1.1.1",
-                    "mvpnRouteTargetExport": [
-                      "65000:100"
-                    ],
-                    "mvpnRouteTargetImport": [
-                      "65000:100"
-                    ],
+                    "loopbackNumber": 100,
                     "trmOnBgw": false,
-                    "v4MulticastGroup": "224.1.0.0/4",
+                    "v4MulticastGroup": "239.1.1.0/25",
                     "v4RpAbsent": false,
-                    "v4RpAddress": "10.1.0.1",
+                    "v4RpAddress": "10.254.254.1",
                     "v4RpExternal": false
                   }
                 },
                 "fabricName": "fab1",
-                "vlanId": 101,
+                "vlanId": 2000,
                 "vrfId": 50000,
                 "vrfName": "MyVRF_50000",
-                "vrfType": "vxlan"
+                "vrfType": "vxlanEbgp"
               }
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -588,6 +1206,70 @@ examples:
                 "vrfName": "MyVRF_50001"
               }
             ]
+          }
+  - name: 400 Response (Classic LAN Enhanced VRF)
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfs"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket ID. This is mandatory if Change Control is enabled
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "vrfs": [
+              {
+                "additionalData": {
+                  "bgpAuth": false,
+                  "configureStaticDefaultRoute": true,
+                  "maxBgpPaths": 1,
+                  "netflow": false,
+                  "ospfAuth": true,
+                  "ospfAuthKey": "3des_encrypted_key_here",
+                  "ospfAuthKeyId": 127,
+                  "vrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET"
+                },
+                "coreData": {
+                  "mtu": 9216,
+                  "ospfAreaId": "0.0.0.1",
+                  "ospfv3AreaId": "0.0.0.1",
+                  "vpcPeering": true,
+                  "vrfDescription": "Classic VRF for legacy network integration",
+                  "vrfIpVersion": "both"
+                },
+                "fabricName": "fab1",
+                "vrfName": "MyVRF_50003",
+                "vrfType": "classicLanEnhanced"
+              }
+            ]
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
           }
   - name: 400 Response (Custom VRF)
     description: Bad Request
@@ -616,20 +1298,155 @@ examples:
             "vrfs": [
               {
                 "fabricName": "fab1",
-                "vlanId": 101,
+                "vlanId": 2004,
                 "vrfExtensionTemplateName": "CustomExtTemplate1",
-                "vrfId": 50000,
-                "vrfName": "MyVRF_50000",
+                "vrfId": 50004,
+                "vrfName": "MyVRF_50004",
                 "vrfTemplateConfig": {
-                  "param1": "value1",
-                  "param2": "value2"
+                  "vrfDescription": "Custom VRF",
+                  "vrfIntfDescription": "VRF Interface",
+                  "vrfName": "MyVRF_50004",
+                  "vrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET",
+                  "vrfSegmentId": "50004"
                 },
-                "vrfTemplateName": "CustomTemplate1",
+                "vrfTemplateName": "Default_VRF_Universal",
                 "vrfType": "userDefined"
               }
             ]
           }
     response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 400 Response (VXLAN EBGP VRF)
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfs"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket ID. This is mandatory if Change Control is enabled
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "vrfs": [
+              {
+                "coreData": {
+                  "maxBgpPaths": 8,
+                  "maxIbgpPaths": 2,
+                  "mtu": 9216,
+                  "routingTag": 54321,
+                  "rtAuto": true,
+                  "vrfDescription": "EBGP VRF for leaf-spine topology",
+                  "vrfInterfaceDescription": "L3 VNI interface for EBGP VRF",
+                  "vrfIpVersion": "both",
+                  "vrfVlanName": "MyVRF_50002_VLAN"
+                },
+                "fabricData": {
+                  "advertiseDefaultRoute": false,
+                  "configureStaticDefaultRoute": false
+                },
+                "fabricName": "fab1",
+                "vlanId": 2002,
+                "vrfId": 50002,
+                "vrfName": "MyVRF_50002",
+                "vrfType": "vxlanEbgp"
+              }
+            ]
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 400 Response (VXLAN IBGP VRF)
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfs"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket ID. This is mandatory if Change Control is enabled
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "vrfs": [
+              {
+                "coreData": {
+                  "ipv6LinkLocal": true,
+                  "maxBgpPaths": 4,
+                  "maxIbgpPaths": 2,
+                  "mtu": 9216,
+                  "routingTag": 12345,
+                  "rtAuto": true,
+                  "vrfDescription": "IBGP VRF for multi-site connectivity",
+                  "vrfInterfaceDescription": "L3 VNI interface for IBGP VRF",
+                  "vrfIpVersion": "both",
+                  "vrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET",
+                  "vrfVlanName": "MyVRF_50001_VLAN"
+                },
+                "fabricData": {
+                  "advertiseDefaultRoute": true,
+                  "advertiseHostRoute": false,
+                  "bgpBestPathRelax": true,
+                  "bgpLogNeighborChange": true,
+                  "configureStaticDefaultRoute": true
+                },
+                "fabricName": "fab1",
+                "vlanId": 2001,
+                "vrfId": 50001,
+                "vrfName": "MyVRF_50001",
+                "vrfType": "vxlanIbgp"
+              }
+            ]
+          }
+    response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -670,63 +1487,59 @@ examples:
               {
                 "coreData": {
                   "evpnRouteTargetExport": [
-                    "65000:1002"
+                    "65000:50000"
                   ],
                   "evpnRouteTargetImport": [
-                    "65000:1002"
+                    "65000:50000"
                   ],
                   "ipv6LinkLocal": true,
                   "maxBgpPaths": 1,
                   "maxIbgpPaths": 2,
                   "mtu": 9216,
                   "routeTargetExport": [
-                    "65000:1001"
+                    "65000:50000"
                   ],
                   "routeTargetImport": [
-                    "65000:1001"
+                    "65000:50000"
                   ],
                   "routingTag": 12345,
+                  "rtAuto": false,
                   "v6VrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET",
-                  "vrfDescription": "VXLAN VRF for Production",
-                  "vrfInterfaceDescription": "Interface for VLAN 101",
+                  "vrfDescription": "Production VRF for tenant1",
+                  "vrfInterfaceDescription": "L3 VNI interface for VRF MyVRF_50000",
+                  "vrfIpVersion": "both",
                   "vrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET",
-                  "vrfVlanName": "VLAN101"
+                  "vrfVlanName": "MyVRF_50000_VLAN"
                 },
                 "fabricData": {
                   "advertiseDefaultRoute": true,
                   "advertiseHostRoute": false,
                   "asn": "1234",
-                  "bgpPassword": "a3f5b6",
-                  "bgpPasswordKeyType": 3,
                   "configureStaticDefaultRoute": true,
+                  "disableRtAuto": false,
                   "netflow": true,
                   "netflowMonitor": "Netflow_123",
-                  "rtAuto": false,
                   "trmData": {
                     "ipv4Trm": true,
                     "l3VniMulticastGroup": "239.1.1.1",
-                    "mvpnRouteTargetExport": [
-                      "65000:100"
-                    ],
-                    "mvpnRouteTargetImport": [
-                      "65000:100"
-                    ],
+                    "loopbackNumber": 100,
                     "trmOnBgw": false,
-                    "v4MulticastGroup": "224.1.0.0/4",
+                    "v4MulticastGroup": "239.1.1.0/25",
                     "v4RpAbsent": false,
-                    "v4RpAddress": "10.1.0.1",
+                    "v4RpAddress": "10.254.254.1",
                     "v4RpExternal": false
                   }
                 },
                 "fabricName": "fab1",
-                "vlanId": 101,
+                "vlanId": 2000,
                 "vrfId": 50000,
                 "vrfName": "MyVRF_50000",
-                "vrfType": "vxlan"
+                "vrfType": "vxlanEbgp"
               }
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -738,6 +1551,70 @@ examples:
             "message": "Bad Request",
             "description": "The server could not understand the request due to incorrect syntax.",
             "code": 400
+          }
+  - name: 401 Response (Classic LAN Enhanced VRF)
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfs"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket ID. This is mandatory if Change Control is enabled
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "vrfs": [
+              {
+                "additionalData": {
+                  "bgpAuth": false,
+                  "configureStaticDefaultRoute": true,
+                  "maxBgpPaths": 1,
+                  "netflow": false,
+                  "ospfAuth": true,
+                  "ospfAuthKey": "3des_encrypted_key_here",
+                  "ospfAuthKeyId": 127,
+                  "vrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET"
+                },
+                "coreData": {
+                  "mtu": 9216,
+                  "ospfAreaId": "0.0.0.1",
+                  "ospfv3AreaId": "0.0.0.1",
+                  "vpcPeering": true,
+                  "vrfDescription": "Classic VRF for legacy network integration",
+                  "vrfIpVersion": "both"
+                },
+                "fabricName": "fab1",
+                "vrfName": "MyVRF_50003",
+                "vrfType": "classicLanEnhanced"
+              }
+            ]
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
           }
   - name: 401 Response (Custom VRF)
     description: Unauthorized
@@ -766,20 +1643,155 @@ examples:
             "vrfs": [
               {
                 "fabricName": "fab1",
-                "vlanId": 101,
+                "vlanId": 2004,
                 "vrfExtensionTemplateName": "CustomExtTemplate1",
-                "vrfId": 50000,
-                "vrfName": "MyVRF_50000",
+                "vrfId": 50004,
+                "vrfName": "MyVRF_50004",
                 "vrfTemplateConfig": {
-                  "param1": "value1",
-                  "param2": "value2"
+                  "vrfDescription": "Custom VRF",
+                  "vrfIntfDescription": "VRF Interface",
+                  "vrfName": "MyVRF_50004",
+                  "vrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET",
+                  "vrfSegmentId": "50004"
                 },
-                "vrfTemplateName": "CustomTemplate1",
+                "vrfTemplateName": "Default_VRF_Universal",
                 "vrfType": "userDefined"
               }
             ]
           }
     response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 401 Response (VXLAN EBGP VRF)
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfs"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket ID. This is mandatory if Change Control is enabled
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "vrfs": [
+              {
+                "coreData": {
+                  "maxBgpPaths": 8,
+                  "maxIbgpPaths": 2,
+                  "mtu": 9216,
+                  "routingTag": 54321,
+                  "rtAuto": true,
+                  "vrfDescription": "EBGP VRF for leaf-spine topology",
+                  "vrfInterfaceDescription": "L3 VNI interface for EBGP VRF",
+                  "vrfIpVersion": "both",
+                  "vrfVlanName": "MyVRF_50002_VLAN"
+                },
+                "fabricData": {
+                  "advertiseDefaultRoute": false,
+                  "configureStaticDefaultRoute": false
+                },
+                "fabricName": "fab1",
+                "vlanId": 2002,
+                "vrfId": 50002,
+                "vrfName": "MyVRF_50002",
+                "vrfType": "vxlanEbgp"
+              }
+            ]
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 401 Response (VXLAN IBGP VRF)
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfs"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket ID. This is mandatory if Change Control is enabled
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "vrfs": [
+              {
+                "coreData": {
+                  "ipv6LinkLocal": true,
+                  "maxBgpPaths": 4,
+                  "maxIbgpPaths": 2,
+                  "mtu": 9216,
+                  "routingTag": 12345,
+                  "rtAuto": true,
+                  "vrfDescription": "IBGP VRF for multi-site connectivity",
+                  "vrfInterfaceDescription": "L3 VNI interface for IBGP VRF",
+                  "vrfIpVersion": "both",
+                  "vrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET",
+                  "vrfVlanName": "MyVRF_50001_VLAN"
+                },
+                "fabricData": {
+                  "advertiseDefaultRoute": true,
+                  "advertiseHostRoute": false,
+                  "bgpBestPathRelax": true,
+                  "bgpLogNeighborChange": true,
+                  "configureStaticDefaultRoute": true
+                },
+                "fabricName": "fab1",
+                "vlanId": 2001,
+                "vrfId": 50001,
+                "vrfName": "MyVRF_50001",
+                "vrfType": "vxlanIbgp"
+              }
+            ]
+          }
+    response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -820,63 +1832,59 @@ examples:
               {
                 "coreData": {
                   "evpnRouteTargetExport": [
-                    "65000:1002"
+                    "65000:50000"
                   ],
                   "evpnRouteTargetImport": [
-                    "65000:1002"
+                    "65000:50000"
                   ],
                   "ipv6LinkLocal": true,
                   "maxBgpPaths": 1,
                   "maxIbgpPaths": 2,
                   "mtu": 9216,
                   "routeTargetExport": [
-                    "65000:1001"
+                    "65000:50000"
                   ],
                   "routeTargetImport": [
-                    "65000:1001"
+                    "65000:50000"
                   ],
                   "routingTag": 12345,
+                  "rtAuto": false,
                   "v6VrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET",
-                  "vrfDescription": "VXLAN VRF for Production",
-                  "vrfInterfaceDescription": "Interface for VLAN 101",
+                  "vrfDescription": "Production VRF for tenant1",
+                  "vrfInterfaceDescription": "L3 VNI interface for VRF MyVRF_50000",
+                  "vrfIpVersion": "both",
                   "vrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET",
-                  "vrfVlanName": "VLAN101"
+                  "vrfVlanName": "MyVRF_50000_VLAN"
                 },
                 "fabricData": {
                   "advertiseDefaultRoute": true,
                   "advertiseHostRoute": false,
                   "asn": "1234",
-                  "bgpPassword": "a3f5b6",
-                  "bgpPasswordKeyType": 3,
                   "configureStaticDefaultRoute": true,
+                  "disableRtAuto": false,
                   "netflow": true,
                   "netflowMonitor": "Netflow_123",
-                  "rtAuto": false,
                   "trmData": {
                     "ipv4Trm": true,
                     "l3VniMulticastGroup": "239.1.1.1",
-                    "mvpnRouteTargetExport": [
-                      "65000:100"
-                    ],
-                    "mvpnRouteTargetImport": [
-                      "65000:100"
-                    ],
+                    "loopbackNumber": 100,
                     "trmOnBgw": false,
-                    "v4MulticastGroup": "224.1.0.0/4",
+                    "v4MulticastGroup": "239.1.1.0/25",
                     "v4RpAbsent": false,
-                    "v4RpAddress": "10.1.0.1",
+                    "v4RpAddress": "10.254.254.1",
                     "v4RpExternal": false
                   }
                 },
                 "fabricName": "fab1",
-                "vlanId": 101,
+                "vlanId": 2000,
                 "vrfId": 50000,
                 "vrfName": "MyVRF_50000",
-                "vrfType": "vxlan"
+                "vrfType": "vxlanEbgp"
               }
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -888,6 +1896,70 @@ examples:
             "message": "Unauthorized",
             "description": "Indicates that the request requires user authentication information.",
             "code": 401
+          }
+  - name: 403 Response (Classic LAN Enhanced VRF)
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfs"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket ID. This is mandatory if Change Control is enabled
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "vrfs": [
+              {
+                "additionalData": {
+                  "bgpAuth": false,
+                  "configureStaticDefaultRoute": true,
+                  "maxBgpPaths": 1,
+                  "netflow": false,
+                  "ospfAuth": true,
+                  "ospfAuthKey": "3des_encrypted_key_here",
+                  "ospfAuthKeyId": 127,
+                  "vrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET"
+                },
+                "coreData": {
+                  "mtu": 9216,
+                  "ospfAreaId": "0.0.0.1",
+                  "ospfv3AreaId": "0.0.0.1",
+                  "vpcPeering": true,
+                  "vrfDescription": "Classic VRF for legacy network integration",
+                  "vrfIpVersion": "both"
+                },
+                "fabricName": "fab1",
+                "vrfName": "MyVRF_50003",
+                "vrfType": "classicLanEnhanced"
+              }
+            ]
+          }
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
           }
   - name: 403 Response (Custom VRF)
     description: Forbidden
@@ -916,20 +1988,155 @@ examples:
             "vrfs": [
               {
                 "fabricName": "fab1",
-                "vlanId": 101,
+                "vlanId": 2004,
                 "vrfExtensionTemplateName": "CustomExtTemplate1",
-                "vrfId": 50000,
-                "vrfName": "MyVRF_50000",
+                "vrfId": 50004,
+                "vrfName": "MyVRF_50004",
                 "vrfTemplateConfig": {
-                  "param1": "value1",
-                  "param2": "value2"
+                  "vrfDescription": "Custom VRF",
+                  "vrfIntfDescription": "VRF Interface",
+                  "vrfName": "MyVRF_50004",
+                  "vrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET",
+                  "vrfSegmentId": "50004"
                 },
-                "vrfTemplateName": "CustomTemplate1",
+                "vrfTemplateName": "Default_VRF_Universal",
                 "vrfType": "userDefined"
               }
             ]
           }
     response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 403 Response (VXLAN EBGP VRF)
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfs"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket ID. This is mandatory if Change Control is enabled
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "vrfs": [
+              {
+                "coreData": {
+                  "maxBgpPaths": 8,
+                  "maxIbgpPaths": 2,
+                  "mtu": 9216,
+                  "routingTag": 54321,
+                  "rtAuto": true,
+                  "vrfDescription": "EBGP VRF for leaf-spine topology",
+                  "vrfInterfaceDescription": "L3 VNI interface for EBGP VRF",
+                  "vrfIpVersion": "both",
+                  "vrfVlanName": "MyVRF_50002_VLAN"
+                },
+                "fabricData": {
+                  "advertiseDefaultRoute": false,
+                  "configureStaticDefaultRoute": false
+                },
+                "fabricName": "fab1",
+                "vlanId": 2002,
+                "vrfId": 50002,
+                "vrfName": "MyVRF_50002",
+                "vrfType": "vxlanEbgp"
+              }
+            ]
+          }
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 403 Response (VXLAN IBGP VRF)
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfs"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket ID. This is mandatory if Change Control is enabled
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "vrfs": [
+              {
+                "coreData": {
+                  "ipv6LinkLocal": true,
+                  "maxBgpPaths": 4,
+                  "maxIbgpPaths": 2,
+                  "mtu": 9216,
+                  "routingTag": 12345,
+                  "rtAuto": true,
+                  "vrfDescription": "IBGP VRF for multi-site connectivity",
+                  "vrfInterfaceDescription": "L3 VNI interface for IBGP VRF",
+                  "vrfIpVersion": "both",
+                  "vrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET",
+                  "vrfVlanName": "MyVRF_50001_VLAN"
+                },
+                "fabricData": {
+                  "advertiseDefaultRoute": true,
+                  "advertiseHostRoute": false,
+                  "bgpBestPathRelax": true,
+                  "bgpLogNeighborChange": true,
+                  "configureStaticDefaultRoute": true
+                },
+                "fabricName": "fab1",
+                "vlanId": 2001,
+                "vrfId": 50001,
+                "vrfName": "MyVRF_50001",
+                "vrfType": "vxlanIbgp"
+              }
+            ]
+          }
+    response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -970,63 +2177,59 @@ examples:
               {
                 "coreData": {
                   "evpnRouteTargetExport": [
-                    "65000:1002"
+                    "65000:50000"
                   ],
                   "evpnRouteTargetImport": [
-                    "65000:1002"
+                    "65000:50000"
                   ],
                   "ipv6LinkLocal": true,
                   "maxBgpPaths": 1,
                   "maxIbgpPaths": 2,
                   "mtu": 9216,
                   "routeTargetExport": [
-                    "65000:1001"
+                    "65000:50000"
                   ],
                   "routeTargetImport": [
-                    "65000:1001"
+                    "65000:50000"
                   ],
                   "routingTag": 12345,
+                  "rtAuto": false,
                   "v6VrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET",
-                  "vrfDescription": "VXLAN VRF for Production",
-                  "vrfInterfaceDescription": "Interface for VLAN 101",
+                  "vrfDescription": "Production VRF for tenant1",
+                  "vrfInterfaceDescription": "L3 VNI interface for VRF MyVRF_50000",
+                  "vrfIpVersion": "both",
                   "vrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET",
-                  "vrfVlanName": "VLAN101"
+                  "vrfVlanName": "MyVRF_50000_VLAN"
                 },
                 "fabricData": {
                   "advertiseDefaultRoute": true,
                   "advertiseHostRoute": false,
                   "asn": "1234",
-                  "bgpPassword": "a3f5b6",
-                  "bgpPasswordKeyType": 3,
                   "configureStaticDefaultRoute": true,
+                  "disableRtAuto": false,
                   "netflow": true,
                   "netflowMonitor": "Netflow_123",
-                  "rtAuto": false,
                   "trmData": {
                     "ipv4Trm": true,
                     "l3VniMulticastGroup": "239.1.1.1",
-                    "mvpnRouteTargetExport": [
-                      "65000:100"
-                    ],
-                    "mvpnRouteTargetImport": [
-                      "65000:100"
-                    ],
+                    "loopbackNumber": 100,
                     "trmOnBgw": false,
-                    "v4MulticastGroup": "224.1.0.0/4",
+                    "v4MulticastGroup": "239.1.1.0/25",
                     "v4RpAbsent": false,
-                    "v4RpAddress": "10.1.0.1",
+                    "v4RpAddress": "10.254.254.1",
                     "v4RpExternal": false
                   }
                 },
                 "fabricName": "fab1",
-                "vlanId": 101,
+                "vlanId": 2000,
                 "vrfId": 50000,
                 "vrfName": "MyVRF_50000",
-                "vrfType": "vxlan"
+                "vrfType": "vxlanEbgp"
               }
             ]
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -1038,6 +2241,70 @@ examples:
             "message": "Forbidden",
             "description": "The client does not have access rights to the content.",
             "code": 403
+          }
+  - name: 404 Response (Classic LAN Enhanced VRF)
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfs"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket ID. This is mandatory if Change Control is enabled
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "vrfs": [
+              {
+                "additionalData": {
+                  "bgpAuth": false,
+                  "configureStaticDefaultRoute": true,
+                  "maxBgpPaths": 1,
+                  "netflow": false,
+                  "ospfAuth": true,
+                  "ospfAuthKey": "3des_encrypted_key_here",
+                  "ospfAuthKeyId": 127,
+                  "vrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET"
+                },
+                "coreData": {
+                  "mtu": 9216,
+                  "ospfAreaId": "0.0.0.1",
+                  "ospfv3AreaId": "0.0.0.1",
+                  "vpcPeering": true,
+                  "vrfDescription": "Classic VRF for legacy network integration",
+                  "vrfIpVersion": "both"
+                },
+                "fabricName": "fab1",
+                "vrfName": "MyVRF_50003",
+                "vrfType": "classicLanEnhanced"
+              }
+            ]
+          }
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
           }
   - name: 404 Response (Custom VRF)
     description: Not Found
@@ -1066,20 +2333,155 @@ examples:
             "vrfs": [
               {
                 "fabricName": "fab1",
-                "vlanId": 101,
+                "vlanId": 2004,
                 "vrfExtensionTemplateName": "CustomExtTemplate1",
-                "vrfId": 50000,
-                "vrfName": "MyVRF_50000",
+                "vrfId": 50004,
+                "vrfName": "MyVRF_50004",
                 "vrfTemplateConfig": {
-                  "param1": "value1",
-                  "param2": "value2"
+                  "vrfDescription": "Custom VRF",
+                  "vrfIntfDescription": "VRF Interface",
+                  "vrfName": "MyVRF_50004",
+                  "vrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET",
+                  "vrfSegmentId": "50004"
                 },
-                "vrfTemplateName": "CustomTemplate1",
+                "vrfTemplateName": "Default_VRF_Universal",
                 "vrfType": "userDefined"
               }
             ]
           }
     response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 404 Response (VXLAN EBGP VRF)
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfs"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket ID. This is mandatory if Change Control is enabled
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "vrfs": [
+              {
+                "coreData": {
+                  "maxBgpPaths": 8,
+                  "maxIbgpPaths": 2,
+                  "mtu": 9216,
+                  "routingTag": 54321,
+                  "rtAuto": true,
+                  "vrfDescription": "EBGP VRF for leaf-spine topology",
+                  "vrfInterfaceDescription": "L3 VNI interface for EBGP VRF",
+                  "vrfIpVersion": "both",
+                  "vrfVlanName": "MyVRF_50002_VLAN"
+                },
+                "fabricData": {
+                  "advertiseDefaultRoute": false,
+                  "configureStaticDefaultRoute": false
+                },
+                "fabricName": "fab1",
+                "vlanId": 2002,
+                "vrfId": 50002,
+                "vrfName": "MyVRF_50002",
+                "vrfType": "vxlanEbgp"
+              }
+            ]
+          }
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 404 Response (VXLAN IBGP VRF)
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfs"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket ID. This is mandatory if Change Control is enabled
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "vrfs": [
+              {
+                "coreData": {
+                  "ipv6LinkLocal": true,
+                  "maxBgpPaths": 4,
+                  "maxIbgpPaths": 2,
+                  "mtu": 9216,
+                  "routingTag": 12345,
+                  "rtAuto": true,
+                  "vrfDescription": "IBGP VRF for multi-site connectivity",
+                  "vrfInterfaceDescription": "L3 VNI interface for IBGP VRF",
+                  "vrfIpVersion": "both",
+                  "vrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET",
+                  "vrfVlanName": "MyVRF_50001_VLAN"
+                },
+                "fabricData": {
+                  "advertiseDefaultRoute": true,
+                  "advertiseHostRoute": false,
+                  "bgpBestPathRelax": true,
+                  "bgpLogNeighborChange": true,
+                  "configureStaticDefaultRoute": true
+                },
+                "fabricName": "fab1",
+                "vlanId": 2001,
+                "vrfId": 50001,
+                "vrfName": "MyVRF_50001",
+                "vrfType": "vxlanIbgp"
+              }
+            ]
+          }
+    response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -1120,63 +2522,59 @@ examples:
               {
                 "coreData": {
                   "evpnRouteTargetExport": [
-                    "65000:1002"
+                    "65000:50000"
                   ],
                   "evpnRouteTargetImport": [
-                    "65000:1002"
+                    "65000:50000"
                   ],
                   "ipv6LinkLocal": true,
                   "maxBgpPaths": 1,
                   "maxIbgpPaths": 2,
                   "mtu": 9216,
                   "routeTargetExport": [
-                    "65000:1001"
+                    "65000:50000"
                   ],
                   "routeTargetImport": [
-                    "65000:1001"
+                    "65000:50000"
                   ],
                   "routingTag": 12345,
+                  "rtAuto": false,
                   "v6VrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET",
-                  "vrfDescription": "VXLAN VRF for Production",
-                  "vrfInterfaceDescription": "Interface for VLAN 101",
+                  "vrfDescription": "Production VRF for tenant1",
+                  "vrfInterfaceDescription": "L3 VNI interface for VRF MyVRF_50000",
+                  "vrfIpVersion": "both",
                   "vrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET",
-                  "vrfVlanName": "VLAN101"
+                  "vrfVlanName": "MyVRF_50000_VLAN"
                 },
                 "fabricData": {
                   "advertiseDefaultRoute": true,
                   "advertiseHostRoute": false,
                   "asn": "1234",
-                  "bgpPassword": "a3f5b6",
-                  "bgpPasswordKeyType": 3,
                   "configureStaticDefaultRoute": true,
+                  "disableRtAuto": false,
                   "netflow": true,
                   "netflowMonitor": "Netflow_123",
-                  "rtAuto": false,
                   "trmData": {
                     "ipv4Trm": true,
                     "l3VniMulticastGroup": "239.1.1.1",
-                    "mvpnRouteTargetExport": [
-                      "65000:100"
-                    ],
-                    "mvpnRouteTargetImport": [
-                      "65000:100"
-                    ],
+                    "loopbackNumber": 100,
                     "trmOnBgw": false,
-                    "v4MulticastGroup": "224.1.0.0/4",
+                    "v4MulticastGroup": "239.1.1.0/25",
                     "v4RpAbsent": false,
-                    "v4RpAddress": "10.1.0.1",
+                    "v4RpAddress": "10.254.254.1",
                     "v4RpExternal": false
                   }
                 },
                 "fabricName": "fab1",
-                "vlanId": 101,
+                "vlanId": 2000,
                 "vrfId": 50000,
                 "vrfName": "MyVRF_50000",
-                "vrfType": "vxlan"
+                "vrfType": "vxlanEbgp"
               }
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -1188,6 +2586,70 @@ examples:
             "message": "Not Found",
             "description": "The server cannot find the requested resource.",
             "code": 404
+          }
+  - name: 500 Response (Classic LAN Enhanced VRF)
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfs"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket ID. This is mandatory if Change Control is enabled
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "vrfs": [
+              {
+                "additionalData": {
+                  "bgpAuth": false,
+                  "configureStaticDefaultRoute": true,
+                  "maxBgpPaths": 1,
+                  "netflow": false,
+                  "ospfAuth": true,
+                  "ospfAuthKey": "3des_encrypted_key_here",
+                  "ospfAuthKeyId": 127,
+                  "vrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET"
+                },
+                "coreData": {
+                  "mtu": 9216,
+                  "ospfAreaId": "0.0.0.1",
+                  "ospfv3AreaId": "0.0.0.1",
+                  "vpcPeering": true,
+                  "vrfDescription": "Classic VRF for legacy network integration",
+                  "vrfIpVersion": "both"
+                },
+                "fabricName": "fab1",
+                "vrfName": "MyVRF_50003",
+                "vrfType": "classicLanEnhanced"
+              }
+            ]
+          }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
           }
   - name: 500 Response (Custom VRF)
     description: Internal Server Error
@@ -1216,20 +2678,155 @@ examples:
             "vrfs": [
               {
                 "fabricName": "fab1",
-                "vlanId": 101,
+                "vlanId": 2004,
                 "vrfExtensionTemplateName": "CustomExtTemplate1",
-                "vrfId": 50000,
-                "vrfName": "MyVRF_50000",
+                "vrfId": 50004,
+                "vrfName": "MyVRF_50004",
                 "vrfTemplateConfig": {
-                  "param1": "value1",
-                  "param2": "value2"
+                  "vrfDescription": "Custom VRF",
+                  "vrfIntfDescription": "VRF Interface",
+                  "vrfName": "MyVRF_50004",
+                  "vrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET",
+                  "vrfSegmentId": "50004"
                 },
-                "vrfTemplateName": "CustomTemplate1",
+                "vrfTemplateName": "Default_VRF_Universal",
                 "vrfType": "userDefined"
               }
             ]
           }
     response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }
+  - name: 500 Response (VXLAN EBGP VRF)
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfs"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket ID. This is mandatory if Change Control is enabled
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "vrfs": [
+              {
+                "coreData": {
+                  "maxBgpPaths": 8,
+                  "maxIbgpPaths": 2,
+                  "mtu": 9216,
+                  "routingTag": 54321,
+                  "rtAuto": true,
+                  "vrfDescription": "EBGP VRF for leaf-spine topology",
+                  "vrfInterfaceDescription": "L3 VNI interface for EBGP VRF",
+                  "vrfIpVersion": "both",
+                  "vrfVlanName": "MyVRF_50002_VLAN"
+                },
+                "fabricData": {
+                  "advertiseDefaultRoute": false,
+                  "configureStaticDefaultRoute": false
+                },
+                "fabricName": "fab1",
+                "vlanId": 2002,
+                "vrfId": 50002,
+                "vrfName": "MyVRF_50002",
+                "vrfType": "vxlanEbgp"
+              }
+            ]
+          }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }
+  - name: 500 Response (VXLAN IBGP VRF)
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/vrfs"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket ID. This is mandatory if Change Control is enabled
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "vrfs": [
+              {
+                "coreData": {
+                  "ipv6LinkLocal": true,
+                  "maxBgpPaths": 4,
+                  "maxIbgpPaths": 2,
+                  "mtu": 9216,
+                  "routingTag": 12345,
+                  "rtAuto": true,
+                  "vrfDescription": "IBGP VRF for multi-site connectivity",
+                  "vrfInterfaceDescription": "L3 VNI interface for IBGP VRF",
+                  "vrfIpVersion": "both",
+                  "vrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET",
+                  "vrfVlanName": "MyVRF_50001_VLAN"
+                },
+                "fabricData": {
+                  "advertiseDefaultRoute": true,
+                  "advertiseHostRoute": false,
+                  "bgpBestPathRelax": true,
+                  "bgpLogNeighborChange": true,
+                  "configureStaticDefaultRoute": true
+                },
+                "fabricName": "fab1",
+                "vlanId": 2001,
+                "vrfId": 50001,
+                "vrfName": "MyVRF_50001",
+                "vrfType": "vxlanIbgp"
+              }
+            ]
+          }
+    response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type
@@ -1270,63 +2867,59 @@ examples:
               {
                 "coreData": {
                   "evpnRouteTargetExport": [
-                    "65000:1002"
+                    "65000:50000"
                   ],
                   "evpnRouteTargetImport": [
-                    "65000:1002"
+                    "65000:50000"
                   ],
                   "ipv6LinkLocal": true,
                   "maxBgpPaths": 1,
                   "maxIbgpPaths": 2,
                   "mtu": 9216,
                   "routeTargetExport": [
-                    "65000:1001"
+                    "65000:50000"
                   ],
                   "routeTargetImport": [
-                    "65000:1001"
+                    "65000:50000"
                   ],
                   "routingTag": 12345,
+                  "rtAuto": false,
                   "v6VrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET",
-                  "vrfDescription": "VXLAN VRF for Production",
-                  "vrfInterfaceDescription": "Interface for VLAN 101",
+                  "vrfDescription": "Production VRF for tenant1",
+                  "vrfInterfaceDescription": "L3 VNI interface for VRF MyVRF_50000",
+                  "vrfIpVersion": "both",
                   "vrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET",
-                  "vrfVlanName": "VLAN101"
+                  "vrfVlanName": "MyVRF_50000_VLAN"
                 },
                 "fabricData": {
                   "advertiseDefaultRoute": true,
                   "advertiseHostRoute": false,
                   "asn": "1234",
-                  "bgpPassword": "a3f5b6",
-                  "bgpPasswordKeyType": 3,
                   "configureStaticDefaultRoute": true,
+                  "disableRtAuto": false,
                   "netflow": true,
                   "netflowMonitor": "Netflow_123",
-                  "rtAuto": false,
                   "trmData": {
                     "ipv4Trm": true,
                     "l3VniMulticastGroup": "239.1.1.1",
-                    "mvpnRouteTargetExport": [
-                      "65000:100"
-                    ],
-                    "mvpnRouteTargetImport": [
-                      "65000:100"
-                    ],
+                    "loopbackNumber": 100,
                     "trmOnBgw": false,
-                    "v4MulticastGroup": "224.1.0.0/4",
+                    "v4MulticastGroup": "239.1.1.0/25",
                     "v4RpAbsent": false,
-                    "v4RpAddress": "10.1.0.1",
+                    "v4RpAddress": "10.254.254.1",
                     "v4RpExternal": false
                   }
                 },
                 "fabricName": "fab1",
-                "vlanId": 101,
+                "vlanId": 2000,
                 "vrfId": 50000,
                 "vrfName": "MyVRF_50000",
-                "vrfType": "vxlan"
+                "vrfType": "vxlanEbgp"
               }
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

@@ -2,6 +2,8 @@ info:
   name: Update audit log system settings
   type: http
   seq: 33
+  tags:
+    - System Settings
 
 http:
   method: PUT
@@ -16,10 +18,13 @@ http:
     type: json
     data: |-
       {
-        "enableAuditRecordStream": false,
-        "maxAuditRecord": 0,
-        "maxAuditRecordRetention": 0,
-        "remoteStreamingServers": []
+        "enableAuditRecordStream": true,
+        "maxAuditRecord": 5,
+        "maxAuditRecordRetention": 5,
+        "remoteStreamingServers": [
+          "Splunk1",
+          "Splunk2"
+        ]
       }
   auth: inherit
 
@@ -45,12 +50,16 @@ examples:
         type: json
         data: |-
           {
-            "enableAuditRecordStream": false,
-            "maxAuditRecord": 0,
-            "maxAuditRecordRetention": 0,
-            "remoteStreamingServers": []
+            "enableAuditRecordStream": true,
+            "maxAuditRecord": 5,
+            "maxAuditRecordRetention": 5,
+            "remoteStreamingServers": [
+              "Splunk1",
+              "Splunk2"
+            ]
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -59,10 +68,13 @@ examples:
         type: json
         data: |-
           {
-            "enableAuditRecordStream": false,
-            "maxAuditRecord": 0,
-            "maxAuditRecordRetention": 0,
-            "remoteStreamingServers": []
+            "enableAuditRecordStream": true,
+            "maxAuditRecord": 5,
+            "maxAuditRecordRetention": 5,
+            "remoteStreamingServers": [
+              "Splunk1",
+              "Splunk2"
+            ]
           }
   - name: 400 Response
     description: Bad Request
@@ -79,12 +91,16 @@ examples:
         type: json
         data: |-
           {
-            "enableAuditRecordStream": false,
-            "maxAuditRecord": 0,
-            "maxAuditRecordRetention": 0,
-            "remoteStreamingServers": []
+            "enableAuditRecordStream": true,
+            "maxAuditRecord": 5,
+            "maxAuditRecordRetention": 5,
+            "remoteStreamingServers": [
+              "Splunk1",
+              "Splunk2"
+            ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -112,12 +128,16 @@ examples:
         type: json
         data: |-
           {
-            "enableAuditRecordStream": false,
-            "maxAuditRecord": 0,
-            "maxAuditRecordRetention": 0,
-            "remoteStreamingServers": []
+            "enableAuditRecordStream": true,
+            "maxAuditRecord": 5,
+            "maxAuditRecordRetention": 5,
+            "remoteStreamingServers": [
+              "Splunk1",
+              "Splunk2"
+            ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -145,12 +165,16 @@ examples:
         type: json
         data: |-
           {
-            "enableAuditRecordStream": false,
-            "maxAuditRecord": 0,
-            "maxAuditRecordRetention": 0,
-            "remoteStreamingServers": []
+            "enableAuditRecordStream": true,
+            "maxAuditRecord": 5,
+            "maxAuditRecordRetention": 5,
+            "remoteStreamingServers": [
+              "Splunk1",
+              "Splunk2"
+            ]
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -178,12 +202,16 @@ examples:
         type: json
         data: |-
           {
-            "enableAuditRecordStream": false,
-            "maxAuditRecord": 0,
-            "maxAuditRecordRetention": 0,
-            "remoteStreamingServers": []
+            "enableAuditRecordStream": true,
+            "maxAuditRecord": 5,
+            "maxAuditRecordRetention": 5,
+            "remoteStreamingServers": [
+              "Splunk1",
+              "Splunk2"
+            ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -211,12 +239,16 @@ examples:
         type: json
         data: |-
           {
-            "enableAuditRecordStream": false,
-            "maxAuditRecord": 0,
-            "maxAuditRecordRetention": 0,
-            "remoteStreamingServers": []
+            "enableAuditRecordStream": true,
+            "maxAuditRecord": 5,
+            "maxAuditRecordRetention": 5,
+            "remoteStreamingServers": [
+              "Splunk1",
+              "Splunk2"
+            ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

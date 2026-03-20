@@ -1,0 +1,493 @@
+info:
+  name: Get the flow device details
+  type: http
+  seq: 40
+  tags:
+    - Network Connectivity Resources
+
+http:
+  method: GET
+  url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivityAnalysis/flowDeviceDetails"
+  params:
+    - name: jobId
+      value: ""
+      type: query
+      description: ID of the Connectivity Analysis job.
+    - name: serialNumber
+      value: ""
+      type: query
+      description: Serial number of the device to query.
+    - name: fabricName
+      value: ""
+      type: query
+      description: Name of the fabric
+    - name: clusterName
+      value: ""
+      type: query
+      description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+      disabled: true
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: OK
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivityAnalysis/flowDeviceDetails"
+      method: GET
+      params:
+        - name: jobId
+          value: ""
+          type: query
+          description: ID of the Connectivity Analysis job.
+        - name: serialNumber
+          value: ""
+          type: query
+          description: Serial number of the device to query.
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "details": {
+              "paths": [
+                {
+                  "logicalOutputInterface": "loopback1",
+                  "physicalOutputInterface": null,
+                  "vlan": "",
+                  "neighbor": "Destination",
+                  "isActivePath": false,
+                  "neighborPhysicalInterface": "Destination"
+                },
+                {
+                  "logicalOutputInterface": "port-channel1",
+                  "neighbor": "topo-3-fo-1",
+                  "neighborPhysicalInterface": "Ethernet1/1",
+                  "neighborSerialNumber": "FDO21191DPU",
+                  "neighborVlan": "2302",
+                  "physicalOutputInterface": "Ethernet1/1",
+                  "isActivePath": true
+                }
+              ],
+              "consistencyCheckDetails": [
+                {
+                  "ingressInterface": "Ethernet1/50",
+                  "vlan": "N/A",
+                  "connectedFrom": "topo-3-9508-bs-2",
+                  "consistencyCheckResults": [
+                    {
+                      "command": "show consistency-checker link-state interface Ethernet1/50 brief",
+                      "description": "Physical Front Panel Port Link state validator",
+                      "type": "CC_TYPE_IF_PHYS_LINKSTATE",
+                      "status": "Pass"
+                    },
+                    {
+                      "command": "show consistency-checker l3-interface interface Ethernet1/50 brief",
+                      "description": "L3 physical routed port state validator",
+                      "type": "CC_TYPE_IF_ETH_L3",
+                      "status": "Pass"
+                    },
+                    {
+                      "command": "show consistency-checker gwmacdb interface Ethernet1/50 brief",
+                      "description": "Gateway mac state validator",
+                      "type": "CC_TYPE_GWMAC",
+                      "status": "Pass"
+                    },
+                    {
+                      "command": "show consistency-checker forwarding single-route ipv4 10.3.0.5/32 vrf default brief",
+                      "description": "L3 route state validator",
+                      "type": "CC_TYPE_L3_UC_SINGLE_ROUTE",
+                      "status": "Pass"
+                    }
+                  ],
+                  "failedConsistencyCheckCount": 0,
+                  "passedConsistencyCheckCount": 4
+                },
+                {
+                  "ingressInterface": "Ethernet1/49",
+                  "vlan": "N/A",
+                  "connectedFrom": "topo-3-9508-bs-1",
+                  "consistencyCheckResults": [
+                    {
+                      "command": "show consistency-checker link-state interface Ethernet1/49 brief",
+                      "description": "Physical Front Panel Port Link state validator",
+                      "type": "CC_TYPE_IF_PHYS_LINKSTATE",
+                      "status": "Pass"
+                    },
+                    {
+                      "command": "show consistency-checker l3-interface interface Ethernet1/49 brief",
+                      "description": "L3 physical routed port state validator",
+                      "type": "CC_TYPE_IF_ETH_L3",
+                      "status": "Pass"
+                    },
+                    {
+                      "command": "show consistency-checker gwmacdb interface Ethernet1/49 brief",
+                      "description": "Gateway mac state validator",
+                      "type": "CC_TYPE_GWMAC",
+                      "status": "Pass"
+                    },
+                    {
+                      "command": "show consistency-checker forwarding single-route ipv4 10.3.0.5/32 vrf default brief",
+                      "description": "L3 route state validator",
+                      "type": "CC_TYPE_L3_UC_SINGLE_ROUTE",
+                      "status": "Pass"
+                    }
+                  ],
+                  "failedConsistencyCheckCount": 0,
+                  "passedConsistencyCheckCount": 4
+                },
+                {
+                  "ingressInterface": "nve1",
+                  "vlan": "32302",
+                  "connectedFrom": "topo-3-9508-bs-1",
+                  "consistencyCheckResults": [
+                    {
+                      "command": "show consistency-checker stp-state vlan 2302 brief",
+                      "description": "Spanning Tree Protocol state validator",
+                      "type": "CC_TYPE_STP_STATE",
+                      "status": "Pass"
+                    },
+                    {
+                      "command": "show consistency-checker l2 switchport interface port-channel1 brief",
+                      "description": "L2 Switchport state validator",
+                      "type": "CC_TYPE_L2_SWITCHPORT",
+                      "status": "Pass"
+                    },
+                    {
+                      "command": "show consistency-checker l2 mac-address 0014.0100.0006 brief",
+                      "description": "L2 MAC state validator",
+                      "type": "CC_TYPE_L2_MAC",
+                      "status": "Pass"
+                    },
+                    {
+                      "command": "show consistency-checker membership port-channels interface port-channel1 brief",
+                      "description": "Port-Channel member port state validator",
+                      "type": "CC_TYPE_IF_AGGR_MEMBERSHIP",
+                      "status": "Pass"
+                    },
+                    {
+                      "command": "show consistency-checker vpc source-interface port-channel1 brief",
+                      "description": "VPC state validator",
+                      "type": "CC_TYPE_VPC",
+                      "status": "Pass"
+                    },
+                    {
+                      "command": "show consistency-checker membership vlan 2302 brief",
+                      "description": "VLAN Membership state validator",
+                      "type": "CC_TYPE_MEMBERSHIP_VLAN",
+                      "status": "Pass"
+                    },
+                    {
+                      "command": "show consistency-checker link-state interface Ethernet1/1 brief",
+                      "description": "Physical Front Panel Port Link state validator",
+                      "type": "CC_TYPE_IF_PHYS_LINKSTATE",
+                      "status": "Pass"
+                    },
+                    {
+                      "command": "show consistency-checker vxlan vlan 2302 brief",
+                      "description": "VxLAN VLAN state validator",
+                      "type": "CC_TYPE_VXLAN_VLAN",
+                      "status": "Pass"
+                    }
+                  ],
+                  "failedConsistencyCheckCount": 0,
+                  "passedConsistencyCheckCount": 8
+                }
+              ],
+              "tunnelType": null
+            },
+            "failures": [],
+            "isVirtualTunnelEndpoint": false,
+            "ingressPaths": 3,
+            "tunnelType": "",
+            "fwdStatus": "SUCCESS",
+            "stateValidatorStatus": "SUCCESS",
+            "trafficStatus": "SUCCESS",
+            "egressPaths": 2,
+            "ingressInterfaces": [
+              {
+                "ingressPhysicalInterface": "Ethernet1/50",
+                "ingressLogicalInterface": "",
+                "isActivePath": false
+              },
+              {
+                "ingressPhysicalInterface": "Ethernet1/49",
+                "ingressLogicalInterface": "",
+                "isActivePath": true
+              },
+              {
+                "ingressPhysicalInterface": "",
+                "ingressLogicalInterface": "nve1",
+                "isActivePath": false
+              }
+            ],
+            "egressInterfaces": [
+              {
+                "egressPhysicalInterface": "",
+                "egressLogicalInterface": "loopback1",
+                "isActivePath": false
+              },
+              {
+                "egressPhysicalInterface": "Ethernet1/1",
+                "egressLogicalInterface": "port-channel1",
+                "isActivePath": true
+              }
+            ],
+            "PathsDict": {
+              "topo-3-fx-leaf-1&Destination": {
+                "isActivePath": false,
+                "lldpInfo": [
+                  [
+                    null,
+                    "Destination"
+                  ]
+                ]
+              },
+              "topo-3-fx-leaf-1&topo-3-fo-1": {
+                "isActivePath": true,
+                "lldpInfo": [
+                  [
+                    "Ethernet1/1",
+                    "Ethernet1/1"
+                  ]
+                ]
+              }
+            },
+            "isActivePath": true,
+            "nodeType": "Final",
+            "isOamPath": false,
+            "oamDetails": {},
+            "ipn": null,
+            "deviceFSVStatus": "FULL run successful",
+            "connectedFrom": "topo-3-9508-bs-2",
+            "deviceName": "topo-3-fx-leaf-1",
+            "deviceId": "FDO24280W7Y",
+            "deviceType": "leaf",
+            "hops": [
+              3
+            ],
+            "vpcs": [
+              {
+                "direction": "EGRESS",
+                "logicalOutputInterface": [
+                  "port-channel1"
+                ],
+                "peerDevice": "topo-3-fo-1",
+                "peerPort": [
+                  "Ethernet1/1"
+                ],
+                "physicalOutputInterface": [
+                  "Ethernet1/1"
+                ]
+              }
+            ],
+            "fabricId": "Topo3",
+            "pod": null,
+            "isRemoteLeaf": null,
+            "hostType": null,
+            "l4Ports": []
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivityAnalysis/flowDeviceDetails"
+      method: GET
+      params:
+        - name: jobId
+          value: ""
+          type: query
+          description: ID of the Connectivity Analysis job.
+        - name: serialNumber
+          value: ""
+          type: query
+          description: Serial number of the device to query.
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivityAnalysis/flowDeviceDetails"
+      method: GET
+      params:
+        - name: jobId
+          value: ""
+          type: query
+          description: ID of the Connectivity Analysis job.
+        - name: serialNumber
+          value: ""
+          type: query
+          description: Serial number of the device to query.
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 403 Response
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivityAnalysis/flowDeviceDetails"
+      method: GET
+      params:
+        - name: jobId
+          value: ""
+          type: query
+          description: ID of the Connectivity Analysis job.
+        - name: serialNumber
+          value: ""
+          type: query
+          description: Serial number of the device to query.
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 404 Response
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivityAnalysis/flowDeviceDetails"
+      method: GET
+      params:
+        - name: jobId
+          value: ""
+          type: query
+          description: ID of the Connectivity Analysis job.
+        - name: serialNumber
+          value: ""
+          type: query
+          description: Serial number of the device to query.
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 500 Response
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivityAnalysis/flowDeviceDetails"
+      method: GET
+      params:
+        - name: jobId
+          value: ""
+          type: query
+          description: ID of the Connectivity Analysis job.
+        - name: serialNumber
+          value: ""
+          type: query
+          description: Serial number of the device to query.
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }

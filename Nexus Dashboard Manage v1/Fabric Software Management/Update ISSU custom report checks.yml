@@ -1,7 +1,9 @@
 info:
   name: Update ISSU custom report checks
   type: http
-  seq: 42
+  seq: 36
+  tags:
+    - Fabric Software Management
 
 http:
   method: PUT
@@ -20,21 +22,28 @@ http:
     type: json
     data: |-
       {
-        "acceptableVariance": 0,
+        "acceptableVariance": 2,
         "advancedChecks": [
           {
-            "checkMustContains": [],
-            "checkMustNotContains": []
+            "checkMustContains": [
+              "module version"
+            ],
+            "checkMustNotContains": [
+              "module Name"
+            ]
           }
         ],
-        "checkType": "",
-        "cliCommand": "",
-        "failureLevel": "",
-        "ignoreFilters": [],
-        "postUpdateDelay": 0,
-        "reportCheckDescription": "",
-        "reportCheckName": "",
-        "reportCheckType": ""
+        "checkType": "custom",
+        "cliCommand": "sh version",
+        "failureLevel": "info",
+        "ignoreFilters": [
+          "nxos",
+          "[a-z,0-9]"
+        ],
+        "postUpdateDelay": 10,
+        "reportCheckDescription": "fetch nxos version details",
+        "reportCheckName": "nxos_version",
+        "reportCheckType": "preAndPost"
       }
   auth: inherit
 
@@ -75,19 +84,20 @@ examples:
                 ]
               }
             ],
-            "checkType": "basic",
+            "checkType": "custom",
             "cliCommand": "sh version",
             "failureLevel": "info",
             "ignoreFilters": [
               "nxos",
               "[a-z,0-9]"
             ],
-            "postUpdatedelay": 10,
+            "postUpdateDelay": 10,
             "reportCheckDescription": "fetch nxos version details",
             "reportCheckName": "nxos_version",
             "reportCheckType": "preAndPost"
           }
     response:
+      status: 204
       statusText: No Content
       body:
         type: text
@@ -122,19 +132,20 @@ examples:
                 ]
               }
             ],
-            "checkType": "basic",
+            "checkType": "custom",
             "cliCommand": "sh version",
             "failureLevel": "info",
             "ignoreFilters": [
               "nxos",
               "[a-z,0-9]"
             ],
-            "postUpdatedelay": 10,
+            "postUpdateDelay": 10,
             "reportCheckDescription": "fetch nxos version details",
             "reportCheckName": "nxos_version",
             "reportCheckType": "preAndPost"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -177,19 +188,20 @@ examples:
                 ]
               }
             ],
-            "checkType": "basic",
+            "checkType": "custom",
             "cliCommand": "sh version",
             "failureLevel": "info",
             "ignoreFilters": [
               "nxos",
               "[a-z,0-9]"
             ],
-            "postUpdatedelay": 10,
+            "postUpdateDelay": 10,
             "reportCheckDescription": "fetch nxos version details",
             "reportCheckName": "nxos_version",
             "reportCheckType": "preAndPost"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -232,19 +244,20 @@ examples:
                 ]
               }
             ],
-            "checkType": "basic",
+            "checkType": "custom",
             "cliCommand": "sh version",
             "failureLevel": "info",
             "ignoreFilters": [
               "nxos",
               "[a-z,0-9]"
             ],
-            "postUpdatedelay": 10,
+            "postUpdateDelay": 10,
             "reportCheckDescription": "fetch nxos version details",
             "reportCheckName": "nxos_version",
             "reportCheckType": "preAndPost"
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -287,19 +300,20 @@ examples:
                 ]
               }
             ],
-            "checkType": "basic",
+            "checkType": "custom",
             "cliCommand": "sh version",
             "failureLevel": "info",
             "ignoreFilters": [
               "nxos",
               "[a-z,0-9]"
             ],
-            "postUpdatedelay": 10,
+            "postUpdateDelay": 10,
             "reportCheckDescription": "fetch nxos version details",
             "reportCheckName": "nxos_version",
             "reportCheckType": "preAndPost"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

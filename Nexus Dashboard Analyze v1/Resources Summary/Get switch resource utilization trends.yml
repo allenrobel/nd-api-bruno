@@ -1,0 +1,718 @@
+info:
+  name: Get switch resource utilization trends
+  type: http
+  seq: 12
+  tags:
+    - Resources Summary
+
+http:
+  method: GET
+  url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/utilization/switchesTrends"
+  params:
+    - name: fabricName
+      value: ""
+      type: query
+      description: Name of the fabric
+    - name: clusterName
+      value: ""
+      type: query
+      description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+      disabled: true
+    - name: switchName
+      value: ""
+      type: query
+      description: Name of the switch
+      disabled: true
+    - name: startDate
+      value: ""
+      type: query
+      description: Start date
+      disabled: true
+    - name: endDate
+      value: ""
+      type: query
+      description: End date
+      disabled: true
+    - name: statName
+      value: ""
+      type: query
+      description: Stats type
+      disabled: true
+    - name: resourceMax
+      value: ""
+      type: query
+      description: Limits the number of resource entries per fabric switch
+      disabled: true
+    - name: includeSubResources
+      value: ""
+      type: query
+      description: Get the subResource statistics
+      disabled: true
+    - name: granularity
+      value: ""
+      type: query
+      description: Granularity of the values with respect to duration in minutes (m), hours (h) and days (d)
+      disabled: true
+    - name: max
+      value: ""
+      type: query
+      description: Number of records to return
+      disabled: true
+    - name: filter
+      value: ""
+      type: query
+      description: Lucene format filter - Filter the response based on this filter field
+      disabled: true
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: OK
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/utilization/switchesTrends"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: switchName
+          value: ""
+          type: query
+          description: Name of the switch
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+        - name: statName
+          value: ""
+          type: query
+          description: Stats type
+          disabled: true
+        - name: resourceMax
+          value: ""
+          type: query
+          description: Limits the number of resource entries per fabric switch
+          disabled: true
+        - name: includeSubResources
+          value: ""
+          type: query
+          description: Get the subResource statistics
+          disabled: true
+        - name: granularity
+          value: ""
+          type: query
+          description: Granularity of the values with respect to duration in minutes (m), hours (h) and days (d)
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "items": [
+              {
+                "anomalyScore": 0,
+                "entries": [
+                  {
+                    "category": "environmental",
+                    "fabricName": "SanJose",
+                    "latestValue": 11.91,
+                    "maxValue": 100,
+                    "peakValue": 12.15,
+                    "resourceName": "CPU",
+                    "resourceType": "environmental",
+                    "stats": [
+                      {
+                        "maxValue": 100,
+                        "timestamp": "2024-08-05T07:13:51.000Z",
+                        "value": 11.92
+                      },
+                      {
+                        "maxValue": 100,
+                        "timestamp": "2024-08-05T07:18:52.000Z",
+                        "value": 11.55
+                      },
+                      {
+                        "maxValue": 100,
+                        "timestamp": "2024-08-05T07:23:53.000Z",
+                        "value": 11.93
+                      },
+                      {
+                        "maxValue": 100,
+                        "timestamp": "2024-08-05T07:28:54.000Z",
+                        "value": 11.41
+                      },
+                      {
+                        "maxValue": 100,
+                        "timestamp": "2024-08-05T07:33:56.000Z",
+                        "value": 11.87
+                      },
+                      {
+                        "maxValue": 100,
+                        "timestamp": "2024-08-05T07:38:57.000Z",
+                        "value": 11.27
+                      },
+                      {
+                        "maxValue": 100,
+                        "timestamp": "2024-08-05T07:43:57.000Z",
+                        "value": 11.8
+                      },
+                      {
+                        "maxValue": 100,
+                        "timestamp": "2024-08-05T07:48:58.000Z",
+                        "value": 11.2
+                      },
+                      {
+                        "maxValue": 100,
+                        "timestamp": "2024-08-05T07:53:59.000Z",
+                        "value": 12.12
+                      },
+                      {
+                        "maxValue": 100,
+                        "timestamp": "2024-08-05T07:59:00.000Z",
+                        "value": 12.12
+                      },
+                      {
+                        "maxValue": 100,
+                        "timestamp": "2024-08-05T08:04:01.000Z",
+                        "value": 12.15
+                      },
+                      {
+                        "maxValue": 100,
+                        "timestamp": "2024-08-05T08:09:02.000Z",
+                        "value": 11.56
+                      },
+                      {
+                        "maxValue": 100,
+                        "timestamp": "2024-08-05T08:14:03.000Z",
+                        "value": 11.56
+                      },
+                      {
+                        "maxValue": 100,
+                        "timestamp": "2024-08-05T08:19:04.000Z",
+                        "value": 11.47
+                      },
+                      {
+                        "maxValue": 100,
+                        "timestamp": "2024-08-05T08:24:05.000Z",
+                        "value": 11.73
+                      },
+                      {
+                        "maxValue": 100,
+                        "timestamp": "2024-08-05T08:29:07.000Z",
+                        "value": 11.18
+                      },
+                      {
+                        "maxValue": 100,
+                        "timestamp": "2024-08-05T08:34:07.000Z",
+                        "value": 11.81
+                      },
+                      {
+                        "maxValue": 100,
+                        "timestamp": "2024-08-05T08:39:08.000Z",
+                        "value": 11.81
+                      },
+                      {
+                        "maxValue": 100,
+                        "timestamp": "2024-08-05T08:44:09.000Z",
+                        "value": 12.05
+                      },
+                      {
+                        "maxValue": 100,
+                        "timestamp": "2024-08-05T08:49:11.000Z",
+                        "value": 11.52
+                      },
+                      {
+                        "maxValue": 100,
+                        "timestamp": "2024-08-05T08:54:11.000Z",
+                        "value": 11.99
+                      },
+                      {
+                        "maxValue": 100,
+                        "timestamp": "2024-08-05T08:59:12.000Z",
+                        "value": 11.43
+                      },
+                      {
+                        "maxValue": 100,
+                        "timestamp": "2024-08-05T09:04:12.000Z",
+                        "value": 11.87
+                      },
+                      {
+                        "maxValue": 100,
+                        "timestamp": "2024-08-05T09:09:14.000Z",
+                        "value": 11.38
+                      },
+                      {
+                        "maxValue": 100,
+                        "timestamp": "2024-08-05T09:14:15.000Z",
+                        "value": 11.91
+                      }
+                    ],
+                    "subResources": [
+                      {
+                        "category": "environmental",
+                        "fabricName": "DC-blr9",
+                        "latestValue": 0,
+                        "maxValue": 0,
+                        "peakValue": 0,
+                        "resourceName": "aaad",
+                        "resourceType": "environmental",
+                        "stats": [
+                          {
+                            "maxValue": 0,
+                            "ts": "2024-09-05T07:58:42.000Z",
+                            "value": 0
+                          },
+                          {
+                            "maxValue": 0,
+                            "ts": "2024-09-05T08:03:42.000Z",
+                            "value": 0
+                          },
+                          {
+                            "maxValue": 0,
+                            "ts": "2024-09-05T08:08:43.000Z",
+                            "value": 0
+                          },
+                          {
+                            "maxValue": 0,
+                            "ts": "2024-09-05T08:13:44.000Z",
+                            "value": 0
+                          },
+                          {
+                            "maxValue": 0,
+                            "ts": "2024-09-05T08:18:44.000Z",
+                            "value": 0
+                          },
+                          {
+                            "maxValue": 0,
+                            "ts": "2024-09-05T08:23:44.000Z",
+                            "value": 0
+                          },
+                          {
+                            "maxValue": 0,
+                            "ts": "2024-09-05T08:28:46.000Z",
+                            "value": 0
+                          },
+                          {
+                            "maxValue": 0,
+                            "ts": "2024-09-05T08:33:47.000Z",
+                            "value": 0
+                          }
+                        ],
+                        "trending": "flat",
+                        "unit": "%"
+                      }
+                    ],
+                    "trending": "down",
+                    "unit": "%"
+                  }
+                ],
+                "fabricName": "SanJose",
+                "switchId": "FDO23400G79",
+                "switchName": "scale2-leaf2"
+              }
+            ]
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/utilization/switchesTrends"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: switchName
+          value: ""
+          type: query
+          description: Name of the switch
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+        - name: statName
+          value: ""
+          type: query
+          description: Stats type
+          disabled: true
+        - name: resourceMax
+          value: ""
+          type: query
+          description: Limits the number of resource entries per fabric switch
+          disabled: true
+        - name: includeSubResources
+          value: ""
+          type: query
+          description: Get the subResource statistics
+          disabled: true
+        - name: granularity
+          value: ""
+          type: query
+          description: Granularity of the values with respect to duration in minutes (m), hours (h) and days (d)
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/utilization/switchesTrends"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: switchName
+          value: ""
+          type: query
+          description: Name of the switch
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+        - name: statName
+          value: ""
+          type: query
+          description: Stats type
+          disabled: true
+        - name: resourceMax
+          value: ""
+          type: query
+          description: Limits the number of resource entries per fabric switch
+          disabled: true
+        - name: includeSubResources
+          value: ""
+          type: query
+          description: Get the subResource statistics
+          disabled: true
+        - name: granularity
+          value: ""
+          type: query
+          description: Granularity of the values with respect to duration in minutes (m), hours (h) and days (d)
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 403 Response
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/utilization/switchesTrends"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: switchName
+          value: ""
+          type: query
+          description: Name of the switch
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+        - name: statName
+          value: ""
+          type: query
+          description: Stats type
+          disabled: true
+        - name: resourceMax
+          value: ""
+          type: query
+          description: Limits the number of resource entries per fabric switch
+          disabled: true
+        - name: includeSubResources
+          value: ""
+          type: query
+          description: Get the subResource statistics
+          disabled: true
+        - name: granularity
+          value: ""
+          type: query
+          description: Granularity of the values with respect to duration in minutes (m), hours (h) and days (d)
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 404 Response
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/utilization/switchesTrends"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: switchName
+          value: ""
+          type: query
+          description: Name of the switch
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+        - name: statName
+          value: ""
+          type: query
+          description: Stats type
+          disabled: true
+        - name: resourceMax
+          value: ""
+          type: query
+          description: Limits the number of resource entries per fabric switch
+          disabled: true
+        - name: includeSubResources
+          value: ""
+          type: query
+          description: Get the subResource statistics
+          disabled: true
+        - name: granularity
+          value: ""
+          type: query
+          description: Granularity of the values with respect to duration in minutes (m), hours (h) and days (d)
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 500 Response
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/utilization/switchesTrends"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: switchName
+          value: ""
+          type: query
+          description: Name of the switch
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+        - name: statName
+          value: ""
+          type: query
+          description: Stats type
+          disabled: true
+        - name: resourceMax
+          value: ""
+          type: query
+          description: Limits the number of resource entries per fabric switch
+          disabled: true
+        - name: includeSubResources
+          value: ""
+          type: query
+          description: Get the subResource statistics
+          disabled: true
+        - name: granularity
+          value: ""
+          type: query
+          description: Granularity of the values with respect to duration in minutes (m), hours (h) and days (d)
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }

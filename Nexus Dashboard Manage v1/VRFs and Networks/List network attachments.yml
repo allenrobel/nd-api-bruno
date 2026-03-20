@@ -2,6 +2,8 @@ info:
   name: List network attachments
   type: http
   seq: 11
+  tags:
+    - VRFs and Networks
 
 http:
   method: POST
@@ -13,7 +15,7 @@ http:
       description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
       disabled: true
     - name: fabricName
-      value: fabric1
+      value: ""
       type: path
       description: Name of the fabric
     - name: offset
@@ -29,29 +31,40 @@ http:
     - name: sort
       value: ""
       type: query
-      description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+      description: |
+        Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+        Ascending order by default: "field1"
+        Specific order for one field: "field1:asc" or "field1:desc"
+        Specific order with multiple fields: "field1:asc,field2:desc"
       disabled: true
     - name: filter
       value: ""
       type: query
       description: Lucene format filter - Filter the response based on this filter field
+      disabled: true
     - name: isConsolidated
-      value: ""
+      value: "false"
       type: query
       description: When true, returns interface ranges (e.g., 'Ethernet1/1-5'). When false, returns individual interface names (e.g., 'Ethernet1/1').
-      disabled: true
     - name: includeAll
-      value: ""
+      value: "false"
       type: query
       description: When true, returns all attachments. When false, does not return attachments that were never attached.
-      disabled: true
   body:
     type: json
     data: |-
       {
-        "networkNames": [],
-        "switchFabricNames": [],
-        "switchIds": []
+        "networkNames": [
+          "MyNetwork_30000",
+          "MyNetwork_30001"
+        ],
+        "switchFabricNames": [
+          "apic1",
+          "apic2"
+        ],
+        "switchIds": [
+          "99X70W9ORI1"
+        ]
       }
   auth: inherit
 
@@ -89,29 +102,32 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
         - name: isConsolidated
-          value: ""
+          value: "false"
           type: query
           description: When true, returns interface ranges (e.g., 'Ethernet1/1-5'). When false, returns individual interface names (e.g., 'Ethernet1/1').
-          disabled: true
         - name: includeAll
-          value: ""
+          value: "false"
           type: query
           description: When true, returns all attachments. When false, does not return attachments that were never attached.
-          disabled: true
       body:
         type: json
         data: |-
           {
             "networkNames": [
-              "MyNetwork_30001",
-              "MyNetwork_30002"
+              "MyNetwork_30000",
+              "MyNetwork_30001"
             ],
             "switchFabricNames": [
               "apic1",
@@ -122,6 +138,7 @@ examples:
             ]
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -133,6 +150,7 @@ examples:
             "attachments": [
               {
                 "attach": true,
+                "displayName": "MyNetwork_30001",
                 "instanceValues": {
                   "isActive": true,
                   "sviEnabled": true
@@ -154,8 +172,9 @@ examples:
               },
               {
                 "attach": false,
-                "networkId": 30002,
-                "networkName": "MyNetwork_30002",
+                "displayName": "MyNetwork_30001",
+                "networkId": 30001,
+                "networkName": "MyNetwork_30001",
                 "peerSwitchId": "99X70W9ORI1",
                 "status": "notApplicable",
                 "switchId": "98AM4PTG8V0",
@@ -202,29 +221,32 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
         - name: isConsolidated
-          value: ""
+          value: "false"
           type: query
           description: When true, returns interface ranges (e.g., 'Ethernet1/1-5'). When false, returns individual interface names (e.g., 'Ethernet1/1').
-          disabled: true
         - name: includeAll
-          value: ""
+          value: "false"
           type: query
           description: When true, returns all attachments. When false, does not return attachments that were never attached.
-          disabled: true
       body:
         type: json
         data: |-
           {
             "networkNames": [
-              "MyNetwork_30002",
-              "MyNetwork_30001"
+              "MyNetwork_30001",
+              "MyNetwork_30000"
             ],
             "switchFabricNames": [
               "apic1",
@@ -236,6 +258,7 @@ examples:
             ]
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -247,6 +270,7 @@ examples:
             "attachments": [
               {
                 "attach": true,
+                "displayName": "MyNetwork_30001",
                 "instanceValues": {
                   "isActive": true,
                   "sviEnabled": true
@@ -268,8 +292,9 @@ examples:
               },
               {
                 "attach": false,
-                "networkId": 30002,
-                "networkName": "MyNetwork_30002",
+                "displayName": "MyNetwork_30001",
+                "networkId": 30001,
+                "networkName": "MyNetwork_30001",
                 "peerSwitchId": "99X70W9ORI1",
                 "status": "notApplicable",
                 "switchId": "98AM4PTG8V0",
@@ -317,29 +342,32 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
         - name: isConsolidated
-          value: ""
+          value: "false"
           type: query
           description: When true, returns interface ranges (e.g., 'Ethernet1/1-5'). When false, returns individual interface names (e.g., 'Ethernet1/1').
-          disabled: true
         - name: includeAll
-          value: ""
+          value: "false"
           type: query
           description: When true, returns all attachments. When false, does not return attachments that were never attached.
-          disabled: true
       body:
         type: json
         data: |-
           {
             "networkNames": [
-              "MyNetwork_30001",
-              "MyNetwork_30002"
+              "MyNetwork_30000",
+              "MyNetwork_30001"
             ],
             "switchFabricNames": [
               "apic1",
@@ -350,6 +378,7 @@ examples:
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -390,29 +419,32 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
         - name: isConsolidated
-          value: ""
+          value: "false"
           type: query
           description: When true, returns interface ranges (e.g., 'Ethernet1/1-5'). When false, returns individual interface names (e.g., 'Ethernet1/1').
-          disabled: true
         - name: includeAll
-          value: ""
+          value: "false"
           type: query
           description: When true, returns all attachments. When false, does not return attachments that were never attached.
-          disabled: true
       body:
         type: json
         data: |-
           {
             "networkNames": [
-              "MyNetwork_30002",
-              "MyNetwork_30001"
+              "MyNetwork_30001",
+              "MyNetwork_30000"
             ],
             "switchFabricNames": [
               "apic1",
@@ -424,6 +456,7 @@ examples:
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -464,29 +497,32 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
         - name: isConsolidated
-          value: ""
+          value: "false"
           type: query
           description: When true, returns interface ranges (e.g., 'Ethernet1/1-5'). When false, returns individual interface names (e.g., 'Ethernet1/1').
-          disabled: true
         - name: includeAll
-          value: ""
+          value: "false"
           type: query
           description: When true, returns all attachments. When false, does not return attachments that were never attached.
-          disabled: true
       body:
         type: json
         data: |-
           {
             "networkNames": [
-              "MyNetwork_30001",
-              "MyNetwork_30002"
+              "MyNetwork_30000",
+              "MyNetwork_30001"
             ],
             "switchFabricNames": [
               "apic1",
@@ -497,6 +533,7 @@ examples:
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -537,29 +574,32 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
         - name: isConsolidated
-          value: ""
+          value: "false"
           type: query
           description: When true, returns interface ranges (e.g., 'Ethernet1/1-5'). When false, returns individual interface names (e.g., 'Ethernet1/1').
-          disabled: true
         - name: includeAll
-          value: ""
+          value: "false"
           type: query
           description: When true, returns all attachments. When false, does not return attachments that were never attached.
-          disabled: true
       body:
         type: json
         data: |-
           {
             "networkNames": [
-              "MyNetwork_30002",
-              "MyNetwork_30001"
+              "MyNetwork_30001",
+              "MyNetwork_30000"
             ],
             "switchFabricNames": [
               "apic1",
@@ -571,6 +611,7 @@ examples:
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -611,29 +652,32 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
         - name: isConsolidated
-          value: ""
+          value: "false"
           type: query
           description: When true, returns interface ranges (e.g., 'Ethernet1/1-5'). When false, returns individual interface names (e.g., 'Ethernet1/1').
-          disabled: true
         - name: includeAll
-          value: ""
+          value: "false"
           type: query
           description: When true, returns all attachments. When false, does not return attachments that were never attached.
-          disabled: true
       body:
         type: json
         data: |-
           {
             "networkNames": [
-              "MyNetwork_30001",
-              "MyNetwork_30002"
+              "MyNetwork_30000",
+              "MyNetwork_30001"
             ],
             "switchFabricNames": [
               "apic1",
@@ -644,6 +688,7 @@ examples:
             ]
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -684,29 +729,32 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
         - name: isConsolidated
-          value: ""
+          value: "false"
           type: query
           description: When true, returns interface ranges (e.g., 'Ethernet1/1-5'). When false, returns individual interface names (e.g., 'Ethernet1/1').
-          disabled: true
         - name: includeAll
-          value: ""
+          value: "false"
           type: query
           description: When true, returns all attachments. When false, does not return attachments that were never attached.
-          disabled: true
       body:
         type: json
         data: |-
           {
             "networkNames": [
-              "MyNetwork_30002",
-              "MyNetwork_30001"
+              "MyNetwork_30001",
+              "MyNetwork_30000"
             ],
             "switchFabricNames": [
               "apic1",
@@ -718,6 +766,7 @@ examples:
             ]
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -758,29 +807,32 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
         - name: isConsolidated
-          value: ""
+          value: "false"
           type: query
           description: When true, returns interface ranges (e.g., 'Ethernet1/1-5'). When false, returns individual interface names (e.g., 'Ethernet1/1').
-          disabled: true
         - name: includeAll
-          value: ""
+          value: "false"
           type: query
           description: When true, returns all attachments. When false, does not return attachments that were never attached.
-          disabled: true
       body:
         type: json
         data: |-
           {
             "networkNames": [
-              "MyNetwork_30001",
-              "MyNetwork_30002"
+              "MyNetwork_30000",
+              "MyNetwork_30001"
             ],
             "switchFabricNames": [
               "apic1",
@@ -791,6 +843,7 @@ examples:
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -831,29 +884,32 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
         - name: isConsolidated
-          value: ""
+          value: "false"
           type: query
           description: When true, returns interface ranges (e.g., 'Ethernet1/1-5'). When false, returns individual interface names (e.g., 'Ethernet1/1').
-          disabled: true
         - name: includeAll
-          value: ""
+          value: "false"
           type: query
           description: When true, returns all attachments. When false, does not return attachments that were never attached.
-          disabled: true
       body:
         type: json
         data: |-
           {
             "networkNames": [
-              "MyNetwork_30002",
-              "MyNetwork_30001"
+              "MyNetwork_30001",
+              "MyNetwork_30000"
             ],
             "switchFabricNames": [
               "apic1",
@@ -865,6 +921,7 @@ examples:
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -905,29 +962,32 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
         - name: isConsolidated
-          value: ""
+          value: "false"
           type: query
           description: When true, returns interface ranges (e.g., 'Ethernet1/1-5'). When false, returns individual interface names (e.g., 'Ethernet1/1').
-          disabled: true
         - name: includeAll
-          value: ""
+          value: "false"
           type: query
           description: When true, returns all attachments. When false, does not return attachments that were never attached.
-          disabled: true
       body:
         type: json
         data: |-
           {
             "networkNames": [
-              "MyNetwork_30001",
-              "MyNetwork_30002"
+              "MyNetwork_30000",
+              "MyNetwork_30001"
             ],
             "switchFabricNames": [
               "apic1",
@@ -938,6 +998,7 @@ examples:
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type
@@ -978,29 +1039,32 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
         - name: isConsolidated
-          value: ""
+          value: "false"
           type: query
           description: When true, returns interface ranges (e.g., 'Ethernet1/1-5'). When false, returns individual interface names (e.g., 'Ethernet1/1').
-          disabled: true
         - name: includeAll
-          value: ""
+          value: "false"
           type: query
           description: When true, returns all attachments. When false, does not return attachments that were never attached.
-          disabled: true
       body:
         type: json
         data: |-
           {
             "networkNames": [
-              "MyNetwork_30002",
-              "MyNetwork_30001"
+              "MyNetwork_30001",
+              "MyNetwork_30000"
             ],
             "switchFabricNames": [
               "apic1",
@@ -1012,6 +1076,7 @@ examples:
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

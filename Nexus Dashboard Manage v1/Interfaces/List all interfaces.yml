@@ -2,6 +2,8 @@ info:
   name: List all interfaces
   type: http
   seq: 18
+  tags:
+    - Interfaces
 
 http:
   method: GET
@@ -33,18 +35,24 @@ http:
     - name: sort
       value: ""
       type: query
-      description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+      description: |
+        Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+        Ascending order by default: "field1"
+        Specific order for one field: "field1:asc" or "field1:desc"
+        Specific order with multiple fields: "field1:asc,field2:desc"
       disabled: true
     - name: filter
       value: ""
       type: query
       description: Lucene format filter - Filter the response based on this filter field
+      disabled: true
     - name: networkName
       value: ""
       type: query
       description: Network name
+      disabled: true
     - name: configOnly
-      value: ""
+      value: "false"
       type: query
       description: Get configuration data alone or with operational data
   auth: inherit
@@ -56,7 +64,7 @@ settings:
   maxRedirects: 5
 
 examples:
-  - name: getInterfaceExamples
+  - name: getInterface
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/interfaces"
       method: GET
@@ -87,21 +95,28 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
         - name: networkName
           value: ""
           type: query
           description: Network name
+          disabled: true
         - name: configOnly
-          value: ""
+          value: "false"
           type: query
           description: Get configuration data alone or with operational data
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -115,9 +130,9 @@ examples:
                 "configData": {
                   "mode": "access",
                   "networkOS": {
-                    "networkOSType": "nexus",
+                    "networkOSType": "nx-os",
                     "policy": {
-                      "accessVlanId": 100,
+                      "accessVlan": 100,
                       "adminState": true,
                       "bpduGuard": "enable",
                       "cdp": true,
@@ -130,7 +145,7 @@ examples:
                       "orphanPort": true,
                       "pfc": false,
                       "policyType": "accessHost",
-                      "portTypeFast": true,
+                      "portTypeEdgeTrunk": true,
                       "qos": false,
                       "qosPolicy": "Custom QoS Policy associated with the interface (must be defined apriori)",
                       "queueingPolicy": "Custom Queuing Policy associated with the interface (must be defined apriori)",
@@ -149,13 +164,142 @@ examples:
                   "speed": "25Gb",
                   "vrfName": "default"
                 },
-                "switchId": "FDO22412H7U"
+                "switchId": "FDO222425SE"
+              },
+              {
+                "configData": {
+                  "mode": "trunk",
+                  "networkOS": {
+                    "networkOSType": "nx-os",
+                    "policy": {
+                      "adminState": true,
+                      "allowedVlans": "none",
+                      "bpduFilter": "default",
+                      "bpduGuard": "enable",
+                      "cdp": true,
+                      "copyDescription": false,
+                      "duplexMode": "auto",
+                      "lacpPortPriority": 32768,
+                      "lacpRate": "normal",
+                      "lacpSuspend": false,
+                      "linkType": "auto",
+                      "monitor": false,
+                      "mtu": "jumbo",
+                      "negotiateAuto": true,
+                      "netflow": false,
+                      "orphanPort": false,
+                      "pfc": false,
+                      "policyType": "trunkPoHost",
+                      "portChannelMode": "active",
+                      "portTypeFast": true,
+                      "ptp": false,
+                      "qos": false,
+                      "speed": "auto",
+                      "stormControl": false,
+                      "stormControlAction": "default",
+                      "vlanMapping": false
+                    }
+                  }
+                },
+                "interfaceName": "port-channel503",
+                "interfaceType": "portChannel",
+                "operData": {
+                  "adminStatus": "unknown",
+                  "operationalDescription": "Not discovered",
+                  "operationalStatus": "unknown",
+                  "portChannelId": 500,
+                  "switchName": "N9K-42",
+                  "vlanRange": "3"
+                },
+                "switchId": "FDO222425SE"
+              },
+              {
+                "configData": {
+                  "mode": "managed",
+                  "networkOS": {
+                    "networkOSType": "nx-os",
+                    "policy": {
+                      "adminState": true,
+                      "advertiseSubnetInUnderlay": false,
+                      "hsrpGroup": 1,
+                      "ipRedirects": true,
+                      "netflow": false,
+                      "pimDrPriority": 1,
+                      "pimSparse": false,
+                      "policyType": "svi",
+                      "preempt": false
+                    }
+                  }
+                },
+                "interfaceName": "vlan3",
+                "interfaceType": "svi",
+                "operData": {
+                  "adminStatus": "unknown",
+                  "operationalDescription": "Not discovered",
+                  "operationalStatus": "unknown",
+                  "portChannelId": 500,
+                  "switchName": "N9K-42",
+                  "vlanRange": "5"
+                },
+                "switchId": "FDO222425SE"
+              },
+              {
+                "configData": {
+                  "mode": "trunk",
+                  "networkOS": {
+                    "networkOSType": "nx-os",
+                    "policy": {
+                      "adminState": true,
+                      "bpduFilter": "default",
+                      "bpduGuard": "enable",
+                      "cdp": true,
+                      "copyDescription": false,
+                      "duplexMode": "auto",
+                      "lacpPortPriority": 32768,
+                      "lacpRate": "normal",
+                      "lacpSuspend": false,
+                      "lacpVpcConvergence": false,
+                      "linkType": "auto",
+                      "mirrorConfig": false,
+                      "mtu": "jumbo",
+                      "negotiateAuto": true,
+                      "netflow": false,
+                      "peer1AllowedVlans": "none",
+                      "peer1PortChannelId": 1,
+                      "peer2AllowedVlans": "none",
+                      "peer2PortChannelId": 1,
+                      "peerSwitchId": "FDO22240HJP",
+                      "pfc": false,
+                      "policyType": "trunkVpcHost",
+                      "portChannelMode": "active",
+                      "portTypeFast": true,
+                      "ptp": false,
+                      "qos": false,
+                      "speed": "auto",
+                      "stormControl": false,
+                      "stormControlAction": "default",
+                      "vlanMapping": false
+                    }
+                  }
+                },
+                "interfaceName": "vpc1",
+                "interfaceType": "vpc",
+                "operData": {
+                  "adminStatus": "unknown",
+                  "operationalDescription": "Not discovered",
+                  "operationalStatus": "unknown",
+                  "peerSwitchName": "N9K-41",
+                  "portChannelId": 500,
+                  "switchName": "N9K-42",
+                  "vlanRange": "5"
+                },
+                "switchId": "FDO222425SE"
               }
             ],
             "meta": {
               "counts": {
                 "remaining": 0,
-                "total": 1
+                "total": 5
               }
             }
           }
@@ -191,21 +335,28 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
         - name: networkName
           value: ""
           type: query
           description: Network name
+          disabled: true
         - name: configOnly
-          value: ""
+          value: "false"
           type: query
           description: Get configuration data alone or with operational data
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -250,21 +401,28 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
         - name: networkName
           value: ""
           type: query
           description: Network name
+          disabled: true
         - name: configOnly
-          value: ""
+          value: "false"
           type: query
           description: Get configuration data alone or with operational data
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -309,21 +467,28 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
         - name: networkName
           value: ""
           type: query
           description: Network name
+          disabled: true
         - name: configOnly
-          value: ""
+          value: "false"
           type: query
           description: Get configuration data alone or with operational data
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -368,21 +533,28 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
         - name: networkName
           value: ""
           type: query
           description: Network name
+          disabled: true
         - name: configOnly
-          value: ""
+          value: "false"
           type: query
           description: Get configuration data alone or with operational data
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -427,21 +599,28 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
         - name: networkName
           value: ""
           type: query
           description: Network name
+          disabled: true
         - name: configOnly
-          value: ""
+          value: "false"
           type: query
           description: Get configuration data alone or with operational data
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

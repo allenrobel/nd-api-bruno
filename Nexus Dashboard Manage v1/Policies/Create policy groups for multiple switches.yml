@@ -2,6 +2,8 @@ info:
   name: Create policy groups for multiple switches
   type: http
   seq: 10
+  tags:
+    - Policies
 
 http:
   method: POST
@@ -25,7 +27,38 @@ http:
     type: json
     data: |-
       {
-        "policyGroups": []
+        "policyGroups": [
+          {
+            "description": "Create group policy to configure LACP (Link Aggregation Control Protocol) on switches",
+            "entityName": "SWITCH",
+            "entityType": "switch",
+            "priority": 500,
+            "source": "",
+            "switchIds": [
+              "FDO25031SY4",
+              "FDO245206N5"
+            ],
+            "templateInputs": {
+              "featureName": "lacp"
+            },
+            "templateName": "feature_enable"
+          },
+          {
+            "description": "Create group policy to configure LACP (Link Aggregation Control Protocol) on switches",
+            "entityName": "SWITCH",
+            "entityType": "switch",
+            "priority": 500,
+            "source": "",
+            "switchIds": [
+              "FDO25",
+              "FDO"
+            ],
+            "templateInputs": {
+              "featureName": "lacp"
+            },
+            "templateName": "feature_enable"
+          }
+        ]
       }
   auth: inherit
 
@@ -94,6 +127,7 @@ examples:
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -186,6 +220,7 @@ examples:
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -256,6 +291,7 @@ examples:
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -326,6 +362,7 @@ examples:
             ]
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -396,6 +433,7 @@ examples:
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -466,6 +504,7 @@ examples:
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

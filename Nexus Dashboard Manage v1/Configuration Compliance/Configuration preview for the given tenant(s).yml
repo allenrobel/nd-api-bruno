@@ -2,6 +2,8 @@ info:
   name: Configuration preview for the given tenant(s)
   type: http
   seq: 6
+  tags:
+    - Configuration Compliance
 
 http:
   method: POST
@@ -25,7 +27,9 @@ http:
     type: json
     data: |-
       {
-        "tenantNames": []
+        "tenantNames": [
+          "tenant1"
+        ]
       }
   auth: inherit
 
@@ -36,6 +40,125 @@ settings:
   maxRedirects: 5
 
 examples:
+  - name: Get configuration preview for tenant1 on a switch with no tenant policies with showBrief passed as true (Configuration preview for a single tenant)
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/tenantActions/preview"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: showBrief
+          value: ""
+          type: query
+          description: If true, API provides line count of the pending config. If false, detailed output is provided.
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "tenantNames": [
+              "tenant1"
+            ]
+          }
+    response:
+      status: 207
+      statusText: Multi-Status
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "items": [
+              {
+                "addConfigCount": 0,
+                "briefCount": 0,
+                "deployMode": "config",
+                "diffConfigs": null,
+                "entityCollection": [],
+                "expectedConfigs": [],
+                "fabricName": "MyFabric",
+                "pendingConfigs": [],
+                "removeConfigCount": 0,
+                "runningConfigs": [],
+                "status": "notApplicable",
+                "statusMessage": "No policies found for tenant tenant1",
+                "switchId": "SAL18432P2T",
+                "switchIp": "1.1.1.1",
+                "switchName": "Leaf1",
+                "switchRole": "leaf",
+                "tenantName": "tenant1"
+              }
+            ]
+          }
+  - name: Get configuration preview for tenant1 on a switch with no tenant policies with showBrief passed as true (Configuration preview for multiple tenants)
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/tenantActions/preview"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: showBrief
+          value: ""
+          type: query
+          description: If true, API provides line count of the pending config. If false, detailed output is provided.
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "tenantNames": [
+              "tenant1",
+              "tenant2"
+            ]
+          }
+    response:
+      status: 207
+      statusText: Multi-Status
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "items": [
+              {
+                "addConfigCount": 0,
+                "briefCount": 0,
+                "deployMode": "config",
+                "diffConfigs": null,
+                "entityCollection": [],
+                "expectedConfigs": [],
+                "fabricName": "MyFabric",
+                "pendingConfigs": [],
+                "removeConfigCount": 0,
+                "runningConfigs": [],
+                "status": "notApplicable",
+                "statusMessage": "No policies found for tenant tenant1",
+                "switchId": "SAL18432P2T",
+                "switchIp": "1.1.1.1",
+                "switchName": "Leaf1",
+                "switchRole": "leaf",
+                "tenantName": "tenant1"
+              }
+            ]
+          }
   - name: Get configuration preview for tenant1 in the fabric MyFabric
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/tenantActions/preview"
@@ -64,6 +187,7 @@ examples:
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -74,7 +198,10 @@ examples:
           {
             "items": [
               {
+                "addConfigCount": 0,
+                "briefCount": 0,
                 "deployMode": "config",
+                "diffConfigs": null,
                 "entityCollection": [
                   {
                     "commands": [
@@ -130,6 +257,7 @@ examples:
                   "  description new description",
                   "  ip router ospf UNDERLAY area 0.0.0.0"
                 ],
+                "removeConfigCount": 0,
                 "runningConfigs": [
                   "hostname n9kv-89",
                   "interface loopback3",
@@ -151,7 +279,7 @@ examples:
               }
             ]
           }
-  - name: Get configuration preview for tenant in the fabric ACI MyAciFabric for vrf2 added and vrf1 deleted. The ACI fabric configurations are in json format of management-objects (Configuration preview for a single tenant)
+  - name: Get a configuration preview for the specified tenant in the fabric, showing added and deleted VRFs. The ACI fabric configurations are returned in JSON format as management objects. (Configuration preview for a single tenant)
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/tenantActions/preview"
       method: POST
@@ -179,6 +307,7 @@ examples:
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -206,7 +335,7 @@ examples:
               }
             ]
           }
-  - name: Get configuration preview for tenant in the fabric ACI MyAciFabric for vrf2 added and vrf1 deleted. The ACI fabric configurations are in json format of management-objects (Configuration preview for multiple tenants)
+  - name: Get a configuration preview for the specified tenant in the fabric, showing added and deleted VRFs. The ACI fabric configurations are returned in JSON format as management objects. (Configuration preview for multiple tenants)
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/tenantActions/preview"
       method: POST
@@ -235,6 +364,7 @@ examples:
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -291,6 +421,7 @@ examples:
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -304,9 +435,10 @@ examples:
                 "addConfigCount": 2,
                 "briefCount": 7,
                 "deployMode": "config",
+                "diffConfigs": null,
                 "entityCollection": [],
                 "expectedConfigs": [],
-                "fabricName": "fab-1",
+                "fabricName": "MyFabric",
                 "pendingConfigs": [],
                 "removeConfigCount": 4,
                 "runningConfigs": [],
@@ -349,6 +481,7 @@ examples:
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -391,6 +524,7 @@ examples:
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -432,6 +566,7 @@ examples:
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -474,6 +609,7 @@ examples:
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -515,6 +651,7 @@ examples:
             ]
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -557,6 +694,7 @@ examples:
             ]
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -598,6 +736,7 @@ examples:
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -640,6 +779,7 @@ examples:
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -681,6 +821,7 @@ examples:
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type
@@ -723,6 +864,7 @@ examples:
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

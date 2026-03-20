@@ -2,6 +2,8 @@ info:
   name: Create a new AppDynamic Integration
   type: http
   seq: 3
+  tags:
+    - Integrations
 
 http:
   method: POST
@@ -16,19 +18,18 @@ http:
     type: json
     data: |-
       {
-        "integrationName": "",
-        "integrationId": "",
-        "ip": "",
-        "port": "",
-        "associatedFabrics": [],
-        "username": "",
-        "password": "",
-        "account": "",
-        "isSecure": false,
+        "integrationName": "Integ1",
+        "ip": "172.23.48.41",
+        "associatedFabrics": [
+          "fabric1"
+        ],
+        "username": "admin",
+        "password": "admin123!",
+        "port": "8090",
+        "account": "acc1",
+        "isSecure": true,
         "useProxy": false,
-        "status": "",
-        "lastActiveDate": "",
-        "type": ""
+        "type": "appDynamics"
       }
   auth: inherit
 
@@ -68,6 +69,7 @@ examples:
             "type": "appDynamics"
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -118,6 +120,7 @@ examples:
             "type": "appDynamics"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -159,6 +162,7 @@ examples:
             "type": "appDynamics"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -200,6 +204,7 @@ examples:
             "type": "appDynamics"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -241,6 +246,7 @@ examples:
             "type": "appDynamics"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

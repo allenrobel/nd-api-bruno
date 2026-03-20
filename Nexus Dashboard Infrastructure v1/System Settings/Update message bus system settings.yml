@@ -2,6 +2,8 @@ info:
   name: Update message bus system settings
   type: http
   seq: 39
+  tags:
+    - System Settings
 
 http:
   method: PUT
@@ -17,7 +19,13 @@ http:
     data: |-
       {
         "messageBusConfigurations": [
-          {}
+          {
+            "ip": "192.168.1.100",
+            "mode": "unsecured",
+            "name": "KafkaConfig1",
+            "port": 9092,
+            "topic": "Topic1"
+          }
         ]
       }
   auth: inherit
@@ -55,6 +63,7 @@ examples:
             ]
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -99,6 +108,7 @@ examples:
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -137,6 +147,7 @@ examples:
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -175,6 +186,7 @@ examples:
             ]
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -213,6 +225,7 @@ examples:
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -251,6 +264,7 @@ examples:
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

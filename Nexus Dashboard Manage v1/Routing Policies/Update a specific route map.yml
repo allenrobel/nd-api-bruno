@@ -2,6 +2,8 @@ info:
   name: Update a specific route map
   type: http
   seq: 40
+  tags:
+    - Routing Policies
 
 http:
   method: PUT
@@ -24,16 +26,27 @@ http:
     type: json
     data: |-
       {
-        "name": "",
-        "lastUpdateTimestamp": "",
+        "name": "MY-BGP-ROUTEMAP-1",
+        "lastUpdateTimestamp": "2021-01-01T00:00:00Z",
         "entries": [
           {
-            "sequenceNumber": 0,
-            "action": "",
-            "ruleEntries": []
+            "sequenceNumber": 10,
+            "action": "permit",
+            "ruleEntries": [
+              {
+                "ruleType": "matchIpv4Acl",
+                "accessControlListName": "acl1"
+              },
+              {
+                "ruleType": "setIpv4NextHop",
+                "nextHopIpCollection": [
+                  "10.10.10.1",
+                  "10.10.10.2"
+                ]
+              }
+            ]
           }
-        ],
-        "tenantName": ""
+        ]
       }
   auth: inherit
 
@@ -90,6 +103,7 @@ examples:
             "name": "MY-BGP-ROUTEMAP-1"
           }
     response:
+      status: 204
       statusText: No Content
       body:
         type: text
@@ -141,6 +155,7 @@ examples:
             "tenantName": "tenantSales"
           }
     response:
+      status: 204
       statusText: No Content
       body:
         type: text
@@ -191,6 +206,7 @@ examples:
             "name": "MY-BGP-ROUTEMAP-1"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -250,6 +266,7 @@ examples:
             "tenantName": "tenantSales"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -308,6 +325,7 @@ examples:
             "name": "MY-BGP-ROUTEMAP-1"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -367,6 +385,7 @@ examples:
             "tenantName": "tenantSales"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -425,6 +444,7 @@ examples:
             "name": "MY-BGP-ROUTEMAP-1"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -484,6 +504,7 @@ examples:
             "tenantName": "tenantSales"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -542,6 +563,7 @@ examples:
             "name": "MY-BGP-ROUTEMAP-1"
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -601,6 +623,7 @@ examples:
             "tenantName": "tenantSales"
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -659,6 +682,7 @@ examples:
             "name": "MY-BGP-ROUTEMAP-1"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type
@@ -718,6 +742,7 @@ examples:
             "tenantName": "tenantSales"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

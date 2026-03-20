@@ -2,6 +2,8 @@ info:
   name: List all available certificates and their metadata
   type: http
   seq: 1
+  tags:
+    - Certificate Management
 
 http:
   method: GET
@@ -13,13 +15,25 @@ http:
       description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
       disabled: true
     - name: certificateType
-      value: ""
+      value: ca
       type: query
       description: Certificate type
+      disabled: true
+    - name: certificateType
+      value: system
+      type: query
+      description: Certificate type
+      disabled: true
+    - name: certificateType
+      value: fabric
+      type: query
+      description: Certificate type
+      disabled: true
     - name: attachedType
       value: ""
       type: query
       description: Attached feature or switch name type
+      disabled: true
   auth: inherit
 
 settings:
@@ -41,14 +55,27 @@ examples:
           description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
           disabled: true
         - name: certificateType
-          value: ""
+          value: ca
           type: query
           description: Certificate type
+          disabled: true
+        - name: certificateType
+          value: system
+          type: query
+          description: Certificate type
+          disabled: true
+        - name: certificateType
+          value: fabric
+          type: query
+          description: Certificate type
+          disabled: true
         - name: attachedType
           value: ""
           type: query
           description: Attached feature or switch name type
+          disabled: true
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -92,14 +119,27 @@ examples:
           description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
           disabled: true
         - name: certificateType
-          value: ""
+          value: ca
           type: query
           description: Certificate type
+          disabled: true
+        - name: certificateType
+          value: system
+          type: query
+          description: Certificate type
+          disabled: true
+        - name: certificateType
+          value: fabric
+          type: query
+          description: Certificate type
+          disabled: true
         - name: attachedType
           value: ""
           type: query
           description: Attached feature or switch name type
+          disabled: true
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -124,14 +164,27 @@ examples:
           description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
           disabled: true
         - name: certificateType
-          value: ""
+          value: ca
           type: query
           description: Certificate type
+          disabled: true
+        - name: certificateType
+          value: system
+          type: query
+          description: Certificate type
+          disabled: true
+        - name: certificateType
+          value: fabric
+          type: query
+          description: Certificate type
+          disabled: true
         - name: attachedType
           value: ""
           type: query
           description: Attached feature or switch name type
+          disabled: true
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -156,14 +209,27 @@ examples:
           description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
           disabled: true
         - name: certificateType
-          value: ""
+          value: ca
           type: query
           description: Certificate type
+          disabled: true
+        - name: certificateType
+          value: system
+          type: query
+          description: Certificate type
+          disabled: true
+        - name: certificateType
+          value: fabric
+          type: query
+          description: Certificate type
+          disabled: true
         - name: attachedType
           value: ""
           type: query
           description: Attached feature or switch name type
+          disabled: true
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -188,14 +254,27 @@ examples:
           description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
           disabled: true
         - name: certificateType
-          value: ""
+          value: ca
           type: query
           description: Certificate type
+          disabled: true
+        - name: certificateType
+          value: system
+          type: query
+          description: Certificate type
+          disabled: true
+        - name: certificateType
+          value: fabric
+          type: query
+          description: Certificate type
+          disabled: true
         - name: attachedType
           value: ""
           type: query
           description: Attached feature or switch name type
+          disabled: true
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

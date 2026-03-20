@@ -2,6 +2,8 @@ info:
   name: Bulk delete VRFs
   type: http
   seq: 23
+  tags:
+    - VRFs and Networks
 
 http:
   method: POST
@@ -13,7 +15,7 @@ http:
       description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
       disabled: true
     - name: fabricName
-      value: fabric1
+      value: ""
       type: path
       description: Name of the fabric
     - name: ticketId
@@ -25,7 +27,10 @@ http:
     type: json
     data: |-
       {
-        "vrfNames": []
+        "vrfNames": [
+          "vrf1",
+          "vrf2"
+        ]
       }
   auth: inherit
 
@@ -65,6 +70,7 @@ examples:
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -109,6 +115,7 @@ examples:
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -159,6 +166,7 @@ examples:
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -213,6 +221,7 @@ examples:
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -255,6 +264,7 @@ examples:
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -297,6 +307,7 @@ examples:
             ]
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -339,6 +350,7 @@ examples:
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -381,6 +393,7 @@ examples:
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

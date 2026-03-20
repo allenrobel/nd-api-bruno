@@ -2,6 +2,8 @@ info:
   name: Retrieve a rule based on its ID
   type: http
   seq: 7
+  tags:
+    - Anomaly Settings
 
 http:
   method: GET
@@ -20,10 +22,12 @@ http:
       value: ""
       type: query
       description: Start date of the rule in order to access a specific rule from compliance reports
+      disabled: true
     - name: endDate
       value: ""
       type: query
       description: End date of the rule in order to access a specific rule from compliance reports
+      disabled: true
   auth: inherit
 
 settings:
@@ -52,11 +56,14 @@ examples:
           value: ""
           type: query
           description: Start date of the rule in order to access a specific rule from compliance reports
+          disabled: true
         - name: endDate
           value: ""
           type: query
           description: End date of the rule in order to access a specific rule from compliance reports
+          disabled: true
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -321,11 +328,14 @@ examples:
           value: ""
           type: query
           description: Start date of the rule in order to access a specific rule from compliance reports
+          disabled: true
         - name: endDate
           value: ""
           type: query
           description: End date of the rule in order to access a specific rule from compliance reports
+          disabled: true
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -357,11 +367,14 @@ examples:
           value: ""
           type: query
           description: Start date of the rule in order to access a specific rule from compliance reports
+          disabled: true
         - name: endDate
           value: ""
           type: query
           description: End date of the rule in order to access a specific rule from compliance reports
+          disabled: true
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -393,11 +406,14 @@ examples:
           value: ""
           type: query
           description: Start date of the rule in order to access a specific rule from compliance reports
+          disabled: true
         - name: endDate
           value: ""
           type: query
           description: End date of the rule in order to access a specific rule from compliance reports
+          disabled: true
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -429,11 +445,14 @@ examples:
           value: ""
           type: query
           description: Start date of the rule in order to access a specific rule from compliance reports
+          disabled: true
         - name: endDate
           value: ""
           type: query
           description: End date of the rule in order to access a specific rule from compliance reports
+          disabled: true
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -465,11 +484,14 @@ examples:
           value: ""
           type: query
           description: Start date of the rule in order to access a specific rule from compliance reports
+          disabled: true
         - name: endDate
           value: ""
           type: query
           description: End date of the rule in order to access a specific rule from compliance reports
+          disabled: true
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

@@ -2,6 +2,8 @@ info:
   name: Batch deletion of one or more CSR
   type: http
   seq: 18
+  tags:
+    - Certificate Management
 
 http:
   method: POST
@@ -18,31 +20,10 @@ http:
       {
         "csr": [
           {
-            "certificateRole": [],
-            "creationTime": "",
-            "csrName": "",
-            "extensions": "",
-            "key": {
-              "keyDigest": [],
-              "keySize": [],
-              "keyType": []
-            },
-            "san": {
-              "domainName": [],
-              "emailAddresses": [],
-              "ipAddress": []
-            },
-            "status": "",
-            "statusMessage": "",
-            "subject": {
-              "commonName": "",
-              "country": "",
-              "email": "",
-              "location": "",
-              "organization": "",
-              "organizationalUnit": "",
-              "state": ""
-            }
+            "csrName": "web-server.csr"
+          },
+          {
+            "csrName": "fabric-switch.csr"
           }
         ]
       }
@@ -80,6 +61,7 @@ examples:
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -129,6 +111,7 @@ examples:
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -166,6 +149,7 @@ examples:
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -203,6 +187,7 @@ examples:
             ]
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -240,6 +225,7 @@ examples:
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

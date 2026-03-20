@@ -1,0 +1,291 @@
+info:
+  name: Get correlated nodes for the given prefix
+  type: http
+  seq: 26
+  tags:
+    - Network Connectivity Resources
+
+http:
+  method: GET
+  url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivity/routes/rootCause/nodes"
+  params:
+    - name: fabricName
+      value: ""
+      type: query
+      description: Name of the fabric
+    - name: timestamp
+      value: ""
+      type: query
+      description: Timestamp of the requested information
+    - name: prefix
+      value: ""
+      type: query
+      description: Deleted prefix IP
+    - name: clusterName
+      value: ""
+      type: query
+      description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+      disabled: true
+    - name: switchName
+      value: ""
+      type: query
+      description: Name of the switch
+      disabled: true
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: OK
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivity/routes/rootCause/nodes"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: timestamp
+          value: ""
+          type: query
+          description: Timestamp of the requested information
+        - name: prefix
+          value: ""
+          type: query
+          description: Deleted prefix IP
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: switchName
+          value: ""
+          type: query
+          description: Name of the switch
+          disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "0": {
+              "value": {
+                "entries": [
+                  {
+                    "anomalyId": "MOD903323769357",
+                    "anomalyStatus": "Cleared",
+                    "anomalyDescription": "L3 OSPF neighbor connected to spine-1 is down",
+                    "category": "Connectivity",
+                    "correlationTime": "January 1, 2023 10:05AM (PST)",
+                    "detectionTime": "January 1, 2023 10AM (PST)",
+                    "gnid": "DC-tbmix-dcnm|anom|MOD903323769357|1696634695836",
+                    "impactCount": 1,
+                    "isRoot": true,
+                    "mnemonicTitle": "Switch Down",
+                    "nodeType": "Anomaly",
+                    "severity": "Critical",
+                    "fabricName": "DC-tbmix-dcnm"
+                  },
+                  {
+                    "anomalyId": "MOD903323769363",
+                    "anomalyStatus": "Anomaly",
+                    "anomalyDescription": "Interface eth1/1 down on switch-201 is down",
+                    "category": "Connectivity",
+                    "correlationTime": "January 1, 2023 10:05AM (PST)",
+                    "detectionTime": "January 1, 2023 10:04AM (PST)",
+                    "gnid": "DC-tbmix-dcnm|anom|MOD903323769363|1696634695886",
+                    "impactCount": 0,
+                    "isRoot": false,
+                    "mnemonicTitle": "Interface Down",
+                    "severity": "Major",
+                    "fabricName": "DC-tbmix-dcnm",
+                    "status": "Active"
+                  }
+                ],
+                "meta": {
+                  "counts": {
+                    "total": 2,
+                    "remaining": 0
+                  }
+                }
+              }
+            }
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivity/routes/rootCause/nodes"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: timestamp
+          value: ""
+          type: query
+          description: Timestamp of the requested information
+        - name: prefix
+          value: ""
+          type: query
+          description: Deleted prefix IP
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: switchName
+          value: ""
+          type: query
+          description: Name of the switch
+          disabled: true
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivity/routes/rootCause/nodes"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: timestamp
+          value: ""
+          type: query
+          description: Timestamp of the requested information
+        - name: prefix
+          value: ""
+          type: query
+          description: Deleted prefix IP
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: switchName
+          value: ""
+          type: query
+          description: Name of the switch
+          disabled: true
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 403 Response
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivity/routes/rootCause/nodes"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: timestamp
+          value: ""
+          type: query
+          description: Timestamp of the requested information
+        - name: prefix
+          value: ""
+          type: query
+          description: Deleted prefix IP
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: switchName
+          value: ""
+          type: query
+          description: Name of the switch
+          disabled: true
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 500 Response
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivity/routes/rootCause/nodes"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: timestamp
+          value: ""
+          type: query
+          description: Timestamp of the requested information
+        - name: prefix
+          value: ""
+          type: query
+          description: Deleted prefix IP
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: switchName
+          value: ""
+          type: query
+          description: Name of the switch
+          disabled: true
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }

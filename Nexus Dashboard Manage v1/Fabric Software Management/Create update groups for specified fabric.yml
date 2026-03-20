@@ -1,7 +1,9 @@
 info:
   name: Create update groups for specified fabric
   type: http
-  seq: 29
+  seq: 23
+  tags:
+    - Fabric Software Management
 
 http:
   method: POST
@@ -22,27 +24,70 @@ http:
       {
         "updateGroups": [
           {
-            "analysis": "",
-            "contingency": "",
-            "execution": "",
+            "analysis": "snapshot",
+            "contingency": "continue",
+            "execution": "serial",
             "installImageData": {
-              "epldImageName": "",
-              "installPackageNames": [],
-              "nosImageName": "",
-              "uninstallPackage": false
+              "epldImageName": "n9000-epld.9.3.13.img",
+              "installPackageNames": [
+                "nxos.CSCwh77779-n9k_ALL-1.0.0-9.3.13.lib32_n9000.rpm",
+                "nxos.CSCwf47127-n9k_ALL-1.0.0-9.3.13.lib32_n9000.rpm"
+              ],
+              "nosImageName": "nxos.9.3.13.bin",
+              "uninstallPackage": true
             },
-            "installationOrderDevices": [],
-            "isDisruptiveUpdate": false,
-            "isMaintenance": false,
-            "latestRecommendedVersion": "",
-            "recommendedVersion": "",
-            "reportSelection": "",
-            "reports": "",
-            "updateGroupName": "",
-            "updateGroupSwitches": [],
+            "installationOrderDevices": [
+              "FDO2338083P",
+              "FDO24020JNK"
+            ],
+            "isDisruptiveUpdate": true,
+            "isMaintenance": true,
+            "latestRecommendedVersion": "9.3(15)",
+            "recommendedVersion": "9.3(14)",
+            "reportSelection": "advanced",
+            "reports": "noReport",
+            "updateGroupName": "vxlanFabric_N9K_leaf",
+            "updateGroupSwitches": [
+              "FDO24020JNK",
+              "FDO2338083P"
+            ],
             "updateReportChecks": [
               {
-                "reportCheckName": ""
+                "reportCheckName": "sh_version"
+              }
+            ]
+          },
+          {
+            "analysis": "snapshot",
+            "contingency": "continue",
+            "execution": "parallel",
+            "installImageData": {
+              "epldImageName": "n9000-epld.9.3.13.img",
+              "installPackageNames": [
+                "nxos.CSCwh77779-n9k_ALL-1.0.0-9.3.13.lib32_n9000.rpm",
+                "nxos.CSCwf47127-n9k_ALL-1.0.0-9.3.13.lib32_n9000.rpm"
+              ],
+              "nosImageName": "nxos.9.3.13.bin",
+              "uninstallPackage": true
+            },
+            "installationOrderDevices": [
+              "FDO24020JJJ",
+              "FDO23380888"
+            ],
+            "isDisruptiveUpdate": true,
+            "isMaintenance": true,
+            "latestRecommendedVersion": "9.3(15)",
+            "recommendedVersion": "9.3(14)",
+            "reportSelection": "advanced",
+            "reports": "noReport",
+            "updateGroupName": "vxlanFabric_N9K_spine",
+            "updateGroupSwitches": [
+              "FDO24020JJJ",
+              "FDO23380888"
+            ],
+            "updateReportChecks": [
+              {
+                "reportCheckName": "sh_version"
               }
             ]
           }
@@ -148,6 +193,7 @@ examples:
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -260,6 +306,7 @@ examples:
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -363,6 +410,7 @@ examples:
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -466,6 +514,7 @@ examples:
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -569,6 +618,7 @@ examples:
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

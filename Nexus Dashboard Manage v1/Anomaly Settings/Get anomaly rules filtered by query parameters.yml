@@ -2,6 +2,8 @@ info:
   name: Get anomaly rules filtered by query parameters
   type: http
   seq: 24
+  tags:
+    - Anomaly Settings
 
 http:
   method: GET
@@ -23,12 +25,32 @@ http:
       description: Category type filter
       disabled: true
     - name: pathApplicablePlatforms
-      value: ""
+      value: aci
+      type: query
+      description: Applicable Platforms
+      disabled: true
+    - name: pathApplicablePlatforms
+      value: nx-os
+      type: query
+      description: Applicable Platforms
+      disabled: true
+    - name: pathApplicablePlatforms
+      value: all
       type: query
       description: Applicable Platforms
       disabled: true
     - name: status
-      value: ""
+      value: default
+      type: query
+      description: Status
+      disabled: true
+    - name: status
+      value: customized
+      type: query
+      description: Status
+      disabled: true
+    - name: status
+      value: notAvailable
       type: query
       description: Status
       disabled: true
@@ -45,7 +67,11 @@ http:
     - name: sort
       value: ""
       type: query
-      description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+      description: |
+        Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+        Ascending order by default: "field1"
+        Specific order for one field: "field1:asc" or "field1:desc"
+        Specific order with multiple fields: "field1:asc,field2:desc"
       disabled: true
   auth: inherit
 
@@ -78,12 +104,32 @@ examples:
           description: Category type filter
           disabled: true
         - name: pathApplicablePlatforms
-          value: ""
+          value: aci
+          type: query
+          description: Applicable Platforms
+          disabled: true
+        - name: pathApplicablePlatforms
+          value: nx-os
+          type: query
+          description: Applicable Platforms
+          disabled: true
+        - name: pathApplicablePlatforms
+          value: all
           type: query
           description: Applicable Platforms
           disabled: true
         - name: status
-          value: ""
+          value: default
+          type: query
+          description: Status
+          disabled: true
+        - name: status
+          value: customized
+          type: query
+          description: Status
+          disabled: true
+        - name: status
+          value: notAvailable
           type: query
           description: Status
           disabled: true
@@ -100,9 +146,14 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -168,12 +219,32 @@ examples:
           description: Category type filter
           disabled: true
         - name: pathApplicablePlatforms
-          value: ""
+          value: aci
+          type: query
+          description: Applicable Platforms
+          disabled: true
+        - name: pathApplicablePlatforms
+          value: nx-os
+          type: query
+          description: Applicable Platforms
+          disabled: true
+        - name: pathApplicablePlatforms
+          value: all
           type: query
           description: Applicable Platforms
           disabled: true
         - name: status
-          value: ""
+          value: default
+          type: query
+          description: Status
+          disabled: true
+        - name: status
+          value: customized
+          type: query
+          description: Status
+          disabled: true
+        - name: status
+          value: notAvailable
           type: query
           description: Status
           disabled: true
@@ -190,9 +261,14 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -227,12 +303,32 @@ examples:
           description: Category type filter
           disabled: true
         - name: pathApplicablePlatforms
-          value: ""
+          value: aci
+          type: query
+          description: Applicable Platforms
+          disabled: true
+        - name: pathApplicablePlatforms
+          value: nx-os
+          type: query
+          description: Applicable Platforms
+          disabled: true
+        - name: pathApplicablePlatforms
+          value: all
           type: query
           description: Applicable Platforms
           disabled: true
         - name: status
-          value: ""
+          value: default
+          type: query
+          description: Status
+          disabled: true
+        - name: status
+          value: customized
+          type: query
+          description: Status
+          disabled: true
+        - name: status
+          value: notAvailable
           type: query
           description: Status
           disabled: true
@@ -249,9 +345,14 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -286,12 +387,32 @@ examples:
           description: Category type filter
           disabled: true
         - name: pathApplicablePlatforms
-          value: ""
+          value: aci
+          type: query
+          description: Applicable Platforms
+          disabled: true
+        - name: pathApplicablePlatforms
+          value: nx-os
+          type: query
+          description: Applicable Platforms
+          disabled: true
+        - name: pathApplicablePlatforms
+          value: all
           type: query
           description: Applicable Platforms
           disabled: true
         - name: status
-          value: ""
+          value: default
+          type: query
+          description: Status
+          disabled: true
+        - name: status
+          value: customized
+          type: query
+          description: Status
+          disabled: true
+        - name: status
+          value: notAvailable
           type: query
           description: Status
           disabled: true
@@ -308,9 +429,14 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -345,12 +471,32 @@ examples:
           description: Category type filter
           disabled: true
         - name: pathApplicablePlatforms
-          value: ""
+          value: aci
+          type: query
+          description: Applicable Platforms
+          disabled: true
+        - name: pathApplicablePlatforms
+          value: nx-os
+          type: query
+          description: Applicable Platforms
+          disabled: true
+        - name: pathApplicablePlatforms
+          value: all
           type: query
           description: Applicable Platforms
           disabled: true
         - name: status
-          value: ""
+          value: default
+          type: query
+          description: Status
+          disabled: true
+        - name: status
+          value: customized
+          type: query
+          description: Status
+          disabled: true
+        - name: status
+          value: notAvailable
           type: query
           description: Status
           disabled: true
@@ -367,9 +513,14 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -404,12 +555,32 @@ examples:
           description: Category type filter
           disabled: true
         - name: pathApplicablePlatforms
-          value: ""
+          value: aci
+          type: query
+          description: Applicable Platforms
+          disabled: true
+        - name: pathApplicablePlatforms
+          value: nx-os
+          type: query
+          description: Applicable Platforms
+          disabled: true
+        - name: pathApplicablePlatforms
+          value: all
           type: query
           description: Applicable Platforms
           disabled: true
         - name: status
-          value: ""
+          value: default
+          type: query
+          description: Status
+          disabled: true
+        - name: status
+          value: customized
+          type: query
+          description: Status
+          disabled: true
+        - name: status
+          value: notAvailable
           type: query
           description: Status
           disabled: true
@@ -426,9 +597,14 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

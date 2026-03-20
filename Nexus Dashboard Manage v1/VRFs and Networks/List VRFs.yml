@@ -2,6 +2,8 @@ info:
   name: List VRFs
   type: http
   seq: 30
+  tags:
+    - VRFs and Networks
 
 http:
   method: GET
@@ -13,7 +15,7 @@ http:
       description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
       disabled: true
     - name: fabricName
-      value: fabric1
+      value: ""
       type: path
       description: Name of the fabric
     - name: offset
@@ -29,12 +31,17 @@ http:
     - name: sort
       value: ""
       type: query
-      description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+      description: |
+        Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+        Ascending order by default: "field1"
+        Specific order for one field: "field1:asc" or "field1:desc"
+        Specific order with multiple fields: "field1:asc,field2:desc"
       disabled: true
     - name: filter
       value: ""
       type: query
       description: Lucene format filter - Filter the response based on this filter field
+      disabled: true
   auth: inherit
 
 settings:
@@ -72,13 +79,19 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -95,13 +108,11 @@ examples:
             },
             "vrfs": [
               {
-                "additionalData": {
+                "coreData": {
                   "advertiseDefaultRoute": true,
                   "advertiseHostRoute": false,
-                  "asn": "65789",
-                  "bgpPassword": "a3f5B6",
-                  "bgpPasswordKeyType": 3,
                   "configureStaticDefaultRoute": true,
+                  "disableRtAuto": false,
                   "evpnRouteTargetExport": [
                     "65001:1",
                     "65101:2000",
@@ -112,29 +123,11 @@ examples:
                     "65100:1000",
                     "65002:3000"
                   ],
-                  "ipv4Trm": false,
                   "ipv6LinkLocal": true,
                   "l3VniMulticastGroup": "239.1.1.1",
-                  "loopbackId": 26,
                   "maxBgpPaths": 1,
                   "maxIbgpPaths": 2,
                   "mtu": 9216,
-                  "mvpnRouteTargetExport": [
-                    "65000:100",
-                    "65001:200",
-                    "65002:300",
-                    "65100:1000",
-                    "65101:2000",
-                    "65102:3000"
-                  ],
-                  "mvpnRouteTargetImport": [
-                    "65000:1",
-                    "65001:10",
-                    "65002:20",
-                    "65100:101",
-                    "65101:2000",
-                    "65102:3000"
-                  ],
                   "netflow": true,
                   "netflowMonitor": "Netflow123",
                   "routeTargetExport": [
@@ -151,26 +144,49 @@ examples:
                     "65102:3000"
                   ],
                   "routingTag": 12345,
-                  "rpAbsent": false,
-                  "rpAddress": "10.1.0.1",
-                  "rpExternal": false,
-                  "rtAuto": false,
-                  "trmOnBgw": false,
-                  "v4MulticastGroup": "224.1.0.0/4",
                   "v6VrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET",
-                  "vrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET"
-                },
-                "coreData": {
                   "vrfDescription": "vrf description",
                   "vrfInterfaceDescription": "example",
+                  "vrfIpVersion": "both",
+                  "vrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET",
                   "vrfVlanName": "example"
                 },
-                "fabricName": "MyFabric",
-                "vlanId": 2002,
+                "fabricData": {
+                  "advertiseDefaultRoute": true,
+                  "advertiseHostRoute": false,
+                  "configureStaticDefaultRoute": true,
+                  "netflow": true,
+                  "netflowMonitor": "Netflow123",
+                  "trmData": {
+                    "ipv4Trm": false,
+                    "l3VniMulticastGroup": "239.1.1.1",
+                    "loopbackNumber": 26,
+                    "mvpnRouteTargetExport": [
+                      "65000:100",
+                      "65001:200",
+                      "65002:300",
+                      "65100:1000",
+                      "65101:2000",
+                      "65102:3000"
+                    ],
+                    "mvpnRouteTargetImport": [
+                      "65000:1",
+                      "65001:10",
+                      "65002:20",
+                      "65100:101",
+                      "65101:2000",
+                      "65102:3000"
+                    ],
+                    "trmOnBgw": false,
+                    "v4MulticastGroup": "224.1.0.0/4"
+                  }
+                },
+                "fabricName": "fab1",
+                "vlanId": 2000,
                 "vrfId": 50000,
                 "vrfName": "MyVRF_50000",
                 "vrfStatus": "notApplicable",
-                "vrfType": "vxlan"
+                "vrfType": "vxlanEbgp"
               }
             ]
           }
@@ -202,13 +218,19 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -249,13 +271,19 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -296,13 +324,19 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -343,13 +377,19 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -390,13 +430,19 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

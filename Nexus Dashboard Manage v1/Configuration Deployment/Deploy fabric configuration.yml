@@ -2,6 +2,8 @@ info:
   name: Deploy fabric configuration
   type: http
   seq: 2
+  tags:
+    - Configuration Deployment
 
 http:
   method: POST
@@ -22,11 +24,10 @@ http:
       description: If true, Config compliance fetches the latest running config from the Device. If false, Config compliance uses the cached version for computation.
       disabled: true
     - name: inclAllFabricGroupsSwitches
-      value: ""
+      value: "false"
       type: query
       description: |
         inclAllFabricGroupSwitches (Include all Fabric Groups Switches): If set to true, and you specify a fabric group name, changes will be deployed to all member fabrics within the group. If set to false, changes will not be deployed to the member fabrics
-      disabled: true
   auth: inherit
 
 settings:
@@ -57,12 +58,12 @@ examples:
           description: If true, Config compliance fetches the latest running config from the Device. If false, Config compliance uses the cached version for computation.
           disabled: true
         - name: inclAllFabricGroupsSwitches
-          value: ""
+          value: "false"
           type: query
           description: |
             inclAllFabricGroupSwitches (Include all Fabric Groups Switches): If set to true, and you specify a fabric group name, changes will be deployed to all member fabrics within the group. If set to false, changes will not be deployed to the member fabrics
-          disabled: true
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -71,7 +72,7 @@ examples:
         type: json
         data: |-
           {
-            "status": ""
+            "status": "Configuration deployment completed for fabric [fabric1]."
           }
   - name: 400 Response
     description: Bad Request
@@ -94,12 +95,12 @@ examples:
           description: If true, Config compliance fetches the latest running config from the Device. If false, Config compliance uses the cached version for computation.
           disabled: true
         - name: inclAllFabricGroupsSwitches
-          value: ""
+          value: "false"
           type: query
           description: |
             inclAllFabricGroupSwitches (Include all Fabric Groups Switches): If set to true, and you specify a fabric group name, changes will be deployed to all member fabrics within the group. If set to false, changes will not be deployed to the member fabrics
-          disabled: true
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -133,12 +134,12 @@ examples:
           description: If true, Config compliance fetches the latest running config from the Device. If false, Config compliance uses the cached version for computation.
           disabled: true
         - name: inclAllFabricGroupsSwitches
-          value: ""
+          value: "false"
           type: query
           description: |
             inclAllFabricGroupSwitches (Include all Fabric Groups Switches): If set to true, and you specify a fabric group name, changes will be deployed to all member fabrics within the group. If set to false, changes will not be deployed to the member fabrics
-          disabled: true
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -172,12 +173,12 @@ examples:
           description: If true, Config compliance fetches the latest running config from the Device. If false, Config compliance uses the cached version for computation.
           disabled: true
         - name: inclAllFabricGroupsSwitches
-          value: ""
+          value: "false"
           type: query
           description: |
             inclAllFabricGroupSwitches (Include all Fabric Groups Switches): If set to true, and you specify a fabric group name, changes will be deployed to all member fabrics within the group. If set to false, changes will not be deployed to the member fabrics
-          disabled: true
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -211,12 +212,12 @@ examples:
           description: If true, Config compliance fetches the latest running config from the Device. If false, Config compliance uses the cached version for computation.
           disabled: true
         - name: inclAllFabricGroupsSwitches
-          value: ""
+          value: "false"
           type: query
           description: |
             inclAllFabricGroupSwitches (Include all Fabric Groups Switches): If set to true, and you specify a fabric group name, changes will be deployed to all member fabrics within the group. If set to false, changes will not be deployed to the member fabrics
-          disabled: true
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -250,12 +251,12 @@ examples:
           description: If true, Config compliance fetches the latest running config from the Device. If false, Config compliance uses the cached version for computation.
           disabled: true
         - name: inclAllFabricGroupsSwitches
-          value: ""
+          value: "false"
           type: query
           description: |
             inclAllFabricGroupSwitches (Include all Fabric Groups Switches): If set to true, and you specify a fabric group name, changes will be deployed to all member fabrics within the group. If set to false, changes will not be deployed to the member fabrics
-          disabled: true
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

@@ -2,6 +2,8 @@ info:
   name: Attach/detach networks
   type: http
   seq: 8
+  tags:
+    - VRFs and Networks
 
 http:
   method: POST
@@ -21,12 +23,33 @@ http:
       type: query
       description: Change Control Ticket ID. This is mandatory if Change Control is enabled
       disabled: true
+    - name: strictModeValidation
+      value: "true"
+      type: query
+      description: When true, enables strict mode validation for attachment operations.
   body:
     type: json
     data: |-
       {
         "attachments": [
-          {}
+          {
+            "attach": true,
+            "extraConfig": "interface Ethernet1/10\n  description Server connection for MyNetwork_30000\n  spanning-tree port type edge\n",
+            "interfaces": [
+              {
+                "interfaceRange": "Ethernet1/10",
+                "mode": "access"
+              },
+              {
+                "interfaceGroupName": "ServerGroup1",
+                "interfaceRange": "Ethernet1/11-15",
+                "mode": "access"
+              }
+            ],
+            "networkName": "MyNetwork_30000",
+            "switchId": "FDO24530ABC",
+            "vlanId": 3000
+          }
         ]
       }
   auth: inherit
@@ -38,7 +61,7 @@ settings:
   maxRedirects: 5
 
 examples:
-  - name: Multi-tenant example (Attach networks to switches)
+  - name: Multi-tenant example (Access Mode Attachment)
     description: Example response for a multi-tenant environment. Each network name is prefixed with the tenant name.
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkAttachments"
@@ -58,6 +81,10 @@ examples:
           type: query
           description: Change Control Ticket ID. This is mandatory if Change Control is enabled
           disabled: true
+        - name: strictModeValidation
+          value: "true"
+          type: query
+          description: When true, enables strict mode validation for attachment operations.
       body:
         type: json
         data: |-
@@ -65,58 +92,26 @@ examples:
             "attachments": [
               {
                 "attach": true,
-                "extraConfig": "interface Ethernet1/1\ndescription part of MyNetwork_30000\n",
+                "extraConfig": "interface Ethernet1/10\n  description Server connection for MyNetwork_30000\n  spanning-tree port type edge\n",
                 "interfaces": [
                   {
-                    "interfaceRange": "Ethernet1/1",
-                    "mapping": {
-                      "mappingType": "none"
-                    },
-                    "mode": "trunk",
-                    "nativeVlan": false
-                  },
-                  {
-                    "interfaceRange": "Ethernet1/2",
+                    "interfaceRange": "Ethernet1/10",
                     "mode": "access"
                   },
                   {
-                    "interfaceRange": "Eth1/20-25",
-                    "mode": "dot1qTunnel"
-                  },
-                  {
-                    "interfaceRange": "Port-Channel10",
-                    "mode": "trunk",
-                    "nativeVlan": false
+                    "interfaceGroupName": "ServerGroup1",
+                    "interfaceRange": "Ethernet1/11-15",
+                    "mode": "access"
                   }
                 ],
                 "networkName": "MyNetwork_30000",
-                "switchId": "FDO20212311U",
-                "vlanId": 2000
-              },
-              {
-                "attach": true,
-                "extraConfig": "interface Ethernet1/3-5\ndescription part of MyNetwork_30001\n",
-                "interfaces": [
-                  {
-                    "interfaceRange": "Ethernet1/3-5",
-                    "mapping": {
-                      "mappingType": "none"
-                    },
-                    "mode": "trunk",
-                    "nativeVlan": true
-                  },
-                  {
-                    "interfaceRange": "Ethernet1/6",
-                    "mode": "dot1qTunnel"
-                  }
-                ],
-                "networkName": "MyNetwork_30001",
-                "switchId": "FDO20212312U",
-                "vlanId": 2001
+                "switchId": "FDO24530ABC",
+                "vlanId": 3000
               }
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -141,7 +136,7 @@ examples:
               }
             ]
           }
-  - name: Multi-tenant example (Detach networks from switches)
+  - name: Multi-tenant example (Bulk Network Detach)
     description: Example response for a multi-tenant environment. Each network name is prefixed with the tenant name.
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkAttachments"
@@ -161,6 +156,10 @@ examples:
           type: query
           description: Change Control Ticket ID. This is mandatory if Change Control is enabled
           disabled: true
+        - name: strictModeValidation
+          value: "true"
+          type: query
+          description: When true, enables strict mode validation for attachment operations.
       body:
         type: json
         data: |-
@@ -169,25 +168,22 @@ examples:
               {
                 "attach": false,
                 "networkName": "MyNetwork_30000",
-                "switchId": "FDO20212311U",
-                "vlanId": 2000
+                "switchId": "FDO24530STU"
               },
               {
-                "attach": true,
-                "extraConfig": "interface Ethernet1/6\ndescription Part of MyNetwork_30001\n",
-                "interfaces": [
-                  {
-                    "interfaceRange": "Ethernet1/6",
-                    "mode": "dot1qTunnel"
-                  }
-                ],
+                "attach": false,
                 "networkName": "MyNetwork_30001",
-                "switchId": "FDO20212312U",
-                "vlanId": 2001
+                "switchId": "FDO24530STU"
+              },
+              {
+                "attach": false,
+                "networkName": "MyNetwork_30001",
+                "switchId": "FDO24530VWX"
               }
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -212,7 +208,8 @@ examples:
               }
             ]
           }
-  - name: attachedOneNetwork (Attach networks to switches)
+  - name: Multi-tenant example (Multi Interface Type Attachment)
+    description: Example response for a multi-tenant environment. Each network name is prefixed with the tenant name.
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkAttachments"
       method: POST
@@ -231,6 +228,10 @@ examples:
           type: query
           description: Change Control Ticket ID. This is mandatory if Change Control is enabled
           disabled: true
+        - name: strictModeValidation
+          value: "true"
+          type: query
+          description: When true, enables strict mode validation for attachment operations.
       body:
         type: json
         data: |-
@@ -238,58 +239,419 @@ examples:
             "attachments": [
               {
                 "attach": true,
-                "extraConfig": "interface Ethernet1/1\ndescription part of MyNetwork_30000\n",
+                "extraConfig": "interface Ethernet1/1\n  description Web server access port\n  spanning-tree port type edge\ninterface port-channel200\n  description vPC peer link\n  vpc peer-link\n",
+                "instanceValues": {
+                  "sviEnabled": true,
+                  "switchRouteTargetExport": [
+                    "65000:30003"
+                  ],
+                  "switchRouteTargetImport": [
+                    "65000:30003"
+                  ]
+                },
                 "interfaces": [
                   {
+                    "interfaceGroupName": "WebServers",
                     "interfaceRange": "Ethernet1/1",
-                    "mapping": {
-                      "mappingType": "none"
-                    },
-                    "mode": "trunk",
-                    "nativeVlan": false
-                  },
-                  {
-                    "interfaceRange": "Ethernet1/2",
                     "mode": "access"
                   },
                   {
-                    "interfaceRange": "Eth1/20-25",
-                    "mode": "dot1qTunnel"
-                  },
-                  {
-                    "interfaceRange": "Port-Channel10",
+                    "interfaceGroupName": "Uplinks",
+                    "interfaceRange": "Ethernet1/2-5",
                     "mode": "trunk",
                     "nativeVlan": false
-                  }
-                ],
-                "networkName": "MyNetwork_30000",
-                "switchId": "FDO20212311U",
-                "vlanId": 2000
-              },
-              {
-                "attach": true,
-                "extraConfig": "interface Ethernet1/3-5\ndescription part of MyNetwork_30001\n",
-                "interfaces": [
-                  {
-                    "interfaceRange": "Ethernet1/3-5",
-                    "mapping": {
-                      "mappingType": "none"
-                    },
-                    "mode": "trunk",
-                    "nativeVlan": true
                   },
                   {
-                    "interfaceRange": "Ethernet1/6",
+                    "interfaceRange": "Port-channel200",
+                    "mode": "trunk",
+                    "nativeVlan": false
+                  },
+                  {
+                    "interfaceRange": "Ethernet1/10",
                     "mode": "dot1qTunnel"
                   }
                 ],
                 "networkName": "MyNetwork_30001",
-                "switchId": "FDO20212312U",
-                "vlanId": 2001
+                "switchId": "FDO24530PQR",
+                "vlanId": 3001
               }
             ]
           }
     response:
+      status: 207
+      statusText: Multi-Status
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "results": [
+              {
+                "message": "vlanId already exists",
+                "networkName": "common~MyNetwork_30001",
+                "status": "failed",
+                "switchId": "99X70W9ORI1",
+                "switchName": "bgl-vp-leaf2"
+              },
+              {
+                "networkName": "common~MyNetwork_30000",
+                "status": "success",
+                "switchId": "99X70W9ORI1",
+                "switchName": "bgl-vp-leaf1"
+              }
+            ]
+          }
+  - name: Multi-tenant example (Private VLAN Host Attachment)
+    description: Example response for a multi-tenant environment. Each network name is prefixed with the tenant name.
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkAttachments"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket ID. This is mandatory if Change Control is enabled
+          disabled: true
+        - name: strictModeValidation
+          value: "true"
+          type: query
+          description: When true, enables strict mode validation for attachment operations.
+      body:
+        type: json
+        data: |-
+          {
+            "attachments": [
+              {
+                "attach": true,
+                "extraConfig": "interface Ethernet1/50-55\n  description Isolated hosts in PVLAN\n  switchport mode private-vlan host\n",
+                "interfaces": [
+                  {
+                    "interfaceRange": "Ethernet1/50-55",
+                    "mode": "host"
+                  }
+                ],
+                "networkName": "MyNetwork_30001",
+                "switchId": "FDO24530MNO",
+                "vlanId": 3001
+              }
+            ]
+          }
+    response:
+      status: 207
+      statusText: Multi-Status
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "results": [
+              {
+                "message": "vlanId already exists",
+                "networkName": "common~MyNetwork_30001",
+                "status": "failed",
+                "switchId": "99X70W9ORI1",
+                "switchName": "bgl-vp-leaf2"
+              },
+              {
+                "networkName": "common~MyNetwork_30000",
+                "status": "success",
+                "switchId": "99X70W9ORI1",
+                "switchName": "bgl-vp-leaf1"
+              }
+            ]
+          }
+  - name: Multi-tenant example (Private VLAN Promiscuous Attachment)
+    description: Example response for a multi-tenant environment. Each network name is prefixed with the tenant name.
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkAttachments"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket ID. This is mandatory if Change Control is enabled
+          disabled: true
+        - name: strictModeValidation
+          value: "true"
+          type: query
+          description: When true, enables strict mode validation for attachment operations.
+      body:
+        type: json
+        data: |-
+          {
+            "attachments": [
+              {
+                "attach": true,
+                "extraConfig": "interface Ethernet1/40\n  description Gateway connection for PVLAN\n  switchport mode private-vlan promiscuous\n",
+                "interfaces": [
+                  {
+                    "interfaceRange": "Ethernet1/40",
+                    "mode": "promiscuous"
+                  },
+                  {
+                    "interfaceRange": "Ethernet1/41",
+                    "mode": "trunkPromiscuous"
+                  }
+                ],
+                "networkName": "MyNetwork_30001",
+                "switchId": "FDO24530JKL",
+                "vlanId": 3001
+              }
+            ]
+          }
+    response:
+      status: 207
+      statusText: Multi-Status
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "results": [
+              {
+                "message": "vlanId already exists",
+                "networkName": "common~MyNetwork_30001",
+                "status": "failed",
+                "switchId": "99X70W9ORI1",
+                "switchName": "bgl-vp-leaf2"
+              },
+              {
+                "networkName": "common~MyNetwork_30000",
+                "status": "success",
+                "switchId": "99X70W9ORI1",
+                "switchName": "bgl-vp-leaf1"
+              }
+            ]
+          }
+  - name: Multi-tenant example (Trunk Mode with Port-Channel)
+    description: Example response for a multi-tenant environment. Each network name is prefixed with the tenant name.
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkAttachments"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket ID. This is mandatory if Change Control is enabled
+          disabled: true
+        - name: strictModeValidation
+          value: "true"
+          type: query
+          description: When true, enables strict mode validation for attachment operations.
+      body:
+        type: json
+        data: |-
+          {
+            "attachments": [
+              {
+                "attach": true,
+                "extraConfig": "interface port-channel100\n  description Trunk to upstream switch\n  switchport mode trunk\n  switchport trunk allowed vlan 3001\n  vpc 100\n",
+                "interfaces": [
+                  {
+                    "interfaceRange": "Port-channel100",
+                    "mapping": {
+                      "mappingType": "none"
+                    },
+                    "mode": "trunk",
+                    "nativeVlan": false
+                  },
+                  {
+                    "interfaceRange": "Ethernet1/20",
+                    "mode": "trunk",
+                    "nativeVlan": true
+                  }
+                ],
+                "networkName": "MyNetwork_30001",
+                "switchId": "FDO24530DEF",
+                "vlanId": 3001
+              }
+            ]
+          }
+    response:
+      status: 207
+      statusText: Multi-Status
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "results": [
+              {
+                "message": "vlanId already exists",
+                "networkName": "common~MyNetwork_30001",
+                "status": "failed",
+                "switchId": "99X70W9ORI1",
+                "switchName": "bgl-vp-leaf2"
+              },
+              {
+                "networkName": "common~MyNetwork_30000",
+                "status": "success",
+                "switchId": "99X70W9ORI1",
+                "switchName": "bgl-vp-leaf1"
+              }
+            ]
+          }
+  - name: Multi-tenant example (VLAN mapping attachment)
+    description: Example response for a multi-tenant environment. Each network name is prefixed with the tenant name.
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkAttachments"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket ID. This is mandatory if Change Control is enabled
+          disabled: true
+        - name: strictModeValidation
+          value: "true"
+          type: query
+          description: When true, enables strict mode validation for attachment operations.
+      body:
+        type: json
+        data: |-
+          {
+            "attachments": [
+              {
+                "attach": true,
+                "extraConfig": "interface Ethernet1/30\n  description Customer connection with VLAN mapping\n  switchport vlan mapping 100 3002\n",
+                "interfaces": [
+                  {
+                    "interfaceRange": "Ethernet1/30",
+                    "mapping": {
+                      "customerVlan": 100,
+                      "mappingType": "single"
+                    },
+                    "mode": "trunk",
+                    "nativeVlan": false
+                  }
+                ],
+                "networkName": "MyNetwork_30001",
+                "switchId": "FDO24530GHI",
+                "vlanId": 3001
+              }
+            ]
+          }
+    response:
+      status: 207
+      statusText: Multi-Status
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "results": [
+              {
+                "message": "vlanId already exists",
+                "networkName": "common~MyNetwork_30001",
+                "status": "failed",
+                "switchId": "99X70W9ORI1",
+                "switchName": "bgl-vp-leaf2"
+              },
+              {
+                "networkName": "common~MyNetwork_30000",
+                "status": "success",
+                "switchId": "99X70W9ORI1",
+                "switchName": "bgl-vp-leaf1"
+              }
+            ]
+          }
+  - name: attachedOneNetwork (Access Mode Attachment)
+    description: Attach network to switch using access mode interfaces
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkAttachments"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket ID. This is mandatory if Change Control is enabled
+          disabled: true
+        - name: strictModeValidation
+          value: "true"
+          type: query
+          description: When true, enables strict mode validation for attachment operations.
+      body:
+        type: json
+        data: |-
+          {
+            "attachments": [
+              {
+                "attach": true,
+                "extraConfig": "interface Ethernet1/10\n  description Server connection for MyNetwork_30000\n  spanning-tree port type edge\n",
+                "interfaces": [
+                  {
+                    "interfaceRange": "Ethernet1/10",
+                    "mode": "access"
+                  },
+                  {
+                    "interfaceGroupName": "ServerGroup1",
+                    "interfaceRange": "Ethernet1/11-15",
+                    "mode": "access"
+                  }
+                ],
+                "networkName": "MyNetwork_30000",
+                "switchId": "FDO24530ABC",
+                "vlanId": 3000
+              }
+            ]
+          }
+    response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -307,7 +669,8 @@ examples:
               }
             ]
           }
-  - name: attachedOneNetwork (Detach networks from switches)
+  - name: attachedOneNetwork (Bulk Network Detach)
+    description: Detach multiple networks from switches
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkAttachments"
       method: POST
@@ -326,6 +689,10 @@ examples:
           type: query
           description: Change Control Ticket ID. This is mandatory if Change Control is enabled
           disabled: true
+        - name: strictModeValidation
+          value: "true"
+          type: query
+          description: When true, enables strict mode validation for attachment operations.
       body:
         type: json
         data: |-
@@ -334,25 +701,22 @@ examples:
               {
                 "attach": false,
                 "networkName": "MyNetwork_30000",
-                "switchId": "FDO20212311U",
-                "vlanId": 2000
+                "switchId": "FDO24530STU"
               },
               {
-                "attach": true,
-                "extraConfig": "interface Ethernet1/6\ndescription Part of MyNetwork_30001\n",
-                "interfaces": [
-                  {
-                    "interfaceRange": "Ethernet1/6",
-                    "mode": "dot1qTunnel"
-                  }
-                ],
+                "attach": false,
                 "networkName": "MyNetwork_30001",
-                "switchId": "FDO20212312U",
-                "vlanId": 2001
+                "switchId": "FDO24530STU"
+              },
+              {
+                "attach": false,
+                "networkName": "MyNetwork_30001",
+                "switchId": "FDO24530VWX"
               }
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -370,7 +734,8 @@ examples:
               }
             ]
           }
-  - name: attachedTwoNetworks (Attach networks to switches)
+  - name: attachedOneNetwork (Multi Interface Type Attachment)
+    description: Attach network with multiple interface types and configurations
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkAttachments"
       method: POST
@@ -389,6 +754,10 @@ examples:
           type: query
           description: Change Control Ticket ID. This is mandatory if Change Control is enabled
           disabled: true
+        - name: strictModeValidation
+          value: "true"
+          type: query
+          description: When true, enables strict mode validation for attachment operations.
       body:
         type: json
         data: |-
@@ -396,58 +765,384 @@ examples:
             "attachments": [
               {
                 "attach": true,
-                "extraConfig": "interface Ethernet1/1\ndescription part of MyNetwork_30000\n",
+                "extraConfig": "interface Ethernet1/1\n  description Web server access port\n  spanning-tree port type edge\ninterface port-channel200\n  description vPC peer link\n  vpc peer-link\n",
+                "instanceValues": {
+                  "sviEnabled": true,
+                  "switchRouteTargetExport": [
+                    "65000:30003"
+                  ],
+                  "switchRouteTargetImport": [
+                    "65000:30003"
+                  ]
+                },
                 "interfaces": [
                   {
+                    "interfaceGroupName": "WebServers",
                     "interfaceRange": "Ethernet1/1",
-                    "mapping": {
-                      "mappingType": "none"
-                    },
-                    "mode": "trunk",
-                    "nativeVlan": false
-                  },
-                  {
-                    "interfaceRange": "Ethernet1/2",
                     "mode": "access"
                   },
                   {
-                    "interfaceRange": "Eth1/20-25",
-                    "mode": "dot1qTunnel"
-                  },
-                  {
-                    "interfaceRange": "Port-Channel10",
+                    "interfaceGroupName": "Uplinks",
+                    "interfaceRange": "Ethernet1/2-5",
                     "mode": "trunk",
                     "nativeVlan": false
-                  }
-                ],
-                "networkName": "MyNetwork_30000",
-                "switchId": "FDO20212311U",
-                "vlanId": 2000
-              },
-              {
-                "attach": true,
-                "extraConfig": "interface Ethernet1/3-5\ndescription part of MyNetwork_30001\n",
-                "interfaces": [
-                  {
-                    "interfaceRange": "Ethernet1/3-5",
-                    "mapping": {
-                      "mappingType": "none"
-                    },
-                    "mode": "trunk",
-                    "nativeVlan": true
                   },
                   {
-                    "interfaceRange": "Ethernet1/6",
+                    "interfaceRange": "Port-channel200",
+                    "mode": "trunk",
+                    "nativeVlan": false
+                  },
+                  {
+                    "interfaceRange": "Ethernet1/10",
                     "mode": "dot1qTunnel"
                   }
                 ],
                 "networkName": "MyNetwork_30001",
-                "switchId": "FDO20212312U",
-                "vlanId": 2001
+                "switchId": "FDO24530PQR",
+                "vlanId": 3001
               }
             ]
           }
     response:
+      status: 207
+      statusText: Multi-Status
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "results": [
+              {
+                "networkName": "MyNetwork_30000",
+                "status": "success",
+                "switchId": "99X70W9ORI1",
+                "switchName": "bgl-vp-leaf2"
+              }
+            ]
+          }
+  - name: attachedOneNetwork (Private VLAN Host Attachment)
+    description: Attach private VLAN secondary network with host ports
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkAttachments"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket ID. This is mandatory if Change Control is enabled
+          disabled: true
+        - name: strictModeValidation
+          value: "true"
+          type: query
+          description: When true, enables strict mode validation for attachment operations.
+      body:
+        type: json
+        data: |-
+          {
+            "attachments": [
+              {
+                "attach": true,
+                "extraConfig": "interface Ethernet1/50-55\n  description Isolated hosts in PVLAN\n  switchport mode private-vlan host\n",
+                "interfaces": [
+                  {
+                    "interfaceRange": "Ethernet1/50-55",
+                    "mode": "host"
+                  }
+                ],
+                "networkName": "MyNetwork_30001",
+                "switchId": "FDO24530MNO",
+                "vlanId": 3001
+              }
+            ]
+          }
+    response:
+      status: 207
+      statusText: Multi-Status
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "results": [
+              {
+                "networkName": "MyNetwork_30000",
+                "status": "success",
+                "switchId": "99X70W9ORI1",
+                "switchName": "bgl-vp-leaf2"
+              }
+            ]
+          }
+  - name: attachedOneNetwork (Private VLAN Promiscuous Attachment)
+    description: Attach private VLAN primary network with promiscuous port
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkAttachments"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket ID. This is mandatory if Change Control is enabled
+          disabled: true
+        - name: strictModeValidation
+          value: "true"
+          type: query
+          description: When true, enables strict mode validation for attachment operations.
+      body:
+        type: json
+        data: |-
+          {
+            "attachments": [
+              {
+                "attach": true,
+                "extraConfig": "interface Ethernet1/40\n  description Gateway connection for PVLAN\n  switchport mode private-vlan promiscuous\n",
+                "interfaces": [
+                  {
+                    "interfaceRange": "Ethernet1/40",
+                    "mode": "promiscuous"
+                  },
+                  {
+                    "interfaceRange": "Ethernet1/41",
+                    "mode": "trunkPromiscuous"
+                  }
+                ],
+                "networkName": "MyNetwork_30001",
+                "switchId": "FDO24530JKL",
+                "vlanId": 3001
+              }
+            ]
+          }
+    response:
+      status: 207
+      statusText: Multi-Status
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "results": [
+              {
+                "networkName": "MyNetwork_30000",
+                "status": "success",
+                "switchId": "99X70W9ORI1",
+                "switchName": "bgl-vp-leaf2"
+              }
+            ]
+          }
+  - name: attachedOneNetwork (Trunk Mode with Port-Channel)
+    description: Attach network using trunk mode with port-channel for high availability
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkAttachments"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket ID. This is mandatory if Change Control is enabled
+          disabled: true
+        - name: strictModeValidation
+          value: "true"
+          type: query
+          description: When true, enables strict mode validation for attachment operations.
+      body:
+        type: json
+        data: |-
+          {
+            "attachments": [
+              {
+                "attach": true,
+                "extraConfig": "interface port-channel100\n  description Trunk to upstream switch\n  switchport mode trunk\n  switchport trunk allowed vlan 3001\n  vpc 100\n",
+                "interfaces": [
+                  {
+                    "interfaceRange": "Port-channel100",
+                    "mapping": {
+                      "mappingType": "none"
+                    },
+                    "mode": "trunk",
+                    "nativeVlan": false
+                  },
+                  {
+                    "interfaceRange": "Ethernet1/20",
+                    "mode": "trunk",
+                    "nativeVlan": true
+                  }
+                ],
+                "networkName": "MyNetwork_30001",
+                "switchId": "FDO24530DEF",
+                "vlanId": 3001
+              }
+            ]
+          }
+    response:
+      status: 207
+      statusText: Multi-Status
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "results": [
+              {
+                "networkName": "MyNetwork_30000",
+                "status": "success",
+                "switchId": "99X70W9ORI1",
+                "switchName": "bgl-vp-leaf2"
+              }
+            ]
+          }
+  - name: attachedOneNetwork (VLAN mapping attachment)
+    description: Attach network with VLAN translation/mapping
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkAttachments"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket ID. This is mandatory if Change Control is enabled
+          disabled: true
+        - name: strictModeValidation
+          value: "true"
+          type: query
+          description: When true, enables strict mode validation for attachment operations.
+      body:
+        type: json
+        data: |-
+          {
+            "attachments": [
+              {
+                "attach": true,
+                "extraConfig": "interface Ethernet1/30\n  description Customer connection with VLAN mapping\n  switchport vlan mapping 100 3002\n",
+                "interfaces": [
+                  {
+                    "interfaceRange": "Ethernet1/30",
+                    "mapping": {
+                      "customerVlan": 100,
+                      "mappingType": "single"
+                    },
+                    "mode": "trunk",
+                    "nativeVlan": false
+                  }
+                ],
+                "networkName": "MyNetwork_30001",
+                "switchId": "FDO24530GHI",
+                "vlanId": 3001
+              }
+            ]
+          }
+    response:
+      status: 207
+      statusText: Multi-Status
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "results": [
+              {
+                "networkName": "MyNetwork_30000",
+                "status": "success",
+                "switchId": "99X70W9ORI1",
+                "switchName": "bgl-vp-leaf2"
+              }
+            ]
+          }
+  - name: attachedTwoNetworks (Access Mode Attachment)
+    description: Attach network to switch using access mode interfaces
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkAttachments"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket ID. This is mandatory if Change Control is enabled
+          disabled: true
+        - name: strictModeValidation
+          value: "true"
+          type: query
+          description: When true, enables strict mode validation for attachment operations.
+      body:
+        type: json
+        data: |-
+          {
+            "attachments": [
+              {
+                "attach": true,
+                "extraConfig": "interface Ethernet1/10\n  description Server connection for MyNetwork_30000\n  spanning-tree port type edge\n",
+                "interfaces": [
+                  {
+                    "interfaceRange": "Ethernet1/10",
+                    "mode": "access"
+                  },
+                  {
+                    "interfaceGroupName": "ServerGroup1",
+                    "interfaceRange": "Ethernet1/11-15",
+                    "mode": "access"
+                  }
+                ],
+                "networkName": "MyNetwork_30000",
+                "switchId": "FDO24530ABC",
+                "vlanId": 3000
+              }
+            ]
+          }
+    response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -472,7 +1167,8 @@ examples:
               }
             ]
           }
-  - name: attachedTwoNetworks (Detach networks from switches)
+  - name: attachedTwoNetworks (Bulk Network Detach)
+    description: Detach multiple networks from switches
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkAttachments"
       method: POST
@@ -491,6 +1187,10 @@ examples:
           type: query
           description: Change Control Ticket ID. This is mandatory if Change Control is enabled
           disabled: true
+        - name: strictModeValidation
+          value: "true"
+          type: query
+          description: When true, enables strict mode validation for attachment operations.
       body:
         type: json
         data: |-
@@ -499,25 +1199,22 @@ examples:
               {
                 "attach": false,
                 "networkName": "MyNetwork_30000",
-                "switchId": "FDO20212311U",
-                "vlanId": 2000
+                "switchId": "FDO24530STU"
               },
               {
-                "attach": true,
-                "extraConfig": "interface Ethernet1/6\ndescription Part of MyNetwork_30001\n",
-                "interfaces": [
-                  {
-                    "interfaceRange": "Ethernet1/6",
-                    "mode": "dot1qTunnel"
-                  }
-                ],
+                "attach": false,
                 "networkName": "MyNetwork_30001",
-                "switchId": "FDO20212312U",
-                "vlanId": 2001
+                "switchId": "FDO24530STU"
+              },
+              {
+                "attach": false,
+                "networkName": "MyNetwork_30001",
+                "switchId": "FDO24530VWX"
               }
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -542,7 +1239,400 @@ examples:
               }
             ]
           }
-  - name: 400 Response (Attach networks to switches)
+  - name: attachedTwoNetworks (Multi Interface Type Attachment)
+    description: Attach network with multiple interface types and configurations
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkAttachments"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket ID. This is mandatory if Change Control is enabled
+          disabled: true
+        - name: strictModeValidation
+          value: "true"
+          type: query
+          description: When true, enables strict mode validation for attachment operations.
+      body:
+        type: json
+        data: |-
+          {
+            "attachments": [
+              {
+                "attach": true,
+                "extraConfig": "interface Ethernet1/1\n  description Web server access port\n  spanning-tree port type edge\ninterface port-channel200\n  description vPC peer link\n  vpc peer-link\n",
+                "instanceValues": {
+                  "sviEnabled": true,
+                  "switchRouteTargetExport": [
+                    "65000:30003"
+                  ],
+                  "switchRouteTargetImport": [
+                    "65000:30003"
+                  ]
+                },
+                "interfaces": [
+                  {
+                    "interfaceGroupName": "WebServers",
+                    "interfaceRange": "Ethernet1/1",
+                    "mode": "access"
+                  },
+                  {
+                    "interfaceGroupName": "Uplinks",
+                    "interfaceRange": "Ethernet1/2-5",
+                    "mode": "trunk",
+                    "nativeVlan": false
+                  },
+                  {
+                    "interfaceRange": "Port-channel200",
+                    "mode": "trunk",
+                    "nativeVlan": false
+                  },
+                  {
+                    "interfaceRange": "Ethernet1/10",
+                    "mode": "dot1qTunnel"
+                  }
+                ],
+                "networkName": "MyNetwork_30001",
+                "switchId": "FDO24530PQR",
+                "vlanId": 3001
+              }
+            ]
+          }
+    response:
+      status: 207
+      statusText: Multi-Status
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "results": [
+              {
+                "message": "vlanId already exists",
+                "networkName": "MyNetwork_30001",
+                "status": "failed",
+                "switchId": "99X70W9ORI1",
+                "switchName": "bgl-vp-leaf2"
+              },
+              {
+                "networkName": "MyNetwork_30000",
+                "status": "success",
+                "switchId": "99X70W9ORI1",
+                "switchName": "bgl-vp-leaf2"
+              }
+            ]
+          }
+  - name: attachedTwoNetworks (Private VLAN Host Attachment)
+    description: Attach private VLAN secondary network with host ports
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkAttachments"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket ID. This is mandatory if Change Control is enabled
+          disabled: true
+        - name: strictModeValidation
+          value: "true"
+          type: query
+          description: When true, enables strict mode validation for attachment operations.
+      body:
+        type: json
+        data: |-
+          {
+            "attachments": [
+              {
+                "attach": true,
+                "extraConfig": "interface Ethernet1/50-55\n  description Isolated hosts in PVLAN\n  switchport mode private-vlan host\n",
+                "interfaces": [
+                  {
+                    "interfaceRange": "Ethernet1/50-55",
+                    "mode": "host"
+                  }
+                ],
+                "networkName": "MyNetwork_30001",
+                "switchId": "FDO24530MNO",
+                "vlanId": 3001
+              }
+            ]
+          }
+    response:
+      status: 207
+      statusText: Multi-Status
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "results": [
+              {
+                "message": "vlanId already exists",
+                "networkName": "MyNetwork_30001",
+                "status": "failed",
+                "switchId": "99X70W9ORI1",
+                "switchName": "bgl-vp-leaf2"
+              },
+              {
+                "networkName": "MyNetwork_30000",
+                "status": "success",
+                "switchId": "99X70W9ORI1",
+                "switchName": "bgl-vp-leaf2"
+              }
+            ]
+          }
+  - name: attachedTwoNetworks (Private VLAN Promiscuous Attachment)
+    description: Attach private VLAN primary network with promiscuous port
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkAttachments"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket ID. This is mandatory if Change Control is enabled
+          disabled: true
+        - name: strictModeValidation
+          value: "true"
+          type: query
+          description: When true, enables strict mode validation for attachment operations.
+      body:
+        type: json
+        data: |-
+          {
+            "attachments": [
+              {
+                "attach": true,
+                "extraConfig": "interface Ethernet1/40\n  description Gateway connection for PVLAN\n  switchport mode private-vlan promiscuous\n",
+                "interfaces": [
+                  {
+                    "interfaceRange": "Ethernet1/40",
+                    "mode": "promiscuous"
+                  },
+                  {
+                    "interfaceRange": "Ethernet1/41",
+                    "mode": "trunkPromiscuous"
+                  }
+                ],
+                "networkName": "MyNetwork_30001",
+                "switchId": "FDO24530JKL",
+                "vlanId": 3001
+              }
+            ]
+          }
+    response:
+      status: 207
+      statusText: Multi-Status
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "results": [
+              {
+                "message": "vlanId already exists",
+                "networkName": "MyNetwork_30001",
+                "status": "failed",
+                "switchId": "99X70W9ORI1",
+                "switchName": "bgl-vp-leaf2"
+              },
+              {
+                "networkName": "MyNetwork_30000",
+                "status": "success",
+                "switchId": "99X70W9ORI1",
+                "switchName": "bgl-vp-leaf2"
+              }
+            ]
+          }
+  - name: attachedTwoNetworks (Trunk Mode with Port-Channel)
+    description: Attach network using trunk mode with port-channel for high availability
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkAttachments"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket ID. This is mandatory if Change Control is enabled
+          disabled: true
+        - name: strictModeValidation
+          value: "true"
+          type: query
+          description: When true, enables strict mode validation for attachment operations.
+      body:
+        type: json
+        data: |-
+          {
+            "attachments": [
+              {
+                "attach": true,
+                "extraConfig": "interface port-channel100\n  description Trunk to upstream switch\n  switchport mode trunk\n  switchport trunk allowed vlan 3001\n  vpc 100\n",
+                "interfaces": [
+                  {
+                    "interfaceRange": "Port-channel100",
+                    "mapping": {
+                      "mappingType": "none"
+                    },
+                    "mode": "trunk",
+                    "nativeVlan": false
+                  },
+                  {
+                    "interfaceRange": "Ethernet1/20",
+                    "mode": "trunk",
+                    "nativeVlan": true
+                  }
+                ],
+                "networkName": "MyNetwork_30001",
+                "switchId": "FDO24530DEF",
+                "vlanId": 3001
+              }
+            ]
+          }
+    response:
+      status: 207
+      statusText: Multi-Status
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "results": [
+              {
+                "message": "vlanId already exists",
+                "networkName": "MyNetwork_30001",
+                "status": "failed",
+                "switchId": "99X70W9ORI1",
+                "switchName": "bgl-vp-leaf2"
+              },
+              {
+                "networkName": "MyNetwork_30000",
+                "status": "success",
+                "switchId": "99X70W9ORI1",
+                "switchName": "bgl-vp-leaf2"
+              }
+            ]
+          }
+  - name: attachedTwoNetworks (VLAN mapping attachment)
+    description: Attach network with VLAN translation/mapping
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkAttachments"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket ID. This is mandatory if Change Control is enabled
+          disabled: true
+        - name: strictModeValidation
+          value: "true"
+          type: query
+          description: When true, enables strict mode validation for attachment operations.
+      body:
+        type: json
+        data: |-
+          {
+            "attachments": [
+              {
+                "attach": true,
+                "extraConfig": "interface Ethernet1/30\n  description Customer connection with VLAN mapping\n  switchport vlan mapping 100 3002\n",
+                "interfaces": [
+                  {
+                    "interfaceRange": "Ethernet1/30",
+                    "mapping": {
+                      "customerVlan": 100,
+                      "mappingType": "single"
+                    },
+                    "mode": "trunk",
+                    "nativeVlan": false
+                  }
+                ],
+                "networkName": "MyNetwork_30001",
+                "switchId": "FDO24530GHI",
+                "vlanId": 3001
+              }
+            ]
+          }
+    response:
+      status: 207
+      statusText: Multi-Status
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "results": [
+              {
+                "message": "vlanId already exists",
+                "networkName": "MyNetwork_30001",
+                "status": "failed",
+                "switchId": "99X70W9ORI1",
+                "switchName": "bgl-vp-leaf2"
+              },
+              {
+                "networkName": "MyNetwork_30000",
+                "status": "success",
+                "switchId": "99X70W9ORI1",
+                "switchName": "bgl-vp-leaf2"
+              }
+            ]
+          }
+  - name: 400 Response (Access Mode Attachment)
     description: Bad Request
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkAttachments"
@@ -562,6 +1652,10 @@ examples:
           type: query
           description: Change Control Ticket ID. This is mandatory if Change Control is enabled
           disabled: true
+        - name: strictModeValidation
+          value: "true"
+          type: query
+          description: When true, enables strict mode validation for attachment operations.
       body:
         type: json
         data: |-
@@ -569,58 +1663,26 @@ examples:
             "attachments": [
               {
                 "attach": true,
-                "extraConfig": "interface Ethernet1/1\ndescription part of MyNetwork_30000\n",
+                "extraConfig": "interface Ethernet1/10\n  description Server connection for MyNetwork_30000\n  spanning-tree port type edge\n",
                 "interfaces": [
                   {
-                    "interfaceRange": "Ethernet1/1",
-                    "mapping": {
-                      "mappingType": "none"
-                    },
-                    "mode": "trunk",
-                    "nativeVlan": false
-                  },
-                  {
-                    "interfaceRange": "Ethernet1/2",
+                    "interfaceRange": "Ethernet1/10",
                     "mode": "access"
                   },
                   {
-                    "interfaceRange": "Eth1/20-25",
-                    "mode": "dot1qTunnel"
-                  },
-                  {
-                    "interfaceRange": "Port-Channel10",
-                    "mode": "trunk",
-                    "nativeVlan": false
+                    "interfaceGroupName": "ServerGroup1",
+                    "interfaceRange": "Ethernet1/11-15",
+                    "mode": "access"
                   }
                 ],
                 "networkName": "MyNetwork_30000",
-                "switchId": "FDO20212311U",
-                "vlanId": 2000
-              },
-              {
-                "attach": true,
-                "extraConfig": "interface Ethernet1/3-5\ndescription part of MyNetwork_30001\n",
-                "interfaces": [
-                  {
-                    "interfaceRange": "Ethernet1/3-5",
-                    "mapping": {
-                      "mappingType": "none"
-                    },
-                    "mode": "trunk",
-                    "nativeVlan": true
-                  },
-                  {
-                    "interfaceRange": "Ethernet1/6",
-                    "mode": "dot1qTunnel"
-                  }
-                ],
-                "networkName": "MyNetwork_30001",
-                "switchId": "FDO20212312U",
-                "vlanId": 2001
+                "switchId": "FDO24530ABC",
+                "vlanId": 3000
               }
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -633,7 +1695,7 @@ examples:
             "description": "The server could not understand the request due to incorrect syntax.",
             "code": 400
           }
-  - name: 400 Response (Detach networks from switches)
+  - name: 400 Response (Bulk Network Detach)
     description: Bad Request
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkAttachments"
@@ -653,6 +1715,10 @@ examples:
           type: query
           description: Change Control Ticket ID. This is mandatory if Change Control is enabled
           disabled: true
+        - name: strictModeValidation
+          value: "true"
+          type: query
+          description: When true, enables strict mode validation for attachment operations.
       body:
         type: json
         data: |-
@@ -661,25 +1727,22 @@ examples:
               {
                 "attach": false,
                 "networkName": "MyNetwork_30000",
-                "switchId": "FDO20212311U",
-                "vlanId": 2000
+                "switchId": "FDO24530STU"
               },
               {
-                "attach": true,
-                "extraConfig": "interface Ethernet1/6\ndescription Part of MyNetwork_30001\n",
-                "interfaces": [
-                  {
-                    "interfaceRange": "Ethernet1/6",
-                    "mode": "dot1qTunnel"
-                  }
-                ],
+                "attach": false,
                 "networkName": "MyNetwork_30001",
-                "switchId": "FDO20212312U",
-                "vlanId": 2001
+                "switchId": "FDO24530STU"
+              },
+              {
+                "attach": false,
+                "networkName": "MyNetwork_30001",
+                "switchId": "FDO24530VWX"
               }
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -692,7 +1755,340 @@ examples:
             "description": "The server could not understand the request due to incorrect syntax.",
             "code": 400
           }
-  - name: 401 Response (Attach networks to switches)
+  - name: 400 Response (Multi Interface Type Attachment)
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkAttachments"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket ID. This is mandatory if Change Control is enabled
+          disabled: true
+        - name: strictModeValidation
+          value: "true"
+          type: query
+          description: When true, enables strict mode validation for attachment operations.
+      body:
+        type: json
+        data: |-
+          {
+            "attachments": [
+              {
+                "attach": true,
+                "extraConfig": "interface Ethernet1/1\n  description Web server access port\n  spanning-tree port type edge\ninterface port-channel200\n  description vPC peer link\n  vpc peer-link\n",
+                "instanceValues": {
+                  "sviEnabled": true,
+                  "switchRouteTargetExport": [
+                    "65000:30003"
+                  ],
+                  "switchRouteTargetImport": [
+                    "65000:30003"
+                  ]
+                },
+                "interfaces": [
+                  {
+                    "interfaceGroupName": "WebServers",
+                    "interfaceRange": "Ethernet1/1",
+                    "mode": "access"
+                  },
+                  {
+                    "interfaceGroupName": "Uplinks",
+                    "interfaceRange": "Ethernet1/2-5",
+                    "mode": "trunk",
+                    "nativeVlan": false
+                  },
+                  {
+                    "interfaceRange": "Port-channel200",
+                    "mode": "trunk",
+                    "nativeVlan": false
+                  },
+                  {
+                    "interfaceRange": "Ethernet1/10",
+                    "mode": "dot1qTunnel"
+                  }
+                ],
+                "networkName": "MyNetwork_30001",
+                "switchId": "FDO24530PQR",
+                "vlanId": 3001
+              }
+            ]
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 400 Response (Private VLAN Host Attachment)
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkAttachments"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket ID. This is mandatory if Change Control is enabled
+          disabled: true
+        - name: strictModeValidation
+          value: "true"
+          type: query
+          description: When true, enables strict mode validation for attachment operations.
+      body:
+        type: json
+        data: |-
+          {
+            "attachments": [
+              {
+                "attach": true,
+                "extraConfig": "interface Ethernet1/50-55\n  description Isolated hosts in PVLAN\n  switchport mode private-vlan host\n",
+                "interfaces": [
+                  {
+                    "interfaceRange": "Ethernet1/50-55",
+                    "mode": "host"
+                  }
+                ],
+                "networkName": "MyNetwork_30001",
+                "switchId": "FDO24530MNO",
+                "vlanId": 3001
+              }
+            ]
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 400 Response (Private VLAN Promiscuous Attachment)
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkAttachments"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket ID. This is mandatory if Change Control is enabled
+          disabled: true
+        - name: strictModeValidation
+          value: "true"
+          type: query
+          description: When true, enables strict mode validation for attachment operations.
+      body:
+        type: json
+        data: |-
+          {
+            "attachments": [
+              {
+                "attach": true,
+                "extraConfig": "interface Ethernet1/40\n  description Gateway connection for PVLAN\n  switchport mode private-vlan promiscuous\n",
+                "interfaces": [
+                  {
+                    "interfaceRange": "Ethernet1/40",
+                    "mode": "promiscuous"
+                  },
+                  {
+                    "interfaceRange": "Ethernet1/41",
+                    "mode": "trunkPromiscuous"
+                  }
+                ],
+                "networkName": "MyNetwork_30001",
+                "switchId": "FDO24530JKL",
+                "vlanId": 3001
+              }
+            ]
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 400 Response (Trunk Mode with Port-Channel)
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkAttachments"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket ID. This is mandatory if Change Control is enabled
+          disabled: true
+        - name: strictModeValidation
+          value: "true"
+          type: query
+          description: When true, enables strict mode validation for attachment operations.
+      body:
+        type: json
+        data: |-
+          {
+            "attachments": [
+              {
+                "attach": true,
+                "extraConfig": "interface port-channel100\n  description Trunk to upstream switch\n  switchport mode trunk\n  switchport trunk allowed vlan 3001\n  vpc 100\n",
+                "interfaces": [
+                  {
+                    "interfaceRange": "Port-channel100",
+                    "mapping": {
+                      "mappingType": "none"
+                    },
+                    "mode": "trunk",
+                    "nativeVlan": false
+                  },
+                  {
+                    "interfaceRange": "Ethernet1/20",
+                    "mode": "trunk",
+                    "nativeVlan": true
+                  }
+                ],
+                "networkName": "MyNetwork_30001",
+                "switchId": "FDO24530DEF",
+                "vlanId": 3001
+              }
+            ]
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 400 Response (VLAN mapping attachment)
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkAttachments"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket ID. This is mandatory if Change Control is enabled
+          disabled: true
+        - name: strictModeValidation
+          value: "true"
+          type: query
+          description: When true, enables strict mode validation for attachment operations.
+      body:
+        type: json
+        data: |-
+          {
+            "attachments": [
+              {
+                "attach": true,
+                "extraConfig": "interface Ethernet1/30\n  description Customer connection with VLAN mapping\n  switchport vlan mapping 100 3002\n",
+                "interfaces": [
+                  {
+                    "interfaceRange": "Ethernet1/30",
+                    "mapping": {
+                      "customerVlan": 100,
+                      "mappingType": "single"
+                    },
+                    "mode": "trunk",
+                    "nativeVlan": false
+                  }
+                ],
+                "networkName": "MyNetwork_30001",
+                "switchId": "FDO24530GHI",
+                "vlanId": 3001
+              }
+            ]
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 401 Response (Access Mode Attachment)
     description: Unauthorized
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkAttachments"
@@ -712,6 +2108,10 @@ examples:
           type: query
           description: Change Control Ticket ID. This is mandatory if Change Control is enabled
           disabled: true
+        - name: strictModeValidation
+          value: "true"
+          type: query
+          description: When true, enables strict mode validation for attachment operations.
       body:
         type: json
         data: |-
@@ -719,58 +2119,26 @@ examples:
             "attachments": [
               {
                 "attach": true,
-                "extraConfig": "interface Ethernet1/1\ndescription part of MyNetwork_30000\n",
+                "extraConfig": "interface Ethernet1/10\n  description Server connection for MyNetwork_30000\n  spanning-tree port type edge\n",
                 "interfaces": [
                   {
-                    "interfaceRange": "Ethernet1/1",
-                    "mapping": {
-                      "mappingType": "none"
-                    },
-                    "mode": "trunk",
-                    "nativeVlan": false
-                  },
-                  {
-                    "interfaceRange": "Ethernet1/2",
+                    "interfaceRange": "Ethernet1/10",
                     "mode": "access"
                   },
                   {
-                    "interfaceRange": "Eth1/20-25",
-                    "mode": "dot1qTunnel"
-                  },
-                  {
-                    "interfaceRange": "Port-Channel10",
-                    "mode": "trunk",
-                    "nativeVlan": false
+                    "interfaceGroupName": "ServerGroup1",
+                    "interfaceRange": "Ethernet1/11-15",
+                    "mode": "access"
                   }
                 ],
                 "networkName": "MyNetwork_30000",
-                "switchId": "FDO20212311U",
-                "vlanId": 2000
-              },
-              {
-                "attach": true,
-                "extraConfig": "interface Ethernet1/3-5\ndescription part of MyNetwork_30001\n",
-                "interfaces": [
-                  {
-                    "interfaceRange": "Ethernet1/3-5",
-                    "mapping": {
-                      "mappingType": "none"
-                    },
-                    "mode": "trunk",
-                    "nativeVlan": true
-                  },
-                  {
-                    "interfaceRange": "Ethernet1/6",
-                    "mode": "dot1qTunnel"
-                  }
-                ],
-                "networkName": "MyNetwork_30001",
-                "switchId": "FDO20212312U",
-                "vlanId": 2001
+                "switchId": "FDO24530ABC",
+                "vlanId": 3000
               }
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -783,7 +2151,7 @@ examples:
             "description": "Indicates that the request requires user authentication information.",
             "code": 401
           }
-  - name: 401 Response (Detach networks from switches)
+  - name: 401 Response (Bulk Network Detach)
     description: Unauthorized
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkAttachments"
@@ -803,6 +2171,10 @@ examples:
           type: query
           description: Change Control Ticket ID. This is mandatory if Change Control is enabled
           disabled: true
+        - name: strictModeValidation
+          value: "true"
+          type: query
+          description: When true, enables strict mode validation for attachment operations.
       body:
         type: json
         data: |-
@@ -811,25 +2183,22 @@ examples:
               {
                 "attach": false,
                 "networkName": "MyNetwork_30000",
-                "switchId": "FDO20212311U",
-                "vlanId": 2000
+                "switchId": "FDO24530STU"
               },
               {
-                "attach": true,
-                "extraConfig": "interface Ethernet1/6\ndescription Part of MyNetwork_30001\n",
-                "interfaces": [
-                  {
-                    "interfaceRange": "Ethernet1/6",
-                    "mode": "dot1qTunnel"
-                  }
-                ],
+                "attach": false,
                 "networkName": "MyNetwork_30001",
-                "switchId": "FDO20212312U",
-                "vlanId": 2001
+                "switchId": "FDO24530STU"
+              },
+              {
+                "attach": false,
+                "networkName": "MyNetwork_30001",
+                "switchId": "FDO24530VWX"
               }
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -842,7 +2211,340 @@ examples:
             "description": "Indicates that the request requires user authentication information.",
             "code": 401
           }
-  - name: 404 Response (Attach networks to switches)
+  - name: 401 Response (Multi Interface Type Attachment)
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkAttachments"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket ID. This is mandatory if Change Control is enabled
+          disabled: true
+        - name: strictModeValidation
+          value: "true"
+          type: query
+          description: When true, enables strict mode validation for attachment operations.
+      body:
+        type: json
+        data: |-
+          {
+            "attachments": [
+              {
+                "attach": true,
+                "extraConfig": "interface Ethernet1/1\n  description Web server access port\n  spanning-tree port type edge\ninterface port-channel200\n  description vPC peer link\n  vpc peer-link\n",
+                "instanceValues": {
+                  "sviEnabled": true,
+                  "switchRouteTargetExport": [
+                    "65000:30003"
+                  ],
+                  "switchRouteTargetImport": [
+                    "65000:30003"
+                  ]
+                },
+                "interfaces": [
+                  {
+                    "interfaceGroupName": "WebServers",
+                    "interfaceRange": "Ethernet1/1",
+                    "mode": "access"
+                  },
+                  {
+                    "interfaceGroupName": "Uplinks",
+                    "interfaceRange": "Ethernet1/2-5",
+                    "mode": "trunk",
+                    "nativeVlan": false
+                  },
+                  {
+                    "interfaceRange": "Port-channel200",
+                    "mode": "trunk",
+                    "nativeVlan": false
+                  },
+                  {
+                    "interfaceRange": "Ethernet1/10",
+                    "mode": "dot1qTunnel"
+                  }
+                ],
+                "networkName": "MyNetwork_30001",
+                "switchId": "FDO24530PQR",
+                "vlanId": 3001
+              }
+            ]
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 401 Response (Private VLAN Host Attachment)
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkAttachments"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket ID. This is mandatory if Change Control is enabled
+          disabled: true
+        - name: strictModeValidation
+          value: "true"
+          type: query
+          description: When true, enables strict mode validation for attachment operations.
+      body:
+        type: json
+        data: |-
+          {
+            "attachments": [
+              {
+                "attach": true,
+                "extraConfig": "interface Ethernet1/50-55\n  description Isolated hosts in PVLAN\n  switchport mode private-vlan host\n",
+                "interfaces": [
+                  {
+                    "interfaceRange": "Ethernet1/50-55",
+                    "mode": "host"
+                  }
+                ],
+                "networkName": "MyNetwork_30001",
+                "switchId": "FDO24530MNO",
+                "vlanId": 3001
+              }
+            ]
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 401 Response (Private VLAN Promiscuous Attachment)
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkAttachments"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket ID. This is mandatory if Change Control is enabled
+          disabled: true
+        - name: strictModeValidation
+          value: "true"
+          type: query
+          description: When true, enables strict mode validation for attachment operations.
+      body:
+        type: json
+        data: |-
+          {
+            "attachments": [
+              {
+                "attach": true,
+                "extraConfig": "interface Ethernet1/40\n  description Gateway connection for PVLAN\n  switchport mode private-vlan promiscuous\n",
+                "interfaces": [
+                  {
+                    "interfaceRange": "Ethernet1/40",
+                    "mode": "promiscuous"
+                  },
+                  {
+                    "interfaceRange": "Ethernet1/41",
+                    "mode": "trunkPromiscuous"
+                  }
+                ],
+                "networkName": "MyNetwork_30001",
+                "switchId": "FDO24530JKL",
+                "vlanId": 3001
+              }
+            ]
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 401 Response (Trunk Mode with Port-Channel)
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkAttachments"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket ID. This is mandatory if Change Control is enabled
+          disabled: true
+        - name: strictModeValidation
+          value: "true"
+          type: query
+          description: When true, enables strict mode validation for attachment operations.
+      body:
+        type: json
+        data: |-
+          {
+            "attachments": [
+              {
+                "attach": true,
+                "extraConfig": "interface port-channel100\n  description Trunk to upstream switch\n  switchport mode trunk\n  switchport trunk allowed vlan 3001\n  vpc 100\n",
+                "interfaces": [
+                  {
+                    "interfaceRange": "Port-channel100",
+                    "mapping": {
+                      "mappingType": "none"
+                    },
+                    "mode": "trunk",
+                    "nativeVlan": false
+                  },
+                  {
+                    "interfaceRange": "Ethernet1/20",
+                    "mode": "trunk",
+                    "nativeVlan": true
+                  }
+                ],
+                "networkName": "MyNetwork_30001",
+                "switchId": "FDO24530DEF",
+                "vlanId": 3001
+              }
+            ]
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 401 Response (VLAN mapping attachment)
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkAttachments"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket ID. This is mandatory if Change Control is enabled
+          disabled: true
+        - name: strictModeValidation
+          value: "true"
+          type: query
+          description: When true, enables strict mode validation for attachment operations.
+      body:
+        type: json
+        data: |-
+          {
+            "attachments": [
+              {
+                "attach": true,
+                "extraConfig": "interface Ethernet1/30\n  description Customer connection with VLAN mapping\n  switchport vlan mapping 100 3002\n",
+                "interfaces": [
+                  {
+                    "interfaceRange": "Ethernet1/30",
+                    "mapping": {
+                      "customerVlan": 100,
+                      "mappingType": "single"
+                    },
+                    "mode": "trunk",
+                    "nativeVlan": false
+                  }
+                ],
+                "networkName": "MyNetwork_30001",
+                "switchId": "FDO24530GHI",
+                "vlanId": 3001
+              }
+            ]
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 404 Response (Access Mode Attachment)
     description: Not Found
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkAttachments"
@@ -862,6 +2564,10 @@ examples:
           type: query
           description: Change Control Ticket ID. This is mandatory if Change Control is enabled
           disabled: true
+        - name: strictModeValidation
+          value: "true"
+          type: query
+          description: When true, enables strict mode validation for attachment operations.
       body:
         type: json
         data: |-
@@ -869,58 +2575,26 @@ examples:
             "attachments": [
               {
                 "attach": true,
-                "extraConfig": "interface Ethernet1/1\ndescription part of MyNetwork_30000\n",
+                "extraConfig": "interface Ethernet1/10\n  description Server connection for MyNetwork_30000\n  spanning-tree port type edge\n",
                 "interfaces": [
                   {
-                    "interfaceRange": "Ethernet1/1",
-                    "mapping": {
-                      "mappingType": "none"
-                    },
-                    "mode": "trunk",
-                    "nativeVlan": false
-                  },
-                  {
-                    "interfaceRange": "Ethernet1/2",
+                    "interfaceRange": "Ethernet1/10",
                     "mode": "access"
                   },
                   {
-                    "interfaceRange": "Eth1/20-25",
-                    "mode": "dot1qTunnel"
-                  },
-                  {
-                    "interfaceRange": "Port-Channel10",
-                    "mode": "trunk",
-                    "nativeVlan": false
+                    "interfaceGroupName": "ServerGroup1",
+                    "interfaceRange": "Ethernet1/11-15",
+                    "mode": "access"
                   }
                 ],
                 "networkName": "MyNetwork_30000",
-                "switchId": "FDO20212311U",
-                "vlanId": 2000
-              },
-              {
-                "attach": true,
-                "extraConfig": "interface Ethernet1/3-5\ndescription part of MyNetwork_30001\n",
-                "interfaces": [
-                  {
-                    "interfaceRange": "Ethernet1/3-5",
-                    "mapping": {
-                      "mappingType": "none"
-                    },
-                    "mode": "trunk",
-                    "nativeVlan": true
-                  },
-                  {
-                    "interfaceRange": "Ethernet1/6",
-                    "mode": "dot1qTunnel"
-                  }
-                ],
-                "networkName": "MyNetwork_30001",
-                "switchId": "FDO20212312U",
-                "vlanId": 2001
+                "switchId": "FDO24530ABC",
+                "vlanId": 3000
               }
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -933,7 +2607,7 @@ examples:
             "description": "The server cannot find the requested resource.",
             "code": 404
           }
-  - name: 404 Response (Detach networks from switches)
+  - name: 404 Response (Bulk Network Detach)
     description: Not Found
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkAttachments"
@@ -953,6 +2627,10 @@ examples:
           type: query
           description: Change Control Ticket ID. This is mandatory if Change Control is enabled
           disabled: true
+        - name: strictModeValidation
+          value: "true"
+          type: query
+          description: When true, enables strict mode validation for attachment operations.
       body:
         type: json
         data: |-
@@ -961,25 +2639,22 @@ examples:
               {
                 "attach": false,
                 "networkName": "MyNetwork_30000",
-                "switchId": "FDO20212311U",
-                "vlanId": 2000
+                "switchId": "FDO24530STU"
               },
               {
-                "attach": true,
-                "extraConfig": "interface Ethernet1/6\ndescription Part of MyNetwork_30001\n",
-                "interfaces": [
-                  {
-                    "interfaceRange": "Ethernet1/6",
-                    "mode": "dot1qTunnel"
-                  }
-                ],
+                "attach": false,
                 "networkName": "MyNetwork_30001",
-                "switchId": "FDO20212312U",
-                "vlanId": 2001
+                "switchId": "FDO24530STU"
+              },
+              {
+                "attach": false,
+                "networkName": "MyNetwork_30001",
+                "switchId": "FDO24530VWX"
               }
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -992,7 +2667,340 @@ examples:
             "description": "The server cannot find the requested resource.",
             "code": 404
           }
-  - name: 500 Response (Attach networks to switches)
+  - name: 404 Response (Multi Interface Type Attachment)
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkAttachments"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket ID. This is mandatory if Change Control is enabled
+          disabled: true
+        - name: strictModeValidation
+          value: "true"
+          type: query
+          description: When true, enables strict mode validation for attachment operations.
+      body:
+        type: json
+        data: |-
+          {
+            "attachments": [
+              {
+                "attach": true,
+                "extraConfig": "interface Ethernet1/1\n  description Web server access port\n  spanning-tree port type edge\ninterface port-channel200\n  description vPC peer link\n  vpc peer-link\n",
+                "instanceValues": {
+                  "sviEnabled": true,
+                  "switchRouteTargetExport": [
+                    "65000:30003"
+                  ],
+                  "switchRouteTargetImport": [
+                    "65000:30003"
+                  ]
+                },
+                "interfaces": [
+                  {
+                    "interfaceGroupName": "WebServers",
+                    "interfaceRange": "Ethernet1/1",
+                    "mode": "access"
+                  },
+                  {
+                    "interfaceGroupName": "Uplinks",
+                    "interfaceRange": "Ethernet1/2-5",
+                    "mode": "trunk",
+                    "nativeVlan": false
+                  },
+                  {
+                    "interfaceRange": "Port-channel200",
+                    "mode": "trunk",
+                    "nativeVlan": false
+                  },
+                  {
+                    "interfaceRange": "Ethernet1/10",
+                    "mode": "dot1qTunnel"
+                  }
+                ],
+                "networkName": "MyNetwork_30001",
+                "switchId": "FDO24530PQR",
+                "vlanId": 3001
+              }
+            ]
+          }
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 404 Response (Private VLAN Host Attachment)
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkAttachments"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket ID. This is mandatory if Change Control is enabled
+          disabled: true
+        - name: strictModeValidation
+          value: "true"
+          type: query
+          description: When true, enables strict mode validation for attachment operations.
+      body:
+        type: json
+        data: |-
+          {
+            "attachments": [
+              {
+                "attach": true,
+                "extraConfig": "interface Ethernet1/50-55\n  description Isolated hosts in PVLAN\n  switchport mode private-vlan host\n",
+                "interfaces": [
+                  {
+                    "interfaceRange": "Ethernet1/50-55",
+                    "mode": "host"
+                  }
+                ],
+                "networkName": "MyNetwork_30001",
+                "switchId": "FDO24530MNO",
+                "vlanId": 3001
+              }
+            ]
+          }
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 404 Response (Private VLAN Promiscuous Attachment)
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkAttachments"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket ID. This is mandatory if Change Control is enabled
+          disabled: true
+        - name: strictModeValidation
+          value: "true"
+          type: query
+          description: When true, enables strict mode validation for attachment operations.
+      body:
+        type: json
+        data: |-
+          {
+            "attachments": [
+              {
+                "attach": true,
+                "extraConfig": "interface Ethernet1/40\n  description Gateway connection for PVLAN\n  switchport mode private-vlan promiscuous\n",
+                "interfaces": [
+                  {
+                    "interfaceRange": "Ethernet1/40",
+                    "mode": "promiscuous"
+                  },
+                  {
+                    "interfaceRange": "Ethernet1/41",
+                    "mode": "trunkPromiscuous"
+                  }
+                ],
+                "networkName": "MyNetwork_30001",
+                "switchId": "FDO24530JKL",
+                "vlanId": 3001
+              }
+            ]
+          }
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 404 Response (Trunk Mode with Port-Channel)
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkAttachments"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket ID. This is mandatory if Change Control is enabled
+          disabled: true
+        - name: strictModeValidation
+          value: "true"
+          type: query
+          description: When true, enables strict mode validation for attachment operations.
+      body:
+        type: json
+        data: |-
+          {
+            "attachments": [
+              {
+                "attach": true,
+                "extraConfig": "interface port-channel100\n  description Trunk to upstream switch\n  switchport mode trunk\n  switchport trunk allowed vlan 3001\n  vpc 100\n",
+                "interfaces": [
+                  {
+                    "interfaceRange": "Port-channel100",
+                    "mapping": {
+                      "mappingType": "none"
+                    },
+                    "mode": "trunk",
+                    "nativeVlan": false
+                  },
+                  {
+                    "interfaceRange": "Ethernet1/20",
+                    "mode": "trunk",
+                    "nativeVlan": true
+                  }
+                ],
+                "networkName": "MyNetwork_30001",
+                "switchId": "FDO24530DEF",
+                "vlanId": 3001
+              }
+            ]
+          }
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 404 Response (VLAN mapping attachment)
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkAttachments"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket ID. This is mandatory if Change Control is enabled
+          disabled: true
+        - name: strictModeValidation
+          value: "true"
+          type: query
+          description: When true, enables strict mode validation for attachment operations.
+      body:
+        type: json
+        data: |-
+          {
+            "attachments": [
+              {
+                "attach": true,
+                "extraConfig": "interface Ethernet1/30\n  description Customer connection with VLAN mapping\n  switchport vlan mapping 100 3002\n",
+                "interfaces": [
+                  {
+                    "interfaceRange": "Ethernet1/30",
+                    "mapping": {
+                      "customerVlan": 100,
+                      "mappingType": "single"
+                    },
+                    "mode": "trunk",
+                    "nativeVlan": false
+                  }
+                ],
+                "networkName": "MyNetwork_30001",
+                "switchId": "FDO24530GHI",
+                "vlanId": 3001
+              }
+            ]
+          }
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 500 Response (Access Mode Attachment)
     description: Internal Server Error
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkAttachments"
@@ -1012,6 +3020,10 @@ examples:
           type: query
           description: Change Control Ticket ID. This is mandatory if Change Control is enabled
           disabled: true
+        - name: strictModeValidation
+          value: "true"
+          type: query
+          description: When true, enables strict mode validation for attachment operations.
       body:
         type: json
         data: |-
@@ -1019,58 +3031,26 @@ examples:
             "attachments": [
               {
                 "attach": true,
-                "extraConfig": "interface Ethernet1/1\ndescription part of MyNetwork_30000\n",
+                "extraConfig": "interface Ethernet1/10\n  description Server connection for MyNetwork_30000\n  spanning-tree port type edge\n",
                 "interfaces": [
                   {
-                    "interfaceRange": "Ethernet1/1",
-                    "mapping": {
-                      "mappingType": "none"
-                    },
-                    "mode": "trunk",
-                    "nativeVlan": false
-                  },
-                  {
-                    "interfaceRange": "Ethernet1/2",
+                    "interfaceRange": "Ethernet1/10",
                     "mode": "access"
                   },
                   {
-                    "interfaceRange": "Eth1/20-25",
-                    "mode": "dot1qTunnel"
-                  },
-                  {
-                    "interfaceRange": "Port-Channel10",
-                    "mode": "trunk",
-                    "nativeVlan": false
+                    "interfaceGroupName": "ServerGroup1",
+                    "interfaceRange": "Ethernet1/11-15",
+                    "mode": "access"
                   }
                 ],
                 "networkName": "MyNetwork_30000",
-                "switchId": "FDO20212311U",
-                "vlanId": 2000
-              },
-              {
-                "attach": true,
-                "extraConfig": "interface Ethernet1/3-5\ndescription part of MyNetwork_30001\n",
-                "interfaces": [
-                  {
-                    "interfaceRange": "Ethernet1/3-5",
-                    "mapping": {
-                      "mappingType": "none"
-                    },
-                    "mode": "trunk",
-                    "nativeVlan": true
-                  },
-                  {
-                    "interfaceRange": "Ethernet1/6",
-                    "mode": "dot1qTunnel"
-                  }
-                ],
-                "networkName": "MyNetwork_30001",
-                "switchId": "FDO20212312U",
-                "vlanId": 2001
+                "switchId": "FDO24530ABC",
+                "vlanId": 3000
               }
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type
@@ -1083,7 +3063,7 @@ examples:
             "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
             "code": 500
           }
-  - name: 500 Response (Detach networks from switches)
+  - name: 500 Response (Bulk Network Detach)
     description: Internal Server Error
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkAttachments"
@@ -1103,6 +3083,10 @@ examples:
           type: query
           description: Change Control Ticket ID. This is mandatory if Change Control is enabled
           disabled: true
+        - name: strictModeValidation
+          value: "true"
+          type: query
+          description: When true, enables strict mode validation for attachment operations.
       body:
         type: json
         data: |-
@@ -1111,25 +3095,355 @@ examples:
               {
                 "attach": false,
                 "networkName": "MyNetwork_30000",
-                "switchId": "FDO20212311U",
-                "vlanId": 2000
+                "switchId": "FDO24530STU"
               },
               {
-                "attach": true,
-                "extraConfig": "interface Ethernet1/6\ndescription Part of MyNetwork_30001\n",
-                "interfaces": [
-                  {
-                    "interfaceRange": "Ethernet1/6",
-                    "mode": "dot1qTunnel"
-                  }
-                ],
+                "attach": false,
                 "networkName": "MyNetwork_30001",
-                "switchId": "FDO20212312U",
-                "vlanId": 2001
+                "switchId": "FDO24530STU"
+              },
+              {
+                "attach": false,
+                "networkName": "MyNetwork_30001",
+                "switchId": "FDO24530VWX"
               }
             ]
           }
     response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }
+  - name: 500 Response (Multi Interface Type Attachment)
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkAttachments"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket ID. This is mandatory if Change Control is enabled
+          disabled: true
+        - name: strictModeValidation
+          value: "true"
+          type: query
+          description: When true, enables strict mode validation for attachment operations.
+      body:
+        type: json
+        data: |-
+          {
+            "attachments": [
+              {
+                "attach": true,
+                "extraConfig": "interface Ethernet1/1\n  description Web server access port\n  spanning-tree port type edge\ninterface port-channel200\n  description vPC peer link\n  vpc peer-link\n",
+                "instanceValues": {
+                  "sviEnabled": true,
+                  "switchRouteTargetExport": [
+                    "65000:30003"
+                  ],
+                  "switchRouteTargetImport": [
+                    "65000:30003"
+                  ]
+                },
+                "interfaces": [
+                  {
+                    "interfaceGroupName": "WebServers",
+                    "interfaceRange": "Ethernet1/1",
+                    "mode": "access"
+                  },
+                  {
+                    "interfaceGroupName": "Uplinks",
+                    "interfaceRange": "Ethernet1/2-5",
+                    "mode": "trunk",
+                    "nativeVlan": false
+                  },
+                  {
+                    "interfaceRange": "Port-channel200",
+                    "mode": "trunk",
+                    "nativeVlan": false
+                  },
+                  {
+                    "interfaceRange": "Ethernet1/10",
+                    "mode": "dot1qTunnel"
+                  }
+                ],
+                "networkName": "MyNetwork_30001",
+                "switchId": "FDO24530PQR",
+                "vlanId": 3001
+              }
+            ]
+          }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }
+  - name: 500 Response (Private VLAN Host Attachment)
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkAttachments"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket ID. This is mandatory if Change Control is enabled
+          disabled: true
+        - name: strictModeValidation
+          value: "true"
+          type: query
+          description: When true, enables strict mode validation for attachment operations.
+      body:
+        type: json
+        data: |-
+          {
+            "attachments": [
+              {
+                "attach": true,
+                "extraConfig": "interface Ethernet1/50-55\n  description Isolated hosts in PVLAN\n  switchport mode private-vlan host\n",
+                "interfaces": [
+                  {
+                    "interfaceRange": "Ethernet1/50-55",
+                    "mode": "host"
+                  }
+                ],
+                "networkName": "MyNetwork_30001",
+                "switchId": "FDO24530MNO",
+                "vlanId": 3001
+              }
+            ]
+          }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }
+  - name: 500 Response (Private VLAN Promiscuous Attachment)
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkAttachments"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket ID. This is mandatory if Change Control is enabled
+          disabled: true
+        - name: strictModeValidation
+          value: "true"
+          type: query
+          description: When true, enables strict mode validation for attachment operations.
+      body:
+        type: json
+        data: |-
+          {
+            "attachments": [
+              {
+                "attach": true,
+                "extraConfig": "interface Ethernet1/40\n  description Gateway connection for PVLAN\n  switchport mode private-vlan promiscuous\n",
+                "interfaces": [
+                  {
+                    "interfaceRange": "Ethernet1/40",
+                    "mode": "promiscuous"
+                  },
+                  {
+                    "interfaceRange": "Ethernet1/41",
+                    "mode": "trunkPromiscuous"
+                  }
+                ],
+                "networkName": "MyNetwork_30001",
+                "switchId": "FDO24530JKL",
+                "vlanId": 3001
+              }
+            ]
+          }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }
+  - name: 500 Response (Trunk Mode with Port-Channel)
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkAttachments"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket ID. This is mandatory if Change Control is enabled
+          disabled: true
+        - name: strictModeValidation
+          value: "true"
+          type: query
+          description: When true, enables strict mode validation for attachment operations.
+      body:
+        type: json
+        data: |-
+          {
+            "attachments": [
+              {
+                "attach": true,
+                "extraConfig": "interface port-channel100\n  description Trunk to upstream switch\n  switchport mode trunk\n  switchport trunk allowed vlan 3001\n  vpc 100\n",
+                "interfaces": [
+                  {
+                    "interfaceRange": "Port-channel100",
+                    "mapping": {
+                      "mappingType": "none"
+                    },
+                    "mode": "trunk",
+                    "nativeVlan": false
+                  },
+                  {
+                    "interfaceRange": "Ethernet1/20",
+                    "mode": "trunk",
+                    "nativeVlan": true
+                  }
+                ],
+                "networkName": "MyNetwork_30001",
+                "switchId": "FDO24530DEF",
+                "vlanId": 3001
+              }
+            ]
+          }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }
+  - name: 500 Response (VLAN mapping attachment)
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networkAttachments"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket ID. This is mandatory if Change Control is enabled
+          disabled: true
+        - name: strictModeValidation
+          value: "true"
+          type: query
+          description: When true, enables strict mode validation for attachment operations.
+      body:
+        type: json
+        data: |-
+          {
+            "attachments": [
+              {
+                "attach": true,
+                "extraConfig": "interface Ethernet1/30\n  description Customer connection with VLAN mapping\n  switchport vlan mapping 100 3002\n",
+                "interfaces": [
+                  {
+                    "interfaceRange": "Ethernet1/30",
+                    "mapping": {
+                      "customerVlan": 100,
+                      "mappingType": "single"
+                    },
+                    "mode": "trunk",
+                    "nativeVlan": false
+                  }
+                ],
+                "networkName": "MyNetwork_30001",
+                "switchId": "FDO24530GHI",
+                "vlanId": 3001
+              }
+            ]
+          }
+    response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

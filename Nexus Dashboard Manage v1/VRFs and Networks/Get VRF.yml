@@ -2,6 +2,8 @@ info:
   name: Get VRF
   type: http
   seq: 33
+  tags:
+    - VRFs and Networks
 
 http:
   method: GET
@@ -59,6 +61,7 @@ examples:
           description: If true, fetches the members details of a policy
           disabled: true
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -71,83 +74,84 @@ examples:
               "advertiseDefaultRoute": true,
               "advertiseHostRoute": false,
               "asn": "65789",
-              "bgpPassword": "a3f5b6",
-              "bgpPasswordKeyType": 3,
               "configureStaticDefaultRoute": true,
+              "disableRtAuto": false,
               "evpnRouteTargetExport": [
                 "65001:1",
-                "65101:2000,65003:4000"
+                "65101:2000",
+                "65003:4000"
               ],
               "evpnRouteTargetImport": [
                 "65000:1",
-                "65100:1000,65002:3000"
+                "65100:1000",
+                "65002:3000"
               ],
-              "ipv4Trm": false,
               "ipv6LinkLocal": true,
               "loopbackId": 26,
               "maxBgpPaths": 1,
               "maxIbgpPaths": 2,
-              "mtu": 9216,
-              "mvpnRouteTargetExport": [
-                "65000:100",
-                "65001:200,65002:300",
-                "65100:1000,65101:2000,65102:3000"
-              ],
-              "mvpnRouteTargetImport": [
-                "65000:1",
-                "65001:10,65002:20",
-                "65100:1000,65101:2000,65102:3000"
-              ],
               "netflow": false,
-              "netflowMonitor": "Netflow_monitor_123",
               "routeTargetExport": [
                 "65000:1",
-                "65100:1000,65001:2000"
+                "65100:1000",
+                "65001:2000"
               ],
               "routeTargetImport": [
                 "65000:1",
-                "65001:10,65002:20",
-                "65100:1000,65101:2000,65102:3000"
+                "65001:10",
+                "65002:20",
+                "65100:1000",
+                "65101:2000",
+                "65102:3000"
               ],
-              "routingTag": 12345,
-              "rpAddress": "10.1.0.1",
               "rtAuto": false,
+              "v4RpAbsent": false,
+              "v4RpAddress": "10.1.0.1",
+              "v4RpExternal": false
+            },
+            "coreData": {
+              "vrfDescription": "vrf description",
+              "vrfInterfaceDescription": "example",
+              "vrfIpVersion": "both",
+              "vrfVlanName": "example"
+            },
+            "fabricData": {
+              "advertiseDefaultRoute": true,
+              "advertiseHostRoute": false,
+              "configureStaticDefaultRoute": true,
+              "netflow": false,
               "trmData": {
                 "ipv4Trm": true,
                 "l3VniMulticastGroup": "239.1.1.1",
+                "loopbackNumber": 26,
                 "mvpnRouteTargetExport": [
                   "65000:100",
-                  "65001:200,65002:300",
-                  "65100:1000,65101:2000,65102:3000"
+                  "65001:200",
+                  "65002:300",
+                  "65100:1000",
+                  "65101:2000",
+                  "65102:3000"
                 ],
                 "mvpnRouteTargetImport": [
                   "65000:1",
-                  "65001:10,65002:20",
-                  "65100:1000,65101:2000,65102:3000"
+                  "65001:10",
+                  "65002:20",
+                  "65100:1000",
+                  "65101:2000",
+                  "65102:3000"
                 ],
                 "trmOnBgw": false,
                 "v4MulticastGroup": "224.1.0.0/4",
                 "v4RpAbsent": false,
                 "v4RpAddress": "10.1.0.1",
                 "v4RpExternal": false
-              },
-              "trmOnBgw": false,
-              "v4MulticastGroup": "224.1.0.0/4",
-              "v4RpAbsent": false,
-              "v4RpAddress": "10.1.0.1",
-              "v4RpExternal": false,
-              "vrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET"
+              }
             },
-            "coreData": {
-              "vrfDescription": "vrf description",
-              "vrfInterfaceDescription": "example",
-              "vrfVlanName": "example"
-            },
-            "fabricName": "MyFabric",
-            "vlanId": 2002,
+            "fabricName": "fab1",
+            "vlanId": 2000,
             "vrfId": 50000,
             "vrfName": "MyVRF_50000",
-            "vrfType": "vxlan"
+            "vrfType": "vxlanEbgp"
           }
   - name: 400 Response
     description: Bad Request
@@ -174,6 +178,7 @@ examples:
           description: If true, fetches the members details of a policy
           disabled: true
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -211,6 +216,7 @@ examples:
           description: If true, fetches the members details of a policy
           disabled: true
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -248,6 +254,7 @@ examples:
           description: If true, fetches the members details of a policy
           disabled: true
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -285,6 +292,7 @@ examples:
           description: If true, fetches the members details of a policy
           disabled: true
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -322,6 +330,7 @@ examples:
           description: If true, fetches the members details of a policy
           disabled: true
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

@@ -1,0 +1,1398 @@
+info:
+  name: List Service endpoints clients
+  type: http
+  seq: 32
+  tags:
+    - Flow Analytics
+
+http:
+  method: GET
+  url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/traffic/services/clients"
+  params:
+    - name: fabricName
+      value: ""
+      type: query
+      description: Name of the fabric
+    - name: clusterName
+      value: ""
+      type: query
+      description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+      disabled: true
+    - name: filter
+      value: ""
+      type: query
+      description: Lucene format filter - Filter the response based on this filter field
+      disabled: true
+    - name: startDate
+      value: ""
+      type: query
+      description: Start date
+      disabled: true
+    - name: endDate
+      value: ""
+      type: query
+      description: End date
+      disabled: true
+    - name: sort
+      value: ""
+      type: query
+      description: |
+        Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+        Ascending order by default: "field1"
+        Specific order for one field: "field1:asc" or "field1:desc"
+        Specific order with multiple fields: "field1:asc,field2:desc"
+      disabled: true
+    - name: offset
+      value: ""
+      type: query
+      description: Number of records to skip for pagination
+      disabled: true
+    - name: max
+      value: ""
+      type: query
+      description: Number of records to return
+      disabled: true
+    - name: granularity
+      value: ""
+      type: query
+      description: Granularity of the values with respect to duration in minutes (m), hours (h) and days (d)
+      disabled: true
+    - name: statisticName
+      value: performanceScore
+      type: query
+      description: Name of the stats to be returned if granularity is specified
+      disabled: true
+    - name: statisticName
+      value: inPerformanceScore
+      type: query
+      description: Name of the stats to be returned if granularity is specified
+      disabled: true
+    - name: statisticName
+      value: outPerformanceScore
+      type: query
+      description: Name of the stats to be returned if granularity is specified
+      disabled: true
+    - name: statisticName
+      value: congestionScore
+      type: query
+      description: Name of the stats to be returned if granularity is specified
+      disabled: true
+    - name: statisticName
+      value: inCongestionScore
+      type: query
+      description: Name of the stats to be returned if granularity is specified
+      disabled: true
+    - name: statisticName
+      value: outCongestionScore
+      type: query
+      description: Name of the stats to be returned if granularity is specified
+      disabled: true
+    - name: statisticName
+      value: latencyScore
+      type: query
+      description: Name of the stats to be returned if granularity is specified
+      disabled: true
+    - name: statisticName
+      value: inLatencyScore
+      type: query
+      description: Name of the stats to be returned if granularity is specified
+      disabled: true
+    - name: statisticName
+      value: outLatencyScore
+      type: query
+      description: Name of the stats to be returned if granularity is specified
+      disabled: true
+    - name: statisticName
+      value: dropScore
+      type: query
+      description: Name of the stats to be returned if granularity is specified
+      disabled: true
+    - name: statisticName
+      value: inDropScore
+      type: query
+      description: Name of the stats to be returned if granularity is specified
+      disabled: true
+    - name: statisticName
+      value: outDropScore
+      type: query
+      description: Name of the stats to be returned if granularity is specified
+      disabled: true
+    - name: statisticName
+      value: inLatencyAvg
+      type: query
+      description: Name of the stats to be returned if granularity is specified
+      disabled: true
+    - name: statisticName
+      value: inLatencyMax
+      type: query
+      description: Name of the stats to be returned if granularity is specified
+      disabled: true
+    - name: statisticName
+      value: outLatencyAvg
+      type: query
+      description: Name of the stats to be returned if granularity is specified
+      disabled: true
+    - name: statisticName
+      value: outLatencyMax
+      type: query
+      description: Name of the stats to be returned if granularity is specified
+      disabled: true
+    - name: statisticName
+      value: outBytes
+      type: query
+      description: Name of the stats to be returned if granularity is specified
+      disabled: true
+    - name: statisticName
+      value: inBytes
+      type: query
+      description: Name of the stats to be returned if granularity is specified
+      disabled: true
+    - name: statisticName
+      value: outRate
+      type: query
+      description: Name of the stats to be returned if granularity is specified
+      disabled: true
+    - name: statisticName
+      value: inRate
+      type: query
+      description: Name of the stats to be returned if granularity is specified
+      disabled: true
+    - name: statisticName
+      value: sessionCount
+      type: query
+      description: Name of the stats to be returned if granularity is specified
+      disabled: true
+    - name: statisticName
+      value: tcpRstCount
+      type: query
+      description: Name of the stats to be returned if granularity is specified
+      disabled: true
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: no_granularity
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/traffic/services/clients"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: granularity
+          value: ""
+          type: query
+          description: Granularity of the values with respect to duration in minutes (m), hours (h) and days (d)
+          disabled: true
+        - name: statisticName
+          value: performanceScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: inPerformanceScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: outPerformanceScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: congestionScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: inCongestionScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: outCongestionScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: latencyScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: inLatencyScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: outLatencyScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: dropScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: inDropScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: outDropScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: inLatencyAvg
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: inLatencyMax
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: outLatencyAvg
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: outLatencyMax
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: outBytes
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: inBytes
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: outRate
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: inRate
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: sessionCount
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: tcpRstCount
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "clients": [
+              {
+                "serviceEndpoint": "192.168.10.1:21",
+                "clientIp": "10.10.10.1",
+                "serviceEndpointPort": 21,
+                "serviceEndpointIp": "192.168.10.1",
+                "serviceVrfTenant": "tenant1",
+                "serviceVrf": "app_vrf-1",
+                "serviceTenant": "tenant1",
+                "clientInterfaces": [
+                  "eth1/10"
+                ],
+                "clientNodes": [
+                  "scaleleaf-201"
+                ],
+                "clientVrfTenant": "tenant1",
+                "clientVrf": "app_vrf-1",
+                "clientTenant": "tenant1",
+                "clientBridgeDomain": "app_bd-1",
+                "clientVni": 0,
+                "clientVlan": 0,
+                "clientEndpointGroup": "ftp",
+                "clientDnsName": "",
+                "fabricName": "DC-WEST",
+                "performanceScore": 61,
+                "latencyScore": 0,
+                "congestionScore": 0,
+                "dropScore": 61,
+                "latestPerformanceScore": 0,
+                "latestLatencyScore": 0,
+                "latestCongestionScore": 0,
+                "latestDropScore": 0,
+                "nodes": [
+                  "scaleleaf-201"
+                ],
+                "interfaces": [
+                  "eth1/10"
+                ],
+                "sessionCount": 847,
+                "outBytes": 126233976714,
+                "inBytes": 279410831,
+                "outRate": 146358233,
+                "inRate": 323953,
+                "inLatencyAvg": 4,
+                "outLatencyAvg": 4,
+                "inLatencyMax": 4.92,
+                "outLatencyMax": 4.92,
+                "inDropScore": 61,
+                "outDropScore": 61,
+                "dropReason": "buffer drop",
+                "dropNodes": "scaleleaf-202",
+                "inCongestion": 0,
+                "outCongestion": 0,
+                "inCongestionScore": 0,
+                "outCongestionScore": 0,
+                "inBurstMax": 0,
+                "outBurstMax": 0,
+                "protocol": 6,
+                "startTimestamp": "2024-07-10T19:10:18.000000Z",
+                "endTimestamp": "2024-07-10T21:05:25.000000Z",
+                "tcpRstCount": 0,
+                "lastUpdated": "2024-07-10T21:05:25.000000Z",
+                "endpointId": "DC-WEST/tenant1/app_bd-1/27:ee:14:12:f8:84",
+                "endpointTenant": "tenant1",
+                "endpointVrf": "app_vrf-1",
+                "startDate": "2024-07-10T19:10:18.000000Z",
+                "endDate": "2024-07-10T21:05:25.000000Z"
+              }
+            ],
+            "meta": {
+              "counts": {
+                "total": 1,
+                "remaining": 0
+              }
+            }
+          }
+  - name: statName=performanceScore&granularity=5m
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/traffic/services/clients"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: granularity
+          value: ""
+          type: query
+          description: Granularity of the values with respect to duration in minutes (m), hours (h) and days (d)
+          disabled: true
+        - name: statisticName
+          value: performanceScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: inPerformanceScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: outPerformanceScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: congestionScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: inCongestionScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: outCongestionScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: latencyScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: inLatencyScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: outLatencyScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: dropScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: inDropScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: outDropScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: inLatencyAvg
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: inLatencyMax
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: outLatencyAvg
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: outLatencyMax
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: outBytes
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: inBytes
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: outRate
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: inRate
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: sessionCount
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: tcpRstCount
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "clients": [
+              {
+                "serviceEndpoint": "192.168.10.1:21",
+                "clientIp": "10.10.10.1",
+                "serviceEndpointPort": 21,
+                "serviceEndpointIp": "192.168.10.1",
+                "serviceVrfTenant": "tenant1",
+                "serviceVrf": "app_vrf-1",
+                "serviceTenant": "tenant1",
+                "clientInterfaces": [
+                  "eth1/10"
+                ],
+                "clientNodes": [
+                  "scaleleaf-201"
+                ],
+                "clientVrfTenant": "tenant1",
+                "clientVrf": "app_vrf-1",
+                "clientTenant": "tenant1",
+                "clientBridgeDomain": "app_bd-1",
+                "clientVni": 0,
+                "clientVlan": 0,
+                "clientEndpointGroup": "ftp",
+                "clientDnsName": "",
+                "fabricName": "DC-WEST",
+                "performanceScore": 61,
+                "latencyScore": 0,
+                "congestionScore": 0,
+                "dropScore": 61,
+                "latestPerformanceScore": 0,
+                "latestLatencyScore": 0,
+                "latestCongestionScore": 0,
+                "latestDropScore": 0,
+                "nodes": [
+                  "scaleleaf-201"
+                ],
+                "interfaces": [
+                  "eth1/10"
+                ],
+                "sessionCount": 847,
+                "outBytes": 126233976714,
+                "inBytes": 279410831,
+                "outRate": 146358233,
+                "inRate": 323953,
+                "inLatencyAvg": 4,
+                "outLatencyAvg": 4,
+                "inLatencyMax": 4.92,
+                "outLatencyMax": 4.92,
+                "inDropScore": 61,
+                "outDropScore": 61,
+                "dropReason": "buffer drop",
+                "dropNodes": "scaleleaf-202",
+                "inCongestion": 0,
+                "outCongestion": 0,
+                "inCongestionScore": 0,
+                "outCongestionScore": 0,
+                "inBurstMax": 0,
+                "outBurstMax": 0,
+                "protocol": 6,
+                "startTimestamp": "2024-07-10T19:10:18.000000Z",
+                "endTimestamp": "2024-07-10T21:05:25.000000Z",
+                "tcpRstCount": 0,
+                "lastUpdated": "2024-07-10T21:05:25.000000Z",
+                "endpointId": "DC-WEST/tenant1/app_bd-1/27:ee:14:12:f8:84",
+                "endpointTenant": "tenant1",
+                "endpointVrf": "app_vrf-1",
+                "startDate": "2024-07-10T19:10:18.000000Z",
+                "endDate": "2024-07-10T21:05:25.000000Z",
+                "statistics": [
+                  {
+                    "timestamp": "2024-07-10T19:15:00.000Z",
+                    "performanceScore": 0
+                  },
+                  {
+                    "timestamp": "2024-07-10T19:20:00.000Z",
+                    "performanceScore": 0
+                  }
+                ]
+              }
+            ],
+            "meta": {
+              "counts": {
+                "total": 1,
+                "remaining": 0
+              }
+            }
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/traffic/services/clients"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: granularity
+          value: ""
+          type: query
+          description: Granularity of the values with respect to duration in minutes (m), hours (h) and days (d)
+          disabled: true
+        - name: statisticName
+          value: performanceScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: inPerformanceScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: outPerformanceScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: congestionScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: inCongestionScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: outCongestionScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: latencyScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: inLatencyScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: outLatencyScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: dropScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: inDropScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: outDropScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: inLatencyAvg
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: inLatencyMax
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: outLatencyAvg
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: outLatencyMax
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: outBytes
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: inBytes
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: outRate
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: inRate
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: sessionCount
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: tcpRstCount
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/traffic/services/clients"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: granularity
+          value: ""
+          type: query
+          description: Granularity of the values with respect to duration in minutes (m), hours (h) and days (d)
+          disabled: true
+        - name: statisticName
+          value: performanceScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: inPerformanceScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: outPerformanceScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: congestionScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: inCongestionScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: outCongestionScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: latencyScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: inLatencyScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: outLatencyScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: dropScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: inDropScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: outDropScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: inLatencyAvg
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: inLatencyMax
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: outLatencyAvg
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: outLatencyMax
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: outBytes
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: inBytes
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: outRate
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: inRate
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: sessionCount
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: tcpRstCount
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 403 Response
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/traffic/services/clients"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: granularity
+          value: ""
+          type: query
+          description: Granularity of the values with respect to duration in minutes (m), hours (h) and days (d)
+          disabled: true
+        - name: statisticName
+          value: performanceScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: inPerformanceScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: outPerformanceScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: congestionScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: inCongestionScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: outCongestionScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: latencyScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: inLatencyScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: outLatencyScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: dropScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: inDropScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: outDropScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: inLatencyAvg
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: inLatencyMax
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: outLatencyAvg
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: outLatencyMax
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: outBytes
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: inBytes
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: outRate
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: inRate
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: sessionCount
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: tcpRstCount
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 500 Response
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/traffic/services/clients"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: granularity
+          value: ""
+          type: query
+          description: Granularity of the values with respect to duration in minutes (m), hours (h) and days (d)
+          disabled: true
+        - name: statisticName
+          value: performanceScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: inPerformanceScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: outPerformanceScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: congestionScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: inCongestionScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: outCongestionScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: latencyScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: inLatencyScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: outLatencyScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: dropScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: inDropScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: outDropScore
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: inLatencyAvg
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: inLatencyMax
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: outLatencyAvg
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: outLatencyMax
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: outBytes
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: inBytes
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: outRate
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: inRate
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: sessionCount
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+        - name: statisticName
+          value: tcpRstCount
+          type: query
+          description: Name of the stats to be returned if granularity is specified
+          disabled: true
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }

@@ -1,7 +1,9 @@
 info:
   name: Create new ISSU custom report checks
   type: http
-  seq: 33
+  seq: 27
+  tags:
+    - Fabric Software Management
 
 http:
   method: POST
@@ -21,23 +23,29 @@ http:
     data: |-
       {
         "reportsCheck": {
-          "acceptableVariance": 0,
+          "acceptableVariance": 2,
           "advancedChecks": [
             {
-              "checkMustContains": [],
-              "checkMustNotContains": []
+              "checkMustContains": [
+                "module version"
+              ],
+              "checkMustNotContains": [
+                "module Name"
+              ]
             }
           ],
-          "checkType": "",
-          "cliCommand": "",
-          "failureLevel": "",
-          "ignoreFilters": [],
-          "postUpdateDelay": 0,
-          "reportCheckDescription": "",
-          "reportCheckName": "",
-          "reportCheckType": ""
+          "checkType": "custom",
+          "cliCommand": "sh version",
+          "failureLevel": "error",
+          "ignoreFilters": [
+            "NXOS version"
+          ],
+          "postUpdateDelay": 10,
+          "reportCheckDescription": "nxos version",
+          "reportCheckName": "nxos_version",
+          "reportCheckType": "preAndPost"
         },
-        "switchId": ""
+        "switchId": "FDO24020JNK"
       }
   auth: inherit
 
@@ -93,6 +101,7 @@ examples:
             "switchId": "FDO24020JNK"
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -152,6 +161,7 @@ examples:
             "switchId": "FDO24020JNK"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -209,6 +219,7 @@ examples:
             "switchId": "FDO24020JNK"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -266,6 +277,7 @@ examples:
             "switchId": "FDO24020JNK"
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -323,6 +335,7 @@ examples:
             "switchId": "FDO24020JNK"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

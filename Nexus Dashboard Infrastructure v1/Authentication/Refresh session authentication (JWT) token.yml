@@ -2,6 +2,8 @@ info:
   name: Refresh session authentication (JWT) token
   type: http
   seq: 6
+  tags:
+    - Authentication
 
 http:
   method: POST
@@ -12,6 +14,12 @@ http:
       type: query
       description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
       disabled: true
+  body:
+    type: json
+    data: |-
+      {
+        "jwttoken": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImI0Z2Mwb2R0Y2Q1eDlxeXVxcjFsMDdjdWViY2VrYm52IiwidHlwIjoiSldUIn0..."
+      }
   auth: inherit
 
 settings:
@@ -32,7 +40,14 @@ examples:
           type: query
           description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
           disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "jwttoken": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImI0Z2Mwb2R0Y2Q1eDlxeXVxcjFsMDdjdWViY2VrYm52IiwidHlwIjoiSldUIn0..."
+          }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -41,13 +56,13 @@ examples:
         type: json
         data: |-
           {
-            "jwttoken": "",
-            "rbac": "",
-            "redirectURI": "",
-            "statusCode": 0,
-            "token": "",
-            "username": "",
-            "usertype": ""
+            "jwttoken": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImI0Z2Mwb2R0Y2Q1eDlxeXVxcjFsMDdjdWViY2VrYm52IiwidHlwIjoiSldUIn0...",
+            "rbac": "[{\"domain\":\"all\",\"rolesMap\":{\"super-admin\":{}}}]",
+            "redirectURI": "https://idp.example.com/authorize?...",
+            "statusCode": 200,
+            "token": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImI0Z2Mwb2R0Y2Q1eDlxeXVxcjFsMDdjdWViY2VrYm52IiwidHlwIjoiSldUIn0...",
+            "username": "admin",
+            "usertype": "local"
           }
   - name: 401 Response
     description: Unauthorized
@@ -60,7 +75,14 @@ examples:
           type: query
           description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
           disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "jwttoken": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImI0Z2Mwb2R0Y2Q1eDlxeXVxcjFsMDdjdWViY2VrYm52IiwidHlwIjoiSldUIn0..."
+          }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -82,7 +104,14 @@ examples:
           type: query
           description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
           disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "jwttoken": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImI0Z2Mwb2R0Y2Q1eDlxeXVxcjFsMDdjdWViY2VrYm52IiwidHlwIjoiSldUIn0..."
+          }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

@@ -2,6 +2,8 @@ info:
   name: Update AI server mapping configuration
   type: http
   seq: 13
+  tags:
+    - Fabric Management
 
 http:
   method: PUT
@@ -31,8 +33,7 @@ http:
     data:
       - name: file
         type: text
-        value: ""
-        description: The AI server mapping file
+        value: binary
   auth: inherit
 
 settings:
@@ -72,9 +73,9 @@ examples:
         data:
           - name: file
             type: text
-            value: ""
-            description: The AI server mapping file
+            value: binary
     response:
+      status: 204
       statusText: No Content
       body:
         type: text
@@ -109,9 +110,9 @@ examples:
         data:
           - name: file
             type: text
-            value: ""
-            description: The AI server mapping file
+            value: binary
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -154,9 +155,9 @@ examples:
         data:
           - name: file
             type: text
-            value: ""
-            description: The AI server mapping file
+            value: binary
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -199,9 +200,9 @@ examples:
         data:
           - name: file
             type: text
-            value: ""
-            description: The AI server mapping file
+            value: binary
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -244,9 +245,9 @@ examples:
         data:
           - name: file
             type: text
-            value: ""
-            description: The AI server mapping file
+            value: binary
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -289,9 +290,9 @@ examples:
         data:
           - name: file
             type: text
-            value: ""
-            description: The AI server mapping file
+            value: binary
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

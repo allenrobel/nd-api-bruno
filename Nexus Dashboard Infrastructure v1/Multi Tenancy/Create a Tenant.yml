@@ -2,6 +2,8 @@ info:
   name: Create a Tenant
   type: http
   seq: 7
+  tags:
+    - Multi Tenancy
 
 http:
   method: POST
@@ -16,8 +18,8 @@ http:
     type: json
     data: |-
       {
-        "description": "",
-        "name": ""
+        "description": "San Jose Nexus1 team",
+        "name": "SJ-NX-1"
       }
   auth: inherit
 
@@ -47,6 +49,7 @@ examples:
             "name": "SJ-NX-1"
           }
     response:
+      status: 201
       statusText: Created
       headers:
         - name: Content-Type
@@ -77,6 +80,7 @@ examples:
             "name": "SJ-NX-1"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -108,6 +112,7 @@ examples:
             "name": "SJ-NX-1"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -139,6 +144,7 @@ examples:
             "name": "SJ-NX-1"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -170,6 +176,7 @@ examples:
             "name": "SJ-NX-1"
           }
     response:
+      status: 409
       statusText: Conflict
       headers:
         - name: Content-Type
@@ -201,6 +208,7 @@ examples:
             "name": "SJ-NX-1"
           }
     response:
+      status: 429
       statusText: Too Many Requests
       headers:
         - name: Content-Type
@@ -232,6 +240,7 @@ examples:
             "name": "SJ-NX-1"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

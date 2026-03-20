@@ -2,6 +2,8 @@ info:
   name: Retrieve compute resources for all nodes
   type: http
   seq: 5
+  tags:
+    - System Status
 
 http:
   method: GET
@@ -18,17 +20,15 @@ http:
       description: Node Name
       disabled: true
     - name: timeRangeDuration
-      value: ""
+      value: 0d0h1m0s
       type: query
       description: |
         Resoure usage over a time range. Prefer to use timeRange query rather  than pulling via separate instant queries.
-      disabled: true
     - name: timeRangeStep
-      value: ""
+      value: 0d0h1m0s
       type: query
       description: |
         The step parameter defines how many data points are returned from the time range query.
-      disabled: true
   auth: inherit
 
 settings:
@@ -55,18 +55,17 @@ examples:
           description: Node Name
           disabled: true
         - name: timeRangeDuration
-          value: ""
+          value: 0d0h1m0s
           type: query
           description: |
             Resoure usage over a time range. Prefer to use timeRange query rather  than pulling via separate instant queries.
-          disabled: true
         - name: timeRangeStep
-          value: ""
+          value: 0d0h1m0s
           type: query
           description: |
             The step parameter defines how many data points are returned from the time range query.
-          disabled: true
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -159,18 +158,17 @@ examples:
           description: Node Name
           disabled: true
         - name: timeRangeDuration
-          value: ""
+          value: 0d0h1m0s
           type: query
           description: |
             Resoure usage over a time range. Prefer to use timeRange query rather  than pulling via separate instant queries.
-          disabled: true
         - name: timeRangeStep
-          value: ""
+          value: 0d0h1m0s
           type: query
           description: |
             The step parameter defines how many data points are returned from the time range query.
-          disabled: true
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -200,18 +198,17 @@ examples:
           description: Node Name
           disabled: true
         - name: timeRangeDuration
-          value: ""
+          value: 0d0h1m0s
           type: query
           description: |
             Resoure usage over a time range. Prefer to use timeRange query rather  than pulling via separate instant queries.
-          disabled: true
         - name: timeRangeStep
-          value: ""
+          value: 0d0h1m0s
           type: query
           description: |
             The step parameter defines how many data points are returned from the time range query.
-          disabled: true
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -241,18 +238,17 @@ examples:
           description: Node Name
           disabled: true
         - name: timeRangeDuration
-          value: ""
+          value: 0d0h1m0s
           type: query
           description: |
             Resoure usage over a time range. Prefer to use timeRange query rather  than pulling via separate instant queries.
-          disabled: true
         - name: timeRangeStep
-          value: ""
+          value: 0d0h1m0s
           type: query
           description: |
             The step parameter defines how many data points are returned from the time range query.
-          disabled: true
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -282,18 +278,17 @@ examples:
           description: Node Name
           disabled: true
         - name: timeRangeDuration
-          value: ""
+          value: 0d0h1m0s
           type: query
           description: |
             Resoure usage over a time range. Prefer to use timeRange query rather  than pulling via separate instant queries.
-          disabled: true
         - name: timeRangeStep
-          value: ""
+          value: 0d0h1m0s
           type: query
           description: |
             The step parameter defines how many data points are returned from the time range query.
-          disabled: true
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

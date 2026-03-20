@@ -2,6 +2,8 @@ info:
   name: Delete uploaded images
   type: http
   seq: 7
+  tags:
+    - Fabric Software Management
 
 http:
   method: POST
@@ -16,7 +18,10 @@ http:
     type: json
     data: |-
       {
-        "imageNames": []
+        "imageNames": [
+          "nxos64-cs.10.2.2.F.bin",
+          "nxos64-cs.10.3.2.F.bin"
+        ]
       }
   auth: inherit
 
@@ -48,6 +53,7 @@ examples:
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -90,6 +96,7 @@ examples:
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -123,6 +130,7 @@ examples:
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -156,6 +164,7 @@ examples:
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -189,6 +198,7 @@ examples:
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

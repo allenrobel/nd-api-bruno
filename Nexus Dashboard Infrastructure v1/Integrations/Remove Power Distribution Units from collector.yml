@@ -2,6 +2,8 @@ info:
   name: Remove Power Distribution Units from collector
   type: http
   seq: 65
+  tags:
+    - Integrations
 
 http:
   method: POST
@@ -24,7 +26,10 @@ http:
     type: json
     data: |-
       {
-        "ipCollection": []
+        "ipCollection": [
+          "172.15.36.2",
+          "172.15.36.3"
+        ]
       }
   auth: inherit
 
@@ -64,6 +69,7 @@ examples:
             ]
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -74,9 +80,9 @@ examples:
           {
             "results": [
               {
-                "message": "",
-                "pduIp": "",
-                "status": ""
+                "message": "Error in deleting Power Distribution Unit",
+                "pduIp": "172.135.55.1",
+                "status": "success"
               }
             ]
           }
@@ -109,6 +115,7 @@ examples:
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -119,9 +126,9 @@ examples:
           {
             "results": [
               {
-                "message": "",
-                "pduIp": "",
-                "status": ""
+                "message": "Error in deleting Power Distribution Unit",
+                "pduIp": "172.135.55.1",
+                "status": "success"
               }
             ]
           }
@@ -154,6 +161,7 @@ examples:
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -195,6 +203,7 @@ examples:
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -236,6 +245,7 @@ examples:
             ]
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -277,6 +287,7 @@ examples:
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

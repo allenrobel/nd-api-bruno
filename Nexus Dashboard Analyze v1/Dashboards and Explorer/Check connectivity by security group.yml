@@ -1,0 +1,319 @@
+info:
+  name: Check connectivity by security group
+  type: http
+  seq: 11
+  tags:
+    - Dashboards and Explorer
+
+http:
+  method: POST
+  url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/explorer/actions/validateConnectivity"
+  params:
+    - name: clusterName
+      value: ""
+      type: query
+      description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+      disabled: true
+  body:
+    type: json
+    data: |-
+      {
+        "analysisDate": "2025-01-22T20:38:22.269Z",
+        "dstIdentifier": "uni/tn-Prod/ap-OnlineStore/epg-Database",
+        "fabricName": "Prod",
+        "healthStatus": "unhealthy",
+        "queryString": "Can Frontend EPG talk to Database EPG",
+        "snapshotId": "123e4567-e89b-12d3-a456-426614174000",
+        "srcIdentifier": "uni/tn-Prod/ap-OnlineStore/epg-Frontend"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: default
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/explorer/actions/validateConnectivity"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "analysisDate": "2025-01-22T20:38:22.269Z",
+            "dstIdentifier": "uni/tn-Prod/ap-OnlineStore/epg-Database",
+            "fabricName": "Prod",
+            "healthStatus": "unhealthy",
+            "queryString": "Can Frontend EPG talk to Database EPG",
+            "snapshotId": "123e4567-e89b-12d3-a456-426614174000",
+            "srcIdentifier": "uni/tn-Prod/ap-OnlineStore/epg-Frontend"
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "canTalk": true,
+            "connectedSecurityGroupDetails": [
+              {
+                "appProfile": {
+                  "identifier": "uni/tn-Prod/ap-OnlineStore",
+                  "name": "OnlineStore",
+                  "type": "endpoint"
+                },
+                "bridgeDomain": {
+                  "identifier": "uni/tn-Prod/BD-FrontendBD",
+                  "name": "FrontendBD",
+                  "type": "bridgeDomain"
+                },
+                "identifier": "uni/tn-Prod/ap-OnlineStore/epg-Frontend",
+                "name": "Frontend",
+                "tenant": {
+                  "identifier": "uni/tn-Prod",
+                  "name": "Prod",
+                  "type": "tenant"
+                },
+                "type": "epg",
+                "vrf": {
+                  "identifier": "uni/tn-Prod/ctx-ProdVRF",
+                  "name": "ProdVRF",
+                  "type": "vrf"
+                }
+              }
+            ],
+            "connections": [
+              {
+                "connectionHealth": "unhealthy",
+                "dstSecurityGroup": {
+                  "identifier": "uni/tn-Prod/ap-OnlineStore/epg-Database",
+                  "name": "Database",
+                  "type": "epg"
+                },
+                "dstSecurityGroupAssociatedPrefixes": [
+                  "10.10.2.0/24|uni/tn-Prod/ctx-ProdVRF"
+                ],
+                "srcSecurityGroup": {
+                  "identifier": "uni/tn-Prod/ap-OnlineStore/epg-Frontend",
+                  "name": "Frontend",
+                  "type": "epg"
+                },
+                "srcSecurityGroupAssociatedPrefixes": [
+                  "10.10.1.0/24|uni/tn-Prod/ctx-ProdVRF"
+                ]
+              }
+            ],
+            "dstResourceCollection": [
+              {
+                "identifier": "uni/tn-Prod/ap-OnlineStore/epg-Database",
+                "name": "Database",
+                "type": "epg"
+              }
+            ],
+            "srcResourceCollection": [
+              {
+                "identifier": "uni/tn-Prod/ap-OnlineStore/epg-Frontend",
+                "name": "Frontend",
+                "type": "epg"
+              }
+            ],
+            "totalConnections": 1
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/explorer/actions/validateConnectivity"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "analysisDate": "2025-01-22T20:38:22.269Z",
+            "dstIdentifier": "uni/tn-Prod/ap-OnlineStore/epg-Database",
+            "fabricName": "Prod",
+            "healthStatus": "unhealthy",
+            "queryString": "Can Frontend EPG talk to Database EPG",
+            "snapshotId": "123e4567-e89b-12d3-a456-426614174000",
+            "srcIdentifier": "uni/tn-Prod/ap-OnlineStore/epg-Frontend"
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/explorer/actions/validateConnectivity"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "analysisDate": "2025-01-22T20:38:22.269Z",
+            "dstIdentifier": "uni/tn-Prod/ap-OnlineStore/epg-Database",
+            "fabricName": "Prod",
+            "healthStatus": "unhealthy",
+            "queryString": "Can Frontend EPG talk to Database EPG",
+            "snapshotId": "123e4567-e89b-12d3-a456-426614174000",
+            "srcIdentifier": "uni/tn-Prod/ap-OnlineStore/epg-Frontend"
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 403 Response
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/explorer/actions/validateConnectivity"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "analysisDate": "2025-01-22T20:38:22.269Z",
+            "dstIdentifier": "uni/tn-Prod/ap-OnlineStore/epg-Database",
+            "fabricName": "Prod",
+            "healthStatus": "unhealthy",
+            "queryString": "Can Frontend EPG talk to Database EPG",
+            "snapshotId": "123e4567-e89b-12d3-a456-426614174000",
+            "srcIdentifier": "uni/tn-Prod/ap-OnlineStore/epg-Frontend"
+          }
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 404 Response
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/explorer/actions/validateConnectivity"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "analysisDate": "2025-01-22T20:38:22.269Z",
+            "dstIdentifier": "uni/tn-Prod/ap-OnlineStore/epg-Database",
+            "fabricName": "Prod",
+            "healthStatus": "unhealthy",
+            "queryString": "Can Frontend EPG talk to Database EPG",
+            "snapshotId": "123e4567-e89b-12d3-a456-426614174000",
+            "srcIdentifier": "uni/tn-Prod/ap-OnlineStore/epg-Frontend"
+          }
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 500 Response
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/explorer/actions/validateConnectivity"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "analysisDate": "2025-01-22T20:38:22.269Z",
+            "dstIdentifier": "uni/tn-Prod/ap-OnlineStore/epg-Database",
+            "fabricName": "Prod",
+            "healthStatus": "unhealthy",
+            "queryString": "Can Frontend EPG talk to Database EPG",
+            "snapshotId": "123e4567-e89b-12d3-a456-426614174000",
+            "srcIdentifier": "uni/tn-Prod/ap-OnlineStore/epg-Frontend"
+          }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }

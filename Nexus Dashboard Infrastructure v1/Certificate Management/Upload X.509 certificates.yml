@@ -2,6 +2,8 @@ info:
   name: Upload X.509 certificates
   type: http
   seq: 2
+  tags:
+    - Certificate Management
 
 http:
   method: POST
@@ -18,13 +20,17 @@ http:
       {
         "certificate": [
           {
-            "certificate": "",
-            "certificateName": "",
-            "certificateType": "",
-            "key": ""
+            "certificate": "LS0tLS1CRUdJTiBFTkNSWVBURUQgUFJJVkFURSBLRVkt...",
+            "certificateName": "test.pem",
+            "certificateType": "system"
+          },
+          {
+            "certificateName": "test.key",
+            "certificateType": "system",
+            "key": "LS0tLS1CRUdJTiBFTkNSWVBURUQgUFJJVkFURSBLRVkt..."
           }
         ],
-        "password": ""
+        "password": "changeme123!"
       }
   auth: inherit
 
@@ -65,6 +71,7 @@ examples:
             "password": "changeme123!"
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -118,6 +125,7 @@ examples:
             "password": "changeme123!"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -160,6 +168,7 @@ examples:
             "password": "changeme123!"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -202,6 +211,7 @@ examples:
             "password": "changeme123!"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -244,6 +254,7 @@ examples:
             "password": "changeme123!"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

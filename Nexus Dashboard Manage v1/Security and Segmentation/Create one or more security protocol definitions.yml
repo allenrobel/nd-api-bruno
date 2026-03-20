@@ -2,6 +2,8 @@ info:
   name: Create one or more security protocol definitions
   type: http
   seq: 35
+  tags:
+    - Security and Segmentation
 
 http:
   method: POST
@@ -22,24 +24,16 @@ http:
       {
         "securityProtocolDefinitions": [
           {
-            "name": "",
-            "tenantName": "",
-            "displayName": "",
-            "description": "",
-            "matchType": "",
+            "description": "Match HTTPs",
             "matchItems": [
               {
-                "matchName": "",
-                "type": "",
-                "protocolOptions": "",
-                "srcPortRange": "",
-                "dstPortRange": "",
-                "tcpFlags": "",
-                "onlyFragments": false,
-                "stateful": false,
-                "dscp": 0
+                "dstPortRange": "443",
+                "matchName": "MatchHttps",
+                "protocolOptions": "TCP",
+                "type": "IP"
               }
-            ]
+            ],
+            "name": "https"
           }
         ]
       }
@@ -86,6 +80,7 @@ examples:
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -149,6 +144,7 @@ examples:
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -199,6 +195,7 @@ examples:
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -267,6 +264,7 @@ examples:
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -323,6 +321,7 @@ examples:
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -383,6 +382,7 @@ examples:
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -430,6 +430,7 @@ examples:
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -490,6 +491,7 @@ examples:
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -537,6 +539,7 @@ examples:
             ]
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -597,6 +600,7 @@ examples:
             ]
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -644,6 +648,7 @@ examples:
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -704,6 +709,7 @@ examples:
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -751,6 +757,7 @@ examples:
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type
@@ -811,6 +818,7 @@ examples:
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

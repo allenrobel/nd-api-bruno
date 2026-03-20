@@ -2,6 +2,8 @@ info:
   name: Create a local user
   type: http
   seq: 11
+  tags:
+    - Users and Security
 
 http:
   method: POST
@@ -16,18 +18,24 @@ http:
     type: json
     data: |-
       {
-        "email": "arobel@me.com",
-        "firstName": "Allen",
-        "lastName": "Robel",
-        "loginID": "arobel",
-        "password": "lab-1324",
+        "email": "xxxxxx@xxxxxx.xxx",
+        "firstName": "First",
+        "lastName": "Last",
+        "loginID": "nduser123",
+        "password": "XXXXXXXX",
         "passwordPolicy": {
           "reuseLimitation": 0,
           "timeIntervalLimitation": 0
         },
         "rbac": {
-          "domains": {},
-          "tenantDomain": "all-tenants-domain"
+          "domains": {
+            "all": {
+              "roles": [
+                "observer"
+              ]
+            }
+          },
+          "tenantDomain": "DevOpsTenantDomain"
         },
         "remoteIDClaim": "",
         "xLaunch": false
@@ -69,15 +77,17 @@ examples:
               "domains": {
                 "all": {
                   "roles": [
-                    "Observer"
+                    "observer"
                   ]
                 }
-              }
+              },
+              "tenantDomain": "DevOpsTenantDomain"
             },
             "remoteIDClaim": "",
             "xLaunch": false
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -99,7 +109,7 @@ examples:
               "domains": {
                 "all": {
                   "roles": [
-                    "Observer"
+                    "observer"
                   ]
                 }
               },
@@ -137,15 +147,17 @@ examples:
               "domains": {
                 "all": {
                   "roles": [
-                    "Observer"
+                    "observer"
                   ]
                 }
-              }
+              },
+              "tenantDomain": "DevOpsTenantDomain"
             },
             "remoteIDClaim": "",
             "xLaunch": false
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -186,15 +198,17 @@ examples:
               "domains": {
                 "all": {
                   "roles": [
-                    "Observer"
+                    "observer"
                   ]
                 }
-              }
+              },
+              "tenantDomain": "DevOpsTenantDomain"
             },
             "remoteIDClaim": "",
             "xLaunch": false
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -235,15 +249,17 @@ examples:
               "domains": {
                 "all": {
                   "roles": [
-                    "Observer"
+                    "observer"
                   ]
                 }
-              }
+              },
+              "tenantDomain": "DevOpsTenantDomain"
             },
             "remoteIDClaim": "",
             "xLaunch": false
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -284,15 +300,17 @@ examples:
               "domains": {
                 "all": {
                   "roles": [
-                    "Observer"
+                    "observer"
                   ]
                 }
-              }
+              },
+              "tenantDomain": "DevOpsTenantDomain"
             },
             "remoteIDClaim": "",
             "xLaunch": false
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -333,15 +351,17 @@ examples:
               "domains": {
                 "all": {
                   "roles": [
-                    "Observer"
+                    "observer"
                   ]
                 }
-              }
+              },
+              "tenantDomain": "DevOpsTenantDomain"
             },
             "remoteIDClaim": "",
             "xLaunch": false
           }
     response:
+      status: 429
       statusText: Too Many Requests
       headers:
         - name: Content-Type
@@ -382,15 +402,17 @@ examples:
               "domains": {
                 "all": {
                   "roles": [
-                    "Observer"
+                    "observer"
                   ]
                 }
-              }
+              },
+              "tenantDomain": "DevOpsTenantDomain"
             },
             "remoteIDClaim": "",
             "xLaunch": false
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

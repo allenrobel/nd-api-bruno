@@ -2,6 +2,8 @@ info:
   name: Update a rule
   type: http
   seq: 8
+  tags:
+    - Anomaly Settings
 
 http:
   method: PUT
@@ -22,212 +24,225 @@ http:
       {
         "associatedFabrics": [
           {
-            "assuredNetworkType": "",
-            "fabricName": "",
-            "isEnabled": false,
-            "uuid": ""
+            "assuredNetworkType": "Type",
+            "fabricName": "FabricName",
+            "isEnabled": true,
+            "uuid": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          {
+            "assuredNetworkType": "Type",
+            "fabricName": "FabricName1",
+            "isEnabled": true,
+            "uuid": "123e4567-e89b-12d3-a456-426614174001"
           }
         ],
-        "baseSnapshotCollectionDate": "",
-        "baseSnapshotCollectionTimestamp": 0,
-        "baseSnapshotId": "",
-        "communicationRuleMatchType": "",
-        "communicationRuleType": "",
+        "baseSnapshotCollectionDate": "2021-07-25T12:00:00Z",
+        "baseSnapshotCollectionTimestamp": 1627184800,
+        "baseSnapshotId": "2",
+        "communicationRuleMatchType": "must",
+        "communicationRuleType": "sla",
         "configComplianceCriteria": {
           "andParameters": [
             {
-              "operator": "",
-              "parameter": "",
-              "value": ""
+              "operator": "exampleOperator",
+              "parameter": "exampleParameter",
+              "value": "exampleValue"
+            },
+            {
+              "operator": "exampleOperator",
+              "parameter": "exampleParameter2",
+              "value": "exampleValue"
             }
           ],
-          "associationType": "",
-          "lowerBound": 0,
-          "parameterType": "",
-          "upperBound": 0
+          "associationType": "bdToEpg",
+          "lowerBound": 10,
+          "parameterType": "mustHave",
+          "upperBound": 20
         },
-        "configurationType": "",
-        "createDate": "",
-        "description": "",
+        "configurationType": "configurationComplianceBaseEpoch",
+        "createDate": "2021-07-25T12:00:00Z",
+        "description": "This is a new compliance rule.",
         "fromObjects": {
-          "description": "",
+          "description": "Description",
+          "enableSelectorBasedOnTags": true,
           "excludes": [
             {
               "matches": [
                 {
                   "applicationEpgMatch": {
                     "applicationEpg": {
-                      "pattern": "",
-                      "type": ""
+                      "pattern": "app",
+                      "type": "contains"
                     },
-                    "applicationProfile": {},
-                    "objectAttribute": "",
-                    "tenant": {}
-                  },
-                  "applicationProfileMatch": {
-                    "applicationProfile": {},
-                    "objectAttribute": "",
-                    "tenant": {}
-                  },
-                  "bridgeDomainMatch": {
-                    "bridgeDomain": {},
-                    "objectAttribute": "",
-                    "tenant": {}
-                  },
-                  "contractMatch": {
-                    "contract": {},
-                    "objectAttribute": "",
-                    "tenant": {}
-                  },
-                  "filterMatch": {
-                    "filter": {},
-                    "objectAttribute": "",
-                    "tenant": {}
-                  },
-                  "l2ExtInstpMatch": {
-                    "l2ExtInstp": {},
-                    "l2ExtOut": {},
-                    "objectAttribute": "",
-                    "tenant": {}
-                  },
-                  "l2ExtOutMatch": {
-                    "l2ExtOut": {},
-                    "objectAttribute": "",
-                    "tenant": {}
-                  },
-                  "l3ExtInstpMatch": {
-                    "l3ExtInstp": {},
-                    "l3ExtOut": {},
-                    "objectAttribute": "",
-                    "tenant": {}
-                  },
-                  "l3ExtOutMatch": {
-                    "l3ExtOut": {},
-                    "objectAttribute": "",
-                    "tenant": {}
-                  },
-                  "loopbackInterfaceMatch": {
-                    "loopbackInterface": {},
-                    "objectAttribute": "",
-                    "switch": {}
-                  },
-                  "pcInterfaceMatch": {
-                    "objectAttribute": "",
-                    "pcInterface": {},
-                    "switch": {}
-                  },
-                  "physicalInterfaceMatch": {
-                    "objectAttribute": "",
-                    "physicalInterface": {},
-                    "switch": {}
-                  },
-                  "serviceGraphMatch": {
-                    "objectAttribute": "",
-                    "serviceGraph": {},
-                    "tenant": {}
-                  },
-                  "subjectMatch": {
-                    "contract": {},
-                    "objectAttribute": "",
-                    "subject": {},
-                    "tenant": {}
-                  },
-                  "sviInterfaceMatch": {
-                    "objectAttribute": "",
-                    "sviInterface": {},
-                    "switch": {}
-                  },
-                  "switchMatch": {
-                    "objectAttribute": "",
-                    "switch": {}
-                  },
-                  "tenantMatch": {
-                    "objectAttribute": "",
-                    "tenant": {}
-                  },
-                  "vlanMatch": {
-                    "objectAttribute": "",
-                    "switch": {},
-                    "vlan": {}
-                  },
-                  "vniInterfaceMatch": {
-                    "objectAttribute": "",
-                    "switch": {},
-                    "vniInterface": {}
-                  },
-                  "vpcInterfaceMatch": {
-                    "objectAttribute": "",
-                    "switch": {},
-                    "vpcInterface": {}
-                  },
-                  "vrfMatch": {
-                    "objectAttribute": "",
-                    "tenant": {},
-                    "vrf": {}
+                    "applicationProfile": {
+                      "pattern": "app",
+                      "type": "contains"
+                    },
+                    "objectAttribute": "exampleAttribute",
+                    "tenant": {
+                      "pattern": "app",
+                      "type": "contains"
+                    }
                   }
                 }
               ]
             }
           ],
           "includes": [
-            {}
+            {
+              "matches": [
+                {
+                  "applicationEpgMatch": {
+                    "applicationEpg": {
+                      "pattern": "app",
+                      "type": "contains"
+                    },
+                    "applicationProfile": {
+                      "pattern": "app",
+                      "type": "contains"
+                    },
+                    "objectAttribute": "exampleAttribute",
+                    "tenant": {
+                      "pattern": "app",
+                      "type": "contains"
+                    }
+                  }
+                }
+              ]
+            }
           ],
-          "isSelectorBasedOnTagsActive": false,
-          "name": "",
-          "ruleName": "",
-          "selectorType": "",
-          "uuid": ""
+          "name": "Example Selector",
+          "ruleName": "Example Rule",
+          "selectorType": "EPG",
+          "uuid": "123e4567-e89b-12d3-a456-426614174000"
         },
         "isAggregatedEventForTenant": false,
-        "isAllTraffic": false,
+        "isAllTraffic": true,
         "isEnabled": false,
-        "isEqualityCheckActive": false,
+        "isEqualityCheckActive": true,
         "isRemovedNonConfigAttribute": false,
         "isTagBasedSelectorActive": false,
-        "lastModifiedTime": "",
-        "name": "",
+        "lastModifiedTime": "2021-07-25T12:00:00Z",
+        "name": "New Compliance Rule",
         "requiredPathObjects": [
           {
             "includes": [
-              {}
+              {
+                "matches": [
+                  {
+                    "serviceGraphMatch": {
+                      "objectAttribute": "exampleAttribute",
+                      "serviceGraph": {
+                        "pattern": "firewall",
+                        "type": "contains"
+                      },
+                      "tenant": {
+                        "pattern": "coke",
+                        "type": "contains"
+                      }
+                    }
+                  }
+                ]
+              }
             ],
-            "selectorType": ""
+            "selectorType": "serviceGraph"
           }
         ],
-        "toObjects": {},
+        "toObjects": {
+          "description": "Description",
+          "enableSelectorBasedOnTags": true,
+          "excludes": [
+            {
+              "matches": [
+                {
+                  "applicationEpgMatch": {
+                    "applicationEpg": {
+                      "pattern": "app",
+                      "type": "contains"
+                    },
+                    "applicationProfile": {
+                      "pattern": "app",
+                      "type": "contains"
+                    },
+                    "objectAttribute": "exampleAttribute",
+                    "tenant": {
+                      "pattern": "app",
+                      "type": "contains"
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "includes": [
+            {
+              "matches": [
+                {
+                  "applicationEpgMatch": {
+                    "applicationEpg": {
+                      "pattern": "app",
+                      "type": "contains"
+                    },
+                    "applicationProfile": {
+                      "pattern": "app",
+                      "type": "contains"
+                    },
+                    "objectAttribute": "exampleAttribute",
+                    "tenant": {
+                      "pattern": "app",
+                      "type": "contains"
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "name": "Example Selector",
+          "ruleName": "Example Rule",
+          "selectorType": "EPG",
+          "uuid": "123e4567-e89b-12d3-a456-426614174000"
+        },
         "trafficSelector": {
-          "description": "",
+          "description": "IP traffic selector description",
           "includes": {
             "selectors": [
               {
                 "selectors": [
                   {
-                    "etherType": "",
-                    "ipProtocol": "",
-                    "isReversePortActive": false,
-                    "portSelectorAtoB": {
-                      "dstPort": "",
-                      "isLogFlagActive": false,
-                      "isTcpFlagActive": false,
-                      "notSetTcpFlags": [],
-                      "setTcpFlags": [],
-                      "srcPort": ""
-                    },
-                    "portSelectorBtoA": {}
+                    "etherType": "IP",
+                    "ipProtocol": "TCP",
+                    "reversePort": false
+                  },
+                  {
+                    "etherType": "ARP",
+                    "reversePort": false
+                  }
+                ]
+              },
+              {
+                "selectors": [
+                  {
+                    "etherType": "IP",
+                    "ipProtocol": "TCP",
+                    "reversePort": false
+                  },
+                  {
+                    "etherType": "ARP",
+                    "reversePort": false
                   }
                 ]
               }
             ]
           },
-          "name": "",
-          "uuid": ""
+          "name": "name",
+          "uuid": "123e4567-e89b-12d3-a456-426614174000"
         },
-        "uploadFileType": "",
-        "uploadedFileExtension": "",
-        "uploadedFileName": "",
-        "uploadedFileSize": 0,
-        "uploadedFileUploadDate": "",
-        "uuid": ""
+        "uploadFileType": "templateBasedConfig",
+        "uploadedFileExtension": ".txt",
+        "uploadedFileName": "new_rule.txt",
+        "uploadedFileSize": 2048,
+        "uploadedFileUploadDate": "2021-07-25T12:00:00Z",
+        "uuid": "987e6543-e21b-45d3-a456-426614174001"
       }
   auth: inherit
 
@@ -480,6 +495,7 @@ examples:
             "uuid": "987e6543-e21b-45d3-a456-426614174001"
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -967,6 +983,7 @@ examples:
             "uuid": "987e6543-e21b-45d3-a456-426614174001"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -1221,6 +1238,7 @@ examples:
             "uuid": "987e6543-e21b-45d3-a456-426614174001"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -1475,6 +1493,7 @@ examples:
             "uuid": "987e6543-e21b-45d3-a456-426614174001"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -1729,6 +1748,7 @@ examples:
             "uuid": "987e6543-e21b-45d3-a456-426614174001"
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -1983,6 +2003,7 @@ examples:
             "uuid": "987e6543-e21b-45d3-a456-426614174001"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

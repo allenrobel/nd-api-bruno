@@ -1,7 +1,9 @@
 info:
   name: Software update plan summary
   type: http
-  seq: 24
+  seq: 18
+  tags:
+    - Fabric Software Management
 
 http:
   method: GET
@@ -51,6 +53,7 @@ examples:
           description: Name of the update group to filter the summary details
           disabled: true
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -266,6 +269,7 @@ examples:
           description: Name of the update group to filter the summary details
           disabled: true
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -299,6 +303,7 @@ examples:
           description: Name of the update group to filter the summary details
           disabled: true
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -332,6 +337,7 @@ examples:
           description: Name of the update group to filter the summary details
           disabled: true
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -365,6 +371,7 @@ examples:
           description: Name of the update group to filter the summary details
           disabled: true
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

@@ -2,6 +2,8 @@ info:
   name: Export IP allocations
   type: http
   seq: 29
+  tags:
+    - Integrations
 
 http:
   method: POST
@@ -20,9 +22,9 @@ http:
     type: json
     data: |-
       {
-        "networkView": "",
-        "subnet": "",
-        "vrfName": ""
+        "networkView": "default",
+        "subnet": "192.168.1.0/24",
+        "vrfName": "vrf1"
       }
   auth: inherit
 
@@ -57,6 +59,7 @@ examples:
             "vrfName": "vrf1"
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -90,6 +93,7 @@ examples:
             "vrfName": "vrf1"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -126,6 +130,7 @@ examples:
             "vrfName": "vrf1"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -162,6 +167,7 @@ examples:
             "vrfName": "vrf1"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -198,6 +204,7 @@ examples:
             "vrfName": "vrf1"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

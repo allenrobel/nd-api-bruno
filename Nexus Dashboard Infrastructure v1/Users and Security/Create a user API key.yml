@@ -2,6 +2,8 @@ info:
   name: Create a user API key
   type: http
   seq: 2
+  tags:
+    - Users and Security
 
 http:
   method: POST
@@ -16,32 +18,11 @@ http:
     type: json
     data: |-
       {
-        "annotations": {},
-        "apiKeyName": "",
-        "dummyNestedArray": [
-          {
-            "arrayField1": "",
-            "arrayField2": ""
-          }
-        ],
-        "dummyNestedField": {
-          "dummyValue": {
-            "data": {
-              "details": {
-                "deepData": {
-                  "timestamp": "",
-                  "value": ""
-                },
-                "description": ""
-              },
-              "name": ""
-            },
-            "id": "",
-            "metadata": {}
-          },
-          "nestedField1": "",
-          "nestedField2": []
-        }
+        "annotations": {
+          "k1": "v1",
+          "k2": "v2"
+        },
+        "apiKeyName": ""
       }
   auth: inherit
 
@@ -74,6 +55,7 @@ examples:
             "apiKeyName": ""
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -114,6 +96,7 @@ examples:
             "apiKeyName": ""
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -148,6 +131,7 @@ examples:
             "apiKeyName": ""
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -182,6 +166,7 @@ examples:
             "apiKeyName": ""
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -216,6 +201,7 @@ examples:
             "apiKeyName": ""
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -250,6 +236,7 @@ examples:
             "apiKeyName": ""
           }
     response:
+      status: 429
       statusText: Too Many Requests
       headers:
         - name: Content-Type
@@ -284,6 +271,7 @@ examples:
             "apiKeyName": ""
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

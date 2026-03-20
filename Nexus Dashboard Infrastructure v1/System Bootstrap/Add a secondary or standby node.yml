@@ -2,6 +2,8 @@ info:
   name: Add a secondary or standby node
   type: http
   seq: 3
+  tags:
+    - System Bootstrap
 
 http:
   method: POST
@@ -16,39 +18,33 @@ http:
     type: json
     data: |-
       {
-        "bgpConfig": {
-          "asn": 0,
-          "peerList": [
-            {
-              "asn": 0,
-              "peerIp": ""
-            }
-          ],
-          "routerId": ""
-        },
         "dataNetwork": {
-          "network": {
-            "cidrv4": "",
-            "cidrv6": ""
-          },
           "gateway": {
-            "ipv4": "",
-            "ipv6": ""
+            "ipv4": "192.2.0.254"
           },
-          "vlanId": 0
+          "network": {
+            "cidrv4": "192.2.0.108/24"
+          },
+          "vlanId": 102
         },
-        "managementNetwork": {},
-        "name": "",
+        "managementNetwork": {
+          "gateway": {
+            "ipv4": "172.20.43.1"
+          },
+          "network": {
+            "cidrv4": "172.20.43.27/24"
+          }
+        },
+        "name": "sjc15-3m6-03-sn5",
         "nodeController": {
           "authentication": {
-            "user": "",
-            "password": ""
+            "password": "<hidden>",
+            "user": "admin"
           },
-          "serverAddress": ""
+          "serverAddress": "172.20.43.41"
         },
-        "role": "",
-        "serialNumber": "",
-        "uuid": ""
+        "role": "secondary",
+        "serialNumber": "WZP26150GQ7"
       }
   auth: inherit
 
@@ -103,6 +99,7 @@ examples:
             "serialNumber": "WZP26150GQ7"
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -154,6 +151,7 @@ examples:
             "serialNumber": "WZP26150GQ7"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -210,6 +208,7 @@ examples:
             "serialNumber": "WZP26150GQ7"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -266,6 +265,7 @@ examples:
             "serialNumber": "WZP26150GQ7"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -322,6 +322,7 @@ examples:
             "serialNumber": "WZP26150GQ7"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

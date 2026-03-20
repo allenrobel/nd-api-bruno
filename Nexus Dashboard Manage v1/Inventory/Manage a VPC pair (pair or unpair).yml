@@ -1,7 +1,9 @@
 info:
   name: Manage a VPC pair (pair or unpair)
   type: http
-  seq: 39
+  seq: 41
+  tags:
+    - Inventory
 
 http:
   method: PUT
@@ -27,7 +29,22 @@ http:
       description: Name of the fabric
   body:
     type: json
-    data: "{}"
+    data: |-
+      {
+        "peerSwitchId": "FDO23040Q86",
+        "switchId": "FDO23040Q85",
+        "useVirtualPeerLink": true,
+        "vpcAction": "pair",
+        "vpcPairDetails": {
+          "templateConfig": {
+            "customConfig": "vpc domain 20\n  peer-keepalive destination 10.1.1.2 source 10.1.1.1 vrf management\n  role priority 2000",
+            "customField1": "custom-value-1",
+            "domainId": "20"
+          },
+          "templateName": "my_custom_template",
+          "type": "custom"
+        }
+      }
   auth: inherit
 
 settings:
@@ -80,6 +97,7 @@ examples:
             }
           }
     response:
+      status: 204
       statusText: No Content
       body:
         type: text
@@ -112,56 +130,50 @@ examples:
         type: json
         data: |-
           {
-            "peerSwitchId": "FDO23040Q86",
-            "switchId": "FDO23040Q85",
+            "peerSwitchId": "FDO29080N1A",
+            "switchId": "FDO29080SUT",
             "useVirtualPeerLink": true,
             "vpcAction": "pair",
             "vpcPairDetails": {
               "adminState": true,
-              "allowedVlans": "1-100",
-              "domainId": 10,
-              "enableMirrorConfig": true,
-              "fabricName": "Fabric1",
+              "allowedVlans": "all",
+              "domainId": 2,
+              "enableMirrorConfig": false,
               "fabricPathSwitchId": 100,
-              "isVpcPlus": true,
+              "isVpcPlus": false,
               "isVteps": true,
-              "keepAliveHoldTimeout": 5,
+              "keepAliveHoldTimeout": 3,
               "keepAliveVrf": "default",
-              "loopbackSecondaryIp": "192.168.3.1",
-              "nveInterface": 2,
-              "peerSwitchDomainConfig": "peer-keepalive destination 10.1.1.2 source 10.1.1.1 vrf mgmt\nauto-recovery\ndelay restore 150\nkeepalive hold-timeout 5",
-              "peerSwitchKeepAliveLocalIp": "192.168.1.2",
+              "loopbackSecondaryIp": "10.1.1.3",
+              "nveInterface": 1,
+              "peerSwitchDomainConfig": "",
+              "peerSwitchKeepAliveLocalIp": "10.1.1.2",
               "peerSwitchMemberInterfaces": [
-                "eth1/6",
-                "eth1/8",
-                "eth1/9",
-                "eth1/10"
+                "e1/5"
               ],
-              "peerSwitchNativeVlan": 2,
-              "peerSwitchPoConfig": "mtu 9216\npriority-flow-control mode on\nno shutdown",
+              "peerSwitchNativeVlan": 4,
+              "peerSwitchPoConfig": "",
               "peerSwitchPoDescription": "Peer-2 Port-Channel Description",
-              "peerSwitchPoId": 201,
-              "peerSwitchPrimaryIp": "192.168.2.2",
-              "peerSwitchSourceLoopback": 11,
+              "peerSwitchPoId": 3,
+              "peerSwitchPrimaryIp": "10.1.1.2",
+              "peerSwitchSourceLoopback": 12,
               "poMode": "active",
-              "switchDomainConfig": "peer-keepalive destination 10.1.1.2 source 10.1.1.1 vrf mgmt\nauto-recovery\ndelay restore 150\nkeepalive hold-timeout 5",
-              "switchKeepAliveLocalIp": "192.168.1.1",
+              "switchDomainConfig": "",
+              "switchKeepAliveLocalIp": "10.1.1.1",
               "switchMemberInterfaces": [
-                "eth1/5",
-                "eth1/7",
-                "eth1/8",
-                "eth1/9"
+                "e1/5"
               ],
-              "switchNativeVlan": 1,
-              "switchPoConfig": "mtu 9216\npriority-flow-control mode on\nno shutdown",
+              "switchNativeVlan": 2,
+              "switchPoConfig": "",
               "switchPoDescription": "Peer-1 Port-Channel Description",
-              "switchPoId": 200,
-              "switchPrimaryIp": "192.168.2.1",
-              "switchSourceLoopback": 10,
+              "switchPoId": 2,
+              "switchPrimaryIp": "10.1.1.1",
+              "switchSourceLoopback": 11,
               "type": "default"
             }
           }
     response:
+      status: 204
       statusText: No Content
       body:
         type: text
@@ -200,6 +212,7 @@ examples:
             "vpcAction": "pair"
           }
     response:
+      status: 204
       statusText: No Content
       body:
         type: text
@@ -235,6 +248,7 @@ examples:
             "vpcAction": "unPair"
           }
     response:
+      status: 204
       statusText: No Content
       body:
         type: text
@@ -282,6 +296,7 @@ examples:
             }
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -322,56 +337,50 @@ examples:
         type: json
         data: |-
           {
-            "peerSwitchId": "FDO23040Q86",
-            "switchId": "FDO23040Q85",
+            "peerSwitchId": "FDO29080N1A",
+            "switchId": "FDO29080SUT",
             "useVirtualPeerLink": true,
             "vpcAction": "pair",
             "vpcPairDetails": {
               "adminState": true,
-              "allowedVlans": "1-100",
-              "domainId": 10,
-              "enableMirrorConfig": true,
-              "fabricName": "Fabric1",
+              "allowedVlans": "all",
+              "domainId": 2,
+              "enableMirrorConfig": false,
               "fabricPathSwitchId": 100,
-              "isVpcPlus": true,
+              "isVpcPlus": false,
               "isVteps": true,
-              "keepAliveHoldTimeout": 5,
+              "keepAliveHoldTimeout": 3,
               "keepAliveVrf": "default",
-              "loopbackSecondaryIp": "192.168.3.1",
-              "nveInterface": 2,
-              "peerSwitchDomainConfig": "peer-keepalive destination 10.1.1.2 source 10.1.1.1 vrf mgmt\nauto-recovery\ndelay restore 150\nkeepalive hold-timeout 5",
-              "peerSwitchKeepAliveLocalIp": "192.168.1.2",
+              "loopbackSecondaryIp": "10.1.1.3",
+              "nveInterface": 1,
+              "peerSwitchDomainConfig": "",
+              "peerSwitchKeepAliveLocalIp": "10.1.1.2",
               "peerSwitchMemberInterfaces": [
-                "eth1/6",
-                "eth1/8",
-                "eth1/9",
-                "eth1/10"
+                "e1/5"
               ],
-              "peerSwitchNativeVlan": 2,
-              "peerSwitchPoConfig": "mtu 9216\npriority-flow-control mode on\nno shutdown",
+              "peerSwitchNativeVlan": 4,
+              "peerSwitchPoConfig": "",
               "peerSwitchPoDescription": "Peer-2 Port-Channel Description",
-              "peerSwitchPoId": 201,
-              "peerSwitchPrimaryIp": "192.168.2.2",
-              "peerSwitchSourceLoopback": 11,
+              "peerSwitchPoId": 3,
+              "peerSwitchPrimaryIp": "10.1.1.2",
+              "peerSwitchSourceLoopback": 12,
               "poMode": "active",
-              "switchDomainConfig": "peer-keepalive destination 10.1.1.2 source 10.1.1.1 vrf mgmt\nauto-recovery\ndelay restore 150\nkeepalive hold-timeout 5",
-              "switchKeepAliveLocalIp": "192.168.1.1",
+              "switchDomainConfig": "",
+              "switchKeepAliveLocalIp": "10.1.1.1",
               "switchMemberInterfaces": [
-                "eth1/5",
-                "eth1/7",
-                "eth1/8",
-                "eth1/9"
+                "e1/5"
               ],
-              "switchNativeVlan": 1,
-              "switchPoConfig": "mtu 9216\npriority-flow-control mode on\nno shutdown",
+              "switchNativeVlan": 2,
+              "switchPoConfig": "",
               "switchPoDescription": "Peer-1 Port-Channel Description",
-              "switchPoId": 200,
-              "switchPrimaryIp": "192.168.2.1",
-              "switchSourceLoopback": 10,
+              "switchPoId": 2,
+              "switchPrimaryIp": "10.1.1.1",
+              "switchSourceLoopback": 11,
               "type": "default"
             }
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -418,6 +427,7 @@ examples:
             "vpcAction": "pair"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -461,6 +471,7 @@ examples:
             "vpcAction": "unPair"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -516,6 +527,7 @@ examples:
             }
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -556,56 +568,50 @@ examples:
         type: json
         data: |-
           {
-            "peerSwitchId": "FDO23040Q86",
-            "switchId": "FDO23040Q85",
+            "peerSwitchId": "FDO29080N1A",
+            "switchId": "FDO29080SUT",
             "useVirtualPeerLink": true,
             "vpcAction": "pair",
             "vpcPairDetails": {
               "adminState": true,
-              "allowedVlans": "1-100",
-              "domainId": 10,
-              "enableMirrorConfig": true,
-              "fabricName": "Fabric1",
+              "allowedVlans": "all",
+              "domainId": 2,
+              "enableMirrorConfig": false,
               "fabricPathSwitchId": 100,
-              "isVpcPlus": true,
+              "isVpcPlus": false,
               "isVteps": true,
-              "keepAliveHoldTimeout": 5,
+              "keepAliveHoldTimeout": 3,
               "keepAliveVrf": "default",
-              "loopbackSecondaryIp": "192.168.3.1",
-              "nveInterface": 2,
-              "peerSwitchDomainConfig": "peer-keepalive destination 10.1.1.2 source 10.1.1.1 vrf mgmt\nauto-recovery\ndelay restore 150\nkeepalive hold-timeout 5",
-              "peerSwitchKeepAliveLocalIp": "192.168.1.2",
+              "loopbackSecondaryIp": "10.1.1.3",
+              "nveInterface": 1,
+              "peerSwitchDomainConfig": "",
+              "peerSwitchKeepAliveLocalIp": "10.1.1.2",
               "peerSwitchMemberInterfaces": [
-                "eth1/6",
-                "eth1/8",
-                "eth1/9",
-                "eth1/10"
+                "e1/5"
               ],
-              "peerSwitchNativeVlan": 2,
-              "peerSwitchPoConfig": "mtu 9216\npriority-flow-control mode on\nno shutdown",
+              "peerSwitchNativeVlan": 4,
+              "peerSwitchPoConfig": "",
               "peerSwitchPoDescription": "Peer-2 Port-Channel Description",
-              "peerSwitchPoId": 201,
-              "peerSwitchPrimaryIp": "192.168.2.2",
-              "peerSwitchSourceLoopback": 11,
+              "peerSwitchPoId": 3,
+              "peerSwitchPrimaryIp": "10.1.1.2",
+              "peerSwitchSourceLoopback": 12,
               "poMode": "active",
-              "switchDomainConfig": "peer-keepalive destination 10.1.1.2 source 10.1.1.1 vrf mgmt\nauto-recovery\ndelay restore 150\nkeepalive hold-timeout 5",
-              "switchKeepAliveLocalIp": "192.168.1.1",
+              "switchDomainConfig": "",
+              "switchKeepAliveLocalIp": "10.1.1.1",
               "switchMemberInterfaces": [
-                "eth1/5",
-                "eth1/7",
-                "eth1/8",
-                "eth1/9"
+                "e1/5"
               ],
-              "switchNativeVlan": 1,
-              "switchPoConfig": "mtu 9216\npriority-flow-control mode on\nno shutdown",
+              "switchNativeVlan": 2,
+              "switchPoConfig": "",
               "switchPoDescription": "Peer-1 Port-Channel Description",
-              "switchPoId": 200,
-              "switchPrimaryIp": "192.168.2.1",
-              "switchSourceLoopback": 10,
+              "switchPoId": 2,
+              "switchPrimaryIp": "10.1.1.1",
+              "switchSourceLoopback": 11,
               "type": "default"
             }
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -652,6 +658,7 @@ examples:
             "vpcAction": "pair"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -695,6 +702,7 @@ examples:
             "vpcAction": "unPair"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -750,6 +758,7 @@ examples:
             }
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -790,56 +799,50 @@ examples:
         type: json
         data: |-
           {
-            "peerSwitchId": "FDO23040Q86",
-            "switchId": "FDO23040Q85",
+            "peerSwitchId": "FDO29080N1A",
+            "switchId": "FDO29080SUT",
             "useVirtualPeerLink": true,
             "vpcAction": "pair",
             "vpcPairDetails": {
               "adminState": true,
-              "allowedVlans": "1-100",
-              "domainId": 10,
-              "enableMirrorConfig": true,
-              "fabricName": "Fabric1",
+              "allowedVlans": "all",
+              "domainId": 2,
+              "enableMirrorConfig": false,
               "fabricPathSwitchId": 100,
-              "isVpcPlus": true,
+              "isVpcPlus": false,
               "isVteps": true,
-              "keepAliveHoldTimeout": 5,
+              "keepAliveHoldTimeout": 3,
               "keepAliveVrf": "default",
-              "loopbackSecondaryIp": "192.168.3.1",
-              "nveInterface": 2,
-              "peerSwitchDomainConfig": "peer-keepalive destination 10.1.1.2 source 10.1.1.1 vrf mgmt\nauto-recovery\ndelay restore 150\nkeepalive hold-timeout 5",
-              "peerSwitchKeepAliveLocalIp": "192.168.1.2",
+              "loopbackSecondaryIp": "10.1.1.3",
+              "nveInterface": 1,
+              "peerSwitchDomainConfig": "",
+              "peerSwitchKeepAliveLocalIp": "10.1.1.2",
               "peerSwitchMemberInterfaces": [
-                "eth1/6",
-                "eth1/8",
-                "eth1/9",
-                "eth1/10"
+                "e1/5"
               ],
-              "peerSwitchNativeVlan": 2,
-              "peerSwitchPoConfig": "mtu 9216\npriority-flow-control mode on\nno shutdown",
+              "peerSwitchNativeVlan": 4,
+              "peerSwitchPoConfig": "",
               "peerSwitchPoDescription": "Peer-2 Port-Channel Description",
-              "peerSwitchPoId": 201,
-              "peerSwitchPrimaryIp": "192.168.2.2",
-              "peerSwitchSourceLoopback": 11,
+              "peerSwitchPoId": 3,
+              "peerSwitchPrimaryIp": "10.1.1.2",
+              "peerSwitchSourceLoopback": 12,
               "poMode": "active",
-              "switchDomainConfig": "peer-keepalive destination 10.1.1.2 source 10.1.1.1 vrf mgmt\nauto-recovery\ndelay restore 150\nkeepalive hold-timeout 5",
-              "switchKeepAliveLocalIp": "192.168.1.1",
+              "switchDomainConfig": "",
+              "switchKeepAliveLocalIp": "10.1.1.1",
               "switchMemberInterfaces": [
-                "eth1/5",
-                "eth1/7",
-                "eth1/8",
-                "eth1/9"
+                "e1/5"
               ],
-              "switchNativeVlan": 1,
-              "switchPoConfig": "mtu 9216\npriority-flow-control mode on\nno shutdown",
+              "switchNativeVlan": 2,
+              "switchPoConfig": "",
               "switchPoDescription": "Peer-1 Port-Channel Description",
-              "switchPoId": 200,
-              "switchPrimaryIp": "192.168.2.1",
-              "switchSourceLoopback": 10,
+              "switchPoId": 2,
+              "switchPrimaryIp": "10.1.1.1",
+              "switchSourceLoopback": 11,
               "type": "default"
             }
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -886,6 +889,7 @@ examples:
             "vpcAction": "pair"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -929,6 +933,7 @@ examples:
             "vpcAction": "unPair"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -984,6 +989,7 @@ examples:
             }
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -1024,56 +1030,50 @@ examples:
         type: json
         data: |-
           {
-            "peerSwitchId": "FDO23040Q86",
-            "switchId": "FDO23040Q85",
+            "peerSwitchId": "FDO29080N1A",
+            "switchId": "FDO29080SUT",
             "useVirtualPeerLink": true,
             "vpcAction": "pair",
             "vpcPairDetails": {
               "adminState": true,
-              "allowedVlans": "1-100",
-              "domainId": 10,
-              "enableMirrorConfig": true,
-              "fabricName": "Fabric1",
+              "allowedVlans": "all",
+              "domainId": 2,
+              "enableMirrorConfig": false,
               "fabricPathSwitchId": 100,
-              "isVpcPlus": true,
+              "isVpcPlus": false,
               "isVteps": true,
-              "keepAliveHoldTimeout": 5,
+              "keepAliveHoldTimeout": 3,
               "keepAliveVrf": "default",
-              "loopbackSecondaryIp": "192.168.3.1",
-              "nveInterface": 2,
-              "peerSwitchDomainConfig": "peer-keepalive destination 10.1.1.2 source 10.1.1.1 vrf mgmt\nauto-recovery\ndelay restore 150\nkeepalive hold-timeout 5",
-              "peerSwitchKeepAliveLocalIp": "192.168.1.2",
+              "loopbackSecondaryIp": "10.1.1.3",
+              "nveInterface": 1,
+              "peerSwitchDomainConfig": "",
+              "peerSwitchKeepAliveLocalIp": "10.1.1.2",
               "peerSwitchMemberInterfaces": [
-                "eth1/6",
-                "eth1/8",
-                "eth1/9",
-                "eth1/10"
+                "e1/5"
               ],
-              "peerSwitchNativeVlan": 2,
-              "peerSwitchPoConfig": "mtu 9216\npriority-flow-control mode on\nno shutdown",
+              "peerSwitchNativeVlan": 4,
+              "peerSwitchPoConfig": "",
               "peerSwitchPoDescription": "Peer-2 Port-Channel Description",
-              "peerSwitchPoId": 201,
-              "peerSwitchPrimaryIp": "192.168.2.2",
-              "peerSwitchSourceLoopback": 11,
+              "peerSwitchPoId": 3,
+              "peerSwitchPrimaryIp": "10.1.1.2",
+              "peerSwitchSourceLoopback": 12,
               "poMode": "active",
-              "switchDomainConfig": "peer-keepalive destination 10.1.1.2 source 10.1.1.1 vrf mgmt\nauto-recovery\ndelay restore 150\nkeepalive hold-timeout 5",
-              "switchKeepAliveLocalIp": "192.168.1.1",
+              "switchDomainConfig": "",
+              "switchKeepAliveLocalIp": "10.1.1.1",
               "switchMemberInterfaces": [
-                "eth1/5",
-                "eth1/7",
-                "eth1/8",
-                "eth1/9"
+                "e1/5"
               ],
-              "switchNativeVlan": 1,
-              "switchPoConfig": "mtu 9216\npriority-flow-control mode on\nno shutdown",
+              "switchNativeVlan": 2,
+              "switchPoConfig": "",
               "switchPoDescription": "Peer-1 Port-Channel Description",
-              "switchPoId": 200,
-              "switchPrimaryIp": "192.168.2.1",
-              "switchSourceLoopback": 10,
+              "switchPoId": 2,
+              "switchPrimaryIp": "10.1.1.1",
+              "switchSourceLoopback": 11,
               "type": "default"
             }
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -1120,6 +1120,7 @@ examples:
             "vpcAction": "pair"
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -1163,6 +1164,7 @@ examples:
             "vpcAction": "unPair"
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -1218,6 +1220,7 @@ examples:
             }
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type
@@ -1258,56 +1261,50 @@ examples:
         type: json
         data: |-
           {
-            "peerSwitchId": "FDO23040Q86",
-            "switchId": "FDO23040Q85",
+            "peerSwitchId": "FDO29080N1A",
+            "switchId": "FDO29080SUT",
             "useVirtualPeerLink": true,
             "vpcAction": "pair",
             "vpcPairDetails": {
               "adminState": true,
-              "allowedVlans": "1-100",
-              "domainId": 10,
-              "enableMirrorConfig": true,
-              "fabricName": "Fabric1",
+              "allowedVlans": "all",
+              "domainId": 2,
+              "enableMirrorConfig": false,
               "fabricPathSwitchId": 100,
-              "isVpcPlus": true,
+              "isVpcPlus": false,
               "isVteps": true,
-              "keepAliveHoldTimeout": 5,
+              "keepAliveHoldTimeout": 3,
               "keepAliveVrf": "default",
-              "loopbackSecondaryIp": "192.168.3.1",
-              "nveInterface": 2,
-              "peerSwitchDomainConfig": "peer-keepalive destination 10.1.1.2 source 10.1.1.1 vrf mgmt\nauto-recovery\ndelay restore 150\nkeepalive hold-timeout 5",
-              "peerSwitchKeepAliveLocalIp": "192.168.1.2",
+              "loopbackSecondaryIp": "10.1.1.3",
+              "nveInterface": 1,
+              "peerSwitchDomainConfig": "",
+              "peerSwitchKeepAliveLocalIp": "10.1.1.2",
               "peerSwitchMemberInterfaces": [
-                "eth1/6",
-                "eth1/8",
-                "eth1/9",
-                "eth1/10"
+                "e1/5"
               ],
-              "peerSwitchNativeVlan": 2,
-              "peerSwitchPoConfig": "mtu 9216\npriority-flow-control mode on\nno shutdown",
+              "peerSwitchNativeVlan": 4,
+              "peerSwitchPoConfig": "",
               "peerSwitchPoDescription": "Peer-2 Port-Channel Description",
-              "peerSwitchPoId": 201,
-              "peerSwitchPrimaryIp": "192.168.2.2",
-              "peerSwitchSourceLoopback": 11,
+              "peerSwitchPoId": 3,
+              "peerSwitchPrimaryIp": "10.1.1.2",
+              "peerSwitchSourceLoopback": 12,
               "poMode": "active",
-              "switchDomainConfig": "peer-keepalive destination 10.1.1.2 source 10.1.1.1 vrf mgmt\nauto-recovery\ndelay restore 150\nkeepalive hold-timeout 5",
-              "switchKeepAliveLocalIp": "192.168.1.1",
+              "switchDomainConfig": "",
+              "switchKeepAliveLocalIp": "10.1.1.1",
               "switchMemberInterfaces": [
-                "eth1/5",
-                "eth1/7",
-                "eth1/8",
-                "eth1/9"
+                "e1/5"
               ],
-              "switchNativeVlan": 1,
-              "switchPoConfig": "mtu 9216\npriority-flow-control mode on\nno shutdown",
+              "switchNativeVlan": 2,
+              "switchPoConfig": "",
               "switchPoDescription": "Peer-1 Port-Channel Description",
-              "switchPoId": 200,
-              "switchPrimaryIp": "192.168.2.1",
-              "switchSourceLoopback": 10,
+              "switchPoId": 2,
+              "switchPrimaryIp": "10.1.1.1",
+              "switchSourceLoopback": 11,
               "type": "default"
             }
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type
@@ -1354,6 +1351,7 @@ examples:
             "vpcAction": "pair"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type
@@ -1397,6 +1395,7 @@ examples:
             "vpcAction": "unPair"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

@@ -2,6 +2,8 @@ info:
   name: Create a new anomaly post processing rule
   type: http
   seq: 11
+  tags:
+    - Anomaly Settings
 
 http:
   method: POST
@@ -18,49 +20,33 @@ http:
       {
         "actions": [
           {
-            "action": "",
-            "applyToActiveAnomalies": false
+            "action": "acknowledge",
+            "applyToActiveAnomalies": true
           }
         ],
-        "anomalyCustomization": {
-          "customMessage": ""
-        },
-        "applyActionsToActiveAnomalies": false,
-        "description": "",
-        "enabled": false,
-        "lastModifiedTime": "",
+        "description": "Acknowledge EPG with invalid BD anomaly",
+        "enabled": true,
         "matchCriteria": [
           {
-            "affectedObjectMatchCriteria": [],
-            "anomalyRuleId": "",
             "anomalyTitleMatchCriteria": [
               {
-                "valueBeginsWith": "",
-                "valueContains": "",
-                "valueEndsWith": "",
-                "valueEquals": "",
-                "valueNotBeginsWith": "",
-                "valueNotContains": "",
-                "valueNotEndsWith": "",
-                "valueNotEquals": ""
+                "valueEquals": "EPG_HAS_INVALID_BD"
               }
             ],
             "categoryMatchCriteria": [
-              {}
+              {
+                "valueEquals": "configuration"
+              }
             ],
-            "checkCodeMatchCriteria": [],
-            "fabricName": "",
-            "scope": "",
+            "fabricName": "fabric1",
             "severityMatchCriteria": [
-              {}
-            ],
-            "uuid": ""
+              {
+                "valueEquals": "warning"
+              }
+            ]
           }
         ],
-        "name": "",
-        "overrideSeverity": "",
-        "priority": 0,
-        "uuid": ""
+        "name": "EPG Invalid BD Rule"
       }
   auth: inherit
 
@@ -117,6 +103,7 @@ examples:
             "name": "EPG Invalid BD Rule"
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -203,6 +190,7 @@ examples:
             "name": "EPG Invalid BD Rule"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -261,6 +249,7 @@ examples:
             "name": "EPG Invalid BD Rule"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -319,6 +308,7 @@ examples:
             "name": "EPG Invalid BD Rule"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -377,6 +367,7 @@ examples:
             "name": "EPG Invalid BD Rule"
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -435,6 +426,7 @@ examples:
             "name": "EPG Invalid BD Rule"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

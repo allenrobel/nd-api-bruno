@@ -2,6 +2,8 @@ info:
   name: Display interface configuration difference
   type: http
   seq: 6
+  tags:
+    - Interfaces
 
 http:
   method: POST
@@ -22,8 +24,24 @@ http:
       {
         "interfaces": [
           {
-            "interfaceName": "",
-            "switchId": ""
+            "interfaceName": "Port-channel501",
+            "switchId": "FDO222419B7"
+          },
+          {
+            "interfaceName": "Ethernet1/3",
+            "switchId": "FDO222419B7"
+          },
+          {
+            "interfaceName": "Loopback1",
+            "switchId": "FDO222419B7"
+          },
+          {
+            "interfaceName": "vPC1",
+            "switchId": "FDO222419B7"
+          },
+          {
+            "interfaceName": "vlan2000",
+            "switchId": "FDO222419B7"
           }
         ]
       }
@@ -58,10 +76,27 @@ examples:
               {
                 "interfaceName": "Port-channel501",
                 "switchId": "FDO222419B7"
+              },
+              {
+                "interfaceName": "Ethernet1/3",
+                "switchId": "FDO222419B7"
+              },
+              {
+                "interfaceName": "Loopback1",
+                "switchId": "FDO222419B7"
+              },
+              {
+                "interfaceName": "vPC1",
+                "switchId": "FDO222419B7"
+              },
+              {
+                "interfaceName": "vlan2000",
+                "switchId": "FDO222419B7"
               }
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -74,7 +109,7 @@ examples:
               {
                 "fabricName": "fabric1",
                 "interfaceName": "Ethernet1/3",
-                "message": "Serial number / interface name cannot be nul or empty",
+                "message": "Switch id (serial number) or interface name cannot be null or empty",
                 "status": "failed",
                 "switchId": "",
                 "switchName": "N9K-40"
@@ -104,10 +139,27 @@ examples:
               {
                 "interfaceName": "Port-channel501",
                 "switchId": "FDO222419B7"
+              },
+              {
+                "interfaceName": "Ethernet1/3",
+                "switchId": "FDO222419B7"
+              },
+              {
+                "interfaceName": "Loopback1",
+                "switchId": "FDO222419B7"
+              },
+              {
+                "interfaceName": "vPC1",
+                "switchId": "FDO222419B7"
+              },
+              {
+                "interfaceName": "vlan2000",
+                "switchId": "FDO222419B7"
               }
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -121,7 +173,7 @@ examples:
                 "adminStatus": "up",
                 "combinedConfigs": [
                   {
-                    "config": "interface Ethernet1/3\\r\\n  switchport\\r\\n  switchport mode trunk\\r\\n  switchport trunk allowed vlan none\\r\\n  spanning-tree port type edge trunk\\r\\n  mtu 9216\\r\\n  no shutdown\\r\\n",
+                    "config": "interface Ethernet1/3\\r\\n  switchport\\r\\n  switchport mode trunk\\r\\n  switchport trunk allowed vlan 10\\r\\n  spanning-tree port type edge trunk\\r\\n  mtu 9216\\r\\n  no shutdown\\r\\n",
                     "configType": "running",
                     "lines": 7
                   },
@@ -131,7 +183,7 @@ examples:
                     "lines": 0
                   },
                   {
-                    "config": "interface Ethernet1/3\\n  switchport\\n  switchport mode trunk\\n  switchport trunk allowed vlan none\\n  mtu 9216\\n  spanning-tree port type edge trunk\\n  no shutdown\\n",
+                    "config": "interface Ethernet1/3\\n  switchport\\n  switchport mode trunk\\n  switchport trunk allowed vlan 10\\n  mtu 9216\\n  spanning-tree port type edge trunk\\n  no shutdown\\n",
                     "configType": "expected",
                     "lines": 7
                   }
@@ -170,10 +222,27 @@ examples:
               {
                 "interfaceName": "Port-channel501",
                 "switchId": "FDO222419B7"
+              },
+              {
+                "interfaceName": "Ethernet1/3",
+                "switchId": "FDO222419B7"
+              },
+              {
+                "interfaceName": "Loopback1",
+                "switchId": "FDO222419B7"
+              },
+              {
+                "interfaceName": "vPC1",
+                "switchId": "FDO222419B7"
+              },
+              {
+                "interfaceName": "vlan2000",
+                "switchId": "FDO222419B7"
               }
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -209,10 +278,27 @@ examples:
               {
                 "interfaceName": "Port-channel501",
                 "switchId": "FDO222419B7"
+              },
+              {
+                "interfaceName": "Ethernet1/3",
+                "switchId": "FDO222419B7"
+              },
+              {
+                "interfaceName": "Loopback1",
+                "switchId": "FDO222419B7"
+              },
+              {
+                "interfaceName": "vPC1",
+                "switchId": "FDO222419B7"
+              },
+              {
+                "interfaceName": "vlan2000",
+                "switchId": "FDO222419B7"
               }
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -248,10 +334,27 @@ examples:
               {
                 "interfaceName": "Port-channel501",
                 "switchId": "FDO222419B7"
+              },
+              {
+                "interfaceName": "Ethernet1/3",
+                "switchId": "FDO222419B7"
+              },
+              {
+                "interfaceName": "Loopback1",
+                "switchId": "FDO222419B7"
+              },
+              {
+                "interfaceName": "vPC1",
+                "switchId": "FDO222419B7"
+              },
+              {
+                "interfaceName": "vlan2000",
+                "switchId": "FDO222419B7"
               }
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -287,10 +390,27 @@ examples:
               {
                 "interfaceName": "Port-channel501",
                 "switchId": "FDO222419B7"
+              },
+              {
+                "interfaceName": "Ethernet1/3",
+                "switchId": "FDO222419B7"
+              },
+              {
+                "interfaceName": "Loopback1",
+                "switchId": "FDO222419B7"
+              },
+              {
+                "interfaceName": "vPC1",
+                "switchId": "FDO222419B7"
+              },
+              {
+                "interfaceName": "vlan2000",
+                "switchId": "FDO222419B7"
               }
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

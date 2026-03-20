@@ -1,7 +1,9 @@
 info:
   name: Rerun pre/post ISSU update reports
   type: http
-  seq: 34
+  seq: 28
+  tags:
+    - Fabric Software Management
 
 http:
   method: PUT
@@ -20,8 +22,8 @@ http:
     type: json
     data: |-
       {
-        "prePostReportInstanceId": "",
-        "reportType": ""
+        "prePostReportInstanceId": "vxlanFabric_N9K_leaf_12_pre",
+        "reportType": "preReport"
       }
   auth: inherit
 
@@ -55,6 +57,7 @@ examples:
             "reportType": "preReport"
           }
     response:
+      status: 204
       statusText: No Content
       body:
         type: text
@@ -82,6 +85,7 @@ examples:
             "reportType": "preReport"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -117,6 +121,7 @@ examples:
             "reportType": "preReport"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -152,6 +157,7 @@ examples:
             "reportType": "preReport"
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -187,6 +193,7 @@ examples:
             "reportType": "preReport"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

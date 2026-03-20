@@ -2,6 +2,8 @@ info:
   name: Create extended community lists
   type: http
   seq: 17
+  tags:
+    - Routing Policies
 
 http:
   method: POST
@@ -20,7 +22,87 @@ http:
     type: json
     data: |-
       {
-        "extendedCommunityLists": []
+        "extendedCommunityLists": [
+          {
+            "entries": [
+              {
+                "action": "permit",
+                "nonTransitiveGenericExtendedCollection": [
+                  "10:10",
+                  "11:11"
+                ],
+                "routeTargetCollection": [
+                  "1:2",
+                  "2:2"
+                ],
+                "routerMacCollection": [
+                  "d478.0111.57b8",
+                  "d478.0111.57b9"
+                ],
+                "sequenceNumber": 10,
+                "siteOfOriginCollection": [
+                  "11:12",
+                  "15:15"
+                ],
+                "transitiveGenericExtendedCollection": [
+                  "12:22",
+                  "15:15"
+                ]
+              }
+            ],
+            "lastUpdateTimestamp": "2025-02-12T12:53:20Z",
+            "name": "communityList1",
+            "type": "standard"
+          },
+          {
+            "entries": [
+              {
+                "action": "permit",
+                "communityNumberRegex": "11:22",
+                "sequenceNumber": 10
+              },
+              {
+                "action": "deny",
+                "communityNumberRegex": "11:23",
+                "sequenceNumber": 20
+              }
+            ],
+            "lastUpdateTimestamp": "2025-02-12T12:53:20Z",
+            "name": "communityList2",
+            "type": "expanded"
+          },
+          {
+            "entries": [
+              {
+                "action": "permit",
+                "nonTransitiveGenericExtendedCollection": [
+                  "10:10",
+                  "11:11"
+                ],
+                "routeTargetCollection": [
+                  "1:2",
+                  "2:2"
+                ],
+                "routerMacCollection": [
+                  "d478.0111.57b8",
+                  "d478.0111.57b9"
+                ],
+                "sequenceNumber": 10,
+                "siteOfOriginCollection": [
+                  "11:12",
+                  "15:15"
+                ],
+                "transitiveGenericExtendedCollection": [
+                  "12:22",
+                  "15:15"
+                ]
+              }
+            ],
+            "lastUpdateTimestamp": "2025-02-12T12:53:20Z",
+            "name": "tenantSales~communityList3",
+            "type": "standard"
+          }
+        ]
       }
   auth: inherit
 
@@ -133,6 +215,7 @@ examples:
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -261,6 +344,7 @@ examples:
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -375,6 +459,7 @@ examples:
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -489,6 +574,7 @@ examples:
             ]
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -603,6 +689,7 @@ examples:
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -717,6 +804,7 @@ examples:
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

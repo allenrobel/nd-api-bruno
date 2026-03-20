@@ -2,6 +2,8 @@ info:
   name: Replace network
   type: http
   seq: 17
+  tags:
+    - VRFs and Networks
 
 http:
   method: PUT
@@ -27,7 +29,46 @@ http:
       disabled: true
   body:
     type: json
-    data: "{}"
+    data: |-
+      {
+        "displayName": "MyNetwork_30000",
+        "fabricName": "fab1",
+        "l2Data": {
+          "fabricData": {
+            "redundancyType": "hsrp"
+          },
+          "vlanName": "CLASSIC_VLAN_3000"
+        },
+        "l3Data": {
+          "activePrimaryInterfaceIpv4": "10.33.0.2",
+          "activePrimaryInterfaceIpv6": "2001:db8:3000::2",
+          "activePrimarySwitchPriority": 150,
+          "dhcpServers": [
+            {
+              "serverAddress": "10.63.0.10",
+              "serverVrf": "MyVRF_50003"
+            }
+          ],
+          "gatewayIpv4Address": "10.33.0.1/24",
+          "gatewayIpv6Address": "2001:db8:3000::1/64",
+          "hsrpVersion": 2,
+          "hsrpVrrpGroupNumber": 100,
+          "mtu": 9216,
+          "netflow": false,
+          "preempt": true,
+          "routingTag": 30000,
+          "standbyBackupInterfaceIpv4": "10.33.0.3",
+          "standbyBackupInterfaceIpv6": "2001:db8:3000::3",
+          "standbyBackupSwitchPriority": 100,
+          "standbyVlanInterfaceDescription": "Classic LAN Enhanced standby interface",
+          "vlanInterfaceDescription": "Classic LAN Enhanced primary interface"
+        },
+        "networkMode": "layer3",
+        "networkName": "MyNetwork_30000",
+        "networkType": "classicLanEnhanced",
+        "vlanId": 3000,
+        "vrfName": "MyVRF_50003"
+      }
   auth: inherit
 
 settings:
@@ -37,7 +78,7 @@ settings:
   maxRedirects: 5
 
 examples:
-  - name: 204 Response (classicNetwork)
+  - name: 204 Response (Classic LAN network)
     description: No Content
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networks/:networkName"
@@ -65,49 +106,51 @@ examples:
         type: json
         data: |-
           {
-            "displayName": "MyNetwork_50000",
+            "displayName": "MyNetwork_30000",
             "fabricName": "fab1",
-            "hsrpVrrpGroupNumberV6": {
-              "protocol": {
-                "hsrp": 175,
-                "vrrp": 100
-              }
-            },
             "l2Data": {
-              "vlanName": "VLAN2000"
+              "fabricData": {
+                "redundancyType": "hsrp"
+              },
+              "vlanName": "CLASSIC_VLAN_3000"
             },
             "l3Data": {
-              "activePrimaryInterfaceIpv4": "192.168.50.2/24",
-              "activePrimarySwitchPriority": 120,
-              "gatewayIpv4Address": "192.168.50.1/24",
-              "hsrpVersion": 2,
-              "hsrpVrrpGroupNumber": {
-                "protocol": {
-                  "hsrpV2": 1
+              "activePrimaryInterfaceIpv4": "10.33.0.2",
+              "activePrimaryInterfaceIpv6": "2001:db8:3000::2",
+              "activePrimarySwitchPriority": 150,
+              "dhcpServers": [
+                {
+                  "serverAddress": "10.63.0.10",
+                  "serverVrf": "MyVRF_50003"
                 }
-              },
+              ],
+              "gatewayIpv4Address": "10.33.0.1/24",
+              "gatewayIpv6Address": "2001:db8:3000::1/64",
+              "hsrpVersion": 2,
+              "hsrpVrrpGroupNumber": 100,
               "mtu": 9216,
               "netflow": false,
               "preempt": true,
-              "routingTag": 50000,
-              "standbyBackupInterfaceIpv4": "192.168.50.3/24",
+              "routingTag": 30000,
+              "standbyBackupInterfaceIpv4": "10.33.0.3",
+              "standbyBackupInterfaceIpv6": "2001:db8:3000::3",
               "standbyBackupSwitchPriority": 100,
-              "vlanInterfaceDescription": "Classic Network Interface"
+              "standbyVlanInterfaceDescription": "Classic LAN Enhanced standby interface",
+              "vlanInterfaceDescription": "Classic LAN Enhanced primary interface"
             },
-            "layer": "layer3",
-            "networkId": 20000,
-            "networkName": "MyNetwork_50000",
-            "networkType": "routed",
-            "tenantName": "tenant3",
-            "vlanId": 2000,
-            "vrfName": "MyVRF_70000"
+            "networkMode": "layer3",
+            "networkName": "MyNetwork_30000",
+            "networkType": "classicLanEnhanced",
+            "vlanId": 3000,
+            "vrfName": "MyVRF_50003"
           }
     response:
+      status: 204
       statusText: No Content
       body:
         type: text
         data: ""
-  - name: 204 Response (customNetwork)
+  - name: 204 Response (Custom network)
     description: No Content
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networks/:networkName"
@@ -135,34 +178,31 @@ examples:
         type: json
         data: |-
           {
-            "displayName": "MyNetwork_40000",
+            "displayName": "MyNetwork_30004",
             "fabricName": "fab1",
-            "hsrpVrrpGroupNumberV6": {
-              "protocol": {
-                "hsrp": 155,
-                "vrrp": 85
-              }
-            },
-            "layer": "layer3",
-            "networkExtensionTemplateName": "CustomExtTemplate1",
-            "networkId": 40000,
-            "networkName": "MyNetwork_40000",
+            "networkExtensionTemplateName": "Custom_Network_Extension_Template",
+            "networkId": 30004,
+            "networkMode": "layer3",
+            "networkName": "MyNetwork_30004",
             "networkTemplateConfig": {
-              "param1": "value1",
-              "param2": "value2"
+              "gatewayIpAddress": "10.35.4.1/24",
+              "mtu": "9216",
+              "networkName": "MyNetwork_30004",
+              "tag": "20000",
+              "vlanId": "3004"
             },
-            "networkTemplateName": "CustomTemplate1",
+            "networkTemplateName": "Default_Network_Universal",
             "networkType": "userDefined",
-            "tenantName": "tenant2",
-            "vlanId": 4000,
-            "vrfName": "MyVRF_60000"
+            "vlanId": 3004,
+            "vrfName": "MyVRF_50004"
           }
     response:
+      status: 204
       statusText: No Content
       body:
         type: text
         data: ""
-  - name: 204 Response (vxlanNetwork)
+  - name: 204 Response (VXLAN network)
     description: No Content
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networks/:networkName"
@@ -190,56 +230,60 @@ examples:
         type: json
         data: |-
           {
-            "aciData": {
-              "applicationProfileName": "ANP1",
-              "epgName": "EPG1",
-              "fabricData": {
-                "vlanPoolDomains": [
-                  {
-                    "domainName": "PhysDom",
-                    "domainType": "physical",
-                    "vlanPool": "211"
-                  }
-                ]
-              }
-            },
-            "displayName": "MyNetwork_30000",
+            "displayName": "MyNetwork_30001",
             "fabricName": "fab1",
-            "hsrpVrrpGroupNumberV6": {
-              "protocol": {
-                "hsrp": 130,
-                "vrrp": 75
-              }
-            },
             "l2Data": {
               "fabricData": {
-                "stretch": "bgw1"
+                "enableIr": false,
+                "multicastGroup": "239.1.1.11"
               },
-              "vlanName": "VLAN3000"
+              "rtAuto": true,
+              "vlanName": "VLAN_3001"
             },
             "l3Data": {
-              "gatewayIpv4Address": "192.168.30.1/24",
-              "gatewayIpv6Collection": [
-                "2001:db8:30::1/64"
-              ],
+              "arpSuppression": true,
+              "fabricData": {
+                "dhcpServers": [
+                  {
+                    "serverAddress": "192.2.2.10",
+                    "serverVrf": "MyVRF_50002"
+                  },
+                  {
+                    "serverAddress": "192.2.2.11",
+                    "serverVrf": "MyVRF_50002"
+                  }
+                ],
+                "gatewayOnBorder": true,
+                "igmpVersion": 3,
+                "loopbackId": 301,
+                "netflow": false
+              },
+              "gatewayIpv4Address": "192.0.2.1/24",
+              "gatewayIpv6Address": "2001:db8:3001::1/64",
+              "mtu": 9216,
+              "routingTag": 30001,
               "secondaryGatewayIpv4Collection": [
-                "192.168.30.2/24"
-              ]
+                "192.1.2.254/24"
+              ],
+              "secondaryGatewayIpv6Collection": [
+                "2001:db8:3001::254/64"
+              ],
+              "vlanInterfaceDescription": "Production network gateway"
             },
-            "layer": "layer3",
-            "networkId": 30000,
-            "networkName": "MyNetwork_30000",
-            "networkType": "vxlan",
-            "tenantName": "tenant1",
-            "vlanId": 3000,
-            "vrfName": "MyVRF_50000"
+            "networkId": 30001,
+            "networkMode": "layer3",
+            "networkName": "MyNetwork_30001",
+            "networkType": "vxlanEbgp",
+            "vlanId": 3001,
+            "vrfName": "MyVRF_50002"
           }
     response:
+      status: 204
       statusText: No Content
       body:
         type: text
         data: ""
-  - name: 400 Response (classicNetwork)
+  - name: 400 Response (Classic LAN network)
     description: Bad Request
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networks/:networkName"
@@ -267,44 +311,46 @@ examples:
         type: json
         data: |-
           {
-            "displayName": "MyNetwork_50000",
+            "displayName": "MyNetwork_30000",
             "fabricName": "fab1",
-            "hsrpVrrpGroupNumberV6": {
-              "protocol": {
-                "hsrp": 175,
-                "vrrp": 100
-              }
-            },
             "l2Data": {
-              "vlanName": "VLAN2000"
+              "fabricData": {
+                "redundancyType": "hsrp"
+              },
+              "vlanName": "CLASSIC_VLAN_3000"
             },
             "l3Data": {
-              "activePrimaryInterfaceIpv4": "192.168.50.2/24",
-              "activePrimarySwitchPriority": 120,
-              "gatewayIpv4Address": "192.168.50.1/24",
-              "hsrpVersion": 2,
-              "hsrpVrrpGroupNumber": {
-                "protocol": {
-                  "hsrpV2": 1
+              "activePrimaryInterfaceIpv4": "10.33.0.2",
+              "activePrimaryInterfaceIpv6": "2001:db8:3000::2",
+              "activePrimarySwitchPriority": 150,
+              "dhcpServers": [
+                {
+                  "serverAddress": "10.63.0.10",
+                  "serverVrf": "MyVRF_50003"
                 }
-              },
+              ],
+              "gatewayIpv4Address": "10.33.0.1/24",
+              "gatewayIpv6Address": "2001:db8:3000::1/64",
+              "hsrpVersion": 2,
+              "hsrpVrrpGroupNumber": 100,
               "mtu": 9216,
               "netflow": false,
               "preempt": true,
-              "routingTag": 50000,
-              "standbyBackupInterfaceIpv4": "192.168.50.3/24",
+              "routingTag": 30000,
+              "standbyBackupInterfaceIpv4": "10.33.0.3",
+              "standbyBackupInterfaceIpv6": "2001:db8:3000::3",
               "standbyBackupSwitchPriority": 100,
-              "vlanInterfaceDescription": "Classic Network Interface"
+              "standbyVlanInterfaceDescription": "Classic LAN Enhanced standby interface",
+              "vlanInterfaceDescription": "Classic LAN Enhanced primary interface"
             },
-            "layer": "layer3",
-            "networkId": 20000,
-            "networkName": "MyNetwork_50000",
-            "networkType": "routed",
-            "tenantName": "tenant3",
-            "vlanId": 2000,
-            "vrfName": "MyVRF_70000"
+            "networkMode": "layer3",
+            "networkName": "MyNetwork_30000",
+            "networkType": "classicLanEnhanced",
+            "vlanId": 3000,
+            "vrfName": "MyVRF_50003"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -317,7 +363,7 @@ examples:
             "description": "The server could not understand the request due to incorrect syntax.",
             "code": 400
           }
-  - name: 400 Response (customNetwork)
+  - name: 400 Response (Custom network)
     description: Bad Request
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networks/:networkName"
@@ -345,29 +391,26 @@ examples:
         type: json
         data: |-
           {
-            "displayName": "MyNetwork_40000",
+            "displayName": "MyNetwork_30004",
             "fabricName": "fab1",
-            "hsrpVrrpGroupNumberV6": {
-              "protocol": {
-                "hsrp": 155,
-                "vrrp": 85
-              }
-            },
-            "layer": "layer3",
-            "networkExtensionTemplateName": "CustomExtTemplate1",
-            "networkId": 40000,
-            "networkName": "MyNetwork_40000",
+            "networkExtensionTemplateName": "Custom_Network_Extension_Template",
+            "networkId": 30004,
+            "networkMode": "layer3",
+            "networkName": "MyNetwork_30004",
             "networkTemplateConfig": {
-              "param1": "value1",
-              "param2": "value2"
+              "gatewayIpAddress": "10.35.4.1/24",
+              "mtu": "9216",
+              "networkName": "MyNetwork_30004",
+              "tag": "20000",
+              "vlanId": "3004"
             },
-            "networkTemplateName": "CustomTemplate1",
+            "networkTemplateName": "Default_Network_Universal",
             "networkType": "userDefined",
-            "tenantName": "tenant2",
-            "vlanId": 4000,
-            "vrfName": "MyVRF_60000"
+            "vlanId": 3004,
+            "vrfName": "MyVRF_50004"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -380,7 +423,7 @@ examples:
             "description": "The server could not understand the request due to incorrect syntax.",
             "code": 400
           }
-  - name: 400 Response (vxlanNetwork)
+  - name: 400 Response (VXLAN network)
     description: Bad Request
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networks/:networkName"
@@ -408,51 +451,55 @@ examples:
         type: json
         data: |-
           {
-            "aciData": {
-              "applicationProfileName": "ANP1",
-              "epgName": "EPG1",
-              "fabricData": {
-                "vlanPoolDomains": [
-                  {
-                    "domainName": "PhysDom",
-                    "domainType": "physical",
-                    "vlanPool": "211"
-                  }
-                ]
-              }
-            },
-            "displayName": "MyNetwork_30000",
+            "displayName": "MyNetwork_30001",
             "fabricName": "fab1",
-            "hsrpVrrpGroupNumberV6": {
-              "protocol": {
-                "hsrp": 130,
-                "vrrp": 75
-              }
-            },
             "l2Data": {
               "fabricData": {
-                "stretch": "bgw1"
+                "enableIr": false,
+                "multicastGroup": "239.1.1.11"
               },
-              "vlanName": "VLAN3000"
+              "rtAuto": true,
+              "vlanName": "VLAN_3001"
             },
             "l3Data": {
-              "gatewayIpv4Address": "192.168.30.1/24",
-              "gatewayIpv6Collection": [
-                "2001:db8:30::1/64"
-              ],
+              "arpSuppression": true,
+              "fabricData": {
+                "dhcpServers": [
+                  {
+                    "serverAddress": "192.2.2.10",
+                    "serverVrf": "MyVRF_50002"
+                  },
+                  {
+                    "serverAddress": "192.2.2.11",
+                    "serverVrf": "MyVRF_50002"
+                  }
+                ],
+                "gatewayOnBorder": true,
+                "igmpVersion": 3,
+                "loopbackId": 301,
+                "netflow": false
+              },
+              "gatewayIpv4Address": "192.0.2.1/24",
+              "gatewayIpv6Address": "2001:db8:3001::1/64",
+              "mtu": 9216,
+              "routingTag": 30001,
               "secondaryGatewayIpv4Collection": [
-                "192.168.30.2/24"
-              ]
+                "192.1.2.254/24"
+              ],
+              "secondaryGatewayIpv6Collection": [
+                "2001:db8:3001::254/64"
+              ],
+              "vlanInterfaceDescription": "Production network gateway"
             },
-            "layer": "layer3",
-            "networkId": 30000,
-            "networkName": "MyNetwork_30000",
-            "networkType": "vxlan",
-            "tenantName": "tenant1",
-            "vlanId": 3000,
-            "vrfName": "MyVRF_50000"
+            "networkId": 30001,
+            "networkMode": "layer3",
+            "networkName": "MyNetwork_30001",
+            "networkType": "vxlanEbgp",
+            "vlanId": 3001,
+            "vrfName": "MyVRF_50002"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -465,7 +512,7 @@ examples:
             "description": "The server could not understand the request due to incorrect syntax.",
             "code": 400
           }
-  - name: 401 Response (classicNetwork)
+  - name: 401 Response (Classic LAN network)
     description: Unauthorized
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networks/:networkName"
@@ -493,44 +540,46 @@ examples:
         type: json
         data: |-
           {
-            "displayName": "MyNetwork_50000",
+            "displayName": "MyNetwork_30000",
             "fabricName": "fab1",
-            "hsrpVrrpGroupNumberV6": {
-              "protocol": {
-                "hsrp": 175,
-                "vrrp": 100
-              }
-            },
             "l2Data": {
-              "vlanName": "VLAN2000"
+              "fabricData": {
+                "redundancyType": "hsrp"
+              },
+              "vlanName": "CLASSIC_VLAN_3000"
             },
             "l3Data": {
-              "activePrimaryInterfaceIpv4": "192.168.50.2/24",
-              "activePrimarySwitchPriority": 120,
-              "gatewayIpv4Address": "192.168.50.1/24",
-              "hsrpVersion": 2,
-              "hsrpVrrpGroupNumber": {
-                "protocol": {
-                  "hsrpV2": 1
+              "activePrimaryInterfaceIpv4": "10.33.0.2",
+              "activePrimaryInterfaceIpv6": "2001:db8:3000::2",
+              "activePrimarySwitchPriority": 150,
+              "dhcpServers": [
+                {
+                  "serverAddress": "10.63.0.10",
+                  "serverVrf": "MyVRF_50003"
                 }
-              },
+              ],
+              "gatewayIpv4Address": "10.33.0.1/24",
+              "gatewayIpv6Address": "2001:db8:3000::1/64",
+              "hsrpVersion": 2,
+              "hsrpVrrpGroupNumber": 100,
               "mtu": 9216,
               "netflow": false,
               "preempt": true,
-              "routingTag": 50000,
-              "standbyBackupInterfaceIpv4": "192.168.50.3/24",
+              "routingTag": 30000,
+              "standbyBackupInterfaceIpv4": "10.33.0.3",
+              "standbyBackupInterfaceIpv6": "2001:db8:3000::3",
               "standbyBackupSwitchPriority": 100,
-              "vlanInterfaceDescription": "Classic Network Interface"
+              "standbyVlanInterfaceDescription": "Classic LAN Enhanced standby interface",
+              "vlanInterfaceDescription": "Classic LAN Enhanced primary interface"
             },
-            "layer": "layer3",
-            "networkId": 20000,
-            "networkName": "MyNetwork_50000",
-            "networkType": "routed",
-            "tenantName": "tenant3",
-            "vlanId": 2000,
-            "vrfName": "MyVRF_70000"
+            "networkMode": "layer3",
+            "networkName": "MyNetwork_30000",
+            "networkType": "classicLanEnhanced",
+            "vlanId": 3000,
+            "vrfName": "MyVRF_50003"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -543,7 +592,7 @@ examples:
             "description": "Indicates that the request requires user authentication information.",
             "code": 401
           }
-  - name: 401 Response (customNetwork)
+  - name: 401 Response (Custom network)
     description: Unauthorized
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networks/:networkName"
@@ -571,29 +620,26 @@ examples:
         type: json
         data: |-
           {
-            "displayName": "MyNetwork_40000",
+            "displayName": "MyNetwork_30004",
             "fabricName": "fab1",
-            "hsrpVrrpGroupNumberV6": {
-              "protocol": {
-                "hsrp": 155,
-                "vrrp": 85
-              }
-            },
-            "layer": "layer3",
-            "networkExtensionTemplateName": "CustomExtTemplate1",
-            "networkId": 40000,
-            "networkName": "MyNetwork_40000",
+            "networkExtensionTemplateName": "Custom_Network_Extension_Template",
+            "networkId": 30004,
+            "networkMode": "layer3",
+            "networkName": "MyNetwork_30004",
             "networkTemplateConfig": {
-              "param1": "value1",
-              "param2": "value2"
+              "gatewayIpAddress": "10.35.4.1/24",
+              "mtu": "9216",
+              "networkName": "MyNetwork_30004",
+              "tag": "20000",
+              "vlanId": "3004"
             },
-            "networkTemplateName": "CustomTemplate1",
+            "networkTemplateName": "Default_Network_Universal",
             "networkType": "userDefined",
-            "tenantName": "tenant2",
-            "vlanId": 4000,
-            "vrfName": "MyVRF_60000"
+            "vlanId": 3004,
+            "vrfName": "MyVRF_50004"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -606,7 +652,7 @@ examples:
             "description": "Indicates that the request requires user authentication information.",
             "code": 401
           }
-  - name: 401 Response (vxlanNetwork)
+  - name: 401 Response (VXLAN network)
     description: Unauthorized
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networks/:networkName"
@@ -634,51 +680,55 @@ examples:
         type: json
         data: |-
           {
-            "aciData": {
-              "applicationProfileName": "ANP1",
-              "epgName": "EPG1",
-              "fabricData": {
-                "vlanPoolDomains": [
-                  {
-                    "domainName": "PhysDom",
-                    "domainType": "physical",
-                    "vlanPool": "211"
-                  }
-                ]
-              }
-            },
-            "displayName": "MyNetwork_30000",
+            "displayName": "MyNetwork_30001",
             "fabricName": "fab1",
-            "hsrpVrrpGroupNumberV6": {
-              "protocol": {
-                "hsrp": 130,
-                "vrrp": 75
-              }
-            },
             "l2Data": {
               "fabricData": {
-                "stretch": "bgw1"
+                "enableIr": false,
+                "multicastGroup": "239.1.1.11"
               },
-              "vlanName": "VLAN3000"
+              "rtAuto": true,
+              "vlanName": "VLAN_3001"
             },
             "l3Data": {
-              "gatewayIpv4Address": "192.168.30.1/24",
-              "gatewayIpv6Collection": [
-                "2001:db8:30::1/64"
-              ],
+              "arpSuppression": true,
+              "fabricData": {
+                "dhcpServers": [
+                  {
+                    "serverAddress": "192.2.2.10",
+                    "serverVrf": "MyVRF_50002"
+                  },
+                  {
+                    "serverAddress": "192.2.2.11",
+                    "serverVrf": "MyVRF_50002"
+                  }
+                ],
+                "gatewayOnBorder": true,
+                "igmpVersion": 3,
+                "loopbackId": 301,
+                "netflow": false
+              },
+              "gatewayIpv4Address": "192.0.2.1/24",
+              "gatewayIpv6Address": "2001:db8:3001::1/64",
+              "mtu": 9216,
+              "routingTag": 30001,
               "secondaryGatewayIpv4Collection": [
-                "192.168.30.2/24"
-              ]
+                "192.1.2.254/24"
+              ],
+              "secondaryGatewayIpv6Collection": [
+                "2001:db8:3001::254/64"
+              ],
+              "vlanInterfaceDescription": "Production network gateway"
             },
-            "layer": "layer3",
-            "networkId": 30000,
-            "networkName": "MyNetwork_30000",
-            "networkType": "vxlan",
-            "tenantName": "tenant1",
-            "vlanId": 3000,
-            "vrfName": "MyVRF_50000"
+            "networkId": 30001,
+            "networkMode": "layer3",
+            "networkName": "MyNetwork_30001",
+            "networkType": "vxlanEbgp",
+            "vlanId": 3001,
+            "vrfName": "MyVRF_50002"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -691,7 +741,7 @@ examples:
             "description": "Indicates that the request requires user authentication information.",
             "code": 401
           }
-  - name: 403 Response (classicNetwork)
+  - name: 403 Response (Classic LAN network)
     description: Forbidden
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networks/:networkName"
@@ -719,44 +769,46 @@ examples:
         type: json
         data: |-
           {
-            "displayName": "MyNetwork_50000",
+            "displayName": "MyNetwork_30000",
             "fabricName": "fab1",
-            "hsrpVrrpGroupNumberV6": {
-              "protocol": {
-                "hsrp": 175,
-                "vrrp": 100
-              }
-            },
             "l2Data": {
-              "vlanName": "VLAN2000"
+              "fabricData": {
+                "redundancyType": "hsrp"
+              },
+              "vlanName": "CLASSIC_VLAN_3000"
             },
             "l3Data": {
-              "activePrimaryInterfaceIpv4": "192.168.50.2/24",
-              "activePrimarySwitchPriority": 120,
-              "gatewayIpv4Address": "192.168.50.1/24",
-              "hsrpVersion": 2,
-              "hsrpVrrpGroupNumber": {
-                "protocol": {
-                  "hsrpV2": 1
+              "activePrimaryInterfaceIpv4": "10.33.0.2",
+              "activePrimaryInterfaceIpv6": "2001:db8:3000::2",
+              "activePrimarySwitchPriority": 150,
+              "dhcpServers": [
+                {
+                  "serverAddress": "10.63.0.10",
+                  "serverVrf": "MyVRF_50003"
                 }
-              },
+              ],
+              "gatewayIpv4Address": "10.33.0.1/24",
+              "gatewayIpv6Address": "2001:db8:3000::1/64",
+              "hsrpVersion": 2,
+              "hsrpVrrpGroupNumber": 100,
               "mtu": 9216,
               "netflow": false,
               "preempt": true,
-              "routingTag": 50000,
-              "standbyBackupInterfaceIpv4": "192.168.50.3/24",
+              "routingTag": 30000,
+              "standbyBackupInterfaceIpv4": "10.33.0.3",
+              "standbyBackupInterfaceIpv6": "2001:db8:3000::3",
               "standbyBackupSwitchPriority": 100,
-              "vlanInterfaceDescription": "Classic Network Interface"
+              "standbyVlanInterfaceDescription": "Classic LAN Enhanced standby interface",
+              "vlanInterfaceDescription": "Classic LAN Enhanced primary interface"
             },
-            "layer": "layer3",
-            "networkId": 20000,
-            "networkName": "MyNetwork_50000",
-            "networkType": "routed",
-            "tenantName": "tenant3",
-            "vlanId": 2000,
-            "vrfName": "MyVRF_70000"
+            "networkMode": "layer3",
+            "networkName": "MyNetwork_30000",
+            "networkType": "classicLanEnhanced",
+            "vlanId": 3000,
+            "vrfName": "MyVRF_50003"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -769,7 +821,7 @@ examples:
             "description": "The client does not have access rights to the content.",
             "code": 403
           }
-  - name: 403 Response (customNetwork)
+  - name: 403 Response (Custom network)
     description: Forbidden
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networks/:networkName"
@@ -797,29 +849,26 @@ examples:
         type: json
         data: |-
           {
-            "displayName": "MyNetwork_40000",
+            "displayName": "MyNetwork_30004",
             "fabricName": "fab1",
-            "hsrpVrrpGroupNumberV6": {
-              "protocol": {
-                "hsrp": 155,
-                "vrrp": 85
-              }
-            },
-            "layer": "layer3",
-            "networkExtensionTemplateName": "CustomExtTemplate1",
-            "networkId": 40000,
-            "networkName": "MyNetwork_40000",
+            "networkExtensionTemplateName": "Custom_Network_Extension_Template",
+            "networkId": 30004,
+            "networkMode": "layer3",
+            "networkName": "MyNetwork_30004",
             "networkTemplateConfig": {
-              "param1": "value1",
-              "param2": "value2"
+              "gatewayIpAddress": "10.35.4.1/24",
+              "mtu": "9216",
+              "networkName": "MyNetwork_30004",
+              "tag": "20000",
+              "vlanId": "3004"
             },
-            "networkTemplateName": "CustomTemplate1",
+            "networkTemplateName": "Default_Network_Universal",
             "networkType": "userDefined",
-            "tenantName": "tenant2",
-            "vlanId": 4000,
-            "vrfName": "MyVRF_60000"
+            "vlanId": 3004,
+            "vrfName": "MyVRF_50004"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -832,7 +881,7 @@ examples:
             "description": "The client does not have access rights to the content.",
             "code": 403
           }
-  - name: 403 Response (vxlanNetwork)
+  - name: 403 Response (VXLAN network)
     description: Forbidden
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networks/:networkName"
@@ -860,51 +909,55 @@ examples:
         type: json
         data: |-
           {
-            "aciData": {
-              "applicationProfileName": "ANP1",
-              "epgName": "EPG1",
-              "fabricData": {
-                "vlanPoolDomains": [
-                  {
-                    "domainName": "PhysDom",
-                    "domainType": "physical",
-                    "vlanPool": "211"
-                  }
-                ]
-              }
-            },
-            "displayName": "MyNetwork_30000",
+            "displayName": "MyNetwork_30001",
             "fabricName": "fab1",
-            "hsrpVrrpGroupNumberV6": {
-              "protocol": {
-                "hsrp": 130,
-                "vrrp": 75
-              }
-            },
             "l2Data": {
               "fabricData": {
-                "stretch": "bgw1"
+                "enableIr": false,
+                "multicastGroup": "239.1.1.11"
               },
-              "vlanName": "VLAN3000"
+              "rtAuto": true,
+              "vlanName": "VLAN_3001"
             },
             "l3Data": {
-              "gatewayIpv4Address": "192.168.30.1/24",
-              "gatewayIpv6Collection": [
-                "2001:db8:30::1/64"
-              ],
+              "arpSuppression": true,
+              "fabricData": {
+                "dhcpServers": [
+                  {
+                    "serverAddress": "192.2.2.10",
+                    "serverVrf": "MyVRF_50002"
+                  },
+                  {
+                    "serverAddress": "192.2.2.11",
+                    "serverVrf": "MyVRF_50002"
+                  }
+                ],
+                "gatewayOnBorder": true,
+                "igmpVersion": 3,
+                "loopbackId": 301,
+                "netflow": false
+              },
+              "gatewayIpv4Address": "192.0.2.1/24",
+              "gatewayIpv6Address": "2001:db8:3001::1/64",
+              "mtu": 9216,
+              "routingTag": 30001,
               "secondaryGatewayIpv4Collection": [
-                "192.168.30.2/24"
-              ]
+                "192.1.2.254/24"
+              ],
+              "secondaryGatewayIpv6Collection": [
+                "2001:db8:3001::254/64"
+              ],
+              "vlanInterfaceDescription": "Production network gateway"
             },
-            "layer": "layer3",
-            "networkId": 30000,
-            "networkName": "MyNetwork_30000",
-            "networkType": "vxlan",
-            "tenantName": "tenant1",
-            "vlanId": 3000,
-            "vrfName": "MyVRF_50000"
+            "networkId": 30001,
+            "networkMode": "layer3",
+            "networkName": "MyNetwork_30001",
+            "networkType": "vxlanEbgp",
+            "vlanId": 3001,
+            "vrfName": "MyVRF_50002"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -917,7 +970,7 @@ examples:
             "description": "The client does not have access rights to the content.",
             "code": 403
           }
-  - name: 404 Response (classicNetwork)
+  - name: 404 Response (Classic LAN network)
     description: Not Found
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networks/:networkName"
@@ -945,44 +998,46 @@ examples:
         type: json
         data: |-
           {
-            "displayName": "MyNetwork_50000",
+            "displayName": "MyNetwork_30000",
             "fabricName": "fab1",
-            "hsrpVrrpGroupNumberV6": {
-              "protocol": {
-                "hsrp": 175,
-                "vrrp": 100
-              }
-            },
             "l2Data": {
-              "vlanName": "VLAN2000"
+              "fabricData": {
+                "redundancyType": "hsrp"
+              },
+              "vlanName": "CLASSIC_VLAN_3000"
             },
             "l3Data": {
-              "activePrimaryInterfaceIpv4": "192.168.50.2/24",
-              "activePrimarySwitchPriority": 120,
-              "gatewayIpv4Address": "192.168.50.1/24",
-              "hsrpVersion": 2,
-              "hsrpVrrpGroupNumber": {
-                "protocol": {
-                  "hsrpV2": 1
+              "activePrimaryInterfaceIpv4": "10.33.0.2",
+              "activePrimaryInterfaceIpv6": "2001:db8:3000::2",
+              "activePrimarySwitchPriority": 150,
+              "dhcpServers": [
+                {
+                  "serverAddress": "10.63.0.10",
+                  "serverVrf": "MyVRF_50003"
                 }
-              },
+              ],
+              "gatewayIpv4Address": "10.33.0.1/24",
+              "gatewayIpv6Address": "2001:db8:3000::1/64",
+              "hsrpVersion": 2,
+              "hsrpVrrpGroupNumber": 100,
               "mtu": 9216,
               "netflow": false,
               "preempt": true,
-              "routingTag": 50000,
-              "standbyBackupInterfaceIpv4": "192.168.50.3/24",
+              "routingTag": 30000,
+              "standbyBackupInterfaceIpv4": "10.33.0.3",
+              "standbyBackupInterfaceIpv6": "2001:db8:3000::3",
               "standbyBackupSwitchPriority": 100,
-              "vlanInterfaceDescription": "Classic Network Interface"
+              "standbyVlanInterfaceDescription": "Classic LAN Enhanced standby interface",
+              "vlanInterfaceDescription": "Classic LAN Enhanced primary interface"
             },
-            "layer": "layer3",
-            "networkId": 20000,
-            "networkName": "MyNetwork_50000",
-            "networkType": "routed",
-            "tenantName": "tenant3",
-            "vlanId": 2000,
-            "vrfName": "MyVRF_70000"
+            "networkMode": "layer3",
+            "networkName": "MyNetwork_30000",
+            "networkType": "classicLanEnhanced",
+            "vlanId": 3000,
+            "vrfName": "MyVRF_50003"
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -995,7 +1050,7 @@ examples:
             "description": "The server cannot find the requested resource.",
             "code": 404
           }
-  - name: 404 Response (customNetwork)
+  - name: 404 Response (Custom network)
     description: Not Found
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networks/:networkName"
@@ -1023,29 +1078,26 @@ examples:
         type: json
         data: |-
           {
-            "displayName": "MyNetwork_40000",
+            "displayName": "MyNetwork_30004",
             "fabricName": "fab1",
-            "hsrpVrrpGroupNumberV6": {
-              "protocol": {
-                "hsrp": 155,
-                "vrrp": 85
-              }
-            },
-            "layer": "layer3",
-            "networkExtensionTemplateName": "CustomExtTemplate1",
-            "networkId": 40000,
-            "networkName": "MyNetwork_40000",
+            "networkExtensionTemplateName": "Custom_Network_Extension_Template",
+            "networkId": 30004,
+            "networkMode": "layer3",
+            "networkName": "MyNetwork_30004",
             "networkTemplateConfig": {
-              "param1": "value1",
-              "param2": "value2"
+              "gatewayIpAddress": "10.35.4.1/24",
+              "mtu": "9216",
+              "networkName": "MyNetwork_30004",
+              "tag": "20000",
+              "vlanId": "3004"
             },
-            "networkTemplateName": "CustomTemplate1",
+            "networkTemplateName": "Default_Network_Universal",
             "networkType": "userDefined",
-            "tenantName": "tenant2",
-            "vlanId": 4000,
-            "vrfName": "MyVRF_60000"
+            "vlanId": 3004,
+            "vrfName": "MyVRF_50004"
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -1058,7 +1110,7 @@ examples:
             "description": "The server cannot find the requested resource.",
             "code": 404
           }
-  - name: 404 Response (vxlanNetwork)
+  - name: 404 Response (VXLAN network)
     description: Not Found
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networks/:networkName"
@@ -1086,51 +1138,55 @@ examples:
         type: json
         data: |-
           {
-            "aciData": {
-              "applicationProfileName": "ANP1",
-              "epgName": "EPG1",
-              "fabricData": {
-                "vlanPoolDomains": [
-                  {
-                    "domainName": "PhysDom",
-                    "domainType": "physical",
-                    "vlanPool": "211"
-                  }
-                ]
-              }
-            },
-            "displayName": "MyNetwork_30000",
+            "displayName": "MyNetwork_30001",
             "fabricName": "fab1",
-            "hsrpVrrpGroupNumberV6": {
-              "protocol": {
-                "hsrp": 130,
-                "vrrp": 75
-              }
-            },
             "l2Data": {
               "fabricData": {
-                "stretch": "bgw1"
+                "enableIr": false,
+                "multicastGroup": "239.1.1.11"
               },
-              "vlanName": "VLAN3000"
+              "rtAuto": true,
+              "vlanName": "VLAN_3001"
             },
             "l3Data": {
-              "gatewayIpv4Address": "192.168.30.1/24",
-              "gatewayIpv6Collection": [
-                "2001:db8:30::1/64"
-              ],
+              "arpSuppression": true,
+              "fabricData": {
+                "dhcpServers": [
+                  {
+                    "serverAddress": "192.2.2.10",
+                    "serverVrf": "MyVRF_50002"
+                  },
+                  {
+                    "serverAddress": "192.2.2.11",
+                    "serverVrf": "MyVRF_50002"
+                  }
+                ],
+                "gatewayOnBorder": true,
+                "igmpVersion": 3,
+                "loopbackId": 301,
+                "netflow": false
+              },
+              "gatewayIpv4Address": "192.0.2.1/24",
+              "gatewayIpv6Address": "2001:db8:3001::1/64",
+              "mtu": 9216,
+              "routingTag": 30001,
               "secondaryGatewayIpv4Collection": [
-                "192.168.30.2/24"
-              ]
+                "192.1.2.254/24"
+              ],
+              "secondaryGatewayIpv6Collection": [
+                "2001:db8:3001::254/64"
+              ],
+              "vlanInterfaceDescription": "Production network gateway"
             },
-            "layer": "layer3",
-            "networkId": 30000,
-            "networkName": "MyNetwork_30000",
-            "networkType": "vxlan",
-            "tenantName": "tenant1",
-            "vlanId": 3000,
-            "vrfName": "MyVRF_50000"
+            "networkId": 30001,
+            "networkMode": "layer3",
+            "networkName": "MyNetwork_30001",
+            "networkType": "vxlanEbgp",
+            "vlanId": 3001,
+            "vrfName": "MyVRF_50002"
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -1143,7 +1199,7 @@ examples:
             "description": "The server cannot find the requested resource.",
             "code": 404
           }
-  - name: 500 Response (classicNetwork)
+  - name: 500 Response (Classic LAN network)
     description: Internal Server Error
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networks/:networkName"
@@ -1171,44 +1227,46 @@ examples:
         type: json
         data: |-
           {
-            "displayName": "MyNetwork_50000",
+            "displayName": "MyNetwork_30000",
             "fabricName": "fab1",
-            "hsrpVrrpGroupNumberV6": {
-              "protocol": {
-                "hsrp": 175,
-                "vrrp": 100
-              }
-            },
             "l2Data": {
-              "vlanName": "VLAN2000"
+              "fabricData": {
+                "redundancyType": "hsrp"
+              },
+              "vlanName": "CLASSIC_VLAN_3000"
             },
             "l3Data": {
-              "activePrimaryInterfaceIpv4": "192.168.50.2/24",
-              "activePrimarySwitchPriority": 120,
-              "gatewayIpv4Address": "192.168.50.1/24",
-              "hsrpVersion": 2,
-              "hsrpVrrpGroupNumber": {
-                "protocol": {
-                  "hsrpV2": 1
+              "activePrimaryInterfaceIpv4": "10.33.0.2",
+              "activePrimaryInterfaceIpv6": "2001:db8:3000::2",
+              "activePrimarySwitchPriority": 150,
+              "dhcpServers": [
+                {
+                  "serverAddress": "10.63.0.10",
+                  "serverVrf": "MyVRF_50003"
                 }
-              },
+              ],
+              "gatewayIpv4Address": "10.33.0.1/24",
+              "gatewayIpv6Address": "2001:db8:3000::1/64",
+              "hsrpVersion": 2,
+              "hsrpVrrpGroupNumber": 100,
               "mtu": 9216,
               "netflow": false,
               "preempt": true,
-              "routingTag": 50000,
-              "standbyBackupInterfaceIpv4": "192.168.50.3/24",
+              "routingTag": 30000,
+              "standbyBackupInterfaceIpv4": "10.33.0.3",
+              "standbyBackupInterfaceIpv6": "2001:db8:3000::3",
               "standbyBackupSwitchPriority": 100,
-              "vlanInterfaceDescription": "Classic Network Interface"
+              "standbyVlanInterfaceDescription": "Classic LAN Enhanced standby interface",
+              "vlanInterfaceDescription": "Classic LAN Enhanced primary interface"
             },
-            "layer": "layer3",
-            "networkId": 20000,
-            "networkName": "MyNetwork_50000",
-            "networkType": "routed",
-            "tenantName": "tenant3",
-            "vlanId": 2000,
-            "vrfName": "MyVRF_70000"
+            "networkMode": "layer3",
+            "networkName": "MyNetwork_30000",
+            "networkType": "classicLanEnhanced",
+            "vlanId": 3000,
+            "vrfName": "MyVRF_50003"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type
@@ -1221,7 +1279,7 @@ examples:
             "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
             "code": 500
           }
-  - name: 500 Response (customNetwork)
+  - name: 500 Response (Custom network)
     description: Internal Server Error
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networks/:networkName"
@@ -1249,29 +1307,26 @@ examples:
         type: json
         data: |-
           {
-            "displayName": "MyNetwork_40000",
+            "displayName": "MyNetwork_30004",
             "fabricName": "fab1",
-            "hsrpVrrpGroupNumberV6": {
-              "protocol": {
-                "hsrp": 155,
-                "vrrp": 85
-              }
-            },
-            "layer": "layer3",
-            "networkExtensionTemplateName": "CustomExtTemplate1",
-            "networkId": 40000,
-            "networkName": "MyNetwork_40000",
+            "networkExtensionTemplateName": "Custom_Network_Extension_Template",
+            "networkId": 30004,
+            "networkMode": "layer3",
+            "networkName": "MyNetwork_30004",
             "networkTemplateConfig": {
-              "param1": "value1",
-              "param2": "value2"
+              "gatewayIpAddress": "10.35.4.1/24",
+              "mtu": "9216",
+              "networkName": "MyNetwork_30004",
+              "tag": "20000",
+              "vlanId": "3004"
             },
-            "networkTemplateName": "CustomTemplate1",
+            "networkTemplateName": "Default_Network_Universal",
             "networkType": "userDefined",
-            "tenantName": "tenant2",
-            "vlanId": 4000,
-            "vrfName": "MyVRF_60000"
+            "vlanId": 3004,
+            "vrfName": "MyVRF_50004"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type
@@ -1284,7 +1339,7 @@ examples:
             "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
             "code": 500
           }
-  - name: 500 Response (vxlanNetwork)
+  - name: 500 Response (VXLAN network)
     description: Internal Server Error
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/networks/:networkName"
@@ -1312,51 +1367,55 @@ examples:
         type: json
         data: |-
           {
-            "aciData": {
-              "applicationProfileName": "ANP1",
-              "epgName": "EPG1",
-              "fabricData": {
-                "vlanPoolDomains": [
-                  {
-                    "domainName": "PhysDom",
-                    "domainType": "physical",
-                    "vlanPool": "211"
-                  }
-                ]
-              }
-            },
-            "displayName": "MyNetwork_30000",
+            "displayName": "MyNetwork_30001",
             "fabricName": "fab1",
-            "hsrpVrrpGroupNumberV6": {
-              "protocol": {
-                "hsrp": 130,
-                "vrrp": 75
-              }
-            },
             "l2Data": {
               "fabricData": {
-                "stretch": "bgw1"
+                "enableIr": false,
+                "multicastGroup": "239.1.1.11"
               },
-              "vlanName": "VLAN3000"
+              "rtAuto": true,
+              "vlanName": "VLAN_3001"
             },
             "l3Data": {
-              "gatewayIpv4Address": "192.168.30.1/24",
-              "gatewayIpv6Collection": [
-                "2001:db8:30::1/64"
-              ],
+              "arpSuppression": true,
+              "fabricData": {
+                "dhcpServers": [
+                  {
+                    "serverAddress": "192.2.2.10",
+                    "serverVrf": "MyVRF_50002"
+                  },
+                  {
+                    "serverAddress": "192.2.2.11",
+                    "serverVrf": "MyVRF_50002"
+                  }
+                ],
+                "gatewayOnBorder": true,
+                "igmpVersion": 3,
+                "loopbackId": 301,
+                "netflow": false
+              },
+              "gatewayIpv4Address": "192.0.2.1/24",
+              "gatewayIpv6Address": "2001:db8:3001::1/64",
+              "mtu": 9216,
+              "routingTag": 30001,
               "secondaryGatewayIpv4Collection": [
-                "192.168.30.2/24"
-              ]
+                "192.1.2.254/24"
+              ],
+              "secondaryGatewayIpv6Collection": [
+                "2001:db8:3001::254/64"
+              ],
+              "vlanInterfaceDescription": "Production network gateway"
             },
-            "layer": "layer3",
-            "networkId": 30000,
-            "networkName": "MyNetwork_30000",
-            "networkType": "vxlan",
-            "tenantName": "tenant1",
-            "vlanId": 3000,
-            "vrfName": "MyVRF_50000"
+            "networkId": 30001,
+            "networkMode": "layer3",
+            "networkName": "MyNetwork_30001",
+            "networkType": "vxlanEbgp",
+            "vlanId": 3001,
+            "vrfName": "MyVRF_50002"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

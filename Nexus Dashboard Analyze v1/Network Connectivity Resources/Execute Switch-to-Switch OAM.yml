@@ -1,0 +1,407 @@
+info:
+  name: Execute Switch-to-Switch OAM
+  type: http
+  seq: 47
+  tags:
+    - Network Connectivity Resources
+
+http:
+  method: POST
+  url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivityAnalysis/oam/:fabricName/switchToSwitch"
+  params:
+    - name: clusterName
+      value: ""
+      type: query
+      description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+      disabled: true
+    - name: fabricName
+      value: ""
+      type: path
+      description: Name of the fabric
+  body:
+    type: json
+    data: |-
+      {
+        "dstSwitchName": "leaf-102",
+        "egressInterface": "all",
+        "srcSwitchName": "leaf-101",
+        "vrfName": "tenant-vrf-1"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: OAM operation completed successfully
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivityAnalysis/oam/:fabricName/switchToSwitch"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "dstSwitchName": "r4-GX2-11",
+            "egressInterface": "",
+            "srcSwitchName": "r4-FX2-08",
+            "vrfName": "vrf01"
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "forwardPaths": [
+              {
+                "description": "Timeout;Success;",
+                "destSwitchName": "r4-FX2-08",
+                "errorPath": [],
+                "flag": false,
+                "id": "2;4;",
+                "oamCli": "ping nve ip 5.0.1.1 vrf vrf01 source 5.0.1.1 verbose;traceroute nve ip 5.0.1.1 vrf vrf01 source 5.0.1.1 verbose",
+                "path": [
+                  {
+                    "hopIP": "10.3.0.2",
+                    "hopIndex": "0",
+                    "hopSwitchName": "LEAF11",
+                    "hopTime": "1"
+                  },
+                  {
+                    "hopIP": "10.4.0.14",
+                    "hopIndex": "1",
+                    "hopSwitchName": "SPINE22",
+                    "hopTime": "3"
+                  },
+                  {
+                    "hopIP": "10.3.0.3",
+                    "hopIndex": "2",
+                    "hopSwitchName": "site-A-Border",
+                    "hopTime": "7"
+                  }
+                ],
+                "pathError": false,
+                "response": "Codes: '!' - success, 'Q' - request not sent, '.' -\ntimeout,\n\n'D' - Destination Unreachable, 'X' - unknown return code,\n\n'm' - malformed request(parameter problem),\n\n'c' - Corrupted Data/Test, '#' - Duplicate response,\n\n'v' - Other - Use verbose to see the result\n\nSender handle: 74\n\n. Pkt sent on sport = 11147\n\n. Pkt sent on sport = 11147\n\n. Pkt sent on sport = 11147\n\n. Pkt sent on sport = 11147\n\n. Pkt sent on sport = 11147\n\nSent 5, Received 0, Success rate is 0 percent Round-trip\nmin/avg/max = 0/0/0 ms\n\nTotal time elapsed 10101 ms\n\n;\n\nCodes: '!' - success, 'Q' - request not sent, '.' -\ntimeout,\n\n'D' - Destination Unreachable, 'X' - unknown return code,\n\n'm' - malformed request(parameter problem),\n\n'c' - Corrupted Data/Test, '#' - Duplicate response,\n\n'v' - Other - Use verbose to see the result\n\nTraceroute Request to peer ip 10.3.0.3 source ip 10.3.0.2\n\nSender handle: 76\n  1 !Reply from 10.4.0.14,time = 3 ms\n  2 !Reply from 10.3.0.3,time = 7 ms\n  3 .\n  4 .\n  5 .\n",
+                "srcSwitchName": "r4-GX2-11",
+                "vrfName": "vrf01"
+              }
+            ],
+            "reversePathTopology": {
+              "edgeList": [],
+              "nodeGroupMap": {},
+              "nodeList": [
+                {
+                  "data": {
+                    "fabricName": "Site101",
+                    "ipAddress": "172.28.161.208",
+                    "isNonNexus": false,
+                    "logicalName": "r4-FX2-08",
+                    "mode": "Normal",
+                    "model": "N9K-C9336C-FX2",
+                    "peer": null,
+                    "peerSerialNumber": null,
+                    "release": "10.5(3)",
+                    "role": "leaf",
+                    "serialNumber": "FDO222800VZ",
+                    "sourceInterface": "",
+                    "sourceVrf": "",
+                    "status": "ok",
+                    "switchDbID": 1220,
+                    "switchId": "1220",
+                    "switchName": "r4-FX2-08",
+                    "switchRole": "leaf",
+                    "upTimeStr": "13:24:33",
+                    "vdcId": -1,
+                    "vdcMac": null,
+                    "version": null
+                  },
+                  "displayName": "r4-FX2-08",
+                  "healthStatus": "unknown",
+                  "id": "FDO222800VZ",
+                  "memberClusterIds": [],
+                  "tierLevel": 1,
+                  "view": "switch"
+                }
+              ]
+            },
+            "reversePaths": [
+              {
+                "description": "Timeout;Success;",
+                "destSwitchName": "r4-GX2-11",
+                "errorPath": [],
+                "flag": false,
+                "id": "3;5;",
+                "oamCli": "ping nve ip 5.0.1.1 vrf vrf01 source 5.0.1.1 verbose;traceroute nve ip 5.0.1.1 vrf vrf01 source 5.0.1.1 verbose",
+                "path": [
+                  {
+                    "hopIP": "10.3.0.1",
+                    "hopIndex": "0",
+                    "hopSwitchName": "LEAF12",
+                    "hopTime": "1"
+                  },
+                  {
+                    "hopIP": "10.4.0.2",
+                    "hopIndex": "1",
+                    "hopSwitchName": "SPINE22",
+                    "hopTime": "3"
+                  },
+                  {
+                    "hopIP": "10.3.0.3",
+                    "hopIndex": "2",
+                    "hopSwitchName": "site-A-Border",
+                    "hopTime": "7"
+                  }
+                ],
+                "pathError": false,
+                "response": "Codes: '!' - success, 'Q' - request not sent, '.' -\ntimeout,\n\n'D' - Destination Unreachable, 'X' - unknown return code,\n\n'm' - malformed request(parameter problem),\n\n'c' - Corrupted Data/Test, '#' - Duplicate response,\n\n'v' - Other - Use verbose to see the result\n\nSender handle: 50\n\n. Pkt sent on sport = 4091\n\n. Pkt sent on sport = 4091\n\n. Pkt sent on sport = 4091\n\n. Pkt sent on sport = 4091\n\n. Pkt sent on sport = 4091\n\nSent 5, Received 0, Success rate is 0 percent Round-trip\nmin/avg/max = 0/0/0 ms\n\nTotal time elapsed 10099 ms\n\n;\n\nCodes: '!' - success, 'Q' - request not sent, '.' -\ntimeout,\n\n'D' - Destination Unreachable, 'X' - unknown return code,\n\n'm' - malformed request(parameter problem),\n\n'c' - Corrupted Data/Test, '#' - Duplicate response,\n\n'v' - Other - Use verbose to see the result\n\nTraceroute Request to peer ip 10.3.0.3 source ip 10.3.0.1\n\nSender handle: 52\n  1 !Reply from 10.4.0.2,time = 3 ms\n  2 !Reply from 10.3.0.3,time = 7 ms\n  3 .\n  4 .\n  5 . ;\n",
+                "srcSwitchName": "r4-FX2-08",
+                "vrfName": "vrf01"
+              }
+            ],
+            "topology": {
+              "edgeList": [],
+              "nodeGroupMap": {},
+              "nodeList": [
+                {
+                  "data": {
+                    "fabricName": "Site101",
+                    "ipAddress": "172.28.161.211",
+                    "isNonNexus": false,
+                    "logicalName": "r4-GX2-11",
+                    "mode": "Normal",
+                    "model": "N9K-C9332D-GX2B",
+                    "peer": null,
+                    "peerSerialNumber": null,
+                    "release": "10.5(3)",
+                    "role": "leaf",
+                    "serialNumber": "FDO270502JD",
+                    "sourceInterface": "",
+                    "sourceVrf": "",
+                    "status": "ok",
+                    "switchDbID": 1020,
+                    "switchId": "1020",
+                    "switchName": "r4-GX2-11",
+                    "switchRole": "leaf",
+                    "upTimeStr": "13:24:44",
+                    "vdcId": -1,
+                    "vdcMac": null,
+                    "version": null
+                  },
+                  "displayName": "r4-GX2-11",
+                  "healthStatus": "unknown",
+                  "id": "FDO270502JD",
+                  "memberClusterIds": [],
+                  "tierLevel": 1,
+                  "view": "switch"
+                }
+              ]
+            }
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivityAnalysis/oam/:fabricName/switchToSwitch"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "dstSwitchName": "r4-GX2-11",
+            "egressInterface": "",
+            "srcSwitchName": "r4-FX2-08",
+            "vrfName": "vrf01"
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivityAnalysis/oam/:fabricName/switchToSwitch"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "dstSwitchName": "r4-GX2-11",
+            "egressInterface": "",
+            "srcSwitchName": "r4-FX2-08",
+            "vrfName": "vrf01"
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 403 Response
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivityAnalysis/oam/:fabricName/switchToSwitch"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "dstSwitchName": "r4-GX2-11",
+            "egressInterface": "",
+            "srcSwitchName": "r4-FX2-08",
+            "vrfName": "vrf01"
+          }
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 404 Response
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivityAnalysis/oam/:fabricName/switchToSwitch"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "dstSwitchName": "r4-GX2-11",
+            "egressInterface": "",
+            "srcSwitchName": "r4-FX2-08",
+            "vrfName": "vrf01"
+          }
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 500 Response
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivityAnalysis/oam/:fabricName/switchToSwitch"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "dstSwitchName": "r4-GX2-11",
+            "egressInterface": "",
+            "srcSwitchName": "r4-FX2-08",
+            "vrfName": "vrf01"
+          }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }

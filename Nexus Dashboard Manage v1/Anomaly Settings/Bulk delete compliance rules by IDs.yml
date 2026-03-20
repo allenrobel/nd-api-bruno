@@ -2,6 +2,8 @@ info:
   name: Bulk delete compliance rules by IDs
   type: http
   seq: 3
+  tags:
+    - Anomaly Settings
 
 http:
   method: POST
@@ -16,7 +18,10 @@ http:
     type: json
     data: |-
       {
-        "ids": []
+        "ids": [
+          "0e5604f9-a5d1a8d4-fec4-456b-ae2d-40ecf172bd4c",
+          "0e5604f9-a5d1a8d4-fec4-456b-ae2d-40ecf172bd5c"
+        ]
       }
   auth: inherit
 
@@ -48,6 +53,7 @@ examples:
             ]
           }
     response:
+      status: 200
       statusText: OK
       body:
         type: text
@@ -73,6 +79,7 @@ examples:
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -106,6 +113,7 @@ examples:
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -139,6 +147,7 @@ examples:
             ]
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -172,6 +181,7 @@ examples:
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -205,6 +215,7 @@ examples:
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

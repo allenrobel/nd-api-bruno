@@ -2,6 +2,8 @@ info:
   name: Create or replace configuration template
   type: http
   seq: 5
+  tags:
+    - Template Library
 
 http:
   method: POST
@@ -14,7 +16,32 @@ http:
       disabled: true
   body:
     type: text
-    data: ""
+    data: |
+      ##template properties
+      name =feature_lldp;
+      description = ;
+      tags = ;
+      userDefined = false;
+      supportedPlatforms = N9K;
+      templateType = POLICY;
+      templateSubType = DEVICE;
+      contentType = TEMPLATE_CLI;
+      implements = ;
+      dependencies = ;
+      published = false;
+      imports = ;
+      ##
+      ##template variables
+
+      #    Copyright (c) 2022 by Cisco Systems, Inc.
+      #    All rights reserved.
+
+      ##
+      ##template content
+
+      feature lldp
+
+      ##
   auth: inherit
 
 settings:
@@ -64,6 +91,7 @@ examples:
 
           ##
     response:
+      status: 200
       statusText: OK
       body:
         type: text
@@ -108,6 +136,7 @@ examples:
 
           ##
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -160,6 +189,7 @@ examples:
 
           ##
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -212,6 +242,7 @@ examples:
 
           ##
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -264,6 +295,7 @@ examples:
 
           ##
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -316,6 +348,7 @@ examples:
 
           ##
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

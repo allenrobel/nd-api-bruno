@@ -2,6 +2,8 @@ info:
   name: Modify the specified trusted Secure key
   type: http
   seq: 31
+  tags:
+    - Users and Security
 
 http:
   method: PUT
@@ -20,10 +22,10 @@ http:
     type: json
     data: |-
       {
-        "appName": "",
-        "keyID": "",
-        "publicKey": "",
-        "remoteIDClaim": ""
+        "appName": "app123",
+        "keyID": "KID123",
+        "publicKey": "publicKey123",
+        "remoteIDClaim": "claim123"
       }
   auth: inherit
 
@@ -59,6 +61,7 @@ examples:
             "remoteIDClaim": "claim123"
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -97,6 +100,7 @@ examples:
             "remoteIDClaim": "claim123"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -134,6 +138,7 @@ examples:
             "remoteIDClaim": "claim123"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -171,6 +176,7 @@ examples:
             "remoteIDClaim": "claim123"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -208,6 +214,7 @@ examples:
             "remoteIDClaim": "claim123"
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -245,6 +252,7 @@ examples:
             "remoteIDClaim": "claim123"
           }
     response:
+      status: 429
       statusText: Too Many Requests
       headers:
         - name: Content-Type
@@ -282,6 +290,7 @@ examples:
             "remoteIDClaim": "claim123"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

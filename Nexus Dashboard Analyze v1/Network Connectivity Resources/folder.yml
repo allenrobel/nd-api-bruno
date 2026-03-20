@@ -1,0 +1,7 @@
+info:
+  name: Network Connectivity Resources
+  type: folder
+  seq: 1
+
+request:
+  auth: inherit

@@ -1,11 +1,21 @@
 info:
   name: Session logout functionality.
   type: http
-  seq: 4
+  seq: 5
+  tags:
+    - Authentication
 
 http:
   method: POST
   url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/logout"
+  headers:
+    - name: Authcookie
+      value: ""
+      description: |
+        Session JWT token passed as an HTTP header (for programmatic access).
+        Use this header when cookies are not available.
+        Either this header OR the AuthCookie cookie must be provided.
+      disabled: true
   params:
     - name: clusterName
       value: ""
@@ -16,6 +26,7 @@ http:
       value: ""
       type: query
       description: Set to 'true' if logout is due to inactivity
+      disabled: true
   auth: inherit
 
 settings:
@@ -30,6 +41,14 @@ examples:
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/logout"
       method: POST
+      headers:
+        - name: Authcookie
+          value: ""
+          description: |
+            Session JWT token passed as an HTTP header (for programmatic access).
+            Use this header when cookies are not available.
+            Either this header OR the AuthCookie cookie must be provided.
+          disabled: true
       params:
         - name: clusterName
           value: ""
@@ -40,7 +59,9 @@ examples:
           value: ""
           type: query
           description: Set to 'true' if logout is due to inactivity
+          disabled: true
     response:
+      status: 200
       statusText: OK
       body:
         type: text
@@ -50,6 +71,14 @@ examples:
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/logout"
       method: POST
+      headers:
+        - name: Authcookie
+          value: ""
+          description: |
+            Session JWT token passed as an HTTP header (for programmatic access).
+            Use this header when cookies are not available.
+            Either this header OR the AuthCookie cookie must be provided.
+          disabled: true
       params:
         - name: clusterName
           value: ""
@@ -60,7 +89,9 @@ examples:
           value: ""
           type: query
           description: Set to 'true' if logout is due to inactivity
+          disabled: true
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -76,6 +107,14 @@ examples:
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/logout"
       method: POST
+      headers:
+        - name: Authcookie
+          value: ""
+          description: |
+            Session JWT token passed as an HTTP header (for programmatic access).
+            Use this header when cookies are not available.
+            Either this header OR the AuthCookie cookie must be provided.
+          disabled: true
       params:
         - name: clusterName
           value: ""
@@ -86,7 +125,9 @@ examples:
           value: ""
           type: query
           description: Set to 'true' if logout is due to inactivity
+          disabled: true
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

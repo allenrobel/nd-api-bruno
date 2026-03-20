@@ -2,6 +2,8 @@ info:
   name: Create a new Power Distribution Units Collector
   type: http
   seq: 59
+  tags:
+    - Integrations
 
 http:
   method: POST
@@ -16,12 +18,12 @@ http:
     type: json
     data: |-
       {
-        "fabricName": "",
-        "integrationName": "",
-        "ip": "",
-        "password": "",
-        "username": "",
-        "vendor": ""
+        "fabricName": "us-west-1",
+        "integrationName": "myPduCollector1",
+        "ip": "172.23.48.41",
+        "password": "admin123!",
+        "username": "admin",
+        "vendor": "PANDUIT"
       }
   auth: inherit
 
@@ -55,6 +57,7 @@ examples:
             "vendor": "PANDUIT"
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -94,6 +97,7 @@ examples:
             "vendor": "PANDUIT"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -129,6 +133,7 @@ examples:
             "vendor": "PANDUIT"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -164,6 +169,7 @@ examples:
             "vendor": "PANDUIT"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -199,6 +205,7 @@ examples:
             "vendor": "PANDUIT"
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -234,6 +241,7 @@ examples:
             "vendor": "PANDUIT"
           }
     response:
+      status: 409
       statusText: Conflict
       headers:
         - name: Content-Type
@@ -269,6 +277,7 @@ examples:
             "vendor": "PANDUIT"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

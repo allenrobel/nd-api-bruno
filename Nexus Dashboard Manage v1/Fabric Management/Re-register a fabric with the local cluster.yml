@@ -2,6 +2,8 @@ info:
   name: Re-register a fabric with the local cluster
   type: http
   seq: 22
+  tags:
+    - Fabric Management
 
 http:
   method: POST
@@ -18,7 +20,19 @@ http:
       description: Name of the fabric
   body:
     type: json
-    data: ""
+    data: |-
+      {
+        "reRegister": {
+          "credentials": {
+            "loginDomain": "default",
+            "password": "passwordoftheuser",
+            "user": "admin"
+          },
+          "onboardUrl": "https://172.28.8.143",
+          "type": "aci",
+          "verifyCA": true
+        }
+      }
   auth: inherit
 
 settings:
@@ -59,6 +73,7 @@ examples:
             }
           }
     response:
+      status: 200
       statusText: OK
       body:
         type: text
@@ -94,6 +109,7 @@ examples:
             }
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -137,6 +153,7 @@ examples:
             }
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -180,6 +197,7 @@ examples:
             }
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -223,6 +241,7 @@ examples:
             }
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -266,6 +285,7 @@ examples:
             }
           }
     response:
+      status: 409
       statusText: Conflict
       headers:
         - name: Content-Type
@@ -309,6 +329,7 @@ examples:
             }
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

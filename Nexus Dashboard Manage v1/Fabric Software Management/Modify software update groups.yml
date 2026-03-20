@@ -1,7 +1,9 @@
 info:
   name: Modify software update groups
   type: http
-  seq: 32
+  seq: 26
+  tags:
+    - Fabric Software Management
 
 http:
   method: PUT
@@ -24,27 +26,36 @@ http:
     type: json
     data: |-
       {
-        "analysis": "",
-        "contingency": "",
-        "execution": "",
+        "analysis": "snapshot",
+        "contingency": "continue",
+        "execution": "serial",
         "installImageData": {
-          "epldImageName": "",
-          "installPackageNames": [],
-          "nosImageName": "",
-          "uninstallPackage": false
+          "epldImageName": "n9000-epld.9.3.13.img",
+          "installPackageNames": [
+            "nxos.CSCwh77779-n9k_ALL-1.0.0-9.3.13.lib32_n9000.rpm",
+            "nxos.CSCwf47127-n9k_ALL-1.0.0-9.3.13.lib32_n9000.rpm"
+          ],
+          "nosImageName": "nxos.9.3.13.bin",
+          "uninstallPackage": true
         },
-        "installationOrderDevices": [],
-        "isDisruptiveUpdate": false,
-        "isMaintenance": false,
-        "latestRecommendedVersion": "",
-        "recommendedVersion": "",
-        "reportSelection": "",
-        "reports": "",
-        "updateGroupName": "",
-        "updateGroupSwitches": [],
+        "installationOrderDevices": [
+          "FDO2338083P",
+          "FDO24020JNK"
+        ],
+        "isDisruptiveUpdate": true,
+        "isMaintenance": true,
+        "latestRecommendedVersion": "9.3(15)",
+        "recommendedVersion": "9.3(14)",
+        "reportSelection": "advanced",
+        "reports": "noReport",
+        "updateGroupName": "vxlanFabric_N9K_leaf",
+        "updateGroupSwitches": [
+          "FDO24020JNK",
+          "FDO2338083P"
+        ],
         "updateReportChecks": [
           {
-            "reportCheckName": ""
+            "reportCheckName": "sh_version"
           }
         ]
       }
@@ -101,7 +112,7 @@ examples:
             "latestRecommendedVersion": "9.3(15)",
             "recommendedVersion": "9.3(14)",
             "reportSelection": "advanced",
-            "reports": "usePreExistingReports",
+            "reports": "noReport",
             "updateGroupName": "vxlanFabric_N9K_leaf",
             "updateGroupSwitches": [
               "FDO24020JNK",
@@ -114,6 +125,7 @@ examples:
             ]
           }
     response:
+      status: 204
       statusText: No Content
       body:
         type: text
@@ -162,7 +174,7 @@ examples:
             "latestRecommendedVersion": "9.3(15)",
             "recommendedVersion": "9.3(14)",
             "reportSelection": "advanced",
-            "reports": "usePreExistingReports",
+            "reports": "noReport",
             "updateGroupName": "vxlanFabric_N9K_leaf",
             "updateGroupSwitches": [
               "FDO24020JNK",
@@ -175,6 +187,7 @@ examples:
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -231,7 +244,7 @@ examples:
             "latestRecommendedVersion": "9.3(15)",
             "recommendedVersion": "9.3(14)",
             "reportSelection": "advanced",
-            "reports": "usePreExistingReports",
+            "reports": "noReport",
             "updateGroupName": "vxlanFabric_N9K_leaf",
             "updateGroupSwitches": [
               "FDO24020JNK",
@@ -244,6 +257,7 @@ examples:
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -300,7 +314,7 @@ examples:
             "latestRecommendedVersion": "9.3(15)",
             "recommendedVersion": "9.3(14)",
             "reportSelection": "advanced",
-            "reports": "usePreExistingReports",
+            "reports": "noReport",
             "updateGroupName": "vxlanFabric_N9K_leaf",
             "updateGroupSwitches": [
               "FDO24020JNK",
@@ -313,6 +327,7 @@ examples:
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -369,7 +384,7 @@ examples:
             "latestRecommendedVersion": "9.3(15)",
             "recommendedVersion": "9.3(14)",
             "reportSelection": "advanced",
-            "reports": "usePreExistingReports",
+            "reports": "noReport",
             "updateGroupName": "vxlanFabric_N9K_leaf",
             "updateGroupSwitches": [
               "FDO24020JNK",
@@ -382,6 +397,7 @@ examples:
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

@@ -2,6 +2,8 @@ info:
   name: Gets system and login banner information
   type: http
   seq: 1
+  tags:
+    - System Software
 
 http:
   method: GET
@@ -33,6 +35,7 @@ examples:
           description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
           disabled: true
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -58,6 +61,7 @@ examples:
           description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
           disabled: true
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

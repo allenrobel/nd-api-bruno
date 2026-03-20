@@ -2,6 +2,8 @@ info:
   name: List VRF attachments
   type: http
   seq: 28
+  tags:
+    - VRFs and Networks
 
 http:
   method: POST
@@ -13,7 +15,7 @@ http:
       description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
       disabled: true
     - name: fabricName
-      value: fabric1
+      value: ""
       type: path
       description: Name of the fabric
     - name: offset
@@ -29,23 +31,33 @@ http:
     - name: sort
       value: ""
       type: query
-      description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+      description: |
+        Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+        Ascending order by default: "field1"
+        Specific order for one field: "field1:asc" or "field1:desc"
+        Specific order with multiple fields: "field1:asc,field2:desc"
       disabled: true
     - name: filter
       value: ""
       type: query
       description: Lucene format filter - Filter the response based on this filter field
+      disabled: true
     - name: includeAll
-      value: ""
+      value: "false"
       type: query
       description: When true, returns all attachments. When false, does not return attachments that were never attached.
-      disabled: true
   body:
     type: json
-    data: |
+    data: |-
       {
-        "switchIds":["945V7U23QJ7"],
-        "vrfNames":["MyVRF_50000"]
+        "switchIds": [
+          "99X70W9ORI1",
+          "98AM4PTG8V0"
+        ],
+        "vrfNames": [
+          "MyVRF_50000",
+          "MyVRF_50001"
+        ]
       }
   auth: inherit
 
@@ -84,17 +96,21 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
         - name: includeAll
-          value: ""
+          value: "false"
           type: query
           description: When true, returns all attachments. When false, does not return attachments that were never attached.
-          disabled: true
       body:
         type: json
         data: |-
@@ -109,6 +125,7 @@ examples:
             ]
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -123,13 +140,12 @@ examples:
                 "errorMessage": "vlanId already exists",
                 "extensionValues": [
                   {
-                    "autoPeerConfig": false,
                     "dot1qId": 2,
                     "interfaceName": "Ethernet1/8",
                     "ipv4Address": "1.10.13.123/24",
                     "ipv6Address": "2001:db8::/32",
                     "ipv6RouteMapIn": "",
-                    "ipv6RouteMapOut": "EXTCON-RMAP-FILTER-V6",
+                    "ipv6RouteMapOut": "",
                     "mtu": 9216,
                     "neighborAsn": "6578",
                     "neighborIpv4Address": "1.10.13.124",
@@ -137,17 +153,16 @@ examples:
                     "netflow": false,
                     "peerVrfName": "MyVRF_50001",
                     "routeMapIn": "",
-                    "routeMapOut": "EXTCON-RMAP-FILTER",
+                    "routeMapOut": "",
                     "routeTag": 1
                   },
                   {
-                    "autoPeerConfig": false,
                     "dot1qId": 2,
                     "interfaceName": "Ethernet1/8",
                     "ipv4Address": "1.10.13.123/24",
                     "ipv6Address": "2001:db8::/32",
                     "ipv6RouteMapIn": "",
-                    "ipv6RouteMapOut": "EXTCON-RMAP-FILTER-V6",
+                    "ipv6RouteMapOut": "",
                     "mtu": 9216,
                     "neighborAsn": "6578",
                     "neighborIpv4Address": "1.10.13.124",
@@ -155,7 +170,7 @@ examples:
                     "netflow": false,
                     "peerVrfName": "MyVRF_50001",
                     "routeMapIn": "",
-                    "routeMapOut": "EXTCON-RMAP-FILTER",
+                    "routeMapOut": "",
                     "routeTag": 1
                   }
                 ],
@@ -212,17 +227,21 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
         - name: includeAll
-          value: ""
+          value: "false"
           type: query
           description: When true, returns all attachments. When false, does not return attachments that were never attached.
-          disabled: true
       body:
         type: json
         data: |-
@@ -237,6 +256,7 @@ examples:
             ]
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -299,17 +319,21 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
         - name: includeAll
-          value: ""
+          value: "false"
           type: query
           description: When true, returns all attachments. When false, does not return attachments that were never attached.
-          disabled: true
       body:
         type: json
         data: |-
@@ -324,6 +348,7 @@ examples:
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -364,17 +389,21 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
         - name: includeAll
-          value: ""
+          value: "false"
           type: query
           description: When true, returns all attachments. When false, does not return attachments that were never attached.
-          disabled: true
       body:
         type: json
         data: |-
@@ -389,6 +418,7 @@ examples:
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -429,17 +459,21 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
         - name: includeAll
-          value: ""
+          value: "false"
           type: query
           description: When true, returns all attachments. When false, does not return attachments that were never attached.
-          disabled: true
       body:
         type: json
         data: |-
@@ -454,6 +488,7 @@ examples:
             ]
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -494,17 +529,21 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
         - name: includeAll
-          value: ""
+          value: "false"
           type: query
           description: When true, returns all attachments. When false, does not return attachments that were never attached.
-          disabled: true
       body:
         type: json
         data: |-
@@ -519,6 +558,7 @@ examples:
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -559,17 +599,21 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
         - name: includeAll
-          value: ""
+          value: "false"
           type: query
           description: When true, returns all attachments. When false, does not return attachments that were never attached.
-          disabled: true
       body:
         type: json
         data: |-
@@ -584,6 +628,7 @@ examples:
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

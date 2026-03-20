@@ -2,6 +2,8 @@ info:
   name: Update a policy
   type: http
   seq: 5
+  tags:
+    - Policies
 
 http:
   method: PUT
@@ -27,7 +29,19 @@ http:
       disabled: true
   body:
     type: json
-    data: "{}"
+    data: |-
+      {
+        "description": "Update policy to change the priority value",
+        "entityName": "SWITCH",
+        "entityType": "switch",
+        "priority": 50,
+        "source": "",
+        "switchId": "FDO23240AK6",
+        "templateInputs": {
+          "featureName": "lacp"
+        },
+        "templateName": "feature_enable"
+      }
   auth: inherit
 
 settings:
@@ -77,6 +91,7 @@ examples:
             "templateName": "feature_enable"
           }
     response:
+      status: 204
       statusText: No Content
       body:
         type: text
@@ -121,6 +136,7 @@ examples:
             "templateName": "feature_enable"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -173,6 +189,7 @@ examples:
             "templateName": "feature_enable"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -225,6 +242,7 @@ examples:
             "templateName": "feature_enable"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -277,6 +295,7 @@ examples:
             "templateName": "feature_enable"
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -329,6 +348,7 @@ examples:
             "templateName": "feature_enable"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

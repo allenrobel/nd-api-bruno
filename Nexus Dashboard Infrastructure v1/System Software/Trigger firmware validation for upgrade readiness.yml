@@ -2,6 +2,8 @@ info:
   name: Trigger firmware validation for upgrade readiness.
   type: http
   seq: 7
+  tags:
+    - System Software
 
 http:
   method: POST
@@ -31,6 +33,7 @@ examples:
           type: path
           description: Firmware name
     response:
+      status: 204
       statusText: No Content
       body:
         type: text
@@ -46,6 +49,7 @@ examples:
           type: path
           description: Firmware name
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -69,6 +73,7 @@ examples:
           type: path
           description: Firmware name
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -92,6 +97,7 @@ examples:
           type: path
           description: Firmware name
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -115,6 +121,7 @@ examples:
           type: path
           description: Firmware name
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -138,6 +145,7 @@ examples:
           type: path
           description: Firmware name
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

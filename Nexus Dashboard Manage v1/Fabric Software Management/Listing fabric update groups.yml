@@ -2,6 +2,8 @@ info:
   name: Listing fabric update groups
   type: http
   seq: 11
+  tags:
+    - Fabric Software Management
 
 http:
   method: GET
@@ -25,12 +27,17 @@ http:
     - name: sort
       value: ""
       type: query
-      description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+      description: |
+        Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+        Ascending order by default: "field1"
+        Specific order for one field: "field1:asc" or "field1:desc"
+        Specific order with multiple fields: "field1:asc,field2:desc"
       disabled: true
     - name: filter
       value: ""
       type: query
       description: Lucene format filter - Filter the response based on this filter field
+      disabled: true
   auth: inherit
 
 settings:
@@ -64,13 +71,19 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -156,12 +169,14 @@ examples:
                         "lastUpdateAction": "2024-07-23T10:00:00.00Z",
                         "latestRecommendedVersion": "10.3(8)",
                         "latestSoftwareVersion": "10.6(1)",
+                        "latestVersionInTrain": "10.3(8)",
                         "preparePreviewConfigs": [
                           {
                             "estimated": "5 min",
                             "previewConfig": "show install all nxos64-cs.10.6.1.F.bin"
                           }
                         ],
+                        "reason": "none",
                         "recommendedVersion": "10.3(6)",
                         "reportAnalysis": "none",
                         "selectedVersion": "10.3(7)",
@@ -175,9 +190,10 @@ examples:
                         "switchUpdateStatus": "none",
                         "switchVersion": "10.3(3)",
                         "systemMode": "normal",
-                        "updateGroupName": "none",
+                        "updateGroupName": "vxlan_N9K_leaf_Secondary",
                         "updateStatus": "success",
                         "updateType": "disruptive",
+                        "versionStatus": "other",
                         "vpcPeer": "N9K-42",
                         "vpcRole": "secondary"
                       }
@@ -232,12 +248,14 @@ examples:
                         "lastUpdateAction": null,
                         "latestRecommendedVersion": "10.3(8)",
                         "latestSoftwareVersion": "10.6(1)",
+                        "latestVersionInTrain": "10.3(8)",
                         "preparePreviewConfigs": [
                           {
                             "estimated": "5 min",
                             "previewConfig": "show install all nxos64-cs.10.6.1.F.bin"
                           }
                         ],
+                        "reason": "none",
                         "recommendedVersion": "10.3(6)",
                         "reportAnalysis": "none",
                         "selectedVersion": "10.3(7)",
@@ -251,9 +269,10 @@ examples:
                         "switchUpdateStatus": "none",
                         "switchVersion": "10.3(3)",
                         "systemMode": "normal",
-                        "updateGroupName": "none",
+                        "updateGroupName": "vxlan_N9K_leaf_Secondary",
                         "updateStatus": "stageSuccess",
                         "updateType": "none",
+                        "versionStatus": "other",
                         "vpcPeer": "N9K-42",
                         "vpcRole": "secondary"
                       }
@@ -299,13 +318,19 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -342,13 +367,19 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -385,13 +416,19 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -428,13 +465,19 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

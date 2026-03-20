@@ -1,0 +1,7 @@
+info:
+  name: Job and Report Management
+  type: folder
+  seq: 1
+
+request:
+  auth: inherit

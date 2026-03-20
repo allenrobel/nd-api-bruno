@@ -2,6 +2,8 @@ info:
   name: Remove a remote cluster
   type: http
   seq: 6
+  tags:
+    - Multi-Cluster Connectivity
 
 http:
   method: POST
@@ -16,11 +18,11 @@ http:
     data: |-
       {
         "credentials": {
-          "loginDomain": "",
-          "password": "",
-          "user": ""
+          "loginDomain": "DefaultAuth",
+          "password": "Q2lzY29pbnMzOTY1IQ==",
+          "user": "admin"
         },
-        "force": false
+        "force": true
       }
   auth: inherit
 
@@ -53,6 +55,7 @@ examples:
             "force": true
           }
     response:
+      status: 200
       statusText: OK
       body:
         type: text
@@ -79,6 +82,7 @@ examples:
             "force": true
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -113,6 +117,7 @@ examples:
             "force": true
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -147,6 +152,7 @@ examples:
             "force": true
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -181,6 +187,7 @@ examples:
             "force": true
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -215,6 +222,7 @@ examples:
             "force": true
           }
     response:
+      status: 412
       statusText: Precondition Failed
       headers:
         - name: Content-Type
@@ -249,6 +257,7 @@ examples:
             "force": true
           }
     response:
+      status: 429
       statusText: Too Many Requests
       headers:
         - name: Content-Type
@@ -283,6 +292,7 @@ examples:
             "force": true
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

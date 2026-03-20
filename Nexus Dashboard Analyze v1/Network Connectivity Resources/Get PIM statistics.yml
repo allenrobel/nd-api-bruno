@@ -1,0 +1,456 @@
+info:
+  name: Get PIM statistics
+  type: http
+  seq: 18
+  tags:
+    - Network Connectivity Resources
+
+http:
+  method: GET
+  url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivity/multicast/pimStats"
+  params:
+    - name: fabricName
+      value: ""
+      type: query
+      description: Name of the fabric
+    - name: switchName
+      value: ""
+      type: query
+      description: Name of the switch
+    - name: clusterName
+      value: ""
+      type: query
+      description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+      disabled: true
+    - name: startDate
+      value: ""
+      type: query
+      description: Start date
+      disabled: true
+    - name: endDate
+      value: ""
+      type: query
+      description: End date
+      disabled: true
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: OK
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivity/multicast/pimStats"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: switchName
+          value: ""
+          type: query
+          description: Name of the switch
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "switches": [
+              {
+                "fabricName": "DC-trex",
+                "switchName": "nc-aci-trex-leaf01",
+                "pimStatistics": [
+                  {
+                    "anomalyScore": 0,
+                    "vrfCount": 2,
+                    "interfaceCount": 5,
+                    "operationallyUpInterfaceCount": 5,
+                    "operationallyDownInterfaceCount": 0,
+                    "groupCount": 5,
+                    "error": {
+                      "value": 0,
+                      "trending": "flat",
+                      "statisticalCounters": [
+                        {
+                          "counterName": "regRcvdAndNotRP",
+                          "counterNameLabel": "Registration received and not RP",
+                          "counterType": "error",
+                          "value": 0,
+                          "trending": "flat"
+                        },
+                        {
+                          "counterName": "autoRPRPFFailed",
+                          "counterNameLabel": "Auto RP RPF failed",
+                          "counterType": "error",
+                          "value": 0,
+                          "trending": "flat"
+                        },
+                        {
+                          "counterName": "autoRPTTLExp",
+                          "counterNameLabel": "Auto RP TTL expired",
+                          "counterType": "error",
+                          "value": 0,
+                          "trending": "flat"
+                        },
+                        {
+                          "counterName": "regRcvdSSM",
+                          "counterNameLabel": "Registration received SSM",
+                          "counterType": "error",
+                          "value": 0,
+                          "trending": "flat"
+                        },
+                        {
+                          "counterName": "autoRPInvalidType",
+                          "counterNameLabel": "Auto RP invalid type",
+                          "counterType": "error",
+                          "value": 0,
+                          "trending": "flat"
+                        },
+                        {
+                          "counterName": "bsrBsRPFFail",
+                          "counterNameLabel": "Bootstrap messages for which RPF Failed",
+                          "counterType": "error",
+                          "value": 0,
+                          "trending": "flat"
+                        },
+                        {
+                          "counterName": "bsrBsFromNonNbr",
+                          "counterNameLabel": "Bsr Bs from non neighbor",
+                          "counterType": "error",
+                          "value": 0,
+                          "trending": "flat"
+                        },
+                        {
+                          "counterName": "bsrBsLenErr",
+                          "counterNameLabel": "Bsr bs length error",
+                          "counterType": "error",
+                          "value": 0,
+                          "trending": "flat"
+                        },
+                        {
+                          "counterName": "pktOnPassiveIf",
+                          "counterNameLabel": "Packet on passive interface",
+                          "counterType": "error",
+                          "value": 0,
+                          "trending": "flat"
+                        },
+                        {
+                          "counterName": "joinWrongRp",
+                          "counterNameLabel": "Join wrong RP",
+                          "counterType": "error",
+                          "value": 0,
+                          "trending": "flat"
+                        },
+                        {
+                          "counterName": "authFail",
+                          "counterNameLabel": "Authentication failed",
+                          "counterType": "error",
+                          "value": 0,
+                          "trending": "flat"
+                        },
+                        {
+                          "counterName": "badVerPkt",
+                          "counterNameLabel": "Bad version packet",
+                          "counterType": "error",
+                          "value": 0,
+                          "trending": "flat"
+                        },
+                        {
+                          "counterName": "joinNoRP",
+                          "counterNameLabel": "Join no RP",
+                          "counterType": "error",
+                          "value": 0,
+                          "trending": "flat"
+                        },
+                        {
+                          "counterName": "pktFrmSelf",
+                          "counterNameLabel": "Packet from self",
+                          "counterType": "error",
+                          "value": 0,
+                          "trending": "flat"
+                        },
+                        {
+                          "counterName": "chksumErr",
+                          "counterNameLabel": "Checksum error received",
+                          "counterType": "error",
+                          "value": 0,
+                          "trending": "flat"
+                        },
+                        {
+                          "counterName": "pktLenErr",
+                          "counterNameLabel": "Packet length error",
+                          "counterType": "error",
+                          "value": 0,
+                          "trending": "flat"
+                        },
+                        {
+                          "counterName": "invalidPktRcvd",
+                          "counterNameLabel": "Invalid packet received",
+                          "counterType": "error",
+                          "value": 0,
+                          "trending": "flat"
+                        },
+                        {
+                          "counterName": "invalidPktSent",
+                          "counterNameLabel": "Invalid packet sent",
+                          "counterType": "error",
+                          "value": 0,
+                          "trending": "flat"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ],
+            "meta": {
+              "counts": {
+                "total": 1,
+                "remaining": 0
+              },
+              "links": {
+                "next": "https://api.example.com/v1/analyze/connectivity/multicast/pimStats?offset=40&max=10",
+                "previous": "https://api.example.com/v1/analyze/connectivity/multicast/pimStats?offset=20&max=10"
+              }
+            }
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivity/multicast/pimStats"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: switchName
+          value: ""
+          type: query
+          description: Name of the switch
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivity/multicast/pimStats"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: switchName
+          value: ""
+          type: query
+          description: Name of the switch
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 403 Response
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivity/multicast/pimStats"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: switchName
+          value: ""
+          type: query
+          description: Name of the switch
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 404 Response
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivity/multicast/pimStats"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: switchName
+          value: ""
+          type: query
+          description: Name of the switch
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 500 Response
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivity/multicast/pimStats"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: switchName
+          value: ""
+          type: query
+          description: Name of the switch
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }

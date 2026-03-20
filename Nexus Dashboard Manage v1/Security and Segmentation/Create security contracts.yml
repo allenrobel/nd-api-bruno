@@ -2,6 +2,8 @@ info:
   name: Create security contracts
   type: http
   seq: 15
+  tags:
+    - Security and Segmentation
 
 http:
   method: POST
@@ -22,17 +24,19 @@ http:
       {
         "securityContracts": [
           {
-            "name": "",
-            "tenantName": "",
-            "displayName": "",
-            "description": "",
-            "direction": "",
+            "description": "Allow web traffic",
+            "direction": "custom",
+            "name": "permit-web",
             "rules": [
               {
-                "ruleDirection": "",
-                "action": "",
-                "protocolDefinitionName": "",
-                "protocolDefinitionMatchSummary": ""
+                "action": "permit",
+                "protocolDefinitionName": "https",
+                "ruleDirection": "bidirectional"
+              },
+              {
+                "action": "permit",
+                "protocolDefinitionName": "http",
+                "ruleDirection": "unidirectional"
               }
             ]
           }
@@ -86,6 +90,7 @@ examples:
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -155,6 +160,7 @@ examples:
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -210,6 +216,7 @@ examples:
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -284,6 +291,7 @@ examples:
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -345,6 +353,7 @@ examples:
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -411,6 +420,7 @@ examples:
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -463,6 +473,7 @@ examples:
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -529,6 +540,7 @@ examples:
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -581,6 +593,7 @@ examples:
             ]
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -647,6 +660,7 @@ examples:
             ]
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -699,6 +713,7 @@ examples:
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -765,6 +780,7 @@ examples:
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -817,6 +833,7 @@ examples:
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type
@@ -883,6 +900,7 @@ examples:
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

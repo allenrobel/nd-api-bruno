@@ -1,7 +1,9 @@
 info:
   name: Stage and validate images
   type: http
-  seq: 22
+  seq: 16
+  tags:
+    - Fabric Software Management
 
 http:
   method: POST
@@ -20,7 +22,10 @@ http:
     type: json
     data: |-
       {
-        "updateGroupNames": []
+        "updateGroupNames": [
+          "vxlanFabric_N9K_spine",
+          "vxlanFabric_N9K_leaf"
+        ]
       }
   auth: inherit
 
@@ -56,6 +61,7 @@ examples:
             ]
           }
     response:
+      status: 202
       statusText: Accepted
       body:
         type: text
@@ -85,6 +91,7 @@ examples:
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -122,6 +129,7 @@ examples:
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -159,6 +167,7 @@ examples:
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -196,6 +205,7 @@ examples:
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

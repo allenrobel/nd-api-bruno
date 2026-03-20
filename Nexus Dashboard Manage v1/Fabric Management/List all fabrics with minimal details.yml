@@ -1,7 +1,9 @@
 info:
   name: List all fabrics with minimal details
   type: http
-  seq: 57
+  seq: 58
+  tags:
+    - Fabric Management
 
 http:
   method: GET
@@ -11,6 +13,11 @@ http:
       value: ""
       type: query
       description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+      disabled: true
+    - name: filter
+      value: ""
+      type: query
+      description: Lucene format filter - Filter the response based on this filter field
       disabled: true
   auth: inherit
 
@@ -36,7 +43,9 @@ examples:
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -81,7 +90,9 @@ examples:
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -109,7 +120,9 @@ examples:
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -137,7 +150,9 @@ examples:
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

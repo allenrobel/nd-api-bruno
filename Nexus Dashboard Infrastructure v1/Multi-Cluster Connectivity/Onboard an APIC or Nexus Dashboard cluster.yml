@@ -2,6 +2,8 @@ info:
   name: Onboard an APIC or Nexus Dashboard cluster
   type: http
   seq: 3
+  tags:
+    - Multi-Cluster Connectivity
 
 http:
   method: POST
@@ -12,35 +14,31 @@ http:
       {
         "spec": {
           "aci": {
-            "licenseTier": "",
-            "name": "",
+            "licenseTier": "premier",
+            "name": "ins15-apic1",
             "orchestration": {
-              "status": ""
+              "status": "enabled"
             },
-            "securityDomain": "",
+            "securityDomain": "all",
             "telemetry": {
-              "epg": "",
-              "network": "",
-              "status": "",
-              "streamingProtocol": ""
+              "epg": "uni/tn-mgmt/mgmtp-default/inb-default",
+              "network": "inband",
+              "status": "enabled",
+              "streamingProtocol": "ipv4"
             },
             "verifyCA": false
           },
-          "annotation": {},
-          "clusterType": "",
+          "clusterType": "APIC",
           "credentials": {
-            "loginDomain": "",
-            "password": "",
-            "user": ""
+            "loginDomain": "DefaultAuth",
+            "password": "Q2lzY29pbnMzOTY1IQ==",
+            "user": "admin"
           },
           "location": {
-            "latitude": 0,
-            "longitude": 0
+            "latitude": 10.2,
+            "longitude": 10.1
           },
-          "nd": {
-            "multiClusterLoginDomainName": ""
-          },
-          "onboardUrl": ""
+          "onboardUrl": "10.195.219.153:443"
         }
       }
   auth: inherit
@@ -91,6 +89,7 @@ examples:
             }
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -167,6 +166,7 @@ examples:
             }
           }
     response:
+      status: 202
       statusText: Accepted
       headers:
         - name: Content-Type
@@ -217,6 +217,7 @@ examples:
             }
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -268,6 +269,7 @@ examples:
             }
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -319,6 +321,7 @@ examples:
             }
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -370,6 +373,7 @@ examples:
             }
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -421,6 +425,7 @@ examples:
             }
           }
     response:
+      status: 429
       statusText: Too Many Requests
       headers:
         - name: Content-Type
@@ -472,6 +477,7 @@ examples:
             }
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

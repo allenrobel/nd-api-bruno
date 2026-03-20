@@ -2,6 +2,8 @@ info:
   name: Upload DNS file
   type: http
   seq: 15
+  tags:
+    - Integrations
 
 http:
   method: POST
@@ -20,8 +22,8 @@ http:
     type: multipart-form
     data:
       - name: chunkData
-        type: text
-        value: ""
+        type: file
+        value: []
         description: Binary data to be uploaded as part of the integration request. This field contains the raw data chunks being transferred.
   auth: inherit
 
@@ -51,10 +53,11 @@ examples:
         type: multipart-form
         data:
           - name: chunkData
-            type: text
-            value: ""
+            type: file
+            value: []
             description: Binary data to be uploaded as part of the integration request. This field contains the raw data chunks being transferred.
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -89,10 +92,11 @@ examples:
         type: multipart-form
         data:
           - name: chunkData
-            type: text
-            value: ""
+            type: file
+            value: []
             description: Binary data to be uploaded as part of the integration request. This field contains the raw data chunks being transferred.
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -124,10 +128,11 @@ examples:
         type: multipart-form
         data:
           - name: chunkData
-            type: text
-            value: ""
+            type: file
+            value: []
             description: Binary data to be uploaded as part of the integration request. This field contains the raw data chunks being transferred.
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -159,10 +164,11 @@ examples:
         type: multipart-form
         data:
           - name: chunkData
-            type: text
-            value: ""
+            type: file
+            value: []
             description: Binary data to be uploaded as part of the integration request. This field contains the raw data chunks being transferred.
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -194,10 +200,11 @@ examples:
         type: multipart-form
         data:
           - name: chunkData
-            type: text
-            value: ""
+            type: file
+            value: []
             description: Binary data to be uploaded as part of the integration request. This field contains the raw data chunks being transferred.
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

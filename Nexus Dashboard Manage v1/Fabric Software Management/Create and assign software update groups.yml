@@ -1,7 +1,9 @@
 info:
   name: Create and assign software update groups
   type: http
-  seq: 17
+  seq: 13
+  tags:
+    - Fabric Software Management
 
 http:
   method: POST
@@ -23,8 +25,11 @@ http:
         "attachUpdateGroups": [
           {
             "forceCreated": false,
-            "switchIds": [],
-            "updateGroupName": ""
+            "switchIds": [
+              "SAL1948TRTT",
+              "SAL1947TRAB"
+            ],
+            "updateGroupName": "vxlanFabric_N9K_leaf"
           }
         ]
       }
@@ -68,6 +73,7 @@ examples:
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -120,6 +126,7 @@ examples:
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -163,6 +170,7 @@ examples:
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -206,6 +214,7 @@ examples:
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -249,6 +258,7 @@ examples:
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

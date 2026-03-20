@@ -2,6 +2,8 @@ info:
   name: Create a security domain
   type: http
   seq: 23
+  tags:
+    - Users and Security
 
 http:
   method: POST
@@ -16,8 +18,8 @@ http:
     type: json
     data: |-
       {
-        "description": "",
-        "name": ""
+        "description": "domain1 description",
+        "name": "domain1"
       }
   auth: inherit
 
@@ -47,6 +49,7 @@ examples:
             "name": "domain1"
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -77,6 +80,7 @@ examples:
             "name": "domain1"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -108,6 +112,7 @@ examples:
             "name": "domain1"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -139,6 +144,7 @@ examples:
             "name": "domain1"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -170,6 +176,7 @@ examples:
             "name": "domain1"
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -201,6 +208,7 @@ examples:
             "name": "domain1"
           }
     response:
+      status: 429
       statusText: Too Many Requests
       headers:
         - name: Content-Type
@@ -232,6 +240,7 @@ examples:
             "name": "domain1"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

@@ -2,6 +2,8 @@ info:
   name: Mark-delete policy groups in bulk
   type: http
   seq: 11
+  tags:
+    - Policies
 
 http:
   method: POST
@@ -25,7 +27,10 @@ http:
     type: json
     data: |-
       {
-        "policyIds": []
+        "policyIds": [
+          "POLICY-GROUP-121110",
+          "POLICY-GROUP-121120"
+        ]
       }
   auth: inherit
 
@@ -61,11 +66,12 @@ examples:
         data: |-
           {
             "policyIds": [
-              "POLICY-121110",
-              "POLICY-121120"
+              "POLICY-GROUP-121110",
+              "POLICY-GROUP-121120"
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -77,8 +83,13 @@ examples:
             "policyGroups": [
               {
                 "message": "Action is successful",
-                "policyId": "POLICY-121110",
+                "policyId": "POLICY-GROUP-121110",
                 "status": "success"
+              },
+              {
+                "message": "Invalid policyId POLICY-GROUP-121120",
+                "policyId": "POLICY-GROUP-121120",
+                "status": "failed"
               }
             ]
           }
@@ -107,11 +118,12 @@ examples:
         data: |-
           {
             "policyIds": [
-              "POLICY-121110",
-              "POLICY-121120"
+              "POLICY-GROUP-121110",
+              "POLICY-GROUP-121120"
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -149,11 +161,12 @@ examples:
         data: |-
           {
             "policyIds": [
-              "POLICY-121110",
-              "POLICY-121120"
+              "POLICY-GROUP-121110",
+              "POLICY-GROUP-121120"
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -191,11 +204,12 @@ examples:
         data: |-
           {
             "policyIds": [
-              "POLICY-121110",
-              "POLICY-121120"
+              "POLICY-GROUP-121110",
+              "POLICY-GROUP-121120"
             ]
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -233,11 +247,12 @@ examples:
         data: |-
           {
             "policyIds": [
-              "POLICY-121110",
-              "POLICY-121120"
+              "POLICY-GROUP-121110",
+              "POLICY-GROUP-121120"
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -275,11 +290,12 @@ examples:
         data: |-
           {
             "policyIds": [
-              "POLICY-121110",
-              "POLICY-121120"
+              "POLICY-GROUP-121110",
+              "POLICY-GROUP-121120"
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

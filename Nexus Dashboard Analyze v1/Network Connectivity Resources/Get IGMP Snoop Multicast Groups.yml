@@ -1,0 +1,597 @@
+info:
+  name: Get IGMP Snoop Multicast Groups
+  type: http
+  seq: 11
+  tags:
+    - Network Connectivity Resources
+
+http:
+  method: GET
+  url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivity/multicast/igmpSnoopingGroups"
+  params:
+    - name: fabricName
+      value: ""
+      type: query
+      description: Name of the fabric
+    - name: switchName
+      value: ""
+      type: query
+      description: Name of the switch
+    - name: clusterName
+      value: ""
+      type: query
+      description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+      disabled: true
+    - name: startDate
+      value: ""
+      type: query
+      description: Start date
+      disabled: true
+    - name: endDate
+      value: ""
+      type: query
+      description: End date
+      disabled: true
+    - name: sort
+      value: ""
+      type: query
+      description: |
+        Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+        Ascending order by default: "field1"
+        Specific order for one field: "field1:asc" or "field1:desc"
+        Specific order with multiple fields: "field1:asc,field2:desc"
+      disabled: true
+    - name: max
+      value: ""
+      type: query
+      description: Number of records to return
+      disabled: true
+    - name: offset
+      value: ""
+      type: query
+      description: Number of records to skip for pagination
+      disabled: true
+    - name: filter
+      value: ""
+      type: query
+      description: Lucene format filter - Filter the response based on this filter field
+      disabled: true
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: ACI Fabric
+    description: IGMP Snooping Multicast Groups for ACI Fabric
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivity/multicast/igmpSnoopingGroups"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: switchName
+          value: ""
+          type: query
+          description: Name of the switch
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "igmpSnoopingMulticastGroups": [
+              {
+                "bridgeDomainName": "bd3",
+                "bridgeDomainVnid": 16252847,
+                "distributionTreeInstance": "225.0.106.176",
+                "epgName": "epg3",
+                "epgVnid": 8574,
+                "epochTime": 1723230576259,
+                "fabricName": "DC-trex",
+                "lastReporter": "50.3.0.2",
+                "modificationDate": "2024-08-09T19:09:36.259Z",
+                "multicastGroupIp": "229.0.0.1",
+                "switchName": "nc-aci-trex-leaf01",
+                "outgoingInterfaces": [
+                  "eth1/17"
+                ],
+                "sourceIp": "*",
+                "sourceName": "fabric-DC-trex/node-nc-aci-trex-leaf01/igmpsnoop/bridgedom-[16252847]/sourceip-[wildcard]/mcgrp-229.0.0.1/epg-[8574]/v2",
+                "status": "created",
+                "tenantName": "tn1",
+                "version": "v2",
+                "vrfName": "ctx1",
+                "vrfVnid": 2392066
+              }
+            ],
+            "meta": {
+              "counts": {
+                "total": 1,
+                "remaining": 0
+              },
+              "links": {
+                "next": "https://api.example.com/v1/analyze/connectivity/multicast/igmpSnoopingGroups?offset=40&max=10",
+                "previous": "https://api.example.com/v1/analyze/connectivity/multicast/igmpSnoopingGroups?offset=20&max=10"
+              }
+            }
+          }
+  - name: Non-ACI Fabric
+    description: IGMP Snooping Multicast Groups for Non-ACI Fabric
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivity/multicast/igmpSnoopingGroups"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: switchName
+          value: ""
+          type: query
+          description: Name of the switch
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "igmpSnoopingMulticastGroups": [
+              {
+                "bridgeDomainName": "vlan201",
+                "bridgeDomainVnid": 201,
+                "distributionTreeInstance": "",
+                "epgName": "",
+                "epgVnid": 0,
+                "epochTime": 1723226666000,
+                "fabricName": "DC-trex-nx",
+                "lastReporter": "50.1.0.2",
+                "modificationDate": "2024-08-09T18:04:26.628Z",
+                "multicastGroupIp": "228.0.0.1",
+                "switchName": "trex-nx-leaf4",
+                "outgoingInterfaces": [
+                  "Po57"
+                ],
+                "sourceIp": "*",
+                "sourceName": "fabric-DC-trex-nx/node-trex-nx-leaf4/igmpsnoop/bridgedom-[201]/sourceip-[*]/mcgrp-228.0.0.1/epg-[201]",
+                "status": "created",
+                "version": "v2"
+              }
+            ],
+            "meta": {
+              "counts": {
+                "total": 1,
+                "remaining": 0
+              },
+              "links": {
+                "next": "https://api.example.com/v1/analyze/connectivity/multicast/protocols/igmp/multicastGroups?offset=40&max=10",
+                "previous": "https://api.example.com/v1/analyze/connectivity/multicast/protocols/igmp/multicastGroups?offset=20&max=10"
+              }
+            }
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivity/multicast/igmpSnoopingGroups"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: switchName
+          value: ""
+          type: query
+          description: Name of the switch
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivity/multicast/igmpSnoopingGroups"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: switchName
+          value: ""
+          type: query
+          description: Name of the switch
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 403 Response
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivity/multicast/igmpSnoopingGroups"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: switchName
+          value: ""
+          type: query
+          description: Name of the switch
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 404 Response
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivity/multicast/igmpSnoopingGroups"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: switchName
+          value: ""
+          type: query
+          description: Name of the switch
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 500 Response
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivity/multicast/igmpSnoopingGroups"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: switchName
+          value: ""
+          type: query
+          description: Name of the switch
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }

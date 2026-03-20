@@ -2,6 +2,8 @@ info:
   name: Get IP scopes
   type: http
   seq: 32
+  tags:
+    - Integrations
 
 http:
   method: GET
@@ -15,6 +17,7 @@ http:
       value: ""
       type: query
       description: Lucene format filter - Filter the response based on this filter field
+      disabled: true
     - name: max
       value: ""
       type: query
@@ -28,7 +31,11 @@ http:
     - name: sort
       value: ""
       type: query
-      description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+      description: |
+        Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+        Ascending order by default: "field1"
+        Specific order for one field: "field1:asc" or "field1:desc"
+        Specific order with multiple fields: "field1:asc,field2:desc"
       disabled: true
     - name: clusterName
       value: ""
@@ -36,15 +43,24 @@ http:
       description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
       disabled: true
     - name: ipScopeType
-      value: ""
+      value: matched
+      type: query
+      description: Whether to fetch matched or conflicting IP scopes
+      disabled: true
+    - name: ipScopeType
+      value: conflicting
+      type: query
+      description: Whether to fetch matched or conflicting IP scopes
+      disabled: true
+    - name: ipScopeType
+      value: all
       type: query
       description: Whether to fetch matched or conflicting IP scopes
       disabled: true
     - name: onDemand
-      value: ""
+      value: "false"
       type: query
       description: Whether to fetch fresh data from the IPAM server
-      disabled: true
   auth: inherit
 
 settings:
@@ -67,6 +83,7 @@ examples:
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
         - name: max
           value: ""
           type: query
@@ -80,7 +97,11 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: clusterName
           value: ""
@@ -88,16 +109,26 @@ examples:
           description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
           disabled: true
         - name: ipScopeType
-          value: ""
+          value: matched
+          type: query
+          description: Whether to fetch matched or conflicting IP scopes
+          disabled: true
+        - name: ipScopeType
+          value: conflicting
+          type: query
+          description: Whether to fetch matched or conflicting IP scopes
+          disabled: true
+        - name: ipScopeType
+          value: all
           type: query
           description: Whether to fetch matched or conflicting IP scopes
           disabled: true
         - name: onDemand
-          value: ""
+          value: "false"
           type: query
           description: Whether to fetch fresh data from the IPAM server
-          disabled: true
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -147,6 +178,7 @@ examples:
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
         - name: max
           value: ""
           type: query
@@ -160,7 +192,11 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: clusterName
           value: ""
@@ -168,16 +204,26 @@ examples:
           description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
           disabled: true
         - name: ipScopeType
-          value: ""
+          value: matched
+          type: query
+          description: Whether to fetch matched or conflicting IP scopes
+          disabled: true
+        - name: ipScopeType
+          value: conflicting
+          type: query
+          description: Whether to fetch matched or conflicting IP scopes
+          disabled: true
+        - name: ipScopeType
+          value: all
           type: query
           description: Whether to fetch matched or conflicting IP scopes
           disabled: true
         - name: onDemand
-          value: ""
+          value: "false"
           type: query
           description: Whether to fetch fresh data from the IPAM server
-          disabled: true
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -228,6 +274,7 @@ examples:
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
         - name: max
           value: ""
           type: query
@@ -241,7 +288,11 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: clusterName
           value: ""
@@ -249,16 +300,26 @@ examples:
           description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
           disabled: true
         - name: ipScopeType
-          value: ""
+          value: matched
+          type: query
+          description: Whether to fetch matched or conflicting IP scopes
+          disabled: true
+        - name: ipScopeType
+          value: conflicting
+          type: query
+          description: Whether to fetch matched or conflicting IP scopes
+          disabled: true
+        - name: ipScopeType
+          value: all
           type: query
           description: Whether to fetch matched or conflicting IP scopes
           disabled: true
         - name: onDemand
-          value: ""
+          value: "false"
           type: query
           description: Whether to fetch fresh data from the IPAM server
-          disabled: true
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -285,6 +346,7 @@ examples:
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
         - name: max
           value: ""
           type: query
@@ -298,7 +360,11 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: clusterName
           value: ""
@@ -306,16 +372,26 @@ examples:
           description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
           disabled: true
         - name: ipScopeType
-          value: ""
+          value: matched
+          type: query
+          description: Whether to fetch matched or conflicting IP scopes
+          disabled: true
+        - name: ipScopeType
+          value: conflicting
+          type: query
+          description: Whether to fetch matched or conflicting IP scopes
+          disabled: true
+        - name: ipScopeType
+          value: all
           type: query
           description: Whether to fetch matched or conflicting IP scopes
           disabled: true
         - name: onDemand
-          value: ""
+          value: "false"
           type: query
           description: Whether to fetch fresh data from the IPAM server
-          disabled: true
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -342,6 +418,7 @@ examples:
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
         - name: max
           value: ""
           type: query
@@ -355,7 +432,11 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: clusterName
           value: ""
@@ -363,16 +444,26 @@ examples:
           description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
           disabled: true
         - name: ipScopeType
-          value: ""
+          value: matched
+          type: query
+          description: Whether to fetch matched or conflicting IP scopes
+          disabled: true
+        - name: ipScopeType
+          value: conflicting
+          type: query
+          description: Whether to fetch matched or conflicting IP scopes
+          disabled: true
+        - name: ipScopeType
+          value: all
           type: query
           description: Whether to fetch matched or conflicting IP scopes
           disabled: true
         - name: onDemand
-          value: ""
+          value: "false"
           type: query
           description: Whether to fetch fresh data from the IPAM server
-          disabled: true
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -399,6 +490,7 @@ examples:
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
         - name: max
           value: ""
           type: query
@@ -412,7 +504,11 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: clusterName
           value: ""
@@ -420,16 +516,26 @@ examples:
           description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
           disabled: true
         - name: ipScopeType
-          value: ""
+          value: matched
+          type: query
+          description: Whether to fetch matched or conflicting IP scopes
+          disabled: true
+        - name: ipScopeType
+          value: conflicting
+          type: query
+          description: Whether to fetch matched or conflicting IP scopes
+          disabled: true
+        - name: ipScopeType
+          value: all
           type: query
           description: Whether to fetch matched or conflicting IP scopes
           disabled: true
         - name: onDemand
-          value: ""
+          value: "false"
           type: query
           description: Whether to fetch fresh data from the IPAM server
-          disabled: true
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

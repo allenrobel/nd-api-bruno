@@ -2,6 +2,8 @@ info:
   name: List the links
   type: http
   seq: 4
+  tags:
+    - Links
 
 http:
   method: GET
@@ -34,12 +36,17 @@ http:
     - name: sort
       value: ""
       type: query
-      description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+      description: |
+        Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+        Ascending order by default: "field1"
+        Specific order for one field: "field1:asc" or "field1:desc"
+        Specific order with multiple fields: "field1:asc,field2:desc"
       disabled: true
     - name: filter
       value: ""
       type: query
       description: Lucene format filter - Filter the response based on this filter field
+      disabled: true
   auth: inherit
 
 settings:
@@ -82,13 +89,19 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -110,12 +123,17 @@ examples:
                     "srcInterfaceDescription": "desc"
                   }
                 },
-                "dstFabricName": "ebgp-fab",
+                "displayName": "Pre-provision",
+                "dstFabricName": "fab1",
                 "dstInterfaceName": "Ethernet1/9",
                 "dstSwitchId": "FDO224226Y9",
                 "dstSwitchInfo": {
-                  "isVdc": false,
+                  "interfaceAdminStatus": "up",
+                  "interfaceOperReason": "none",
+                  "interfaceOperStatus": "up",
                   "switchModelName": "N9K-C93180YC-EX",
+                  "switchRole": "leaf",
+                  "vdc": false,
                   "vdcId": 0
                 },
                 "dstSwitchName": "sml_N9K-FX2-7",
@@ -125,13 +143,13 @@ examples:
                 "isPortChannel": false,
                 "linkId": "LINK-UUID-8540",
                 "linkType": "lan_neighbor_link",
-                "srcFabricName": "ebgp-fab",
+                "srcFabricName": "fab1",
                 "srcInterfaceName": "Ethernet1/2",
                 "srcSwitchId": "FDO22422CZC",
                 "srcSwitchInfo": {
                   "interfaceAdminStatus": "up",
-                  "interfaceOpReason": "none",
-                  "interfaceOpStatus": "up",
+                  "interfaceOperReason": "none",
+                  "interfaceOperStatus": "up",
                   "isVdc": false,
                   "switchModelName": "N9K-C93180YC-EX",
                   "switchRole": "spine",
@@ -141,50 +159,89 @@ examples:
               },
               {
                 "configData": {
-                  "policyType": "preprovision",
+                  "policyType": "ebgpVrfLite",
                   "templateInputs": {
-                    "dstInterfaceConfig": "logging event port link-status",
-                    "dstInterfaceDescription": "desc",
-                    "mtu": 9216,
-                    "speed": "auto",
-                    "srcInterfaceConfig": "logging event port link-status",
-                    "srcInterfaceDescription": "desc"
+                    "autoGenConfigDefaultVrf": false,
+                    "autoGenConfigNxPeerDefaultVrf": false,
+                    "autoGenConfigPeer": false,
+                    "dciTracking": false,
+                    "defaultVrfEbgpNeighborPassword": "",
+                    "dstEbgpAsn": "55",
+                    "dstInterfaceConfig": "",
+                    "dstInterfaceDescription": "",
+                    "dstIpAddress": "19.0.0.2",
+                    "dstIpv6Address": "",
+                    "dstKmeServerIp": "",
+                    "dstKmeServerPortNumber": 0,
+                    "dstMacsecKeyChainPrefix": "",
+                    "dstQkdProfileName": "",
+                    "dstTrustpointLabel": "",
+                    "ignoreCertificate": false,
+                    "inheritTtagFabricSetting": true,
+                    "linkMtu": 9216,
+                    "macsec": false,
+                    "macsecCipherSuite": "",
+                    "macsecFallbackCryptographicAlgorithm": "",
+                    "macsecFallbackKeyString": "",
+                    "macsecPrimaryCryptographicAlgorithm": "",
+                    "macsecPrimaryKeyString": "",
+                    "overrideFabricMacsec": false,
+                    "qkd": false,
+                    "redistribEbgpRouteMapName": "",
+                    "routingTag": "",
+                    "srcEbgpAsn": "11",
+                    "srcInterfaceConfig": "",
+                    "srcInterfaceDescription": "",
+                    "srcIpAddressMask": "19.0.0.1/24",
+                    "srcIpv6AddressMask": "",
+                    "srcKmeServerIp": "",
+                    "srcKmeServerPortNumber": 0,
+                    "srcMacsecKeyChainPrefix": "",
+                    "srcQkdProfileName": "",
+                    "srcTrustpointLabel": "",
+                    "templateConfigGenPeer": "Ext_VRF_Lite_Jython",
+                    "vrfNameNxPeerSwitch": ""
                   }
                 },
-                "dstFabricName": "ebgp-fab",
-                "dstInterfaceName": "Ethernet1/9",
-                "dstSwitchId": "FDO224226Y9",
+                "displayName": "VRF lite (Subinterface)",
+                "dstFabricName": "Ext1",
+                "dstInterfaceName": "Ethernet1/16",
+                "dstSwitchId": "9A9PSOHXQ2Q",
                 "dstSwitchInfo": {
-                  "isVdc": false,
-                  "switchModelName": "N9K-C93180YC-EX",
+                  "interfaceAdminStatus": "up",
+                  "interfaceOperReason": "none",
+                  "interfaceOperStatus": "up",
+                  "switchModelName": "N9K-C9300v",
+                  "switchRole": "core router",
+                  "vdc": false,
                   "vdcId": 0
                 },
-                "dstSwitchName": "sml_N9K-FX2-7",
-                "isLinkDiscovered": true,
-                "isLinkPlanned": false,
-                "isLinkPresent": true,
-                "isPortChannel": false,
-                "linkId": "LINK-UUID-3650",
-                "linkType": "lan_neighbor_link",
-                "srcFabricName": "ebgp-fab",
-                "srcInterfaceName": "Ethernet1/2",
-                "srcSwitchId": "FDO22422CZC",
+                "dstSwitchName": "RS11",
+                "linkDiscovered": false,
+                "linkId": "LINK-UUID-48060",
+                "linkPlanned": true,
+                "linkPresent": false,
+                "linkType": "lan_planned_link",
+                "portChannel": false,
+                "srcFabricName": "fab1",
+                "srcInterfaceName": "Ethernet1/16",
+                "srcSwitchId": "FDO23500AB5",
                 "srcSwitchInfo": {
                   "interfaceAdminStatus": "up",
-                  "interfaceOpReason": "none",
-                  "interfaceOpStatus": "up",
-                  "isVdc": false,
-                  "switchModelName": "N9K-C93180YC-EX",
-                  "switchRole": "spine",
+                  "interfaceOperReason": "",
+                  "interfaceOperStatus": "down",
+                  "switchModelName": "N9K-C93180YC-FX",
+                  "switchRole": "leaf",
+                  "vdc": false,
                   "vdcId": 0
                 },
-                "srcSwitchName": "sml_N9K-FX2-6"
+                "srcSwitchName": "n9k-z17-62"
               }
             ],
             "meta": {
               "counts": {
                 "remaining": 0,
-                "total": 3
+                "total": 2
               }
             }
           }
@@ -221,13 +278,19 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -273,13 +336,19 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -325,13 +394,19 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -377,13 +452,19 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -429,13 +510,19 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
     response:
+      status: 409
       statusText: Conflict
       headers:
         - name: Content-Type
@@ -481,13 +568,19 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

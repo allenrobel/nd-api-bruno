@@ -1,0 +1,193 @@
+info:
+  name: API to get cluster health status
+  type: http
+  seq: 6
+  tags:
+    - System Bootstrap
+
+http:
+  method: GET
+  url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/cluster/status"
+  params:
+    - name: clusterName
+      value: ""
+      type: query
+      description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+      disabled: true
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: OK
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/cluster/status"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "externalServiceStatusList": [
+              {
+                "allocatedIp": "192.0.0.200",
+                "name": "Telemetry collector-1",
+                "service": "cisco-nir/flow-collector"
+              }
+            ],
+            "name": "sjc15-3m6-03",
+            "state": "active",
+            "status": {
+              "overallStatus": {
+                "endTime": "2025-03-26T20:16:58.305723678Z",
+                "estimatedTime": 0,
+                "lastUpdateTime": "2025-03-26T20:16:58.305723678Z",
+                "progress": 100,
+                "startTime": "2025-03-26T20:15:36.576664211Z",
+                "status": "Completed",
+                "statusMessage": "Cluster bootstrapped successfully."
+              },
+              "stages": [
+                {
+                  "name": "InstallStageIdSystemInit",
+                  "progressWeight": 3,
+                  "status": {
+                    "endTime": "2025-03-26T20:15:36.635632885Z",
+                    "estimatedTime": 0,
+                    "progress": 100,
+                    "startTime": "2025-03-26T20:15:36.594269611Z",
+                    "status": "Completed",
+                    "statusMessage": "Completed successfully."
+                  },
+                  "tasks": [
+                    {
+                      "name": "Setup cluster install",
+                      "status": "Completed"
+                    },
+                    {
+                      "name": "Generate Kubernetes API access",
+                      "status": "Completed"
+                    }
+                  ],
+                  "timeout": 300
+                }
+              ]
+            },
+            "uuid": "736a6331-352d-336d-362d-303300000000"
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/cluster/status"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 403 Response
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/cluster/status"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 404 Response
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/cluster/status"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 500 Response
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/cluster/status"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }

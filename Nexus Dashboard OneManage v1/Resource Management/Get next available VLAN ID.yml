@@ -22,6 +22,11 @@ http:
       type: query
       description: The type of VLAN to query
       disabled: true
+    - name: vlanType
+      value: serviceNetworkVlan
+      type: query
+      description: The type of VLAN to query
+      disabled: true
   auth: inherit
 
 settings:
@@ -47,6 +52,11 @@ examples:
           description: The type of VLAN to query
         - name: vlanType
           value: vrfVlan
+          type: query
+          description: The type of VLAN to query
+          disabled: true
+        - name: vlanType
+          value: serviceNetworkVlan
           type: query
           description: The type of VLAN to query
           disabled: true
@@ -83,6 +93,11 @@ examples:
           type: query
           description: The type of VLAN to query
           disabled: true
+        - name: vlanType
+          value: serviceNetworkVlan
+          type: query
+          description: The type of VLAN to query
+          disabled: true
     response:
       status: 400
       statusText: Bad Request
@@ -113,6 +128,11 @@ examples:
           description: The type of VLAN to query
         - name: vlanType
           value: vrfVlan
+          type: query
+          description: The type of VLAN to query
+          disabled: true
+        - name: vlanType
+          value: serviceNetworkVlan
           type: query
           description: The type of VLAN to query
           disabled: true
@@ -149,6 +169,11 @@ examples:
           type: query
           description: The type of VLAN to query
           disabled: true
+        - name: vlanType
+          value: serviceNetworkVlan
+          type: query
+          description: The type of VLAN to query
+          disabled: true
     response:
       status: 403
       statusText: Forbidden
@@ -182,6 +207,11 @@ examples:
           type: query
           description: The type of VLAN to query
           disabled: true
+        - name: vlanType
+          value: serviceNetworkVlan
+          type: query
+          description: The type of VLAN to query
+          disabled: true
     response:
       status: 404
       statusText: Not Found
@@ -212,6 +242,11 @@ examples:
           description: The type of VLAN to query
         - name: vlanType
           value: vrfVlan
+          type: query
+          description: The type of VLAN to query
+          disabled: true
+        - name: vlanType
+          value: serviceNetworkVlan
           type: query
           description: The type of VLAN to query
           disabled: true

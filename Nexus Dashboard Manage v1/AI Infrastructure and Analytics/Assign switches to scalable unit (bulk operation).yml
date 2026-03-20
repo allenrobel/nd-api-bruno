@@ -1,7 +1,9 @@
 info:
   name: Assign switches to scalable unit (bulk operation)
   type: http
-  seq: 2
+  seq: 3
+  tags:
+    - AI Infrastructure and Analytics
 
 http:
   method: POST
@@ -26,8 +28,12 @@ http:
       {
         "switches": [
           {
-            "description": "",
-            "switchId": ""
+            "description": "Backend compute scalable unit leaf 1",
+            "switchId": "FLM2518055U"
+          },
+          {
+            "description": "Backend compute scalable unit leaf 2",
+            "switchId": "FLM2518056V"
           }
         ]
       }
@@ -75,6 +81,7 @@ examples:
             ]
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -116,6 +123,7 @@ examples:
             ]
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -161,6 +169,7 @@ examples:
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -204,6 +213,7 @@ examples:
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -251,6 +261,7 @@ examples:
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -294,6 +305,7 @@ examples:
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -341,6 +353,7 @@ examples:
             ]
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -384,6 +397,7 @@ examples:
             ]
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -431,6 +445,7 @@ examples:
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -474,6 +489,7 @@ examples:
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -521,6 +537,7 @@ examples:
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type
@@ -564,6 +581,7 @@ examples:
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

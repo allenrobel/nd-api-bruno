@@ -1,7 +1,9 @@
 info:
   name: Get ISSU pre and post update reports
   type: http
-  seq: 37
+  seq: 31
+  tags:
+    - Fabric Software Management
 
 http:
   method: GET
@@ -49,6 +51,7 @@ examples:
           type: path
           description: Name of the pre and post update report
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -59,7 +62,7 @@ examples:
           {
             "reportData": "Pre/Post ISSU report details",
             "reportInstanceId": "vxlanFabric_N9K_leaf_12_pre",
-            "reportLink": "/preport/export/details/html/6476440c-f924-4463-837e-e2381eaebf5b/24526aa1-93da-11f0-b79a-c3c22e77d31e",
+            "reportLink": "/export/details/html/6476440c-f924-4463-837e-e2381eaebf5b/24526aa1-93da-11f0-b79a-c3c22e77d31e",
             "reportSummary": "Pre/Post ISSU report summary",
             "reportType": "preReport",
             "status": "success"
@@ -84,6 +87,7 @@ examples:
           type: path
           description: Name of the pre and post update report
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -116,6 +120,7 @@ examples:
           type: path
           description: Name of the pre and post update report
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -148,6 +153,7 @@ examples:
           type: path
           description: Name of the pre and post update report
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -180,6 +186,7 @@ examples:
           type: path
           description: Name of the pre and post update report
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

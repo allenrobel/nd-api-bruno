@@ -1,7 +1,9 @@
 info:
   name: Get interface details
   type: http
-  seq: 22
+  seq: 21
+  tags:
+    - Interfaces
 
 http:
   method: GET
@@ -25,7 +27,7 @@ http:
       type: path
       description: Name of the interface
     - name: configOnly
-      value: ""
+      value: "false"
       type: query
       description: Get configuration data alone or with operational data
   auth: inherit
@@ -37,7 +39,7 @@ settings:
   maxRedirects: 5
 
 examples:
-  - name: ethernetExample
+  - name: getEthernet
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/interfaces/:interfaceName"
       method: GET
@@ -60,10 +62,11 @@ examples:
           type: path
           description: Name of the interface
         - name: configOnly
-          value: ""
+          value: "false"
           type: query
           description: Get configuration data alone or with operational data
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -75,9 +78,9 @@ examples:
             "configData": {
               "mode": "access",
               "networkOS": {
-                "networkOSType": "nexus",
+                "networkOSType": "nx-os",
                 "policy": {
-                  "accessVlanId": 100,
+                  "accessVlan": 100,
                   "adminState": true,
                   "bpduGuard": "enable",
                   "cdp": true,
@@ -90,7 +93,7 @@ examples:
                   "orphanPort": true,
                   "pfc": false,
                   "policyType": "accessHost",
-                  "portTypeFast": true,
+                  "portTypeEdgeTrunk": true,
                   "qos": false,
                   "qosPolicy": "Custom QoS Policy associated with the interface (must be defined apriori)",
                   "queueingPolicy": "Custom Queuing Policy associated with the interface (must be defined apriori)",
@@ -110,6 +113,268 @@ examples:
               "vrfName": "default"
             },
             "switchId": "FDO22412H7U"
+          }
+  - name: getInterfaceLoopback
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/interfaces/:interfaceName"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: interfaceName
+          value: ""
+          type: path
+          description: Name of the interface
+        - name: configOnly
+          value: "false"
+          type: query
+          description: Get configuration data alone or with operational data
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "configData": {
+              "mode": "managed",
+              "networkOS": {
+                "networkOSType": "nx-os",
+                "policy": {
+                  "adminState": true,
+                  "ip": "2.3.4.5",
+                  "linkStateRoutingTag": "UNDERLAY",
+                  "policyType": "loopback",
+                  "routeMapTag": 54321
+                }
+              }
+            },
+            "interfaceName": "loopback0",
+            "interfaceType": "loopback",
+            "switchId": "FDO222425SE"
+          }
+  - name: getInterfacePo
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/interfaces/:interfaceName"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: interfaceName
+          value: ""
+          type: path
+          description: Name of the interface
+        - name: configOnly
+          value: "false"
+          type: query
+          description: Get configuration data alone or with operational data
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "configData": {
+              "mode": "trunk",
+              "networkOS": {
+                "networkOSType": "nx-os",
+                "policy": {
+                  "adminState": true,
+                  "allowedVlans": "none",
+                  "bpduFilter": "default",
+                  "bpduGuard": "enable",
+                  "cdp": true,
+                  "copyDescription": false,
+                  "duplexMode": "auto",
+                  "lacpPortPriority": 32768,
+                  "lacpRate": "normal",
+                  "lacpSuspend": false,
+                  "linkType": "auto",
+                  "monitor": false,
+                  "mtu": "jumbo",
+                  "negotiateAuto": true,
+                  "netflow": false,
+                  "orphanPort": false,
+                  "pfc": false,
+                  "policyType": "trunkPoHost",
+                  "portChannelMode": "active",
+                  "portTypeFast": true,
+                  "ptp": false,
+                  "qos": false,
+                  "speed": "auto",
+                  "stormControl": false,
+                  "stormControlAction": "default",
+                  "vlanMapping": false
+                }
+              }
+            },
+            "interfaceName": "port-channel503",
+            "interfaceType": "portChannel",
+            "switchId": "FDO222425SE"
+          }
+  - name: getInterfaceSvi
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/interfaces/:interfaceName"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: interfaceName
+          value: ""
+          type: path
+          description: Name of the interface
+        - name: configOnly
+          value: "false"
+          type: query
+          description: Get configuration data alone or with operational data
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "configData": {
+              "mode": "managed",
+              "networkOS": {
+                "networkOSType": "nx-os",
+                "policy": {
+                  "adminState": true,
+                  "advertiseSubnetInUnderlay": false,
+                  "hsrpGroup": 1,
+                  "ipRedirects": true,
+                  "netflow": false,
+                  "pimDrPriority": 1,
+                  "pimSparse": false,
+                  "policyType": "svi",
+                  "preempt": false
+                }
+              }
+            },
+            "interfaceName": "vlan3",
+            "interfaceType": "svi",
+            "switchId": "FDO222425SE"
+          }
+  - name: getInterfacevPC
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/interfaces/:interfaceName"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+        - name: switchId
+          value: ""
+          type: path
+          description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
+        - name: interfaceName
+          value: ""
+          type: path
+          description: Name of the interface
+        - name: configOnly
+          value: "false"
+          type: query
+          description: Get configuration data alone or with operational data
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "configData": {
+              "mode": "trunk",
+              "networkOS": {
+                "networkOSType": "nx-os",
+                "policy": {
+                  "adminState": true,
+                  "bpduFilter": "default",
+                  "bpduGuard": "enable",
+                  "cdp": true,
+                  "copyDescription": false,
+                  "duplexMode": "auto",
+                  "lacpPortPriority": 32768,
+                  "lacpRate": "normal",
+                  "lacpSuspend": false,
+                  "lacpVpcConvergence": false,
+                  "linkType": "auto",
+                  "mirrorConfig": false,
+                  "mtu": "jumbo",
+                  "negotiateAuto": true,
+                  "netflow": false,
+                  "peer1AllowedVlans": "none",
+                  "peer1PortChannelId": 1,
+                  "peer2AllowedVlans": "none",
+                  "peer2PortChannelId": 1,
+                  "peerSwitchId": "FDO22240HJP",
+                  "pfc": false,
+                  "policyType": "trunkVpcHost",
+                  "portChannelMode": "active",
+                  "portTypeFast": true,
+                  "ptp": false,
+                  "qos": false,
+                  "speed": "auto",
+                  "stormControl": false,
+                  "stormControlAction": "default",
+                  "vlanMapping": false
+                }
+              }
+            },
+            "interfaceName": "vpc1",
+            "interfaceType": "vpc",
+            "switchId": "FDO222425SE"
           }
   - name: 400 Response
     description: Bad Request
@@ -135,10 +400,11 @@ examples:
           type: path
           description: Name of the interface
         - name: configOnly
-          value: ""
+          value: "false"
           type: query
           description: Get configuration data alone or with operational data
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -175,10 +441,11 @@ examples:
           type: path
           description: Name of the interface
         - name: configOnly
-          value: ""
+          value: "false"
           type: query
           description: Get configuration data alone or with operational data
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -215,10 +482,11 @@ examples:
           type: path
           description: Name of the interface
         - name: configOnly
-          value: ""
+          value: "false"
           type: query
           description: Get configuration data alone or with operational data
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -255,10 +523,11 @@ examples:
           type: path
           description: Name of the interface
         - name: configOnly
-          value: ""
+          value: "false"
           type: query
           description: Get configuration data alone or with operational data
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

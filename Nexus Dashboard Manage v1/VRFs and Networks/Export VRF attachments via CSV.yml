@@ -2,6 +2,8 @@ info:
   name: Export VRF attachments via CSV
   type: http
   seq: 26
+  tags:
+    - VRFs and Networks
 
 http:
   method: POST
@@ -20,8 +22,14 @@ http:
     type: json
     data: |-
       {
-        "switchIds": [],
-        "vrfNames": []
+        "switchIds": [
+          "9UA832KA3LO",
+          "9YVKXMATL9J"
+        ],
+        "vrfNames": [
+          "MyVRF_50000",
+          "MyVRF_50001"
+        ]
       }
   auth: inherit
 
@@ -61,6 +69,7 @@ examples:
             ]
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -68,8 +77,8 @@ examples:
       body:
         type: text
         data: |
-          vrfName,switchName,vlan,switchId,peerSwitchId,dot1qId,ipv4Address,routeTag,neighborIpv4Address,neighborAsn,ipv6Address,neighborIpv6Address,mtu,netflow,autoPeerConfig,peerVrfName,routeMapIn,routeMapOut,ipv6RouteMapIn,ipv6RouteMapOut,attach,status,errorMessage,instanceValues,extraConfig,switchRole,vlanModifiable
-          MyVRF_50000,sw1,2000,9UA832KA3LO,9YVKXMATL9J,2,1.10.13.123/24,1,1.10.13.124,6578,,,9216,,false,,,,false,na,,null,null,leaf,true
+          vrfName,switchName,vlan,vrfId,switchId,peerSwitchId,switchFabricName,attach,status,loopbackId,loopbackIpv4,loopbackIpv6,switchRole,vlanModifiable,showVlan,extensionValues
+          MyVRF_50000,sw1,2000,50000,9UA832KA3LO,9YVKXMATL9J,fab1,true,notApplicable,26,1.1.1.6,2051:18:200::11,leaf,true,true,"[{""interfaceName"":""Ethernet1/8"",""dot1qId"":2,""ipv4Address"":""1.10.13.123/24"",""routeTag"":1,""neighborIpv4Address"":""1.10.13.124"",""neighborAsn"":""6578"",""ipv6Address"":""2001:db8::/32"",""neighborIpv6Address"":""2001:db8::1"",""mtu"":9216,""netflow"":false,""autoPeerConfig"":false,""peerVrfName"":""MyVRF_50001"",""routeMapIn"":"""",""routeMapOut"":""EXTCON-RMAP-FILTER"",""ipv6RouteMapIn"":"""",""ipv6RouteMapOut"":""EXTCON-RMAP-FILTER-V6""}]"
   - name: 400 Response
     description: Bad Request
     request:
@@ -99,6 +108,7 @@ examples:
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -140,6 +150,7 @@ examples:
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -181,6 +192,7 @@ examples:
             ]
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -222,6 +234,7 @@ examples:
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -263,6 +276,7 @@ examples:
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

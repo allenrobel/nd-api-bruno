@@ -2,6 +2,8 @@ info:
   name: Export fabric links as CSV
   type: http
   seq: 1
+  tags:
+    - Links
 
 http:
   method: POST
@@ -16,7 +18,7 @@ http:
     type: json
     data: |-
       {
-        "fabricName": "",
+        "fabricName": "fab1",
         "linkIds": []
       }
   auth: inherit
@@ -48,6 +50,7 @@ examples:
             "linkIds": []
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -78,6 +81,7 @@ examples:
             ]
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -85,8 +89,8 @@ examples:
       body:
         type: text
         data: <binary data representation of a zip file>
-  - name: 200 Response (Export all links from a fabric)
-    description: OK
+  - name: ebgpVrfLite (Export all links from a fabric)
+    description: Export eBGP VRF lite links as CSV
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/export"
       method: POST
@@ -104,6 +108,7 @@ examples:
             "linkIds": []
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -111,11 +116,10 @@ examples:
       body:
         type: text
         data: |
-          linkId,srcFabricName,dstFabricName,srcSwitchId,dstSwitchId,srcSwitchName,dstSwitchName,srcInterfaceName,dstInterfaceName,policyType,dstInterfaceConfig,dstInterfaceDescription,mtu,speed,srcInterfaceConfig,srcInterfaceDescription
-          LINK-UUID-8540,fab1,fab1,FDO22422CZC,FDO224226Y9,sml_N9K-FX2-6,sml_N9K-FX2-7,Ethernet1/2,Ethernet1/9,preprovison,logging event port link-status,description for destination interface,9216,auto,logging event port link-status,description for source interface
-          LINK-UUID-3650,fab1,fab1,FDO22422CZC,FDO224226Y9,sml_N9K-FX2-6,sml_N9K-FX2-7,Ethernet1/10,Ethernet1/10,preprovison,,logging event port link-status,description for destination interface,9216,auto,logging event port link-status,description for source interface}
-  - name: 200 Response (Export specific links from a fabric)
-    description: OK
+          linkId,srcFabricName,dstFabricName,srcSwitchId,dstSwitchId,srcSwitchName,dstSwitchName,srcInterfaceName,dstInterfaceName,policyType,autoGenConfigDefaultVrf,autoGenConfigNxPeerDefaultVrf,autoGenConfigPeer,dciTracking,defaultVrfEbgpNeighborPassword,dstEbgpAsn,dstInterfaceConfig,dstInterfaceDescription,dstIpAddress,dstIpv6Address,dstKmeServerIp,dstMacsecKeyChainPrefix,dstQkdProfileName,dstTrustpointLabel,ignoreCertificate,inheritTtagFabricSetting,linkMtu,macsec,macsecCipherSuite,macsecFallbackCryptographicAlgorithm,macsecFallbackKeyString,macsecPrimaryCryptographicAlgorithm,macsecPrimaryKeyString,qkd,redistribEbgpRouteMapName,routingTag,srcEbgpAsn,srcInterfaceConfig,srcInterfaceDescription,srcIpAddressMask,srcIpv6AddressMask,srcKmeServerIp,srcMacsecKeyChainPrefix,srcQkdProfileName,srcTrustpointLabel,templateConfigGenPeer,overrideFabricMacsec,vrfNameNxPeerSwitch
+          LINK-UUID-15130,fab1,fab2,FDO23500AB5,FDO2310039C,n9k-z17-62,stewong-n9kfx2-3,Ethernet1/12,Ethernet1/12,ebgpVrfLite,false,false,false,false,,44,logging event port link-status,,12.0.0.2,,,,,,false,true,9216,false,,,,,,false,,,33,logging event port link-status,,12.0.0.1/24,,,,,,Ext_VRF_Lite_Jython,false,
+  - name: ebgpVrfLite (Export specific links from a fabric)
+    description: Export eBGP VRF lite links as CSV
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/export"
       method: POST
@@ -136,6 +140,280 @@ examples:
             ]
           }
     response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: text/csv
+      body:
+        type: text
+        data: |
+          linkId,srcFabricName,dstFabricName,srcSwitchId,dstSwitchId,srcSwitchName,dstSwitchName,srcInterfaceName,dstInterfaceName,policyType,autoGenConfigDefaultVrf,autoGenConfigNxPeerDefaultVrf,autoGenConfigPeer,dciTracking,defaultVrfEbgpNeighborPassword,dstEbgpAsn,dstInterfaceConfig,dstInterfaceDescription,dstIpAddress,dstIpv6Address,dstKmeServerIp,dstMacsecKeyChainPrefix,dstQkdProfileName,dstTrustpointLabel,ignoreCertificate,inheritTtagFabricSetting,linkMtu,macsec,macsecCipherSuite,macsecFallbackCryptographicAlgorithm,macsecFallbackKeyString,macsecPrimaryCryptographicAlgorithm,macsecPrimaryKeyString,qkd,redistribEbgpRouteMapName,routingTag,srcEbgpAsn,srcInterfaceConfig,srcInterfaceDescription,srcIpAddressMask,srcIpv6AddressMask,srcKmeServerIp,srcMacsecKeyChainPrefix,srcQkdProfileName,srcTrustpointLabel,templateConfigGenPeer,overrideFabricMacsec,vrfNameNxPeerSwitch
+          LINK-UUID-15130,fab1,fab2,FDO23500AB5,FDO2310039C,n9k-z17-62,stewong-n9kfx2-3,Ethernet1/12,Ethernet1/12,ebgpVrfLite,false,false,false,false,,44,logging event port link-status,,12.0.0.2,,,,,,false,true,9216,false,,,,,,false,,,33,logging event port link-status,,12.0.0.1/24,,,,,,Ext_VRF_Lite_Jython,false,
+  - name: layer3DciVrfLite (Export all links from a fabric)
+    description: Export layer3 DCI VRF lite links as CSV
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "fabricName": "fab1",
+            "linkIds": []
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: text/csv
+      body:
+        type: text
+        data: |
+          linkId,srcFabricName,dstFabricName,srcSwitchId,dstSwitchId,srcSwitchName,dstSwitchName,srcInterfaceName,dstInterfaceName,policyType,dstInterfaceConfig,dstInterfaceDescription,dstIpAddressMask,dstIpv6AddressMask,dstKmeServerIp,dstMacsecKeyChainPrefix,dstNetflowMonitorName,dstQkdProfileName,dstTrustpointLabel,dstVrfName,ignoreCertificate,ipRedirects,ipv4Pim,ipv6Pim,linkMtu,macsec,macsecCipherSuite,macsecFallbackCryptographicAlgorithm,macsecFallbackKeyString,macsecPrimaryCryptographicAlgorithm,macsecPrimaryKeyString,netflowOnDstInterface,netflowOnSrcInterface,qkd,speed,srcInterfaceConfig,srcInterfaceDescription,srcIpAddressMask,srcIpv6AddressMask,srcKmeServerIp,srcMacsecKeyChainPrefix,srcNetflowMonitorName,srcQkdProfileName,srcTrustpointLabel,srcVrfName,overrideFabricMacsec
+          LINK-UUID-15140,fab1,fab2,FDO2310039C,FDO23500AB5,stewong-n9kfx2-3,n9k-z17-62,Ethernet1/2,Ethernet1/2,layer3DciVrfLite,,,10.33.0.2/30,,,DCI,,,,MyVRF_50000,false,false,false,false,9216,false,GCM-AES-XPN-256,AES_128_CMAC,,AES_128_CMAC,,false,false,false,auto,,,10.33.0.1/30,,,DCI,,,,MyVRF_50000,false
+  - name: layer3DciVrfLite (Export specific links from a fabric)
+    description: Export layer3 DCI VRF lite links as CSV
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "fabricName": "fab1",
+            "linkIds": [
+              "LINK-UUID-8540",
+              "LINK-UUID-3650"
+            ]
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: text/csv
+      body:
+        type: text
+        data: |
+          linkId,srcFabricName,dstFabricName,srcSwitchId,dstSwitchId,srcSwitchName,dstSwitchName,srcInterfaceName,dstInterfaceName,policyType,dstInterfaceConfig,dstInterfaceDescription,dstIpAddressMask,dstIpv6AddressMask,dstKmeServerIp,dstMacsecKeyChainPrefix,dstNetflowMonitorName,dstQkdProfileName,dstTrustpointLabel,dstVrfName,ignoreCertificate,ipRedirects,ipv4Pim,ipv6Pim,linkMtu,macsec,macsecCipherSuite,macsecFallbackCryptographicAlgorithm,macsecFallbackKeyString,macsecPrimaryCryptographicAlgorithm,macsecPrimaryKeyString,netflowOnDstInterface,netflowOnSrcInterface,qkd,speed,srcInterfaceConfig,srcInterfaceDescription,srcIpAddressMask,srcIpv6AddressMask,srcKmeServerIp,srcMacsecKeyChainPrefix,srcNetflowMonitorName,srcQkdProfileName,srcTrustpointLabel,srcVrfName,overrideFabricMacsec
+          LINK-UUID-15140,fab1,fab2,FDO2310039C,FDO23500AB5,stewong-n9kfx2-3,n9k-z17-62,Ethernet1/2,Ethernet1/2,layer3DciVrfLite,,,10.33.0.2/30,,,DCI,,,,MyVRF_50000,false,false,false,false,9216,false,GCM-AES-XPN-256,AES_128_CMAC,,AES_128_CMAC,,false,false,false,auto,,,10.33.0.1/30,,,DCI,,,,MyVRF_50000,false
+  - name: multisiteOverlay (Export all links from a fabric)
+    description: Export multisite overlay links as CSV
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "fabricName": "fab1",
+            "linkIds": []
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: text/csv
+      body:
+        type: text
+        data: |
+          linkId,srcFabricName,dstFabricName,srcSwitchId,dstSwitchId,srcSwitchName,dstSwitchName,srcInterfaceName,dstInterfaceName,policyType,dstEbgpAsn,dstInterfaceDescription,dstIpAddress,ebgpAuthKeyEncryptionType,ebgpMultihop,ebgpPassword,enableEbgpPassword,inheritEbgpPasswordMsdSettings,ipv4Trm,ipv6Trm,macsecCipherSuite,redistributeRouteServer,routeServerRoutingTag,skipConfigGeneration,srcEbgpAsn,srcInterfaceDescription,srcIpAddress
+          LINK-UUID-15190,fab2,fab1,FDO23500AB5,FDO2310039C,n9k-z17-62,stewong-n9kfx2-3,Loopback1,Loopback0,multisiteOverlay,33,,12.0.0.2,,5,,true,true,true,true,,true,54321,true,44,,12.0.0.1
+  - name: multisiteOverlay (Export specific links from a fabric)
+    description: Export multisite overlay links as CSV
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "fabricName": "fab1",
+            "linkIds": [
+              "LINK-UUID-8540",
+              "LINK-UUID-3650"
+            ]
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: text/csv
+      body:
+        type: text
+        data: |
+          linkId,srcFabricName,dstFabricName,srcSwitchId,dstSwitchId,srcSwitchName,dstSwitchName,srcInterfaceName,dstInterfaceName,policyType,dstEbgpAsn,dstInterfaceDescription,dstIpAddress,ebgpAuthKeyEncryptionType,ebgpMultihop,ebgpPassword,enableEbgpPassword,inheritEbgpPasswordMsdSettings,ipv4Trm,ipv6Trm,macsecCipherSuite,redistributeRouteServer,routeServerRoutingTag,skipConfigGeneration,srcEbgpAsn,srcInterfaceDescription,srcIpAddress
+          LINK-UUID-15190,fab2,fab1,FDO23500AB5,FDO2310039C,n9k-z17-62,stewong-n9kfx2-3,Loopback1,Loopback0,multisiteOverlay,33,,12.0.0.2,,5,,true,true,true,true,,true,54321,true,44,,12.0.0.1
+  - name: multisiteUnderlay (Export all links from a fabric)
+    description: Export multisite underlay links as CSV
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "fabricName": "fab1",
+            "linkIds": []
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: text/csv
+      body:
+        type: text
+        data: |
+          linkId,srcFabricName,dstFabricName,srcSwitchId,dstSwitchId,srcSwitchName,dstSwitchName,srcInterfaceName,dstInterfaceName,policyType,dciTrackingEnableFlag,dstEbgpAsn,dstInterfaceConfig,dstInterfaceDescription,dstIpAddress,dstIpv6Address,ebgpAuthKeyEncryptionType,ebgpBfd,ebgpLogNeighborChange,ebgpMaximumPaths,ebgpPassword,ebgpSendComboth,enableEbgpPassword,inheritEbgpPasswordMsdSettings,inheritTtagFabricSetting,linkMtu,routingTag,speed,srcEbgpAsn,srcInterfaceConfig,srcInterfaceDescription,srcIpAddressMask,srcIpv6AddressMask
+          LINK-UUID-15110,fab2,fab1,FDO23500AB5,FDO2310039C,n9k-z17-62,stewong-n9kfx2-3,Ethernet1/8,Ethernet1/8,multisiteUnderlay,false,33,logging event port link-status,Destination Interface Description,8.0.0.2,,,false,true,1,,true,true,true,true,9216,54321,auto,44,logging event port link-status,source Interface Description,8.0.0.1/24,
+  - name: multisiteUnderlay (Export specific links from a fabric)
+    description: Export multisite underlay links as CSV
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "fabricName": "fab1",
+            "linkIds": [
+              "LINK-UUID-8540",
+              "LINK-UUID-3650"
+            ]
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: text/csv
+      body:
+        type: text
+        data: |
+          linkId,srcFabricName,dstFabricName,srcSwitchId,dstSwitchId,srcSwitchName,dstSwitchName,srcInterfaceName,dstInterfaceName,policyType,dciTrackingEnableFlag,dstEbgpAsn,dstInterfaceConfig,dstInterfaceDescription,dstIpAddress,dstIpv6Address,ebgpAuthKeyEncryptionType,ebgpBfd,ebgpLogNeighborChange,ebgpMaximumPaths,ebgpPassword,ebgpSendComboth,enableEbgpPassword,inheritEbgpPasswordMsdSettings,inheritTtagFabricSetting,linkMtu,routingTag,speed,srcEbgpAsn,srcInterfaceConfig,srcInterfaceDescription,srcIpAddressMask,srcIpv6AddressMask
+          LINK-UUID-15110,fab2,fab1,FDO23500AB5,FDO2310039C,n9k-z17-62,stewong-n9kfx2-3,Ethernet1/8,Ethernet1/8,multisiteUnderlay,false,33,logging event port link-status,Destination Interface Description,8.0.0.2,,,false,true,1,,true,true,true,true,9216,54321,auto,44,logging event port link-status,source Interface Description,8.0.0.1/24,
+  - name: numbered (Export all links from a fabric)
+    description: Export numbered links as CSV
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "fabricName": "fab1",
+            "linkIds": []
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: text/csv
+      body:
+        type: text
+        data: |
+          linkId,srcFabricName,dstFabricName,srcSwitchId,dstSwitchId,srcSwitchName,dstSwitchName,srcInterfaceName,dstInterfaceName,policyType,bfdEchoOnDstInterface,bfdEchoOnSrcInterface,dhcpRelayOnDstInterface,dhcpRelayOnSrcInterface,dstInterfaceConfig,dstInterfaceDescription,dstIp,dstIpv6,fec,interfaceAdminState,macsec,mtu,speed,srcInterfaceConfig,srcInterfaceDescription,srcIp,srcIpv6
+          LINK-UUID-15180,fab1,fab1,FDO23500AB5,FDO23500ABA,n9k-z17-62,n9k-z17-63,Ethernet1/15,Ethernet1/15,numbered,false,false,false,false,,,11.0.0.2,,auto,true,false,9216,auto,,,11.0.0.1,
+  - name: numbered (Export specific links from a fabric)
+    description: Export numbered links as CSV
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "fabricName": "fab1",
+            "linkIds": [
+              "LINK-UUID-8540",
+              "LINK-UUID-3650"
+            ]
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: text/csv
+      body:
+        type: text
+        data: |
+          linkId,srcFabricName,dstFabricName,srcSwitchId,dstSwitchId,srcSwitchName,dstSwitchName,srcInterfaceName,dstInterfaceName,policyType,bfdEchoOnDstInterface,bfdEchoOnSrcInterface,dhcpRelayOnDstInterface,dhcpRelayOnSrcInterface,dstInterfaceConfig,dstInterfaceDescription,dstIp,dstIpv6,fec,interfaceAdminState,macsec,mtu,speed,srcInterfaceConfig,srcInterfaceDescription,srcIp,srcIpv6
+          LINK-UUID-15180,fab1,fab1,FDO23500AB5,FDO23500ABA,n9k-z17-62,n9k-z17-63,Ethernet1/15,Ethernet1/15,numbered,false,false,false,false,,,11.0.0.2,,auto,true,false,9216,auto,,,11.0.0.1,
+  - name: preprovision (Export all links from a fabric)
+    description: Export preprovision links as CSV
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "fabricName": "fab1",
+            "linkIds": []
+          }
+    response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -144,8 +422,161 @@ examples:
         type: text
         data: |
           linkId,srcFabricName,dstFabricName,srcSwitchId,dstSwitchId,srcSwitchName,dstSwitchName,srcInterfaceName,dstInterfaceName,policyType,dstInterfaceConfig,dstInterfaceDescription,mtu,speed,srcInterfaceConfig,srcInterfaceDescription
-          LINK-UUID-8540,fab1,fab1,FDO22422CZC,FDO224226Y9,sml_N9K-FX2-6,sml_N9K-FX2-7,Ethernet1/2,Ethernet1/9,preprovison,logging event port link-status,description for destination interface,9216,auto,logging event port link-status,description for source interface
-          LINK-UUID-3650,fab1,fab1,FDO22422CZC,FDO224226Y9,sml_N9K-FX2-6,sml_N9K-FX2-7,Ethernet1/10,Ethernet1/10,preprovison,,logging event port link-status,description for destination interface,9216,auto,logging event port link-status,description for source interface}
+          LINK-UUID-8540,fab1,fab1,FDO22422CZC,FDO224226Y9,sml_N9K-FX2-6,sml_N9K-FX2-7,Ethernet1/2,Ethernet1/9,preprovision,logging event port link-status,description for destination interface,9216,auto,logging event port link-status,description for source interface
+  - name: preprovision (Export specific links from a fabric)
+    description: Export preprovision links as CSV
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "fabricName": "fab1",
+            "linkIds": [
+              "LINK-UUID-8540",
+              "LINK-UUID-3650"
+            ]
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: text/csv
+      body:
+        type: text
+        data: |
+          linkId,srcFabricName,dstFabricName,srcSwitchId,dstSwitchId,srcSwitchName,dstSwitchName,srcInterfaceName,dstInterfaceName,policyType,dstInterfaceConfig,dstInterfaceDescription,mtu,speed,srcInterfaceConfig,srcInterfaceDescription
+          LINK-UUID-8540,fab1,fab1,FDO22422CZC,FDO224226Y9,sml_N9K-FX2-6,sml_N9K-FX2-7,Ethernet1/2,Ethernet1/9,preprovision,logging event port link-status,description for destination interface,9216,auto,logging event port link-status,description for source interface
+  - name: unnumbered (Export all links from a fabric)
+    description: Export unnumbered links as CSV
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "fabricName": "fab1",
+            "linkIds": []
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: text/csv
+      body:
+        type: text
+        data: |
+          linkId,srcFabricName,dstFabricName,srcSwitchId,dstSwitchId,srcSwitchName,dstSwitchName,srcInterfaceName,dstInterfaceName,policyType,dhcpRelayOnDstInterface,dhcpRelayOnSrcInterface,dstInterfaceConfig,dstInterfaceDescription,fec,interfaceAdminState,macsec,mtu,speed,srcInterfaceConfig,srcInterfaceDescription
+          LINK-UUID-15390,fab1,fab1,FDO23500A4C,FDO2310039C,n9k-z17-64,stewong-n9kfx2-3,Ethernet1/26,Ethernet1/26,unnumbered,false,false,,,fcFec,true,false,9216,auto,,source description
+  - name: unnumbered (Export specific links from a fabric)
+    description: Export unnumbered links as CSV
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "fabricName": "fab1",
+            "linkIds": [
+              "LINK-UUID-8540",
+              "LINK-UUID-3650"
+            ]
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: text/csv
+      body:
+        type: text
+        data: |
+          linkId,srcFabricName,dstFabricName,srcSwitchId,dstSwitchId,srcSwitchName,dstSwitchName,srcInterfaceName,dstInterfaceName,policyType,dhcpRelayOnDstInterface,dhcpRelayOnSrcInterface,dstInterfaceConfig,dstInterfaceDescription,fec,interfaceAdminState,macsec,mtu,speed,srcInterfaceConfig,srcInterfaceDescription
+          LINK-UUID-15390,fab1,fab1,FDO23500A4C,FDO2310039C,n9k-z17-64,stewong-n9kfx2-3,Ethernet1/26,Ethernet1/26,unnumbered,false,false,,,fcFec,true,false,9216,auto,,source description
+  - name: userDefined (Export all links from a fabric)
+    description: Export user defined links as CSV
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "fabricName": "fab1",
+            "linkIds": []
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: text/csv
+      body:
+        type: text
+        data: |
+          linkId,srcFabricName,dstFabricName,srcSwitchId,dstSwitchId,srcSwitchName,dstSwitchName,srcInterfaceName,dstInterfaceName,policyType,templateName,ALLOWED_VLANS,BPDUGUARD_ENABLED,DEST_FABRIC_NAME,DEST_IF_NAME,DEST_KME_SERVER_IP,DEST_KME_SERVER_PORT,DEST_MACSEC_POLICY_NAME_PREFIX,DEST_QKD_PROFILE_NAME,DEST_SERIAL_NUMBER,DEST_SWITCH_NAME,DEST_TRUSTPOINT_LABEL,ENABLE_DCI_MACSEC,ENABLE_QKD,IGNORE_CERT,IS_METASWITCH,LINK_UUID,MACSEC_ALGORITHM,MACSEC_CIPHER_SUITE,MACSEC_FALLBACK_ALGORITHM,MACSEC_FALLBACK_KEY_STRING,MACSEC_KEY_STRING,MTU,NATIVE_VLAN,PEER1_CONF,PEER1_DESC,PEER2_CONF,PEER2_DESC,POLICY_DESC,POLICY_ID,PORTTYPE_FAST_ENABLED,PRIORITY,SOURCE_FABRIC_NAME,SOURCE_IF_NAME,SOURCE_KME_SERVER_IP,SOURCE_KME_SERVER_PORT,SOURCE_MACSEC_POLICY_NAME_PREFIX,SOURCE_QKD_PROFILE_NAME,SOURCE_SERIAL_NUMBER,SOURCE_SWITCH_NAME,SOURCE_TRUSTPOINT_LABEL,SPEED,USE_LINK_MACSEC,inheritTtagFabricSetting
+          LINK-UUID-15300,fab2,fab1,FDO23500AB5,FDO2310039C,n9k-z17-62,stewong-n9kfx2-3,Ethernet1/20,Ethernet1/20,userDefined,custom_l2Dci,none,no,fab1,Ethernet1/20,,,,,FDO2310039C,stewong-n9kfx2-3,,false,false,false,false,LINK-UUID-15300,,,,,,jumbo,4,,source description,,destination description,,POLICY-36240,true,500,fab2,Ethernet1/20,,,,,FDO23500AB5,n9k-z17-62,,Auto,false,true
+  - name: userDefined (Export specific links from a fabric)
+    description: Export user defined links as CSV
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "fabricName": "fab1",
+            "linkIds": [
+              "LINK-UUID-8540",
+              "LINK-UUID-3650"
+            ]
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: text/csv
+      body:
+        type: text
+        data: |
+          linkId,srcFabricName,dstFabricName,srcSwitchId,dstSwitchId,srcSwitchName,dstSwitchName,srcInterfaceName,dstInterfaceName,policyType,templateName,ALLOWED_VLANS,BPDUGUARD_ENABLED,DEST_FABRIC_NAME,DEST_IF_NAME,DEST_KME_SERVER_IP,DEST_KME_SERVER_PORT,DEST_MACSEC_POLICY_NAME_PREFIX,DEST_QKD_PROFILE_NAME,DEST_SERIAL_NUMBER,DEST_SWITCH_NAME,DEST_TRUSTPOINT_LABEL,ENABLE_DCI_MACSEC,ENABLE_QKD,IGNORE_CERT,IS_METASWITCH,LINK_UUID,MACSEC_ALGORITHM,MACSEC_CIPHER_SUITE,MACSEC_FALLBACK_ALGORITHM,MACSEC_FALLBACK_KEY_STRING,MACSEC_KEY_STRING,MTU,NATIVE_VLAN,PEER1_CONF,PEER1_DESC,PEER2_CONF,PEER2_DESC,POLICY_DESC,POLICY_ID,PORTTYPE_FAST_ENABLED,PRIORITY,SOURCE_FABRIC_NAME,SOURCE_IF_NAME,SOURCE_KME_SERVER_IP,SOURCE_KME_SERVER_PORT,SOURCE_MACSEC_POLICY_NAME_PREFIX,SOURCE_QKD_PROFILE_NAME,SOURCE_SERIAL_NUMBER,SOURCE_SWITCH_NAME,SOURCE_TRUSTPOINT_LABEL,SPEED,USE_LINK_MACSEC,inheritTtagFabricSetting
+          LINK-UUID-15300,fab2,fab1,FDO23500AB5,FDO2310039C,n9k-z17-62,stewong-n9kfx2-3,Ethernet1/20,Ethernet1/20,userDefined,custom_l2Dci,none,no,fab1,Ethernet1/20,,,,,FDO2310039C,stewong-n9kfx2-3,,false,false,false,false,LINK-UUID-15300,,,,,,jumbo,4,,source description,,destination description,,POLICY-36240,true,500,fab2,Ethernet1/20,,,,,FDO23500AB5,n9k-z17-62,,Auto,false,true
   - name: 400 Response (Export all links from a fabric)
     description: Bad Request
     request:
@@ -165,6 +596,7 @@ examples:
             "linkIds": []
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -199,6 +631,7 @@ examples:
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -230,6 +663,7 @@ examples:
             "linkIds": []
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -264,6 +698,7 @@ examples:
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -295,6 +730,7 @@ examples:
             "linkIds": []
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -329,6 +765,7 @@ examples:
             ]
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -360,6 +797,7 @@ examples:
             "linkIds": []
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -394,6 +832,7 @@ examples:
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -425,6 +864,7 @@ examples:
             "linkIds": []
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type
@@ -459,6 +899,7 @@ examples:
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

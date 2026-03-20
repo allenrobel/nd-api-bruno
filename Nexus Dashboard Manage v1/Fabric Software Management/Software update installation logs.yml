@@ -1,7 +1,9 @@
 info:
   name: Software update installation logs
   type: http
-  seq: 27
+  seq: 21
+  tags:
+    - Fabric Software Management
 
 http:
   method: GET
@@ -49,6 +51,7 @@ examples:
           type: path
           description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -79,6 +82,7 @@ examples:
           type: path
           description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -111,6 +115,7 @@ examples:
           type: path
           description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -143,6 +148,7 @@ examples:
           type: path
           description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -175,6 +181,7 @@ examples:
           type: path
           description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

@@ -2,6 +2,8 @@ info:
   name: Bulk delete networks
   type: http
   seq: 6
+  tags:
+    - VRFs and Networks
 
 http:
   method: POST
@@ -25,7 +27,10 @@ http:
     type: json
     data: |-
       {
-        "networkNames": []
+        "networkNames": [
+          "MyNetwork_30000",
+          "MyNetwork_30001"
+        ]
       }
   auth: inherit
 
@@ -66,6 +71,7 @@ examples:
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -80,7 +86,7 @@ examples:
                 "status": "success"
               },
               {
-                "networkName": "tenant1~MyNetwork_30002",
+                "networkName": "tenant1~MyNetwork_30001",
                 "status": "success"
               },
               {
@@ -119,6 +125,7 @@ examples:
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -169,6 +176,7 @@ examples:
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -211,6 +219,7 @@ examples:
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -253,6 +262,7 @@ examples:
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -295,6 +305,7 @@ examples:
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

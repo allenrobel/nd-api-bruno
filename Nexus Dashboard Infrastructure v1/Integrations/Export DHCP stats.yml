@@ -2,6 +2,8 @@ info:
   name: Export DHCP stats
   type: http
   seq: 28
+  tags:
+    - Integrations
 
 http:
   method: POST
@@ -20,10 +22,10 @@ http:
     type: json
     data: |-
       {
-        "endTimestamp": 0,
-        "networkView": "",
-        "startTimestamp": 0,
-        "subnet": ""
+        "endTimestamp": 1632825600,
+        "networkView": "default",
+        "startTimestamp": 1632825600,
+        "subnet": "192.168.1.0/24"
       }
   auth: inherit
 
@@ -59,6 +61,7 @@ examples:
             "subnet": "192.168.1.0/24"
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -93,6 +96,7 @@ examples:
             "subnet": "192.168.1.0/24"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -130,6 +134,7 @@ examples:
             "subnet": "192.168.1.0/24"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -167,6 +172,7 @@ examples:
             "subnet": "192.168.1.0/24"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -204,6 +210,7 @@ examples:
             "subnet": "192.168.1.0/24"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

@@ -2,6 +2,8 @@ info:
   name: Update email system settings
   type: http
   seq: 35
+  tags:
+    - System Settings
 
 http:
   method: PUT
@@ -14,7 +16,25 @@ http:
       disabled: true
   body:
     type: json
-    data: ""
+    data: |-
+      {
+        "emails": [
+          {
+            "emailServerType": "SMTP",
+            "name": "PrimarySMTPServer",
+            "smtpAuth": {
+              "enabled": true,
+              "password": "yourPasswordHere",
+              "username": "admin"
+            },
+            "smtpHost": "10.10.10.10",
+            "smtpPort": 587,
+            "sourceEmail": "noreply@example.com"
+          }
+        ],
+        "enableIntersight": true,
+        "intersightAccountName": "customer_account"
+      }
   auth: inherit
 
 settings:
@@ -57,6 +77,7 @@ examples:
             "intersightAccountName": "customer_account"
           }
     response:
+      status: 204
       statusText: No Content
       body:
         type: text
@@ -94,6 +115,7 @@ examples:
             "intersightAccountName": "customer_account"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -139,6 +161,7 @@ examples:
             "intersightAccountName": "customer_account"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -184,6 +207,7 @@ examples:
             "intersightAccountName": "customer_account"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -229,6 +253,7 @@ examples:
             "intersightAccountName": "customer_account"
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -274,6 +299,7 @@ examples:
             "intersightAccountName": "customer_account"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

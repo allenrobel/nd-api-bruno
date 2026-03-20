@@ -1,0 +1,284 @@
+info:
+  name: Create a new flow troubleshoot job
+  type: http
+  seq: 23
+  tags:
+    - Flow Analytics
+
+http:
+  method: POST
+  url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/traffic/flows/troubleshootJobs"
+  params:
+    - name: clusterName
+      value: ""
+      type: query
+      description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+      disabled: true
+  body:
+    type: json
+    data: |-
+      {
+        "ingressVrf": "ctx",
+        "egressVrf": "ctx",
+        "srcIp": "22::12",
+        "srcPort": "*",
+        "dstIp": "21::13",
+        "dstPort": "22",
+        "protocol": "6",
+        "duration": 3,
+        "ingressTenant": "tenant1",
+        "egressTenant": "tenant1",
+        "fabricName": "ifav22-aci",
+        "ingressVrfTenant": "tenant1",
+        "egressVrfTenant": "tenant1"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 201 Response
+    description: Created
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/traffic/flows/troubleshootJobs"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "ingressVrf": "ctx",
+            "egressVrf": "ctx",
+            "srcIp": "22::12",
+            "srcPort": "*",
+            "dstIp": "21::13",
+            "dstPort": "22",
+            "protocol": "6",
+            "duration": 3,
+            "ingressTenant": "tenant1",
+            "egressTenant": "tenant1",
+            "fabricName": "ifav22-aci",
+            "ingressVrfTenant": "tenant1",
+            "egressVrfTenant": "tenant1"
+          }
+    response:
+      status: 201
+      statusText: Created
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "ingressVrf": "ctx",
+            "egressVrf": "ctx",
+            "srcIp": "22::12",
+            "srcPort": "*",
+            "dstIp": "21::13",
+            "dstPort": "22",
+            "protocol": "6",
+            "duration": 3,
+            "ingressTenant": "tenant1",
+            "egressTenant": "tenant1",
+            "fabricName": "ifav22-aci",
+            "jobId": "FLOW-d376567c-3fdf-11ef-962a-9e5672429bdc",
+            "startTime": "2024-07-11T23:46:42.983260Z",
+            "endTime": "2024-07-11T23:54:29.737242Z",
+            "status": "STOPPED",
+            "jobStatus": "STOPPED",
+            "flowStatus": "STOPPED",
+            "errorMessage": "",
+            "flowRecordCount": 40,
+            "hasRecords": true,
+            "failedNodes": [
+              {
+                "nodeName": "GX2B-Spine",
+                "serialNumber": "FDO27040A0P",
+                "failReason": "Unsupported switch release 10.4(1)IMG9(0.144)"
+              }
+            ],
+            "ingressVrfTenant": "tenant1",
+            "egressVrfTenant": "tenant1"
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/traffic/flows/troubleshootJobs"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "ingressVrf": "ctx",
+            "egressVrf": "ctx",
+            "srcIp": "22::12",
+            "srcPort": "*",
+            "dstIp": "21::13",
+            "dstPort": "22",
+            "protocol": "6",
+            "duration": 3,
+            "ingressTenant": "tenant1",
+            "egressTenant": "tenant1",
+            "fabricName": "ifav22-aci",
+            "ingressVrfTenant": "tenant1",
+            "egressVrfTenant": "tenant1"
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/traffic/flows/troubleshootJobs"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "ingressVrf": "ctx",
+            "egressVrf": "ctx",
+            "srcIp": "22::12",
+            "srcPort": "*",
+            "dstIp": "21::13",
+            "dstPort": "22",
+            "protocol": "6",
+            "duration": 3,
+            "ingressTenant": "tenant1",
+            "egressTenant": "tenant1",
+            "fabricName": "ifav22-aci",
+            "ingressVrfTenant": "tenant1",
+            "egressVrfTenant": "tenant1"
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 403 Response
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/traffic/flows/troubleshootJobs"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "ingressVrf": "ctx",
+            "egressVrf": "ctx",
+            "srcIp": "22::12",
+            "srcPort": "*",
+            "dstIp": "21::13",
+            "dstPort": "22",
+            "protocol": "6",
+            "duration": 3,
+            "ingressTenant": "tenant1",
+            "egressTenant": "tenant1",
+            "fabricName": "ifav22-aci",
+            "ingressVrfTenant": "tenant1",
+            "egressVrfTenant": "tenant1"
+          }
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 500 Response
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/traffic/flows/troubleshootJobs"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "ingressVrf": "ctx",
+            "egressVrf": "ctx",
+            "srcIp": "22::12",
+            "srcPort": "*",
+            "dstIp": "21::13",
+            "dstPort": "22",
+            "protocol": "6",
+            "duration": 3,
+            "ingressTenant": "tenant1",
+            "egressTenant": "tenant1",
+            "fabricName": "ifav22-aci",
+            "ingressVrfTenant": "tenant1",
+            "egressVrfTenant": "tenant1"
+          }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }

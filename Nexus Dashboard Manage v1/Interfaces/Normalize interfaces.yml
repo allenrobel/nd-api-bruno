@@ -2,6 +2,8 @@ info:
   name: Normalize interfaces
   type: http
   seq: 5
+  tags:
+    - Interfaces
 
 http:
   method: POST
@@ -23,7 +25,46 @@ http:
       disabled: true
   body:
     type: json
-    data: "{}"
+    data: |-
+      {
+        "configData": {
+          "mode": "access",
+          "networkOS": {
+            "networkOSType": "nx-os",
+            "policy": {
+              "accessVlan": 100,
+              "adminState": true,
+              "bpduGuard": "enable",
+              "cdp": true,
+              "duplexMode": "half",
+              "extraConfig": "logging event port link-status",
+              "mtu": "default",
+              "netflow": false,
+              "netflowMonitor": "Netflow Layer-2 monitor name for the interface",
+              "netflowSampler": "Netflow Layer-2 sampler name for the interface (only applicable for Nexus 7000 platforms)",
+              "orphanPort": true,
+              "pfc": false,
+              "policyType": "accessHost",
+              "portTypeEdgeTrunk": true,
+              "qos": false,
+              "qosPolicy": "Custom QoS Policy associated with the interface (must be defined apriori)",
+              "queueingPolicy": "Custom Queuing Policy associated with the interface (must be defined apriori)",
+              "speed": "auto"
+            }
+          }
+        },
+        "interfaceType": "ethernet",
+        "switchInterfaces": [
+          {
+            "interfaceName": "Ethernet1/11",
+            "switchId": "FDO22412H7A"
+          },
+          {
+            "interfaceName": "Ethernet1/12",
+            "switchId": "FDO22412H7B"
+          }
+        ]
+      }
   auth: inherit
 
 settings:
@@ -59,9 +100,9 @@ examples:
             "configData": {
               "mode": "access",
               "networkOS": {
-                "networkOSType": "nexus",
+                "networkOSType": "nx-os",
                 "policy": {
-                  "accessVlanId": 100,
+                  "accessVlan": 100,
                   "adminState": true,
                   "bpduGuard": "enable",
                   "cdp": true,
@@ -74,7 +115,7 @@ examples:
                   "orphanPort": true,
                   "pfc": false,
                   "policyType": "accessHost",
-                  "portTypeFast": true,
+                  "portTypeEdgeTrunk": true,
                   "qos": false,
                   "qosPolicy": "Custom QoS Policy associated with the interface (must be defined apriori)",
                   "queueingPolicy": "Custom Queuing Policy associated with the interface (must be defined apriori)",
@@ -95,6 +136,7 @@ examples:
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -143,9 +185,9 @@ examples:
             "configData": {
               "mode": "access",
               "networkOS": {
-                "networkOSType": "nexus",
+                "networkOSType": "nx-os",
                 "policy": {
-                  "accessVlanId": 100,
+                  "accessVlan": 100,
                   "adminState": true,
                   "bpduGuard": "enable",
                   "cdp": true,
@@ -158,7 +200,7 @@ examples:
                   "orphanPort": true,
                   "pfc": false,
                   "policyType": "accessHost",
-                  "portTypeFast": true,
+                  "portTypeEdgeTrunk": true,
                   "qos": false,
                   "qosPolicy": "Custom QoS Policy associated with the interface (must be defined apriori)",
                   "queueingPolicy": "Custom Queuing Policy associated with the interface (must be defined apriori)",
@@ -179,6 +221,7 @@ examples:
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -218,9 +261,9 @@ examples:
             "configData": {
               "mode": "access",
               "networkOS": {
-                "networkOSType": "nexus",
+                "networkOSType": "nx-os",
                 "policy": {
-                  "accessVlanId": 100,
+                  "accessVlan": 100,
                   "adminState": true,
                   "bpduGuard": "enable",
                   "cdp": true,
@@ -233,7 +276,7 @@ examples:
                   "orphanPort": true,
                   "pfc": false,
                   "policyType": "accessHost",
-                  "portTypeFast": true,
+                  "portTypeEdgeTrunk": true,
                   "qos": false,
                   "qosPolicy": "Custom QoS Policy associated with the interface (must be defined apriori)",
                   "queueingPolicy": "Custom Queuing Policy associated with the interface (must be defined apriori)",
@@ -254,6 +297,7 @@ examples:
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -293,9 +337,9 @@ examples:
             "configData": {
               "mode": "access",
               "networkOS": {
-                "networkOSType": "nexus",
+                "networkOSType": "nx-os",
                 "policy": {
-                  "accessVlanId": 100,
+                  "accessVlan": 100,
                   "adminState": true,
                   "bpduGuard": "enable",
                   "cdp": true,
@@ -308,7 +352,7 @@ examples:
                   "orphanPort": true,
                   "pfc": false,
                   "policyType": "accessHost",
-                  "portTypeFast": true,
+                  "portTypeEdgeTrunk": true,
                   "qos": false,
                   "qosPolicy": "Custom QoS Policy associated with the interface (must be defined apriori)",
                   "queueingPolicy": "Custom Queuing Policy associated with the interface (must be defined apriori)",
@@ -329,6 +373,7 @@ examples:
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -368,9 +413,9 @@ examples:
             "configData": {
               "mode": "access",
               "networkOS": {
-                "networkOSType": "nexus",
+                "networkOSType": "nx-os",
                 "policy": {
-                  "accessVlanId": 100,
+                  "accessVlan": 100,
                   "adminState": true,
                   "bpduGuard": "enable",
                   "cdp": true,
@@ -383,7 +428,7 @@ examples:
                   "orphanPort": true,
                   "pfc": false,
                   "policyType": "accessHost",
-                  "portTypeFast": true,
+                  "portTypeEdgeTrunk": true,
                   "qos": false,
                   "qosPolicy": "Custom QoS Policy associated with the interface (must be defined apriori)",
                   "queueingPolicy": "Custom Queuing Policy associated with the interface (must be defined apriori)",
@@ -404,6 +449,7 @@ examples:
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

@@ -2,6 +2,8 @@ info:
   name: Bulk deletion of one or more certificates
   type: http
   seq: 5
+  tags:
+    - Certificate Management
 
 http:
   method: POST
@@ -17,16 +19,10 @@ http:
     data: |-
       [
         {
-          "attachedSubjects": [],
-          "certificateDetail": "",
-          "certificateName": "",
-          "certificateType": "",
-          "expiresOn": "",
-          "ips": [],
-          "status": "",
-          "statusMessage": "",
-          "updateTime": "",
-          "version": 0
+          "certificateName": "test.pem"
+        },
+        {
+          "certificateName": "test1.crt"
         }
       ]
   auth: inherit
@@ -61,6 +57,7 @@ examples:
             }
           ]
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -107,6 +104,7 @@ examples:
             }
           ]
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -142,6 +140,7 @@ examples:
             }
           ]
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -177,6 +176,7 @@ examples:
             }
           ]
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -212,6 +212,7 @@ examples:
             }
           ]
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

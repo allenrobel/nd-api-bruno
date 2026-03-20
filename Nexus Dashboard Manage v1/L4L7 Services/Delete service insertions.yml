@@ -2,6 +2,8 @@ info:
   name: Delete service insertions
   type: http
   seq: 17
+  tags:
+    - L4L7 Services
 
 http:
   method: POST
@@ -15,7 +17,10 @@ http:
     type: json
     data: |-
       {
-        "insertionNames": []
+        "insertionNames": [
+          "ServiceIns1",
+          "ServiceIns2"
+        ]
       }
   auth: inherit
 
@@ -40,9 +45,13 @@ examples:
         type: json
         data: |-
           {
-            "insertionNames": []
+            "insertionNames": [
+              "ServiceIns1",
+              "ServiceIns2"
+            ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -83,9 +92,13 @@ examples:
         type: json
         data: |-
           {
-            "insertionNames": []
+            "insertionNames": [
+              "ServiceIns1",
+              "ServiceIns2"
+            ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -112,9 +125,13 @@ examples:
         type: json
         data: |-
           {
-            "insertionNames": []
+            "insertionNames": [
+              "ServiceIns1",
+              "ServiceIns2"
+            ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -141,9 +158,13 @@ examples:
         type: json
         data: |-
           {
-            "insertionNames": []
+            "insertionNames": [
+              "ServiceIns1",
+              "ServiceIns2"
+            ]
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -170,9 +191,13 @@ examples:
         type: json
         data: |-
           {
-            "insertionNames": []
+            "insertionNames": [
+              "ServiceIns1",
+              "ServiceIns2"
+            ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -199,9 +224,13 @@ examples:
         type: json
         data: |-
           {
-            "insertionNames": []
+            "insertionNames": [
+              "ServiceIns1",
+              "ServiceIns2"
+            ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

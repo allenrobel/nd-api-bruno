@@ -2,6 +2,8 @@ info:
   name: Modify existing Slurm integration
   type: http
   seq: 75
+  tags:
+    - Integrations
 
 http:
   method: PUT
@@ -20,15 +22,17 @@ http:
     type: json
     data: |-
       {
-        "integrationName": "",
-        "integrationId": "",
-        "hostname": "",
-        "username": "",
-        "password": "",
-        "derivedFabrics": [],
-        "status": "",
-        "lastActiveDate": "",
-        "type": ""
+        "integrationName": "Slurm-Integration-1",
+        "integrationId": "slurm-172-23-48-41",
+        "hostname": "172.23.48.41",
+        "username": "slurmadmin",
+        "password": "slurmsecret",
+        "derivedFabrics": [
+          "backend-fabric-1"
+        ],
+        "type": "slurm",
+        "lastActiveDate": "2024-08-22T00:42:14Z",
+        "status": "active"
       }
   auth: inherit
 
@@ -71,6 +75,7 @@ examples:
             "status": "active"
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -123,6 +128,7 @@ examples:
             "status": "active"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -167,6 +173,7 @@ examples:
             "status": "active"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -211,6 +218,7 @@ examples:
             "status": "active"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -255,6 +263,7 @@ examples:
             "status": "active"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

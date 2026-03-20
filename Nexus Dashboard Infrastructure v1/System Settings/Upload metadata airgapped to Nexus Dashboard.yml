@@ -2,6 +2,8 @@ info:
   name: Upload metadata airgapped to Nexus Dashboard
   type: http
   seq: 11
+  tags:
+    - System Settings
 
 http:
   method: POST
@@ -17,8 +19,7 @@ http:
     data:
       - name: inputFile
         type: text
-        value: ""
-        description: input file in binary format.
+        value: binary
   auth: inherit
 
 settings:
@@ -44,9 +45,9 @@ examples:
         data:
           - name: inputFile
             type: text
-            value: ""
-            description: input file in binary format.
+            value: binary
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -74,9 +75,9 @@ examples:
         data:
           - name: inputFile
             type: text
-            value: ""
-            description: input file in binary format.
+            value: binary
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -105,9 +106,9 @@ examples:
         data:
           - name: inputFile
             type: text
-            value: ""
-            description: input file in binary format.
+            value: binary
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -136,9 +137,9 @@ examples:
         data:
           - name: inputFile
             type: text
-            value: ""
-            description: input file in binary format.
+            value: binary
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -167,9 +168,9 @@ examples:
         data:
           - name: inputFile
             type: text
-            value: ""
-            description: input file in binary format.
+            value: binary
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -198,9 +199,9 @@ examples:
         data:
           - name: inputFile
             type: text
-            value: ""
-            description: input file in binary format.
+            value: binary
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

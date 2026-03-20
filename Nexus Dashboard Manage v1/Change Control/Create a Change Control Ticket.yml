@@ -2,6 +2,8 @@ info:
   name: Create a Change Control Ticket
   type: http
   seq: 2
+  tags:
+    - Change Control
 
 http:
   method: POST
@@ -16,8 +18,8 @@ http:
     type: json
     data: |-
       {
-        "description": "",
-        "ticketId": ""
+        "description": "Overlay deployment",
+        "ticketId": "MyTicket1234"
       }
   auth: inherit
 
@@ -47,6 +49,7 @@ examples:
             "ticketId": "MyTicket1234"
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -83,6 +86,7 @@ examples:
             "ticketId": "MyTicket1234"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -114,6 +118,7 @@ examples:
             "ticketId": "MyTicket1234"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -145,6 +150,7 @@ examples:
             "ticketId": "MyTicket1234"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -176,6 +182,7 @@ examples:
             "ticketId": "MyTicket1234"
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -207,6 +214,7 @@ examples:
             "ticketId": "MyTicket1234"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

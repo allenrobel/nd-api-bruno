@@ -2,6 +2,8 @@ info:
   name: update security config settings for local users
   type: http
   seq: 40
+  tags:
+    - Users and Security
 
 http:
   method: PUT
@@ -16,14 +18,14 @@ http:
     type: json
     data: |-
       {
-        "enableAutoUnblock": false,
-        "maxFailedLogins": 0,
-        "minimumPasswordLength": 0,
-        "reuseLimitation": 0,
-        "strongCheckEnabled": false,
-        "timeIntervalBlockAccount": 0,
-        "timeIntervalBlockAdministratorAccount": 0,
-        "timeIntervalPasswordValidity": 0
+        "LocalUserSecurityConfig": {
+          "enableAutoUnblock": false,
+          "maxFailedLogins": 5,
+          "minimumPasswordLength": 8,
+          "timeIntervalBlockAccount": 86400,
+          "timeIntervalBlockAdministratorAccount": 1800,
+          "timeIntervalPasswordValidity": 365
+        }
       }
   auth: inherit
 
@@ -59,6 +61,7 @@ examples:
             }
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -101,6 +104,7 @@ examples:
             }
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -138,6 +142,7 @@ examples:
             }
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -175,6 +180,7 @@ examples:
             }
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -212,6 +218,7 @@ examples:
             }
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

@@ -2,6 +2,8 @@ info:
   name: Get pods across multiple kubernetes clusters
   type: http
   seq: 42
+  tags:
+    - Integrations
 
 http:
   method: GET
@@ -83,6 +85,7 @@ examples:
           description: end Index of List
           disabled: true
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -93,37 +96,37 @@ examples:
           {
             "data": [
               {
-                "podId": "",
-                "podName": "",
-                "podIP": "",
-                "tenantName": "",
-                "namespace": "",
-                "nodeName": "",
-                "hostName": "",
-                "nodeIP": "",
-                "clusterName": "",
-                "clusterType": "",
-                "application": "",
-                "phase": "",
-                "reason": "",
-                "fabricName": "",
-                "fabricId": "",
-                "phySwitch": "",
-                "vlan": "",
-                "vSwitch": "",
-                "vswitchPortGroupId": "",
-                "vswitchPortGroupName": "",
-                "dvswitchId": "",
-                "dvportgroupId": "",
-                "dvportgroupName": "",
-                "phyNic": "",
-                "switchIntf": "",
-                "vpcId": "",
-                "portChannel": "",
-                "state": "",
-                "integrationId": "",
-                "SwitchSerialNum": "",
-                "Managed": false
+                "podId": "bd92dbf5-4865-4657-bcc6-5a76a543b2c6",
+                "podName": "test-pod",
+                "podIP": "1.1.1.1",
+                "tenantName": "TenantA",
+                "namespace": "test-ns",
+                "nodeName": "k8s-node-1",
+                "hostName": "k8s-node-1",
+                "nodeIP": "1.1.1.1",
+                "clusterName": "k8scluster1",
+                "clusterType": "Kubernetes",
+                "application": "test-app",
+                "phase": "Running",
+                "reason": "Succeeded",
+                "fabricName": "nd-phys-fab-1",
+                "fabricId": "FABRIC-2010",
+                "phySwitch": "dev2-leaf1",
+                "vlan": "320",
+                "vSwitch": "vswitch-10230",
+                "vswitchPortGroupId": "vswitchportgroup-145670",
+                "vswitchPortGroupName": "vswitch-348905",
+                "dvswitchId": "dvs-164242",
+                "dvportgroupId": "dvportgroup-164243",
+                "dvportgroupName": "dvportgroup",
+                "phyNic": "vmnic2",
+                "switchIntf": "Ethernet1/2",
+                "vpcId": "2",
+                "portChannel": "po3",
+                "state": "Running",
+                "integrationId": "kubernetes-2.2.2.2",
+                "SwitchSerialNum": "FLM28280097",
+                "Managed": true
               }
             ]
           }
@@ -164,6 +167,7 @@ examples:
           description: end Index of List
           disabled: true
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -213,6 +217,7 @@ examples:
           description: end Index of List
           disabled: true
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -262,6 +267,7 @@ examples:
           description: end Index of List
           disabled: true
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -311,6 +317,7 @@ examples:
           description: end Index of List
           disabled: true
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -360,6 +367,7 @@ examples:
           description: end Index of List
           disabled: true
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

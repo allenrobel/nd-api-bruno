@@ -2,6 +2,8 @@ info:
   name: Create service clusters
   type: http
   seq: 7
+  tags:
+    - L4L7 Services
 
 http:
   method: POST
@@ -17,22 +19,29 @@ http:
       {
         "serviceClusters": [
           {
-            "clusterName": "",
-            "clusterType": "",
-            "formFactor": "",
-            "lastUpdateTimestamp": "",
-            "nodeRedundancy": "",
+            "serviceClusterName": "Cluster1",
+            "clusterType": "other",
+            "formFactor": "physical",
+            "nodeRedundancy": "standalone",
             "serviceNodes": [
               {
-                "lastUpdateTimestamp": "",
-                "nodeName": "",
+                "nodeName": "Node1",
                 "serviceLinks": [
                   {
-                    "attachSwitches": [],
-                    "attachSwitchInterface": "",
-                    "linkData": "",
-                    "nodeInterface": "",
-                    "nodeInterfaceUsage": ""
+                    "attachSwitches": [
+                      "FDO20401ABC"
+                    ],
+                    "attachSwitchInterface": "Ethernet1/45",
+                    "linkData": {
+                      "linkDataType": "custom",
+                      "templateName": "my_service_link_trunk",
+                      "templateParams": {
+                        "adminState": "true",
+                        "speed": "10Mb"
+                      }
+                    },
+                    "nodeInterface": "G1/1",
+                    "nodeInterfaceUsage": "secondArm"
                   }
                 ]
               }
@@ -49,7 +58,7 @@ settings:
   maxRedirects: 5
 
 examples:
-  - name: 207 Response
+  - name: 207 Response (Service cluster that has service node with customized link template)
     description: Multi-Status response.
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters"
@@ -65,22 +74,29 @@ examples:
           {
             "serviceClusters": [
               {
-                "clusterName": "",
-                "clusterType": "",
-                "formFactor": "",
-                "lastUpdateTimestamp": "",
-                "nodeRedundancy": "",
+                "serviceClusterName": "Cluster1",
+                "clusterType": "other",
+                "formFactor": "physical",
+                "nodeRedundancy": "standalone",
                 "serviceNodes": [
                   {
-                    "lastUpdateTimestamp": "",
-                    "nodeName": "",
+                    "nodeName": "Node1",
                     "serviceLinks": [
                       {
-                        "attachSwitches": [],
-                        "attachSwitchInterface": "",
-                        "linkData": "",
-                        "nodeInterface": "",
-                        "nodeInterfaceUsage": ""
+                        "attachSwitches": [
+                          "FDO20401ABC"
+                        ],
+                        "attachSwitchInterface": "Ethernet1/45",
+                        "linkData": {
+                          "linkDataType": "custom",
+                          "templateName": "my_service_link_trunk",
+                          "templateParams": {
+                            "adminState": "true",
+                            "speed": "10Mb"
+                          }
+                        },
+                        "nodeInterface": "G1/1",
+                        "nodeInterfaceUsage": "secondArm"
                       }
                     ]
                   }
@@ -89,6 +105,7 @@ examples:
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -115,7 +132,254 @@ examples:
               }
             ]
           }
-  - name: 400 Response
+  - name: 207 Response (Service cluster that has service node with ethernet trunk interface link)
+    description: Multi-Status response.
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters"
+      method: POST
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "serviceClusters": [
+              {
+                "serviceClusterName": "Cluster1",
+                "clusterType": "firewall",
+                "formFactor": "physical",
+                "nodeRedundancy": "standalone",
+                "serviceNodes": [
+                  {
+                    "nodeName": "Node1",
+                    "serviceLinks": [
+                      {
+                        "attachSwitches": [
+                          "FDO20401ABC"
+                        ],
+                        "attachSwitchInterface": "Ethernet1/42",
+                        "linkData": {
+                          "adminState": true,
+                          "allowedVlans": "none",
+                          "bpduGuard": "default",
+                          "cdp": true,
+                          "svcLeafIntfDescription": "source interface of service link",
+                          "svcLeafIntfFreeformConfig": "",
+                          "linkDataType": "ethernet",
+                          "mtu": "jumbo",
+                          "nativeVlanId": 1,
+                          "netflow": false,
+                          "netflowMonitor": "nfMonitor",
+                          "netflowSampler": "sampler1",
+                          "orphanPort": false,
+                          "portDuplexMode": "auto",
+                          "portTypeEdgeTrunk": true,
+                          "pfc": false,
+                          "qos": false,
+                          "qosPolicy": "qosPolicy1",
+                          "queuingPolicy": "queuingPolicy1",
+                          "speed": "auto"
+                        },
+                        "nodeInterface": "G1/1",
+                        "nodeInterfaceUsage": "insideOutside"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+    response:
+      status: 207
+      statusText: Multi-Status
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "results": [
+              {
+                "name": "Resource-1",
+                "status": "success",
+                "message": "Operation completed successfully."
+              },
+              {
+                "name": "Resource-2",
+                "status": "failed",
+                "message": "Resource already exists."
+              },
+              {
+                "name": "Resource-3",
+                "status": "success",
+                "message": "Operation completed successfully."
+              }
+            ]
+          }
+  - name: 207 Response (Service cluster that has service node with port-channel trunk interface link)
+    description: Multi-Status response.
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters"
+      method: POST
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "serviceClusters": [
+              {
+                "serviceClusterName": "Cluster1",
+                "clusterType": "firewall",
+                "formFactor": "physical",
+                "nodeRedundancy": "standalone",
+                "serviceNodes": [
+                  {
+                    "nodeName": "Node1",
+                    "serviceLinks": [
+                      {
+                        "attachSwitches": [
+                          "FDO20401ABC"
+                        ],
+                        "attachSwitchInterface": "Port-Channel505",
+                        "linkData": {
+                          "adminState": true,
+                          "allowedVlans": "none",
+                          "bpduGuard": "default",
+                          "cdp": true,
+                          "copyDescription": false,
+                          "lacpPortPriority": 32768,
+                          "lacpRate": "normal",
+                          "linkDataType": "portChannel",
+                          "mtu": "jumbo",
+                          "nativeVlanId": 1,
+                          "netflow": false,
+                          "netflowMonitor": "nfMonitor",
+                          "netflowSampler": "sampler1",
+                          "orphanPort": false,
+                          "portChannelMode": "active",
+                          "portDuplexMode": "auto",
+                          "portTypeEdgeTrunk": true,
+                          "pfc": false,
+                          "qos": false,
+                          "qosPolicy": "qosPolicy1",
+                          "queuingPolicy": "queuingPolicy1",
+                          "speed": "auto",
+                          "svcLeafIntfDescription": "source interface of service link",
+                          "svcLeafIntfFreeformConfig": ""
+                        },
+                        "nodeInterface": "G1/1",
+                        "nodeInterfaceUsage": "insideOutside"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+    response:
+      status: 207
+      statusText: Multi-Status
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "results": [
+              {
+                "name": "Resource-1",
+                "status": "success",
+                "message": "Operation completed successfully."
+              },
+              {
+                "name": "Resource-2",
+                "status": "failed",
+                "message": "Resource already exists."
+              },
+              {
+                "name": "Resource-3",
+                "status": "success",
+                "message": "Operation completed successfully."
+              }
+            ]
+          }
+  - name: 207 Response (Service cluster that has service node with vPC interface link)
+    description: Multi-Status response.
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters"
+      method: POST
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "serviceClusters": [
+              {
+                "serviceClusterName": "Cluster1",
+                "clusterType": "loadBalancer",
+                "formFactor": "physical",
+                "nodeRedundancy": "standalone",
+                "serviceNodes": [
+                  {
+                    "nodeName": "Node1",
+                    "serviceLinks": [
+                      {
+                        "attachSwitches": [
+                          "FDO20401ABC",
+                          "FDO20401DEF"
+                        ],
+                        "attachSwitchInterface": "vPC42",
+                        "nodeInterface": "G1/1",
+                        "nodeInterfaceUsage": "firstSecondArm"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+    response:
+      status: 207
+      statusText: Multi-Status
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "results": [
+              {
+                "name": "Resource-1",
+                "status": "success",
+                "message": "Operation completed successfully."
+              },
+              {
+                "name": "Resource-2",
+                "status": "failed",
+                "message": "Resource already exists."
+              },
+              {
+                "name": "Resource-3",
+                "status": "success",
+                "message": "Operation completed successfully."
+              }
+            ]
+          }
+  - name: 400 Response (Service cluster that has service node with customized link template)
     description: Bad Request
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters"
@@ -131,22 +395,29 @@ examples:
           {
             "serviceClusters": [
               {
-                "clusterName": "",
-                "clusterType": "",
-                "formFactor": "",
-                "lastUpdateTimestamp": "",
-                "nodeRedundancy": "",
+                "serviceClusterName": "Cluster1",
+                "clusterType": "other",
+                "formFactor": "physical",
+                "nodeRedundancy": "standalone",
                 "serviceNodes": [
                   {
-                    "lastUpdateTimestamp": "",
-                    "nodeName": "",
+                    "nodeName": "Node1",
                     "serviceLinks": [
                       {
-                        "attachSwitches": [],
-                        "attachSwitchInterface": "",
-                        "linkData": "",
-                        "nodeInterface": "",
-                        "nodeInterfaceUsage": ""
+                        "attachSwitches": [
+                          "FDO20401ABC"
+                        ],
+                        "attachSwitchInterface": "Ethernet1/45",
+                        "linkData": {
+                          "linkDataType": "custom",
+                          "templateName": "my_service_link_trunk",
+                          "templateParams": {
+                            "adminState": "true",
+                            "speed": "10Mb"
+                          }
+                        },
+                        "nodeInterface": "G1/1",
+                        "nodeInterfaceUsage": "secondArm"
                       }
                     ]
                   }
@@ -155,6 +426,7 @@ examples:
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -167,7 +439,212 @@ examples:
             "description": "The server could not understand the request due to incorrect syntax.",
             "code": 400
           }
-  - name: 401 Response
+  - name: 400 Response (Service cluster that has service node with ethernet trunk interface link)
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters"
+      method: POST
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "serviceClusters": [
+              {
+                "serviceClusterName": "Cluster1",
+                "clusterType": "firewall",
+                "formFactor": "physical",
+                "nodeRedundancy": "standalone",
+                "serviceNodes": [
+                  {
+                    "nodeName": "Node1",
+                    "serviceLinks": [
+                      {
+                        "attachSwitches": [
+                          "FDO20401ABC"
+                        ],
+                        "attachSwitchInterface": "Ethernet1/42",
+                        "linkData": {
+                          "adminState": true,
+                          "allowedVlans": "none",
+                          "bpduGuard": "default",
+                          "cdp": true,
+                          "svcLeafIntfDescription": "source interface of service link",
+                          "svcLeafIntfFreeformConfig": "",
+                          "linkDataType": "ethernet",
+                          "mtu": "jumbo",
+                          "nativeVlanId": 1,
+                          "netflow": false,
+                          "netflowMonitor": "nfMonitor",
+                          "netflowSampler": "sampler1",
+                          "orphanPort": false,
+                          "portDuplexMode": "auto",
+                          "portTypeEdgeTrunk": true,
+                          "pfc": false,
+                          "qos": false,
+                          "qosPolicy": "qosPolicy1",
+                          "queuingPolicy": "queuingPolicy1",
+                          "speed": "auto"
+                        },
+                        "nodeInterface": "G1/1",
+                        "nodeInterfaceUsage": "insideOutside"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 400 Response (Service cluster that has service node with port-channel trunk interface link)
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters"
+      method: POST
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "serviceClusters": [
+              {
+                "serviceClusterName": "Cluster1",
+                "clusterType": "firewall",
+                "formFactor": "physical",
+                "nodeRedundancy": "standalone",
+                "serviceNodes": [
+                  {
+                    "nodeName": "Node1",
+                    "serviceLinks": [
+                      {
+                        "attachSwitches": [
+                          "FDO20401ABC"
+                        ],
+                        "attachSwitchInterface": "Port-Channel505",
+                        "linkData": {
+                          "adminState": true,
+                          "allowedVlans": "none",
+                          "bpduGuard": "default",
+                          "cdp": true,
+                          "copyDescription": false,
+                          "lacpPortPriority": 32768,
+                          "lacpRate": "normal",
+                          "linkDataType": "portChannel",
+                          "mtu": "jumbo",
+                          "nativeVlanId": 1,
+                          "netflow": false,
+                          "netflowMonitor": "nfMonitor",
+                          "netflowSampler": "sampler1",
+                          "orphanPort": false,
+                          "portChannelMode": "active",
+                          "portDuplexMode": "auto",
+                          "portTypeEdgeTrunk": true,
+                          "pfc": false,
+                          "qos": false,
+                          "qosPolicy": "qosPolicy1",
+                          "queuingPolicy": "queuingPolicy1",
+                          "speed": "auto",
+                          "svcLeafIntfDescription": "source interface of service link",
+                          "svcLeafIntfFreeformConfig": ""
+                        },
+                        "nodeInterface": "G1/1",
+                        "nodeInterfaceUsage": "insideOutside"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 400 Response (Service cluster that has service node with vPC interface link)
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters"
+      method: POST
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "serviceClusters": [
+              {
+                "serviceClusterName": "Cluster1",
+                "clusterType": "loadBalancer",
+                "formFactor": "physical",
+                "nodeRedundancy": "standalone",
+                "serviceNodes": [
+                  {
+                    "nodeName": "Node1",
+                    "serviceLinks": [
+                      {
+                        "attachSwitches": [
+                          "FDO20401ABC",
+                          "FDO20401DEF"
+                        ],
+                        "attachSwitchInterface": "vPC42",
+                        "nodeInterface": "G1/1",
+                        "nodeInterfaceUsage": "firstSecondArm"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 401 Response (Service cluster that has service node with customized link template)
     description: Unauthorized
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters"
@@ -183,22 +660,29 @@ examples:
           {
             "serviceClusters": [
               {
-                "clusterName": "",
-                "clusterType": "",
-                "formFactor": "",
-                "lastUpdateTimestamp": "",
-                "nodeRedundancy": "",
+                "serviceClusterName": "Cluster1",
+                "clusterType": "other",
+                "formFactor": "physical",
+                "nodeRedundancy": "standalone",
                 "serviceNodes": [
                   {
-                    "lastUpdateTimestamp": "",
-                    "nodeName": "",
+                    "nodeName": "Node1",
                     "serviceLinks": [
                       {
-                        "attachSwitches": [],
-                        "attachSwitchInterface": "",
-                        "linkData": "",
-                        "nodeInterface": "",
-                        "nodeInterfaceUsage": ""
+                        "attachSwitches": [
+                          "FDO20401ABC"
+                        ],
+                        "attachSwitchInterface": "Ethernet1/45",
+                        "linkData": {
+                          "linkDataType": "custom",
+                          "templateName": "my_service_link_trunk",
+                          "templateParams": {
+                            "adminState": "true",
+                            "speed": "10Mb"
+                          }
+                        },
+                        "nodeInterface": "G1/1",
+                        "nodeInterfaceUsage": "secondArm"
                       }
                     ]
                   }
@@ -207,6 +691,7 @@ examples:
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -219,7 +704,212 @@ examples:
             "description": "Indicates that the request requires user authentication information.",
             "code": 401
           }
-  - name: 403 Response
+  - name: 401 Response (Service cluster that has service node with ethernet trunk interface link)
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters"
+      method: POST
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "serviceClusters": [
+              {
+                "serviceClusterName": "Cluster1",
+                "clusterType": "firewall",
+                "formFactor": "physical",
+                "nodeRedundancy": "standalone",
+                "serviceNodes": [
+                  {
+                    "nodeName": "Node1",
+                    "serviceLinks": [
+                      {
+                        "attachSwitches": [
+                          "FDO20401ABC"
+                        ],
+                        "attachSwitchInterface": "Ethernet1/42",
+                        "linkData": {
+                          "adminState": true,
+                          "allowedVlans": "none",
+                          "bpduGuard": "default",
+                          "cdp": true,
+                          "svcLeafIntfDescription": "source interface of service link",
+                          "svcLeafIntfFreeformConfig": "",
+                          "linkDataType": "ethernet",
+                          "mtu": "jumbo",
+                          "nativeVlanId": 1,
+                          "netflow": false,
+                          "netflowMonitor": "nfMonitor",
+                          "netflowSampler": "sampler1",
+                          "orphanPort": false,
+                          "portDuplexMode": "auto",
+                          "portTypeEdgeTrunk": true,
+                          "pfc": false,
+                          "qos": false,
+                          "qosPolicy": "qosPolicy1",
+                          "queuingPolicy": "queuingPolicy1",
+                          "speed": "auto"
+                        },
+                        "nodeInterface": "G1/1",
+                        "nodeInterfaceUsage": "insideOutside"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 401 Response (Service cluster that has service node with port-channel trunk interface link)
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters"
+      method: POST
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "serviceClusters": [
+              {
+                "serviceClusterName": "Cluster1",
+                "clusterType": "firewall",
+                "formFactor": "physical",
+                "nodeRedundancy": "standalone",
+                "serviceNodes": [
+                  {
+                    "nodeName": "Node1",
+                    "serviceLinks": [
+                      {
+                        "attachSwitches": [
+                          "FDO20401ABC"
+                        ],
+                        "attachSwitchInterface": "Port-Channel505",
+                        "linkData": {
+                          "adminState": true,
+                          "allowedVlans": "none",
+                          "bpduGuard": "default",
+                          "cdp": true,
+                          "copyDescription": false,
+                          "lacpPortPriority": 32768,
+                          "lacpRate": "normal",
+                          "linkDataType": "portChannel",
+                          "mtu": "jumbo",
+                          "nativeVlanId": 1,
+                          "netflow": false,
+                          "netflowMonitor": "nfMonitor",
+                          "netflowSampler": "sampler1",
+                          "orphanPort": false,
+                          "portChannelMode": "active",
+                          "portDuplexMode": "auto",
+                          "portTypeEdgeTrunk": true,
+                          "pfc": false,
+                          "qos": false,
+                          "qosPolicy": "qosPolicy1",
+                          "queuingPolicy": "queuingPolicy1",
+                          "speed": "auto",
+                          "svcLeafIntfDescription": "source interface of service link",
+                          "svcLeafIntfFreeformConfig": ""
+                        },
+                        "nodeInterface": "G1/1",
+                        "nodeInterfaceUsage": "insideOutside"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 401 Response (Service cluster that has service node with vPC interface link)
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters"
+      method: POST
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "serviceClusters": [
+              {
+                "serviceClusterName": "Cluster1",
+                "clusterType": "loadBalancer",
+                "formFactor": "physical",
+                "nodeRedundancy": "standalone",
+                "serviceNodes": [
+                  {
+                    "nodeName": "Node1",
+                    "serviceLinks": [
+                      {
+                        "attachSwitches": [
+                          "FDO20401ABC",
+                          "FDO20401DEF"
+                        ],
+                        "attachSwitchInterface": "vPC42",
+                        "nodeInterface": "G1/1",
+                        "nodeInterfaceUsage": "firstSecondArm"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 403 Response (Service cluster that has service node with customized link template)
     description: Forbidden
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters"
@@ -235,22 +925,29 @@ examples:
           {
             "serviceClusters": [
               {
-                "clusterName": "",
-                "clusterType": "",
-                "formFactor": "",
-                "lastUpdateTimestamp": "",
-                "nodeRedundancy": "",
+                "serviceClusterName": "Cluster1",
+                "clusterType": "other",
+                "formFactor": "physical",
+                "nodeRedundancy": "standalone",
                 "serviceNodes": [
                   {
-                    "lastUpdateTimestamp": "",
-                    "nodeName": "",
+                    "nodeName": "Node1",
                     "serviceLinks": [
                       {
-                        "attachSwitches": [],
-                        "attachSwitchInterface": "",
-                        "linkData": "",
-                        "nodeInterface": "",
-                        "nodeInterfaceUsage": ""
+                        "attachSwitches": [
+                          "FDO20401ABC"
+                        ],
+                        "attachSwitchInterface": "Ethernet1/45",
+                        "linkData": {
+                          "linkDataType": "custom",
+                          "templateName": "my_service_link_trunk",
+                          "templateParams": {
+                            "adminState": "true",
+                            "speed": "10Mb"
+                          }
+                        },
+                        "nodeInterface": "G1/1",
+                        "nodeInterfaceUsage": "secondArm"
                       }
                     ]
                   }
@@ -259,6 +956,7 @@ examples:
             ]
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -271,7 +969,212 @@ examples:
             "description": "The client does not have access rights to the content.",
             "code": 403
           }
-  - name: 404 Response
+  - name: 403 Response (Service cluster that has service node with ethernet trunk interface link)
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters"
+      method: POST
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "serviceClusters": [
+              {
+                "serviceClusterName": "Cluster1",
+                "clusterType": "firewall",
+                "formFactor": "physical",
+                "nodeRedundancy": "standalone",
+                "serviceNodes": [
+                  {
+                    "nodeName": "Node1",
+                    "serviceLinks": [
+                      {
+                        "attachSwitches": [
+                          "FDO20401ABC"
+                        ],
+                        "attachSwitchInterface": "Ethernet1/42",
+                        "linkData": {
+                          "adminState": true,
+                          "allowedVlans": "none",
+                          "bpduGuard": "default",
+                          "cdp": true,
+                          "svcLeafIntfDescription": "source interface of service link",
+                          "svcLeafIntfFreeformConfig": "",
+                          "linkDataType": "ethernet",
+                          "mtu": "jumbo",
+                          "nativeVlanId": 1,
+                          "netflow": false,
+                          "netflowMonitor": "nfMonitor",
+                          "netflowSampler": "sampler1",
+                          "orphanPort": false,
+                          "portDuplexMode": "auto",
+                          "portTypeEdgeTrunk": true,
+                          "pfc": false,
+                          "qos": false,
+                          "qosPolicy": "qosPolicy1",
+                          "queuingPolicy": "queuingPolicy1",
+                          "speed": "auto"
+                        },
+                        "nodeInterface": "G1/1",
+                        "nodeInterfaceUsage": "insideOutside"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 403 Response (Service cluster that has service node with port-channel trunk interface link)
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters"
+      method: POST
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "serviceClusters": [
+              {
+                "serviceClusterName": "Cluster1",
+                "clusterType": "firewall",
+                "formFactor": "physical",
+                "nodeRedundancy": "standalone",
+                "serviceNodes": [
+                  {
+                    "nodeName": "Node1",
+                    "serviceLinks": [
+                      {
+                        "attachSwitches": [
+                          "FDO20401ABC"
+                        ],
+                        "attachSwitchInterface": "Port-Channel505",
+                        "linkData": {
+                          "adminState": true,
+                          "allowedVlans": "none",
+                          "bpduGuard": "default",
+                          "cdp": true,
+                          "copyDescription": false,
+                          "lacpPortPriority": 32768,
+                          "lacpRate": "normal",
+                          "linkDataType": "portChannel",
+                          "mtu": "jumbo",
+                          "nativeVlanId": 1,
+                          "netflow": false,
+                          "netflowMonitor": "nfMonitor",
+                          "netflowSampler": "sampler1",
+                          "orphanPort": false,
+                          "portChannelMode": "active",
+                          "portDuplexMode": "auto",
+                          "portTypeEdgeTrunk": true,
+                          "pfc": false,
+                          "qos": false,
+                          "qosPolicy": "qosPolicy1",
+                          "queuingPolicy": "queuingPolicy1",
+                          "speed": "auto",
+                          "svcLeafIntfDescription": "source interface of service link",
+                          "svcLeafIntfFreeformConfig": ""
+                        },
+                        "nodeInterface": "G1/1",
+                        "nodeInterfaceUsage": "insideOutside"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 403 Response (Service cluster that has service node with vPC interface link)
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters"
+      method: POST
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "serviceClusters": [
+              {
+                "serviceClusterName": "Cluster1",
+                "clusterType": "loadBalancer",
+                "formFactor": "physical",
+                "nodeRedundancy": "standalone",
+                "serviceNodes": [
+                  {
+                    "nodeName": "Node1",
+                    "serviceLinks": [
+                      {
+                        "attachSwitches": [
+                          "FDO20401ABC",
+                          "FDO20401DEF"
+                        ],
+                        "attachSwitchInterface": "vPC42",
+                        "nodeInterface": "G1/1",
+                        "nodeInterfaceUsage": "firstSecondArm"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 404 Response (Service cluster that has service node with customized link template)
     description: Not Found
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters"
@@ -287,22 +1190,29 @@ examples:
           {
             "serviceClusters": [
               {
-                "clusterName": "",
-                "clusterType": "",
-                "formFactor": "",
-                "lastUpdateTimestamp": "",
-                "nodeRedundancy": "",
+                "serviceClusterName": "Cluster1",
+                "clusterType": "other",
+                "formFactor": "physical",
+                "nodeRedundancy": "standalone",
                 "serviceNodes": [
                   {
-                    "lastUpdateTimestamp": "",
-                    "nodeName": "",
+                    "nodeName": "Node1",
                     "serviceLinks": [
                       {
-                        "attachSwitches": [],
-                        "attachSwitchInterface": "",
-                        "linkData": "",
-                        "nodeInterface": "",
-                        "nodeInterfaceUsage": ""
+                        "attachSwitches": [
+                          "FDO20401ABC"
+                        ],
+                        "attachSwitchInterface": "Ethernet1/45",
+                        "linkData": {
+                          "linkDataType": "custom",
+                          "templateName": "my_service_link_trunk",
+                          "templateParams": {
+                            "adminState": "true",
+                            "speed": "10Mb"
+                          }
+                        },
+                        "nodeInterface": "G1/1",
+                        "nodeInterfaceUsage": "secondArm"
                       }
                     ]
                   }
@@ -311,6 +1221,7 @@ examples:
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -323,7 +1234,212 @@ examples:
             "description": "The server cannot find the requested resource.",
             "code": 404
           }
-  - name: 500 Response
+  - name: 404 Response (Service cluster that has service node with ethernet trunk interface link)
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters"
+      method: POST
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "serviceClusters": [
+              {
+                "serviceClusterName": "Cluster1",
+                "clusterType": "firewall",
+                "formFactor": "physical",
+                "nodeRedundancy": "standalone",
+                "serviceNodes": [
+                  {
+                    "nodeName": "Node1",
+                    "serviceLinks": [
+                      {
+                        "attachSwitches": [
+                          "FDO20401ABC"
+                        ],
+                        "attachSwitchInterface": "Ethernet1/42",
+                        "linkData": {
+                          "adminState": true,
+                          "allowedVlans": "none",
+                          "bpduGuard": "default",
+                          "cdp": true,
+                          "svcLeafIntfDescription": "source interface of service link",
+                          "svcLeafIntfFreeformConfig": "",
+                          "linkDataType": "ethernet",
+                          "mtu": "jumbo",
+                          "nativeVlanId": 1,
+                          "netflow": false,
+                          "netflowMonitor": "nfMonitor",
+                          "netflowSampler": "sampler1",
+                          "orphanPort": false,
+                          "portDuplexMode": "auto",
+                          "portTypeEdgeTrunk": true,
+                          "pfc": false,
+                          "qos": false,
+                          "qosPolicy": "qosPolicy1",
+                          "queuingPolicy": "queuingPolicy1",
+                          "speed": "auto"
+                        },
+                        "nodeInterface": "G1/1",
+                        "nodeInterfaceUsage": "insideOutside"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 404 Response (Service cluster that has service node with port-channel trunk interface link)
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters"
+      method: POST
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "serviceClusters": [
+              {
+                "serviceClusterName": "Cluster1",
+                "clusterType": "firewall",
+                "formFactor": "physical",
+                "nodeRedundancy": "standalone",
+                "serviceNodes": [
+                  {
+                    "nodeName": "Node1",
+                    "serviceLinks": [
+                      {
+                        "attachSwitches": [
+                          "FDO20401ABC"
+                        ],
+                        "attachSwitchInterface": "Port-Channel505",
+                        "linkData": {
+                          "adminState": true,
+                          "allowedVlans": "none",
+                          "bpduGuard": "default",
+                          "cdp": true,
+                          "copyDescription": false,
+                          "lacpPortPriority": 32768,
+                          "lacpRate": "normal",
+                          "linkDataType": "portChannel",
+                          "mtu": "jumbo",
+                          "nativeVlanId": 1,
+                          "netflow": false,
+                          "netflowMonitor": "nfMonitor",
+                          "netflowSampler": "sampler1",
+                          "orphanPort": false,
+                          "portChannelMode": "active",
+                          "portDuplexMode": "auto",
+                          "portTypeEdgeTrunk": true,
+                          "pfc": false,
+                          "qos": false,
+                          "qosPolicy": "qosPolicy1",
+                          "queuingPolicy": "queuingPolicy1",
+                          "speed": "auto",
+                          "svcLeafIntfDescription": "source interface of service link",
+                          "svcLeafIntfFreeformConfig": ""
+                        },
+                        "nodeInterface": "G1/1",
+                        "nodeInterfaceUsage": "insideOutside"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 404 Response (Service cluster that has service node with vPC interface link)
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters"
+      method: POST
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "serviceClusters": [
+              {
+                "serviceClusterName": "Cluster1",
+                "clusterType": "loadBalancer",
+                "formFactor": "physical",
+                "nodeRedundancy": "standalone",
+                "serviceNodes": [
+                  {
+                    "nodeName": "Node1",
+                    "serviceLinks": [
+                      {
+                        "attachSwitches": [
+                          "FDO20401ABC",
+                          "FDO20401DEF"
+                        ],
+                        "attachSwitchInterface": "vPC42",
+                        "nodeInterface": "G1/1",
+                        "nodeInterfaceUsage": "firstSecondArm"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 500 Response (Service cluster that has service node with customized link template)
     description: Internal Server Error
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters"
@@ -339,22 +1455,29 @@ examples:
           {
             "serviceClusters": [
               {
-                "clusterName": "",
-                "clusterType": "",
-                "formFactor": "",
-                "lastUpdateTimestamp": "",
-                "nodeRedundancy": "",
+                "serviceClusterName": "Cluster1",
+                "clusterType": "other",
+                "formFactor": "physical",
+                "nodeRedundancy": "standalone",
                 "serviceNodes": [
                   {
-                    "lastUpdateTimestamp": "",
-                    "nodeName": "",
+                    "nodeName": "Node1",
                     "serviceLinks": [
                       {
-                        "attachSwitches": [],
-                        "attachSwitchInterface": "",
-                        "linkData": "",
-                        "nodeInterface": "",
-                        "nodeInterfaceUsage": ""
+                        "attachSwitches": [
+                          "FDO20401ABC"
+                        ],
+                        "attachSwitchInterface": "Ethernet1/45",
+                        "linkData": {
+                          "linkDataType": "custom",
+                          "templateName": "my_service_link_trunk",
+                          "templateParams": {
+                            "adminState": "true",
+                            "speed": "10Mb"
+                          }
+                        },
+                        "nodeInterface": "G1/1",
+                        "nodeInterfaceUsage": "secondArm"
                       }
                     ]
                   }
@@ -363,6 +1486,212 @@ examples:
             ]
           }
     response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }
+  - name: 500 Response (Service cluster that has service node with ethernet trunk interface link)
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters"
+      method: POST
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "serviceClusters": [
+              {
+                "serviceClusterName": "Cluster1",
+                "clusterType": "firewall",
+                "formFactor": "physical",
+                "nodeRedundancy": "standalone",
+                "serviceNodes": [
+                  {
+                    "nodeName": "Node1",
+                    "serviceLinks": [
+                      {
+                        "attachSwitches": [
+                          "FDO20401ABC"
+                        ],
+                        "attachSwitchInterface": "Ethernet1/42",
+                        "linkData": {
+                          "adminState": true,
+                          "allowedVlans": "none",
+                          "bpduGuard": "default",
+                          "cdp": true,
+                          "svcLeafIntfDescription": "source interface of service link",
+                          "svcLeafIntfFreeformConfig": "",
+                          "linkDataType": "ethernet",
+                          "mtu": "jumbo",
+                          "nativeVlanId": 1,
+                          "netflow": false,
+                          "netflowMonitor": "nfMonitor",
+                          "netflowSampler": "sampler1",
+                          "orphanPort": false,
+                          "portDuplexMode": "auto",
+                          "portTypeEdgeTrunk": true,
+                          "pfc": false,
+                          "qos": false,
+                          "qosPolicy": "qosPolicy1",
+                          "queuingPolicy": "queuingPolicy1",
+                          "speed": "auto"
+                        },
+                        "nodeInterface": "G1/1",
+                        "nodeInterfaceUsage": "insideOutside"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }
+  - name: 500 Response (Service cluster that has service node with port-channel trunk interface link)
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters"
+      method: POST
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "serviceClusters": [
+              {
+                "serviceClusterName": "Cluster1",
+                "clusterType": "firewall",
+                "formFactor": "physical",
+                "nodeRedundancy": "standalone",
+                "serviceNodes": [
+                  {
+                    "nodeName": "Node1",
+                    "serviceLinks": [
+                      {
+                        "attachSwitches": [
+                          "FDO20401ABC"
+                        ],
+                        "attachSwitchInterface": "Port-Channel505",
+                        "linkData": {
+                          "adminState": true,
+                          "allowedVlans": "none",
+                          "bpduGuard": "default",
+                          "cdp": true,
+                          "copyDescription": false,
+                          "lacpPortPriority": 32768,
+                          "lacpRate": "normal",
+                          "linkDataType": "portChannel",
+                          "mtu": "jumbo",
+                          "nativeVlanId": 1,
+                          "netflow": false,
+                          "netflowMonitor": "nfMonitor",
+                          "netflowSampler": "sampler1",
+                          "orphanPort": false,
+                          "portChannelMode": "active",
+                          "portDuplexMode": "auto",
+                          "portTypeEdgeTrunk": true,
+                          "pfc": false,
+                          "qos": false,
+                          "qosPolicy": "qosPolicy1",
+                          "queuingPolicy": "queuingPolicy1",
+                          "speed": "auto",
+                          "svcLeafIntfDescription": "source interface of service link",
+                          "svcLeafIntfFreeformConfig": ""
+                        },
+                        "nodeInterface": "G1/1",
+                        "nodeInterfaceUsage": "insideOutside"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }
+  - name: 500 Response (Service cluster that has service node with vPC interface link)
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters"
+      method: POST
+      params:
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "serviceClusters": [
+              {
+                "serviceClusterName": "Cluster1",
+                "clusterType": "loadBalancer",
+                "formFactor": "physical",
+                "nodeRedundancy": "standalone",
+                "serviceNodes": [
+                  {
+                    "nodeName": "Node1",
+                    "serviceLinks": [
+                      {
+                        "attachSwitches": [
+                          "FDO20401ABC",
+                          "FDO20401DEF"
+                        ],
+                        "attachSwitchInterface": "vPC42",
+                        "nodeInterface": "G1/1",
+                        "nodeInterfaceUsage": "firstSecondArm"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+    response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

@@ -1,7 +1,9 @@
 info:
   name: Create a new traffic category
   type: http
-  seq: 2
+  seq: 8
+  tags:
+    - Flows
 
 http:
   method: POST
@@ -20,12 +22,21 @@ http:
     type: json
     data: |-
       {
-        "name": "",
-        "fabricName": "",
+        "name": "Web",
+        "fabricName": "DC-WEST",
         "portSelectors": [
           {
-            "protocol": 0,
-            "ports": []
+            "protocol": 6,
+            "ports": [
+              "80",
+              "443"
+            ]
+          },
+          {
+            "protocol": 17,
+            "ports": [
+              "100-200"
+            ]
           }
         ]
       }
@@ -76,6 +87,7 @@ examples:
             ]
           }
     response:
+      status: 201
       statusText: Created
       headers:
         - name: Content-Type
@@ -140,6 +152,7 @@ examples:
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -190,6 +203,7 @@ examples:
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -240,6 +254,7 @@ examples:
             ]
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -290,6 +305,7 @@ examples:
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

@@ -2,6 +2,8 @@ info:
   name: Configuration preview for the given switch(es) (POST)
   type: http
   seq: 7
+  tags:
+    - Configuration Compliance
 
 http:
   method: POST
@@ -23,16 +25,17 @@ http:
       description: If true, API provides line count of the pending config. If false, detailed output is provided.
       disabled: true
     - name: recompute
-      value: ""
+      value: "false"
       type: query
       description: |
         If this passed as true, compliance cache for specified switch(es) is cleared before computing pending configuration. If this passed as false, pending configuration is returned from compliance cache.
-      disabled: true
   body:
     type: json
     data: |-
       {
-        "switchIds": []
+        "switchIds": [
+          "SAL18432P2T"
+        ]
       }
   auth: inherit
 
@@ -64,11 +67,10 @@ examples:
           description: If true, API provides line count of the pending config. If false, detailed output is provided.
           disabled: true
         - name: recompute
-          value: ""
+          value: "false"
           type: query
           description: |
             If this passed as true, compliance cache for specified switch(es) is cleared before computing pending configuration. If this passed as false, pending configuration is returned from compliance cache.
-          disabled: true
       body:
         type: json
         data: |-
@@ -78,6 +80,7 @@ examples:
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -88,7 +91,10 @@ examples:
           {
             "items": [
               {
+                "addConfigCount": 0,
+                "briefCount": 0,
                 "deployMode": "config",
+                "diffConfigs": null,
                 "entityCollection": [
                   {
                     "commands": [
@@ -144,6 +150,7 @@ examples:
                   "  description new description",
                   "  ip router ospf UNDERLAY area 0.0.0.0"
                 ],
+                "removeConfigCount": 0,
                 "runningConfigs": [
                   "hostname n9kv-89",
                   "interface loopback3",
@@ -185,11 +192,10 @@ examples:
           description: If true, API provides line count of the pending config. If false, detailed output is provided.
           disabled: true
         - name: recompute
-          value: ""
+          value: "false"
           type: query
           description: |
             If this passed as true, compliance cache for specified switch(es) is cleared before computing pending configuration. If this passed as false, pending configuration is returned from compliance cache.
-          disabled: true
       body:
         type: json
         data: |-
@@ -199,6 +205,7 @@ examples:
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -212,9 +219,10 @@ examples:
                 "addConfigCount": 2,
                 "briefCount": 7,
                 "deployMode": "config",
+                "diffConfigs": null,
                 "entityCollection": [],
                 "expectedConfigs": [],
-                "fabricName": "fab-1",
+                "fabricName": "MyFabric",
                 "pendingConfigs": [],
                 "removeConfigCount": 4,
                 "runningConfigs": [],
@@ -249,11 +257,10 @@ examples:
           description: If true, API provides line count of the pending config. If false, detailed output is provided.
           disabled: true
         - name: recompute
-          value: ""
+          value: "false"
           type: query
           description: |
             If this passed as true, compliance cache for specified switch(es) is cleared before computing pending configuration. If this passed as false, pending configuration is returned from compliance cache.
-          disabled: true
       body:
         type: json
         data: |-
@@ -263,6 +270,7 @@ examples:
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -297,11 +305,10 @@ examples:
           description: If true, API provides line count of the pending config. If false, detailed output is provided.
           disabled: true
         - name: recompute
-          value: ""
+          value: "false"
           type: query
           description: |
             If this passed as true, compliance cache for specified switch(es) is cleared before computing pending configuration. If this passed as false, pending configuration is returned from compliance cache.
-          disabled: true
       body:
         type: json
         data: |-
@@ -311,6 +318,7 @@ examples:
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -345,11 +353,10 @@ examples:
           description: If true, API provides line count of the pending config. If false, detailed output is provided.
           disabled: true
         - name: recompute
-          value: ""
+          value: "false"
           type: query
           description: |
             If this passed as true, compliance cache for specified switch(es) is cleared before computing pending configuration. If this passed as false, pending configuration is returned from compliance cache.
-          disabled: true
       body:
         type: json
         data: |-
@@ -359,6 +366,7 @@ examples:
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -393,11 +401,10 @@ examples:
           description: If true, API provides line count of the pending config. If false, detailed output is provided.
           disabled: true
         - name: recompute
-          value: ""
+          value: "false"
           type: query
           description: |
             If this passed as true, compliance cache for specified switch(es) is cleared before computing pending configuration. If this passed as false, pending configuration is returned from compliance cache.
-          disabled: true
       body:
         type: json
         data: |-
@@ -407,6 +414,7 @@ examples:
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -441,11 +449,10 @@ examples:
           description: If true, API provides line count of the pending config. If false, detailed output is provided.
           disabled: true
         - name: recompute
-          value: ""
+          value: "false"
           type: query
           description: |
             If this passed as true, compliance cache for specified switch(es) is cleared before computing pending configuration. If this passed as false, pending configuration is returned from compliance cache.
-          disabled: true
       body:
         type: json
         data: |-
@@ -455,6 +462,7 @@ examples:
             ]
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -489,11 +497,10 @@ examples:
           description: If true, API provides line count of the pending config. If false, detailed output is provided.
           disabled: true
         - name: recompute
-          value: ""
+          value: "false"
           type: query
           description: |
             If this passed as true, compliance cache for specified switch(es) is cleared before computing pending configuration. If this passed as false, pending configuration is returned from compliance cache.
-          disabled: true
       body:
         type: json
         data: |-
@@ -503,6 +510,7 @@ examples:
             ]
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -537,11 +545,10 @@ examples:
           description: If true, API provides line count of the pending config. If false, detailed output is provided.
           disabled: true
         - name: recompute
-          value: ""
+          value: "false"
           type: query
           description: |
             If this passed as true, compliance cache for specified switch(es) is cleared before computing pending configuration. If this passed as false, pending configuration is returned from compliance cache.
-          disabled: true
       body:
         type: json
         data: |-
@@ -551,6 +558,7 @@ examples:
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -585,11 +593,10 @@ examples:
           description: If true, API provides line count of the pending config. If false, detailed output is provided.
           disabled: true
         - name: recompute
-          value: ""
+          value: "false"
           type: query
           description: |
             If this passed as true, compliance cache for specified switch(es) is cleared before computing pending configuration. If this passed as false, pending configuration is returned from compliance cache.
-          disabled: true
       body:
         type: json
         data: |-
@@ -599,6 +606,7 @@ examples:
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -633,11 +641,10 @@ examples:
           description: If true, API provides line count of the pending config. If false, detailed output is provided.
           disabled: true
         - name: recompute
-          value: ""
+          value: "false"
           type: query
           description: |
             If this passed as true, compliance cache for specified switch(es) is cleared before computing pending configuration. If this passed as false, pending configuration is returned from compliance cache.
-          disabled: true
       body:
         type: json
         data: |-
@@ -647,6 +654,7 @@ examples:
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type
@@ -681,11 +689,10 @@ examples:
           description: If true, API provides line count of the pending config. If false, detailed output is provided.
           disabled: true
         - name: recompute
-          value: ""
+          value: "false"
           type: query
           description: |
             If this passed as true, compliance cache for specified switch(es) is cleared before computing pending configuration. If this passed as false, pending configuration is returned from compliance cache.
-          disabled: true
       body:
         type: json
         data: |-
@@ -695,6 +702,7 @@ examples:
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

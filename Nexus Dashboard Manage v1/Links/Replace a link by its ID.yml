@@ -1,7 +1,9 @@
 info:
-  name: Replace a link by its ID.
+  name: Replace a link by its ID
   type: http
   seq: 8
+  tags:
+    - Links
 
 http:
   method: PUT
@@ -23,7 +25,28 @@ http:
       disabled: true
   body:
     type: json
-    data: ""
+    data: |-
+      {
+        "configData": {
+          "policyType": "preprovision",
+          "templateInputs": {
+            "dstInterfaceConfig": "logging event port link-status",
+            "dstInterfaceDescription": "desc",
+            "mtu": 9216,
+            "speed": "auto",
+            "srcInterfaceConfig": "logging event port link-status",
+            "srcInterfaceDescription": "desc"
+          }
+        },
+        "dstFabricName": "fab1",
+        "dstInterfaceName": "Ethernet1/9",
+        "dstSwitchId": "FDO21351QGE",
+        "dstSwitchName": "sml_N9K-FX2-7",
+        "srcFabricName": "fab1",
+        "srcInterfaceName": "Ethernet1/2",
+        "srcSwitchId": "FDO20372FH8",
+        "srcSwitchName": "sml_N9K-FX2-6"
+      }
   auth: inherit
 
 settings:
@@ -68,16 +91,17 @@ examples:
                 "srcInterfaceDescription": "desc"
               }
             },
-            "dstFabricName": "ebgp-fab",
+            "dstFabricName": "fab1",
             "dstInterfaceName": "Ethernet1/9",
             "dstSwitchId": "FDO21351QGE",
             "dstSwitchName": "sml_N9K-FX2-7",
-            "srcFabricName": "ebgp-fab",
+            "srcFabricName": "fab1",
             "srcInterfaceName": "Ethernet1/2",
             "srcSwitchId": "FDO20372FH8",
             "srcSwitchName": "sml_N9K-FX2-6"
           }
     response:
+      status: 204
       statusText: No Content
       body:
         type: text
@@ -117,16 +141,17 @@ examples:
                 "srcInterfaceDescription": "desc"
               }
             },
-            "dstFabricName": "ebgp-fab",
+            "dstFabricName": "fab1",
             "dstInterfaceName": "Ethernet1/9",
             "dstSwitchId": "FDO21351QGE",
             "dstSwitchName": "sml_N9K-FX2-7",
-            "srcFabricName": "ebgp-fab",
+            "srcFabricName": "fab1",
             "srcInterfaceName": "Ethernet1/2",
             "srcSwitchId": "FDO20372FH8",
             "srcSwitchName": "sml_N9K-FX2-6"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -174,16 +199,17 @@ examples:
                 "srcInterfaceDescription": "desc"
               }
             },
-            "dstFabricName": "ebgp-fab",
+            "dstFabricName": "fab1",
             "dstInterfaceName": "Ethernet1/9",
             "dstSwitchId": "FDO21351QGE",
             "dstSwitchName": "sml_N9K-FX2-7",
-            "srcFabricName": "ebgp-fab",
+            "srcFabricName": "fab1",
             "srcInterfaceName": "Ethernet1/2",
             "srcSwitchId": "FDO20372FH8",
             "srcSwitchName": "sml_N9K-FX2-6"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -231,16 +257,17 @@ examples:
                 "srcInterfaceDescription": "desc"
               }
             },
-            "dstFabricName": "ebgp-fab",
+            "dstFabricName": "fab1",
             "dstInterfaceName": "Ethernet1/9",
             "dstSwitchId": "FDO21351QGE",
             "dstSwitchName": "sml_N9K-FX2-7",
-            "srcFabricName": "ebgp-fab",
+            "srcFabricName": "fab1",
             "srcInterfaceName": "Ethernet1/2",
             "srcSwitchId": "FDO20372FH8",
             "srcSwitchName": "sml_N9K-FX2-6"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -288,16 +315,17 @@ examples:
                 "srcInterfaceDescription": "desc"
               }
             },
-            "dstFabricName": "ebgp-fab",
+            "dstFabricName": "fab1",
             "dstInterfaceName": "Ethernet1/9",
             "dstSwitchId": "FDO21351QGE",
             "dstSwitchName": "sml_N9K-FX2-7",
-            "srcFabricName": "ebgp-fab",
+            "srcFabricName": "fab1",
             "srcInterfaceName": "Ethernet1/2",
             "srcSwitchId": "FDO20372FH8",
             "srcSwitchName": "sml_N9K-FX2-6"
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -345,16 +373,17 @@ examples:
                 "srcInterfaceDescription": "desc"
               }
             },
-            "dstFabricName": "ebgp-fab",
+            "dstFabricName": "fab1",
             "dstInterfaceName": "Ethernet1/9",
             "dstSwitchId": "FDO21351QGE",
             "dstSwitchName": "sml_N9K-FX2-7",
-            "srcFabricName": "ebgp-fab",
+            "srcFabricName": "fab1",
             "srcInterfaceName": "Ethernet1/2",
             "srcSwitchId": "FDO20372FH8",
             "srcSwitchName": "sml_N9K-FX2-6"
           }
     response:
+      status: 409
       statusText: Conflict
       headers:
         - name: Content-Type
@@ -402,16 +431,17 @@ examples:
                 "srcInterfaceDescription": "desc"
               }
             },
-            "dstFabricName": "ebgp-fab",
+            "dstFabricName": "fab1",
             "dstInterfaceName": "Ethernet1/9",
             "dstSwitchId": "FDO21351QGE",
             "dstSwitchName": "sml_N9K-FX2-7",
-            "srcFabricName": "ebgp-fab",
+            "srcFabricName": "fab1",
             "srcInterfaceName": "Ethernet1/2",
             "srcSwitchId": "FDO20372FH8",
             "srcSwitchName": "sml_N9K-FX2-6"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

@@ -2,6 +2,8 @@ info:
   name: Get a specific layer-3 out
   type: http
   seq: 47
+  tags:
+    - Routing Policies
 
 http:
   method: GET
@@ -41,6 +43,7 @@ examples:
           type: path
           description: The name of the layer-3 out.
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -108,6 +111,7 @@ examples:
           type: path
           description: The name of the layer-3 out.
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -136,6 +140,7 @@ examples:
           type: path
           description: The name of the layer-3 out.
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -164,6 +169,7 @@ examples:
           type: path
           description: The name of the layer-3 out.
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -192,6 +198,7 @@ examples:
           type: path
           description: The name of the layer-3 out.
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -220,6 +227,7 @@ examples:
           type: path
           description: The name of the layer-3 out.
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

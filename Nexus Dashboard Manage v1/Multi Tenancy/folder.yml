@@ -1,7 +1,7 @@
 info:
   name: Multi Tenancy
   type: folder
-  seq: 16
+  seq: 1
 
 request:
   auth: inherit

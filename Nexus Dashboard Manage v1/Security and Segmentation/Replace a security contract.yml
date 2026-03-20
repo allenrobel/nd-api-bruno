@@ -2,6 +2,8 @@ info:
   name: Replace a security contract
   type: http
   seq: 18
+  tags:
+    - Security and Segmentation
 
 http:
   method: PUT
@@ -24,17 +26,19 @@ http:
     type: json
     data: |-
       {
-        "name": "",
-        "tenantName": "",
-        "displayName": "",
-        "description": "",
-        "direction": "",
+        "description": "Allow web traffic",
+        "direction": "bidirectional",
+        "name": "permit-web",
         "rules": [
           {
-            "ruleDirection": "",
-            "action": "",
-            "protocolDefinitionName": "",
-            "protocolDefinitionMatchSummary": ""
+            "action": "permit",
+            "protocolDefinitionName": "https",
+            "ruleDirection": "bidirectional"
+          },
+          {
+            "action": "permit",
+            "protocolDefinitionName": "http",
+            "ruleDirection": "bidirectional"
           }
         ]
       }
@@ -87,6 +91,7 @@ examples:
             ]
           }
     response:
+      status: 204
       statusText: No Content
       body:
         type: text
@@ -131,6 +136,7 @@ examples:
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -183,6 +189,7 @@ examples:
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -235,6 +242,7 @@ examples:
             ]
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -287,6 +295,7 @@ examples:
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -339,6 +348,7 @@ examples:
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

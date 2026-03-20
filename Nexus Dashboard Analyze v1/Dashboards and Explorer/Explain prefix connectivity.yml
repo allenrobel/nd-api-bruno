@@ -1,0 +1,320 @@
+info:
+  name: Explain prefix connectivity
+  type: http
+  seq: 9
+  tags:
+    - Dashboards and Explorer
+
+http:
+  method: POST
+  url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/explorer/actions/explainPrefixConnectivity"
+  params:
+    - name: clusterName
+      value: ""
+      type: query
+      description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+      disabled: true
+  body:
+    type: json
+    data: |-
+      {
+        "analysisDate": "2025-01-22T20:38:22.269Z",
+        "dstPrefixIdentifier": "172.16.5.0/24|uni/tn-DMZ/ctx-ExternalVRF",
+        "dstSecurityGroupFilter": "uni/tn-DMZ/ap-ExternalAccess/epg-PublicWeb",
+        "fabricName": "Prod",
+        "snapshotId": "123e4567-e89b-12d3-a456-426614174000",
+        "srcPrefixIdentifier": "10.20.1.0/24|uni/tn-Services/ctx-SharedServicesVRF",
+        "srcSecurityGroupFilter": "uni/tn-Services/ap-Infra/epg-AppServers"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: default
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/explorer/actions/explainPrefixConnectivity"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "analysisDate": "2025-01-22T20:38:22.269Z",
+            "dstPrefixIdentifier": "172.16.5.0/24|uni/tn-DMZ/ctx-ExternalVRF",
+            "dstSecurityGroupFilter": "uni/tn-DMZ/ap-ExternalAccess/epg-PublicWeb",
+            "fabricName": "Prod",
+            "snapshotId": "123e4567-e89b-12d3-a456-426614174000",
+            "srcPrefixIdentifier": "10.20.1.0/24|uni/tn-Services/ctx-SharedServicesVRF",
+            "srcSecurityGroupFilter": "uni/tn-Services/ap-Infra/epg-AppServers"
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "connectivity": {
+              "connectivityDetails": [
+                {
+                  "action": "permit",
+                  "dstPortRangeEnd": "443",
+                  "dstPortRangeStart": "443",
+                  "dstPrefix": {
+                    "identifier": "14.1.140.60/30|uni/tn-mgmt/ctx-inb",
+                    "name": "14.1.140.60/30"
+                  },
+                  "dstSecurityGroup": {
+                    "identifier": "uni/tn-mgmt/out-inb-labl3out/instP-inb-labl3out-EPG",
+                    "name": "inb-labl3out-EPG"
+                  },
+                  "dstVrf": {
+                    "identifier": "uni/tn-mgmt/ctx-inb",
+                    "name": "inb"
+                  },
+                  "etherType": "ipv4",
+                  "fabricName": "mgmt",
+                  "flowOrigin": "CONTRACT",
+                  "flowOwners": [
+                    {
+                      "identifier": "uni/tn-common/brc-default",
+                      "name": "default"
+                    }
+                  ],
+                  "policyEnforcementVrf": {
+                    "identifier": "uni/tn-mgmt/ctx-inb",
+                    "name": "inb"
+                  },
+                  "protocol": "tcp",
+                  "srcPortRangeEnd": "65535",
+                  "srcPortRangeStart": "1024",
+                  "srcPrefix": {
+                    "identifier": "172.29.96.32/28|uni/tn-mgmt/ctx-inb",
+                    "name": "172.29.96.32/28"
+                  },
+                  "srcSecurityGroup": {
+                    "identifier": "uni/tn-mgmt/mgmtp-default/inb-default",
+                    "name": "inb-default"
+                  },
+                  "srcVrf": {
+                    "identifier": "uni/tn-mgmt/ctx-inb",
+                    "name": "inb"
+                  },
+                  "tcpRules": "established"
+                }
+              ],
+              "connectivitySummary": [
+                {
+                  "dstPrefix": {
+                    "identifier": "14.1.140.60/30|uni/tn-mgmt/ctx-inb",
+                    "name": "14.1.140.60/30"
+                  },
+                  "hasDirectConnectivity": true,
+                  "nextPairConnections": [],
+                  "serviceGraphs": [],
+                  "srcPrefix": {
+                    "identifier": "172.29.96.32/28|uni/tn-mgmt/ctx-inb",
+                    "name": "172.29.96.32/28"
+                  }
+                }
+              ]
+            }
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/explorer/actions/explainPrefixConnectivity"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "analysisDate": "2025-01-22T20:38:22.269Z",
+            "dstPrefixIdentifier": "172.16.5.0/24|uni/tn-DMZ/ctx-ExternalVRF",
+            "dstSecurityGroupFilter": "uni/tn-DMZ/ap-ExternalAccess/epg-PublicWeb",
+            "fabricName": "Prod",
+            "snapshotId": "123e4567-e89b-12d3-a456-426614174000",
+            "srcPrefixIdentifier": "10.20.1.0/24|uni/tn-Services/ctx-SharedServicesVRF",
+            "srcSecurityGroupFilter": "uni/tn-Services/ap-Infra/epg-AppServers"
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/explorer/actions/explainPrefixConnectivity"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "analysisDate": "2025-01-22T20:38:22.269Z",
+            "dstPrefixIdentifier": "172.16.5.0/24|uni/tn-DMZ/ctx-ExternalVRF",
+            "dstSecurityGroupFilter": "uni/tn-DMZ/ap-ExternalAccess/epg-PublicWeb",
+            "fabricName": "Prod",
+            "snapshotId": "123e4567-e89b-12d3-a456-426614174000",
+            "srcPrefixIdentifier": "10.20.1.0/24|uni/tn-Services/ctx-SharedServicesVRF",
+            "srcSecurityGroupFilter": "uni/tn-Services/ap-Infra/epg-AppServers"
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 403 Response
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/explorer/actions/explainPrefixConnectivity"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "analysisDate": "2025-01-22T20:38:22.269Z",
+            "dstPrefixIdentifier": "172.16.5.0/24|uni/tn-DMZ/ctx-ExternalVRF",
+            "dstSecurityGroupFilter": "uni/tn-DMZ/ap-ExternalAccess/epg-PublicWeb",
+            "fabricName": "Prod",
+            "snapshotId": "123e4567-e89b-12d3-a456-426614174000",
+            "srcPrefixIdentifier": "10.20.1.0/24|uni/tn-Services/ctx-SharedServicesVRF",
+            "srcSecurityGroupFilter": "uni/tn-Services/ap-Infra/epg-AppServers"
+          }
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 404 Response
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/explorer/actions/explainPrefixConnectivity"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "analysisDate": "2025-01-22T20:38:22.269Z",
+            "dstPrefixIdentifier": "172.16.5.0/24|uni/tn-DMZ/ctx-ExternalVRF",
+            "dstSecurityGroupFilter": "uni/tn-DMZ/ap-ExternalAccess/epg-PublicWeb",
+            "fabricName": "Prod",
+            "snapshotId": "123e4567-e89b-12d3-a456-426614174000",
+            "srcPrefixIdentifier": "10.20.1.0/24|uni/tn-Services/ctx-SharedServicesVRF",
+            "srcSecurityGroupFilter": "uni/tn-Services/ap-Infra/epg-AppServers"
+          }
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 500 Response
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/explorer/actions/explainPrefixConnectivity"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "analysisDate": "2025-01-22T20:38:22.269Z",
+            "dstPrefixIdentifier": "172.16.5.0/24|uni/tn-DMZ/ctx-ExternalVRF",
+            "dstSecurityGroupFilter": "uni/tn-DMZ/ap-ExternalAccess/epg-PublicWeb",
+            "fabricName": "Prod",
+            "snapshotId": "123e4567-e89b-12d3-a456-426614174000",
+            "srcPrefixIdentifier": "10.20.1.0/24|uni/tn-Services/ctx-SharedServicesVRF",
+            "srcSecurityGroupFilter": "uni/tn-Services/ap-Infra/epg-AppServers"
+          }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }

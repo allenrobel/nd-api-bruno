@@ -2,6 +2,8 @@ info:
   name: Delete a specific switch from the fabric
   type: http
   seq: 33
+  tags:
+    - Inventory
 
 http:
   method: DELETE
@@ -13,11 +15,11 @@ http:
       description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
       disabled: true
     - name: switchId
-      value: FOX14658SD
+      value: ""
       type: path
       description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
     - name: fabricName
-      value: fabric1
+      value: ""
       type: path
       description: Name of the fabric
     - name: ticketId
@@ -26,10 +28,9 @@ http:
       description: Change Control Ticket Id
       disabled: true
     - name: force
-      value: ""
+      value: "false"
       type: query
       description: True forces deletion of the switch(es)
-      disabled: true
   auth: inherit
 
 settings:
@@ -64,11 +65,11 @@ examples:
           description: Change Control Ticket Id
           disabled: true
         - name: force
-          value: ""
+          value: "false"
           type: query
           description: True forces deletion of the switch(es)
-          disabled: true
     response:
+      status: 204
       statusText: No Content
       body:
         type: text
@@ -98,11 +99,11 @@ examples:
           description: Change Control Ticket Id
           disabled: true
         - name: force
-          value: ""
+          value: "false"
           type: query
           description: True forces deletion of the switch(es)
-          disabled: true
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -140,11 +141,11 @@ examples:
           description: Change Control Ticket Id
           disabled: true
         - name: force
-          value: ""
+          value: "false"
           type: query
           description: True forces deletion of the switch(es)
-          disabled: true
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -182,11 +183,11 @@ examples:
           description: Change Control Ticket Id
           disabled: true
         - name: force
-          value: ""
+          value: "false"
           type: query
           description: True forces deletion of the switch(es)
-          disabled: true
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -224,11 +225,11 @@ examples:
           description: Change Control Ticket Id
           disabled: true
         - name: force
-          value: ""
+          value: "false"
           type: query
           description: True forces deletion of the switch(es)
-          disabled: true
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -266,11 +267,11 @@ examples:
           description: Change Control Ticket Id
           disabled: true
         - name: force
-          value: ""
+          value: "false"
           type: query
           description: True forces deletion of the switch(es)
-          disabled: true
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

@@ -1,7 +1,9 @@
 info:
   name: Create ISSU report checks
   type: http
-  seq: 39
+  seq: 33
+  tags:
+    - Fabric Software Management
 
 http:
   method: POST
@@ -18,21 +20,50 @@ http:
       {
         "updateChecks": [
           {
-            "acceptableVariance": 0,
+            "acceptableVariance": 2,
             "advancedChecks": [
               {
-                "checkMustContains": [],
-                "checkMustNotContains": []
+                "checkMustContains": [
+                  "module version"
+                ],
+                "checkMustNotContains": [
+                  "module Name"
+                ]
               }
             ],
-            "checkType": "",
-            "cliCommand": "",
-            "failureLevel": "",
-            "ignoreFilters": [],
-            "postUpdateDelay": 0,
-            "reportCheckDescription": "",
-            "reportCheckName": "",
-            "reportCheckType": ""
+            "checkType": "custom",
+            "cliCommand": "sh version",
+            "failureLevel": "error",
+            "ignoreFilters": [
+              "NXOS version"
+            ],
+            "postUpdateDelay": 10,
+            "reportCheckDescription": "nxos version",
+            "reportCheckName": "nxos_version",
+            "reportCheckType": "preAndPost"
+          },
+          {
+            "acceptableVariance": 2,
+            "advancedChecks": [
+              {
+                "checkMustContains": [
+                  "module version"
+                ],
+                "checkMustNotContains": [
+                  "module Name"
+                ]
+              }
+            ],
+            "checkType": "custom",
+            "cliCommand": "show mod",
+            "failureLevel": "info",
+            "ignoreFilters": [
+              "module number"
+            ],
+            "postUpdateDelay": 10,
+            "reportCheckDescription": "show mod command",
+            "reportCheckName": "show_mod",
+            "reportCheckType": "preAndPost"
           }
         ]
       }
@@ -73,7 +104,7 @@ examples:
                     ]
                   }
                 ],
-                "checkType": "basic",
+                "checkType": "custom",
                 "cliCommand": "sh version",
                 "failureLevel": "error",
                 "ignoreFilters": [
@@ -96,7 +127,7 @@ examples:
                     ]
                   }
                 ],
-                "checkType": "basic",
+                "checkType": "custom",
                 "cliCommand": "show mod",
                 "failureLevel": "info",
                 "ignoreFilters": [
@@ -110,6 +141,7 @@ examples:
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -154,7 +186,7 @@ examples:
                     ]
                   }
                 ],
-                "checkType": "basic",
+                "checkType": "custom",
                 "cliCommand": "sh version",
                 "failureLevel": "error",
                 "ignoreFilters": [
@@ -177,7 +209,7 @@ examples:
                     ]
                   }
                 ],
-                "checkType": "basic",
+                "checkType": "custom",
                 "cliCommand": "show mod",
                 "failureLevel": "info",
                 "ignoreFilters": [
@@ -191,6 +223,7 @@ examples:
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -231,7 +264,7 @@ examples:
                     ]
                   }
                 ],
-                "checkType": "basic",
+                "checkType": "custom",
                 "cliCommand": "sh version",
                 "failureLevel": "error",
                 "ignoreFilters": [
@@ -254,7 +287,7 @@ examples:
                     ]
                   }
                 ],
-                "checkType": "basic",
+                "checkType": "custom",
                 "cliCommand": "show mod",
                 "failureLevel": "info",
                 "ignoreFilters": [
@@ -268,6 +301,7 @@ examples:
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -308,7 +342,7 @@ examples:
                     ]
                   }
                 ],
-                "checkType": "basic",
+                "checkType": "custom",
                 "cliCommand": "sh version",
                 "failureLevel": "error",
                 "ignoreFilters": [
@@ -331,7 +365,7 @@ examples:
                     ]
                   }
                 ],
-                "checkType": "basic",
+                "checkType": "custom",
                 "cliCommand": "show mod",
                 "failureLevel": "info",
                 "ignoreFilters": [
@@ -345,6 +379,7 @@ examples:
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -385,7 +420,7 @@ examples:
                     ]
                   }
                 ],
-                "checkType": "basic",
+                "checkType": "custom",
                 "cliCommand": "sh version",
                 "failureLevel": "error",
                 "ignoreFilters": [
@@ -408,7 +443,7 @@ examples:
                     ]
                   }
                 ],
-                "checkType": "basic",
+                "checkType": "custom",
                 "cliCommand": "show mod",
                 "failureLevel": "info",
                 "ignoreFilters": [
@@ -422,6 +457,7 @@ examples:
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

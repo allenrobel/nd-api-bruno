@@ -2,6 +2,8 @@ info:
   name: Modify an onboarded cluster
   type: http
   seq: 5
+  tags:
+    - Multi-Cluster Connectivity
 
 http:
   method: PUT
@@ -17,58 +19,31 @@ http:
       {
         "spec": {
           "aci": {
-            "licenseTier": "",
+            "licenseTier": "premier",
             "orchestration": {
-              "status": ""
+              "status": "enabled"
             },
-            "securityDomain": "",
+            "securityDomain": "all",
             "telemetry": {
-              "epg": "",
-              "network": "",
-              "status": "",
-              "streamingProtocol": ""
+              "epg": "uni/tn-mgmt/mgmtp-default/inb-default",
+              "network": "inband",
+              "status": "enabled",
+              "streamingProtocol": "ipv4"
             },
             "verifyCA": false
           },
-          "annotation": {},
           "credentials": {
-            "loginDomain": "",
-            "password": "",
-            "user": ""
+            "loginDomain": "DefaultAuth",
+            "password": "Q2lzY29pbnMzOTY1IQ==",
+            "user": "admin"
           },
           "location": {
-            "latitude": 0,
-            "longitude": 0
+            "latitude": 10.2,
+            "longitude": 10.1
           },
-          "name": "",
-          "onboardUrl": "",
+          "name": "ins15-apic1",
+          "onboardUrl": "10.195.219.153:443",
           "reRegister": false
-        },
-        "status": {
-          "controllers": [
-            {
-              "fabricDomain": "",
-              "inbandNetwork": {
-                "ipv4Address": "",
-                "ipv6Address": ""
-              },
-              "name": "",
-              "managementNetwork": {},
-              "fqdn": "",
-              "reachability": "",
-              "serialNumber": "",
-              "status": ""
-            }
-          ],
-          "lastUpdate": {
-            "message": "",
-            "time": ""
-          },
-          "local": false,
-          "primaryCluster": false,
-          "state": "",
-          "version": "",
-          "virtual": false
         }
       }
   auth: inherit
@@ -124,6 +99,7 @@ examples:
             }
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -205,6 +181,7 @@ examples:
             }
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -261,6 +238,7 @@ examples:
             }
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -317,6 +295,7 @@ examples:
             }
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -373,6 +352,7 @@ examples:
             }
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -429,6 +409,7 @@ examples:
             }
           }
     response:
+      status: 429
       statusText: Too Many Requests
       headers:
         - name: Content-Type
@@ -485,6 +466,7 @@ examples:
             }
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

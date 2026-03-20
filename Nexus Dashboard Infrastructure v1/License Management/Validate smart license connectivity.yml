@@ -2,6 +2,8 @@ info:
   name: Validate smart license connectivity
   type: http
   seq: 15
+  tags:
+    - License Management
 
 http:
   method: POST
@@ -16,9 +18,7 @@ http:
     type: json
     data: |-
       {
-        "port": "",
-        "transport": "",
-        "url": ""
+        "transport": "slDefault"
       }
   auth: inherit
 
@@ -46,6 +46,7 @@ examples:
             "transport": "slDefault"
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -77,6 +78,7 @@ examples:
             "url": "abc.ex"
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -109,6 +111,7 @@ examples:
             "url": "proxy.abc.com"
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -139,6 +142,7 @@ examples:
             "transport": "slDefault"
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -170,6 +174,7 @@ examples:
             "url": "abc.ex"
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -202,6 +207,7 @@ examples:
             "url": "proxy.abc.com"
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -233,6 +239,7 @@ examples:
             "transport": "slDefault"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -264,6 +271,7 @@ examples:
             "url": "abc.ex"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -296,6 +304,7 @@ examples:
             "url": "proxy.abc.com"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -326,6 +335,7 @@ examples:
             "transport": "slDefault"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -357,6 +367,7 @@ examples:
             "url": "abc.ex"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -389,6 +400,7 @@ examples:
             "url": "proxy.abc.com"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -419,6 +431,7 @@ examples:
             "transport": "slDefault"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -450,6 +463,7 @@ examples:
             "url": "abc.ex"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -482,6 +496,7 @@ examples:
             "url": "proxy.abc.com"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -512,6 +527,7 @@ examples:
             "transport": "slDefault"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type
@@ -543,6 +559,7 @@ examples:
             "url": "abc.ex"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type
@@ -575,6 +592,7 @@ examples:
             "url": "proxy.abc.com"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

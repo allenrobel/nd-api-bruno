@@ -2,6 +2,8 @@ info:
   name: Returns list of Integrations
   type: http
   seq: 2
+  tags:
+    - Integrations
 
 http:
   method: GET
@@ -16,6 +18,7 @@ http:
       value: ""
       type: query
       description: Lucene format filter - Filter the response based on this filter field
+      disabled: true
     - name: fabricName
       value: ""
       type: query
@@ -24,7 +27,11 @@ http:
     - name: sort
       value: ""
       type: query
-      description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+      description: |
+        Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+        Ascending order by default: "field1"
+        Specific order for one field: "field1:asc" or "field1:desc"
+        Specific order with multiple fields: "field1:asc,field2:desc"
       disabled: true
     - name: max
       value: ""
@@ -60,6 +67,7 @@ examples:
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
         - name: fabricName
           value: ""
           type: query
@@ -68,7 +76,11 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: max
           value: ""
@@ -81,6 +93,7 @@ examples:
           description: Number of records to skip for pagination
           disabled: true
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -89,7 +102,57 @@ examples:
         type: json
         data: |-
           {
-            "items": []
+            "items": [
+              {
+                "items": [
+                  {
+                    "integrationName": "Integ1",
+                    "integrationId": "appDynamics-172.23.48.41",
+                    "ip": "172.23.48.41",
+                    "associatedFabrics": [
+                      "fabric1"
+                    ],
+                    "username": "admin",
+                    "type": "appDynamics",
+                    "port": "8090",
+                    "lastActiveDate": "2024-08-22T00:42:14Z",
+                    "status": "active"
+                  },
+                  {
+                    "integrationName": "Integ2",
+                    "integrationId": "dnsQuery-172.23.48.43",
+                    "ip": "172.23.48.42",
+                    "associatedFabrics": [
+                      "fabric1"
+                    ],
+                    "type": "dnsQuery",
+                    "lastActiveDate": null,
+                    "status": "down",
+                    "dnsServers": [
+                      {
+                        "ip": "172.23.48.43",
+                        "port": "53"
+                      },
+                      {
+                        "ip": "172.23.48.44",
+                        "port": "53"
+                      }
+                    ]
+                  },
+                  {
+                    "integrationName": "Slurm-Integration-1",
+                    "integrationId": "slurm-172-23-48-41",
+                    "hostname": "172.23.48.41",
+                    "derivedFabrics": [
+                      "backend-fabric-1"
+                    ],
+                    "type": "slurm",
+                    "lastActiveDate": "2024-08-22T00:42:14Z",
+                    "status": "active"
+                  }
+                ]
+              }
+            ]
           }
   - name: 400 Response
     description: Bad Request
@@ -106,6 +169,7 @@ examples:
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
         - name: fabricName
           value: ""
           type: query
@@ -114,7 +178,11 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: max
           value: ""
@@ -127,6 +195,7 @@ examples:
           description: Number of records to skip for pagination
           disabled: true
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -154,6 +223,7 @@ examples:
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
         - name: fabricName
           value: ""
           type: query
@@ -162,7 +232,11 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: max
           value: ""
@@ -175,6 +249,7 @@ examples:
           description: Number of records to skip for pagination
           disabled: true
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -202,6 +277,7 @@ examples:
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
         - name: fabricName
           value: ""
           type: query
@@ -210,7 +286,11 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: max
           value: ""
@@ -223,6 +303,7 @@ examples:
           description: Number of records to skip for pagination
           disabled: true
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -250,6 +331,7 @@ examples:
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
         - name: fabricName
           value: ""
           type: query
@@ -258,7 +340,11 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: max
           value: ""
@@ -271,6 +357,7 @@ examples:
           description: Number of records to skip for pagination
           disabled: true
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

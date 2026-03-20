@@ -2,6 +2,8 @@ info:
   name: Create IPv6 prefix lists
   type: http
   seq: 30
+  tags:
+    - Routing Policies
 
 http:
   method: POST
@@ -22,21 +24,36 @@ http:
       {
         "ipv6PrefixLists": [
           {
-            "name": "",
-            "description": "",
-            "lastUpdateTimestamp": "",
-            "tenantName": "",
+            "description": "Allows engineering server",
             "entries": [
               {
-                "sequenceNumber": 0,
-                "action": "",
-                "prefix": "",
-                "exactLength": 0,
-                "minLength": 0,
-                "maxLength": 0,
-                "mask": ""
+                "action": "permit",
+                "mask": "ffff:ffff:f::",
+                "maxLength": 64,
+                "minLength": 48,
+                "prefix": "2001:db8::/32",
+                "sequenceNumber": 10
+              },
+              {
+                "action": "permit",
+                "exactLength": 64,
+                "prefix": "2001:db8:1::/48",
+                "sequenceNumber": 20
               }
-            ]
+            ],
+            "name": "prefixList1"
+          },
+          {
+            "description": "Denied subnet",
+            "entries": [
+              {
+                "action": "deny",
+                "maxLength": 64,
+                "prefix": "2001:db8:2::/48",
+                "sequenceNumber": 10
+              }
+            ],
+            "name": "prefixList2"
           }
         ]
       }
@@ -104,6 +121,7 @@ examples:
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -173,6 +191,7 @@ examples:
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -254,6 +273,7 @@ examples:
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -309,6 +329,7 @@ examples:
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -376,6 +397,7 @@ examples:
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -431,6 +453,7 @@ examples:
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -498,6 +521,7 @@ examples:
             ]
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -553,6 +577,7 @@ examples:
             ]
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -620,6 +645,7 @@ examples:
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -675,6 +701,7 @@ examples:
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -742,6 +769,7 @@ examples:
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type
@@ -797,6 +825,7 @@ examples:
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

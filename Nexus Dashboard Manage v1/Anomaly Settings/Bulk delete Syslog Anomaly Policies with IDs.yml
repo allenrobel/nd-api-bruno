@@ -2,6 +2,8 @@ info:
   name: Bulk delete Syslog Anomaly Policies with IDs
   type: http
   seq: 19
+  tags:
+    - Anomaly Settings
 
 http:
   method: POST
@@ -16,7 +18,9 @@ http:
     type: json
     data: |-
       [
-        {}
+        "rule1",
+        "rule2",
+        "rule2"
       ]
   auth: inherit
 
@@ -47,6 +51,7 @@ examples:
             "rule2"
           ]
     response:
+      status: 200
       statusText: OK
       body:
         type: text
@@ -71,6 +76,7 @@ examples:
             "rule2"
           ]
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -103,6 +109,7 @@ examples:
             "rule2"
           ]
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -135,6 +142,7 @@ examples:
             "rule2"
           ]
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -167,6 +175,7 @@ examples:
             "rule2"
           ]
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -199,6 +208,7 @@ examples:
             "rule2"
           ]
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

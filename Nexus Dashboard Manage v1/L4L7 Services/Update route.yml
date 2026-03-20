@@ -2,6 +2,8 @@ info:
   name: Update route
   type: http
   seq: 34
+  tags:
+    - L4L7 Services
 
 http:
   method: PUT
@@ -19,10 +21,15 @@ http:
     type: json
     data: |-
       {
-        "lastUpdateTimestamp": "",
-        "routeData": "",
-        "routeName": "",
-        "vrfName": ""
+        "routeData": {
+          "routeDataType": "custom",
+          "templateName": "my_service_ebgp_route",
+          "templateParams": {
+            "adminState": "true"
+          }
+        },
+        "routeName": "route3",
+        "vrfName": "Vrf1"
       }
   auth: inherit
 
@@ -61,6 +68,7 @@ examples:
             "vrfName": "Vrf1"
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -139,6 +147,7 @@ examples:
             "vrfName": "Vrf1"
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -223,6 +232,7 @@ examples:
             "vrfName": "Vrf1"
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -276,6 +286,7 @@ examples:
             "vrfName": "Vrf1"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -349,6 +360,7 @@ examples:
             "vrfName": "Vrf1"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -396,6 +408,7 @@ examples:
             "vrfName": "Vrf1"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -437,6 +450,7 @@ examples:
             "vrfName": "Vrf1"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -510,6 +524,7 @@ examples:
             "vrfName": "Vrf1"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -557,6 +572,7 @@ examples:
             "vrfName": "Vrf1"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -598,6 +614,7 @@ examples:
             "vrfName": "Vrf1"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -671,6 +688,7 @@ examples:
             "vrfName": "Vrf1"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -718,6 +736,7 @@ examples:
             "vrfName": "Vrf1"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -759,6 +778,7 @@ examples:
             "vrfName": "Vrf1"
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -832,6 +852,7 @@ examples:
             "vrfName": "Vrf1"
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -879,6 +900,7 @@ examples:
             "vrfName": "Vrf1"
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -920,6 +942,7 @@ examples:
             "vrfName": "Vrf1"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type
@@ -993,6 +1016,7 @@ examples:
             "vrfName": "Vrf1"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type
@@ -1040,6 +1064,7 @@ examples:
             "vrfName": "Vrf1"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

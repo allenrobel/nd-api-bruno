@@ -1,0 +1,472 @@
+info:
+  name: Get Microburst Analytics queue burst information
+  type: http
+  seq: 4
+  tags:
+    - Network Connectivity Resources
+
+http:
+  method: GET
+  url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivity/microburst/bursts"
+  params:
+    - name: fabricName
+      value: ""
+      type: query
+      description: Name of the fabric
+    - name: switchName
+      value: ""
+      type: query
+      description: Name of the switch
+    - name: interfaceName
+      value: ""
+      type: query
+      description: Name of the interface
+    - name: groupBy
+      value: peak
+      type: query
+      description: Aggregation by Statistics Type
+    - name: groupBy
+      value: duration
+      type: query
+      description: Aggregation by Statistics Type
+      disabled: true
+    - name: queueName
+      value: ""
+      type: query
+      description: Name of the queue in switch/interface
+    - name: clusterName
+      value: ""
+      type: query
+      description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+      disabled: true
+    - name: startDate
+      value: ""
+      type: query
+      description: Start date
+      disabled: true
+    - name: endDate
+      value: ""
+      type: query
+      description: End date
+      disabled: true
+    - name: max
+      value: ""
+      type: query
+      description: Number of records to return
+      disabled: true
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: OK
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivity/microburst/bursts"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: switchName
+          value: ""
+          type: query
+          description: Name of the switch
+        - name: interfaceName
+          value: ""
+          type: query
+          description: Name of the interface
+        - name: groupBy
+          value: peak
+          type: query
+          description: Aggregation by Statistics Type
+        - name: groupBy
+          value: duration
+          type: query
+          description: Aggregation by Statistics Type
+          disabled: true
+        - name: queueName
+          value: ""
+          type: query
+          description: Name of the queue in switch/interface
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "microbursts": [
+              {
+                "fabricName": "tel1",
+                "interfaceName": "eth1/1",
+                "queues": [
+                  {
+                    "duration": 19347,
+                    "endBurstValue\"": 242,
+                    "endTimestamp": "2020-02-20T03:38:54.834561Z",
+                    "peakBurstValue": 9358,
+                    "peakTimestamp": "2020-02-20T03:38:54.834556Z",
+                    "queueName": "queue-0",
+                    "queueType": "unicast",
+                    "startBurstValue": 2757,
+                    "startTimestamp": "2020-02-20T03:38:54.835277Z"
+                  }
+                ],
+                "switchName": "tel1-leaf1"
+              }
+            ]
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivity/microburst/bursts"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: switchName
+          value: ""
+          type: query
+          description: Name of the switch
+        - name: interfaceName
+          value: ""
+          type: query
+          description: Name of the interface
+        - name: groupBy
+          value: peak
+          type: query
+          description: Aggregation by Statistics Type
+        - name: groupBy
+          value: duration
+          type: query
+          description: Aggregation by Statistics Type
+          disabled: true
+        - name: queueName
+          value: ""
+          type: query
+          description: Name of the queue in switch/interface
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivity/microburst/bursts"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: switchName
+          value: ""
+          type: query
+          description: Name of the switch
+        - name: interfaceName
+          value: ""
+          type: query
+          description: Name of the interface
+        - name: groupBy
+          value: peak
+          type: query
+          description: Aggregation by Statistics Type
+        - name: groupBy
+          value: duration
+          type: query
+          description: Aggregation by Statistics Type
+          disabled: true
+        - name: queueName
+          value: ""
+          type: query
+          description: Name of the queue in switch/interface
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 403 Response
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivity/microburst/bursts"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: switchName
+          value: ""
+          type: query
+          description: Name of the switch
+        - name: interfaceName
+          value: ""
+          type: query
+          description: Name of the interface
+        - name: groupBy
+          value: peak
+          type: query
+          description: Aggregation by Statistics Type
+        - name: groupBy
+          value: duration
+          type: query
+          description: Aggregation by Statistics Type
+          disabled: true
+        - name: queueName
+          value: ""
+          type: query
+          description: Name of the queue in switch/interface
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 404 Response
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivity/microburst/bursts"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: switchName
+          value: ""
+          type: query
+          description: Name of the switch
+        - name: interfaceName
+          value: ""
+          type: query
+          description: Name of the interface
+        - name: groupBy
+          value: peak
+          type: query
+          description: Aggregation by Statistics Type
+        - name: groupBy
+          value: duration
+          type: query
+          description: Aggregation by Statistics Type
+          disabled: true
+        - name: queueName
+          value: ""
+          type: query
+          description: Name of the queue in switch/interface
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 500 Response
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivity/microburst/bursts"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: switchName
+          value: ""
+          type: query
+          description: Name of the switch
+        - name: interfaceName
+          value: ""
+          type: query
+          description: Name of the interface
+        - name: groupBy
+          value: peak
+          type: query
+          description: Aggregation by Statistics Type
+        - name: groupBy
+          value: duration
+          type: query
+          description: Aggregation by Statistics Type
+          disabled: true
+        - name: queueName
+          value: ""
+          type: query
+          description: Name of the queue in switch/interface
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }

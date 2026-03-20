@@ -2,6 +2,8 @@ info:
   name: Delete the specified security domain
   type: http
   seq: 24
+  tags:
+    - Users and Security
 
 http:
   method: DELETE
@@ -41,6 +43,7 @@ examples:
           type: path
           description: Security domain name
     response:
+      status: 200
       statusText: OK
       body:
         type: text
@@ -61,6 +64,7 @@ examples:
           type: path
           description: Security domain name
     response:
+      status: 204
       statusText: No Content
       body:
         type: text
@@ -81,6 +85,7 @@ examples:
           type: path
           description: Security domain name
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -109,6 +114,7 @@ examples:
           type: path
           description: Security domain name
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -137,6 +143,7 @@ examples:
           type: path
           description: Security domain name
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -165,6 +172,7 @@ examples:
           type: path
           description: Security domain name
     response:
+      status: 429
       statusText: Too Many Requests
       headers:
         - name: Content-Type
@@ -193,6 +201,7 @@ examples:
           type: path
           description: Security domain name
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

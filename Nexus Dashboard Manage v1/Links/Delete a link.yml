@@ -2,6 +2,8 @@ info:
   name: Delete a link
   type: http
   seq: 6
+  tags:
+    - Links
 
 http:
   method: DELETE
@@ -22,10 +24,9 @@ http:
       description: Change Control Ticket Id
       disabled: true
     - name: isLogicalLink
-      value: ""
+      value: "false"
       type: query
       description: Indicates if the link is a logical link. Set to `true` for logical links, `false` otherwise
-      disabled: true
   auth: inherit
 
 settings:
@@ -56,11 +57,11 @@ examples:
           description: Change Control Ticket Id
           disabled: true
         - name: isLogicalLink
-          value: ""
+          value: "false"
           type: query
           description: Indicates if the link is a logical link. Set to `true` for logical links, `false` otherwise
-          disabled: true
     response:
+      status: 204
       statusText: No Content
       body:
         type: text
@@ -86,11 +87,11 @@ examples:
           description: Change Control Ticket Id
           disabled: true
         - name: isLogicalLink
-          value: ""
+          value: "false"
           type: query
           description: Indicates if the link is a logical link. Set to `true` for logical links, `false` otherwise
-          disabled: true
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -124,11 +125,11 @@ examples:
           description: Change Control Ticket Id
           disabled: true
         - name: isLogicalLink
-          value: ""
+          value: "false"
           type: query
           description: Indicates if the link is a logical link. Set to `true` for logical links, `false` otherwise
-          disabled: true
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -162,11 +163,11 @@ examples:
           description: Change Control Ticket Id
           disabled: true
         - name: isLogicalLink
-          value: ""
+          value: "false"
           type: query
           description: Indicates if the link is a logical link. Set to `true` for logical links, `false` otherwise
-          disabled: true
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -200,11 +201,11 @@ examples:
           description: Change Control Ticket Id
           disabled: true
         - name: isLogicalLink
-          value: ""
+          value: "false"
           type: query
           description: Indicates if the link is a logical link. Set to `true` for logical links, `false` otherwise
-          disabled: true
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -238,11 +239,11 @@ examples:
           description: Change Control Ticket Id
           disabled: true
         - name: isLogicalLink
-          value: ""
+          value: "false"
           type: query
           description: Indicates if the link is a logical link. Set to `true` for logical links, `false` otherwise
-          disabled: true
     response:
+      status: 409
       statusText: Conflict
       headers:
         - name: Content-Type
@@ -276,11 +277,11 @@ examples:
           description: Change Control Ticket Id
           disabled: true
         - name: isLogicalLink
-          value: ""
+          value: "false"
           type: query
           description: Indicates if the link is a logical link. Set to `true` for logical links, `false` otherwise
-          disabled: true
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

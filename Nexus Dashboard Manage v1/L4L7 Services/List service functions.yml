@@ -2,6 +2,8 @@ info:
   name: List service functions
   type: http
   seq: 11
+  tags:
+    - L4L7 Services
 
 http:
   method: GET
@@ -20,6 +22,7 @@ http:
       value: ""
       type: query
       description: Lucene format filter - Filter the response based on this filter field
+      disabled: true
     - name: offset
       value: ""
       type: query
@@ -28,7 +31,11 @@ http:
     - name: sort
       value: ""
       type: query
-      description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+      description: |
+        Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+        Ascending order by default: "field1"
+        Specific order for one field: "field1:asc" or "field1:desc"
+        Specific order with multiple fields: "field1:asc,field2:desc"
       disabled: true
   auth: inherit
 
@@ -58,6 +65,7 @@ examples:
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
         - name: offset
           value: ""
           type: query
@@ -66,9 +74,14 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -84,42 +97,48 @@ examples:
                     {
                       "arms": [
                         {
-                          "armType": "",
-                          "peeringOption": "",
-                          "probeName": "",
+                          "armType": "firstOrOutsideArm",
+                          "peeringOption": "eBGPDynamicPeering",
+                          "probeName": "probe1",
                           "peeringConfigs": [
                             {
-                              "peerSwitches": [],
-                              "routeName": ""
+                              "peerSwitches": [
+                                "FDO12345ABC"
+                              ],
+                              "routeName": "route1"
                             }
                           ],
-                          "serviceNetworkName": ""
+                          "serviceNetworkName": "ServiceNet1"
+                        },
+                        {
+                          "armType": "secondOrInsideArm",
+                          "peeringOption": "eBGPDynamicPeering",
+                          "probeName": "probe2",
+                          "serviceNetworkName": "ServiceNet2"
                         }
                       ],
-                      "clusterName": "",
-                      "lastUpdateTimestamp": "",
+                      "serviceClusterName": "LBCluster1",
                       "serviceNodeIps": {
-                        "ipv4Address": "",
-                        "ipv6Address": "",
-                        "reverseIpv4Address": "",
-                        "reverseIpv6Address": ""
+                        "ipv4Address": "123.1.5.123",
+                        "ipv6Address": "1005::123",
+                        "reverseIpv4Address": "123.1.6.123",
+                        "reverseIpv6Address": "1006::123"
                       }
                     }
                   ],
-                  "clusterType": "",
-                  "connectivityMode": "",
-                  "functionName": "",
-                  "lastUpdateTimestamp": "",
-                  "vrf2Name": "",
-                  "vrfName": ""
+                  "clusterType": "loadBalancer",
+                  "connectivityMode": "twoArm",
+                  "functionName": "LBFunc1",
+                  "vrf2Name": "Vrf1",
+                  "vrfName": "Vrf1"
                 },
                 "deploymentStatus": {
-                  "status": "",
+                  "status": "deployed",
                   "statusDetails": [
                     {
-                      "type": "",
-                      "name": "",
-                      "status": ""
+                      "type": "serviceVrf",
+                      "name": "TenantVRF_50001",
+                      "status": "deployed"
                     }
                   ]
                 }
@@ -145,6 +164,7 @@ examples:
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
         - name: offset
           value: ""
           type: query
@@ -153,9 +173,14 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -187,6 +212,7 @@ examples:
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
         - name: offset
           value: ""
           type: query
@@ -195,9 +221,14 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -229,6 +260,7 @@ examples:
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
         - name: offset
           value: ""
           type: query
@@ -237,9 +269,14 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -271,6 +308,7 @@ examples:
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
         - name: offset
           value: ""
           type: query
@@ -279,9 +317,14 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -313,6 +356,7 @@ examples:
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
         - name: offset
           value: ""
           type: query
@@ -321,9 +365,14 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

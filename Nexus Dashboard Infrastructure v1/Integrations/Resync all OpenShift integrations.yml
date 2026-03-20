@@ -2,6 +2,8 @@ info:
   name: Resync all OpenShift integrations
   type: http
   seq: 58
+  tags:
+    - Integrations
 
 http:
   method: POST
@@ -33,6 +35,7 @@ examples:
           description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
           disabled: true
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -41,7 +44,13 @@ examples:
         type: json
         data: |-
           {
-            "results": []
+            "results": [
+              {
+                "integrationId": "openshift-1.1.1.1",
+                "message": "resync complete",
+                "status": "success"
+              }
+            ]
           }
   - name: 400 Response
     description: Bad Request
@@ -55,6 +64,7 @@ examples:
           description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
           disabled: true
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -79,6 +89,7 @@ examples:
           description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
           disabled: true
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -103,6 +114,7 @@ examples:
           description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
           disabled: true
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -127,6 +139,7 @@ examples:
           description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
           disabled: true
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

@@ -2,6 +2,8 @@ info:
   name: Update Interface Group details
   type: http
   seq: 15
+  tags:
+    - Interfaces
 
 http:
   method: PUT
@@ -27,7 +29,36 @@ http:
       disabled: true
   body:
     type: json
-    data: ""
+    data: |-
+      {
+        "description": "any interface group",
+        "interfaceGroupName": "IG1_ANY",
+        "networkNames": [
+          "MyNetwork_30003",
+          "MyNetwork_30004"
+        ],
+        "switchInterfaces": [
+          {
+            "interfaceNames": [
+              "Ethernet1/1",
+              "Ethernet1/2",
+              "Ethernet1/3",
+              "Ethernet1/4"
+            ],
+            "switchId": "FDO24490CQQ"
+          },
+          {
+            "interfaceNames": [
+              "Ethernet1/1",
+              "Ethernet1/2",
+              "Ethernet1/3",
+              "Ethernet1/4"
+            ],
+            "switchId": "FX1930GDYZ"
+          }
+        ],
+        "type": "any"
+      }
   auth: inherit
 
 settings:
@@ -74,27 +105,32 @@ examples:
             "switchInterfaces": [
               {
                 "interfaceNames": [
-                  "portChannel501"
+                  "Ethernet1/1",
+                  "Ethernet1/2",
+                  "Ethernet1/3",
+                  "Ethernet1/4"
                 ],
                 "switchId": "FDO24490CQQ"
               },
               {
                 "interfaceNames": [
-                  "portChannel502",
-                  "portChannel503",
-                  "portChannel504"
+                  "Ethernet1/1",
+                  "Ethernet1/2",
+                  "Ethernet1/3",
+                  "Ethernet1/4"
                 ],
-                "switchId": "FOX1930GDYK"
+                "switchId": "FX1930GDYZ"
               }
             ],
             "type": "any"
           }
     response:
+      status: 204
       statusText: No Content
       body:
         type: text
         data: ""
-  - name: 204 Response (ethernetCustom)
+  - name: 204 Response (ehternetWithoutPolicy)
     description: No Content
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups/:interfaceGroupName"
@@ -122,58 +158,40 @@ examples:
         type: json
         data: |-
           {
-            "description": "Ethernet with custom template",
-            "interfaceGroupName": "IG1_with_custom_template",
+            "description": "ethernet without policy",
+            "interfaceGroupName": "IG1_Without_Policy",
             "networkNames": [
               "MyNetwork_30003",
               "MyNetwork_30004"
             ],
-            "switchInterfaces": [
-              {
-                "interfaceNames": [
-                  "Ethernet1/1"
-                ],
-                "switchId": "FDO24490CQQ"
-              },
-              {
-                "interfaceNames": [
-                  "Ethernet1/2",
-                  "Ethernet1/3",
-                  "Ethernet1/4"
-                ],
-                "switchId": "FOX1930GDYK"
-              }
-            ],
-            "templateConfig": {
-              "adminStatus": true,
-              "autoNegotiation": "on",
-              "bpduGuard": "default",
-              "cdp": true,
-              "description": "ethernet interface group with custom template",
-              "extraConfig": "logging event port link-status",
-              "fex": false,
-              "mtu": "jumbo",
-              "nativeVlan": 1,
-              "netflow": false,
-              "netflowMonitor": "",
-              "netflowSampler": "",
-              "portDuplexMode": "auto",
-              "portTypeFast": true,
-              "ptp": false,
-              "ptpTimestampTagging": false,
-              "speed": "auto",
-              "trunkAllowedVlans": "none",
-              "vPCOrphanPort": false
+            "policyDetails": {
+              "policyType": "none"
             },
-            "templateName": "int_shared_custom_trunk_host",
-            "type": "ethernetCustom"
+            "switchInterfaces": [
+              {
+                "interfaceNames": [
+                  "Ethernet1/1"
+                ],
+                "switchId": "FX1930GDYZ"
+              },
+              {
+                "interfaceNames": [
+                  "Ethernet1/2",
+                  "Ethernet1/3",
+                  "Ethernet1/4"
+                ],
+                "switchId": "FOX1930GDYK"
+              }
+            ],
+            "type": "ethernet"
           }
     response:
+      status: 204
       statusText: No Content
       body:
         type: text
         data: ""
-  - name: 204 Response (ethernetWithPolicy)
+  - name: 204 Response (ethernetSharedTrunkHost)
     description: No Content
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups/:interfaceGroupName"
@@ -201,39 +219,41 @@ examples:
         type: json
         data: |-
           {
-            "description": "Ethernet with Policy",
-            "ethernetAttributes": {
-              "adminStatus": true,
-              "autoNegotiation": "on",
-              "bpduGuard": "default",
-              "cdp": true,
-              "description": "Get ethernet interface group with policy details",
-              "extraConfig": "logging event port link-status",
-              "fex": false,
-              "mtu": "jumbo",
-              "nativeVlan": 1,
-              "netflow": false,
-              "netflowMonitor": "",
-              "netflowSampler": "",
-              "portDuplexMode": "auto",
-              "portTypeFast": true,
-              "ptp": false,
-              "ptpTimestampTagging": false,
-              "speed": "auto",
-              "trunkAllowedVlans": "none",
-              "vPCOrphanPort": false
+            "description": "ethernet with policy",
+            "interfaceGroupName": "IG1_With_Policy",
+            "networkNames": [
+              "MyNetwork_30003",
+              "MyNetwork_30004"
+            ],
+            "policyDetails": {
+              "ethernetAttributes": {
+                "adminState": true,
+                "allowedVlans": "none",
+                "autoNegotiate": true,
+                "bpduGuard": "default",
+                "cdp": true,
+                "description": "Ethernet policy attributes",
+                "duplexMode": "auto",
+                "extraConfig": "",
+                "mtu": "jumbo",
+                "nativeVlan": 1,
+                "netflow": false,
+                "netflowMonitor": "",
+                "netflowSampler": "",
+                "orphanPort": false,
+                "portTypeEdge": false,
+                "portTypeEdgeTrunk": true,
+                "speed": "auto"
+              },
+              "policyId": "POLICY-SHARED-35020",
+              "policyType": "sharedTrunkHost"
             },
-            "interfaceGroupName": "IG1_with_Policy",
-            "networkNames": [
-              "MyNetwork_30003",
-              "MyNetwork_30004"
-            ],
             "switchInterfaces": [
               {
                 "interfaceNames": [
                   "Ethernet1/1"
                 ],
-                "switchId": "FDO24490CQQ"
+                "switchId": "FX1930GDYZ"
               },
               {
                 "interfaceNames": [
@@ -244,14 +264,15 @@ examples:
                 "switchId": "FOX1930GDYK"
               }
             ],
-            "type": "ethernetWithPolicy"
+            "type": "ethernet"
           }
     response:
+      status: 204
       statusText: No Content
       body:
         type: text
         data: ""
-  - name: 204 Response (ethernetWithoutPolicy)
+  - name: 204 Response (ethernetUserDefinedSharedTrunkPolicy)
     description: No Content
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups/:interfaceGroupName"
@@ -279,19 +300,41 @@ examples:
         type: json
         data: |-
           {
-            "description": "Ethernet without Policy",
-            "ethernetAttributes": {},
-            "interfaceGroupName": "IG1_without_Policy",
+            "description": "ethernet Custom policy",
+            "interfaceGroupName": "IG1_custom_Policy",
             "networkNames": [
               "MyNetwork_30003",
               "MyNetwork_30004"
             ],
+            "policyDetails": {
+              "policyType": "userDefinedSharedTrunk",
+              "templateConfig": {
+                "adminState": true,
+                "allowedVlans": "none",
+                "autoNegotiate": true,
+                "bpduGuard": "default",
+                "cdp": true,
+                "description": "Ethernet policy attributes",
+                "duplexMode": "auto",
+                "extraConfig": "",
+                "mtu": "jumbo",
+                "nativeVlan": 1,
+                "netflow": false,
+                "netflowMonitor": "",
+                "netflowSampler": "",
+                "orphanPort": false,
+                "portTypeEdge": false,
+                "portTypeEdgeTrunk": true,
+                "speed": "auto"
+              },
+              "templateName": "int_shared_custom_trunk_host"
+            },
             "switchInterfaces": [
               {
                 "interfaceNames": [
                   "Ethernet1/1"
                 ],
-                "switchId": "FDO24490CQQ"
+                "switchId": "FX1930GDYZ"
               },
               {
                 "interfaceNames": [
@@ -302,9 +345,10 @@ examples:
                 "switchId": "FOX1930GDYK"
               }
             ],
-            "type": "ethernetWithoutPolicy"
+            "type": "ethernet"
           }
     response:
+      status: 204
       statusText: No Content
       body:
         type: text
@@ -346,15 +390,15 @@ examples:
             "switchInterfaces": [
               {
                 "interfaceNames": [
-                  "portChannel501"
+                  "Port-channel501"
                 ],
                 "switchId": "FDO24490CQQ"
               },
               {
                 "interfaceNames": [
-                  "portChannel502",
-                  "portChannel503",
-                  "portChannel504"
+                  "Port-channel502",
+                  "Port-channel503",
+                  "Port-channel504"
                 ],
                 "switchId": "FOX1930GDYK"
               }
@@ -362,6 +406,7 @@ examples:
             "type": "portChannel"
           }
     response:
+      status: 204
       statusText: No Content
       body:
         type: text
@@ -394,8 +439,8 @@ examples:
         type: json
         data: |-
           {
-            "description": "vpc interface group",
-            "interfaceGroupName": "IG1_vpc",
+            "description": "vPC interface group",
+            "interfaceGroupName": "IG1_VPC",
             "networkNames": [
               "MyNetwork_30003",
               "MyNetwork_30004"
@@ -403,15 +448,17 @@ examples:
             "switchInterfaces": [
               {
                 "interfaceNames": [
-                  "vpc1"
+                  "vPC2",
+                  "vPC3",
+                  "vPC4"
                 ],
                 "switchId": "FDO24490CQQ"
               },
               {
                 "interfaceNames": [
-                  "vpc2",
-                  "vpc3",
-                  "vpc4"
+                  "vPC2",
+                  "vPC3",
+                  "vPC4"
                 ],
                 "switchId": "FOX1930GDYK"
               }
@@ -419,6 +466,7 @@ examples:
             "type": "vpc"
           }
     response:
+      status: 204
       statusText: No Content
       body:
         type: text
@@ -460,22 +508,27 @@ examples:
             "switchInterfaces": [
               {
                 "interfaceNames": [
-                  "portChannel501"
+                  "Ethernet1/1",
+                  "Ethernet1/2",
+                  "Ethernet1/3",
+                  "Ethernet1/4"
                 ],
                 "switchId": "FDO24490CQQ"
               },
               {
                 "interfaceNames": [
-                  "portChannel502",
-                  "portChannel503",
-                  "portChannel504"
+                  "Ethernet1/1",
+                  "Ethernet1/2",
+                  "Ethernet1/3",
+                  "Ethernet1/4"
                 ],
-                "switchId": "FOX1930GDYK"
+                "switchId": "FX1930GDYZ"
               }
             ],
             "type": "any"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -488,7 +541,7 @@ examples:
             "description": "The server could not understand the request due to incorrect syntax.",
             "code": 400
           }
-  - name: 400 Response (ethernetCustom)
+  - name: 400 Response (ehternetWithoutPolicy)
     description: Bad Request
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups/:interfaceGroupName"
@@ -516,53 +569,35 @@ examples:
         type: json
         data: |-
           {
-            "description": "Ethernet with custom template",
-            "interfaceGroupName": "IG1_with_custom_template",
+            "description": "ethernet without policy",
+            "interfaceGroupName": "IG1_Without_Policy",
             "networkNames": [
               "MyNetwork_30003",
               "MyNetwork_30004"
             ],
-            "switchInterfaces": [
-              {
-                "interfaceNames": [
-                  "Ethernet1/1"
-                ],
-                "switchId": "FDO24490CQQ"
-              },
-              {
-                "interfaceNames": [
-                  "Ethernet1/2",
-                  "Ethernet1/3",
-                  "Ethernet1/4"
-                ],
-                "switchId": "FOX1930GDYK"
-              }
-            ],
-            "templateConfig": {
-              "adminStatus": true,
-              "autoNegotiation": "on",
-              "bpduGuard": "default",
-              "cdp": true,
-              "description": "ethernet interface group with custom template",
-              "extraConfig": "logging event port link-status",
-              "fex": false,
-              "mtu": "jumbo",
-              "nativeVlan": 1,
-              "netflow": false,
-              "netflowMonitor": "",
-              "netflowSampler": "",
-              "portDuplexMode": "auto",
-              "portTypeFast": true,
-              "ptp": false,
-              "ptpTimestampTagging": false,
-              "speed": "auto",
-              "trunkAllowedVlans": "none",
-              "vPCOrphanPort": false
+            "policyDetails": {
+              "policyType": "none"
             },
-            "templateName": "int_shared_custom_trunk_host",
-            "type": "ethernetCustom"
+            "switchInterfaces": [
+              {
+                "interfaceNames": [
+                  "Ethernet1/1"
+                ],
+                "switchId": "FX1930GDYZ"
+              },
+              {
+                "interfaceNames": [
+                  "Ethernet1/2",
+                  "Ethernet1/3",
+                  "Ethernet1/4"
+                ],
+                "switchId": "FOX1930GDYK"
+              }
+            ],
+            "type": "ethernet"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -575,7 +610,7 @@ examples:
             "description": "The server could not understand the request due to incorrect syntax.",
             "code": 400
           }
-  - name: 400 Response (ethernetWithPolicy)
+  - name: 400 Response (ethernetSharedTrunkHost)
     description: Bad Request
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups/:interfaceGroupName"
@@ -603,39 +638,41 @@ examples:
         type: json
         data: |-
           {
-            "description": "Ethernet with Policy",
-            "ethernetAttributes": {
-              "adminStatus": true,
-              "autoNegotiation": "on",
-              "bpduGuard": "default",
-              "cdp": true,
-              "description": "Get ethernet interface group with policy details",
-              "extraConfig": "logging event port link-status",
-              "fex": false,
-              "mtu": "jumbo",
-              "nativeVlan": 1,
-              "netflow": false,
-              "netflowMonitor": "",
-              "netflowSampler": "",
-              "portDuplexMode": "auto",
-              "portTypeFast": true,
-              "ptp": false,
-              "ptpTimestampTagging": false,
-              "speed": "auto",
-              "trunkAllowedVlans": "none",
-              "vPCOrphanPort": false
+            "description": "ethernet with policy",
+            "interfaceGroupName": "IG1_With_Policy",
+            "networkNames": [
+              "MyNetwork_30003",
+              "MyNetwork_30004"
+            ],
+            "policyDetails": {
+              "ethernetAttributes": {
+                "adminState": true,
+                "allowedVlans": "none",
+                "autoNegotiate": true,
+                "bpduGuard": "default",
+                "cdp": true,
+                "description": "Ethernet policy attributes",
+                "duplexMode": "auto",
+                "extraConfig": "",
+                "mtu": "jumbo",
+                "nativeVlan": 1,
+                "netflow": false,
+                "netflowMonitor": "",
+                "netflowSampler": "",
+                "orphanPort": false,
+                "portTypeEdge": false,
+                "portTypeEdgeTrunk": true,
+                "speed": "auto"
+              },
+              "policyId": "POLICY-SHARED-35020",
+              "policyType": "sharedTrunkHost"
             },
-            "interfaceGroupName": "IG1_with_Policy",
-            "networkNames": [
-              "MyNetwork_30003",
-              "MyNetwork_30004"
-            ],
             "switchInterfaces": [
               {
                 "interfaceNames": [
                   "Ethernet1/1"
                 ],
-                "switchId": "FDO24490CQQ"
+                "switchId": "FX1930GDYZ"
               },
               {
                 "interfaceNames": [
@@ -646,9 +683,10 @@ examples:
                 "switchId": "FOX1930GDYK"
               }
             ],
-            "type": "ethernetWithPolicy"
+            "type": "ethernet"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -661,7 +699,7 @@ examples:
             "description": "The server could not understand the request due to incorrect syntax.",
             "code": 400
           }
-  - name: 400 Response (ethernetWithoutPolicy)
+  - name: 400 Response (ethernetUserDefinedSharedTrunkPolicy)
     description: Bad Request
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups/:interfaceGroupName"
@@ -689,19 +727,41 @@ examples:
         type: json
         data: |-
           {
-            "description": "Ethernet without Policy",
-            "ethernetAttributes": {},
-            "interfaceGroupName": "IG1_without_Policy",
+            "description": "ethernet Custom policy",
+            "interfaceGroupName": "IG1_custom_Policy",
             "networkNames": [
               "MyNetwork_30003",
               "MyNetwork_30004"
             ],
+            "policyDetails": {
+              "policyType": "userDefinedSharedTrunk",
+              "templateConfig": {
+                "adminState": true,
+                "allowedVlans": "none",
+                "autoNegotiate": true,
+                "bpduGuard": "default",
+                "cdp": true,
+                "description": "Ethernet policy attributes",
+                "duplexMode": "auto",
+                "extraConfig": "",
+                "mtu": "jumbo",
+                "nativeVlan": 1,
+                "netflow": false,
+                "netflowMonitor": "",
+                "netflowSampler": "",
+                "orphanPort": false,
+                "portTypeEdge": false,
+                "portTypeEdgeTrunk": true,
+                "speed": "auto"
+              },
+              "templateName": "int_shared_custom_trunk_host"
+            },
             "switchInterfaces": [
               {
                 "interfaceNames": [
                   "Ethernet1/1"
                 ],
-                "switchId": "FDO24490CQQ"
+                "switchId": "FX1930GDYZ"
               },
               {
                 "interfaceNames": [
@@ -712,9 +772,10 @@ examples:
                 "switchId": "FOX1930GDYK"
               }
             ],
-            "type": "ethernetWithoutPolicy"
+            "type": "ethernet"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -764,15 +825,15 @@ examples:
             "switchInterfaces": [
               {
                 "interfaceNames": [
-                  "portChannel501"
+                  "Port-channel501"
                 ],
                 "switchId": "FDO24490CQQ"
               },
               {
                 "interfaceNames": [
-                  "portChannel502",
-                  "portChannel503",
-                  "portChannel504"
+                  "Port-channel502",
+                  "Port-channel503",
+                  "Port-channel504"
                 ],
                 "switchId": "FOX1930GDYK"
               }
@@ -780,6 +841,7 @@ examples:
             "type": "portChannel"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -820,8 +882,8 @@ examples:
         type: json
         data: |-
           {
-            "description": "vpc interface group",
-            "interfaceGroupName": "IG1_vpc",
+            "description": "vPC interface group",
+            "interfaceGroupName": "IG1_VPC",
             "networkNames": [
               "MyNetwork_30003",
               "MyNetwork_30004"
@@ -829,15 +891,17 @@ examples:
             "switchInterfaces": [
               {
                 "interfaceNames": [
-                  "vpc1"
+                  "vPC2",
+                  "vPC3",
+                  "vPC4"
                 ],
                 "switchId": "FDO24490CQQ"
               },
               {
                 "interfaceNames": [
-                  "vpc2",
-                  "vpc3",
-                  "vpc4"
+                  "vPC2",
+                  "vPC3",
+                  "vPC4"
                 ],
                 "switchId": "FOX1930GDYK"
               }
@@ -845,6 +909,7 @@ examples:
             "type": "vpc"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -894,22 +959,27 @@ examples:
             "switchInterfaces": [
               {
                 "interfaceNames": [
-                  "portChannel501"
+                  "Ethernet1/1",
+                  "Ethernet1/2",
+                  "Ethernet1/3",
+                  "Ethernet1/4"
                 ],
                 "switchId": "FDO24490CQQ"
               },
               {
                 "interfaceNames": [
-                  "portChannel502",
-                  "portChannel503",
-                  "portChannel504"
+                  "Ethernet1/1",
+                  "Ethernet1/2",
+                  "Ethernet1/3",
+                  "Ethernet1/4"
                 ],
-                "switchId": "FOX1930GDYK"
+                "switchId": "FX1930GDYZ"
               }
             ],
             "type": "any"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -922,7 +992,7 @@ examples:
             "description": "Indicates that the request requires user authentication information.",
             "code": 401
           }
-  - name: 401 Response (ethernetCustom)
+  - name: 401 Response (ehternetWithoutPolicy)
     description: Unauthorized
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups/:interfaceGroupName"
@@ -950,53 +1020,35 @@ examples:
         type: json
         data: |-
           {
-            "description": "Ethernet with custom template",
-            "interfaceGroupName": "IG1_with_custom_template",
+            "description": "ethernet without policy",
+            "interfaceGroupName": "IG1_Without_Policy",
             "networkNames": [
               "MyNetwork_30003",
               "MyNetwork_30004"
             ],
-            "switchInterfaces": [
-              {
-                "interfaceNames": [
-                  "Ethernet1/1"
-                ],
-                "switchId": "FDO24490CQQ"
-              },
-              {
-                "interfaceNames": [
-                  "Ethernet1/2",
-                  "Ethernet1/3",
-                  "Ethernet1/4"
-                ],
-                "switchId": "FOX1930GDYK"
-              }
-            ],
-            "templateConfig": {
-              "adminStatus": true,
-              "autoNegotiation": "on",
-              "bpduGuard": "default",
-              "cdp": true,
-              "description": "ethernet interface group with custom template",
-              "extraConfig": "logging event port link-status",
-              "fex": false,
-              "mtu": "jumbo",
-              "nativeVlan": 1,
-              "netflow": false,
-              "netflowMonitor": "",
-              "netflowSampler": "",
-              "portDuplexMode": "auto",
-              "portTypeFast": true,
-              "ptp": false,
-              "ptpTimestampTagging": false,
-              "speed": "auto",
-              "trunkAllowedVlans": "none",
-              "vPCOrphanPort": false
+            "policyDetails": {
+              "policyType": "none"
             },
-            "templateName": "int_shared_custom_trunk_host",
-            "type": "ethernetCustom"
+            "switchInterfaces": [
+              {
+                "interfaceNames": [
+                  "Ethernet1/1"
+                ],
+                "switchId": "FX1930GDYZ"
+              },
+              {
+                "interfaceNames": [
+                  "Ethernet1/2",
+                  "Ethernet1/3",
+                  "Ethernet1/4"
+                ],
+                "switchId": "FOX1930GDYK"
+              }
+            ],
+            "type": "ethernet"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -1009,7 +1061,7 @@ examples:
             "description": "Indicates that the request requires user authentication information.",
             "code": 401
           }
-  - name: 401 Response (ethernetWithPolicy)
+  - name: 401 Response (ethernetSharedTrunkHost)
     description: Unauthorized
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups/:interfaceGroupName"
@@ -1037,39 +1089,41 @@ examples:
         type: json
         data: |-
           {
-            "description": "Ethernet with Policy",
-            "ethernetAttributes": {
-              "adminStatus": true,
-              "autoNegotiation": "on",
-              "bpduGuard": "default",
-              "cdp": true,
-              "description": "Get ethernet interface group with policy details",
-              "extraConfig": "logging event port link-status",
-              "fex": false,
-              "mtu": "jumbo",
-              "nativeVlan": 1,
-              "netflow": false,
-              "netflowMonitor": "",
-              "netflowSampler": "",
-              "portDuplexMode": "auto",
-              "portTypeFast": true,
-              "ptp": false,
-              "ptpTimestampTagging": false,
-              "speed": "auto",
-              "trunkAllowedVlans": "none",
-              "vPCOrphanPort": false
+            "description": "ethernet with policy",
+            "interfaceGroupName": "IG1_With_Policy",
+            "networkNames": [
+              "MyNetwork_30003",
+              "MyNetwork_30004"
+            ],
+            "policyDetails": {
+              "ethernetAttributes": {
+                "adminState": true,
+                "allowedVlans": "none",
+                "autoNegotiate": true,
+                "bpduGuard": "default",
+                "cdp": true,
+                "description": "Ethernet policy attributes",
+                "duplexMode": "auto",
+                "extraConfig": "",
+                "mtu": "jumbo",
+                "nativeVlan": 1,
+                "netflow": false,
+                "netflowMonitor": "",
+                "netflowSampler": "",
+                "orphanPort": false,
+                "portTypeEdge": false,
+                "portTypeEdgeTrunk": true,
+                "speed": "auto"
+              },
+              "policyId": "POLICY-SHARED-35020",
+              "policyType": "sharedTrunkHost"
             },
-            "interfaceGroupName": "IG1_with_Policy",
-            "networkNames": [
-              "MyNetwork_30003",
-              "MyNetwork_30004"
-            ],
             "switchInterfaces": [
               {
                 "interfaceNames": [
                   "Ethernet1/1"
                 ],
-                "switchId": "FDO24490CQQ"
+                "switchId": "FX1930GDYZ"
               },
               {
                 "interfaceNames": [
@@ -1080,9 +1134,10 @@ examples:
                 "switchId": "FOX1930GDYK"
               }
             ],
-            "type": "ethernetWithPolicy"
+            "type": "ethernet"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -1095,7 +1150,7 @@ examples:
             "description": "Indicates that the request requires user authentication information.",
             "code": 401
           }
-  - name: 401 Response (ethernetWithoutPolicy)
+  - name: 401 Response (ethernetUserDefinedSharedTrunkPolicy)
     description: Unauthorized
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups/:interfaceGroupName"
@@ -1123,19 +1178,41 @@ examples:
         type: json
         data: |-
           {
-            "description": "Ethernet without Policy",
-            "ethernetAttributes": {},
-            "interfaceGroupName": "IG1_without_Policy",
+            "description": "ethernet Custom policy",
+            "interfaceGroupName": "IG1_custom_Policy",
             "networkNames": [
               "MyNetwork_30003",
               "MyNetwork_30004"
             ],
+            "policyDetails": {
+              "policyType": "userDefinedSharedTrunk",
+              "templateConfig": {
+                "adminState": true,
+                "allowedVlans": "none",
+                "autoNegotiate": true,
+                "bpduGuard": "default",
+                "cdp": true,
+                "description": "Ethernet policy attributes",
+                "duplexMode": "auto",
+                "extraConfig": "",
+                "mtu": "jumbo",
+                "nativeVlan": 1,
+                "netflow": false,
+                "netflowMonitor": "",
+                "netflowSampler": "",
+                "orphanPort": false,
+                "portTypeEdge": false,
+                "portTypeEdgeTrunk": true,
+                "speed": "auto"
+              },
+              "templateName": "int_shared_custom_trunk_host"
+            },
             "switchInterfaces": [
               {
                 "interfaceNames": [
                   "Ethernet1/1"
                 ],
-                "switchId": "FDO24490CQQ"
+                "switchId": "FX1930GDYZ"
               },
               {
                 "interfaceNames": [
@@ -1146,9 +1223,10 @@ examples:
                 "switchId": "FOX1930GDYK"
               }
             ],
-            "type": "ethernetWithoutPolicy"
+            "type": "ethernet"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -1198,15 +1276,15 @@ examples:
             "switchInterfaces": [
               {
                 "interfaceNames": [
-                  "portChannel501"
+                  "Port-channel501"
                 ],
                 "switchId": "FDO24490CQQ"
               },
               {
                 "interfaceNames": [
-                  "portChannel502",
-                  "portChannel503",
-                  "portChannel504"
+                  "Port-channel502",
+                  "Port-channel503",
+                  "Port-channel504"
                 ],
                 "switchId": "FOX1930GDYK"
               }
@@ -1214,6 +1292,7 @@ examples:
             "type": "portChannel"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -1254,8 +1333,8 @@ examples:
         type: json
         data: |-
           {
-            "description": "vpc interface group",
-            "interfaceGroupName": "IG1_vpc",
+            "description": "vPC interface group",
+            "interfaceGroupName": "IG1_VPC",
             "networkNames": [
               "MyNetwork_30003",
               "MyNetwork_30004"
@@ -1263,15 +1342,17 @@ examples:
             "switchInterfaces": [
               {
                 "interfaceNames": [
-                  "vpc1"
+                  "vPC2",
+                  "vPC3",
+                  "vPC4"
                 ],
                 "switchId": "FDO24490CQQ"
               },
               {
                 "interfaceNames": [
-                  "vpc2",
-                  "vpc3",
-                  "vpc4"
+                  "vPC2",
+                  "vPC3",
+                  "vPC4"
                 ],
                 "switchId": "FOX1930GDYK"
               }
@@ -1279,6 +1360,7 @@ examples:
             "type": "vpc"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -1328,22 +1410,27 @@ examples:
             "switchInterfaces": [
               {
                 "interfaceNames": [
-                  "portChannel501"
+                  "Ethernet1/1",
+                  "Ethernet1/2",
+                  "Ethernet1/3",
+                  "Ethernet1/4"
                 ],
                 "switchId": "FDO24490CQQ"
               },
               {
                 "interfaceNames": [
-                  "portChannel502",
-                  "portChannel503",
-                  "portChannel504"
+                  "Ethernet1/1",
+                  "Ethernet1/2",
+                  "Ethernet1/3",
+                  "Ethernet1/4"
                 ],
-                "switchId": "FOX1930GDYK"
+                "switchId": "FX1930GDYZ"
               }
             ],
             "type": "any"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -1356,7 +1443,7 @@ examples:
             "description": "The client does not have access rights to the content.",
             "code": 403
           }
-  - name: 403 Response (ethernetCustom)
+  - name: 403 Response (ehternetWithoutPolicy)
     description: Forbidden
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups/:interfaceGroupName"
@@ -1384,53 +1471,35 @@ examples:
         type: json
         data: |-
           {
-            "description": "Ethernet with custom template",
-            "interfaceGroupName": "IG1_with_custom_template",
+            "description": "ethernet without policy",
+            "interfaceGroupName": "IG1_Without_Policy",
             "networkNames": [
               "MyNetwork_30003",
               "MyNetwork_30004"
             ],
-            "switchInterfaces": [
-              {
-                "interfaceNames": [
-                  "Ethernet1/1"
-                ],
-                "switchId": "FDO24490CQQ"
-              },
-              {
-                "interfaceNames": [
-                  "Ethernet1/2",
-                  "Ethernet1/3",
-                  "Ethernet1/4"
-                ],
-                "switchId": "FOX1930GDYK"
-              }
-            ],
-            "templateConfig": {
-              "adminStatus": true,
-              "autoNegotiation": "on",
-              "bpduGuard": "default",
-              "cdp": true,
-              "description": "ethernet interface group with custom template",
-              "extraConfig": "logging event port link-status",
-              "fex": false,
-              "mtu": "jumbo",
-              "nativeVlan": 1,
-              "netflow": false,
-              "netflowMonitor": "",
-              "netflowSampler": "",
-              "portDuplexMode": "auto",
-              "portTypeFast": true,
-              "ptp": false,
-              "ptpTimestampTagging": false,
-              "speed": "auto",
-              "trunkAllowedVlans": "none",
-              "vPCOrphanPort": false
+            "policyDetails": {
+              "policyType": "none"
             },
-            "templateName": "int_shared_custom_trunk_host",
-            "type": "ethernetCustom"
+            "switchInterfaces": [
+              {
+                "interfaceNames": [
+                  "Ethernet1/1"
+                ],
+                "switchId": "FX1930GDYZ"
+              },
+              {
+                "interfaceNames": [
+                  "Ethernet1/2",
+                  "Ethernet1/3",
+                  "Ethernet1/4"
+                ],
+                "switchId": "FOX1930GDYK"
+              }
+            ],
+            "type": "ethernet"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -1443,7 +1512,7 @@ examples:
             "description": "The client does not have access rights to the content.",
             "code": 403
           }
-  - name: 403 Response (ethernetWithPolicy)
+  - name: 403 Response (ethernetSharedTrunkHost)
     description: Forbidden
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups/:interfaceGroupName"
@@ -1471,39 +1540,41 @@ examples:
         type: json
         data: |-
           {
-            "description": "Ethernet with Policy",
-            "ethernetAttributes": {
-              "adminStatus": true,
-              "autoNegotiation": "on",
-              "bpduGuard": "default",
-              "cdp": true,
-              "description": "Get ethernet interface group with policy details",
-              "extraConfig": "logging event port link-status",
-              "fex": false,
-              "mtu": "jumbo",
-              "nativeVlan": 1,
-              "netflow": false,
-              "netflowMonitor": "",
-              "netflowSampler": "",
-              "portDuplexMode": "auto",
-              "portTypeFast": true,
-              "ptp": false,
-              "ptpTimestampTagging": false,
-              "speed": "auto",
-              "trunkAllowedVlans": "none",
-              "vPCOrphanPort": false
+            "description": "ethernet with policy",
+            "interfaceGroupName": "IG1_With_Policy",
+            "networkNames": [
+              "MyNetwork_30003",
+              "MyNetwork_30004"
+            ],
+            "policyDetails": {
+              "ethernetAttributes": {
+                "adminState": true,
+                "allowedVlans": "none",
+                "autoNegotiate": true,
+                "bpduGuard": "default",
+                "cdp": true,
+                "description": "Ethernet policy attributes",
+                "duplexMode": "auto",
+                "extraConfig": "",
+                "mtu": "jumbo",
+                "nativeVlan": 1,
+                "netflow": false,
+                "netflowMonitor": "",
+                "netflowSampler": "",
+                "orphanPort": false,
+                "portTypeEdge": false,
+                "portTypeEdgeTrunk": true,
+                "speed": "auto"
+              },
+              "policyId": "POLICY-SHARED-35020",
+              "policyType": "sharedTrunkHost"
             },
-            "interfaceGroupName": "IG1_with_Policy",
-            "networkNames": [
-              "MyNetwork_30003",
-              "MyNetwork_30004"
-            ],
             "switchInterfaces": [
               {
                 "interfaceNames": [
                   "Ethernet1/1"
                 ],
-                "switchId": "FDO24490CQQ"
+                "switchId": "FX1930GDYZ"
               },
               {
                 "interfaceNames": [
@@ -1514,9 +1585,10 @@ examples:
                 "switchId": "FOX1930GDYK"
               }
             ],
-            "type": "ethernetWithPolicy"
+            "type": "ethernet"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -1529,7 +1601,7 @@ examples:
             "description": "The client does not have access rights to the content.",
             "code": 403
           }
-  - name: 403 Response (ethernetWithoutPolicy)
+  - name: 403 Response (ethernetUserDefinedSharedTrunkPolicy)
     description: Forbidden
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups/:interfaceGroupName"
@@ -1557,19 +1629,41 @@ examples:
         type: json
         data: |-
           {
-            "description": "Ethernet without Policy",
-            "ethernetAttributes": {},
-            "interfaceGroupName": "IG1_without_Policy",
+            "description": "ethernet Custom policy",
+            "interfaceGroupName": "IG1_custom_Policy",
             "networkNames": [
               "MyNetwork_30003",
               "MyNetwork_30004"
             ],
+            "policyDetails": {
+              "policyType": "userDefinedSharedTrunk",
+              "templateConfig": {
+                "adminState": true,
+                "allowedVlans": "none",
+                "autoNegotiate": true,
+                "bpduGuard": "default",
+                "cdp": true,
+                "description": "Ethernet policy attributes",
+                "duplexMode": "auto",
+                "extraConfig": "",
+                "mtu": "jumbo",
+                "nativeVlan": 1,
+                "netflow": false,
+                "netflowMonitor": "",
+                "netflowSampler": "",
+                "orphanPort": false,
+                "portTypeEdge": false,
+                "portTypeEdgeTrunk": true,
+                "speed": "auto"
+              },
+              "templateName": "int_shared_custom_trunk_host"
+            },
             "switchInterfaces": [
               {
                 "interfaceNames": [
                   "Ethernet1/1"
                 ],
-                "switchId": "FDO24490CQQ"
+                "switchId": "FX1930GDYZ"
               },
               {
                 "interfaceNames": [
@@ -1580,9 +1674,10 @@ examples:
                 "switchId": "FOX1930GDYK"
               }
             ],
-            "type": "ethernetWithoutPolicy"
+            "type": "ethernet"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -1632,15 +1727,15 @@ examples:
             "switchInterfaces": [
               {
                 "interfaceNames": [
-                  "portChannel501"
+                  "Port-channel501"
                 ],
                 "switchId": "FDO24490CQQ"
               },
               {
                 "interfaceNames": [
-                  "portChannel502",
-                  "portChannel503",
-                  "portChannel504"
+                  "Port-channel502",
+                  "Port-channel503",
+                  "Port-channel504"
                 ],
                 "switchId": "FOX1930GDYK"
               }
@@ -1648,6 +1743,7 @@ examples:
             "type": "portChannel"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -1688,8 +1784,8 @@ examples:
         type: json
         data: |-
           {
-            "description": "vpc interface group",
-            "interfaceGroupName": "IG1_vpc",
+            "description": "vPC interface group",
+            "interfaceGroupName": "IG1_VPC",
             "networkNames": [
               "MyNetwork_30003",
               "MyNetwork_30004"
@@ -1697,15 +1793,17 @@ examples:
             "switchInterfaces": [
               {
                 "interfaceNames": [
-                  "vpc1"
+                  "vPC2",
+                  "vPC3",
+                  "vPC4"
                 ],
                 "switchId": "FDO24490CQQ"
               },
               {
                 "interfaceNames": [
-                  "vpc2",
-                  "vpc3",
-                  "vpc4"
+                  "vPC2",
+                  "vPC3",
+                  "vPC4"
                 ],
                 "switchId": "FOX1930GDYK"
               }
@@ -1713,6 +1811,7 @@ examples:
             "type": "vpc"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -1762,22 +1861,27 @@ examples:
             "switchInterfaces": [
               {
                 "interfaceNames": [
-                  "portChannel501"
+                  "Ethernet1/1",
+                  "Ethernet1/2",
+                  "Ethernet1/3",
+                  "Ethernet1/4"
                 ],
                 "switchId": "FDO24490CQQ"
               },
               {
                 "interfaceNames": [
-                  "portChannel502",
-                  "portChannel503",
-                  "portChannel504"
+                  "Ethernet1/1",
+                  "Ethernet1/2",
+                  "Ethernet1/3",
+                  "Ethernet1/4"
                 ],
-                "switchId": "FOX1930GDYK"
+                "switchId": "FX1930GDYZ"
               }
             ],
             "type": "any"
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -1790,7 +1894,7 @@ examples:
             "description": "The server cannot find the requested resource.",
             "code": 404
           }
-  - name: 404 Response (ethernetCustom)
+  - name: 404 Response (ehternetWithoutPolicy)
     description: Not Found
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups/:interfaceGroupName"
@@ -1818,53 +1922,35 @@ examples:
         type: json
         data: |-
           {
-            "description": "Ethernet with custom template",
-            "interfaceGroupName": "IG1_with_custom_template",
+            "description": "ethernet without policy",
+            "interfaceGroupName": "IG1_Without_Policy",
             "networkNames": [
               "MyNetwork_30003",
               "MyNetwork_30004"
             ],
-            "switchInterfaces": [
-              {
-                "interfaceNames": [
-                  "Ethernet1/1"
-                ],
-                "switchId": "FDO24490CQQ"
-              },
-              {
-                "interfaceNames": [
-                  "Ethernet1/2",
-                  "Ethernet1/3",
-                  "Ethernet1/4"
-                ],
-                "switchId": "FOX1930GDYK"
-              }
-            ],
-            "templateConfig": {
-              "adminStatus": true,
-              "autoNegotiation": "on",
-              "bpduGuard": "default",
-              "cdp": true,
-              "description": "ethernet interface group with custom template",
-              "extraConfig": "logging event port link-status",
-              "fex": false,
-              "mtu": "jumbo",
-              "nativeVlan": 1,
-              "netflow": false,
-              "netflowMonitor": "",
-              "netflowSampler": "",
-              "portDuplexMode": "auto",
-              "portTypeFast": true,
-              "ptp": false,
-              "ptpTimestampTagging": false,
-              "speed": "auto",
-              "trunkAllowedVlans": "none",
-              "vPCOrphanPort": false
+            "policyDetails": {
+              "policyType": "none"
             },
-            "templateName": "int_shared_custom_trunk_host",
-            "type": "ethernetCustom"
+            "switchInterfaces": [
+              {
+                "interfaceNames": [
+                  "Ethernet1/1"
+                ],
+                "switchId": "FX1930GDYZ"
+              },
+              {
+                "interfaceNames": [
+                  "Ethernet1/2",
+                  "Ethernet1/3",
+                  "Ethernet1/4"
+                ],
+                "switchId": "FOX1930GDYK"
+              }
+            ],
+            "type": "ethernet"
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -1877,7 +1963,7 @@ examples:
             "description": "The server cannot find the requested resource.",
             "code": 404
           }
-  - name: 404 Response (ethernetWithPolicy)
+  - name: 404 Response (ethernetSharedTrunkHost)
     description: Not Found
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups/:interfaceGroupName"
@@ -1905,39 +1991,41 @@ examples:
         type: json
         data: |-
           {
-            "description": "Ethernet with Policy",
-            "ethernetAttributes": {
-              "adminStatus": true,
-              "autoNegotiation": "on",
-              "bpduGuard": "default",
-              "cdp": true,
-              "description": "Get ethernet interface group with policy details",
-              "extraConfig": "logging event port link-status",
-              "fex": false,
-              "mtu": "jumbo",
-              "nativeVlan": 1,
-              "netflow": false,
-              "netflowMonitor": "",
-              "netflowSampler": "",
-              "portDuplexMode": "auto",
-              "portTypeFast": true,
-              "ptp": false,
-              "ptpTimestampTagging": false,
-              "speed": "auto",
-              "trunkAllowedVlans": "none",
-              "vPCOrphanPort": false
+            "description": "ethernet with policy",
+            "interfaceGroupName": "IG1_With_Policy",
+            "networkNames": [
+              "MyNetwork_30003",
+              "MyNetwork_30004"
+            ],
+            "policyDetails": {
+              "ethernetAttributes": {
+                "adminState": true,
+                "allowedVlans": "none",
+                "autoNegotiate": true,
+                "bpduGuard": "default",
+                "cdp": true,
+                "description": "Ethernet policy attributes",
+                "duplexMode": "auto",
+                "extraConfig": "",
+                "mtu": "jumbo",
+                "nativeVlan": 1,
+                "netflow": false,
+                "netflowMonitor": "",
+                "netflowSampler": "",
+                "orphanPort": false,
+                "portTypeEdge": false,
+                "portTypeEdgeTrunk": true,
+                "speed": "auto"
+              },
+              "policyId": "POLICY-SHARED-35020",
+              "policyType": "sharedTrunkHost"
             },
-            "interfaceGroupName": "IG1_with_Policy",
-            "networkNames": [
-              "MyNetwork_30003",
-              "MyNetwork_30004"
-            ],
             "switchInterfaces": [
               {
                 "interfaceNames": [
                   "Ethernet1/1"
                 ],
-                "switchId": "FDO24490CQQ"
+                "switchId": "FX1930GDYZ"
               },
               {
                 "interfaceNames": [
@@ -1948,9 +2036,10 @@ examples:
                 "switchId": "FOX1930GDYK"
               }
             ],
-            "type": "ethernetWithPolicy"
+            "type": "ethernet"
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -1963,7 +2052,7 @@ examples:
             "description": "The server cannot find the requested resource.",
             "code": 404
           }
-  - name: 404 Response (ethernetWithoutPolicy)
+  - name: 404 Response (ethernetUserDefinedSharedTrunkPolicy)
     description: Not Found
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups/:interfaceGroupName"
@@ -1991,19 +2080,41 @@ examples:
         type: json
         data: |-
           {
-            "description": "Ethernet without Policy",
-            "ethernetAttributes": {},
-            "interfaceGroupName": "IG1_without_Policy",
+            "description": "ethernet Custom policy",
+            "interfaceGroupName": "IG1_custom_Policy",
             "networkNames": [
               "MyNetwork_30003",
               "MyNetwork_30004"
             ],
+            "policyDetails": {
+              "policyType": "userDefinedSharedTrunk",
+              "templateConfig": {
+                "adminState": true,
+                "allowedVlans": "none",
+                "autoNegotiate": true,
+                "bpduGuard": "default",
+                "cdp": true,
+                "description": "Ethernet policy attributes",
+                "duplexMode": "auto",
+                "extraConfig": "",
+                "mtu": "jumbo",
+                "nativeVlan": 1,
+                "netflow": false,
+                "netflowMonitor": "",
+                "netflowSampler": "",
+                "orphanPort": false,
+                "portTypeEdge": false,
+                "portTypeEdgeTrunk": true,
+                "speed": "auto"
+              },
+              "templateName": "int_shared_custom_trunk_host"
+            },
             "switchInterfaces": [
               {
                 "interfaceNames": [
                   "Ethernet1/1"
                 ],
-                "switchId": "FDO24490CQQ"
+                "switchId": "FX1930GDYZ"
               },
               {
                 "interfaceNames": [
@@ -2014,9 +2125,10 @@ examples:
                 "switchId": "FOX1930GDYK"
               }
             ],
-            "type": "ethernetWithoutPolicy"
+            "type": "ethernet"
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -2066,15 +2178,15 @@ examples:
             "switchInterfaces": [
               {
                 "interfaceNames": [
-                  "portChannel501"
+                  "Port-channel501"
                 ],
                 "switchId": "FDO24490CQQ"
               },
               {
                 "interfaceNames": [
-                  "portChannel502",
-                  "portChannel503",
-                  "portChannel504"
+                  "Port-channel502",
+                  "Port-channel503",
+                  "Port-channel504"
                 ],
                 "switchId": "FOX1930GDYK"
               }
@@ -2082,6 +2194,7 @@ examples:
             "type": "portChannel"
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -2122,8 +2235,8 @@ examples:
         type: json
         data: |-
           {
-            "description": "vpc interface group",
-            "interfaceGroupName": "IG1_vpc",
+            "description": "vPC interface group",
+            "interfaceGroupName": "IG1_VPC",
             "networkNames": [
               "MyNetwork_30003",
               "MyNetwork_30004"
@@ -2131,15 +2244,17 @@ examples:
             "switchInterfaces": [
               {
                 "interfaceNames": [
-                  "vpc1"
+                  "vPC2",
+                  "vPC3",
+                  "vPC4"
                 ],
                 "switchId": "FDO24490CQQ"
               },
               {
                 "interfaceNames": [
-                  "vpc2",
-                  "vpc3",
-                  "vpc4"
+                  "vPC2",
+                  "vPC3",
+                  "vPC4"
                 ],
                 "switchId": "FOX1930GDYK"
               }
@@ -2147,6 +2262,7 @@ examples:
             "type": "vpc"
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -2196,22 +2312,27 @@ examples:
             "switchInterfaces": [
               {
                 "interfaceNames": [
-                  "portChannel501"
+                  "Ethernet1/1",
+                  "Ethernet1/2",
+                  "Ethernet1/3",
+                  "Ethernet1/4"
                 ],
                 "switchId": "FDO24490CQQ"
               },
               {
                 "interfaceNames": [
-                  "portChannel502",
-                  "portChannel503",
-                  "portChannel504"
+                  "Ethernet1/1",
+                  "Ethernet1/2",
+                  "Ethernet1/3",
+                  "Ethernet1/4"
                 ],
-                "switchId": "FOX1930GDYK"
+                "switchId": "FX1930GDYZ"
               }
             ],
             "type": "any"
           }
     response:
+      status: 409
       statusText: Conflict
       headers:
         - name: Content-Type
@@ -2224,7 +2345,7 @@ examples:
             "description": "The request could not be completed due to a conflict with the current state of the resource.",
             "code": 409
           }
-  - name: 409 Response (ethernetCustom)
+  - name: 409 Response (ehternetWithoutPolicy)
     description: Conflict
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups/:interfaceGroupName"
@@ -2252,53 +2373,35 @@ examples:
         type: json
         data: |-
           {
-            "description": "Ethernet with custom template",
-            "interfaceGroupName": "IG1_with_custom_template",
+            "description": "ethernet without policy",
+            "interfaceGroupName": "IG1_Without_Policy",
             "networkNames": [
               "MyNetwork_30003",
               "MyNetwork_30004"
             ],
-            "switchInterfaces": [
-              {
-                "interfaceNames": [
-                  "Ethernet1/1"
-                ],
-                "switchId": "FDO24490CQQ"
-              },
-              {
-                "interfaceNames": [
-                  "Ethernet1/2",
-                  "Ethernet1/3",
-                  "Ethernet1/4"
-                ],
-                "switchId": "FOX1930GDYK"
-              }
-            ],
-            "templateConfig": {
-              "adminStatus": true,
-              "autoNegotiation": "on",
-              "bpduGuard": "default",
-              "cdp": true,
-              "description": "ethernet interface group with custom template",
-              "extraConfig": "logging event port link-status",
-              "fex": false,
-              "mtu": "jumbo",
-              "nativeVlan": 1,
-              "netflow": false,
-              "netflowMonitor": "",
-              "netflowSampler": "",
-              "portDuplexMode": "auto",
-              "portTypeFast": true,
-              "ptp": false,
-              "ptpTimestampTagging": false,
-              "speed": "auto",
-              "trunkAllowedVlans": "none",
-              "vPCOrphanPort": false
+            "policyDetails": {
+              "policyType": "none"
             },
-            "templateName": "int_shared_custom_trunk_host",
-            "type": "ethernetCustom"
+            "switchInterfaces": [
+              {
+                "interfaceNames": [
+                  "Ethernet1/1"
+                ],
+                "switchId": "FX1930GDYZ"
+              },
+              {
+                "interfaceNames": [
+                  "Ethernet1/2",
+                  "Ethernet1/3",
+                  "Ethernet1/4"
+                ],
+                "switchId": "FOX1930GDYK"
+              }
+            ],
+            "type": "ethernet"
           }
     response:
+      status: 409
       statusText: Conflict
       headers:
         - name: Content-Type
@@ -2311,7 +2414,7 @@ examples:
             "description": "The request could not be completed due to a conflict with the current state of the resource.",
             "code": 409
           }
-  - name: 409 Response (ethernetWithPolicy)
+  - name: 409 Response (ethernetSharedTrunkHost)
     description: Conflict
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups/:interfaceGroupName"
@@ -2339,39 +2442,41 @@ examples:
         type: json
         data: |-
           {
-            "description": "Ethernet with Policy",
-            "ethernetAttributes": {
-              "adminStatus": true,
-              "autoNegotiation": "on",
-              "bpduGuard": "default",
-              "cdp": true,
-              "description": "Get ethernet interface group with policy details",
-              "extraConfig": "logging event port link-status",
-              "fex": false,
-              "mtu": "jumbo",
-              "nativeVlan": 1,
-              "netflow": false,
-              "netflowMonitor": "",
-              "netflowSampler": "",
-              "portDuplexMode": "auto",
-              "portTypeFast": true,
-              "ptp": false,
-              "ptpTimestampTagging": false,
-              "speed": "auto",
-              "trunkAllowedVlans": "none",
-              "vPCOrphanPort": false
+            "description": "ethernet with policy",
+            "interfaceGroupName": "IG1_With_Policy",
+            "networkNames": [
+              "MyNetwork_30003",
+              "MyNetwork_30004"
+            ],
+            "policyDetails": {
+              "ethernetAttributes": {
+                "adminState": true,
+                "allowedVlans": "none",
+                "autoNegotiate": true,
+                "bpduGuard": "default",
+                "cdp": true,
+                "description": "Ethernet policy attributes",
+                "duplexMode": "auto",
+                "extraConfig": "",
+                "mtu": "jumbo",
+                "nativeVlan": 1,
+                "netflow": false,
+                "netflowMonitor": "",
+                "netflowSampler": "",
+                "orphanPort": false,
+                "portTypeEdge": false,
+                "portTypeEdgeTrunk": true,
+                "speed": "auto"
+              },
+              "policyId": "POLICY-SHARED-35020",
+              "policyType": "sharedTrunkHost"
             },
-            "interfaceGroupName": "IG1_with_Policy",
-            "networkNames": [
-              "MyNetwork_30003",
-              "MyNetwork_30004"
-            ],
             "switchInterfaces": [
               {
                 "interfaceNames": [
                   "Ethernet1/1"
                 ],
-                "switchId": "FDO24490CQQ"
+                "switchId": "FX1930GDYZ"
               },
               {
                 "interfaceNames": [
@@ -2382,9 +2487,10 @@ examples:
                 "switchId": "FOX1930GDYK"
               }
             ],
-            "type": "ethernetWithPolicy"
+            "type": "ethernet"
           }
     response:
+      status: 409
       statusText: Conflict
       headers:
         - name: Content-Type
@@ -2397,7 +2503,7 @@ examples:
             "description": "The request could not be completed due to a conflict with the current state of the resource.",
             "code": 409
           }
-  - name: 409 Response (ethernetWithoutPolicy)
+  - name: 409 Response (ethernetUserDefinedSharedTrunkPolicy)
     description: Conflict
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups/:interfaceGroupName"
@@ -2425,19 +2531,41 @@ examples:
         type: json
         data: |-
           {
-            "description": "Ethernet without Policy",
-            "ethernetAttributes": {},
-            "interfaceGroupName": "IG1_without_Policy",
+            "description": "ethernet Custom policy",
+            "interfaceGroupName": "IG1_custom_Policy",
             "networkNames": [
               "MyNetwork_30003",
               "MyNetwork_30004"
             ],
+            "policyDetails": {
+              "policyType": "userDefinedSharedTrunk",
+              "templateConfig": {
+                "adminState": true,
+                "allowedVlans": "none",
+                "autoNegotiate": true,
+                "bpduGuard": "default",
+                "cdp": true,
+                "description": "Ethernet policy attributes",
+                "duplexMode": "auto",
+                "extraConfig": "",
+                "mtu": "jumbo",
+                "nativeVlan": 1,
+                "netflow": false,
+                "netflowMonitor": "",
+                "netflowSampler": "",
+                "orphanPort": false,
+                "portTypeEdge": false,
+                "portTypeEdgeTrunk": true,
+                "speed": "auto"
+              },
+              "templateName": "int_shared_custom_trunk_host"
+            },
             "switchInterfaces": [
               {
                 "interfaceNames": [
                   "Ethernet1/1"
                 ],
-                "switchId": "FDO24490CQQ"
+                "switchId": "FX1930GDYZ"
               },
               {
                 "interfaceNames": [
@@ -2448,9 +2576,10 @@ examples:
                 "switchId": "FOX1930GDYK"
               }
             ],
-            "type": "ethernetWithoutPolicy"
+            "type": "ethernet"
           }
     response:
+      status: 409
       statusText: Conflict
       headers:
         - name: Content-Type
@@ -2500,15 +2629,15 @@ examples:
             "switchInterfaces": [
               {
                 "interfaceNames": [
-                  "portChannel501"
+                  "Port-channel501"
                 ],
                 "switchId": "FDO24490CQQ"
               },
               {
                 "interfaceNames": [
-                  "portChannel502",
-                  "portChannel503",
-                  "portChannel504"
+                  "Port-channel502",
+                  "Port-channel503",
+                  "Port-channel504"
                 ],
                 "switchId": "FOX1930GDYK"
               }
@@ -2516,6 +2645,7 @@ examples:
             "type": "portChannel"
           }
     response:
+      status: 409
       statusText: Conflict
       headers:
         - name: Content-Type
@@ -2556,8 +2686,8 @@ examples:
         type: json
         data: |-
           {
-            "description": "vpc interface group",
-            "interfaceGroupName": "IG1_vpc",
+            "description": "vPC interface group",
+            "interfaceGroupName": "IG1_VPC",
             "networkNames": [
               "MyNetwork_30003",
               "MyNetwork_30004"
@@ -2565,15 +2695,17 @@ examples:
             "switchInterfaces": [
               {
                 "interfaceNames": [
-                  "vpc1"
+                  "vPC2",
+                  "vPC3",
+                  "vPC4"
                 ],
                 "switchId": "FDO24490CQQ"
               },
               {
                 "interfaceNames": [
-                  "vpc2",
-                  "vpc3",
-                  "vpc4"
+                  "vPC2",
+                  "vPC3",
+                  "vPC4"
                 ],
                 "switchId": "FOX1930GDYK"
               }
@@ -2581,6 +2713,7 @@ examples:
             "type": "vpc"
           }
     response:
+      status: 409
       statusText: Conflict
       headers:
         - name: Content-Type
@@ -2630,22 +2763,27 @@ examples:
             "switchInterfaces": [
               {
                 "interfaceNames": [
-                  "portChannel501"
+                  "Ethernet1/1",
+                  "Ethernet1/2",
+                  "Ethernet1/3",
+                  "Ethernet1/4"
                 ],
                 "switchId": "FDO24490CQQ"
               },
               {
                 "interfaceNames": [
-                  "portChannel502",
-                  "portChannel503",
-                  "portChannel504"
+                  "Ethernet1/1",
+                  "Ethernet1/2",
+                  "Ethernet1/3",
+                  "Ethernet1/4"
                 ],
-                "switchId": "FOX1930GDYK"
+                "switchId": "FX1930GDYZ"
               }
             ],
             "type": "any"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type
@@ -2658,7 +2796,7 @@ examples:
             "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
             "code": 500
           }
-  - name: 500 Response (ethernetCustom)
+  - name: 500 Response (ehternetWithoutPolicy)
     description: Internal Server Error
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups/:interfaceGroupName"
@@ -2686,53 +2824,35 @@ examples:
         type: json
         data: |-
           {
-            "description": "Ethernet with custom template",
-            "interfaceGroupName": "IG1_with_custom_template",
+            "description": "ethernet without policy",
+            "interfaceGroupName": "IG1_Without_Policy",
             "networkNames": [
               "MyNetwork_30003",
               "MyNetwork_30004"
             ],
-            "switchInterfaces": [
-              {
-                "interfaceNames": [
-                  "Ethernet1/1"
-                ],
-                "switchId": "FDO24490CQQ"
-              },
-              {
-                "interfaceNames": [
-                  "Ethernet1/2",
-                  "Ethernet1/3",
-                  "Ethernet1/4"
-                ],
-                "switchId": "FOX1930GDYK"
-              }
-            ],
-            "templateConfig": {
-              "adminStatus": true,
-              "autoNegotiation": "on",
-              "bpduGuard": "default",
-              "cdp": true,
-              "description": "ethernet interface group with custom template",
-              "extraConfig": "logging event port link-status",
-              "fex": false,
-              "mtu": "jumbo",
-              "nativeVlan": 1,
-              "netflow": false,
-              "netflowMonitor": "",
-              "netflowSampler": "",
-              "portDuplexMode": "auto",
-              "portTypeFast": true,
-              "ptp": false,
-              "ptpTimestampTagging": false,
-              "speed": "auto",
-              "trunkAllowedVlans": "none",
-              "vPCOrphanPort": false
+            "policyDetails": {
+              "policyType": "none"
             },
-            "templateName": "int_shared_custom_trunk_host",
-            "type": "ethernetCustom"
+            "switchInterfaces": [
+              {
+                "interfaceNames": [
+                  "Ethernet1/1"
+                ],
+                "switchId": "FX1930GDYZ"
+              },
+              {
+                "interfaceNames": [
+                  "Ethernet1/2",
+                  "Ethernet1/3",
+                  "Ethernet1/4"
+                ],
+                "switchId": "FOX1930GDYK"
+              }
+            ],
+            "type": "ethernet"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type
@@ -2745,7 +2865,7 @@ examples:
             "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
             "code": 500
           }
-  - name: 500 Response (ethernetWithPolicy)
+  - name: 500 Response (ethernetSharedTrunkHost)
     description: Internal Server Error
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups/:interfaceGroupName"
@@ -2773,39 +2893,41 @@ examples:
         type: json
         data: |-
           {
-            "description": "Ethernet with Policy",
-            "ethernetAttributes": {
-              "adminStatus": true,
-              "autoNegotiation": "on",
-              "bpduGuard": "default",
-              "cdp": true,
-              "description": "Get ethernet interface group with policy details",
-              "extraConfig": "logging event port link-status",
-              "fex": false,
-              "mtu": "jumbo",
-              "nativeVlan": 1,
-              "netflow": false,
-              "netflowMonitor": "",
-              "netflowSampler": "",
-              "portDuplexMode": "auto",
-              "portTypeFast": true,
-              "ptp": false,
-              "ptpTimestampTagging": false,
-              "speed": "auto",
-              "trunkAllowedVlans": "none",
-              "vPCOrphanPort": false
+            "description": "ethernet with policy",
+            "interfaceGroupName": "IG1_With_Policy",
+            "networkNames": [
+              "MyNetwork_30003",
+              "MyNetwork_30004"
+            ],
+            "policyDetails": {
+              "ethernetAttributes": {
+                "adminState": true,
+                "allowedVlans": "none",
+                "autoNegotiate": true,
+                "bpduGuard": "default",
+                "cdp": true,
+                "description": "Ethernet policy attributes",
+                "duplexMode": "auto",
+                "extraConfig": "",
+                "mtu": "jumbo",
+                "nativeVlan": 1,
+                "netflow": false,
+                "netflowMonitor": "",
+                "netflowSampler": "",
+                "orphanPort": false,
+                "portTypeEdge": false,
+                "portTypeEdgeTrunk": true,
+                "speed": "auto"
+              },
+              "policyId": "POLICY-SHARED-35020",
+              "policyType": "sharedTrunkHost"
             },
-            "interfaceGroupName": "IG1_with_Policy",
-            "networkNames": [
-              "MyNetwork_30003",
-              "MyNetwork_30004"
-            ],
             "switchInterfaces": [
               {
                 "interfaceNames": [
                   "Ethernet1/1"
                 ],
-                "switchId": "FDO24490CQQ"
+                "switchId": "FX1930GDYZ"
               },
               {
                 "interfaceNames": [
@@ -2816,9 +2938,10 @@ examples:
                 "switchId": "FOX1930GDYK"
               }
             ],
-            "type": "ethernetWithPolicy"
+            "type": "ethernet"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type
@@ -2831,7 +2954,7 @@ examples:
             "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
             "code": 500
           }
-  - name: 500 Response (ethernetWithoutPolicy)
+  - name: 500 Response (ethernetUserDefinedSharedTrunkPolicy)
     description: Internal Server Error
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceGroups/:interfaceGroupName"
@@ -2859,19 +2982,41 @@ examples:
         type: json
         data: |-
           {
-            "description": "Ethernet without Policy",
-            "ethernetAttributes": {},
-            "interfaceGroupName": "IG1_without_Policy",
+            "description": "ethernet Custom policy",
+            "interfaceGroupName": "IG1_custom_Policy",
             "networkNames": [
               "MyNetwork_30003",
               "MyNetwork_30004"
             ],
+            "policyDetails": {
+              "policyType": "userDefinedSharedTrunk",
+              "templateConfig": {
+                "adminState": true,
+                "allowedVlans": "none",
+                "autoNegotiate": true,
+                "bpduGuard": "default",
+                "cdp": true,
+                "description": "Ethernet policy attributes",
+                "duplexMode": "auto",
+                "extraConfig": "",
+                "mtu": "jumbo",
+                "nativeVlan": 1,
+                "netflow": false,
+                "netflowMonitor": "",
+                "netflowSampler": "",
+                "orphanPort": false,
+                "portTypeEdge": false,
+                "portTypeEdgeTrunk": true,
+                "speed": "auto"
+              },
+              "templateName": "int_shared_custom_trunk_host"
+            },
             "switchInterfaces": [
               {
                 "interfaceNames": [
                   "Ethernet1/1"
                 ],
-                "switchId": "FDO24490CQQ"
+                "switchId": "FX1930GDYZ"
               },
               {
                 "interfaceNames": [
@@ -2882,9 +3027,10 @@ examples:
                 "switchId": "FOX1930GDYK"
               }
             ],
-            "type": "ethernetWithoutPolicy"
+            "type": "ethernet"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type
@@ -2934,15 +3080,15 @@ examples:
             "switchInterfaces": [
               {
                 "interfaceNames": [
-                  "portChannel501"
+                  "Port-channel501"
                 ],
                 "switchId": "FDO24490CQQ"
               },
               {
                 "interfaceNames": [
-                  "portChannel502",
-                  "portChannel503",
-                  "portChannel504"
+                  "Port-channel502",
+                  "Port-channel503",
+                  "Port-channel504"
                 ],
                 "switchId": "FOX1930GDYK"
               }
@@ -2950,6 +3096,7 @@ examples:
             "type": "portChannel"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type
@@ -2990,8 +3137,8 @@ examples:
         type: json
         data: |-
           {
-            "description": "vpc interface group",
-            "interfaceGroupName": "IG1_vpc",
+            "description": "vPC interface group",
+            "interfaceGroupName": "IG1_VPC",
             "networkNames": [
               "MyNetwork_30003",
               "MyNetwork_30004"
@@ -2999,15 +3146,17 @@ examples:
             "switchInterfaces": [
               {
                 "interfaceNames": [
-                  "vpc1"
+                  "vPC2",
+                  "vPC3",
+                  "vPC4"
                 ],
                 "switchId": "FDO24490CQQ"
               },
               {
                 "interfaceNames": [
-                  "vpc2",
-                  "vpc3",
-                  "vpc4"
+                  "vPC2",
+                  "vPC3",
+                  "vPC4"
                 ],
                 "switchId": "FOX1930GDYK"
               }
@@ -3015,6 +3164,7 @@ examples:
             "type": "vpc"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

@@ -2,6 +2,8 @@ info:
   name: Create Syslog Anomaly Policy
   type: http
   seq: 18
+  tags:
+    - Anomaly Settings
 
 http:
   method: POST
@@ -16,21 +18,15 @@ http:
     type: json
     data: |-
       {
-        "anomalyType": "",
-        "commonAnomaly": {
-          "details": "",
-          "forwarding": "",
-          "isActive": false
-        },
-        "identifier": "",
-        "impact": "",
-        "policyName": "",
-        "recommendation": "",
-        "severity": "",
-        "syslogClear": "",
-        "syslogRaise": "",
-        "trigger": "",
-        "whatIsWrong": ""
+        "anomalyType": "syslog",
+        "details": "Policy to monitor",
+        "forwarding": "email",
+        "identifier": "$(ID)",
+        "isActive": true,
+        "policyName": "CPU Monitoring Policy",
+        "severity": "minor",
+        "syslogClear": "PORT-5-IF_UP: $(VSAN) Interface $(ID) is up in mode $(MODE)",
+        "syslogRaise": "PORT-5-IF_DOWN_ADMIN_DOWN: $(VSAN) Interface $(ID) is down (Administratively down)"
       }
   auth: inherit
 
@@ -67,6 +63,7 @@ examples:
             "syslogRaise": "PORT-5-IF_DOWN_ADMIN_DOWN: $(VSAN) Interface $(ID) is down (Administratively down)"
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -111,6 +108,7 @@ examples:
             "syslogRaise": "PORT-5-IF_DOWN_ADMIN_DOWN: $(VSAN) Interface $(ID) is down (Administratively down)"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -149,6 +147,7 @@ examples:
             "syslogRaise": "PORT-5-IF_DOWN_ADMIN_DOWN: $(VSAN) Interface $(ID) is down (Administratively down)"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -187,6 +186,7 @@ examples:
             "syslogRaise": "PORT-5-IF_DOWN_ADMIN_DOWN: $(VSAN) Interface $(ID) is down (Administratively down)"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -225,6 +225,7 @@ examples:
             "syslogRaise": "PORT-5-IF_DOWN_ADMIN_DOWN: $(VSAN) Interface $(ID) is down (Administratively down)"
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -263,6 +264,7 @@ examples:
             "syslogRaise": "PORT-5-IF_DOWN_ADMIN_DOWN: $(VSAN) Interface $(ID) is down (Administratively down)"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

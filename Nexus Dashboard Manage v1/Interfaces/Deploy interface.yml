@@ -2,6 +2,8 @@ info:
   name: Deploy interface
   type: http
   seq: 2
+  tags:
+    - Interfaces
 
 http:
   method: POST
@@ -27,17 +29,28 @@ http:
       {
         "interfaces": [
           {
-            "interfaceName": "",
-            "switchId": ""
+            "interfaceName": "Port-channel501",
+            "switchId": "FDO222419B7"
+          },
+          {
+            "interfaceName": "Ethernet1/3",
+            "switchId": "FDO222419B7"
+          },
+          {
+            "interfaceName": "Loopback10",
+            "switchId": "FDO222419B7"
+          },
+          {
+            "interfaceName": "vPC1",
+            "switchId": "FDO222419B7"
+          },
+          {
+            "interfaceName": "vlan2000",
+            "switchId": "FDO222419B7"
           }
         ]
       }
   auth: inherit
-
-runtime:
-  variables:
-    - name: fabricName
-      value: f1
 
 settings:
   encodeUrl: true
@@ -74,10 +87,27 @@ examples:
               {
                 "interfaceName": "Port-channel501",
                 "switchId": "FDO222419B7"
+              },
+              {
+                "interfaceName": "Ethernet1/3",
+                "switchId": "FDO222419B7"
+              },
+              {
+                "interfaceName": "Loopback10",
+                "switchId": "FDO222419B7"
+              },
+              {
+                "interfaceName": "vPC1",
+                "switchId": "FDO222419B7"
+              },
+              {
+                "interfaceName": "vlan2000",
+                "switchId": "FDO222419B7"
               }
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -89,19 +119,40 @@ examples:
             "results": [
               {
                 "switchId": "FDO2137X0L1",
+                "switchName": "N9K-41",
                 "interfaceName": "loopback25",
                 "status": "success",
                 "message": "Interface deployed successfully"
               },
               {
                 "switchId": "FDO2137X0L1",
+                "switchName": "N9K-41",
                 "interfaceName": "loopback100",
                 "status": "failed",
                 "message": "Interface deployment failed due to configuration error"
               },
               {
                 "switchId": "FDO2137X0L1",
+                "switchName": "N9K-41",
                 "interfaceName": "loopback20",
+                "status": "success",
+                "message": "Interface deployed successfully"
+              },
+              {
+                "switchId": "FDO2137X0L1",
+                "interfaceName": "Ethernet1/10",
+                "status": "success",
+                "message": "Interface deployed successfully"
+              },
+              {
+                "switchId": "FDO2137X0L1",
+                "interfaceName": "Port-channel501",
+                "status": "failed",
+                "message": "Interface deployment failed due to configuration error"
+              },
+              {
+                "switchId": "FDO2137X0L1",
+                "interfaceName": "Vlan300",
                 "status": "success",
                 "message": "Interface deployed successfully"
               }
@@ -135,10 +186,27 @@ examples:
               {
                 "interfaceName": "Port-channel501",
                 "switchId": "FDO222419B7"
+              },
+              {
+                "interfaceName": "Ethernet1/3",
+                "switchId": "FDO222419B7"
+              },
+              {
+                "interfaceName": "Loopback10",
+                "switchId": "FDO222419B7"
+              },
+              {
+                "interfaceName": "vPC1",
+                "switchId": "FDO222419B7"
+              },
+              {
+                "interfaceName": "vlan2000",
+                "switchId": "FDO222419B7"
               }
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -179,10 +247,27 @@ examples:
               {
                 "interfaceName": "Port-channel501",
                 "switchId": "FDO222419B7"
+              },
+              {
+                "interfaceName": "Ethernet1/3",
+                "switchId": "FDO222419B7"
+              },
+              {
+                "interfaceName": "Loopback10",
+                "switchId": "FDO222419B7"
+              },
+              {
+                "interfaceName": "vPC1",
+                "switchId": "FDO222419B7"
+              },
+              {
+                "interfaceName": "vlan2000",
+                "switchId": "FDO222419B7"
               }
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -223,10 +308,27 @@ examples:
               {
                 "interfaceName": "Port-channel501",
                 "switchId": "FDO222419B7"
+              },
+              {
+                "interfaceName": "Ethernet1/3",
+                "switchId": "FDO222419B7"
+              },
+              {
+                "interfaceName": "Loopback10",
+                "switchId": "FDO222419B7"
+              },
+              {
+                "interfaceName": "vPC1",
+                "switchId": "FDO222419B7"
+              },
+              {
+                "interfaceName": "vlan2000",
+                "switchId": "FDO222419B7"
               }
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -267,10 +369,27 @@ examples:
               {
                 "interfaceName": "Port-channel501",
                 "switchId": "FDO222419B7"
+              },
+              {
+                "interfaceName": "Ethernet1/3",
+                "switchId": "FDO222419B7"
+              },
+              {
+                "interfaceName": "Loopback10",
+                "switchId": "FDO222419B7"
+              },
+              {
+                "interfaceName": "vPC1",
+                "switchId": "FDO222419B7"
+              },
+              {
+                "interfaceName": "vlan2000",
+                "switchId": "FDO222419B7"
               }
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

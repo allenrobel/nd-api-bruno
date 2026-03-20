@@ -2,6 +2,8 @@ info:
   name: Update security settings of SSH server
   type: http
   seq: 42
+  tags:
+    - Users and Security
 
 http:
   method: POST
@@ -16,19 +18,38 @@ http:
     type: json
     data: |-
       {
-        "allowedSubnets": [],
-        "cryptoConfig": {
-          "data": {
-            "ciphers": [],
-            "hostKeyAlgorithms": [],
-            "kexAlgorithms": [],
-            "macs": []
+        "SSHConfig": {
+          "allowedSubnets": [
+            "100.34.22.0/24",
+            "200.0.0.0/16",
+            "2b01:720:27c1:90a:0:0:0:123/112",
+            "2001:db8::ff00:42:8329/64"
+          ],
+          "cryptoConfig": {
+            "data": {
+              "hostKeyAlgorithms": [
+                "ecdsa-sha2-nistp256"
+              ],
+              "macs": [
+                "hmac-sha2-256-etm@openssh.com",
+                "hmac-sha2-512-etm@openssh.com"
+              ]
+            },
+            "management": {
+              "ciphers": [
+                "aes128-ctr",
+                "aes256-gcm@openssh.com"
+              ],
+              "kexAlgorithms": [
+                "ecdh-sha2-nistp256",
+                "ecdh-sha2-nistp521",
+                "diffie-hellman-group16-sha512"
+              ]
+            }
           },
-          "management": {}
-        },
-        "enabled": false,
-        "idleTimeout": 0,
-        "supportedCrypto": {}
+          "enabled": true,
+          "idleTimeout": 600
+        }
       }
   auth: inherit
 
@@ -88,6 +109,7 @@ examples:
             }
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -247,6 +269,7 @@ examples:
             }
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -308,6 +331,7 @@ examples:
             }
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -369,6 +393,7 @@ examples:
             }
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -430,6 +455,7 @@ examples:
             }
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

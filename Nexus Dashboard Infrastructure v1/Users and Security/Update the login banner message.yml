@@ -2,6 +2,8 @@ info:
   name: Update the login banner message
   type: http
   seq: 35
+  tags:
+    - Users and Security
 
 http:
   method: POST
@@ -16,7 +18,7 @@ http:
     type: json
     data: |-
       {
-        "loginBannerMessage": ""
+        "loginBannerMessage": "UNAUTHORIZED ACCESS TO THIS DEVICE IS PROHIBITED."
       }
   auth: inherit
 
@@ -45,6 +47,7 @@ examples:
             "loginBannerMessage": "UNAUTHORIZED ACCESS TO THIS DEVICE IS PROHIBITED."
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -73,6 +76,7 @@ examples:
             "loginBannerMessage": "UNAUTHORIZED ACCESS TO THIS DEVICE IS PROHIBITED."
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -103,6 +107,7 @@ examples:
             "loginBannerMessage": "UNAUTHORIZED ACCESS TO THIS DEVICE IS PROHIBITED."
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -133,6 +138,7 @@ examples:
             "loginBannerMessage": "UNAUTHORIZED ACCESS TO THIS DEVICE IS PROHIBITED."
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -163,6 +169,7 @@ examples:
             "loginBannerMessage": "UNAUTHORIZED ACCESS TO THIS DEVICE IS PROHIBITED."
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -193,6 +200,7 @@ examples:
             "loginBannerMessage": "UNAUTHORIZED ACCESS TO THIS DEVICE IS PROHIBITED."
           }
     response:
+      status: 429
       statusText: Too Many Requests
       headers:
         - name: Content-Type
@@ -223,6 +231,7 @@ examples:
             "loginBannerMessage": "UNAUTHORIZED ACCESS TO THIS DEVICE IS PROHIBITED."
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

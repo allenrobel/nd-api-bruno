@@ -1,16 +1,53 @@
 info:
   name: Get VPC pairs overview details
   type: http
-  seq: 41
+  seq: 43
+  tags:
+    - Inventory
 
 http:
   method: GET
   url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/switches/:switchId/vpcPairOverview"
   params:
     - name: componentType
-      value: ""
+      value: full
       type: query
       description: Get specific overview component details
+    - name: componentType
+      value: health
+      type: query
+      description: Get specific overview component details
+      disabled: true
+    - name: componentType
+      value: module
+      type: query
+      description: Get specific overview component details
+      disabled: true
+    - name: componentType
+      value: vxlan
+      type: query
+      description: Get specific overview component details
+      disabled: true
+    - name: componentType
+      value: overlay
+      type: query
+      description: Get specific overview component details
+      disabled: true
+    - name: componentType
+      value: pairsInfo
+      type: query
+      description: Get specific overview component details
+      disabled: true
+    - name: componentType
+      value: inventory
+      type: query
+      description: Get specific overview component details
+      disabled: true
+    - name: componentType
+      value: anomalies
+      type: query
+      description: Get specific overview component details
+      disabled: true
     - name: switchId
       value: ""
       type: path
@@ -40,9 +77,44 @@ examples:
       method: GET
       params:
         - name: componentType
-          value: ""
+          value: full
           type: query
           description: Get specific overview component details
+        - name: componentType
+          value: health
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: module
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: vxlan
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: overlay
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: pairsInfo
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: inventory
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: anomalies
+          type: query
+          description: Get specific overview component details
+          disabled: true
         - name: switchId
           value: ""
           type: path
@@ -57,6 +129,7 @@ examples:
           description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
           disabled: true
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -257,9 +330,44 @@ examples:
       method: GET
       params:
         - name: componentType
-          value: ""
+          value: full
           type: query
           description: Get specific overview component details
+        - name: componentType
+          value: health
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: module
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: vxlan
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: overlay
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: pairsInfo
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: inventory
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: anomalies
+          type: query
+          description: Get specific overview component details
+          disabled: true
         - name: switchId
           value: ""
           type: path
@@ -274,6 +382,7 @@ examples:
           description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
           disabled: true
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -301,9 +410,44 @@ examples:
       method: GET
       params:
         - name: componentType
-          value: ""
+          value: full
           type: query
           description: Get specific overview component details
+        - name: componentType
+          value: health
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: module
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: vxlan
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: overlay
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: pairsInfo
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: inventory
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: anomalies
+          type: query
+          description: Get specific overview component details
+          disabled: true
         - name: switchId
           value: ""
           type: path
@@ -318,6 +462,7 @@ examples:
           description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
           disabled: true
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -355,9 +500,44 @@ examples:
       method: GET
       params:
         - name: componentType
-          value: ""
+          value: full
           type: query
           description: Get specific overview component details
+        - name: componentType
+          value: health
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: module
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: vxlan
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: overlay
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: pairsInfo
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: inventory
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: anomalies
+          type: query
+          description: Get specific overview component details
+          disabled: true
         - name: switchId
           value: ""
           type: path
@@ -372,6 +552,7 @@ examples:
           description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
           disabled: true
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -440,9 +621,44 @@ examples:
       method: GET
       params:
         - name: componentType
-          value: ""
+          value: full
           type: query
           description: Get specific overview component details
+        - name: componentType
+          value: health
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: module
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: vxlan
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: overlay
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: pairsInfo
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: inventory
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: anomalies
+          type: query
+          description: Get specific overview component details
+          disabled: true
         - name: switchId
           value: ""
           type: path
@@ -457,6 +673,7 @@ examples:
           description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
           disabled: true
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -491,9 +708,44 @@ examples:
       method: GET
       params:
         - name: componentType
-          value: ""
+          value: full
           type: query
           description: Get specific overview component details
+        - name: componentType
+          value: health
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: module
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: vxlan
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: overlay
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: pairsInfo
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: inventory
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: anomalies
+          type: query
+          description: Get specific overview component details
+          disabled: true
         - name: switchId
           value: ""
           type: path
@@ -508,6 +760,7 @@ examples:
           description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
           disabled: true
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -531,9 +784,44 @@ examples:
       method: GET
       params:
         - name: componentType
-          value: ""
+          value: full
           type: query
           description: Get specific overview component details
+        - name: componentType
+          value: health
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: module
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: vxlan
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: overlay
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: pairsInfo
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: inventory
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: anomalies
+          type: query
+          description: Get specific overview component details
+          disabled: true
         - name: switchId
           value: ""
           type: path
@@ -548,6 +836,7 @@ examples:
           description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
           disabled: true
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -579,9 +868,44 @@ examples:
       method: GET
       params:
         - name: componentType
-          value: ""
+          value: full
           type: query
           description: Get specific overview component details
+        - name: componentType
+          value: health
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: module
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: vxlan
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: overlay
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: pairsInfo
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: inventory
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: anomalies
+          type: query
+          description: Get specific overview component details
+          disabled: true
         - name: switchId
           value: ""
           type: path
@@ -596,6 +920,7 @@ examples:
           description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
           disabled: true
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -669,9 +994,44 @@ examples:
       method: GET
       params:
         - name: componentType
-          value: ""
+          value: full
           type: query
           description: Get specific overview component details
+        - name: componentType
+          value: health
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: module
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: vxlan
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: overlay
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: pairsInfo
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: inventory
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: anomalies
+          type: query
+          description: Get specific overview component details
+          disabled: true
         - name: switchId
           value: ""
           type: path
@@ -686,6 +1046,7 @@ examples:
           description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
           disabled: true
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -705,9 +1066,44 @@ examples:
       method: GET
       params:
         - name: componentType
-          value: ""
+          value: full
           type: query
           description: Get specific overview component details
+        - name: componentType
+          value: health
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: module
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: vxlan
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: overlay
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: pairsInfo
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: inventory
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: anomalies
+          type: query
+          description: Get specific overview component details
+          disabled: true
         - name: switchId
           value: ""
           type: path
@@ -722,6 +1118,7 @@ examples:
           description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
           disabled: true
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -741,9 +1138,44 @@ examples:
       method: GET
       params:
         - name: componentType
-          value: ""
+          value: full
           type: query
           description: Get specific overview component details
+        - name: componentType
+          value: health
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: module
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: vxlan
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: overlay
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: pairsInfo
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: inventory
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: anomalies
+          type: query
+          description: Get specific overview component details
+          disabled: true
         - name: switchId
           value: ""
           type: path
@@ -758,6 +1190,7 @@ examples:
           description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
           disabled: true
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -777,9 +1210,44 @@ examples:
       method: GET
       params:
         - name: componentType
-          value: ""
+          value: full
           type: query
           description: Get specific overview component details
+        - name: componentType
+          value: health
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: module
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: vxlan
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: overlay
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: pairsInfo
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: inventory
+          type: query
+          description: Get specific overview component details
+          disabled: true
+        - name: componentType
+          value: anomalies
+          type: query
+          description: Get specific overview component details
+          disabled: true
         - name: switchId
           value: ""
           type: path
@@ -794,6 +1262,7 @@ examples:
           description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
           disabled: true
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

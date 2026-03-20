@@ -2,12 +2,14 @@ info:
   name: Delete service cluster
   type: http
   seq: 8
+  tags:
+    - L4L7 Services
 
 http:
   method: DELETE
-  url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
+  url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters/:serviceClusterName"
   params:
-    - name: clusterName
+    - name: serviceClusterName
       value: ""
       type: path
       description: Service cluster name
@@ -27,10 +29,10 @@ examples:
   - name: 204 Response
     description: No Content
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters/:serviceClusterName"
       method: DELETE
       params:
-        - name: clusterName
+        - name: serviceClusterName
           value: ""
           type: path
           description: Service cluster name
@@ -39,6 +41,7 @@ examples:
           type: path
           description: Name of the fabric
     response:
+      status: 204
       statusText: No Content
       body:
         type: text
@@ -46,10 +49,10 @@ examples:
   - name: 400 Response
     description: Bad Request
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters/:serviceClusterName"
       method: DELETE
       params:
-        - name: clusterName
+        - name: serviceClusterName
           value: ""
           type: path
           description: Service cluster name
@@ -58,6 +61,7 @@ examples:
           type: path
           description: Name of the fabric
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -73,10 +77,10 @@ examples:
   - name: 401 Response
     description: Unauthorized
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters/:serviceClusterName"
       method: DELETE
       params:
-        - name: clusterName
+        - name: serviceClusterName
           value: ""
           type: path
           description: Service cluster name
@@ -85,6 +89,7 @@ examples:
           type: path
           description: Name of the fabric
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -100,10 +105,10 @@ examples:
   - name: 403 Response
     description: Forbidden
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters/:serviceClusterName"
       method: DELETE
       params:
-        - name: clusterName
+        - name: serviceClusterName
           value: ""
           type: path
           description: Service cluster name
@@ -112,6 +117,7 @@ examples:
           type: path
           description: Name of the fabric
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -127,10 +133,10 @@ examples:
   - name: 404 Response
     description: Not Found
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters/:serviceClusterName"
       method: DELETE
       params:
-        - name: clusterName
+        - name: serviceClusterName
           value: ""
           type: path
           description: Service cluster name
@@ -139,6 +145,7 @@ examples:
           type: path
           description: Name of the fabric
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -154,10 +161,10 @@ examples:
   - name: 500 Response
     description: Internal Server Error
     request:
-      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters/:clusterName"
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/clusters/:serviceClusterName"
       method: DELETE
       params:
-        - name: clusterName
+        - name: serviceClusterName
           value: ""
           type: path
           description: Service cluster name
@@ -166,6 +173,7 @@ examples:
           type: path
           description: Name of the fabric
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

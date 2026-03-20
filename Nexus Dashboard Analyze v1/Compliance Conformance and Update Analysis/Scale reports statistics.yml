@@ -1,0 +1,543 @@
+info:
+  name: Scale reports statistics
+  type: http
+  seq: 11
+  tags:
+    - Compliance Conformance and Update Analysis
+
+http:
+  method: GET
+  url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/conformance/reports/scale/statistics"
+  params:
+    - name: fabricName
+      value: ""
+      type: query
+      description: Name of the fabric
+    - name: clusterName
+      value: ""
+      type: query
+      description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+      disabled: true
+    - name: startDate
+      value: ""
+      type: query
+      description: Start date
+      disabled: true
+    - name: endDate
+      value: ""
+      type: query
+      description: End date
+      disabled: true
+    - name: nodeName
+      value: ""
+      type: query
+      description: Switch Name
+      disabled: true
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: OK
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/conformance/reports/scale/statistics"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+        - name: nodeName
+          value: ""
+          type: query
+          description: Switch Name
+          disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "fabricName": "fabric1",
+            "forwardingProfile": "dualStack",
+            "model": "N9K-C93180YC-EX",
+            "nodeName": "leaf101",
+            "reportGenerationDate": "2023-01-21T07:13:45.512Z",
+            "statistics": [
+              {
+                "max": 5,
+                "name": "Number of BDs",
+                "percentage": 120,
+                "status": "violatedLimit",
+                "threshold": 100,
+                "value": 6
+              },
+              {
+                "max": 5,
+                "name": "Number of EPGs",
+                "percentage": 120,
+                "status": "violatedLimit",
+                "threshold": 100,
+                "value": 6
+              },
+              {
+                "max": 800,
+                "name": "Number of External EPGs",
+                "percentage": 5,
+                "status": "ok",
+                "threshold": 0,
+                "value": 40
+              },
+              {
+                "max": 800,
+                "name": "Number of L3 Outs",
+                "percentage": 4.125,
+                "status": "ok",
+                "threshold": 0,
+                "value": 33
+              },
+              {
+                "max": 1000,
+                "name": "Number of SVI interfaces",
+                "percentage": 2.4,
+                "status": "ok",
+                "threshold": 0,
+                "value": 24
+              },
+              {
+                "max": 48,
+                "name": "Number of Routed interfaces",
+                "percentage": 2.083333333333333,
+                "status": "ok",
+                "threshold": 0,
+                "value": 1
+              },
+              {
+                "max": 0,
+                "name": "Number of Routed interfaces per VRF",
+                "percentage": 2.083333333333333,
+                "status": "ok",
+                "subStatistics": [
+                  {
+                    "max": 48,
+                    "name": "corp02|ctx1",
+                    "percentage": 0,
+                    "status": "ok",
+                    "threshold": 0,
+                    "value": 0
+                  },
+                  {
+                    "max": 48,
+                    "name": "corp03|ctx1",
+                    "percentage": 0,
+                    "status": "ok",
+                    "threshold": 0,
+                    "value": 0
+                  }
+                ],
+                "threshold": 0,
+                "value": 0
+              },
+              {
+                "max": 800,
+                "name": "Number of VRFs",
+                "percentage": 1.125,
+                "status": "ok",
+                "threshold": 0,
+                "value": 9
+              },
+              {
+                "max": 8000,
+                "name": "Number of TCAM policy entries",
+                "percentage": 1,
+                "status": "ok",
+                "threshold": 0,
+                "value": 80
+              },
+              {
+                "max": 3960,
+                "name": "Number of VLANs",
+                "percentage": 0.5555555555555556,
+                "status": "ok",
+                "threshold": 0,
+                "value": 22
+              },
+              {
+                "max": 0,
+                "name": "Number of External EPGs per L3 Out",
+                "percentage": 0.4,
+                "status": "ok",
+                "subStatistics": [
+                  {
+                    "max": 250,
+                    "name": "l3out1",
+                    "percentage": 0.4,
+                    "status": "ok",
+                    "threshold": 0,
+                    "value": 1
+                  },
+                  {
+                    "max": 250,
+                    "name": "abc09_ctx01_l3out_subif",
+                    "percentage": 0.4,
+                    "status": "ok",
+                    "threshold": 0,
+                    "value": 1
+                  }
+                ],
+                "threshold": 0,
+                "value": 0
+              },
+              {
+                "max": 0,
+                "name": "Number of SVI interfaces per VRF",
+                "percentage": 0.2,
+                "status": "ok",
+                "subStatistics": [
+                  {
+                    "max": 1000,
+                    "name": "corp02|ctx1",
+                    "percentage": 0.2,
+                    "status": "ok",
+                    "threshold": 0,
+                    "value": 2
+                  },
+                  {
+                    "max": 1000,
+                    "name": "corp03|ctx1",
+                    "percentage": 0.2,
+                    "status": "ok",
+                    "threshold": 0,
+                    "value": 2
+                  },
+                  {
+                    "max": 1000,
+                    "name": "corp10|ctx1",
+                    "percentage": 0.2,
+                    "status": "ok",
+                    "threshold": 0,
+                    "value": 2
+                  }
+                ],
+                "threshold": 0,
+                "value": 0
+              },
+              {
+                "max": 64000,
+                "name": "Number of LPM Prefixes for External EPG classification",
+                "percentage": 0.040625,
+                "status": "ok",
+                "threshold": 0,
+                "value": 26
+              },
+              {
+                "max": 24000,
+                "name": "Number of local IPv4 endpoints",
+                "percentage": 0.02916666666666667,
+                "status": "ok",
+                "threshold": 0,
+                "value": 7
+              },
+              {
+                "max": 24000,
+                "name": "Number of MAC endpoints",
+                "percentage": 0,
+                "status": "ok",
+                "threshold": 0,
+                "value": 0
+              },
+              {
+                "max": 24000,
+                "name": "Number of total IPv4 endpoints",
+                "percentage": 0,
+                "status": "ok",
+                "threshold": 0,
+                "value": 0
+              },
+              {
+                "max": 12000,
+                "name": "Number of total IPv6 endpoints",
+                "percentage": 0,
+                "status": "ok",
+                "threshold": 0,
+                "value": 0
+              },
+              {
+                "max": 48000,
+                "name": "Number of IPv4 Host Routes",
+                "percentage": 0,
+                "status": "ok",
+                "threshold": 0,
+                "value": 0
+              },
+              {
+                "max": 24000,
+                "name": "Number of IPv6 Host Routes",
+                "percentage": 0,
+                "status": "ok",
+                "threshold": 0,
+                "value": 0
+              },
+              {
+                "max": 8000,
+                "name": "Number of Multicast Routes",
+                "percentage": 0,
+                "status": "ok",
+                "threshold": 0,
+                "value": 0
+              },
+              {
+                "max": 2000,
+                "name": "Number of LPM entries",
+                "percentage": 0,
+                "status": "ok",
+                "threshold": 0,
+                "value": 0
+              }
+            ],
+            "version": "16.0(51m)"
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/conformance/reports/scale/statistics"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+        - name: nodeName
+          value: ""
+          type: query
+          description: Switch Name
+          disabled: true
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/conformance/reports/scale/statistics"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+        - name: nodeName
+          value: ""
+          type: query
+          description: Switch Name
+          disabled: true
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 403 Response
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/conformance/reports/scale/statistics"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+        - name: nodeName
+          value: ""
+          type: query
+          description: Switch Name
+          disabled: true
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 404 Response
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/conformance/reports/scale/statistics"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+        - name: nodeName
+          value: ""
+          type: query
+          description: Switch Name
+          disabled: true
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 500 Response
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/conformance/reports/scale/statistics"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+        - name: nodeName
+          value: ""
+          type: query
+          description: Switch Name
+          disabled: true
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }

@@ -2,6 +2,8 @@ info:
   name: Import configuration templates in zip format
   type: http
   seq: 6
+  tags:
+    - Template Library
 
 http:
   method: POST
@@ -16,8 +18,8 @@ http:
     type: multipart-form
     data:
       - name: fileName
-        type: text
-        value: ""
+        type: file
+        value: []
         description: Files to be imported
   auth: inherit
 
@@ -43,10 +45,11 @@ examples:
         type: multipart-form
         data:
           - name: fileName
-            type: text
-            value: ""
+            type: file
+            value: []
             description: Files to be imported
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -78,10 +81,11 @@ examples:
         type: multipart-form
         data:
           - name: fileName
-            type: text
-            value: ""
+            type: file
+            value: []
             description: Files to be imported
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -109,10 +113,11 @@ examples:
         type: multipart-form
         data:
           - name: fileName
-            type: text
-            value: ""
+            type: file
+            value: []
             description: Files to be imported
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -140,10 +145,11 @@ examples:
         type: multipart-form
         data:
           - name: fileName
-            type: text
-            value: ""
+            type: file
+            value: []
             description: Files to be imported
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -171,10 +177,11 @@ examples:
         type: multipart-form
         data:
           - name: fileName
-            type: text
-            value: ""
+            type: file
+            value: []
             description: Files to be imported
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -202,10 +209,11 @@ examples:
         type: multipart-form
         data:
           - name: fileName
-            type: text
-            value: ""
+            type: file
+            value: []
             description: Files to be imported
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

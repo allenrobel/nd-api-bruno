@@ -1,0 +1,600 @@
+info:
+  name: List anomalies cleared after upgrade
+  type: http
+  seq: 35
+  tags:
+    - Compliance Conformance and Update Analysis
+
+http:
+  method: GET
+  url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/fabricSoftware/upgradeReports/:reportId/instances/:instanceId/clearedAnomalies"
+  params:
+    - name: fabricName
+      value: ""
+      type: query
+      description: Name of the fabric
+    - name: reportId
+      value: ""
+      type: path
+      description: Report id for upgrade analysis
+    - name: instanceId
+      value: ""
+      type: path
+      description: Instance id for a previous run of pre-validation check
+    - name: clusterName
+      value: ""
+      type: query
+      description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+      disabled: true
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: OK
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/fabricSoftware/upgradeReports/:reportId/instances/:instanceId/clearedAnomalies"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: reportId
+          value: ""
+          type: path
+          description: Report id for upgrade analysis
+        - name: instanceId
+          value: ""
+          type: path
+          description: Instance id for a previous run of pre-validation check
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "offset": 0,
+            "anomalies": [
+              {
+                "anomalyId": "e61d9077f18c3d14eeeb13d12a988c6c303efa28e8258f8252cb080f5df5b33a",
+                "category": "configuration",
+                "startTimestamp": "2022-11-01T09:08:45.000Z",
+                "startDate": "2022-11-01T09:08:45.000Z",
+                "endTimestamp": "2022-11-01T13:08:49.000Z",
+                "endDate": "2022-11-01T13:08:49.000Z",
+                "anomalyScore": 64,
+                "fabricName": "",
+                "entityName": "",
+                "resourceType": "FORWARDING_POLICY",
+                "resourceName": "",
+                "anomalyString": "Overlapping subnets configured in Tenant aepg_l3epg_imd_tnt_pass_1 VRF CTX1 on EPG CTX1_BD1_AP1_EPG1 and Tenant aepg_l3epg_imd_tnt_pass_1 VRF CTX2 EPG CTX2_BD1_AP1_EPG1",
+                "anomalyReason": "overlapping subnets configured in tenant aepg_l3epg_imd_tnt_pass_1 vrf ctx1 on epg ctx1_bd1_ap1_epg1 and tenant aepg_l3epg_imd_tnt_pass_1 vrf ctx2 epg ctx2_bd1_ap1_epg1",
+                "recommendation": false,
+                "impact": false,
+                "vendor": "CISCO_ACI",
+                "severity": "major",
+                "anomalyType": "OVERLAPPING_SUBNETS_ACROSS_BDS_ACROSS_VRFS_DUE_TO_CONTRACT",
+                "acknowledged": false,
+                "acknowledgeTimestamp": "2022-11-01T12:01:49.000Z",
+                "acknowledgeDate": "2022-11-01T12:01:49.000Z",
+                "cleared": false,
+                "streamingAnomaly": false,
+                "clearTimestamp": "2022-11-01T13:08:49.000Z",
+                "clearDate": "2022-11-01T13:08:49.000Z",
+                "expired": false,
+                "alertType": "anomaly",
+                "title": "",
+                "customData": "{peerInterfaceName: eth1/7, peerDeviceName: scaleleaf-202}",
+                "epochStartTimestamp": 1667293725000,
+                "epochEndTimestamp": 1667308129000,
+                "mnemonicTitle": "OVERLAPPING_SUBNETS_ACROSS_BDS_ACROSS_VRFS_DUE_TO_CONTRACT",
+                "mnemonicNumber": 425,
+                "mnemonicDescription": "Overlapping subnets configured in Tenant aepg_l3epg_imd_tnt_pass_1 VRF CTX1 on EPG CTX1_BD1_AP1_EPG1 and Tenant aepg_l3epg_imd_tnt_pass_1 VRF CTX2 EPG CTX2_BD1_AP1_EPG1",
+                "snapshotFabric": false,
+                "verificationStatus": "NEW",
+                "assignee": "",
+                "tags": [],
+                "comment": "",
+                "manualAcknowledged": "unset",
+                "suspendedAlert": "ENABLED",
+                "alertRuleName": "alert_rule_overlapping_subnets",
+                "autoAcknowledged": true,
+                "hashKey": 1024164573275715,
+                "checkCodes": [
+                  "OVERLAPPING_SUBNET_MULTIPLE_BDS_ACROSS_VRFS"
+                ],
+                "multiFabricAlert": false,
+                "anomalyObjects": [
+                  {
+                    "objectType": "NI_OBJECT_COMPOSITE_TYPE_VRF_PREFIX",
+                    "identifier": "1.1.1.0/24_uni/tn-aepg_l3epg_imd_tnt_pass_1/ctx-CTX1",
+                    "lowercaseIdentifier": "1.1.1.0/24_uni/tn-aepg_l3epg_imd_tnt_pass_1/ctx-ctx1",
+                    "name": "1.1.1.0/24",
+                    "lowercaseName": "1.1.1.0/24",
+                    "isPrimary": true,
+                    "isHealthy": false
+                  },
+                  {
+                    "objectType": "bd_subnet",
+                    "identifier": "1.1.1.0/24_uni/tn-aepg_l3epg_imd_tnt_pass_1/ctx-CTX1",
+                    "lowercaseIdentifier": "1.1.1.0/24_uni/tn-aepg_l3epg_imd_tnt_pass_1/ctx-ctx1",
+                    "name": "1.1.1.0/24",
+                    "lowercaseName": "1.1.1.0/24",
+                    "isPrimary": true,
+                    "isHealthy": true
+                  },
+                  {
+                    "objectType": "NI_OBJECT_TYPE_VRF_PREFIX_SUBNET",
+                    "identifier": "1.1.1.0/24_uni/tn-aepg_l3epg_imd_tnt_pass_1/ctx-CTX1",
+                    "lowercaseIdentifier": "1.1.1.0/24_uni/tn-aepg_l3epg_imd_tnt_pass_1/ctx-ctx1",
+                    "name": "1.1.1.0/24",
+                    "lowercaseName": "1.1.1.0/24",
+                    "isPrimary": true,
+                    "isHealthy": true
+                  },
+                  {
+                    "objectType": "prefix",
+                    "identifier": "1.1.1.0/24",
+                    "lowercaseIdentifier": "1.1.1.0/24",
+                    "name": "1.1.1.0/24",
+                    "lowercaseName": "1.1.1.0/24",
+                    "isPrimary": true,
+                    "isHealthy": false
+                  },
+                  {
+                    "objectType": "NI_OBJECT_TYPE_PREFIX_BD_SUBNET",
+                    "identifier": "1.1.1.0/24",
+                    "lowercaseIdentifier": "1.1.1.0/24",
+                    "name": "1.1.1.0/24",
+                    "lowercaseName": "1.1.1.0/24",
+                    "isPrimary": true,
+                    "isHealthy": true
+                  },
+                  {
+                    "objectType": "subnet",
+                    "identifier": "1.1.1.0/24",
+                    "lowercaseIdentifier": "1.1.1.0/24",
+                    "name": "1.1.1.0/24",
+                    "lowercaseName": "1.1.1.0/24",
+                    "isPrimary": true,
+                    "isHealthy": true
+                  },
+                  {
+                    "objectType": "vrf",
+                    "identifier": "uni/tn-aepg_l3epg_imd_tnt_pass_1/ctx-CTX1",
+                    "lowercaseIdentifier": "uni/tn-aepg_l3epg_imd_tnt_pass_1/ctx-ctx1",
+                    "name": "CTX1",
+                    "lowercaseName": "ctx1",
+                    "isPrimary": true,
+                    "isHealthy": false
+                  },
+                  {
+                    "objectType": "tenant",
+                    "identifier": "uni/tn-aepg_l3epg_imd_tnt_pass_1",
+                    "lowercaseIdentifier": "uni/tn-aepg_l3epg_imd_tnt_pass_1",
+                    "name": "aepg_l3epg_imd_tnt_pass_1",
+                    "lowercaseName": "aepg_l3epg_imd_tnt_pass_1",
+                    "isPrimary": false,
+                    "isHealthy": false
+                  },
+                  {
+                    "objectType": "vrf_tenant",
+                    "identifier": "uni/tn-aepg_l3epg_imd_tnt_pass_1",
+                    "lowercaseIdentifier": "uni/tn-aepg_l3epg_imd_tnt_pass_1",
+                    "name": "aepg_l3epg_imd_tnt_pass_1",
+                    "lowercaseName": "aepg_l3epg_imd_tnt_pass_1",
+                    "isPrimary": false,
+                    "isHealthy": false
+                  },
+                  {
+                    "objectType": "app_epg",
+                    "identifier": "uni/tn-aepg_l3epg_imd_tnt_pass_1/ap-CTX1_AP1/epg-CTX1_BD1_AP1_EPG1",
+                    "lowercaseIdentifier": "uni/tn-aepg_l3epg_imd_tnt_pass_1/ap-ctx1_ap1/epg-ctx1_bd1_ap1_epg1",
+                    "name": "CTX1_BD1_AP1_EPG1",
+                    "lowercaseName": "ctx1_bd1_ap1_epg1",
+                    "isPrimary": false,
+                    "isHealthy": false
+                  },
+                  {
+                    "objectType": "epg",
+                    "identifier": "uni/tn-aepg_l3epg_imd_tnt_pass_1/ap-CTX1_AP1/epg-CTX1_BD1_AP1_EPG1",
+                    "lowercaseIdentifier": "uni/tn-aepg_l3epg_imd_tnt_pass_1/ap-ctx1_ap1/epg-ctx1_bd1_ap1_epg1",
+                    "name": "CTX1_BD1_AP1_EPG1",
+                    "lowercaseName": "ctx1_bd1_ap1_epg1",
+                    "isPrimary": false,
+                    "isHealthy": true
+                  },
+                  {
+                    "objectType": "bd",
+                    "identifier": "uni/tn-aepg_l3epg_imd_tnt_pass_1/BD-CTX1_BD1",
+                    "lowercaseIdentifier": "uni/tn-aepg_l3epg_imd_tnt_pass_1/bd-ctx1_bd1",
+                    "name": "CTX1_BD1",
+                    "lowercaseName": "ctx1_bd1",
+                    "isPrimary": false,
+                    "isHealthy": false
+                  },
+                  {
+                    "objectType": "app_profile",
+                    "identifier": "uni/tn-aepg_l3epg_imd_tnt_pass_1/ap-CTX1_AP1",
+                    "lowercaseIdentifier": "uni/tn-aepg_l3epg_imd_tnt_pass_1/ap-ctx1_ap1",
+                    "name": "CTX1_AP1",
+                    "lowercaseName": "ctx1_ap1",
+                    "isPrimary": false,
+                    "isHealthy": true
+                  },
+                  {
+                    "objectType": "app_epg",
+                    "identifier": "uni/tn-aepg_l3epg_imd_tnt_pass_1/ap-CTX2_AP1/epg-CTX2_BD1_AP1_EPG1",
+                    "lowercaseIdentifier": "uni/tn-aepg_l3epg_imd_tnt_pass_1/ap-ctx2_ap1/epg-ctx2_bd1_ap1_epg1",
+                    "name": "CTX2_BD1_AP1_EPG1",
+                    "lowercaseName": "ctx2_bd1_ap1_epg1",
+                    "isPrimary": false,
+                    "isHealthy": true
+                  },
+                  {
+                    "objectType": "epg",
+                    "identifier": "uni/tn-aepg_l3epg_imd_tnt_pass_1/ap-CTX2_AP1/epg-CTX2_BD1_AP1_EPG1",
+                    "lowercaseIdentifier": "uni/tn-aepg_l3epg_imd_tnt_pass_1/ap-ctx2_ap1/epg-ctx2_bd1_ap1_epg1",
+                    "name": "CTX2_BD1_AP1_EPG1",
+                    "lowercaseName": "ctx2_bd1_ap1_epg1",
+                    "isPrimary": false,
+                    "isHealthy": true
+                  },
+                  {
+                    "objectType": "bd",
+                    "identifier": "uni/tn-aepg_l3epg_imd_tnt_pass_1/BD-CTX2_BD1",
+                    "lowercaseIdentifier": "uni/tn-aepg_l3epg_imd_tnt_pass_1/bd-ctx2_bd1",
+                    "name": "CTX2_BD1",
+                    "lowercaseName": "ctx2_bd1",
+                    "isPrimary": false,
+                    "isHealthy": true
+                  },
+                  {
+                    "objectType": "vrf",
+                    "identifier": "uni/tn-aepg_l3epg_imd_tnt_pass_1/ctx-CTX2",
+                    "lowercaseIdentifier": "uni/tn-aepg_l3epg_imd_tnt_pass_1/ctx-ctx2",
+                    "name": "CTX2",
+                    "lowercaseName": "ctx2",
+                    "isPrimary": false,
+                    "isHealthy": true
+                  },
+                  {
+                    "objectType": "app_profile",
+                    "identifier": "uni/tn-aepg_l3epg_imd_tnt_pass_1/ap-CTX2_AP1",
+                    "lowercaseIdentifier": "uni/tn-aepg_l3epg_imd_tnt_pass_1/ap-ctx2_ap1",
+                    "name": "CTX2_AP1",
+                    "lowercaseName": "ctx2_ap1",
+                    "isPrimary": false,
+                    "isHealthy": true
+                  },
+                  {
+                    "objectType": "contract",
+                    "identifier": "uni/tn-aepg_l3epg_imd_tnt_pass_1/brc-Ctrct_1",
+                    "lowercaseIdentifier": "uni/tn-aepg_l3epg_imd_tnt_pass_1/brc-ctrct_1",
+                    "name": "Ctrct_1",
+                    "lowercaseName": "ctrct_1",
+                    "isPrimary": false,
+                    "isHealthy": true
+                  },
+                  {
+                    "objectType": "subnet",
+                    "identifier": "uni/tn-aepg_l3epg_imd_tnt_pass_1/BD-CTX2_BD1/subnet-[1.1.1.1/24]",
+                    "lowercaseIdentifier": "uni/tn-aepg_l3epg_imd_tnt_pass_1/bd-ctx2_bd1/subnet-[1.1.1.1/24]",
+                    "name": "[1.1.1.1/24]",
+                    "lowercaseName": "[1.1.1.1/24]",
+                    "isPrimary": false,
+                    "isHealthy": true
+                  },
+                  {
+                    "objectType": "leaf",
+                    "identifier": "topology/pod-1/node-104",
+                    "lowercaseIdentifier": "topology/pod-1/node-104",
+                    "name": "candid9-leaf4",
+                    "lowercaseName": "candid9-leaf4",
+                    "isPrimary": false,
+                    "isHealthy": true
+                  },
+                  {
+                    "objectType": "leaf",
+                    "identifier": "topology/pod-1/node-104",
+                    "lowercaseIdentifier": "topology/pod-1/node-104",
+                    "name": "candid9-leaf4",
+                    "lowercaseName": "candid9-leaf4",
+                    "isPrimary": false,
+                    "isHealthy": true
+                  },
+                  {
+                    "objectType": "subnet",
+                    "identifier": "uni/tn-aepg_l3epg_imd_tnt_pass_1/BD-CTX1_BD1/subnet-[1.1.1.1/24]",
+                    "lowercaseIdentifier": "uni/tn-aepg_l3epg_imd_tnt_pass_1/bd-ctx1_bd1/subnet-[1.1.1.1/24]",
+                    "name": "[1.1.1.1/24]",
+                    "lowercaseName": "[1.1.1.1/24]",
+                    "isPrimary": false,
+                    "isHealthy": true
+                  },
+                  {
+                    "objectType": "leaf",
+                    "identifier": "topology/pod-1/node-106",
+                    "lowercaseIdentifier": "topology/pod-1/node-106",
+                    "name": "candid9-leaf6",
+                    "lowercaseName": "candid9-leaf6",
+                    "isPrimary": false,
+                    "isHealthy": true
+                  },
+                  {
+                    "objectType": "leaf",
+                    "identifier": "topology/pod-1/node-106",
+                    "lowercaseIdentifier": "topology/pod-1/node-106",
+                    "name": "candid9-leaf6",
+                    "lowercaseName": "candid9-leaf6",
+                    "isPrimary": false,
+                    "isHealthy": true
+                  },
+                  {
+                    "objectType": "leaf",
+                    "identifier": "topology/pod-1/node-107",
+                    "lowercaseIdentifier": "topology/pod-1/node-107",
+                    "name": "candid9-leaf7",
+                    "lowercaseName": "candid9-leaf7",
+                    "isPrimary": false,
+                    "isHealthy": true
+                  },
+                  {
+                    "objectType": "leaf",
+                    "identifier": "topology/pod-1/node-107",
+                    "lowercaseIdentifier": "topology/pod-1/node-107",
+                    "name": "candid9-leaf7",
+                    "lowercaseName": "candid9-leaf7",
+                    "isPrimary": false,
+                    "isHealthy": true
+                  },
+                  {
+                    "objectType": "NI_OBJECT_TYPE_EVENT_RULE_VIEW",
+                    "identifier": "2",
+                    "lowercaseIdentifier": "2",
+                    "name": "",
+                    "lowercaseName": "",
+                    "isPrimary": false,
+                    "isHealthy": true
+                  }
+                ],
+                "tenants": [
+                  "tenant_A"
+                ],
+                "eventSignature": "e61d9077f18c3d14eeeb13d12a988c6c303efa28e8258f8252cb080f5df5b33a",
+                "orchestratorPrimaryKey": "",
+                "nodeNames": [
+                  "candid9-leaf4",
+                  "candid9-leaf6",
+                  "candid9-leaf7"
+                ],
+                "primaryClearDate": "2022-11-01T13:08:49.000Z",
+                "isRoot": false,
+                "isCorrelated": false,
+                "correlatedAnomaliesCount": 0,
+                "anomalySource": "fabricManagement",
+                "preChangeAnalysis": false,
+                "analysisTimestamp": "2022-11-01T13:00:00.000Z",
+                "complianceReport": false,
+                "integrationType": "vCenter",
+                "integrationName": "integrationName",
+                "integrationMode": "integration",
+                "device": "172.22.31.254",
+                "switchId": "",
+                "policyName": "",
+                "ruleType": "communicationCompliance",
+                "ruleId": "0e5604f9-f81bde1e-ee2f-49c8-b915-5d617601e7ee",
+                "ruleName": "test rule 3"
+              }
+            ],
+            "meta": {
+              "counts": {
+                "total": 1,
+                "remaining": 0
+              },
+              "links": {
+                "next": "https://api.example.com/v1/analyze/analyze-anomalies/anomalies/details?offset=40&max=10",
+                "previous": "https://api.example.com/v1/analyze/analyze-anomalies/anomalies/details?offset=20&max=10"
+              }
+            }
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/fabricSoftware/upgradeReports/:reportId/instances/:instanceId/clearedAnomalies"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: reportId
+          value: ""
+          type: path
+          description: Report id for upgrade analysis
+        - name: instanceId
+          value: ""
+          type: path
+          description: Instance id for a previous run of pre-validation check
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/fabricSoftware/upgradeReports/:reportId/instances/:instanceId/clearedAnomalies"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: reportId
+          value: ""
+          type: path
+          description: Report id for upgrade analysis
+        - name: instanceId
+          value: ""
+          type: path
+          description: Instance id for a previous run of pre-validation check
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 403 Response
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/fabricSoftware/upgradeReports/:reportId/instances/:instanceId/clearedAnomalies"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: reportId
+          value: ""
+          type: path
+          description: Report id for upgrade analysis
+        - name: instanceId
+          value: ""
+          type: path
+          description: Instance id for a previous run of pre-validation check
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 404 Response
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/fabricSoftware/upgradeReports/:reportId/instances/:instanceId/clearedAnomalies"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: reportId
+          value: ""
+          type: path
+          description: Report id for upgrade analysis
+        - name: instanceId
+          value: ""
+          type: path
+          description: Instance id for a previous run of pre-validation check
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 500 Response
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/fabricSoftware/upgradeReports/:reportId/instances/:instanceId/clearedAnomalies"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: reportId
+          value: ""
+          type: path
+          description: Report id for upgrade analysis
+        - name: instanceId
+          value: ""
+          type: path
+          description: Instance id for a previous run of pre-validation check
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }

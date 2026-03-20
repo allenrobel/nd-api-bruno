@@ -1,0 +1,3056 @@
+info:
+  name: Export fabric interface list
+  type: http
+  seq: 3
+  tags:
+    - Interfaces
+
+http:
+  method: POST
+  url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+  params:
+    - name: clusterName
+      value: ""
+      type: query
+      description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+      disabled: true
+    - name: fabricName
+      value: ""
+      type: path
+      description: Name of the fabric
+  body:
+    type: json
+    data: |-
+      {
+        "exportList": [
+          {
+            "interfaceName": "Ethernet1/1",
+            "switchId": "FDO222425SE"
+          },
+          {
+            "interfaceName": "Ethernet1/3",
+            "switchId": "FDO222425SE"
+          }
+        ]
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: ZIP archive with multiple CSVs when interfaces have different policyTypes (Export ethernet interfaces)
+    description: |
+      ZIP archive containing CSV files grouped by policyType. Each CSV file is named as 'interface_<policyType>_<timestamp>.csv' (e.g., 'interface_preprovision_20251031211500000.csv'). 
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": [
+              {
+                "interfaceName": "Ethernet1/1",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "Ethernet1/3",
+                "switchId": "FDO222425SE"
+              }
+            ]
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/zip
+      body:
+        type: text
+        data: <binary data representation of a zip file>
+  - name: ZIP archive with multiple CSVs when interfaces have different policyTypes (Export all interfaces)
+    description: |
+      ZIP archive containing CSV files grouped by policyType. Each CSV file is named as 'interface_<policyType>_<timestamp>.csv' (e.g., 'interface_preprovision_20251031211500000.csv'). 
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": []
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/zip
+      body:
+        type: text
+        data: <binary data representation of a zip file>
+  - name: ZIP archive with multiple CSVs when interfaces have different policyTypes (Export Loopback interfaces)
+    description: |
+      ZIP archive containing CSV files grouped by policyType. Each CSV file is named as 'interface_<policyType>_<timestamp>.csv' (e.g., 'interface_preprovision_20251031211500000.csv'). 
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": [
+              {
+                "interfaceName": "Loopback0",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "Loopback1",
+                "switchId": "FDO222425SE"
+              }
+            ]
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/zip
+      body:
+        type: text
+        data: <binary data representation of a zip file>
+  - name: ZIP archive with multiple CSVs when interfaces have different policyTypes (Export multiple interfaces)
+    description: |
+      ZIP archive containing CSV files grouped by policyType. Each CSV file is named as 'interface_<policyType>_<timestamp>.csv' (e.g., 'interface_preprovision_20251031211500000.csv'). 
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": [
+              {
+                "interfaceName": "Ethernet1/1",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "Port-Channel501",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "vPC100",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "VLAN2100",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "Loopback0",
+                "switchId": "FDO222425SE"
+              }
+            ]
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/zip
+      body:
+        type: text
+        data: <binary data representation of a zip file>
+  - name: ZIP archive with multiple CSVs when interfaces have different policyTypes (Export Port-Channel interfaces)
+    description: |
+      ZIP archive containing CSV files grouped by policyType. Each CSV file is named as 'interface_<policyType>_<timestamp>.csv' (e.g., 'interface_preprovision_20251031211500000.csv'). 
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": [
+              {
+                "interfaceName": "Port-Channel501",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "Port-Channel502",
+                "switchId": "FDO222425SE"
+              }
+            ]
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/zip
+      body:
+        type: text
+        data: <binary data representation of a zip file>
+  - name: ZIP archive with multiple CSVs when interfaces have different policyTypes (Export VLAN interfaces)
+    description: |
+      ZIP archive containing CSV files grouped by policyType. Each CSV file is named as 'interface_<policyType>_<timestamp>.csv' (e.g., 'interface_preprovision_20251031211500000.csv'). 
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": [
+              {
+                "interfaceName": "VLAN2100",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "VLAN2101",
+                "switchId": "FDO222425SE"
+              }
+            ]
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/zip
+      body:
+        type: text
+        data: <binary data representation of a zip file>
+  - name: ZIP archive with multiple CSVs when interfaces have different policyTypes (Export vPC interfaces)
+    description: |
+      ZIP archive containing CSV files grouped by policyType. Each CSV file is named as 'interface_<policyType>_<timestamp>.csv' (e.g., 'interface_preprovision_20251031211500000.csv'). 
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": [
+              {
+                "interfaceName": "vPC100",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "vPC101",
+                "switchId": "FDO222425SE"
+              }
+            ]
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/zip
+      body:
+        type: text
+        data: <binary data representation of a zip file>
+  - name: ethernetExample (Export ethernet interfaces)
+    description: Export multiple ethernet interfaces from one or more switches
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": [
+              {
+                "interfaceName": "Ethernet1/1",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "Ethernet1/3",
+                "switchId": "FDO222425SE"
+              }
+            ]
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: text/csv
+      body:
+        type: text
+        data: |
+          interfaceName,switchId,interfaceType,mode,networkOSType,adminState,allowedVlans,bpduGuard,description,extraConfig,mtu,netflow,netflowMonitor,policyType,portTypeFast,ptp,speed
+          Ethernet1/1,FDO222425SE,ethernet,trunk,nx-os,true,none,default,,,jumbo,false,,trunkHost,true,false,auto
+          Ethernet1/3,FDO22240HJP,ethernet,trunk,nx-os,true,none,default,,,jumbo,false,,trunkHost,true,false,auto
+  - name: ethernetExample (Export all interfaces)
+    description: Export all interfaces from one or more switches
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": []
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: text/csv
+      body:
+        type: text
+        data: |
+          interfaceName,switchId,interfaceType,mode,networkOSType,adminState,allowedVlans,bpduGuard,description,extraConfig,mtu,netflow,netflowMonitor,policyType,portTypeFast,ptp,speed
+          Ethernet1/1,FDO222425SE,ethernet,trunk,nx-os,true,none,default,,,jumbo,false,,trunkHost,true,false,auto
+          Ethernet1/3,FDO22240HJP,ethernet,trunk,nx-os,true,none,default,,,jumbo,false,,trunkHost,true,false,auto
+  - name: ethernetExample (Export Loopback interfaces)
+    description: Export multiple loopback interfaces from one or more switches
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": [
+              {
+                "interfaceName": "Loopback0",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "Loopback1",
+                "switchId": "FDO222425SE"
+              }
+            ]
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: text/csv
+      body:
+        type: text
+        data: |
+          interfaceName,switchId,interfaceType,mode,networkOSType,adminState,allowedVlans,bpduGuard,description,extraConfig,mtu,netflow,netflowMonitor,policyType,portTypeFast,ptp,speed
+          Ethernet1/1,FDO222425SE,ethernet,trunk,nx-os,true,none,default,,,jumbo,false,,trunkHost,true,false,auto
+          Ethernet1/3,FDO22240HJP,ethernet,trunk,nx-os,true,none,default,,,jumbo,false,,trunkHost,true,false,auto
+  - name: ethernetExample (Export multiple interfaces)
+    description: Export multiple interfaces from one or more switches
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": [
+              {
+                "interfaceName": "Ethernet1/1",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "Port-Channel501",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "vPC100",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "VLAN2100",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "Loopback0",
+                "switchId": "FDO222425SE"
+              }
+            ]
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: text/csv
+      body:
+        type: text
+        data: |
+          interfaceName,switchId,interfaceType,mode,networkOSType,adminState,allowedVlans,bpduGuard,description,extraConfig,mtu,netflow,netflowMonitor,policyType,portTypeFast,ptp,speed
+          Ethernet1/1,FDO222425SE,ethernet,trunk,nx-os,true,none,default,,,jumbo,false,,trunkHost,true,false,auto
+          Ethernet1/3,FDO22240HJP,ethernet,trunk,nx-os,true,none,default,,,jumbo,false,,trunkHost,true,false,auto
+  - name: ethernetExample (Export Port-Channel interfaces)
+    description: Export multiple Port-Channel interfaces from one or more switches
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": [
+              {
+                "interfaceName": "Port-Channel501",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "Port-Channel502",
+                "switchId": "FDO222425SE"
+              }
+            ]
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: text/csv
+      body:
+        type: text
+        data: |
+          interfaceName,switchId,interfaceType,mode,networkOSType,adminState,allowedVlans,bpduGuard,description,extraConfig,mtu,netflow,netflowMonitor,policyType,portTypeFast,ptp,speed
+          Ethernet1/1,FDO222425SE,ethernet,trunk,nx-os,true,none,default,,,jumbo,false,,trunkHost,true,false,auto
+          Ethernet1/3,FDO22240HJP,ethernet,trunk,nx-os,true,none,default,,,jumbo,false,,trunkHost,true,false,auto
+  - name: ethernetExample (Export VLAN interfaces)
+    description: Export multiple Vlan interfaces from one or more switches
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": [
+              {
+                "interfaceName": "VLAN2100",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "VLAN2101",
+                "switchId": "FDO222425SE"
+              }
+            ]
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: text/csv
+      body:
+        type: text
+        data: |
+          interfaceName,switchId,interfaceType,mode,networkOSType,adminState,allowedVlans,bpduGuard,description,extraConfig,mtu,netflow,netflowMonitor,policyType,portTypeFast,ptp,speed
+          Ethernet1/1,FDO222425SE,ethernet,trunk,nx-os,true,none,default,,,jumbo,false,,trunkHost,true,false,auto
+          Ethernet1/3,FDO22240HJP,ethernet,trunk,nx-os,true,none,default,,,jumbo,false,,trunkHost,true,false,auto
+  - name: ethernetExample (Export vPC interfaces)
+    description: Export multiple vPC interfaces from one or more switches
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": [
+              {
+                "interfaceName": "vPC100",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "vPC101",
+                "switchId": "FDO222425SE"
+              }
+            ]
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: text/csv
+      body:
+        type: text
+        data: |
+          interfaceName,switchId,interfaceType,mode,networkOSType,adminState,allowedVlans,bpduGuard,description,extraConfig,mtu,netflow,netflowMonitor,policyType,portTypeFast,ptp,speed
+          Ethernet1/1,FDO222425SE,ethernet,trunk,nx-os,true,none,default,,,jumbo,false,,trunkHost,true,false,auto
+          Ethernet1/3,FDO22240HJP,ethernet,trunk,nx-os,true,none,default,,,jumbo,false,,trunkHost,true,false,auto
+  - name: loopbackExample (Export ethernet interfaces)
+    description: Export multiple ethernet interfaces from one or more switches
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": [
+              {
+                "interfaceName": "Ethernet1/1",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "Ethernet1/3",
+                "switchId": "FDO222425SE"
+              }
+            ]
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: text/csv
+      body:
+        type: text
+        data: |
+          interfaceName,switchId,interfaceType,mode,networkOSType,adminState,description,ip,linkStateRoutingTag,ospfAreaId,policyType,replicationMode,secondaryIp
+          loopback1,FDO22240HJP,loopback,managed,nx-os,true,"VTEP loopback interface","10.3.0.1","UNDERLAY","0.0.0.0","underlayLoopback","multicast","10.3.0.2"
+          loopback0,FDO22240HJP,loopback,managed,nx-os,true,"Routing loopback interface","10.2.0.2","UNDERLAY","0.0.0.0","underlayLoopback","multicast",
+  - name: loopbackExample (Export all interfaces)
+    description: Export all interfaces from one or more switches
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": []
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: text/csv
+      body:
+        type: text
+        data: |
+          interfaceName,switchId,interfaceType,mode,networkOSType,adminState,description,ip,linkStateRoutingTag,ospfAreaId,policyType,replicationMode,secondaryIp
+          loopback1,FDO22240HJP,loopback,managed,nx-os,true,"VTEP loopback interface","10.3.0.1","UNDERLAY","0.0.0.0","underlayLoopback","multicast","10.3.0.2"
+          loopback0,FDO22240HJP,loopback,managed,nx-os,true,"Routing loopback interface","10.2.0.2","UNDERLAY","0.0.0.0","underlayLoopback","multicast",
+  - name: loopbackExample (Export Loopback interfaces)
+    description: Export multiple loopback interfaces from one or more switches
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": [
+              {
+                "interfaceName": "Loopback0",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "Loopback1",
+                "switchId": "FDO222425SE"
+              }
+            ]
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: text/csv
+      body:
+        type: text
+        data: |
+          interfaceName,switchId,interfaceType,mode,networkOSType,adminState,description,ip,linkStateRoutingTag,ospfAreaId,policyType,replicationMode,secondaryIp
+          loopback1,FDO22240HJP,loopback,managed,nx-os,true,"VTEP loopback interface","10.3.0.1","UNDERLAY","0.0.0.0","underlayLoopback","multicast","10.3.0.2"
+          loopback0,FDO22240HJP,loopback,managed,nx-os,true,"Routing loopback interface","10.2.0.2","UNDERLAY","0.0.0.0","underlayLoopback","multicast",
+  - name: loopbackExample (Export multiple interfaces)
+    description: Export multiple interfaces from one or more switches
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": [
+              {
+                "interfaceName": "Ethernet1/1",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "Port-Channel501",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "vPC100",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "VLAN2100",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "Loopback0",
+                "switchId": "FDO222425SE"
+              }
+            ]
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: text/csv
+      body:
+        type: text
+        data: |
+          interfaceName,switchId,interfaceType,mode,networkOSType,adminState,description,ip,linkStateRoutingTag,ospfAreaId,policyType,replicationMode,secondaryIp
+          loopback1,FDO22240HJP,loopback,managed,nx-os,true,"VTEP loopback interface","10.3.0.1","UNDERLAY","0.0.0.0","underlayLoopback","multicast","10.3.0.2"
+          loopback0,FDO22240HJP,loopback,managed,nx-os,true,"Routing loopback interface","10.2.0.2","UNDERLAY","0.0.0.0","underlayLoopback","multicast",
+  - name: loopbackExample (Export Port-Channel interfaces)
+    description: Export multiple Port-Channel interfaces from one or more switches
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": [
+              {
+                "interfaceName": "Port-Channel501",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "Port-Channel502",
+                "switchId": "FDO222425SE"
+              }
+            ]
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: text/csv
+      body:
+        type: text
+        data: |
+          interfaceName,switchId,interfaceType,mode,networkOSType,adminState,description,ip,linkStateRoutingTag,ospfAreaId,policyType,replicationMode,secondaryIp
+          loopback1,FDO22240HJP,loopback,managed,nx-os,true,"VTEP loopback interface","10.3.0.1","UNDERLAY","0.0.0.0","underlayLoopback","multicast","10.3.0.2"
+          loopback0,FDO22240HJP,loopback,managed,nx-os,true,"Routing loopback interface","10.2.0.2","UNDERLAY","0.0.0.0","underlayLoopback","multicast",
+  - name: loopbackExample (Export VLAN interfaces)
+    description: Export multiple Vlan interfaces from one or more switches
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": [
+              {
+                "interfaceName": "VLAN2100",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "VLAN2101",
+                "switchId": "FDO222425SE"
+              }
+            ]
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: text/csv
+      body:
+        type: text
+        data: |
+          interfaceName,switchId,interfaceType,mode,networkOSType,adminState,description,ip,linkStateRoutingTag,ospfAreaId,policyType,replicationMode,secondaryIp
+          loopback1,FDO22240HJP,loopback,managed,nx-os,true,"VTEP loopback interface","10.3.0.1","UNDERLAY","0.0.0.0","underlayLoopback","multicast","10.3.0.2"
+          loopback0,FDO22240HJP,loopback,managed,nx-os,true,"Routing loopback interface","10.2.0.2","UNDERLAY","0.0.0.0","underlayLoopback","multicast",
+  - name: loopbackExample (Export vPC interfaces)
+    description: Export multiple vPC interfaces from one or more switches
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": [
+              {
+                "interfaceName": "vPC100",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "vPC101",
+                "switchId": "FDO222425SE"
+              }
+            ]
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: text/csv
+      body:
+        type: text
+        data: |
+          interfaceName,switchId,interfaceType,mode,networkOSType,adminState,description,ip,linkStateRoutingTag,ospfAreaId,policyType,replicationMode,secondaryIp
+          loopback1,FDO22240HJP,loopback,managed,nx-os,true,"VTEP loopback interface","10.3.0.1","UNDERLAY","0.0.0.0","underlayLoopback","multicast","10.3.0.2"
+          loopback0,FDO22240HJP,loopback,managed,nx-os,true,"Routing loopback interface","10.2.0.2","UNDERLAY","0.0.0.0","underlayLoopback","multicast",
+  - name: portChannelExample (Export ethernet interfaces)
+    description: Export multiple ethernet interfaces from one or more switches
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": [
+              {
+                "interfaceName": "Ethernet1/1",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "Ethernet1/3",
+                "switchId": "FDO222425SE"
+              }
+            ]
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: text/csv
+      body:
+        type: text
+        data: |
+          interfaceName,switchId,interfaceType,mode,networkOSType,adminState,allowedVlans,bpduFilter,bpduGuard,cdp,copyDescription,duplexMode,lacpPortPriority,lacpRate,lacpSuspend,linkType,monitor,mtu,negotiateAuto,netflow,orphanPort,pfc,policyType,portChannelId,portChannelMode,portTypeEdgeTrunk,ptp,qos,speed,stormControl,vlanMapping
+          port-channel501,94OZMUWKVVO,portChannel,trunk,nx-os,true,none,default,enable,true,false,auto,32768,normal,false,auto,false,jumbo,true,false,false,false,trunkPoHost,Port-channel501,active,true,false,false,auto,false,false
+          port-channel502,94OZMUWKVVO,portChannel,trunk,nx-os,true,none,default,enable,true,false,auto,32768,normal,false,auto,false,jumbo,true,false,false,false,trunkPoHost,Port-channel502,active,true,false,false,auto,false,false
+  - name: portChannelExample (Export all interfaces)
+    description: Export all interfaces from one or more switches
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": []
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: text/csv
+      body:
+        type: text
+        data: |
+          interfaceName,switchId,interfaceType,mode,networkOSType,adminState,allowedVlans,bpduFilter,bpduGuard,cdp,copyDescription,duplexMode,lacpPortPriority,lacpRate,lacpSuspend,linkType,monitor,mtu,negotiateAuto,netflow,orphanPort,pfc,policyType,portChannelId,portChannelMode,portTypeEdgeTrunk,ptp,qos,speed,stormControl,vlanMapping
+          port-channel501,94OZMUWKVVO,portChannel,trunk,nx-os,true,none,default,enable,true,false,auto,32768,normal,false,auto,false,jumbo,true,false,false,false,trunkPoHost,Port-channel501,active,true,false,false,auto,false,false
+          port-channel502,94OZMUWKVVO,portChannel,trunk,nx-os,true,none,default,enable,true,false,auto,32768,normal,false,auto,false,jumbo,true,false,false,false,trunkPoHost,Port-channel502,active,true,false,false,auto,false,false
+  - name: portChannelExample (Export Loopback interfaces)
+    description: Export multiple loopback interfaces from one or more switches
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": [
+              {
+                "interfaceName": "Loopback0",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "Loopback1",
+                "switchId": "FDO222425SE"
+              }
+            ]
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: text/csv
+      body:
+        type: text
+        data: |
+          interfaceName,switchId,interfaceType,mode,networkOSType,adminState,allowedVlans,bpduFilter,bpduGuard,cdp,copyDescription,duplexMode,lacpPortPriority,lacpRate,lacpSuspend,linkType,monitor,mtu,negotiateAuto,netflow,orphanPort,pfc,policyType,portChannelId,portChannelMode,portTypeEdgeTrunk,ptp,qos,speed,stormControl,vlanMapping
+          port-channel501,94OZMUWKVVO,portChannel,trunk,nx-os,true,none,default,enable,true,false,auto,32768,normal,false,auto,false,jumbo,true,false,false,false,trunkPoHost,Port-channel501,active,true,false,false,auto,false,false
+          port-channel502,94OZMUWKVVO,portChannel,trunk,nx-os,true,none,default,enable,true,false,auto,32768,normal,false,auto,false,jumbo,true,false,false,false,trunkPoHost,Port-channel502,active,true,false,false,auto,false,false
+  - name: portChannelExample (Export multiple interfaces)
+    description: Export multiple interfaces from one or more switches
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": [
+              {
+                "interfaceName": "Ethernet1/1",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "Port-Channel501",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "vPC100",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "VLAN2100",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "Loopback0",
+                "switchId": "FDO222425SE"
+              }
+            ]
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: text/csv
+      body:
+        type: text
+        data: |
+          interfaceName,switchId,interfaceType,mode,networkOSType,adminState,allowedVlans,bpduFilter,bpduGuard,cdp,copyDescription,duplexMode,lacpPortPriority,lacpRate,lacpSuspend,linkType,monitor,mtu,negotiateAuto,netflow,orphanPort,pfc,policyType,portChannelId,portChannelMode,portTypeEdgeTrunk,ptp,qos,speed,stormControl,vlanMapping
+          port-channel501,94OZMUWKVVO,portChannel,trunk,nx-os,true,none,default,enable,true,false,auto,32768,normal,false,auto,false,jumbo,true,false,false,false,trunkPoHost,Port-channel501,active,true,false,false,auto,false,false
+          port-channel502,94OZMUWKVVO,portChannel,trunk,nx-os,true,none,default,enable,true,false,auto,32768,normal,false,auto,false,jumbo,true,false,false,false,trunkPoHost,Port-channel502,active,true,false,false,auto,false,false
+  - name: portChannelExample (Export Port-Channel interfaces)
+    description: Export multiple Port-Channel interfaces from one or more switches
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": [
+              {
+                "interfaceName": "Port-Channel501",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "Port-Channel502",
+                "switchId": "FDO222425SE"
+              }
+            ]
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: text/csv
+      body:
+        type: text
+        data: |
+          interfaceName,switchId,interfaceType,mode,networkOSType,adminState,allowedVlans,bpduFilter,bpduGuard,cdp,copyDescription,duplexMode,lacpPortPriority,lacpRate,lacpSuspend,linkType,monitor,mtu,negotiateAuto,netflow,orphanPort,pfc,policyType,portChannelId,portChannelMode,portTypeEdgeTrunk,ptp,qos,speed,stormControl,vlanMapping
+          port-channel501,94OZMUWKVVO,portChannel,trunk,nx-os,true,none,default,enable,true,false,auto,32768,normal,false,auto,false,jumbo,true,false,false,false,trunkPoHost,Port-channel501,active,true,false,false,auto,false,false
+          port-channel502,94OZMUWKVVO,portChannel,trunk,nx-os,true,none,default,enable,true,false,auto,32768,normal,false,auto,false,jumbo,true,false,false,false,trunkPoHost,Port-channel502,active,true,false,false,auto,false,false
+  - name: portChannelExample (Export VLAN interfaces)
+    description: Export multiple Vlan interfaces from one or more switches
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": [
+              {
+                "interfaceName": "VLAN2100",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "VLAN2101",
+                "switchId": "FDO222425SE"
+              }
+            ]
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: text/csv
+      body:
+        type: text
+        data: |
+          interfaceName,switchId,interfaceType,mode,networkOSType,adminState,allowedVlans,bpduFilter,bpduGuard,cdp,copyDescription,duplexMode,lacpPortPriority,lacpRate,lacpSuspend,linkType,monitor,mtu,negotiateAuto,netflow,orphanPort,pfc,policyType,portChannelId,portChannelMode,portTypeEdgeTrunk,ptp,qos,speed,stormControl,vlanMapping
+          port-channel501,94OZMUWKVVO,portChannel,trunk,nx-os,true,none,default,enable,true,false,auto,32768,normal,false,auto,false,jumbo,true,false,false,false,trunkPoHost,Port-channel501,active,true,false,false,auto,false,false
+          port-channel502,94OZMUWKVVO,portChannel,trunk,nx-os,true,none,default,enable,true,false,auto,32768,normal,false,auto,false,jumbo,true,false,false,false,trunkPoHost,Port-channel502,active,true,false,false,auto,false,false
+  - name: portChannelExample (Export vPC interfaces)
+    description: Export multiple vPC interfaces from one or more switches
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": [
+              {
+                "interfaceName": "vPC100",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "vPC101",
+                "switchId": "FDO222425SE"
+              }
+            ]
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: text/csv
+      body:
+        type: text
+        data: |
+          interfaceName,switchId,interfaceType,mode,networkOSType,adminState,allowedVlans,bpduFilter,bpduGuard,cdp,copyDescription,duplexMode,lacpPortPriority,lacpRate,lacpSuspend,linkType,monitor,mtu,negotiateAuto,netflow,orphanPort,pfc,policyType,portChannelId,portChannelMode,portTypeEdgeTrunk,ptp,qos,speed,stormControl,vlanMapping
+          port-channel501,94OZMUWKVVO,portChannel,trunk,nx-os,true,none,default,enable,true,false,auto,32768,normal,false,auto,false,jumbo,true,false,false,false,trunkPoHost,Port-channel501,active,true,false,false,auto,false,false
+          port-channel502,94OZMUWKVVO,portChannel,trunk,nx-os,true,none,default,enable,true,false,auto,32768,normal,false,auto,false,jumbo,true,false,false,false,trunkPoHost,Port-channel502,active,true,false,false,auto,false,false
+  - name: sviExample (Export ethernet interfaces)
+    description: Export multiple ethernet interfaces from one or more switches
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": [
+              {
+                "interfaceName": "Ethernet1/1",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "Ethernet1/3",
+                "switchId": "FDO222425SE"
+              }
+            ]
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: text/csv
+      body:
+        type: text
+        data: |
+          interfaceName,switchId,interfaceType,mode,networkOSType,adminState,bfd,bfdAuthKeyId,bfdEchoDisable,description,ip,isType,linkStateRouting,linkStateRoutingTag,mtu,ospfAreaId,policyType,prefix,replicationMode
+          Vlan3600,FDO22240HJP,svi,managed,nx-os,true,false,100,true,"VPC-Peer-Link SVI","10.4.0.1","level2","ospf","UNDERLAY",9216,"0.0.0.0","vpcBackupSvi",30,"multicast"
+          Vlan2100,FDO22240HJP,svi,managed,nx-os,true,false,100,true,"VPC-Peer-Link SVI","10.4.0.1","level2","ospf","UNDERLAY",9216,"0.0.0.0","vpcBackupSvi",30,"multicast"
+  - name: sviExample (Export all interfaces)
+    description: Export all interfaces from one or more switches
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": []
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: text/csv
+      body:
+        type: text
+        data: |
+          interfaceName,switchId,interfaceType,mode,networkOSType,adminState,bfd,bfdAuthKeyId,bfdEchoDisable,description,ip,isType,linkStateRouting,linkStateRoutingTag,mtu,ospfAreaId,policyType,prefix,replicationMode
+          Vlan3600,FDO22240HJP,svi,managed,nx-os,true,false,100,true,"VPC-Peer-Link SVI","10.4.0.1","level2","ospf","UNDERLAY",9216,"0.0.0.0","vpcBackupSvi",30,"multicast"
+          Vlan2100,FDO22240HJP,svi,managed,nx-os,true,false,100,true,"VPC-Peer-Link SVI","10.4.0.1","level2","ospf","UNDERLAY",9216,"0.0.0.0","vpcBackupSvi",30,"multicast"
+  - name: sviExample (Export Loopback interfaces)
+    description: Export multiple loopback interfaces from one or more switches
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": [
+              {
+                "interfaceName": "Loopback0",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "Loopback1",
+                "switchId": "FDO222425SE"
+              }
+            ]
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: text/csv
+      body:
+        type: text
+        data: |
+          interfaceName,switchId,interfaceType,mode,networkOSType,adminState,bfd,bfdAuthKeyId,bfdEchoDisable,description,ip,isType,linkStateRouting,linkStateRoutingTag,mtu,ospfAreaId,policyType,prefix,replicationMode
+          Vlan3600,FDO22240HJP,svi,managed,nx-os,true,false,100,true,"VPC-Peer-Link SVI","10.4.0.1","level2","ospf","UNDERLAY",9216,"0.0.0.0","vpcBackupSvi",30,"multicast"
+          Vlan2100,FDO22240HJP,svi,managed,nx-os,true,false,100,true,"VPC-Peer-Link SVI","10.4.0.1","level2","ospf","UNDERLAY",9216,"0.0.0.0","vpcBackupSvi",30,"multicast"
+  - name: sviExample (Export multiple interfaces)
+    description: Export multiple interfaces from one or more switches
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": [
+              {
+                "interfaceName": "Ethernet1/1",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "Port-Channel501",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "vPC100",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "VLAN2100",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "Loopback0",
+                "switchId": "FDO222425SE"
+              }
+            ]
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: text/csv
+      body:
+        type: text
+        data: |
+          interfaceName,switchId,interfaceType,mode,networkOSType,adminState,bfd,bfdAuthKeyId,bfdEchoDisable,description,ip,isType,linkStateRouting,linkStateRoutingTag,mtu,ospfAreaId,policyType,prefix,replicationMode
+          Vlan3600,FDO22240HJP,svi,managed,nx-os,true,false,100,true,"VPC-Peer-Link SVI","10.4.0.1","level2","ospf","UNDERLAY",9216,"0.0.0.0","vpcBackupSvi",30,"multicast"
+          Vlan2100,FDO22240HJP,svi,managed,nx-os,true,false,100,true,"VPC-Peer-Link SVI","10.4.0.1","level2","ospf","UNDERLAY",9216,"0.0.0.0","vpcBackupSvi",30,"multicast"
+  - name: sviExample (Export Port-Channel interfaces)
+    description: Export multiple Port-Channel interfaces from one or more switches
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": [
+              {
+                "interfaceName": "Port-Channel501",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "Port-Channel502",
+                "switchId": "FDO222425SE"
+              }
+            ]
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: text/csv
+      body:
+        type: text
+        data: |
+          interfaceName,switchId,interfaceType,mode,networkOSType,adminState,bfd,bfdAuthKeyId,bfdEchoDisable,description,ip,isType,linkStateRouting,linkStateRoutingTag,mtu,ospfAreaId,policyType,prefix,replicationMode
+          Vlan3600,FDO22240HJP,svi,managed,nx-os,true,false,100,true,"VPC-Peer-Link SVI","10.4.0.1","level2","ospf","UNDERLAY",9216,"0.0.0.0","vpcBackupSvi",30,"multicast"
+          Vlan2100,FDO22240HJP,svi,managed,nx-os,true,false,100,true,"VPC-Peer-Link SVI","10.4.0.1","level2","ospf","UNDERLAY",9216,"0.0.0.0","vpcBackupSvi",30,"multicast"
+  - name: sviExample (Export VLAN interfaces)
+    description: Export multiple Vlan interfaces from one or more switches
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": [
+              {
+                "interfaceName": "VLAN2100",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "VLAN2101",
+                "switchId": "FDO222425SE"
+              }
+            ]
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: text/csv
+      body:
+        type: text
+        data: |
+          interfaceName,switchId,interfaceType,mode,networkOSType,adminState,bfd,bfdAuthKeyId,bfdEchoDisable,description,ip,isType,linkStateRouting,linkStateRoutingTag,mtu,ospfAreaId,policyType,prefix,replicationMode
+          Vlan3600,FDO22240HJP,svi,managed,nx-os,true,false,100,true,"VPC-Peer-Link SVI","10.4.0.1","level2","ospf","UNDERLAY",9216,"0.0.0.0","vpcBackupSvi",30,"multicast"
+          Vlan2100,FDO22240HJP,svi,managed,nx-os,true,false,100,true,"VPC-Peer-Link SVI","10.4.0.1","level2","ospf","UNDERLAY",9216,"0.0.0.0","vpcBackupSvi",30,"multicast"
+  - name: sviExample (Export vPC interfaces)
+    description: Export multiple vPC interfaces from one or more switches
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": [
+              {
+                "interfaceName": "vPC100",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "vPC101",
+                "switchId": "FDO222425SE"
+              }
+            ]
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: text/csv
+      body:
+        type: text
+        data: |
+          interfaceName,switchId,interfaceType,mode,networkOSType,adminState,bfd,bfdAuthKeyId,bfdEchoDisable,description,ip,isType,linkStateRouting,linkStateRoutingTag,mtu,ospfAreaId,policyType,prefix,replicationMode
+          Vlan3600,FDO22240HJP,svi,managed,nx-os,true,false,100,true,"VPC-Peer-Link SVI","10.4.0.1","level2","ospf","UNDERLAY",9216,"0.0.0.0","vpcBackupSvi",30,"multicast"
+          Vlan2100,FDO22240HJP,svi,managed,nx-os,true,false,100,true,"VPC-Peer-Link SVI","10.4.0.1","level2","ospf","UNDERLAY",9216,"0.0.0.0","vpcBackupSvi",30,"multicast"
+  - name: vPCExample (Export ethernet interfaces)
+    description: Export multiple ethernet interfaces from one or more switches
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": [
+              {
+                "interfaceName": "Ethernet1/1",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "Ethernet1/3",
+                "switchId": "FDO222425SE"
+              }
+            ]
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: text/csv
+      body:
+        type: text
+        data: |
+          interfaceName,switchId,interfaceType,mode,networkOSType,adminState,bpduFilter,bpduGuard,cdp,copyDescription,duplexMode,lacpPortPriority,lacpRate,lacpSuspend,lacpVpcConvergence,linkType,mirrorConfig,mtu,negotiateAuto,netflow,peer1AllowedVlans,peer1MemberPorts,peer1PortChannelId,peer2AllowedVlans,peer2MemberPorts,peer2PortChannelId,peerSwitchId,pfc,policyType,portChannelMode,portTypeFast,ptp,qos,speed,stormControl,stormControlAction,vlanMapping
+          vpc652,FDO22240HJP,vpc,trunk,nx-os,true,"default","enable",true,false,"auto",32768,"normal",false,false,"auto",false,"jumbo",true,false,"none","[""Ethernet1/24""]",652,"none","[""Ethernet1/24""]",652,"FDO22240HJP",false,"trunkVpcHost","active",true,false,false,"auto",false,"default",false
+          vpc1,FDO22240HJP,vpc,trunk,nx-os,true,"default","enable",true,false,"auto",32768,"normal",false,false,"auto",false,"jumbo",true,false,"none",,1,"none",,1,"FDO222425SE",false,"trunkVpcHost","active",true,false,false,"auto",false,"default",false
+  - name: vPCExample (Export all interfaces)
+    description: Export all interfaces from one or more switches
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": []
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: text/csv
+      body:
+        type: text
+        data: |
+          interfaceName,switchId,interfaceType,mode,networkOSType,adminState,bpduFilter,bpduGuard,cdp,copyDescription,duplexMode,lacpPortPriority,lacpRate,lacpSuspend,lacpVpcConvergence,linkType,mirrorConfig,mtu,negotiateAuto,netflow,peer1AllowedVlans,peer1MemberPorts,peer1PortChannelId,peer2AllowedVlans,peer2MemberPorts,peer2PortChannelId,peerSwitchId,pfc,policyType,portChannelMode,portTypeFast,ptp,qos,speed,stormControl,stormControlAction,vlanMapping
+          vpc652,FDO22240HJP,vpc,trunk,nx-os,true,"default","enable",true,false,"auto",32768,"normal",false,false,"auto",false,"jumbo",true,false,"none","[""Ethernet1/24""]",652,"none","[""Ethernet1/24""]",652,"FDO22240HJP",false,"trunkVpcHost","active",true,false,false,"auto",false,"default",false
+          vpc1,FDO22240HJP,vpc,trunk,nx-os,true,"default","enable",true,false,"auto",32768,"normal",false,false,"auto",false,"jumbo",true,false,"none",,1,"none",,1,"FDO222425SE",false,"trunkVpcHost","active",true,false,false,"auto",false,"default",false
+  - name: vPCExample (Export Loopback interfaces)
+    description: Export multiple loopback interfaces from one or more switches
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": [
+              {
+                "interfaceName": "Loopback0",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "Loopback1",
+                "switchId": "FDO222425SE"
+              }
+            ]
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: text/csv
+      body:
+        type: text
+        data: |
+          interfaceName,switchId,interfaceType,mode,networkOSType,adminState,bpduFilter,bpduGuard,cdp,copyDescription,duplexMode,lacpPortPriority,lacpRate,lacpSuspend,lacpVpcConvergence,linkType,mirrorConfig,mtu,negotiateAuto,netflow,peer1AllowedVlans,peer1MemberPorts,peer1PortChannelId,peer2AllowedVlans,peer2MemberPorts,peer2PortChannelId,peerSwitchId,pfc,policyType,portChannelMode,portTypeFast,ptp,qos,speed,stormControl,stormControlAction,vlanMapping
+          vpc652,FDO22240HJP,vpc,trunk,nx-os,true,"default","enable",true,false,"auto",32768,"normal",false,false,"auto",false,"jumbo",true,false,"none","[""Ethernet1/24""]",652,"none","[""Ethernet1/24""]",652,"FDO22240HJP",false,"trunkVpcHost","active",true,false,false,"auto",false,"default",false
+          vpc1,FDO22240HJP,vpc,trunk,nx-os,true,"default","enable",true,false,"auto",32768,"normal",false,false,"auto",false,"jumbo",true,false,"none",,1,"none",,1,"FDO222425SE",false,"trunkVpcHost","active",true,false,false,"auto",false,"default",false
+  - name: vPCExample (Export multiple interfaces)
+    description: Export multiple interfaces from one or more switches
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": [
+              {
+                "interfaceName": "Ethernet1/1",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "Port-Channel501",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "vPC100",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "VLAN2100",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "Loopback0",
+                "switchId": "FDO222425SE"
+              }
+            ]
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: text/csv
+      body:
+        type: text
+        data: |
+          interfaceName,switchId,interfaceType,mode,networkOSType,adminState,bpduFilter,bpduGuard,cdp,copyDescription,duplexMode,lacpPortPriority,lacpRate,lacpSuspend,lacpVpcConvergence,linkType,mirrorConfig,mtu,negotiateAuto,netflow,peer1AllowedVlans,peer1MemberPorts,peer1PortChannelId,peer2AllowedVlans,peer2MemberPorts,peer2PortChannelId,peerSwitchId,pfc,policyType,portChannelMode,portTypeFast,ptp,qos,speed,stormControl,stormControlAction,vlanMapping
+          vpc652,FDO22240HJP,vpc,trunk,nx-os,true,"default","enable",true,false,"auto",32768,"normal",false,false,"auto",false,"jumbo",true,false,"none","[""Ethernet1/24""]",652,"none","[""Ethernet1/24""]",652,"FDO22240HJP",false,"trunkVpcHost","active",true,false,false,"auto",false,"default",false
+          vpc1,FDO22240HJP,vpc,trunk,nx-os,true,"default","enable",true,false,"auto",32768,"normal",false,false,"auto",false,"jumbo",true,false,"none",,1,"none",,1,"FDO222425SE",false,"trunkVpcHost","active",true,false,false,"auto",false,"default",false
+  - name: vPCExample (Export Port-Channel interfaces)
+    description: Export multiple Port-Channel interfaces from one or more switches
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": [
+              {
+                "interfaceName": "Port-Channel501",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "Port-Channel502",
+                "switchId": "FDO222425SE"
+              }
+            ]
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: text/csv
+      body:
+        type: text
+        data: |
+          interfaceName,switchId,interfaceType,mode,networkOSType,adminState,bpduFilter,bpduGuard,cdp,copyDescription,duplexMode,lacpPortPriority,lacpRate,lacpSuspend,lacpVpcConvergence,linkType,mirrorConfig,mtu,negotiateAuto,netflow,peer1AllowedVlans,peer1MemberPorts,peer1PortChannelId,peer2AllowedVlans,peer2MemberPorts,peer2PortChannelId,peerSwitchId,pfc,policyType,portChannelMode,portTypeFast,ptp,qos,speed,stormControl,stormControlAction,vlanMapping
+          vpc652,FDO22240HJP,vpc,trunk,nx-os,true,"default","enable",true,false,"auto",32768,"normal",false,false,"auto",false,"jumbo",true,false,"none","[""Ethernet1/24""]",652,"none","[""Ethernet1/24""]",652,"FDO22240HJP",false,"trunkVpcHost","active",true,false,false,"auto",false,"default",false
+          vpc1,FDO22240HJP,vpc,trunk,nx-os,true,"default","enable",true,false,"auto",32768,"normal",false,false,"auto",false,"jumbo",true,false,"none",,1,"none",,1,"FDO222425SE",false,"trunkVpcHost","active",true,false,false,"auto",false,"default",false
+  - name: vPCExample (Export VLAN interfaces)
+    description: Export multiple Vlan interfaces from one or more switches
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": [
+              {
+                "interfaceName": "VLAN2100",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "VLAN2101",
+                "switchId": "FDO222425SE"
+              }
+            ]
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: text/csv
+      body:
+        type: text
+        data: |
+          interfaceName,switchId,interfaceType,mode,networkOSType,adminState,bpduFilter,bpduGuard,cdp,copyDescription,duplexMode,lacpPortPriority,lacpRate,lacpSuspend,lacpVpcConvergence,linkType,mirrorConfig,mtu,negotiateAuto,netflow,peer1AllowedVlans,peer1MemberPorts,peer1PortChannelId,peer2AllowedVlans,peer2MemberPorts,peer2PortChannelId,peerSwitchId,pfc,policyType,portChannelMode,portTypeFast,ptp,qos,speed,stormControl,stormControlAction,vlanMapping
+          vpc652,FDO22240HJP,vpc,trunk,nx-os,true,"default","enable",true,false,"auto",32768,"normal",false,false,"auto",false,"jumbo",true,false,"none","[""Ethernet1/24""]",652,"none","[""Ethernet1/24""]",652,"FDO22240HJP",false,"trunkVpcHost","active",true,false,false,"auto",false,"default",false
+          vpc1,FDO22240HJP,vpc,trunk,nx-os,true,"default","enable",true,false,"auto",32768,"normal",false,false,"auto",false,"jumbo",true,false,"none",,1,"none",,1,"FDO222425SE",false,"trunkVpcHost","active",true,false,false,"auto",false,"default",false
+  - name: vPCExample (Export vPC interfaces)
+    description: Export multiple vPC interfaces from one or more switches
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": [
+              {
+                "interfaceName": "vPC100",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "vPC101",
+                "switchId": "FDO222425SE"
+              }
+            ]
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: text/csv
+      body:
+        type: text
+        data: |
+          interfaceName,switchId,interfaceType,mode,networkOSType,adminState,bpduFilter,bpduGuard,cdp,copyDescription,duplexMode,lacpPortPriority,lacpRate,lacpSuspend,lacpVpcConvergence,linkType,mirrorConfig,mtu,negotiateAuto,netflow,peer1AllowedVlans,peer1MemberPorts,peer1PortChannelId,peer2AllowedVlans,peer2MemberPorts,peer2PortChannelId,peerSwitchId,pfc,policyType,portChannelMode,portTypeFast,ptp,qos,speed,stormControl,stormControlAction,vlanMapping
+          vpc652,FDO22240HJP,vpc,trunk,nx-os,true,"default","enable",true,false,"auto",32768,"normal",false,false,"auto",false,"jumbo",true,false,"none","[""Ethernet1/24""]",652,"none","[""Ethernet1/24""]",652,"FDO22240HJP",false,"trunkVpcHost","active",true,false,false,"auto",false,"default",false
+          vpc1,FDO22240HJP,vpc,trunk,nx-os,true,"default","enable",true,false,"auto",32768,"normal",false,false,"auto",false,"jumbo",true,false,"none",,1,"none",,1,"FDO222425SE",false,"trunkVpcHost","active",true,false,false,"auto",false,"default",false
+  - name: 400 Response (Export ethernet interfaces)
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": [
+              {
+                "interfaceName": "Ethernet1/1",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "Ethernet1/3",
+                "switchId": "FDO222425SE"
+              }
+            ]
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 400 Response (Export all interfaces)
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": []
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 400 Response (Export Loopback interfaces)
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": [
+              {
+                "interfaceName": "Loopback0",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "Loopback1",
+                "switchId": "FDO222425SE"
+              }
+            ]
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 400 Response (Export multiple interfaces)
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": [
+              {
+                "interfaceName": "Ethernet1/1",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "Port-Channel501",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "vPC100",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "VLAN2100",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "Loopback0",
+                "switchId": "FDO222425SE"
+              }
+            ]
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 400 Response (Export Port-Channel interfaces)
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": [
+              {
+                "interfaceName": "Port-Channel501",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "Port-Channel502",
+                "switchId": "FDO222425SE"
+              }
+            ]
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 400 Response (Export VLAN interfaces)
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": [
+              {
+                "interfaceName": "VLAN2100",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "VLAN2101",
+                "switchId": "FDO222425SE"
+              }
+            ]
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 400 Response (Export vPC interfaces)
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": [
+              {
+                "interfaceName": "vPC100",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "vPC101",
+                "switchId": "FDO222425SE"
+              }
+            ]
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 401 Response (Export ethernet interfaces)
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": [
+              {
+                "interfaceName": "Ethernet1/1",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "Ethernet1/3",
+                "switchId": "FDO222425SE"
+              }
+            ]
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 401 Response (Export all interfaces)
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": []
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 401 Response (Export Loopback interfaces)
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": [
+              {
+                "interfaceName": "Loopback0",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "Loopback1",
+                "switchId": "FDO222425SE"
+              }
+            ]
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 401 Response (Export multiple interfaces)
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": [
+              {
+                "interfaceName": "Ethernet1/1",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "Port-Channel501",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "vPC100",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "VLAN2100",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "Loopback0",
+                "switchId": "FDO222425SE"
+              }
+            ]
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 401 Response (Export Port-Channel interfaces)
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": [
+              {
+                "interfaceName": "Port-Channel501",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "Port-Channel502",
+                "switchId": "FDO222425SE"
+              }
+            ]
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 401 Response (Export VLAN interfaces)
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": [
+              {
+                "interfaceName": "VLAN2100",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "VLAN2101",
+                "switchId": "FDO222425SE"
+              }
+            ]
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 401 Response (Export vPC interfaces)
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": [
+              {
+                "interfaceName": "vPC100",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "vPC101",
+                "switchId": "FDO222425SE"
+              }
+            ]
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 404 Response (Export ethernet interfaces)
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": [
+              {
+                "interfaceName": "Ethernet1/1",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "Ethernet1/3",
+                "switchId": "FDO222425SE"
+              }
+            ]
+          }
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 404 Response (Export all interfaces)
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": []
+          }
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 404 Response (Export Loopback interfaces)
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": [
+              {
+                "interfaceName": "Loopback0",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "Loopback1",
+                "switchId": "FDO222425SE"
+              }
+            ]
+          }
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 404 Response (Export multiple interfaces)
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": [
+              {
+                "interfaceName": "Ethernet1/1",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "Port-Channel501",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "vPC100",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "VLAN2100",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "Loopback0",
+                "switchId": "FDO222425SE"
+              }
+            ]
+          }
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 404 Response (Export Port-Channel interfaces)
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": [
+              {
+                "interfaceName": "Port-Channel501",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "Port-Channel502",
+                "switchId": "FDO222425SE"
+              }
+            ]
+          }
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 404 Response (Export VLAN interfaces)
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": [
+              {
+                "interfaceName": "VLAN2100",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "VLAN2101",
+                "switchId": "FDO222425SE"
+              }
+            ]
+          }
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 404 Response (Export vPC interfaces)
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": [
+              {
+                "interfaceName": "vPC100",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "vPC101",
+                "switchId": "FDO222425SE"
+              }
+            ]
+          }
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 500 Response (Export ethernet interfaces)
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": [
+              {
+                "interfaceName": "Ethernet1/1",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "Ethernet1/3",
+                "switchId": "FDO222425SE"
+              }
+            ]
+          }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }
+  - name: 500 Response (Export all interfaces)
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": []
+          }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }
+  - name: 500 Response (Export Loopback interfaces)
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": [
+              {
+                "interfaceName": "Loopback0",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "Loopback1",
+                "switchId": "FDO222425SE"
+              }
+            ]
+          }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }
+  - name: 500 Response (Export multiple interfaces)
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": [
+              {
+                "interfaceName": "Ethernet1/1",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "Port-Channel501",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "vPC100",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "VLAN2100",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "Loopback0",
+                "switchId": "FDO222425SE"
+              }
+            ]
+          }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }
+  - name: 500 Response (Export Port-Channel interfaces)
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": [
+              {
+                "interfaceName": "Port-Channel501",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "Port-Channel502",
+                "switchId": "FDO222425SE"
+              }
+            ]
+          }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }
+  - name: 500 Response (Export VLAN interfaces)
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": [
+              {
+                "interfaceName": "VLAN2100",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "VLAN2101",
+                "switchId": "FDO222425SE"
+              }
+            ]
+          }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }
+  - name: 500 Response (Export vPC interfaces)
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/interfaceActions/export"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "exportList": [
+              {
+                "interfaceName": "vPC100",
+                "switchId": "FDO222425SE"
+              },
+              {
+                "interfaceName": "vPC101",
+                "switchId": "FDO222425SE"
+              }
+            ]
+          }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }

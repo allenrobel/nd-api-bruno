@@ -2,6 +2,8 @@ info:
   name: Trigger collection of tech support logs
   type: http
   seq: 2
+  tags:
+    - Tech Support
 
 http:
   method: POST
@@ -14,7 +16,11 @@ http:
       disabled: true
   body:
     type: json
-    data: ""
+    data: |-
+      {
+        "collectDuration": "2023-03-01",
+        "name": "Techsupport1"
+      }
   auth: inherit
 
 settings:
@@ -43,6 +49,7 @@ examples:
             "name": "Techsupport1"
           }
     response:
+      status: 200
       statusText: OK
       body:
         type: text
@@ -66,6 +73,7 @@ examples:
             "name": "Techsupport1"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -97,6 +105,7 @@ examples:
             "name": "Techsupport1"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -128,6 +137,7 @@ examples:
             "name": "Techsupport1"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -159,6 +169,7 @@ examples:
             "name": "Techsupport1"
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -190,6 +201,7 @@ examples:
             "name": "Techsupport1"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

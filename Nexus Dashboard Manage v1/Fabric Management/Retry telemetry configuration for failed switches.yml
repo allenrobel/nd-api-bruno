@@ -2,6 +2,8 @@ info:
   name: Retry telemetry configuration for failed switches
   type: http
   seq: 28
+  tags:
+    - Fabric Management
 
 http:
   method: POST
@@ -20,8 +22,8 @@ http:
     type: json
     data: |-
       {
-        "feature": "",
-        "switchId": ""
+        "feature": "flowrules",
+        "switchId": "FDO24090H04"
       }
   auth: inherit
 
@@ -55,6 +57,7 @@ examples:
             "switchId": "FDO24090H04"
           }
     response:
+      status: 204
       statusText: No Content
       body:
         type: text
@@ -82,6 +85,7 @@ examples:
             "switchId": "FDO24090H04"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -117,6 +121,7 @@ examples:
             "switchId": "FDO24090H04"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -152,6 +157,7 @@ examples:
             "switchId": "FDO24090H04"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -187,6 +193,7 @@ examples:
             "switchId": "FDO24090H04"
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -222,6 +229,7 @@ examples:
             "switchId": "FDO24090H04"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

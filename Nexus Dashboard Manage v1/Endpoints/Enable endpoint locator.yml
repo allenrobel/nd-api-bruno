@@ -2,6 +2,8 @@ info:
   name: Enable endpoint locator
   type: http
   seq: 3
+  tags:
+    - Endpoints
 
 http:
   method: POST
@@ -25,15 +27,19 @@ http:
     type: json
     data: |-
       {
-        "fabricType": "",
-        "nxApiMode": 0,
-        "skipSwitchConfiguration": false,
+        "fabricType": "l2vpn",
+        "nxApiMode": 1,
         "routeReflectors": [
           {
-            "switchName": "",
-            "managementIpAddress": ""
+            "managementIpAddress": "172.29.160.141",
+            "switchName": "s1"
+          },
+          {
+            "managementIpAddress": "172.29.160.140",
+            "switchName": "s2"
           }
-        ]
+        ],
+        "skipSwitchConfiguration": false
       }
   auth: inherit
 
@@ -83,6 +89,7 @@ examples:
             "skipSwitchConfiguration": false
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -132,6 +139,7 @@ examples:
             "skipSwitchConfiguration": false
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -183,6 +191,7 @@ examples:
             "skipSwitchConfiguration": false
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -234,6 +243,7 @@ examples:
             "skipSwitchConfiguration": false
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -285,6 +295,7 @@ examples:
             "skipSwitchConfiguration": false
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -336,6 +347,7 @@ examples:
             "skipSwitchConfiguration": false
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

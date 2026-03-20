@@ -2,6 +2,8 @@ info:
   name: Create policies in bulk
   type: http
   seq: 2
+  tags:
+    - Policies
 
 http:
   method: POST
@@ -25,7 +27,20 @@ http:
     type: json
     data: |-
       {
-        "policies": []
+        "policies": [
+          {
+            "description": "Create policy to configure LACP (Link Aggregation Control Protocol)",
+            "entityName": "SWITCH",
+            "entityType": "switch",
+            "priority": 500,
+            "source": "",
+            "switchId": "FDO23240AK6",
+            "templateInputs": {
+              "featureName": "lacp"
+            },
+            "templateName": "feature_enable"
+          }
+        ]
       }
   auth: inherit
 
@@ -76,6 +91,7 @@ examples:
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -86,23 +102,13 @@ examples:
           {
             "policies": [
               {
-                "createTimestamp": "2024-02-02 12:00:00+00:00",
-                "description": "Create policy to configure LACP (Link Aggregation Control Protocol)",
                 "entityName": "SWITCH",
                 "entityType": "switch",
-                "generatedConfig": "feature lacp\\n\\n\\n",
-                "markDeleted": false,
-                "message": "Policy is successfully created",
+                "message": "Action is successful",
                 "policyId": "POLICY-121110",
-                "priority": 500,
-                "source": "",
                 "status": "success",
-                "switchId": "FDO25031SY4",
-                "templateInputs": {
-                  "featureName": "lacp"
-                },
-                "templateName": "feature_enable",
-                "updateTimestamp": "2024-02-02 12:00:00+00:00"
+                "switchId": "FDO23240AK6",
+                "templateName": "feature_enable"
               }
             ]
           }
@@ -146,6 +152,7 @@ examples:
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -198,6 +205,7 @@ examples:
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -250,6 +258,7 @@ examples:
             ]
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -302,6 +311,7 @@ examples:
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -354,6 +364,7 @@ examples:
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

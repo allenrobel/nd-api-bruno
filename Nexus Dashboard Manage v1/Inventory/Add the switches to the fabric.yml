@@ -2,6 +2,8 @@ info:
   name: Add the switches to the fabric
   type: http
   seq: 31
+  tags:
+    - Inventory
 
 http:
   method: POST
@@ -27,24 +29,27 @@ http:
       {
         "switches": [
           {
-            "hostname": "",
-            "ip": "",
-            "model": "",
-            "serialNumber": "",
-            "softwareVersion": "",
-            "vdcId": 0,
-            "vdcMac": "",
-            "switchRole": ""
+            "hostname": "leaf1",
+            "ip": "10.23.244.81",
+            "model": "N9K-C93180YC-FX",
+            "serialNumber": "SAL1948TRTT",
+            "softwareVersion": "10.3(3)",
+            "switchRole": "leaf"
+          },
+          {
+            "hostname": "leaf2",
+            "ip": "10.23.244.82",
+            "model": "N9K-C93180YC-FX",
+            "serialNumber": "SAL1948TRST",
+            "softwareVersion": "10.3(3)"
           }
         ],
-        "platformType": "",
-        "preserveConfig": false,
-        "snmpV3AuthProtocol": "",
-        "useCredentialForWrite": false,
-        "username": "",
-        "password": "",
-        "remoteCredentialStore": "",
-        "remoteCredentialStoreKey": ""
+        "platformType": "nx-os",
+        "preserveConfig": true,
+        "snmpV3AuthProtocol": "md5",
+        "useCredentialForWrite": true,
+        "username": "admin",
+        "password": "mysecret"
       }
   auth: inherit
 
@@ -104,6 +109,7 @@ examples:
             "password": "mysecret"
           }
     response:
+      status: 202
       statusText: Accepted
       body:
         type: text
@@ -157,6 +163,7 @@ examples:
             "password": "mysecret"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -218,6 +225,7 @@ examples:
             "password": "mysecret"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -279,6 +287,7 @@ examples:
             "password": "mysecret"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -340,6 +349,7 @@ examples:
             "password": "mysecret"
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -401,6 +411,7 @@ examples:
             "password": "mysecret"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

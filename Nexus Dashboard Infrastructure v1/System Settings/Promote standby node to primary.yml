@@ -2,6 +2,8 @@ info:
   name: Promote standby node to primary
   type: http
   seq: 2
+  tags:
+    - System Settings
 
 http:
   method: POST
@@ -18,7 +20,7 @@ http:
       description: Node Name
   body:
     type: json
-    data: ""
+    data: '"sjc15-1m6-02-sn1-standby"'
   auth: inherit
 
 settings:
@@ -45,8 +47,9 @@ examples:
           description: Node Name
       body:
         type: json
-        data: sjc15-1m6-02-sn1-standby
+        data: '"sjc15-1m6-02-sn1-standby"'
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -71,8 +74,9 @@ examples:
           description: Node Name
       body:
         type: json
-        data: sjc15-1m6-02-sn1-standby
+        data: '"sjc15-1m6-02-sn1-standby"'
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -102,8 +106,9 @@ examples:
           description: Node Name
       body:
         type: json
-        data: sjc15-1m6-02-sn1-standby
+        data: '"sjc15-1m6-02-sn1-standby"'
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -133,8 +138,9 @@ examples:
           description: Node Name
       body:
         type: json
-        data: sjc15-1m6-02-sn1-standby
+        data: '"sjc15-1m6-02-sn1-standby"'
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -164,8 +170,9 @@ examples:
           description: Node Name
       body:
         type: json
-        data: sjc15-1m6-02-sn1-standby
+        data: '"sjc15-1m6-02-sn1-standby"'
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

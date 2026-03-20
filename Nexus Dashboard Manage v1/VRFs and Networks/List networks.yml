@@ -2,6 +2,8 @@ info:
   name: List networks
   type: http
   seq: 13
+  tags:
+    - VRFs and Networks
 
 http:
   method: GET
@@ -16,11 +18,6 @@ http:
       value: ""
       type: path
       description: Name of the fabric
-    - name: serviceNetwork
-      value: ""
-      type: query
-      description: Optional filter to delete the service network if set to true
-      disabled: true
     - name: offset
       value: ""
       type: query
@@ -34,12 +31,17 @@ http:
     - name: sort
       value: ""
       type: query
-      description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+      description: |
+        Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+        Ascending order by default: "field1"
+        Specific order for one field: "field1:asc" or "field1:desc"
+        Specific order with multiple fields: "field1:asc,field2:desc"
       disabled: true
     - name: filter
       value: ""
       type: query
       description: Lucene format filter - Filter the response based on this filter field
+      disabled: true
   auth: inherit
 
 settings:
@@ -63,11 +65,6 @@ examples:
           value: ""
           type: path
           description: Name of the fabric
-        - name: serviceNetwork
-          value: ""
-          type: query
-          description: Optional filter to delete the service network if set to true
-          disabled: true
         - name: offset
           value: ""
           type: query
@@ -81,13 +78,19 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -108,10 +111,10 @@ examples:
             },
             "networks": [
               {
-                "displayName": "MyNetwork_40000",
+                "displayName": "MyNetwork_30000",
                 "fabricName": "fab1",
                 "l2Data": {
-                  "vlanName": "VLAN4000"
+                  "vlanName": "VLAN3000"
                 },
                 "l3Data": {
                   "activePrimaryInterfaceIpv4": "192.168.40.2/24",
@@ -119,35 +122,25 @@ examples:
                   "activePrimarySwitchPriority": 120,
                   "gatewayIpv4Address": "192.168.40.1/24",
                   "hsrpVersion": 2,
-                  "hsrpVrrpGroupNumber": {
-                    "protocol": {
-                      "hsrpV2": 1
-                    }
-                  },
-                  "hsrpVrrpGroupNumberV6": {
-                    "protocol": {
-                      "hsrp": 180,
-                      "vrrp": 95
-                    }
-                  },
+                  "hsrpVrrpGroupNumber": 1,
+                  "hsrpVrrpGroupNumberV6": 95,
                   "l3NetflowMonitor": "L3_MONITOR",
                   "mtu": 9216,
                   "netflow": true,
                   "preempt": true,
-                  "routingTag": 40000,
+                  "routingTag": 30000,
                   "standbyBackupInterfaceIpv4": "192.168.40.3/24",
                   "standbyBackupInterfaceIpv6": "2001:db8:40::3/64",
                   "standbyBackupSwitchPriority": 100,
                   "standbyVlanInterfaceDescription": "Standby Classic Network 40000 Interface",
                   "vlanInterfaceDescription": "Classic Network 40000 Interface"
                 },
-                "layer": "layer3",
-                "networkName": "MyNetwork_40000",
+                "networkMode": "layer3",
+                "networkName": "MyNetwork_30000",
                 "networkStatus": "pending",
                 "networkType": "routed",
-                "tenantName": "tenant2",
-                "vlanId": 4000,
-                "vrfName": "MyVRF_60000"
+                "vlanId": 3000,
+                "vrfName": "MyVRF_50000"
               }
             ]
           }
@@ -165,11 +158,6 @@ examples:
           value: ""
           type: path
           description: Name of the fabric
-        - name: serviceNetwork
-          value: ""
-          type: query
-          description: Optional filter to delete the service network if set to true
-          disabled: true
         - name: offset
           value: ""
           type: query
@@ -183,13 +171,19 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -210,22 +204,21 @@ examples:
             },
             "networks": [
               {
-                "displayName": "MyNetwork_20000",
+                "displayName": "MyNetwork_30001",
                 "fabricName": "fab1",
-                "layer": "layer3",
-                "networkExtensionTemplateName": "CustomExtTemplate",
-                "networkId": 20000,
-                "networkName": "MyNetwork_20000",
+                "networkExtensionTemplateName": "Custom_Network_Extension_Template",
+                "networkId": 30001,
+                "networkMode": "layer3",
+                "networkName": "MyNetwork_30001",
                 "networkStatus": "inSync",
                 "networkTemplateConfig": {
-                  "customParam1": "value1",
-                  "customParam2": "value2"
+                  "networkName": "MyNetwork_30001",
+                  "vlanId": "3001"
                 },
-                "networkTemplateName": "CustomTemplate",
+                "networkTemplateName": "Default_Network_Universal",
                 "networkType": "userDefined",
-                "tenantName": "tenant3",
-                "vlanId": 2000,
-                "vrfName": "MyVRF_70000"
+                "vlanId": 3001,
+                "vrfName": "MyVRF_50001"
               }
             ]
           }
@@ -243,11 +236,6 @@ examples:
           value: ""
           type: path
           description: Name of the fabric
-        - name: serviceNetwork
-          value: ""
-          type: query
-          description: Optional filter to delete the service network if set to true
-          disabled: true
         - name: offset
           value: ""
           type: query
@@ -261,13 +249,19 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -304,9 +298,6 @@ examples:
                 "displayName": "MyNetwork_30000",
                 "fabricName": "fab1",
                 "l2Data": {
-                  "fabricData": {
-                    "stretch": "bgw1"
-                  },
                   "rtAuto": true,
                   "vlanName": "VLAN3000"
                 },
@@ -337,12 +328,11 @@ examples:
                   ],
                   "vlanInterfaceDescription": "VXLAN Network 30000 Interface"
                 },
-                "layer": "layer3",
                 "networkId": 30000,
+                "networkMode": "layer3",
                 "networkName": "MyNetwork_30000",
                 "networkStatus": "inSync",
-                "networkType": "vxlan",
-                "tenantName": "tenant1",
+                "networkType": "vxlanEbgp",
                 "vlanId": 3000,
                 "vrfName": "MyVRF_50000"
               }
@@ -363,11 +353,6 @@ examples:
           value: ""
           type: path
           description: Name of the fabric
-        - name: serviceNetwork
-          value: ""
-          type: query
-          description: Optional filter to delete the service network if set to true
-          disabled: true
         - name: offset
           value: ""
           type: query
@@ -381,13 +366,19 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -415,11 +406,6 @@ examples:
           value: ""
           type: path
           description: Name of the fabric
-        - name: serviceNetwork
-          value: ""
-          type: query
-          description: Optional filter to delete the service network if set to true
-          disabled: true
         - name: offset
           value: ""
           type: query
@@ -433,13 +419,19 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -467,11 +459,6 @@ examples:
           value: ""
           type: path
           description: Name of the fabric
-        - name: serviceNetwork
-          value: ""
-          type: query
-          description: Optional filter to delete the service network if set to true
-          disabled: true
         - name: offset
           value: ""
           type: query
@@ -485,13 +472,19 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -519,11 +512,6 @@ examples:
           value: ""
           type: path
           description: Name of the fabric
-        - name: serviceNetwork
-          value: ""
-          type: query
-          description: Optional filter to delete the service network if set to true
-          disabled: true
         - name: offset
           value: ""
           type: query
@@ -537,13 +525,19 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -571,11 +565,6 @@ examples:
           value: ""
           type: path
           description: Name of the fabric
-        - name: serviceNetwork
-          value: ""
-          type: query
-          description: Optional filter to delete the service network if set to true
-          disabled: true
         - name: offset
           value: ""
           type: query
@@ -589,13 +578,19 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

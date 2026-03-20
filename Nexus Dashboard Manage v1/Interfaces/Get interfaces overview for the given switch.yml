@@ -1,7 +1,9 @@
 info:
   name: Get interfaces overview for the given switch
   type: http
-  seq: 26
+  seq: 25
+  tags:
+    - Interfaces
 
 http:
   method: GET
@@ -21,13 +23,65 @@ http:
       type: path
       description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
     - name: interfaceType
-      value: ""
+      value: physical
       type: query
       description: Interface type
+      disabled: true
+    - name: interfaceType
+      value: ethernet
+      type: query
+      description: Interface type
+      disabled: true
+    - name: interfaceType
+      value: portChannel
+      type: query
+      description: Interface type
+      disabled: true
+    - name: interfaceType
+      value: loopback
+      type: query
+      description: Interface type
+      disabled: true
+    - name: interfaceType
+      value: virtualPortChannel
+      type: query
+      description: Interface type
+      disabled: true
+    - name: interfaceType
+      value: networkVirtualInterface
+      type: query
+      description: Interface type
+      disabled: true
+    - name: interfaceType
+      value: switchVirtualInterface
+      type: query
+      description: Interface type
+      disabled: true
+    - name: interfaceType
+      value: management
+      type: query
+      description: Interface type
+      disabled: true
+    - name: interfaceType
+      value: subInterface
+      type: query
+      description: Interface type
+      disabled: true
+    - name: interfaceType
+      value: tunnel
+      type: query
+      description: Interface type
+      disabled: true
+    - name: interfaceType
+      value: peerlinkPortChannel
+      type: query
+      description: Interface type
+      disabled: true
     - name: filter
       value: ""
       type: query
       description: Lucene format filter - Filter the response based on this filter field
+      disabled: true
   auth: inherit
 
 settings:
@@ -57,14 +111,67 @@ examples:
           type: path
           description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
         - name: interfaceType
-          value: ""
+          value: physical
           type: query
           description: Interface type
+          disabled: true
+        - name: interfaceType
+          value: ethernet
+          type: query
+          description: Interface type
+          disabled: true
+        - name: interfaceType
+          value: portChannel
+          type: query
+          description: Interface type
+          disabled: true
+        - name: interfaceType
+          value: loopback
+          type: query
+          description: Interface type
+          disabled: true
+        - name: interfaceType
+          value: virtualPortChannel
+          type: query
+          description: Interface type
+          disabled: true
+        - name: interfaceType
+          value: networkVirtualInterface
+          type: query
+          description: Interface type
+          disabled: true
+        - name: interfaceType
+          value: switchVirtualInterface
+          type: query
+          description: Interface type
+          disabled: true
+        - name: interfaceType
+          value: management
+          type: query
+          description: Interface type
+          disabled: true
+        - name: interfaceType
+          value: subInterface
+          type: query
+          description: Interface type
+          disabled: true
+        - name: interfaceType
+          value: tunnel
+          type: query
+          description: Interface type
+          disabled: true
+        - name: interfaceType
+          value: peerlinkPortChannel
+          type: query
+          description: Interface type
+          disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -203,14 +310,67 @@ examples:
           type: path
           description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
         - name: interfaceType
-          value: ""
+          value: physical
           type: query
           description: Interface type
+          disabled: true
+        - name: interfaceType
+          value: ethernet
+          type: query
+          description: Interface type
+          disabled: true
+        - name: interfaceType
+          value: portChannel
+          type: query
+          description: Interface type
+          disabled: true
+        - name: interfaceType
+          value: loopback
+          type: query
+          description: Interface type
+          disabled: true
+        - name: interfaceType
+          value: virtualPortChannel
+          type: query
+          description: Interface type
+          disabled: true
+        - name: interfaceType
+          value: networkVirtualInterface
+          type: query
+          description: Interface type
+          disabled: true
+        - name: interfaceType
+          value: switchVirtualInterface
+          type: query
+          description: Interface type
+          disabled: true
+        - name: interfaceType
+          value: management
+          type: query
+          description: Interface type
+          disabled: true
+        - name: interfaceType
+          value: subInterface
+          type: query
+          description: Interface type
+          disabled: true
+        - name: interfaceType
+          value: tunnel
+          type: query
+          description: Interface type
+          disabled: true
+        - name: interfaceType
+          value: peerlinkPortChannel
+          type: query
+          description: Interface type
+          disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -243,14 +403,67 @@ examples:
           type: path
           description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
         - name: interfaceType
-          value: ""
+          value: physical
           type: query
           description: Interface type
+          disabled: true
+        - name: interfaceType
+          value: ethernet
+          type: query
+          description: Interface type
+          disabled: true
+        - name: interfaceType
+          value: portChannel
+          type: query
+          description: Interface type
+          disabled: true
+        - name: interfaceType
+          value: loopback
+          type: query
+          description: Interface type
+          disabled: true
+        - name: interfaceType
+          value: virtualPortChannel
+          type: query
+          description: Interface type
+          disabled: true
+        - name: interfaceType
+          value: networkVirtualInterface
+          type: query
+          description: Interface type
+          disabled: true
+        - name: interfaceType
+          value: switchVirtualInterface
+          type: query
+          description: Interface type
+          disabled: true
+        - name: interfaceType
+          value: management
+          type: query
+          description: Interface type
+          disabled: true
+        - name: interfaceType
+          value: subInterface
+          type: query
+          description: Interface type
+          disabled: true
+        - name: interfaceType
+          value: tunnel
+          type: query
+          description: Interface type
+          disabled: true
+        - name: interfaceType
+          value: peerlinkPortChannel
+          type: query
+          description: Interface type
+          disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -283,14 +496,67 @@ examples:
           type: path
           description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
         - name: interfaceType
-          value: ""
+          value: physical
           type: query
           description: Interface type
+          disabled: true
+        - name: interfaceType
+          value: ethernet
+          type: query
+          description: Interface type
+          disabled: true
+        - name: interfaceType
+          value: portChannel
+          type: query
+          description: Interface type
+          disabled: true
+        - name: interfaceType
+          value: loopback
+          type: query
+          description: Interface type
+          disabled: true
+        - name: interfaceType
+          value: virtualPortChannel
+          type: query
+          description: Interface type
+          disabled: true
+        - name: interfaceType
+          value: networkVirtualInterface
+          type: query
+          description: Interface type
+          disabled: true
+        - name: interfaceType
+          value: switchVirtualInterface
+          type: query
+          description: Interface type
+          disabled: true
+        - name: interfaceType
+          value: management
+          type: query
+          description: Interface type
+          disabled: true
+        - name: interfaceType
+          value: subInterface
+          type: query
+          description: Interface type
+          disabled: true
+        - name: interfaceType
+          value: tunnel
+          type: query
+          description: Interface type
+          disabled: true
+        - name: interfaceType
+          value: peerlinkPortChannel
+          type: query
+          description: Interface type
+          disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -323,14 +589,67 @@ examples:
           type: path
           description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
         - name: interfaceType
-          value: ""
+          value: physical
           type: query
           description: Interface type
+          disabled: true
+        - name: interfaceType
+          value: ethernet
+          type: query
+          description: Interface type
+          disabled: true
+        - name: interfaceType
+          value: portChannel
+          type: query
+          description: Interface type
+          disabled: true
+        - name: interfaceType
+          value: loopback
+          type: query
+          description: Interface type
+          disabled: true
+        - name: interfaceType
+          value: virtualPortChannel
+          type: query
+          description: Interface type
+          disabled: true
+        - name: interfaceType
+          value: networkVirtualInterface
+          type: query
+          description: Interface type
+          disabled: true
+        - name: interfaceType
+          value: switchVirtualInterface
+          type: query
+          description: Interface type
+          disabled: true
+        - name: interfaceType
+          value: management
+          type: query
+          description: Interface type
+          disabled: true
+        - name: interfaceType
+          value: subInterface
+          type: query
+          description: Interface type
+          disabled: true
+        - name: interfaceType
+          value: tunnel
+          type: query
+          description: Interface type
+          disabled: true
+        - name: interfaceType
+          value: peerlinkPortChannel
+          type: query
+          description: Interface type
+          disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -363,14 +682,67 @@ examples:
           type: path
           description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
         - name: interfaceType
-          value: ""
+          value: physical
           type: query
           description: Interface type
+          disabled: true
+        - name: interfaceType
+          value: ethernet
+          type: query
+          description: Interface type
+          disabled: true
+        - name: interfaceType
+          value: portChannel
+          type: query
+          description: Interface type
+          disabled: true
+        - name: interfaceType
+          value: loopback
+          type: query
+          description: Interface type
+          disabled: true
+        - name: interfaceType
+          value: virtualPortChannel
+          type: query
+          description: Interface type
+          disabled: true
+        - name: interfaceType
+          value: networkVirtualInterface
+          type: query
+          description: Interface type
+          disabled: true
+        - name: interfaceType
+          value: switchVirtualInterface
+          type: query
+          description: Interface type
+          disabled: true
+        - name: interfaceType
+          value: management
+          type: query
+          description: Interface type
+          disabled: true
+        - name: interfaceType
+          value: subInterface
+          type: query
+          description: Interface type
+          disabled: true
+        - name: interfaceType
+          value: tunnel
+          type: query
+          description: Interface type
+          disabled: true
+        - name: interfaceType
+          value: peerlinkPortChannel
+          type: query
+          description: Interface type
+          disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

@@ -2,6 +2,8 @@ info:
   name: get a kubernetes cluster's connection information
   type: http
   seq: 37
+  tags:
+    - Integrations
 
 http:
   method: GET
@@ -41,6 +43,7 @@ examples:
           type: path
           description: Id of the Integration, Id format is {type}-{ip} or {type}-{name}
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -49,20 +52,20 @@ examples:
         type: json
         data: |-
           {
-            "integrationName": "",
-            "managed": "",
-            "orchType": "",
-            "host": "",
-            "tlsServerName": "",
-            "port": 0,
-            "userName": "",
-            "lastUpdateTimestamp": "",
-            "status": "",
-            "version": "",
-            "event": "",
-            "sourceUser": "",
-            "sourceIp": "",
-            "integrationId": ""
+            "integrationName": "k8s-1",
+            "managed": "managed",
+            "orchType": "kubernetes",
+            "host": "1.1.1.1",
+            "tlsServerName": "api.example1.cluster.local",
+            "port": 6443,
+            "userName": "nduser",
+            "lastUpdateTimestamp": "Sun, 02 Mar 2025 22:24:15 UTC",
+            "status": "OK",
+            "version": "v1.32.1",
+            "event": "add_event",
+            "sourceUser": "admin",
+            "sourceIp": "172.20.71.20",
+            "integrationId": "kubernetes-1.1.1.1"
           }
   - name: 400 Response
     description: Bad Request
@@ -80,6 +83,7 @@ examples:
           type: path
           description: Id of the Integration, Id format is {type}-{ip} or {type}-{name}
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -108,6 +112,7 @@ examples:
           type: path
           description: Id of the Integration, Id format is {type}-{ip} or {type}-{name}
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -136,6 +141,7 @@ examples:
           type: path
           description: Id of the Integration, Id format is {type}-{ip} or {type}-{name}
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -164,6 +170,7 @@ examples:
           type: path
           description: Id of the Integration, Id format is {type}-{ip} or {type}-{name}
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -192,6 +199,7 @@ examples:
           type: path
           description: Id of the Integration, Id format is {type}-{ip} or {type}-{name}
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

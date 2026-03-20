@@ -1,7 +1,9 @@
 info:
-  name: Update node configuration.
+  name: Update node configuration
   type: http
   seq: 5
+  tags:
+    - System Bootstrap
 
 http:
   method: PUT
@@ -20,27 +22,15 @@ http:
     type: json
     data: |-
       {
-        "bgpConfig": {
-          "asn": 0,
-          "peerList": [
-            {
-              "asn": 0,
-              "peerIp": ""
-            }
-          ],
-          "routerId": ""
-        },
         "managementNetwork": {
-          "network": {
-            "cidrv4": "",
-            "cidrv6": ""
-          },
           "gateway": {
-            "ipv4": "",
-            "ipv6": ""
+            "ipv4": "172.20.23.1"
           },
-          "vlanId": 0
-        }
+          "network": {
+            "cidrv4": "172.20.23.27/24"
+          }
+        },
+        "name": "sjc15-3m6-03-sn5"
       }
   auth: inherit
 
@@ -81,6 +71,7 @@ examples:
             "name": "sjc15-3m6-03-sn5"
           }
     response:
+      status: 204
       statusText: No Content
       body:
         type: text
@@ -115,6 +106,7 @@ examples:
             "name": "sjc15-3m6-03-sn5"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -157,6 +149,7 @@ examples:
             "name": "sjc15-3m6-03-sn5"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -199,6 +192,7 @@ examples:
             "name": "sjc15-3m6-03-sn5"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -241,6 +235,7 @@ examples:
             "name": "sjc15-3m6-03-sn5"
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -283,6 +278,7 @@ examples:
             "name": "sjc15-3m6-03-sn5"
           }
     response:
+      status: 409
       statusText: Conflict
       headers:
         - name: Content-Type
@@ -325,6 +321,7 @@ examples:
             "name": "sjc15-3m6-03-sn5"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

@@ -1,7 +1,9 @@
 info:
   name: Execute show commands on switches
   type: http
-  seq: 61
+  seq: 63
+  tags:
+    - Inventory
 
 http:
   method: POST
@@ -16,9 +18,16 @@ http:
     type: json
     data: |-
       {
-        "commands": [],
-        "switchIds": [],
-        "timeout": 0
+        "commands": [
+          "show version",
+          "show mod",
+          "show int"
+        ],
+        "switchIds": [
+          "SAL1925HCYJ",
+          "SAL1924GTKN"
+        ],
+        "timeout": 10
       }
   auth: inherit
 
@@ -56,6 +65,7 @@ examples:
             "timeout": 10
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -107,6 +117,7 @@ examples:
             "timeout": 10
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -146,6 +157,7 @@ examples:
             "timeout": 10
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -185,6 +197,7 @@ examples:
             "timeout": 10
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -224,6 +237,7 @@ examples:
             "timeout": 10
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -263,6 +277,7 @@ examples:
             "timeout": 10
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

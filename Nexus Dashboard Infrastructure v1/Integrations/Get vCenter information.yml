@@ -2,6 +2,8 @@ info:
   name: Get vCenter information
   type: http
   seq: 79
+  tags:
+    - Integrations
 
 http:
   method: GET
@@ -41,6 +43,7 @@ examples:
           type: path
           description: Id of the Integration, Id format is {type}-{ip} or {type}-{name}
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -49,13 +52,13 @@ examples:
         type: json
         data: |-
           {
-            "hostname": "",
-            "integrationId": "",
-            "integrationName": "",
-            "lastUpdateTime": "",
-            "status": "",
-            "username": "",
-            "version": ""
+            "hostname": "1.1.1.1",
+            "integrationId": "vcenter-1.1.1.1",
+            "integrationName": "d30-vCenter1",
+            "lastUpdateTime": "2024-06-22T10:00:00.00Z",
+            "status": "ok",
+            "username": "administrator@vsphere.local",
+            "version": "7.0.3"
           }
   - name: 400 Response
     description: Bad Request
@@ -73,6 +76,7 @@ examples:
           type: path
           description: Id of the Integration, Id format is {type}-{ip} or {type}-{name}
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -101,6 +105,7 @@ examples:
           type: path
           description: Id of the Integration, Id format is {type}-{ip} or {type}-{name}
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -129,6 +134,7 @@ examples:
           type: path
           description: Id of the Integration, Id format is {type}-{ip} or {type}-{name}
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -157,6 +163,7 @@ examples:
           type: path
           description: Id of the Integration, Id format is {type}-{ip} or {type}-{name}
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

@@ -2,6 +2,8 @@ info:
   name: Export network attachments via CSV
   type: http
   seq: 9
+  tags:
+    - VRFs and Networks
 
 http:
   method: POST
@@ -20,9 +22,18 @@ http:
     type: json
     data: |-
       {
-        "networkNames": [],
-        "switchFabricNames": [],
-        "switchIds": []
+        "networkNames": [
+          "MyNetwork_30000",
+          "MyNetwork_30001"
+        ],
+        "switchFabricNames": [
+          "apic1",
+          "apic2"
+        ],
+        "switchIds": [
+          "99X70W9ORI1",
+          "98AM4PTG8V0"
+        ]
       }
   auth: inherit
 
@@ -66,6 +77,7 @@ examples:
             ]
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -73,9 +85,8 @@ examples:
       body:
         type: text
         data: |
-          fabricName,networkName,switchId,switchName,vlanId,status,attach,switchRole,interfaceRange,interfaceStatus,interfaceDescription,interfaceChannelNumber,interfaceType,neighbourInformation,peerSwitchId
-          Fabric1,MyNetwork_30001,99X70W9ORI1,bgl-vp-leaf2,100,inSync,true,leaf,Ethernet1/1-3,true,Access Port Range,1,access,Connected to Server1,98AM4PTG8V0
-          Fabric1,MyNetwork_30002,98AM4PTG8V0,bgl-vp-leaf3,200,outOfSync,false,leaf,Ethernet1/2,false,Trunk Port,2,trunk,Connected to Server2,99X70W9ORI1
+          networkName,networkId,switchId,switchName,switchFabricName,vlanId,status,attach,switchRole,peerSwitchId,sviEnabled,isActive,interfaces
+          MyNetwork_30001,30001,99X70W9ORI1,bgl-vp-leaf2,fab1,100,inSync,true,leaf,98AM4PTG8V0,true,true,"[{""interfaceRange"":""Ethernet1/1-3"",""mode"":""access""}]"
   - name: 400 Response
     description: Bad Request
     request:
@@ -109,6 +120,7 @@ examples:
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -154,6 +166,7 @@ examples:
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -199,6 +212,7 @@ examples:
             ]
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -244,6 +258,7 @@ examples:
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -289,6 +304,7 @@ examples:
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

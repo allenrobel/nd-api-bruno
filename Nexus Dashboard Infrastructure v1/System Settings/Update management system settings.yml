@@ -2,6 +2,8 @@ info:
   name: Update management system settings
   type: http
   seq: 25
+  tags:
+    - System Settings
 
 http:
   method: PUT
@@ -16,7 +18,7 @@ http:
     type: json
     data: |-
       {
-        "apicProxyMode": "",
+        "apicProxyMode": "remoteUsersOnly",
         "enableAaaPassthrough": false
       }
   auth: inherit
@@ -47,6 +49,7 @@ examples:
             "enableAaaPassthrough": false
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -77,6 +80,7 @@ examples:
             "enableAaaPassthrough": false
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -108,6 +112,7 @@ examples:
             "enableAaaPassthrough": false
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -139,6 +144,7 @@ examples:
             "enableAaaPassthrough": false
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -170,6 +176,7 @@ examples:
             "enableAaaPassthrough": false
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -201,6 +208,7 @@ examples:
             "enableAaaPassthrough": false
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

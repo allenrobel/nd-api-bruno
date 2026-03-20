@@ -2,6 +2,8 @@ info:
   name: Replace VRF
   type: http
   seq: 34
+  tags:
+    - VRFs and Networks
 
 http:
   method: PUT
@@ -27,7 +29,49 @@ http:
       disabled: true
   body:
     type: json
-    data: "{}"
+    data: |-
+      {
+        "additionalData": {
+          "advertiseDefaultRoute": true,
+          "advertiseHostRoute": false,
+          "asn": "65789",
+          "configureStaticDefaultRoute": true,
+          "disableRtAuto": false,
+          "evpnRouteTargetExport": [
+            "65000:50000"
+          ],
+          "evpnRouteTargetImport": [
+            "65000:50000"
+          ],
+          "ipv6LinkLocal": true,
+          "l3VniMulticastGroup": "1.1.1.2",
+          "loopbackId": 25,
+          "maxBgpPaths": 1,
+          "maxIbgpPaths": 2,
+          "netflow": false,
+          "routeTargetExport": [
+            "65000:50000"
+          ],
+          "routeTargetImport": [
+            "65000:50000"
+          ],
+          "rtAuto": false,
+          "trmOnBgw": false,
+          "v4RpAbsent": false,
+          "v4RpExternal": false
+        },
+        "fabricData": {
+          "advertiseDefaultRoute": true,
+          "advertiseHostRoute": false,
+          "configureStaticDefaultRoute": true,
+          "netflow": false
+        },
+        "fabricName": "fab1",
+        "vlanId": 2000,
+        "vrfId": 50000,
+        "vrfName": "MyVRF_50000",
+        "vrfType": "vxlan"
+      }
   auth: inherit
 
 settings:
@@ -69,65 +113,45 @@ examples:
               "advertiseDefaultRoute": true,
               "advertiseHostRoute": false,
               "asn": "65789",
-              "bgpPassword": "a3f5b7",
-              "bgpPasswordKeyType": 3,
               "configureStaticDefaultRoute": true,
+              "disableRtAuto": false,
               "evpnRouteTargetExport": [
-                "65001:1",
-                "65101:2"
+                "65000:50000"
               ],
               "evpnRouteTargetImport": [
-                "65000:1",
-                "65100:10"
+                "65000:50000"
               ],
-              "ipv4Trm": false,
               "ipv6LinkLocal": true,
               "l3VniMulticastGroup": "1.1.1.2",
               "loopbackId": 25,
               "maxBgpPaths": 1,
               "maxIbgpPaths": 2,
-              "mtu": 9216,
-              "mvpnRouteTargetExport": [
-                "65000:10",
-                "65001:20"
-              ],
-              "mvpnRouteTargetImport": [
-                "65000:1",
-                "65001:10",
-                "65100:20"
-              ],
               "netflow": false,
-              "netflowMonitor": "Netflow123",
               "routeTargetExport": [
-                "65000:1",
-                "65100:10"
+                "65000:50000"
               ],
               "routeTargetImport": [
-                "65000:1",
-                "65001:10",
-                "65100:20"
+                "65000:50000"
               ],
-              "routingTag": 12345,
               "rtAuto": false,
               "trmOnBgw": false,
-              "v4MulticastGroup": "224.1.0.0/4",
               "v4RpAbsent": false,
-              "v4RpAddress": "10.1.0.2",
-              "v4RpExternal": false,
-              "vrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET"
+              "v4RpExternal": false
             },
-            "coreData": {
-              "vrfDescription": "vrf description",
-              "vrfInterfaceDescription": "example",
-              "vrfVlanName": "example"
+            "fabricData": {
+              "advertiseDefaultRoute": true,
+              "advertiseHostRoute": false,
+              "configureStaticDefaultRoute": true,
+              "netflow": false
             },
-            "fabricName": "MyFabric",
-            "vlanId": 2002,
+            "fabricName": "fab1",
+            "vlanId": 2000,
             "vrfId": 50000,
             "vrfName": "MyVRF_50000",
             "vrfType": "vxlan"
           }
     response:
+      status: 204
       statusText: No Content
       body:
         type: text
@@ -164,65 +188,45 @@ examples:
               "advertiseDefaultRoute": true,
               "advertiseHostRoute": false,
               "asn": "65789",
-              "bgpPassword": "a3f5b7",
-              "bgpPasswordKeyType": 3,
               "configureStaticDefaultRoute": true,
+              "disableRtAuto": false,
               "evpnRouteTargetExport": [
-                "65001:1",
-                "65101:2"
+                "65000:50000"
               ],
               "evpnRouteTargetImport": [
-                "65000:1",
-                "65100:10"
+                "65000:50000"
               ],
-              "ipv4Trm": false,
               "ipv6LinkLocal": true,
               "l3VniMulticastGroup": "1.1.1.2",
               "loopbackId": 25,
               "maxBgpPaths": 1,
               "maxIbgpPaths": 2,
-              "mtu": 9216,
-              "mvpnRouteTargetExport": [
-                "65000:10",
-                "65001:20"
-              ],
-              "mvpnRouteTargetImport": [
-                "65000:1",
-                "65001:10",
-                "65100:20"
-              ],
               "netflow": false,
-              "netflowMonitor": "Netflow123",
               "routeTargetExport": [
-                "65000:1",
-                "65100:10"
+                "65000:50000"
               ],
               "routeTargetImport": [
-                "65000:1",
-                "65001:10",
-                "65100:20"
+                "65000:50000"
               ],
-              "routingTag": 12345,
               "rtAuto": false,
               "trmOnBgw": false,
-              "v4MulticastGroup": "224.1.0.0/4",
               "v4RpAbsent": false,
-              "v4RpAddress": "10.1.0.2",
-              "v4RpExternal": false,
-              "vrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET"
+              "v4RpExternal": false
             },
-            "coreData": {
-              "vrfDescription": "vrf description",
-              "vrfInterfaceDescription": "example",
-              "vrfVlanName": "example"
+            "fabricData": {
+              "advertiseDefaultRoute": true,
+              "advertiseHostRoute": false,
+              "configureStaticDefaultRoute": true,
+              "netflow": false
             },
-            "fabricName": "MyFabric",
-            "vlanId": 2002,
+            "fabricName": "fab1",
+            "vlanId": 2000,
             "vrfId": 50000,
             "vrfName": "MyVRF_50000",
             "vrfType": "vxlan"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -267,65 +271,45 @@ examples:
               "advertiseDefaultRoute": true,
               "advertiseHostRoute": false,
               "asn": "65789",
-              "bgpPassword": "a3f5b7",
-              "bgpPasswordKeyType": 3,
               "configureStaticDefaultRoute": true,
+              "disableRtAuto": false,
               "evpnRouteTargetExport": [
-                "65001:1",
-                "65101:2"
+                "65000:50000"
               ],
               "evpnRouteTargetImport": [
-                "65000:1",
-                "65100:10"
+                "65000:50000"
               ],
-              "ipv4Trm": false,
               "ipv6LinkLocal": true,
               "l3VniMulticastGroup": "1.1.1.2",
               "loopbackId": 25,
               "maxBgpPaths": 1,
               "maxIbgpPaths": 2,
-              "mtu": 9216,
-              "mvpnRouteTargetExport": [
-                "65000:10",
-                "65001:20"
-              ],
-              "mvpnRouteTargetImport": [
-                "65000:1",
-                "65001:10",
-                "65100:20"
-              ],
               "netflow": false,
-              "netflowMonitor": "Netflow123",
               "routeTargetExport": [
-                "65000:1",
-                "65100:10"
+                "65000:50000"
               ],
               "routeTargetImport": [
-                "65000:1",
-                "65001:10",
-                "65100:20"
+                "65000:50000"
               ],
-              "routingTag": 12345,
               "rtAuto": false,
               "trmOnBgw": false,
-              "v4MulticastGroup": "224.1.0.0/4",
               "v4RpAbsent": false,
-              "v4RpAddress": "10.1.0.2",
-              "v4RpExternal": false,
-              "vrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET"
+              "v4RpExternal": false
             },
-            "coreData": {
-              "vrfDescription": "vrf description",
-              "vrfInterfaceDescription": "example",
-              "vrfVlanName": "example"
+            "fabricData": {
+              "advertiseDefaultRoute": true,
+              "advertiseHostRoute": false,
+              "configureStaticDefaultRoute": true,
+              "netflow": false
             },
-            "fabricName": "MyFabric",
-            "vlanId": 2002,
+            "fabricName": "fab1",
+            "vlanId": 2000,
             "vrfId": 50000,
             "vrfName": "MyVRF_50000",
             "vrfType": "vxlan"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -370,65 +354,45 @@ examples:
               "advertiseDefaultRoute": true,
               "advertiseHostRoute": false,
               "asn": "65789",
-              "bgpPassword": "a3f5b7",
-              "bgpPasswordKeyType": 3,
               "configureStaticDefaultRoute": true,
+              "disableRtAuto": false,
               "evpnRouteTargetExport": [
-                "65001:1",
-                "65101:2"
+                "65000:50000"
               ],
               "evpnRouteTargetImport": [
-                "65000:1",
-                "65100:10"
+                "65000:50000"
               ],
-              "ipv4Trm": false,
               "ipv6LinkLocal": true,
               "l3VniMulticastGroup": "1.1.1.2",
               "loopbackId": 25,
               "maxBgpPaths": 1,
               "maxIbgpPaths": 2,
-              "mtu": 9216,
-              "mvpnRouteTargetExport": [
-                "65000:10",
-                "65001:20"
-              ],
-              "mvpnRouteTargetImport": [
-                "65000:1",
-                "65001:10",
-                "65100:20"
-              ],
               "netflow": false,
-              "netflowMonitor": "Netflow123",
               "routeTargetExport": [
-                "65000:1",
-                "65100:10"
+                "65000:50000"
               ],
               "routeTargetImport": [
-                "65000:1",
-                "65001:10",
-                "65100:20"
+                "65000:50000"
               ],
-              "routingTag": 12345,
               "rtAuto": false,
               "trmOnBgw": false,
-              "v4MulticastGroup": "224.1.0.0/4",
               "v4RpAbsent": false,
-              "v4RpAddress": "10.1.0.2",
-              "v4RpExternal": false,
-              "vrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET"
+              "v4RpExternal": false
             },
-            "coreData": {
-              "vrfDescription": "vrf description",
-              "vrfInterfaceDescription": "example",
-              "vrfVlanName": "example"
+            "fabricData": {
+              "advertiseDefaultRoute": true,
+              "advertiseHostRoute": false,
+              "configureStaticDefaultRoute": true,
+              "netflow": false
             },
-            "fabricName": "MyFabric",
-            "vlanId": 2002,
+            "fabricName": "fab1",
+            "vlanId": 2000,
             "vrfId": 50000,
             "vrfName": "MyVRF_50000",
             "vrfType": "vxlan"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -473,65 +437,45 @@ examples:
               "advertiseDefaultRoute": true,
               "advertiseHostRoute": false,
               "asn": "65789",
-              "bgpPassword": "a3f5b7",
-              "bgpPasswordKeyType": 3,
               "configureStaticDefaultRoute": true,
+              "disableRtAuto": false,
               "evpnRouteTargetExport": [
-                "65001:1",
-                "65101:2"
+                "65000:50000"
               ],
               "evpnRouteTargetImport": [
-                "65000:1",
-                "65100:10"
+                "65000:50000"
               ],
-              "ipv4Trm": false,
               "ipv6LinkLocal": true,
               "l3VniMulticastGroup": "1.1.1.2",
               "loopbackId": 25,
               "maxBgpPaths": 1,
               "maxIbgpPaths": 2,
-              "mtu": 9216,
-              "mvpnRouteTargetExport": [
-                "65000:10",
-                "65001:20"
-              ],
-              "mvpnRouteTargetImport": [
-                "65000:1",
-                "65001:10",
-                "65100:20"
-              ],
               "netflow": false,
-              "netflowMonitor": "Netflow123",
               "routeTargetExport": [
-                "65000:1",
-                "65100:10"
+                "65000:50000"
               ],
               "routeTargetImport": [
-                "65000:1",
-                "65001:10",
-                "65100:20"
+                "65000:50000"
               ],
-              "routingTag": 12345,
               "rtAuto": false,
               "trmOnBgw": false,
-              "v4MulticastGroup": "224.1.0.0/4",
               "v4RpAbsent": false,
-              "v4RpAddress": "10.1.0.2",
-              "v4RpExternal": false,
-              "vrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET"
+              "v4RpExternal": false
             },
-            "coreData": {
-              "vrfDescription": "vrf description",
-              "vrfInterfaceDescription": "example",
-              "vrfVlanName": "example"
+            "fabricData": {
+              "advertiseDefaultRoute": true,
+              "advertiseHostRoute": false,
+              "configureStaticDefaultRoute": true,
+              "netflow": false
             },
-            "fabricName": "MyFabric",
-            "vlanId": 2002,
+            "fabricName": "fab1",
+            "vlanId": 2000,
             "vrfId": 50000,
             "vrfName": "MyVRF_50000",
             "vrfType": "vxlan"
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -576,65 +520,45 @@ examples:
               "advertiseDefaultRoute": true,
               "advertiseHostRoute": false,
               "asn": "65789",
-              "bgpPassword": "a3f5b7",
-              "bgpPasswordKeyType": 3,
               "configureStaticDefaultRoute": true,
+              "disableRtAuto": false,
               "evpnRouteTargetExport": [
-                "65001:1",
-                "65101:2"
+                "65000:50000"
               ],
               "evpnRouteTargetImport": [
-                "65000:1",
-                "65100:10"
+                "65000:50000"
               ],
-              "ipv4Trm": false,
               "ipv6LinkLocal": true,
               "l3VniMulticastGroup": "1.1.1.2",
               "loopbackId": 25,
               "maxBgpPaths": 1,
               "maxIbgpPaths": 2,
-              "mtu": 9216,
-              "mvpnRouteTargetExport": [
-                "65000:10",
-                "65001:20"
-              ],
-              "mvpnRouteTargetImport": [
-                "65000:1",
-                "65001:10",
-                "65100:20"
-              ],
               "netflow": false,
-              "netflowMonitor": "Netflow123",
               "routeTargetExport": [
-                "65000:1",
-                "65100:10"
+                "65000:50000"
               ],
               "routeTargetImport": [
-                "65000:1",
-                "65001:10",
-                "65100:20"
+                "65000:50000"
               ],
-              "routingTag": 12345,
               "rtAuto": false,
               "trmOnBgw": false,
-              "v4MulticastGroup": "224.1.0.0/4",
               "v4RpAbsent": false,
-              "v4RpAddress": "10.1.0.2",
-              "v4RpExternal": false,
-              "vrfRouteMap": "FABRIC-RMAP-REDIST-SUBNET"
+              "v4RpExternal": false
             },
-            "coreData": {
-              "vrfDescription": "vrf description",
-              "vrfInterfaceDescription": "example",
-              "vrfVlanName": "example"
+            "fabricData": {
+              "advertiseDefaultRoute": true,
+              "advertiseHostRoute": false,
+              "configureStaticDefaultRoute": true,
+              "netflow": false
             },
-            "fabricName": "MyFabric",
-            "vlanId": 2002,
+            "fabricName": "fab1",
+            "vlanId": 2000,
             "vrfId": 50000,
             "vrfName": "MyVRF_50000",
             "vrfType": "vxlan"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

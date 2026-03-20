@@ -2,6 +2,8 @@ info:
   name: Create IPAM integration
   type: http
   seq: 22
+  tags:
+    - Integrations
 
 http:
   method: POST
@@ -14,7 +16,14 @@ http:
       disabled: true
   body:
     type: json
-    data: "{}"
+    data: |-
+      {
+        "integrationName": "d30-ipam1",
+        "ip": "192.168.1.10",
+        "username": "admin",
+        "password": "secretpass",
+        "pollInterval": 15
+      }
   auth: inherit
 
 settings:
@@ -46,6 +55,7 @@ examples:
             "username": "admin"
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -82,6 +92,7 @@ examples:
             "username": "admin"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -116,6 +127,7 @@ examples:
             "username": "admin"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -150,6 +162,7 @@ examples:
             "username": "admin"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -184,6 +197,7 @@ examples:
             "username": "admin"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

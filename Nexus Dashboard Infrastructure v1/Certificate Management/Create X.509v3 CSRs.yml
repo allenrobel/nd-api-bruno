@@ -2,6 +2,8 @@ info:
   name: Create X.509v3 CSRs
   type: http
   seq: 17
+  tags:
+    - Certificate Management
 
 http:
   method: POST
@@ -18,30 +20,46 @@ http:
       {
         "csr": [
           {
-            "certificateRole": [],
-            "creationTime": "",
-            "csrName": "",
-            "extensions": "",
+            "certificateRole": [
+              "system"
+            ],
+            "creationTime": "2024-08-01T06:00:54.04949812Z",
+            "csrName": "webserver",
+            "extensions": "CA: false,ExtendedKeyUsage: [ServerAuth,ClientAuth]",
             "key": {
-              "keyDigest": [],
-              "keySize": [],
-              "keyType": []
+              "keyDigest": [
+                "SHA-256"
+              ],
+              "keySize": [
+                512
+              ],
+              "keyType": [
+                "ECDSA"
+              ]
             },
             "san": {
-              "domainName": [],
-              "emailAddresses": [],
-              "ipAddress": []
+              "domainName": [
+                "myhost1.com",
+                "webserver.com"
+              ],
+              "emailAddresses": [
+                "xyz@xyz.com",
+                "abc@abc.com"
+              ],
+              "ipAddress": [
+                "231.29.254.237"
+              ]
             },
-            "status": "",
-            "statusMessage": "",
+            "status": "generated",
+            "statusMessage": "Invalid CSR content due to wrong ipv4 format",
             "subject": {
-              "commonName": "",
-              "country": "",
-              "email": "",
-              "location": "",
-              "organization": "",
-              "organizationalUnit": "",
-              "state": ""
+              "commonName": "host1.cisco.com",
+              "country": "US",
+              "email": "myemail@cisco.com",
+              "location": "San Jose",
+              "organization": "Cisco Systems",
+              "organizationalUnit": "IT Department",
+              "state": "California"
             }
           }
         ]
@@ -72,35 +90,52 @@ examples:
           {
             "csr": [
               {
-                "certificateRole": [],
-                "creationTime": "",
-                "csrName": "",
-                "extensions": "",
+                "certificateRole": [
+                  "system"
+                ],
+                "creationTime": "2024-08-01T06:00:54.04949812Z",
+                "csrName": "webserver",
+                "extensions": "CA: false,ExtendedKeyUsage: [ServerAuth,ClientAuth]",
                 "key": {
-                  "keyDigest": [],
-                  "keySize": [],
-                  "keyType": []
+                  "keyDigest": [
+                    "SHA-256"
+                  ],
+                  "keySize": [
+                    512
+                  ],
+                  "keyType": [
+                    "ECDSA"
+                  ]
                 },
                 "san": {
-                  "domainName": [],
-                  "emailAddresses": [],
-                  "ipAddress": []
+                  "domainName": [
+                    "myhost1.com",
+                    "webserver.com"
+                  ],
+                  "emailAddresses": [
+                    "xyz@xyz.com",
+                    "abc@abc.com"
+                  ],
+                  "ipAddress": [
+                    "231.29.254.237"
+                  ]
                 },
-                "status": "",
-                "statusMessage": "",
+                "status": "generated",
+                "statusMessage": "Invalid CSR content due to wrong ipv4 format",
                 "subject": {
-                  "commonName": "",
-                  "country": "",
-                  "email": "",
-                  "location": "",
-                  "organization": "",
-                  "organizationalUnit": "",
-                  "state": ""
+                  "commonName": "host1.cisco.com",
+                  "country": "US",
+                  "email": "myemail@cisco.com",
+                  "location": "San Jose",
+                  "organization": "Cisco Systems",
+                  "organizationalUnit": "IT Department",
+                  "state": "California"
                 }
               }
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -216,35 +251,52 @@ examples:
           {
             "csr": [
               {
-                "certificateRole": [],
-                "creationTime": "",
-                "csrName": "",
-                "extensions": "",
+                "certificateRole": [
+                  "system"
+                ],
+                "creationTime": "2024-08-01T06:00:54.04949812Z",
+                "csrName": "webserver",
+                "extensions": "CA: false,ExtendedKeyUsage: [ServerAuth,ClientAuth]",
                 "key": {
-                  "keyDigest": [],
-                  "keySize": [],
-                  "keyType": []
+                  "keyDigest": [
+                    "SHA-256"
+                  ],
+                  "keySize": [
+                    512
+                  ],
+                  "keyType": [
+                    "ECDSA"
+                  ]
                 },
                 "san": {
-                  "domainName": [],
-                  "emailAddresses": [],
-                  "ipAddress": []
+                  "domainName": [
+                    "myhost1.com",
+                    "webserver.com"
+                  ],
+                  "emailAddresses": [
+                    "xyz@xyz.com",
+                    "abc@abc.com"
+                  ],
+                  "ipAddress": [
+                    "231.29.254.237"
+                  ]
                 },
-                "status": "",
-                "statusMessage": "",
+                "status": "generated",
+                "statusMessage": "Invalid CSR content due to wrong ipv4 format",
                 "subject": {
-                  "commonName": "",
-                  "country": "",
-                  "email": "",
-                  "location": "",
-                  "organization": "",
-                  "organizationalUnit": "",
-                  "state": ""
+                  "commonName": "host1.cisco.com",
+                  "country": "US",
+                  "email": "myemail@cisco.com",
+                  "location": "San Jose",
+                  "organization": "Cisco Systems",
+                  "organizationalUnit": "IT Department",
+                  "state": "California"
                 }
               }
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -274,35 +326,52 @@ examples:
           {
             "csr": [
               {
-                "certificateRole": [],
-                "creationTime": "",
-                "csrName": "",
-                "extensions": "",
+                "certificateRole": [
+                  "system"
+                ],
+                "creationTime": "2024-08-01T06:00:54.04949812Z",
+                "csrName": "webserver",
+                "extensions": "CA: false,ExtendedKeyUsage: [ServerAuth,ClientAuth]",
                 "key": {
-                  "keyDigest": [],
-                  "keySize": [],
-                  "keyType": []
+                  "keyDigest": [
+                    "SHA-256"
+                  ],
+                  "keySize": [
+                    512
+                  ],
+                  "keyType": [
+                    "ECDSA"
+                  ]
                 },
                 "san": {
-                  "domainName": [],
-                  "emailAddresses": [],
-                  "ipAddress": []
+                  "domainName": [
+                    "myhost1.com",
+                    "webserver.com"
+                  ],
+                  "emailAddresses": [
+                    "xyz@xyz.com",
+                    "abc@abc.com"
+                  ],
+                  "ipAddress": [
+                    "231.29.254.237"
+                  ]
                 },
-                "status": "",
-                "statusMessage": "",
+                "status": "generated",
+                "statusMessage": "Invalid CSR content due to wrong ipv4 format",
                 "subject": {
-                  "commonName": "",
-                  "country": "",
-                  "email": "",
-                  "location": "",
-                  "organization": "",
-                  "organizationalUnit": "",
-                  "state": ""
+                  "commonName": "host1.cisco.com",
+                  "country": "US",
+                  "email": "myemail@cisco.com",
+                  "location": "San Jose",
+                  "organization": "Cisco Systems",
+                  "organizationalUnit": "IT Department",
+                  "state": "California"
                 }
               }
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -332,35 +401,52 @@ examples:
           {
             "csr": [
               {
-                "certificateRole": [],
-                "creationTime": "",
-                "csrName": "",
-                "extensions": "",
+                "certificateRole": [
+                  "system"
+                ],
+                "creationTime": "2024-08-01T06:00:54.04949812Z",
+                "csrName": "webserver",
+                "extensions": "CA: false,ExtendedKeyUsage: [ServerAuth,ClientAuth]",
                 "key": {
-                  "keyDigest": [],
-                  "keySize": [],
-                  "keyType": []
+                  "keyDigest": [
+                    "SHA-256"
+                  ],
+                  "keySize": [
+                    512
+                  ],
+                  "keyType": [
+                    "ECDSA"
+                  ]
                 },
                 "san": {
-                  "domainName": [],
-                  "emailAddresses": [],
-                  "ipAddress": []
+                  "domainName": [
+                    "myhost1.com",
+                    "webserver.com"
+                  ],
+                  "emailAddresses": [
+                    "xyz@xyz.com",
+                    "abc@abc.com"
+                  ],
+                  "ipAddress": [
+                    "231.29.254.237"
+                  ]
                 },
-                "status": "",
-                "statusMessage": "",
+                "status": "generated",
+                "statusMessage": "Invalid CSR content due to wrong ipv4 format",
                 "subject": {
-                  "commonName": "",
-                  "country": "",
-                  "email": "",
-                  "location": "",
-                  "organization": "",
-                  "organizationalUnit": "",
-                  "state": ""
+                  "commonName": "host1.cisco.com",
+                  "country": "US",
+                  "email": "myemail@cisco.com",
+                  "location": "San Jose",
+                  "organization": "Cisco Systems",
+                  "organizationalUnit": "IT Department",
+                  "state": "California"
                 }
               }
             ]
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -390,35 +476,52 @@ examples:
           {
             "csr": [
               {
-                "certificateRole": [],
-                "creationTime": "",
-                "csrName": "",
-                "extensions": "",
+                "certificateRole": [
+                  "system"
+                ],
+                "creationTime": "2024-08-01T06:00:54.04949812Z",
+                "csrName": "webserver",
+                "extensions": "CA: false,ExtendedKeyUsage: [ServerAuth,ClientAuth]",
                 "key": {
-                  "keyDigest": [],
-                  "keySize": [],
-                  "keyType": []
+                  "keyDigest": [
+                    "SHA-256"
+                  ],
+                  "keySize": [
+                    512
+                  ],
+                  "keyType": [
+                    "ECDSA"
+                  ]
                 },
                 "san": {
-                  "domainName": [],
-                  "emailAddresses": [],
-                  "ipAddress": []
+                  "domainName": [
+                    "myhost1.com",
+                    "webserver.com"
+                  ],
+                  "emailAddresses": [
+                    "xyz@xyz.com",
+                    "abc@abc.com"
+                  ],
+                  "ipAddress": [
+                    "231.29.254.237"
+                  ]
                 },
-                "status": "",
-                "statusMessage": "",
+                "status": "generated",
+                "statusMessage": "Invalid CSR content due to wrong ipv4 format",
                 "subject": {
-                  "commonName": "",
-                  "country": "",
-                  "email": "",
-                  "location": "",
-                  "organization": "",
-                  "organizationalUnit": "",
-                  "state": ""
+                  "commonName": "host1.cisco.com",
+                  "country": "US",
+                  "email": "myemail@cisco.com",
+                  "location": "San Jose",
+                  "organization": "Cisco Systems",
+                  "organizationalUnit": "IT Department",
+                  "state": "California"
                 }
               }
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

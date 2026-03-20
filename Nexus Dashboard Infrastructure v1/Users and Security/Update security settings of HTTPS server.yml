@@ -2,6 +2,8 @@ info:
   name: Update security settings of HTTPS server
   type: http
   seq: 38
+  tags:
+    - Users and Security
 
 http:
   method: POST
@@ -16,7 +18,14 @@ http:
     type: json
     data: |-
       {
-        "allowedSubnets": []
+        "HTTPConfig": {
+          "allowedSubnets": [
+            "210.22.0.0/16",
+            "104.39.58.0/24",
+            "2b01:720:27c1:90a:0:0:0:123/112",
+            "2001:db8::ff00:42:8329/64"
+          ]
+        }
       }
   auth: inherit
 
@@ -52,6 +61,7 @@ examples:
             }
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -94,6 +104,7 @@ examples:
             }
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -131,6 +142,7 @@ examples:
             }
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -168,6 +180,7 @@ examples:
             }
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -205,6 +218,7 @@ examples:
             }
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

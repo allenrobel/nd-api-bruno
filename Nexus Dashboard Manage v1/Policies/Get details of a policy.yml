@@ -2,6 +2,8 @@ info:
   name: Get details of a policy
   type: http
   seq: 4
+  tags:
+    - Policies
 
 http:
   method: GET
@@ -49,6 +51,7 @@ examples:
           type: path
           description: Id of the policy
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -93,6 +96,7 @@ examples:
           type: path
           description: Id of the policy
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -125,6 +129,7 @@ examples:
           type: path
           description: Id of the policy
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -157,6 +162,7 @@ examples:
           type: path
           description: Id of the policy
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -189,6 +195,7 @@ examples:
           type: path
           description: Id of the policy
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -221,6 +228,7 @@ examples:
           type: path
           description: Id of the policy
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

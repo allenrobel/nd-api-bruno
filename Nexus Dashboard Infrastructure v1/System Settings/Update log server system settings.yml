@@ -2,6 +2,8 @@ info:
   name: Update log server system settings
   type: http
   seq: 37
+  tags:
+    - System Settings
 
 http:
   method: PUT
@@ -16,7 +18,27 @@ http:
     type: json
     data: |-
       {
-        "logServerSettings": []
+        "logServerSettings": [
+          {
+            "host": "10.10.10.10",
+            "index": "splunk_index",
+            "name": "SplunkServer1",
+            "port": 8089,
+            "protocol": "HTTPS",
+            "serverType": "splunk",
+            "token": "splunk_token"
+          },
+          {
+            "cacert": "CA certificate",
+            "host": "10.10.10.10",
+            "name": "SyslogServer1",
+            "port": 514,
+            "protocol": "TCP",
+            "serverType": "syslog",
+            "severity": "info",
+            "tls": false
+          }
+        ]
       }
   auth: inherit
 
@@ -65,6 +87,7 @@ examples:
             ]
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -133,6 +156,7 @@ examples:
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -183,6 +207,7 @@ examples:
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -233,6 +258,7 @@ examples:
             ]
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -283,6 +309,7 @@ examples:
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -333,6 +360,7 @@ examples:
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

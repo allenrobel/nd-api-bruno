@@ -2,6 +2,8 @@ info:
   name: Delete one or more interface groups
   type: http
   seq: 12
+  tags:
+    - Interfaces
 
 http:
   method: POST
@@ -25,7 +27,10 @@ http:
     type: json
     data: |-
       {
-        "interfaceGroupNames": []
+        "interfaceGroupNames": [
+          "IG1_PC",
+          "IG1_VPC"
+        ]
       }
   auth: inherit
 
@@ -60,11 +65,12 @@ examples:
         data: |-
           {
             "interfaceGroupNames": [
-              "IG2",
-              "IG3"
+              "IG1_PC",
+              "IG1_VPC"
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -75,13 +81,13 @@ examples:
           {
             "interfaceGroups": [
               {
-                "interfaceGroupName": "IG2",
-                "message": "Interface group 'IG2' deleted successfully",
+                "interfaceGroupName": "IG1_PC",
+                "message": "Interface group 'IG1_PC' deleted successfully",
                 "status": "success"
               },
               {
-                "interfaceGroupName": "IG3",
-                "message": "Failed to delete Interface group 'IG3'",
+                "interfaceGroupName": "IG1_With_Policy",
+                "message": "Cannot delete the IG group IG1_With_Policy, it is associated with networks/interfaces.",
                 "status": "failed"
               }
             ]
@@ -110,10 +116,11 @@ examples:
         data: |-
           {
             "interfaceGroupNames": [
-              "IG1"
+              "IG1_ANY"
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -124,8 +131,8 @@ examples:
           {
             "interfaceGroups": [
               {
-                "interfaceGroupName": "IG1",
-                "message": "Interface group 'IG1' deleted successfully",
+                "interfaceGroupName": "IG1_ANY",
+                "message": "Interface group 'IG1_ANY' deleted successfully",
                 "status": "success"
               }
             ]
@@ -155,11 +162,12 @@ examples:
         data: |-
           {
             "interfaceGroupNames": [
-              "IG2",
-              "IG3"
+              "IG1_PC",
+              "IG1_VPC"
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -197,10 +205,11 @@ examples:
         data: |-
           {
             "interfaceGroupNames": [
-              "IG1"
+              "IG1_ANY"
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -238,11 +247,12 @@ examples:
         data: |-
           {
             "interfaceGroupNames": [
-              "IG2",
-              "IG3"
+              "IG1_PC",
+              "IG1_VPC"
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -280,10 +290,11 @@ examples:
         data: |-
           {
             "interfaceGroupNames": [
-              "IG1"
+              "IG1_ANY"
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -321,11 +332,12 @@ examples:
         data: |-
           {
             "interfaceGroupNames": [
-              "IG2",
-              "IG3"
+              "IG1_PC",
+              "IG1_VPC"
             ]
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -363,10 +375,11 @@ examples:
         data: |-
           {
             "interfaceGroupNames": [
-              "IG1"
+              "IG1_ANY"
             ]
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -404,11 +417,12 @@ examples:
         data: |-
           {
             "interfaceGroupNames": [
-              "IG2",
-              "IG3"
+              "IG1_PC",
+              "IG1_VPC"
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -446,10 +460,11 @@ examples:
         data: |-
           {
             "interfaceGroupNames": [
-              "IG1"
+              "IG1_ANY"
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -487,11 +502,12 @@ examples:
         data: |-
           {
             "interfaceGroupNames": [
-              "IG2",
-              "IG3"
+              "IG1_PC",
+              "IG1_VPC"
             ]
           }
     response:
+      status: 409
       statusText: Conflict
       headers:
         - name: Content-Type
@@ -529,10 +545,11 @@ examples:
         data: |-
           {
             "interfaceGroupNames": [
-              "IG1"
+              "IG1_ANY"
             ]
           }
     response:
+      status: 409
       statusText: Conflict
       headers:
         - name: Content-Type
@@ -570,11 +587,12 @@ examples:
         data: |-
           {
             "interfaceGroupNames": [
-              "IG2",
-              "IG3"
+              "IG1_PC",
+              "IG1_VPC"
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type
@@ -612,10 +630,11 @@ examples:
         data: |-
           {
             "interfaceGroupNames": [
-              "IG1"
+              "IG1_ANY"
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

@@ -2,6 +2,8 @@ info:
   name: Update IPv6 prefix list
   type: http
   seq: 33
+  tags:
+    - Routing Policies
 
 http:
   method: PUT
@@ -24,21 +26,24 @@ http:
     type: json
     data: |-
       {
-        "name": "",
-        "description": "",
-        "lastUpdateTimestamp": "",
-        "tenantName": "",
+        "description": "Allows engineering server",
         "entries": [
           {
-            "sequenceNumber": 0,
-            "action": "",
-            "prefix": "",
-            "exactLength": 0,
-            "minLength": 0,
-            "maxLength": 0,
-            "mask": ""
+            "action": "permit",
+            "mask": "ffff:ffff:f::",
+            "maxLength": 64,
+            "minLength": 48,
+            "prefix": "2001:db8::/32",
+            "sequenceNumber": 10
+          },
+          {
+            "action": "permit",
+            "exactLength": 64,
+            "prefix": "2001:db8:1::/48",
+            "sequenceNumber": 20
           }
-        ]
+        ],
+        "name": "prefixList1"
       }
   auth: inherit
 
@@ -92,6 +97,7 @@ examples:
             "name": "prefixList1"
           }
     response:
+      status: 204
       statusText: No Content
       body:
         type: text
@@ -141,6 +147,7 @@ examples:
             "tenantName": "tenantSales"
           }
     response:
+      status: 204
       statusText: No Content
       body:
         type: text
@@ -188,6 +195,7 @@ examples:
             "name": "prefixList1"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -245,6 +253,7 @@ examples:
             "tenantName": "tenantSales"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -300,6 +309,7 @@ examples:
             "name": "prefixList1"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -357,6 +367,7 @@ examples:
             "tenantName": "tenantSales"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -412,6 +423,7 @@ examples:
             "name": "prefixList1"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -469,6 +481,7 @@ examples:
             "tenantName": "tenantSales"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -524,6 +537,7 @@ examples:
             "name": "prefixList1"
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -581,6 +595,7 @@ examples:
             "tenantName": "tenantSales"
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -636,6 +651,7 @@ examples:
             "name": "prefixList1"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type
@@ -693,6 +709,7 @@ examples:
             "tenantName": "tenantSales"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

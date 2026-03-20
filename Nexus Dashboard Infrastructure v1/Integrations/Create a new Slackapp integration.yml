@@ -2,6 +2,8 @@ info:
   name: Create a new Slackapp integration
   type: http
   seq: 68
+  tags:
+    - Integrations
 
 http:
   method: POST
@@ -16,9 +18,34 @@ http:
       value: ""
       type: query
       description: Validates the request without creating the integration
+      disabled: true
   body:
     type: json
-    data: "{}"
+    data: |-
+      {
+        "disableSlackIntegration": false,
+        "integrationName": "Slack App",
+        "lastUpdateDate": "2024-08-04 12:00:00+00:00",
+        "slackAppId": "slack-app-id",
+        "slackAppLevelToken": "slack-token",
+        "slackBotUserOauthToken": "slack-bot-token",
+        "slackChannelsRbacConfig": {
+          "C09BZ3U7MTL": {
+            "ndSecurityDomains": [
+              "sd1"
+            ],
+            "ndTenantDomain": "coke"
+          },
+          "C09CK5CFTUJ": {
+            "ndSecurityDomains": [
+              "sd2",
+              "sd3"
+            ],
+            "ndTenantDomain": "td2"
+          }
+        },
+        "status": "active"
+      }
   auth: inherit
 
 settings:
@@ -43,6 +70,7 @@ examples:
           value: ""
           type: query
           description: Validates the request without creating the integration
+          disabled: true
       body:
         type: json
         data: |-
@@ -69,6 +97,7 @@ examples:
             }
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -116,6 +145,7 @@ examples:
           value: ""
           type: query
           description: Validates the request without creating the integration
+          disabled: true
       body:
         type: json
         data: |-
@@ -142,6 +172,7 @@ examples:
             }
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -169,6 +200,7 @@ examples:
           value: ""
           type: query
           description: Validates the request without creating the integration
+          disabled: true
       body:
         type: json
         data: |-
@@ -195,6 +227,7 @@ examples:
             }
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -222,6 +255,7 @@ examples:
           value: ""
           type: query
           description: Validates the request without creating the integration
+          disabled: true
       body:
         type: json
         data: |-
@@ -248,6 +282,7 @@ examples:
             }
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -275,6 +310,7 @@ examples:
           value: ""
           type: query
           description: Validates the request without creating the integration
+          disabled: true
       body:
         type: json
         data: |-
@@ -301,6 +337,7 @@ examples:
             }
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

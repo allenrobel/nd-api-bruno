@@ -2,6 +2,8 @@ info:
   name: Create compliance rule with file
   type: http
   seq: 9
+  tags:
+    - Anomaly Settings
 
 http:
   method: POST
@@ -17,20 +19,16 @@ http:
     data:
       - name: file
         type: text
-        value: ""
-        description: The file uploaded in the rule
+        value: '{ "fvBD": { "attributes": { "SELECT(unicastRoute)": "yes", "MATCH(dn)": "REGEX([A-Za-z0-9_]*)", "arpFlood": "yes", "limitIpLearnToSubnets": "yes", "type": "regular", "unkMacUcastAct": "flood", "multiDstPktAct": "bd-flood", "hostBasedRouting": "no", "ipv6McastAllow": "no", "mcastAllow": "no", "epClear": "no", "v6unkMcastAct": "flood", "unkMcastAct": "flood" }, "children": [ { "fvSubnet": { "attributes": { "MATCH(ip)": "OR(172.16.6.254/24, 172.16.1.254/24, 172.16.3.254/24, 172.16.5.254/24)" } } }, { "fvRsCtx": { "attributes": { "MATCH(tnFvCtxName)": "REGEX([A-Za-z]*)" } } } ] } }'
       - name: qqfilename
         type: text
-        value: ""
-        description: The name of the file
+        value: customer_template_2.json
       - name: qqtotalfilesize
         type: text
-        value: ""
-        description: The size of the file
+        value: "2048"
       - name: rule
         type: text
-        value: ""
-        description: Stringified JSON object of the schema /components/schemas/complianceAnomalyRuleObject that contains the compliance rule creation data
+        value: '{"name":"test_file_11","description":"","isEnabled":false, "configurationType":"configurationComplianceTemplate","communicationRuleType":"configurationCompliance", "associatedFabrics":[{"uuid":"0e5604f9-f74a0f22-0bb2-47a2-98f7-c678f3138416","isEnabled":true, "fabricName":"DC-EAST-OFFLINE"}],"isEqualityCheckActive":false,"uploadedFileName":"customer_template_2.json", "uploadFileType":"templateBasedConfig"}'
   auth: inherit
 
 settings:
@@ -56,21 +54,18 @@ examples:
         data:
           - name: file
             type: text
-            value: ""
-            description: The file uploaded in the rule
+            value: '{ "fvBD": { "attributes": { "SELECT(unicastRoute)": "yes", "MATCH(dn)": "REGEX([A-Za-z0-9_]*)", "arpFlood": "yes", "limitIpLearnToSubnets": "yes", "type": "regular", "unkMacUcastAct": "flood", "multiDstPktAct": "bd-flood", "hostBasedRouting": "no", "ipv6McastAllow": "no", "mcastAllow": "no", "epClear": "no", "v6unkMcastAct": "flood", "unkMcastAct": "flood" }, "children": [ { "fvSubnet": { "attributes": { "MATCH(ip)": "OR(172.16.6.254/24, 172.16.1.254/24, 172.16.3.254/24, 172.16.5.254/24)" } } }, { "fvRsCtx": { "attributes": { "MATCH(tnFvCtxName)": "REGEX([A-Za-z]*)" } } } ] } }'
           - name: qqfilename
             type: text
-            value: ""
-            description: The name of the file
+            value: customer_template_2.json
           - name: qqtotalfilesize
             type: text
-            value: ""
-            description: The size of the file
+            value: "2048"
           - name: rule
             type: text
-            value: ""
-            description: Stringified JSON object of the schema /components/schemas/complianceAnomalyRuleObject that contains the compliance rule creation data
+            value: '{"name":"test_file_11","description":"","isEnabled":false, "configurationType":"configurationComplianceTemplate","communicationRuleType":"configurationCompliance", "associatedFabrics":[{"uuid":"0e5604f9-f74a0f22-0bb2-47a2-98f7-c678f3138416","isEnabled":true, "fabricName":"DC-EAST-OFFLINE"}],"isEqualityCheckActive":false,"uploadedFileName":"customer_template_2.json", "uploadFileType":"templateBasedConfig"}'
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -332,21 +327,18 @@ examples:
         data:
           - name: file
             type: text
-            value: ""
-            description: The file uploaded in the rule
+            value: '{ "fvBD": { "attributes": { "SELECT(unicastRoute)": "yes", "MATCH(dn)": "REGEX([A-Za-z0-9_]*)", "arpFlood": "yes", "limitIpLearnToSubnets": "yes", "type": "regular", "unkMacUcastAct": "flood", "multiDstPktAct": "bd-flood", "hostBasedRouting": "no", "ipv6McastAllow": "no", "mcastAllow": "no", "epClear": "no", "v6unkMcastAct": "flood", "unkMcastAct": "flood" }, "children": [ { "fvSubnet": { "attributes": { "MATCH(ip)": "OR(172.16.6.254/24, 172.16.1.254/24, 172.16.3.254/24, 172.16.5.254/24)" } } }, { "fvRsCtx": { "attributes": { "MATCH(tnFvCtxName)": "REGEX([A-Za-z]*)" } } } ] } }'
           - name: qqfilename
             type: text
-            value: ""
-            description: The name of the file
+            value: customer_template_2.json
           - name: qqtotalfilesize
             type: text
-            value: ""
-            description: The size of the file
+            value: "2048"
           - name: rule
             type: text
-            value: ""
-            description: Stringified JSON object of the schema /components/schemas/complianceAnomalyRuleObject that contains the compliance rule creation data
+            value: '{"name":"test_file_11","description":"","isEnabled":false, "configurationType":"configurationComplianceTemplate","communicationRuleType":"configurationCompliance", "associatedFabrics":[{"uuid":"0e5604f9-f74a0f22-0bb2-47a2-98f7-c678f3138416","isEnabled":true, "fabricName":"DC-EAST-OFFLINE"}],"isEqualityCheckActive":false,"uploadedFileName":"customer_template_2.json", "uploadFileType":"templateBasedConfig"}'
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -375,21 +367,18 @@ examples:
         data:
           - name: file
             type: text
-            value: ""
-            description: The file uploaded in the rule
+            value: '{ "fvBD": { "attributes": { "SELECT(unicastRoute)": "yes", "MATCH(dn)": "REGEX([A-Za-z0-9_]*)", "arpFlood": "yes", "limitIpLearnToSubnets": "yes", "type": "regular", "unkMacUcastAct": "flood", "multiDstPktAct": "bd-flood", "hostBasedRouting": "no", "ipv6McastAllow": "no", "mcastAllow": "no", "epClear": "no", "v6unkMcastAct": "flood", "unkMcastAct": "flood" }, "children": [ { "fvSubnet": { "attributes": { "MATCH(ip)": "OR(172.16.6.254/24, 172.16.1.254/24, 172.16.3.254/24, 172.16.5.254/24)" } } }, { "fvRsCtx": { "attributes": { "MATCH(tnFvCtxName)": "REGEX([A-Za-z]*)" } } } ] } }'
           - name: qqfilename
             type: text
-            value: ""
-            description: The name of the file
+            value: customer_template_2.json
           - name: qqtotalfilesize
             type: text
-            value: ""
-            description: The size of the file
+            value: "2048"
           - name: rule
             type: text
-            value: ""
-            description: Stringified JSON object of the schema /components/schemas/complianceAnomalyRuleObject that contains the compliance rule creation data
+            value: '{"name":"test_file_11","description":"","isEnabled":false, "configurationType":"configurationComplianceTemplate","communicationRuleType":"configurationCompliance", "associatedFabrics":[{"uuid":"0e5604f9-f74a0f22-0bb2-47a2-98f7-c678f3138416","isEnabled":true, "fabricName":"DC-EAST-OFFLINE"}],"isEqualityCheckActive":false,"uploadedFileName":"customer_template_2.json", "uploadFileType":"templateBasedConfig"}'
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -418,21 +407,18 @@ examples:
         data:
           - name: file
             type: text
-            value: ""
-            description: The file uploaded in the rule
+            value: '{ "fvBD": { "attributes": { "SELECT(unicastRoute)": "yes", "MATCH(dn)": "REGEX([A-Za-z0-9_]*)", "arpFlood": "yes", "limitIpLearnToSubnets": "yes", "type": "regular", "unkMacUcastAct": "flood", "multiDstPktAct": "bd-flood", "hostBasedRouting": "no", "ipv6McastAllow": "no", "mcastAllow": "no", "epClear": "no", "v6unkMcastAct": "flood", "unkMcastAct": "flood" }, "children": [ { "fvSubnet": { "attributes": { "MATCH(ip)": "OR(172.16.6.254/24, 172.16.1.254/24, 172.16.3.254/24, 172.16.5.254/24)" } } }, { "fvRsCtx": { "attributes": { "MATCH(tnFvCtxName)": "REGEX([A-Za-z]*)" } } } ] } }'
           - name: qqfilename
             type: text
-            value: ""
-            description: The name of the file
+            value: customer_template_2.json
           - name: qqtotalfilesize
             type: text
-            value: ""
-            description: The size of the file
+            value: "2048"
           - name: rule
             type: text
-            value: ""
-            description: Stringified JSON object of the schema /components/schemas/complianceAnomalyRuleObject that contains the compliance rule creation data
+            value: '{"name":"test_file_11","description":"","isEnabled":false, "configurationType":"configurationComplianceTemplate","communicationRuleType":"configurationCompliance", "associatedFabrics":[{"uuid":"0e5604f9-f74a0f22-0bb2-47a2-98f7-c678f3138416","isEnabled":true, "fabricName":"DC-EAST-OFFLINE"}],"isEqualityCheckActive":false,"uploadedFileName":"customer_template_2.json", "uploadFileType":"templateBasedConfig"}'
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -461,21 +447,18 @@ examples:
         data:
           - name: file
             type: text
-            value: ""
-            description: The file uploaded in the rule
+            value: '{ "fvBD": { "attributes": { "SELECT(unicastRoute)": "yes", "MATCH(dn)": "REGEX([A-Za-z0-9_]*)", "arpFlood": "yes", "limitIpLearnToSubnets": "yes", "type": "regular", "unkMacUcastAct": "flood", "multiDstPktAct": "bd-flood", "hostBasedRouting": "no", "ipv6McastAllow": "no", "mcastAllow": "no", "epClear": "no", "v6unkMcastAct": "flood", "unkMcastAct": "flood" }, "children": [ { "fvSubnet": { "attributes": { "MATCH(ip)": "OR(172.16.6.254/24, 172.16.1.254/24, 172.16.3.254/24, 172.16.5.254/24)" } } }, { "fvRsCtx": { "attributes": { "MATCH(tnFvCtxName)": "REGEX([A-Za-z]*)" } } } ] } }'
           - name: qqfilename
             type: text
-            value: ""
-            description: The name of the file
+            value: customer_template_2.json
           - name: qqtotalfilesize
             type: text
-            value: ""
-            description: The size of the file
+            value: "2048"
           - name: rule
             type: text
-            value: ""
-            description: Stringified JSON object of the schema /components/schemas/complianceAnomalyRuleObject that contains the compliance rule creation data
+            value: '{"name":"test_file_11","description":"","isEnabled":false, "configurationType":"configurationComplianceTemplate","communicationRuleType":"configurationCompliance", "associatedFabrics":[{"uuid":"0e5604f9-f74a0f22-0bb2-47a2-98f7-c678f3138416","isEnabled":true, "fabricName":"DC-EAST-OFFLINE"}],"isEqualityCheckActive":false,"uploadedFileName":"customer_template_2.json", "uploadFileType":"templateBasedConfig"}'
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -504,21 +487,18 @@ examples:
         data:
           - name: file
             type: text
-            value: ""
-            description: The file uploaded in the rule
+            value: '{ "fvBD": { "attributes": { "SELECT(unicastRoute)": "yes", "MATCH(dn)": "REGEX([A-Za-z0-9_]*)", "arpFlood": "yes", "limitIpLearnToSubnets": "yes", "type": "regular", "unkMacUcastAct": "flood", "multiDstPktAct": "bd-flood", "hostBasedRouting": "no", "ipv6McastAllow": "no", "mcastAllow": "no", "epClear": "no", "v6unkMcastAct": "flood", "unkMcastAct": "flood" }, "children": [ { "fvSubnet": { "attributes": { "MATCH(ip)": "OR(172.16.6.254/24, 172.16.1.254/24, 172.16.3.254/24, 172.16.5.254/24)" } } }, { "fvRsCtx": { "attributes": { "MATCH(tnFvCtxName)": "REGEX([A-Za-z]*)" } } } ] } }'
           - name: qqfilename
             type: text
-            value: ""
-            description: The name of the file
+            value: customer_template_2.json
           - name: qqtotalfilesize
             type: text
-            value: ""
-            description: The size of the file
+            value: "2048"
           - name: rule
             type: text
-            value: ""
-            description: Stringified JSON object of the schema /components/schemas/complianceAnomalyRuleObject that contains the compliance rule creation data
+            value: '{"name":"test_file_11","description":"","isEnabled":false, "configurationType":"configurationComplianceTemplate","communicationRuleType":"configurationCompliance", "associatedFabrics":[{"uuid":"0e5604f9-f74a0f22-0bb2-47a2-98f7-c678f3138416","isEnabled":true, "fabricName":"DC-EAST-OFFLINE"}],"isEqualityCheckActive":false,"uploadedFileName":"customer_template_2.json", "uploadFileType":"templateBasedConfig"}'
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

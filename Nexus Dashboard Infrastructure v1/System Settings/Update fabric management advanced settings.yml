@@ -2,6 +2,8 @@ info:
   name: Update fabric management advanced settings
   type: http
   seq: 21
+  tags:
+    - System Settings
 
 http:
   method: POST
@@ -18,20 +20,34 @@ http:
       {
         "fabricManagementAdvancedSettings": [
           {
-            "annotations": {},
-            "metaProperties": {
-              "defaultValue": "",
-              "max": "",
-              "maxLength": "",
-              "min": "",
-              "regularExpr": "",
-              "value": ""
-            },
-            "name": "",
-            "namespace": "",
-            "parameterType": "",
-            "priority": "",
-            "value": ""
+            "name": "pm_DaysToKeep",
+            "namespace": "core",
+            "value": "88"
+          },
+          {
+            "name": "alarm_cleared_DaysToKeep",
+            "namespace": "core",
+            "value": "66"
+          },
+          {
+            "name": "db_history_interval",
+            "namespace": "global",
+            "value": "90"
+          },
+          {
+            "name": "archived_versions_limit",
+            "namespace": "lan",
+            "value": "2"
+          },
+          {
+            "name": "sanSensorDiscovery",
+            "namespace": "san",
+            "value": "false"
+          },
+          {
+            "name": "pm_collectSanTemperature",
+            "namespace": "san",
+            "value": "false"
           }
         ]
       }
@@ -45,7 +61,7 @@ settings:
 
 examples:
   - name: 204 Response
-    description: No-Content
+    description: No Content
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/settings/fabricManagement/advancedSettings"
       method: POST
@@ -93,6 +109,7 @@ examples:
             ]
           }
     response:
+      status: 204
       statusText: No Content
       body:
         type: text
@@ -146,6 +163,7 @@ examples:
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -207,6 +225,7 @@ examples:
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -268,6 +287,7 @@ examples:
             ]
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -329,6 +349,7 @@ examples:
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

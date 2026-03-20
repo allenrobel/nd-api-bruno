@@ -1,7 +1,9 @@
 info:
   name: Deploy switch configuration (POST)
   type: http
-  seq: 53
+  seq: 55
+  tags:
+    - Inventory
 
 http:
   method: POST
@@ -16,7 +18,10 @@ http:
     type: json
     data: |-
       {
-        "switchIds": []
+        "switchIds": [
+          "SAL1948TRTT",
+          "SAL1947TRAB"
+        ]
       }
   auth: inherit
 
@@ -28,7 +33,7 @@ settings:
 
 examples:
   - name: 207 Response
-    description: OK
+    description: Multi-Status response
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/inventory/switchActions/deploy"
       method: POST
@@ -48,6 +53,7 @@ examples:
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -58,14 +64,16 @@ examples:
           {
             "switchIds": [
               {
-                "message": "Deploy successful",
+                "message": "Configuration deployment completed successfully.",
                 "status": "success",
-                "switchId": "FDO222419B7"
+                "switchId": "SAL1948TRTT3",
+                "switchName": "INS04-J09-LEAF3"
               },
               {
-                "message": "Switch in migration mode. Operation not allowed",
+                "message": "Configuration deployment completed. However, some commands failed to execute.",
                 "status": "failed",
-                "switchId": "FDO24420D8"
+                "switchId": "SAL1948TRTT4",
+                "switchName": "LEAF4"
               }
             ]
           }
@@ -90,6 +98,7 @@ examples:
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -123,6 +132,7 @@ examples:
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -156,6 +166,7 @@ examples:
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -189,6 +200,7 @@ examples:
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

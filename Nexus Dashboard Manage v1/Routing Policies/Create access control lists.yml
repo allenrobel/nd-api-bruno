@@ -2,6 +2,8 @@ info:
   name: Create access control lists
   type: http
   seq: 3
+  tags:
+    - Routing Policies
 
 http:
   method: POST
@@ -21,7 +23,46 @@ http:
     data: |-
       {
         "accessControlLists": [
-          {}
+          {
+            "entries": [
+              {
+                "action": "permit",
+                "dst": "192.168.2.0/24",
+                "icmpOption": "echo",
+                "protocol": "icmp",
+                "sequenceNumber": 10,
+                "src": "192.168.1.0/24"
+              },
+              {
+                "action": "permit",
+                "dst": "192.168.4.0/24",
+                "protocol": "tcp",
+                "sequenceNumber": 20,
+                "src": "192.168.3.0/24",
+                "tcpOption": "established"
+              },
+              {
+                "action": "permit",
+                "dst": "192.168.6.0/24",
+                "dstPort": "53",
+                "dstPortAction": "equalTo",
+                "protocol": "udp",
+                "sequenceNumber": 30,
+                "src": "192.168.5.0/24",
+                "srcPort": "1024",
+                "srcPortAction": "greaterThan"
+              },
+              {
+                "action": "deny",
+                "dst": "any",
+                "protocol": "ip",
+                "sequenceNumber": 40,
+                "src": "any"
+              }
+            ],
+            "name": "aclAdvanced",
+            "type": "ipv4"
+          }
         ]
       }
   auth: inherit
@@ -33,7 +74,7 @@ settings:
   maxRedirects: 5
 
 examples:
-  - name: 207 Response
+  - name: 207 Response (Create ACL with advanced options)
     description: Multi-Status
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/accessControlLists"
@@ -53,10 +94,50 @@ examples:
         data: |-
           {
             "accessControlLists": [
-              {}
+              {
+                "entries": [
+                  {
+                    "action": "permit",
+                    "dst": "192.168.2.0/24",
+                    "icmpOption": "echo",
+                    "protocol": "icmp",
+                    "sequenceNumber": 10,
+                    "src": "192.168.1.0/24"
+                  },
+                  {
+                    "action": "permit",
+                    "dst": "192.168.4.0/24",
+                    "protocol": "tcp",
+                    "sequenceNumber": 20,
+                    "src": "192.168.3.0/24",
+                    "tcpOption": "established"
+                  },
+                  {
+                    "action": "permit",
+                    "dst": "192.168.6.0/24",
+                    "dstPort": "53",
+                    "dstPortAction": "equalTo",
+                    "protocol": "udp",
+                    "sequenceNumber": 30,
+                    "src": "192.168.5.0/24",
+                    "srcPort": "1024",
+                    "srcPortAction": "greaterThan"
+                  },
+                  {
+                    "action": "deny",
+                    "dst": "any",
+                    "protocol": "ip",
+                    "sequenceNumber": 40,
+                    "src": "any"
+                  }
+                ],
+                "name": "aclAdvanced",
+                "type": "ipv4"
+              }
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -77,13 +158,311 @@ examples:
                 "status": "failed"
               },
               {
-                "message": "Successfully created access control list tenantSales~acl3",
-                "name": "tenantSales~acl3",
+                "message": "Successfully created access control list tenant1~acl3",
+                "name": "tenant1~acl3",
                 "status": "success"
               }
             ]
           }
-  - name: 400 Response
+  - name: 207 Response (Create ACL with port ranges)
+    description: Multi-Status
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/accessControlLists"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "accessControlLists": [
+              {
+                "entries": [
+                  {
+                    "action": "permit",
+                    "dst": "192.168.2.0/24",
+                    "dstPortAction": "portRange",
+                    "dstPortRangeEnd": "4000",
+                    "dstPortRangeStart": "3000",
+                    "protocol": "tcp",
+                    "sequenceNumber": 10,
+                    "src": "192.168.1.0/24",
+                    "srcPortAction": "portRange",
+                    "srcPortRangeEnd": "2000",
+                    "srcPortRangeStart": "1000"
+                  },
+                  {
+                    "action": "deny",
+                    "dst": "192.168.4.0/24",
+                    "dstPort": "5000",
+                    "dstPortAction": "lessThan",
+                    "protocol": "udp",
+                    "sequenceNumber": 20,
+                    "src": "192.168.3.0/24",
+                    "srcPort": "1024",
+                    "srcPortAction": "greaterThan"
+                  }
+                ],
+                "name": "aclPortRange",
+                "type": "ipv4"
+              }
+            ]
+          }
+    response:
+      status: 207
+      statusText: Multi-Status
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "results": [
+              {
+                "message": "Successfully created access control list acl1",
+                "name": "acl1",
+                "status": "success"
+              },
+              {
+                "message": "Access control list acl2 already exists",
+                "name": "acl2",
+                "status": "failed"
+              },
+              {
+                "message": "Successfully created access control list tenant1~acl3",
+                "name": "tenant1~acl3",
+                "status": "success"
+              }
+            ]
+          }
+  - name: 207 Response (Create multiple ACLs)
+    description: Multi-Status
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/accessControlLists"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "accessControlLists": [
+              {
+                "entries": [
+                  {
+                    "action": "permit",
+                    "dst": "192.168.2.10",
+                    "dstPort": "ftp",
+                    "dstPortAction": "equalTo",
+                    "protocol": "tcp",
+                    "sequenceNumber": 10,
+                    "src": "192.168.1.10",
+                    "srcPort": "www",
+                    "srcPortAction": "equalTo"
+                  },
+                  {
+                    "action": "deny",
+                    "dst": "192.168.4.10",
+                    "protocol": "icmp",
+                    "sequenceNumber": 20,
+                    "src": "192.168.3.10"
+                  },
+                  {
+                    "action": "remark",
+                    "remarkComment": "Access control list entry for testing",
+                    "sequenceNumber": 30
+                  }
+                ],
+                "name": "acl1",
+                "type": "ipv4"
+              },
+              {
+                "entries": [
+                  {
+                    "action": "permit",
+                    "dst": "2001:db8::2",
+                    "dstPort": "ftp",
+                    "dstPortAction": "equalTo",
+                    "protocol": "tcp",
+                    "sequenceNumber": 10,
+                    "src": "2001:db8::1",
+                    "srcPort": "www",
+                    "srcPortAction": "equalTo"
+                  },
+                  {
+                    "action": "deny",
+                    "dst": "2001:db8::4",
+                    "protocol": "icmp",
+                    "sequenceNumber": 20,
+                    "src": "2001:db8::3"
+                  },
+                  {
+                    "action": "remark",
+                    "remarkComment": "IPv6 access control list entry for testing",
+                    "sequenceNumber": 30
+                  }
+                ],
+                "name": "acl2",
+                "type": "ipv6"
+              }
+            ]
+          }
+    response:
+      status: 207
+      statusText: Multi-Status
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "results": [
+              {
+                "message": "Successfully created access control list acl1",
+                "name": "acl1",
+                "status": "success"
+              },
+              {
+                "message": "Access control list acl2 already exists",
+                "name": "acl2",
+                "status": "failed"
+              },
+              {
+                "message": "Successfully created access control list tenant1~acl3",
+                "name": "tenant1~acl3",
+                "status": "success"
+              }
+            ]
+          }
+  - name: 207 Response (Create tenant-scoped ACLs)
+    description: Multi-Status
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/accessControlLists"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "accessControlLists": [
+              {
+                "entries": [
+                  {
+                    "action": "permit",
+                    "dst": "192.168.2.10",
+                    "dstPort": "ftp",
+                    "dstPortAction": "equalTo",
+                    "protocol": "tcp",
+                    "sequenceNumber": 10,
+                    "src": "192.168.1.10",
+                    "srcPort": "www",
+                    "srcPortAction": "equalTo"
+                  },
+                  {
+                    "action": "deny",
+                    "dst": "192.168.4.10",
+                    "protocol": "icmp",
+                    "sequenceNumber": 20,
+                    "src": "192.168.3.10"
+                  },
+                  {
+                    "action": "remark",
+                    "remarkComment": "Access control list entry for testing",
+                    "sequenceNumber": 30
+                  }
+                ],
+                "name": "tenant1~acl3",
+                "tenantName": "tenant1",
+                "type": "ipv4"
+              },
+              {
+                "entries": [
+                  {
+                    "action": "permit",
+                    "dst": "2001:db8::2",
+                    "dstPort": "ftp",
+                    "dstPortAction": "equalTo",
+                    "protocol": "tcp",
+                    "sequenceNumber": 10,
+                    "src": "2001:db8::1",
+                    "srcPort": "www",
+                    "srcPortAction": "equalTo"
+                  },
+                  {
+                    "action": "deny",
+                    "dst": "2001:db8::4",
+                    "protocol": "icmp",
+                    "sequenceNumber": 20,
+                    "src": "2001:db8::3"
+                  },
+                  {
+                    "action": "remark",
+                    "remarkComment": "IPv6 access control list entry for testing",
+                    "sequenceNumber": 30
+                  }
+                ],
+                "name": "tenant1~acl4",
+                "tenantName": "tenant1",
+                "type": "ipv6"
+              }
+            ]
+          }
+    response:
+      status: 207
+      statusText: Multi-Status
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "results": [
+              {
+                "message": "Successfully created access control list acl1",
+                "name": "acl1",
+                "status": "success"
+              },
+              {
+                "message": "Access control list acl2 already exists",
+                "name": "acl2",
+                "status": "failed"
+              },
+              {
+                "message": "Successfully created access control list tenant1~acl3",
+                "name": "tenant1~acl3",
+                "status": "success"
+              }
+            ]
+          }
+  - name: 400 Response (Create ACL with advanced options)
     description: Bad Request
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/accessControlLists"
@@ -103,10 +482,50 @@ examples:
         data: |-
           {
             "accessControlLists": [
-              {}
+              {
+                "entries": [
+                  {
+                    "action": "permit",
+                    "dst": "192.168.2.0/24",
+                    "icmpOption": "echo",
+                    "protocol": "icmp",
+                    "sequenceNumber": 10,
+                    "src": "192.168.1.0/24"
+                  },
+                  {
+                    "action": "permit",
+                    "dst": "192.168.4.0/24",
+                    "protocol": "tcp",
+                    "sequenceNumber": 20,
+                    "src": "192.168.3.0/24",
+                    "tcpOption": "established"
+                  },
+                  {
+                    "action": "permit",
+                    "dst": "192.168.6.0/24",
+                    "dstPort": "53",
+                    "dstPortAction": "equalTo",
+                    "protocol": "udp",
+                    "sequenceNumber": 30,
+                    "src": "192.168.5.0/24",
+                    "srcPort": "1024",
+                    "srcPortAction": "greaterThan"
+                  },
+                  {
+                    "action": "deny",
+                    "dst": "any",
+                    "protocol": "ip",
+                    "sequenceNumber": 40,
+                    "src": "any"
+                  }
+                ],
+                "name": "aclAdvanced",
+                "type": "ipv4"
+              }
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -119,7 +538,263 @@ examples:
             "description": "The server could not understand the request due to incorrect syntax.",
             "code": 400
           }
-  - name: 401 Response
+  - name: 400 Response (Create ACL with port ranges)
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/accessControlLists"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "accessControlLists": [
+              {
+                "entries": [
+                  {
+                    "action": "permit",
+                    "dst": "192.168.2.0/24",
+                    "dstPortAction": "portRange",
+                    "dstPortRangeEnd": "4000",
+                    "dstPortRangeStart": "3000",
+                    "protocol": "tcp",
+                    "sequenceNumber": 10,
+                    "src": "192.168.1.0/24",
+                    "srcPortAction": "portRange",
+                    "srcPortRangeEnd": "2000",
+                    "srcPortRangeStart": "1000"
+                  },
+                  {
+                    "action": "deny",
+                    "dst": "192.168.4.0/24",
+                    "dstPort": "5000",
+                    "dstPortAction": "lessThan",
+                    "protocol": "udp",
+                    "sequenceNumber": 20,
+                    "src": "192.168.3.0/24",
+                    "srcPort": "1024",
+                    "srcPortAction": "greaterThan"
+                  }
+                ],
+                "name": "aclPortRange",
+                "type": "ipv4"
+              }
+            ]
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 400 Response (Create multiple ACLs)
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/accessControlLists"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "accessControlLists": [
+              {
+                "entries": [
+                  {
+                    "action": "permit",
+                    "dst": "192.168.2.10",
+                    "dstPort": "ftp",
+                    "dstPortAction": "equalTo",
+                    "protocol": "tcp",
+                    "sequenceNumber": 10,
+                    "src": "192.168.1.10",
+                    "srcPort": "www",
+                    "srcPortAction": "equalTo"
+                  },
+                  {
+                    "action": "deny",
+                    "dst": "192.168.4.10",
+                    "protocol": "icmp",
+                    "sequenceNumber": 20,
+                    "src": "192.168.3.10"
+                  },
+                  {
+                    "action": "remark",
+                    "remarkComment": "Access control list entry for testing",
+                    "sequenceNumber": 30
+                  }
+                ],
+                "name": "acl1",
+                "type": "ipv4"
+              },
+              {
+                "entries": [
+                  {
+                    "action": "permit",
+                    "dst": "2001:db8::2",
+                    "dstPort": "ftp",
+                    "dstPortAction": "equalTo",
+                    "protocol": "tcp",
+                    "sequenceNumber": 10,
+                    "src": "2001:db8::1",
+                    "srcPort": "www",
+                    "srcPortAction": "equalTo"
+                  },
+                  {
+                    "action": "deny",
+                    "dst": "2001:db8::4",
+                    "protocol": "icmp",
+                    "sequenceNumber": 20,
+                    "src": "2001:db8::3"
+                  },
+                  {
+                    "action": "remark",
+                    "remarkComment": "IPv6 access control list entry for testing",
+                    "sequenceNumber": 30
+                  }
+                ],
+                "name": "acl2",
+                "type": "ipv6"
+              }
+            ]
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 400 Response (Create tenant-scoped ACLs)
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/accessControlLists"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "accessControlLists": [
+              {
+                "entries": [
+                  {
+                    "action": "permit",
+                    "dst": "192.168.2.10",
+                    "dstPort": "ftp",
+                    "dstPortAction": "equalTo",
+                    "protocol": "tcp",
+                    "sequenceNumber": 10,
+                    "src": "192.168.1.10",
+                    "srcPort": "www",
+                    "srcPortAction": "equalTo"
+                  },
+                  {
+                    "action": "deny",
+                    "dst": "192.168.4.10",
+                    "protocol": "icmp",
+                    "sequenceNumber": 20,
+                    "src": "192.168.3.10"
+                  },
+                  {
+                    "action": "remark",
+                    "remarkComment": "Access control list entry for testing",
+                    "sequenceNumber": 30
+                  }
+                ],
+                "name": "tenant1~acl3",
+                "tenantName": "tenant1",
+                "type": "ipv4"
+              },
+              {
+                "entries": [
+                  {
+                    "action": "permit",
+                    "dst": "2001:db8::2",
+                    "dstPort": "ftp",
+                    "dstPortAction": "equalTo",
+                    "protocol": "tcp",
+                    "sequenceNumber": 10,
+                    "src": "2001:db8::1",
+                    "srcPort": "www",
+                    "srcPortAction": "equalTo"
+                  },
+                  {
+                    "action": "deny",
+                    "dst": "2001:db8::4",
+                    "protocol": "icmp",
+                    "sequenceNumber": 20,
+                    "src": "2001:db8::3"
+                  },
+                  {
+                    "action": "remark",
+                    "remarkComment": "IPv6 access control list entry for testing",
+                    "sequenceNumber": 30
+                  }
+                ],
+                "name": "tenant1~acl4",
+                "tenantName": "tenant1",
+                "type": "ipv6"
+              }
+            ]
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 401 Response (Create ACL with advanced options)
     description: Unauthorized
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/accessControlLists"
@@ -139,10 +814,50 @@ examples:
         data: |-
           {
             "accessControlLists": [
-              {}
+              {
+                "entries": [
+                  {
+                    "action": "permit",
+                    "dst": "192.168.2.0/24",
+                    "icmpOption": "echo",
+                    "protocol": "icmp",
+                    "sequenceNumber": 10,
+                    "src": "192.168.1.0/24"
+                  },
+                  {
+                    "action": "permit",
+                    "dst": "192.168.4.0/24",
+                    "protocol": "tcp",
+                    "sequenceNumber": 20,
+                    "src": "192.168.3.0/24",
+                    "tcpOption": "established"
+                  },
+                  {
+                    "action": "permit",
+                    "dst": "192.168.6.0/24",
+                    "dstPort": "53",
+                    "dstPortAction": "equalTo",
+                    "protocol": "udp",
+                    "sequenceNumber": 30,
+                    "src": "192.168.5.0/24",
+                    "srcPort": "1024",
+                    "srcPortAction": "greaterThan"
+                  },
+                  {
+                    "action": "deny",
+                    "dst": "any",
+                    "protocol": "ip",
+                    "sequenceNumber": 40,
+                    "src": "any"
+                  }
+                ],
+                "name": "aclAdvanced",
+                "type": "ipv4"
+              }
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -155,7 +870,263 @@ examples:
             "description": "Indicates that the request requires user authentication information.",
             "code": 401
           }
-  - name: 403 Response
+  - name: 401 Response (Create ACL with port ranges)
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/accessControlLists"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "accessControlLists": [
+              {
+                "entries": [
+                  {
+                    "action": "permit",
+                    "dst": "192.168.2.0/24",
+                    "dstPortAction": "portRange",
+                    "dstPortRangeEnd": "4000",
+                    "dstPortRangeStart": "3000",
+                    "protocol": "tcp",
+                    "sequenceNumber": 10,
+                    "src": "192.168.1.0/24",
+                    "srcPortAction": "portRange",
+                    "srcPortRangeEnd": "2000",
+                    "srcPortRangeStart": "1000"
+                  },
+                  {
+                    "action": "deny",
+                    "dst": "192.168.4.0/24",
+                    "dstPort": "5000",
+                    "dstPortAction": "lessThan",
+                    "protocol": "udp",
+                    "sequenceNumber": 20,
+                    "src": "192.168.3.0/24",
+                    "srcPort": "1024",
+                    "srcPortAction": "greaterThan"
+                  }
+                ],
+                "name": "aclPortRange",
+                "type": "ipv4"
+              }
+            ]
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 401 Response (Create multiple ACLs)
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/accessControlLists"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "accessControlLists": [
+              {
+                "entries": [
+                  {
+                    "action": "permit",
+                    "dst": "192.168.2.10",
+                    "dstPort": "ftp",
+                    "dstPortAction": "equalTo",
+                    "protocol": "tcp",
+                    "sequenceNumber": 10,
+                    "src": "192.168.1.10",
+                    "srcPort": "www",
+                    "srcPortAction": "equalTo"
+                  },
+                  {
+                    "action": "deny",
+                    "dst": "192.168.4.10",
+                    "protocol": "icmp",
+                    "sequenceNumber": 20,
+                    "src": "192.168.3.10"
+                  },
+                  {
+                    "action": "remark",
+                    "remarkComment": "Access control list entry for testing",
+                    "sequenceNumber": 30
+                  }
+                ],
+                "name": "acl1",
+                "type": "ipv4"
+              },
+              {
+                "entries": [
+                  {
+                    "action": "permit",
+                    "dst": "2001:db8::2",
+                    "dstPort": "ftp",
+                    "dstPortAction": "equalTo",
+                    "protocol": "tcp",
+                    "sequenceNumber": 10,
+                    "src": "2001:db8::1",
+                    "srcPort": "www",
+                    "srcPortAction": "equalTo"
+                  },
+                  {
+                    "action": "deny",
+                    "dst": "2001:db8::4",
+                    "protocol": "icmp",
+                    "sequenceNumber": 20,
+                    "src": "2001:db8::3"
+                  },
+                  {
+                    "action": "remark",
+                    "remarkComment": "IPv6 access control list entry for testing",
+                    "sequenceNumber": 30
+                  }
+                ],
+                "name": "acl2",
+                "type": "ipv6"
+              }
+            ]
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 401 Response (Create tenant-scoped ACLs)
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/accessControlLists"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "accessControlLists": [
+              {
+                "entries": [
+                  {
+                    "action": "permit",
+                    "dst": "192.168.2.10",
+                    "dstPort": "ftp",
+                    "dstPortAction": "equalTo",
+                    "protocol": "tcp",
+                    "sequenceNumber": 10,
+                    "src": "192.168.1.10",
+                    "srcPort": "www",
+                    "srcPortAction": "equalTo"
+                  },
+                  {
+                    "action": "deny",
+                    "dst": "192.168.4.10",
+                    "protocol": "icmp",
+                    "sequenceNumber": 20,
+                    "src": "192.168.3.10"
+                  },
+                  {
+                    "action": "remark",
+                    "remarkComment": "Access control list entry for testing",
+                    "sequenceNumber": 30
+                  }
+                ],
+                "name": "tenant1~acl3",
+                "tenantName": "tenant1",
+                "type": "ipv4"
+              },
+              {
+                "entries": [
+                  {
+                    "action": "permit",
+                    "dst": "2001:db8::2",
+                    "dstPort": "ftp",
+                    "dstPortAction": "equalTo",
+                    "protocol": "tcp",
+                    "sequenceNumber": 10,
+                    "src": "2001:db8::1",
+                    "srcPort": "www",
+                    "srcPortAction": "equalTo"
+                  },
+                  {
+                    "action": "deny",
+                    "dst": "2001:db8::4",
+                    "protocol": "icmp",
+                    "sequenceNumber": 20,
+                    "src": "2001:db8::3"
+                  },
+                  {
+                    "action": "remark",
+                    "remarkComment": "IPv6 access control list entry for testing",
+                    "sequenceNumber": 30
+                  }
+                ],
+                "name": "tenant1~acl4",
+                "tenantName": "tenant1",
+                "type": "ipv6"
+              }
+            ]
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 403 Response (Create ACL with advanced options)
     description: Forbidden
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/accessControlLists"
@@ -175,10 +1146,50 @@ examples:
         data: |-
           {
             "accessControlLists": [
-              {}
+              {
+                "entries": [
+                  {
+                    "action": "permit",
+                    "dst": "192.168.2.0/24",
+                    "icmpOption": "echo",
+                    "protocol": "icmp",
+                    "sequenceNumber": 10,
+                    "src": "192.168.1.0/24"
+                  },
+                  {
+                    "action": "permit",
+                    "dst": "192.168.4.0/24",
+                    "protocol": "tcp",
+                    "sequenceNumber": 20,
+                    "src": "192.168.3.0/24",
+                    "tcpOption": "established"
+                  },
+                  {
+                    "action": "permit",
+                    "dst": "192.168.6.0/24",
+                    "dstPort": "53",
+                    "dstPortAction": "equalTo",
+                    "protocol": "udp",
+                    "sequenceNumber": 30,
+                    "src": "192.168.5.0/24",
+                    "srcPort": "1024",
+                    "srcPortAction": "greaterThan"
+                  },
+                  {
+                    "action": "deny",
+                    "dst": "any",
+                    "protocol": "ip",
+                    "sequenceNumber": 40,
+                    "src": "any"
+                  }
+                ],
+                "name": "aclAdvanced",
+                "type": "ipv4"
+              }
             ]
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -191,7 +1202,263 @@ examples:
             "description": "The client does not have access rights to the content.",
             "code": 403
           }
-  - name: 404 Response
+  - name: 403 Response (Create ACL with port ranges)
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/accessControlLists"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "accessControlLists": [
+              {
+                "entries": [
+                  {
+                    "action": "permit",
+                    "dst": "192.168.2.0/24",
+                    "dstPortAction": "portRange",
+                    "dstPortRangeEnd": "4000",
+                    "dstPortRangeStart": "3000",
+                    "protocol": "tcp",
+                    "sequenceNumber": 10,
+                    "src": "192.168.1.0/24",
+                    "srcPortAction": "portRange",
+                    "srcPortRangeEnd": "2000",
+                    "srcPortRangeStart": "1000"
+                  },
+                  {
+                    "action": "deny",
+                    "dst": "192.168.4.0/24",
+                    "dstPort": "5000",
+                    "dstPortAction": "lessThan",
+                    "protocol": "udp",
+                    "sequenceNumber": 20,
+                    "src": "192.168.3.0/24",
+                    "srcPort": "1024",
+                    "srcPortAction": "greaterThan"
+                  }
+                ],
+                "name": "aclPortRange",
+                "type": "ipv4"
+              }
+            ]
+          }
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 403 Response (Create multiple ACLs)
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/accessControlLists"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "accessControlLists": [
+              {
+                "entries": [
+                  {
+                    "action": "permit",
+                    "dst": "192.168.2.10",
+                    "dstPort": "ftp",
+                    "dstPortAction": "equalTo",
+                    "protocol": "tcp",
+                    "sequenceNumber": 10,
+                    "src": "192.168.1.10",
+                    "srcPort": "www",
+                    "srcPortAction": "equalTo"
+                  },
+                  {
+                    "action": "deny",
+                    "dst": "192.168.4.10",
+                    "protocol": "icmp",
+                    "sequenceNumber": 20,
+                    "src": "192.168.3.10"
+                  },
+                  {
+                    "action": "remark",
+                    "remarkComment": "Access control list entry for testing",
+                    "sequenceNumber": 30
+                  }
+                ],
+                "name": "acl1",
+                "type": "ipv4"
+              },
+              {
+                "entries": [
+                  {
+                    "action": "permit",
+                    "dst": "2001:db8::2",
+                    "dstPort": "ftp",
+                    "dstPortAction": "equalTo",
+                    "protocol": "tcp",
+                    "sequenceNumber": 10,
+                    "src": "2001:db8::1",
+                    "srcPort": "www",
+                    "srcPortAction": "equalTo"
+                  },
+                  {
+                    "action": "deny",
+                    "dst": "2001:db8::4",
+                    "protocol": "icmp",
+                    "sequenceNumber": 20,
+                    "src": "2001:db8::3"
+                  },
+                  {
+                    "action": "remark",
+                    "remarkComment": "IPv6 access control list entry for testing",
+                    "sequenceNumber": 30
+                  }
+                ],
+                "name": "acl2",
+                "type": "ipv6"
+              }
+            ]
+          }
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 403 Response (Create tenant-scoped ACLs)
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/accessControlLists"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "accessControlLists": [
+              {
+                "entries": [
+                  {
+                    "action": "permit",
+                    "dst": "192.168.2.10",
+                    "dstPort": "ftp",
+                    "dstPortAction": "equalTo",
+                    "protocol": "tcp",
+                    "sequenceNumber": 10,
+                    "src": "192.168.1.10",
+                    "srcPort": "www",
+                    "srcPortAction": "equalTo"
+                  },
+                  {
+                    "action": "deny",
+                    "dst": "192.168.4.10",
+                    "protocol": "icmp",
+                    "sequenceNumber": 20,
+                    "src": "192.168.3.10"
+                  },
+                  {
+                    "action": "remark",
+                    "remarkComment": "Access control list entry for testing",
+                    "sequenceNumber": 30
+                  }
+                ],
+                "name": "tenant1~acl3",
+                "tenantName": "tenant1",
+                "type": "ipv4"
+              },
+              {
+                "entries": [
+                  {
+                    "action": "permit",
+                    "dst": "2001:db8::2",
+                    "dstPort": "ftp",
+                    "dstPortAction": "equalTo",
+                    "protocol": "tcp",
+                    "sequenceNumber": 10,
+                    "src": "2001:db8::1",
+                    "srcPort": "www",
+                    "srcPortAction": "equalTo"
+                  },
+                  {
+                    "action": "deny",
+                    "dst": "2001:db8::4",
+                    "protocol": "icmp",
+                    "sequenceNumber": 20,
+                    "src": "2001:db8::3"
+                  },
+                  {
+                    "action": "remark",
+                    "remarkComment": "IPv6 access control list entry for testing",
+                    "sequenceNumber": 30
+                  }
+                ],
+                "name": "tenant1~acl4",
+                "tenantName": "tenant1",
+                "type": "ipv6"
+              }
+            ]
+          }
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 404 Response (Create ACL with advanced options)
     description: Not Found
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/accessControlLists"
@@ -211,10 +1478,50 @@ examples:
         data: |-
           {
             "accessControlLists": [
-              {}
+              {
+                "entries": [
+                  {
+                    "action": "permit",
+                    "dst": "192.168.2.0/24",
+                    "icmpOption": "echo",
+                    "protocol": "icmp",
+                    "sequenceNumber": 10,
+                    "src": "192.168.1.0/24"
+                  },
+                  {
+                    "action": "permit",
+                    "dst": "192.168.4.0/24",
+                    "protocol": "tcp",
+                    "sequenceNumber": 20,
+                    "src": "192.168.3.0/24",
+                    "tcpOption": "established"
+                  },
+                  {
+                    "action": "permit",
+                    "dst": "192.168.6.0/24",
+                    "dstPort": "53",
+                    "dstPortAction": "equalTo",
+                    "protocol": "udp",
+                    "sequenceNumber": 30,
+                    "src": "192.168.5.0/24",
+                    "srcPort": "1024",
+                    "srcPortAction": "greaterThan"
+                  },
+                  {
+                    "action": "deny",
+                    "dst": "any",
+                    "protocol": "ip",
+                    "sequenceNumber": 40,
+                    "src": "any"
+                  }
+                ],
+                "name": "aclAdvanced",
+                "type": "ipv4"
+              }
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -227,7 +1534,263 @@ examples:
             "description": "The server cannot find the requested resource.",
             "code": 404
           }
-  - name: 409 Response
+  - name: 404 Response (Create ACL with port ranges)
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/accessControlLists"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "accessControlLists": [
+              {
+                "entries": [
+                  {
+                    "action": "permit",
+                    "dst": "192.168.2.0/24",
+                    "dstPortAction": "portRange",
+                    "dstPortRangeEnd": "4000",
+                    "dstPortRangeStart": "3000",
+                    "protocol": "tcp",
+                    "sequenceNumber": 10,
+                    "src": "192.168.1.0/24",
+                    "srcPortAction": "portRange",
+                    "srcPortRangeEnd": "2000",
+                    "srcPortRangeStart": "1000"
+                  },
+                  {
+                    "action": "deny",
+                    "dst": "192.168.4.0/24",
+                    "dstPort": "5000",
+                    "dstPortAction": "lessThan",
+                    "protocol": "udp",
+                    "sequenceNumber": 20,
+                    "src": "192.168.3.0/24",
+                    "srcPort": "1024",
+                    "srcPortAction": "greaterThan"
+                  }
+                ],
+                "name": "aclPortRange",
+                "type": "ipv4"
+              }
+            ]
+          }
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 404 Response (Create multiple ACLs)
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/accessControlLists"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "accessControlLists": [
+              {
+                "entries": [
+                  {
+                    "action": "permit",
+                    "dst": "192.168.2.10",
+                    "dstPort": "ftp",
+                    "dstPortAction": "equalTo",
+                    "protocol": "tcp",
+                    "sequenceNumber": 10,
+                    "src": "192.168.1.10",
+                    "srcPort": "www",
+                    "srcPortAction": "equalTo"
+                  },
+                  {
+                    "action": "deny",
+                    "dst": "192.168.4.10",
+                    "protocol": "icmp",
+                    "sequenceNumber": 20,
+                    "src": "192.168.3.10"
+                  },
+                  {
+                    "action": "remark",
+                    "remarkComment": "Access control list entry for testing",
+                    "sequenceNumber": 30
+                  }
+                ],
+                "name": "acl1",
+                "type": "ipv4"
+              },
+              {
+                "entries": [
+                  {
+                    "action": "permit",
+                    "dst": "2001:db8::2",
+                    "dstPort": "ftp",
+                    "dstPortAction": "equalTo",
+                    "protocol": "tcp",
+                    "sequenceNumber": 10,
+                    "src": "2001:db8::1",
+                    "srcPort": "www",
+                    "srcPortAction": "equalTo"
+                  },
+                  {
+                    "action": "deny",
+                    "dst": "2001:db8::4",
+                    "protocol": "icmp",
+                    "sequenceNumber": 20,
+                    "src": "2001:db8::3"
+                  },
+                  {
+                    "action": "remark",
+                    "remarkComment": "IPv6 access control list entry for testing",
+                    "sequenceNumber": 30
+                  }
+                ],
+                "name": "acl2",
+                "type": "ipv6"
+              }
+            ]
+          }
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 404 Response (Create tenant-scoped ACLs)
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/accessControlLists"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "accessControlLists": [
+              {
+                "entries": [
+                  {
+                    "action": "permit",
+                    "dst": "192.168.2.10",
+                    "dstPort": "ftp",
+                    "dstPortAction": "equalTo",
+                    "protocol": "tcp",
+                    "sequenceNumber": 10,
+                    "src": "192.168.1.10",
+                    "srcPort": "www",
+                    "srcPortAction": "equalTo"
+                  },
+                  {
+                    "action": "deny",
+                    "dst": "192.168.4.10",
+                    "protocol": "icmp",
+                    "sequenceNumber": 20,
+                    "src": "192.168.3.10"
+                  },
+                  {
+                    "action": "remark",
+                    "remarkComment": "Access control list entry for testing",
+                    "sequenceNumber": 30
+                  }
+                ],
+                "name": "tenant1~acl3",
+                "tenantName": "tenant1",
+                "type": "ipv4"
+              },
+              {
+                "entries": [
+                  {
+                    "action": "permit",
+                    "dst": "2001:db8::2",
+                    "dstPort": "ftp",
+                    "dstPortAction": "equalTo",
+                    "protocol": "tcp",
+                    "sequenceNumber": 10,
+                    "src": "2001:db8::1",
+                    "srcPort": "www",
+                    "srcPortAction": "equalTo"
+                  },
+                  {
+                    "action": "deny",
+                    "dst": "2001:db8::4",
+                    "protocol": "icmp",
+                    "sequenceNumber": 20,
+                    "src": "2001:db8::3"
+                  },
+                  {
+                    "action": "remark",
+                    "remarkComment": "IPv6 access control list entry for testing",
+                    "sequenceNumber": 30
+                  }
+                ],
+                "name": "tenant1~acl4",
+                "tenantName": "tenant1",
+                "type": "ipv6"
+              }
+            ]
+          }
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 409 Response (Create ACL with advanced options)
     description: Conflict
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/accessControlLists"
@@ -247,10 +1810,50 @@ examples:
         data: |-
           {
             "accessControlLists": [
-              {}
+              {
+                "entries": [
+                  {
+                    "action": "permit",
+                    "dst": "192.168.2.0/24",
+                    "icmpOption": "echo",
+                    "protocol": "icmp",
+                    "sequenceNumber": 10,
+                    "src": "192.168.1.0/24"
+                  },
+                  {
+                    "action": "permit",
+                    "dst": "192.168.4.0/24",
+                    "protocol": "tcp",
+                    "sequenceNumber": 20,
+                    "src": "192.168.3.0/24",
+                    "tcpOption": "established"
+                  },
+                  {
+                    "action": "permit",
+                    "dst": "192.168.6.0/24",
+                    "dstPort": "53",
+                    "dstPortAction": "equalTo",
+                    "protocol": "udp",
+                    "sequenceNumber": 30,
+                    "src": "192.168.5.0/24",
+                    "srcPort": "1024",
+                    "srcPortAction": "greaterThan"
+                  },
+                  {
+                    "action": "deny",
+                    "dst": "any",
+                    "protocol": "ip",
+                    "sequenceNumber": 40,
+                    "src": "any"
+                  }
+                ],
+                "name": "aclAdvanced",
+                "type": "ipv4"
+              }
             ]
           }
     response:
+      status: 409
       statusText: Conflict
       headers:
         - name: Content-Type
@@ -263,7 +1866,263 @@ examples:
             "description": "The request could not be completed due to a conflict with the current state of the resource.",
             "code": 409
           }
-  - name: 500 Response
+  - name: 409 Response (Create ACL with port ranges)
+    description: Conflict
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/accessControlLists"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "accessControlLists": [
+              {
+                "entries": [
+                  {
+                    "action": "permit",
+                    "dst": "192.168.2.0/24",
+                    "dstPortAction": "portRange",
+                    "dstPortRangeEnd": "4000",
+                    "dstPortRangeStart": "3000",
+                    "protocol": "tcp",
+                    "sequenceNumber": 10,
+                    "src": "192.168.1.0/24",
+                    "srcPortAction": "portRange",
+                    "srcPortRangeEnd": "2000",
+                    "srcPortRangeStart": "1000"
+                  },
+                  {
+                    "action": "deny",
+                    "dst": "192.168.4.0/24",
+                    "dstPort": "5000",
+                    "dstPortAction": "lessThan",
+                    "protocol": "udp",
+                    "sequenceNumber": 20,
+                    "src": "192.168.3.0/24",
+                    "srcPort": "1024",
+                    "srcPortAction": "greaterThan"
+                  }
+                ],
+                "name": "aclPortRange",
+                "type": "ipv4"
+              }
+            ]
+          }
+    response:
+      status: 409
+      statusText: Conflict
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Conflict",
+            "description": "The request could not be completed due to a conflict with the current state of the resource.",
+            "code": 409
+          }
+  - name: 409 Response (Create multiple ACLs)
+    description: Conflict
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/accessControlLists"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "accessControlLists": [
+              {
+                "entries": [
+                  {
+                    "action": "permit",
+                    "dst": "192.168.2.10",
+                    "dstPort": "ftp",
+                    "dstPortAction": "equalTo",
+                    "protocol": "tcp",
+                    "sequenceNumber": 10,
+                    "src": "192.168.1.10",
+                    "srcPort": "www",
+                    "srcPortAction": "equalTo"
+                  },
+                  {
+                    "action": "deny",
+                    "dst": "192.168.4.10",
+                    "protocol": "icmp",
+                    "sequenceNumber": 20,
+                    "src": "192.168.3.10"
+                  },
+                  {
+                    "action": "remark",
+                    "remarkComment": "Access control list entry for testing",
+                    "sequenceNumber": 30
+                  }
+                ],
+                "name": "acl1",
+                "type": "ipv4"
+              },
+              {
+                "entries": [
+                  {
+                    "action": "permit",
+                    "dst": "2001:db8::2",
+                    "dstPort": "ftp",
+                    "dstPortAction": "equalTo",
+                    "protocol": "tcp",
+                    "sequenceNumber": 10,
+                    "src": "2001:db8::1",
+                    "srcPort": "www",
+                    "srcPortAction": "equalTo"
+                  },
+                  {
+                    "action": "deny",
+                    "dst": "2001:db8::4",
+                    "protocol": "icmp",
+                    "sequenceNumber": 20,
+                    "src": "2001:db8::3"
+                  },
+                  {
+                    "action": "remark",
+                    "remarkComment": "IPv6 access control list entry for testing",
+                    "sequenceNumber": 30
+                  }
+                ],
+                "name": "acl2",
+                "type": "ipv6"
+              }
+            ]
+          }
+    response:
+      status: 409
+      statusText: Conflict
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Conflict",
+            "description": "The request could not be completed due to a conflict with the current state of the resource.",
+            "code": 409
+          }
+  - name: 409 Response (Create tenant-scoped ACLs)
+    description: Conflict
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/accessControlLists"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "accessControlLists": [
+              {
+                "entries": [
+                  {
+                    "action": "permit",
+                    "dst": "192.168.2.10",
+                    "dstPort": "ftp",
+                    "dstPortAction": "equalTo",
+                    "protocol": "tcp",
+                    "sequenceNumber": 10,
+                    "src": "192.168.1.10",
+                    "srcPort": "www",
+                    "srcPortAction": "equalTo"
+                  },
+                  {
+                    "action": "deny",
+                    "dst": "192.168.4.10",
+                    "protocol": "icmp",
+                    "sequenceNumber": 20,
+                    "src": "192.168.3.10"
+                  },
+                  {
+                    "action": "remark",
+                    "remarkComment": "Access control list entry for testing",
+                    "sequenceNumber": 30
+                  }
+                ],
+                "name": "tenant1~acl3",
+                "tenantName": "tenant1",
+                "type": "ipv4"
+              },
+              {
+                "entries": [
+                  {
+                    "action": "permit",
+                    "dst": "2001:db8::2",
+                    "dstPort": "ftp",
+                    "dstPortAction": "equalTo",
+                    "protocol": "tcp",
+                    "sequenceNumber": 10,
+                    "src": "2001:db8::1",
+                    "srcPort": "www",
+                    "srcPortAction": "equalTo"
+                  },
+                  {
+                    "action": "deny",
+                    "dst": "2001:db8::4",
+                    "protocol": "icmp",
+                    "sequenceNumber": 20,
+                    "src": "2001:db8::3"
+                  },
+                  {
+                    "action": "remark",
+                    "remarkComment": "IPv6 access control list entry for testing",
+                    "sequenceNumber": 30
+                  }
+                ],
+                "name": "tenant1~acl4",
+                "tenantName": "tenant1",
+                "type": "ipv6"
+              }
+            ]
+          }
+    response:
+      status: 409
+      statusText: Conflict
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Conflict",
+            "description": "The request could not be completed due to a conflict with the current state of the resource.",
+            "code": 409
+          }
+  - name: 500 Response (Create ACL with advanced options)
     description: Internal Server Error
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/accessControlLists"
@@ -283,10 +2142,306 @@ examples:
         data: |-
           {
             "accessControlLists": [
-              {}
+              {
+                "entries": [
+                  {
+                    "action": "permit",
+                    "dst": "192.168.2.0/24",
+                    "icmpOption": "echo",
+                    "protocol": "icmp",
+                    "sequenceNumber": 10,
+                    "src": "192.168.1.0/24"
+                  },
+                  {
+                    "action": "permit",
+                    "dst": "192.168.4.0/24",
+                    "protocol": "tcp",
+                    "sequenceNumber": 20,
+                    "src": "192.168.3.0/24",
+                    "tcpOption": "established"
+                  },
+                  {
+                    "action": "permit",
+                    "dst": "192.168.6.0/24",
+                    "dstPort": "53",
+                    "dstPortAction": "equalTo",
+                    "protocol": "udp",
+                    "sequenceNumber": 30,
+                    "src": "192.168.5.0/24",
+                    "srcPort": "1024",
+                    "srcPortAction": "greaterThan"
+                  },
+                  {
+                    "action": "deny",
+                    "dst": "any",
+                    "protocol": "ip",
+                    "sequenceNumber": 40,
+                    "src": "any"
+                  }
+                ],
+                "name": "aclAdvanced",
+                "type": "ipv4"
+              }
             ]
           }
     response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }
+  - name: 500 Response (Create ACL with port ranges)
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/accessControlLists"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "accessControlLists": [
+              {
+                "entries": [
+                  {
+                    "action": "permit",
+                    "dst": "192.168.2.0/24",
+                    "dstPortAction": "portRange",
+                    "dstPortRangeEnd": "4000",
+                    "dstPortRangeStart": "3000",
+                    "protocol": "tcp",
+                    "sequenceNumber": 10,
+                    "src": "192.168.1.0/24",
+                    "srcPortAction": "portRange",
+                    "srcPortRangeEnd": "2000",
+                    "srcPortRangeStart": "1000"
+                  },
+                  {
+                    "action": "deny",
+                    "dst": "192.168.4.0/24",
+                    "dstPort": "5000",
+                    "dstPortAction": "lessThan",
+                    "protocol": "udp",
+                    "sequenceNumber": 20,
+                    "src": "192.168.3.0/24",
+                    "srcPort": "1024",
+                    "srcPortAction": "greaterThan"
+                  }
+                ],
+                "name": "aclPortRange",
+                "type": "ipv4"
+              }
+            ]
+          }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }
+  - name: 500 Response (Create multiple ACLs)
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/accessControlLists"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "accessControlLists": [
+              {
+                "entries": [
+                  {
+                    "action": "permit",
+                    "dst": "192.168.2.10",
+                    "dstPort": "ftp",
+                    "dstPortAction": "equalTo",
+                    "protocol": "tcp",
+                    "sequenceNumber": 10,
+                    "src": "192.168.1.10",
+                    "srcPort": "www",
+                    "srcPortAction": "equalTo"
+                  },
+                  {
+                    "action": "deny",
+                    "dst": "192.168.4.10",
+                    "protocol": "icmp",
+                    "sequenceNumber": 20,
+                    "src": "192.168.3.10"
+                  },
+                  {
+                    "action": "remark",
+                    "remarkComment": "Access control list entry for testing",
+                    "sequenceNumber": 30
+                  }
+                ],
+                "name": "acl1",
+                "type": "ipv4"
+              },
+              {
+                "entries": [
+                  {
+                    "action": "permit",
+                    "dst": "2001:db8::2",
+                    "dstPort": "ftp",
+                    "dstPortAction": "equalTo",
+                    "protocol": "tcp",
+                    "sequenceNumber": 10,
+                    "src": "2001:db8::1",
+                    "srcPort": "www",
+                    "srcPortAction": "equalTo"
+                  },
+                  {
+                    "action": "deny",
+                    "dst": "2001:db8::4",
+                    "protocol": "icmp",
+                    "sequenceNumber": 20,
+                    "src": "2001:db8::3"
+                  },
+                  {
+                    "action": "remark",
+                    "remarkComment": "IPv6 access control list entry for testing",
+                    "sequenceNumber": 30
+                  }
+                ],
+                "name": "acl2",
+                "type": "ipv6"
+              }
+            ]
+          }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }
+  - name: 500 Response (Create tenant-scoped ACLs)
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/accessControlLists"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "accessControlLists": [
+              {
+                "entries": [
+                  {
+                    "action": "permit",
+                    "dst": "192.168.2.10",
+                    "dstPort": "ftp",
+                    "dstPortAction": "equalTo",
+                    "protocol": "tcp",
+                    "sequenceNumber": 10,
+                    "src": "192.168.1.10",
+                    "srcPort": "www",
+                    "srcPortAction": "equalTo"
+                  },
+                  {
+                    "action": "deny",
+                    "dst": "192.168.4.10",
+                    "protocol": "icmp",
+                    "sequenceNumber": 20,
+                    "src": "192.168.3.10"
+                  },
+                  {
+                    "action": "remark",
+                    "remarkComment": "Access control list entry for testing",
+                    "sequenceNumber": 30
+                  }
+                ],
+                "name": "tenant1~acl3",
+                "tenantName": "tenant1",
+                "type": "ipv4"
+              },
+              {
+                "entries": [
+                  {
+                    "action": "permit",
+                    "dst": "2001:db8::2",
+                    "dstPort": "ftp",
+                    "dstPortAction": "equalTo",
+                    "protocol": "tcp",
+                    "sequenceNumber": 10,
+                    "src": "2001:db8::1",
+                    "srcPort": "www",
+                    "srcPortAction": "equalTo"
+                  },
+                  {
+                    "action": "deny",
+                    "dst": "2001:db8::4",
+                    "protocol": "icmp",
+                    "sequenceNumber": 20,
+                    "src": "2001:db8::3"
+                  },
+                  {
+                    "action": "remark",
+                    "remarkComment": "IPv6 access control list entry for testing",
+                    "sequenceNumber": 30
+                  }
+                ],
+                "name": "tenant1~acl4",
+                "tenantName": "tenant1",
+                "type": "ipv6"
+              }
+            ]
+          }
+    response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

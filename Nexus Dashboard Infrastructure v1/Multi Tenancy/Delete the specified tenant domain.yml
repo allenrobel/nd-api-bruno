@@ -2,6 +2,8 @@ info:
   name: Delete the specified tenant domain
   type: http
   seq: 3
+  tags:
+    - Multi Tenancy
 
 http:
   method: DELETE
@@ -41,6 +43,7 @@ examples:
           type: path
           description: Name of the tenant domain
     response:
+      status: 204
       statusText: No Content
       body:
         type: text
@@ -61,6 +64,7 @@ examples:
           type: path
           description: Name of the tenant domain
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -89,6 +93,7 @@ examples:
           type: path
           description: Name of the tenant domain
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -117,6 +122,7 @@ examples:
           type: path
           description: Name of the tenant domain
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -145,6 +151,7 @@ examples:
           type: path
           description: Name of the tenant domain
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -173,6 +180,7 @@ examples:
           type: path
           description: Name of the tenant domain
     response:
+      status: 429
       statusText: Too Many Requests
       headers:
         - name: Content-Type
@@ -201,6 +209,7 @@ examples:
           type: path
           description: Name of the tenant domain
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

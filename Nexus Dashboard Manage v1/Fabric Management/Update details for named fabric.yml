@@ -2,6 +2,8 @@ info:
   name: Update details for named fabric
   type: http
   seq: 8
+  tags:
+    - Fabric Management
 
 http:
   method: PUT
@@ -18,7 +20,96 @@ http:
       description: Name of the fabric
   body:
     type: json
-    data: "{}"
+    data: |-
+      {
+        "category": "fabric",
+        "licenseTier": "essentials",
+        "location": {
+          "latitude": 37.33939,
+          "longitude": -121.89496
+        },
+        "management": {
+          "aaa": false,
+          "advancedSshOption": false,
+          "aimlQos": false,
+          "allowLeafSameAs": false,
+          "anycastLoopbackId": 10,
+          "assignIpv4ToLoopback0": false,
+          "autoGenerateMulticastGroupAddress": false,
+          "bfd": false,
+          "bfdAuthentication": false,
+          "bfdAuthenticationKeyId": 100,
+          "bfdIbgp": false,
+          "bgpAllowAsInNum": 1,
+          "bgpAsMode": "multiAS",
+          "bgpAsn": "33",
+          "bgpAuthentication": false,
+          "bgpLoopbackId": 0,
+          "bgpLoopbackIpRange": "10.2.0.0/22",
+          "bgpMaxPath": 4,
+          "bgpUnderlayFailureProtect": false,
+          "cdp": false,
+          "coppPolicy": "strict",
+          "day0Bootstrap": false,
+          "defaultQueuingPolicy": false,
+          "disableRouteMapTag": false,
+          "fabricMtu": 9216,
+          "fabricVpcDomainId": false,
+          "fabricVpcQos": false,
+          "fabricVpcQosPolicyName": "spine_qos_for_fabric_vpc_peering",
+          "firstHopRedundancyProtocol": "hsrp",
+          "greenfieldDebugFlag": "disable",
+          "heartbeatInterval": 190,
+          "interfaceStatisticsLoadInterval": 10,
+          "intraFabricSubnetRange": "10.4.0.0/16",
+          "l2HostInterfaceMtu": 9216,
+          "localDhcpServer": false,
+          "macsec": false,
+          "macsecReportTimer": 5,
+          "managementIpv4Prefix": 24,
+          "managementIpv6Prefix": 64,
+          "netflowSettings": {
+            "netflow": false
+          },
+          "networkVlanRange": "2300-2999",
+          "nxapi": true,
+          "nxapiHttp": true,
+          "nxapiHttpPort": 80,
+          "nxapiHttpsPort": 443,
+          "performanceMonitoring": false,
+          "powerRedundancyMode": "redundant",
+          "ptp": false,
+          "ptpDomainId": 0,
+          "ptpLoopbackId": 0,
+          "realTimeInterfaceStatisticsCollection": false,
+          "routeMapTag": 12345,
+          "sharedVpcDomainId": 1,
+          "snmpTrap": true,
+          "staticUnderlayIpAllocation": false,
+          "strictConfigComplianceMode": false,
+          "subInterfaceDot1qRange": "2-511",
+          "targetSubnetMask": 30,
+          "tcamAllocation": true,
+          "type": "routed",
+          "underlayIpv6": false,
+          "vpcAutoRecoveryTimer": 360,
+          "vpcDelayRestoreTimer": 150,
+          "vpcDomainIdRange": "1-1000",
+          "vpcIpv6NeighborDiscoverySync": true,
+          "vpcLayer3PeerRouter": true,
+          "vpcPeerKeepAliveOption": "management",
+          "vpcPeerLinkEnableNativeVlan": false,
+          "vpcPeerLinkPortChannelId": "500",
+          "vpcPeerLinkVlan": "3600",
+          "vrfLiteIpv6SubnetRange": "fd00::a33:0/112",
+          "vrfLiteIpv6SubnetTargetMask": 126,
+          "vrfLiteSubnetRange": "10.33.0.0/16",
+          "vrfLiteSubnetTargetMask": 30
+        },
+        "name": "rr1",
+        "securityDomain": "all",
+        "telemetryCollection": false
+      }
   auth: inherit
 
 settings:
@@ -135,6 +226,7 @@ examples:
             "telemetryCollection": false
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -339,6 +431,7 @@ examples:
             "telemetryCollection": false
           }
     response:
+      status: 202
       statusText: Accepted
       headers:
         - name: Content-Type
@@ -458,6 +551,7 @@ examples:
             "telemetryCollection": false
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -578,6 +672,7 @@ examples:
             "telemetryCollection": false
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -698,6 +793,7 @@ examples:
             "telemetryCollection": false
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -818,6 +914,7 @@ examples:
             "telemetryCollection": false
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -938,6 +1035,7 @@ examples:
             "telemetryCollection": false
           }
     response:
+      status: 405
       statusText: Method Not Allowed
       headers:
         - name: Content-Type
@@ -1058,6 +1156,7 @@ examples:
             "telemetryCollection": false
           }
     response:
+      status: 409
       statusText: Conflict
       headers:
         - name: Content-Type
@@ -1178,6 +1277,7 @@ examples:
             "telemetryCollection": false
           }
     response:
+      status: 412
       statusText: Precondition Failed
       headers:
         - name: Content-Type
@@ -1298,6 +1398,7 @@ examples:
             "telemetryCollection": false
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

@@ -1,0 +1,385 @@
+info:
+  name: Get policy change tree
+  type: http
+  seq: 15
+  tags:
+    - Compliance Conformance and Update Analysis
+
+http:
+  method: GET
+  url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/deltaAnalysis/policyChangeTree"
+  params:
+    - name: clusterName
+      value: ""
+      type: query
+      description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+      disabled: true
+    - name: jobId
+      value: ""
+      type: query
+      description: job id
+      disabled: true
+    - name: depth
+      value: "1"
+      type: query
+      description: Maximum depth of the tree to return. Default is 1.
+    - name: objectId
+      value: ""
+      type: query
+      description: Unique identifier of the object to fetch.
+      disabled: true
+    - name: nodeId
+      value: ""
+      type: query
+      description: Unique identifier of the policy change tree node to be fetched.
+      disabled: true
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: Example policy change tree response
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/deltaAnalysis/policyChangeTree"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: jobId
+          value: ""
+          type: query
+          description: job id
+          disabled: true
+        - name: depth
+          value: "1"
+          type: query
+          description: Maximum depth of the tree to return. Default is 1.
+        - name: objectId
+          value: ""
+          type: query
+          description: Unique identifier of the object to fetch.
+          disabled: true
+        - name: nodeId
+          value: ""
+          type: query
+          description: Unique identifier of the policy change tree node to be fetched.
+          disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "meta": {
+              "changeTreeDepth": 4,
+              "total": 1
+            },
+            "policyChangeTree": {
+              "changeCount": 117,
+              "changedChildren": [
+                {
+                  "changeCount": 110,
+                  "changedChildren": [
+                    {
+                      "changeCount": 60,
+                      "changeLineNumberEnd": 346,
+                      "changeLineNumberStart": 131,
+                      "changedChildrenCount": 60,
+                      "identifier": "uni/tn-infra",
+                      "name": "infra",
+                      "nodeStatus": "unchanged"
+                    },
+                    {
+                      "changeCount": 50,
+                      "changeLineNumberEnd": 856,
+                      "changeLineNumberStart": 757,
+                      "changedChildrenCount": 20,
+                      "identifier": "uni/tn-tenant1",
+                      "name": "tenant1",
+                      "namePrefix": "tn",
+                      "nodeStatus": "added"
+                    }
+                  ],
+                  "changedChildrenCount": 2,
+                  "name": "Tenants",
+                  "nodeId": "root/Tenants"
+                },
+                {
+                  "changeCount": 0,
+                  "changedChildrenCount": 0,
+                  "displayName": "Fabric",
+                  "name": "Fabric",
+                  "nodeId": "root/Fabric"
+                },
+                {
+                  "changeCount": 0,
+                  "changedChildrenCount": 0,
+                  "displayName": "L4 - L7 Services",
+                  "name": "L4L7Services",
+                  "nodeId": "root/L4L7Services"
+                },
+                {
+                  "changeCount": 0,
+                  "changedChildrenCount": 0,
+                  "displayName": "VM Networking",
+                  "name": "VMNetworking",
+                  "nodeId": "root/VMNetworking"
+                },
+                {
+                  "changeCount": 7,
+                  "changedChildren": [
+                    {
+                      "changeCount": 5,
+                      "changedChildrenCount": 1,
+                      "name": "Admin",
+                      "nodeId": "root/Other/Admin"
+                    },
+                    {
+                      "changeCount": 2,
+                      "changedChildrenCount": 1,
+                      "name": "System",
+                      "nodeId": "root/Other/System"
+                    }
+                  ],
+                  "changedChildrenCount": 2,
+                  "displayName": "Other",
+                  "name": "Other",
+                  "nodeId": "root/Other"
+                }
+              ],
+              "changedChildrenCount": 5,
+              "name": "root",
+              "nodeId": "root"
+            }
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/deltaAnalysis/policyChangeTree"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: jobId
+          value: ""
+          type: query
+          description: job id
+          disabled: true
+        - name: depth
+          value: "1"
+          type: query
+          description: Maximum depth of the tree to return. Default is 1.
+        - name: objectId
+          value: ""
+          type: query
+          description: Unique identifier of the object to fetch.
+          disabled: true
+        - name: nodeId
+          value: ""
+          type: query
+          description: Unique identifier of the policy change tree node to be fetched.
+          disabled: true
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/deltaAnalysis/policyChangeTree"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: jobId
+          value: ""
+          type: query
+          description: job id
+          disabled: true
+        - name: depth
+          value: "1"
+          type: query
+          description: Maximum depth of the tree to return. Default is 1.
+        - name: objectId
+          value: ""
+          type: query
+          description: Unique identifier of the object to fetch.
+          disabled: true
+        - name: nodeId
+          value: ""
+          type: query
+          description: Unique identifier of the policy change tree node to be fetched.
+          disabled: true
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 403 Response
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/deltaAnalysis/policyChangeTree"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: jobId
+          value: ""
+          type: query
+          description: job id
+          disabled: true
+        - name: depth
+          value: "1"
+          type: query
+          description: Maximum depth of the tree to return. Default is 1.
+        - name: objectId
+          value: ""
+          type: query
+          description: Unique identifier of the object to fetch.
+          disabled: true
+        - name: nodeId
+          value: ""
+          type: query
+          description: Unique identifier of the policy change tree node to be fetched.
+          disabled: true
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 404 Response
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/deltaAnalysis/policyChangeTree"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: jobId
+          value: ""
+          type: query
+          description: job id
+          disabled: true
+        - name: depth
+          value: "1"
+          type: query
+          description: Maximum depth of the tree to return. Default is 1.
+        - name: objectId
+          value: ""
+          type: query
+          description: Unique identifier of the object to fetch.
+          disabled: true
+        - name: nodeId
+          value: ""
+          type: query
+          description: Unique identifier of the policy change tree node to be fetched.
+          disabled: true
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 500 Response
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/deltaAnalysis/policyChangeTree"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: jobId
+          value: ""
+          type: query
+          description: job id
+          disabled: true
+        - name: depth
+          value: "1"
+          type: query
+          description: Maximum depth of the tree to return. Default is 1.
+        - name: objectId
+          value: ""
+          type: query
+          description: Unique identifier of the object to fetch.
+          disabled: true
+        - name: nodeId
+          value: ""
+          type: query
+          description: Unique identifier of the policy change tree node to be fetched.
+          disabled: true
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }

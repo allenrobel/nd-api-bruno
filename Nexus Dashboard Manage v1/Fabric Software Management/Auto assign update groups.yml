@@ -1,7 +1,9 @@
 info:
   name: Auto assign update groups
   type: http
-  seq: 19
+  seq: 15
+  tags:
+    - Fabric Software Management
 
 http:
   method: POST
@@ -20,7 +22,7 @@ http:
     type: json
     data: |-
       {
-        "algorithm": ""
+        "algorithm": "roleBased"
       }
   auth: inherit
 
@@ -53,6 +55,7 @@ examples:
             "algorithm": "roleBased"
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -269,6 +272,7 @@ examples:
             "algorithm": "roleBased"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -303,6 +307,7 @@ examples:
             "algorithm": "roleBased"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -337,6 +342,7 @@ examples:
             "algorithm": "roleBased"
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -371,6 +377,7 @@ examples:
             "algorithm": "roleBased"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

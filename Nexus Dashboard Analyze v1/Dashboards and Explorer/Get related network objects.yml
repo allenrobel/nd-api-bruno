@@ -1,0 +1,597 @@
+info:
+  name: Get related network objects
+  type: http
+  seq: 17
+  tags:
+    - Dashboards and Explorer
+
+http:
+  method: GET
+  url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/explorer/whatDetails"
+  params:
+    - name: queryString
+      value: ""
+      type: query
+      description: What query string to search for network objects
+    - name: snapshotId
+      value: ""
+      type: query
+      description: Identifier of the snapshot to query against
+    - name: relatedObjectType
+      value: endpoint
+      type: query
+      description: Type of the related network objects to retrieve (e.g., endpoint, interface, bridgeDomain)
+    - name: relatedObjectType
+      value: interface
+      type: query
+      description: Type of the related network objects to retrieve (e.g., endpoint, interface, bridgeDomain)
+      disabled: true
+    - name: relatedObjectType
+      value: switch
+      type: query
+      description: Type of the related network objects to retrieve (e.g., endpoint, interface, bridgeDomain)
+      disabled: true
+    - name: relatedObjectType
+      value: bridgeDomain
+      type: query
+      description: Type of the related network objects to retrieve (e.g., endpoint, interface, bridgeDomain)
+      disabled: true
+    - name: relatedObjectType
+      value: epg
+      type: query
+      description: Type of the related network objects to retrieve (e.g., endpoint, interface, bridgeDomain)
+      disabled: true
+    - name: relatedObjectType
+      value: vrf
+      type: query
+      description: Type of the related network objects to retrieve (e.g., endpoint, interface, bridgeDomain)
+      disabled: true
+    - name: relatedObjectType
+      value: encap
+      type: query
+      description: Type of the related network objects to retrieve (e.g., endpoint, interface, bridgeDomain)
+      disabled: true
+    - name: relatedObjectType
+      value: vlan
+      type: query
+      description: Type of the related network objects to retrieve (e.g., endpoint, interface, bridgeDomain)
+      disabled: true
+    - name: relatedObjectType
+      value: l2vni
+      type: query
+      description: Type of the related network objects to retrieve (e.g., endpoint, interface, bridgeDomain)
+      disabled: true
+    - name: relatedObjectType
+      value: l3vni
+      type: query
+      description: Type of the related network objects to retrieve (e.g., endpoint, interface, bridgeDomain)
+      disabled: true
+    - name: srcObjectIdentifier
+      value: ""
+      type: query
+      description: Unique identifier for the source network object to find related objects for
+    - name: clusterName
+      value: ""
+      type: query
+      description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+      disabled: true
+    - name: offset
+      value: ""
+      type: query
+      description: Number of records to skip for pagination
+      disabled: true
+    - name: max
+      value: ""
+      type: query
+      description: Number of records to return
+      disabled: true
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: endpoint
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/explorer/whatDetails"
+      method: GET
+      params:
+        - name: queryString
+          value: ""
+          type: query
+          description: What query string to search for network objects
+        - name: snapshotId
+          value: ""
+          type: query
+          description: Identifier of the snapshot to query against
+        - name: relatedObjectType
+          value: endpoint
+          type: query
+          description: Type of the related network objects to retrieve (e.g., endpoint, interface, bridgeDomain)
+        - name: relatedObjectType
+          value: interface
+          type: query
+          description: Type of the related network objects to retrieve (e.g., endpoint, interface, bridgeDomain)
+          disabled: true
+        - name: relatedObjectType
+          value: switch
+          type: query
+          description: Type of the related network objects to retrieve (e.g., endpoint, interface, bridgeDomain)
+          disabled: true
+        - name: relatedObjectType
+          value: bridgeDomain
+          type: query
+          description: Type of the related network objects to retrieve (e.g., endpoint, interface, bridgeDomain)
+          disabled: true
+        - name: relatedObjectType
+          value: epg
+          type: query
+          description: Type of the related network objects to retrieve (e.g., endpoint, interface, bridgeDomain)
+          disabled: true
+        - name: relatedObjectType
+          value: vrf
+          type: query
+          description: Type of the related network objects to retrieve (e.g., endpoint, interface, bridgeDomain)
+          disabled: true
+        - name: relatedObjectType
+          value: encap
+          type: query
+          description: Type of the related network objects to retrieve (e.g., endpoint, interface, bridgeDomain)
+          disabled: true
+        - name: relatedObjectType
+          value: vlan
+          type: query
+          description: Type of the related network objects to retrieve (e.g., endpoint, interface, bridgeDomain)
+          disabled: true
+        - name: relatedObjectType
+          value: l2vni
+          type: query
+          description: Type of the related network objects to retrieve (e.g., endpoint, interface, bridgeDomain)
+          disabled: true
+        - name: relatedObjectType
+          value: l3vni
+          type: query
+          description: Type of the related network objects to retrieve (e.g., endpoint, interface, bridgeDomain)
+          disabled: true
+        - name: srcObjectIdentifier
+          value: ""
+          type: query
+          description: Unique identifier for the source network object to find related objects for
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "meta": {
+              "remaining": 10,
+              "total": 22
+            },
+            "objects": [
+              {
+                "encap": {
+                  "identifier": "vlan-50|topology/pod-1/paths-101/pathep-[101_pc11]",
+                  "interface": {
+                    "identifier": "topology/pod-1/paths-101/pathep-[101_pc11]",
+                    "name": "101_pc11",
+                    "switchNames": "101",
+                    "type": "interface"
+                  },
+                  "name": "vlan-50",
+                  "objectType": "encap"
+                },
+                "identifier": "1.1.1.100/32|00:00:DC:CD:BC:01",
+                "ip": "1.1.1.100/32",
+                "mac": "00:00:DC:CD:BC:01",
+                "name": "1.1.1.100/32",
+                "objectType": "endpoint",
+                "type": "endpoint"
+              }
+            ]
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/explorer/whatDetails"
+      method: GET
+      params:
+        - name: queryString
+          value: ""
+          type: query
+          description: What query string to search for network objects
+        - name: snapshotId
+          value: ""
+          type: query
+          description: Identifier of the snapshot to query against
+        - name: relatedObjectType
+          value: endpoint
+          type: query
+          description: Type of the related network objects to retrieve (e.g., endpoint, interface, bridgeDomain)
+        - name: relatedObjectType
+          value: interface
+          type: query
+          description: Type of the related network objects to retrieve (e.g., endpoint, interface, bridgeDomain)
+          disabled: true
+        - name: relatedObjectType
+          value: switch
+          type: query
+          description: Type of the related network objects to retrieve (e.g., endpoint, interface, bridgeDomain)
+          disabled: true
+        - name: relatedObjectType
+          value: bridgeDomain
+          type: query
+          description: Type of the related network objects to retrieve (e.g., endpoint, interface, bridgeDomain)
+          disabled: true
+        - name: relatedObjectType
+          value: epg
+          type: query
+          description: Type of the related network objects to retrieve (e.g., endpoint, interface, bridgeDomain)
+          disabled: true
+        - name: relatedObjectType
+          value: vrf
+          type: query
+          description: Type of the related network objects to retrieve (e.g., endpoint, interface, bridgeDomain)
+          disabled: true
+        - name: relatedObjectType
+          value: encap
+          type: query
+          description: Type of the related network objects to retrieve (e.g., endpoint, interface, bridgeDomain)
+          disabled: true
+        - name: relatedObjectType
+          value: vlan
+          type: query
+          description: Type of the related network objects to retrieve (e.g., endpoint, interface, bridgeDomain)
+          disabled: true
+        - name: relatedObjectType
+          value: l2vni
+          type: query
+          description: Type of the related network objects to retrieve (e.g., endpoint, interface, bridgeDomain)
+          disabled: true
+        - name: relatedObjectType
+          value: l3vni
+          type: query
+          description: Type of the related network objects to retrieve (e.g., endpoint, interface, bridgeDomain)
+          disabled: true
+        - name: srcObjectIdentifier
+          value: ""
+          type: query
+          description: Unique identifier for the source network object to find related objects for
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/explorer/whatDetails"
+      method: GET
+      params:
+        - name: queryString
+          value: ""
+          type: query
+          description: What query string to search for network objects
+        - name: snapshotId
+          value: ""
+          type: query
+          description: Identifier of the snapshot to query against
+        - name: relatedObjectType
+          value: endpoint
+          type: query
+          description: Type of the related network objects to retrieve (e.g., endpoint, interface, bridgeDomain)
+        - name: relatedObjectType
+          value: interface
+          type: query
+          description: Type of the related network objects to retrieve (e.g., endpoint, interface, bridgeDomain)
+          disabled: true
+        - name: relatedObjectType
+          value: switch
+          type: query
+          description: Type of the related network objects to retrieve (e.g., endpoint, interface, bridgeDomain)
+          disabled: true
+        - name: relatedObjectType
+          value: bridgeDomain
+          type: query
+          description: Type of the related network objects to retrieve (e.g., endpoint, interface, bridgeDomain)
+          disabled: true
+        - name: relatedObjectType
+          value: epg
+          type: query
+          description: Type of the related network objects to retrieve (e.g., endpoint, interface, bridgeDomain)
+          disabled: true
+        - name: relatedObjectType
+          value: vrf
+          type: query
+          description: Type of the related network objects to retrieve (e.g., endpoint, interface, bridgeDomain)
+          disabled: true
+        - name: relatedObjectType
+          value: encap
+          type: query
+          description: Type of the related network objects to retrieve (e.g., endpoint, interface, bridgeDomain)
+          disabled: true
+        - name: relatedObjectType
+          value: vlan
+          type: query
+          description: Type of the related network objects to retrieve (e.g., endpoint, interface, bridgeDomain)
+          disabled: true
+        - name: relatedObjectType
+          value: l2vni
+          type: query
+          description: Type of the related network objects to retrieve (e.g., endpoint, interface, bridgeDomain)
+          disabled: true
+        - name: relatedObjectType
+          value: l3vni
+          type: query
+          description: Type of the related network objects to retrieve (e.g., endpoint, interface, bridgeDomain)
+          disabled: true
+        - name: srcObjectIdentifier
+          value: ""
+          type: query
+          description: Unique identifier for the source network object to find related objects for
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 403 Response
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/explorer/whatDetails"
+      method: GET
+      params:
+        - name: queryString
+          value: ""
+          type: query
+          description: What query string to search for network objects
+        - name: snapshotId
+          value: ""
+          type: query
+          description: Identifier of the snapshot to query against
+        - name: relatedObjectType
+          value: endpoint
+          type: query
+          description: Type of the related network objects to retrieve (e.g., endpoint, interface, bridgeDomain)
+        - name: relatedObjectType
+          value: interface
+          type: query
+          description: Type of the related network objects to retrieve (e.g., endpoint, interface, bridgeDomain)
+          disabled: true
+        - name: relatedObjectType
+          value: switch
+          type: query
+          description: Type of the related network objects to retrieve (e.g., endpoint, interface, bridgeDomain)
+          disabled: true
+        - name: relatedObjectType
+          value: bridgeDomain
+          type: query
+          description: Type of the related network objects to retrieve (e.g., endpoint, interface, bridgeDomain)
+          disabled: true
+        - name: relatedObjectType
+          value: epg
+          type: query
+          description: Type of the related network objects to retrieve (e.g., endpoint, interface, bridgeDomain)
+          disabled: true
+        - name: relatedObjectType
+          value: vrf
+          type: query
+          description: Type of the related network objects to retrieve (e.g., endpoint, interface, bridgeDomain)
+          disabled: true
+        - name: relatedObjectType
+          value: encap
+          type: query
+          description: Type of the related network objects to retrieve (e.g., endpoint, interface, bridgeDomain)
+          disabled: true
+        - name: relatedObjectType
+          value: vlan
+          type: query
+          description: Type of the related network objects to retrieve (e.g., endpoint, interface, bridgeDomain)
+          disabled: true
+        - name: relatedObjectType
+          value: l2vni
+          type: query
+          description: Type of the related network objects to retrieve (e.g., endpoint, interface, bridgeDomain)
+          disabled: true
+        - name: relatedObjectType
+          value: l3vni
+          type: query
+          description: Type of the related network objects to retrieve (e.g., endpoint, interface, bridgeDomain)
+          disabled: true
+        - name: srcObjectIdentifier
+          value: ""
+          type: query
+          description: Unique identifier for the source network object to find related objects for
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 500 Response
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/explorer/whatDetails"
+      method: GET
+      params:
+        - name: queryString
+          value: ""
+          type: query
+          description: What query string to search for network objects
+        - name: snapshotId
+          value: ""
+          type: query
+          description: Identifier of the snapshot to query against
+        - name: relatedObjectType
+          value: endpoint
+          type: query
+          description: Type of the related network objects to retrieve (e.g., endpoint, interface, bridgeDomain)
+        - name: relatedObjectType
+          value: interface
+          type: query
+          description: Type of the related network objects to retrieve (e.g., endpoint, interface, bridgeDomain)
+          disabled: true
+        - name: relatedObjectType
+          value: switch
+          type: query
+          description: Type of the related network objects to retrieve (e.g., endpoint, interface, bridgeDomain)
+          disabled: true
+        - name: relatedObjectType
+          value: bridgeDomain
+          type: query
+          description: Type of the related network objects to retrieve (e.g., endpoint, interface, bridgeDomain)
+          disabled: true
+        - name: relatedObjectType
+          value: epg
+          type: query
+          description: Type of the related network objects to retrieve (e.g., endpoint, interface, bridgeDomain)
+          disabled: true
+        - name: relatedObjectType
+          value: vrf
+          type: query
+          description: Type of the related network objects to retrieve (e.g., endpoint, interface, bridgeDomain)
+          disabled: true
+        - name: relatedObjectType
+          value: encap
+          type: query
+          description: Type of the related network objects to retrieve (e.g., endpoint, interface, bridgeDomain)
+          disabled: true
+        - name: relatedObjectType
+          value: vlan
+          type: query
+          description: Type of the related network objects to retrieve (e.g., endpoint, interface, bridgeDomain)
+          disabled: true
+        - name: relatedObjectType
+          value: l2vni
+          type: query
+          description: Type of the related network objects to retrieve (e.g., endpoint, interface, bridgeDomain)
+          disabled: true
+        - name: relatedObjectType
+          value: l3vni
+          type: query
+          description: Type of the related network objects to retrieve (e.g., endpoint, interface, bridgeDomain)
+          disabled: true
+        - name: srcObjectIdentifier
+          value: ""
+          type: query
+          description: Unique identifier for the source network object to find related objects for
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }

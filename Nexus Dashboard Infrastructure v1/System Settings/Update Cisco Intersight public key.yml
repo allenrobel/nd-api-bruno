@@ -2,6 +2,8 @@ info:
   name: Update Cisco Intersight public key
   type: http
   seq: 10
+  tags:
+    - System Settings
 
 http:
   method: POST
@@ -16,7 +18,7 @@ http:
     type: json
     data: |-
       {
-        "intersightKey": ""
+        "intersightKey": "public_key_value"
       }
   auth: inherit
 
@@ -45,6 +47,7 @@ examples:
             "intersightKey": "public_key_value"
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -74,6 +77,7 @@ examples:
             "intersightKey": "public_key_value"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -104,6 +108,7 @@ examples:
             "intersightKey": "public_key_value"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -134,6 +139,7 @@ examples:
             "intersightKey": "public_key_value"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -164,6 +170,7 @@ examples:
             "intersightKey": "public_key_value"
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -194,6 +201,7 @@ examples:
             "intersightKey": "public_key_value"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

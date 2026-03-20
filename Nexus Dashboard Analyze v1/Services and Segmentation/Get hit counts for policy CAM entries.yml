@@ -1,0 +1,998 @@
+info:
+  name: Get hit counts for policy CAM entries
+  type: http
+  seq: 7
+  tags:
+    - Services and Segmentation
+
+http:
+  method: GET
+  url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/policyCam/hitCounts"
+  params:
+    - name: fabricName
+      value: ""
+      type: query
+      description: Name of the fabric
+    - name: groupBy
+      value: tenant
+      type: query
+      description: Criteria to group the hit counts by
+    - name: groupBy
+      value: securityGroup
+      type: query
+      description: Criteria to group the hit counts by
+      disabled: true
+    - name: groupBy
+      value: contract
+      type: query
+      description: Criteria to group the hit counts by
+      disabled: true
+    - name: groupBy
+      value: filter
+      type: query
+      description: Criteria to group the hit counts by
+      disabled: true
+    - name: groupBy
+      value: switch
+      type: query
+      description: Criteria to group the hit counts by
+      disabled: true
+    - name: clusterName
+      value: ""
+      type: query
+      description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+      disabled: true
+    - name: filter
+      value: ""
+      type: query
+      description: Lucene format filter - Filter the response based on this filter field
+      disabled: true
+    - name: securityGroupType
+      value: EPG
+      type: query
+      description: Type of security group (EPG or ESG)
+      disabled: true
+    - name: securityGroupType
+      value: ESG
+      type: query
+      description: Type of security group (EPG or ESG)
+      disabled: true
+    - name: collectionTimestamp
+      value: ""
+      type: query
+      description: Timestamp when the data was collected from the switch
+      disabled: true
+    - name: tenant
+      value: ""
+      type: query
+      description: Filter by  source or destination tenant name
+      disabled: true
+    - name: srcTenant
+      value: ""
+      type: query
+      description: Filter by source tenant name
+      disabled: true
+    - name: dstTenant
+      value: ""
+      type: query
+      description: Filter by destination tenant name
+      disabled: true
+    - name: securityGroupId
+      value: ""
+      type: query
+      description: Filter by source  or destination security group identifier
+      disabled: true
+    - name: srcSecurityGroupId
+      value: ""
+      type: query
+      description: Filter by source security group identifier
+      disabled: true
+    - name: dstSecurityGroupId
+      value: ""
+      type: query
+      description: Filter by destination security group identifier
+      disabled: true
+    - name: contractId
+      value: ""
+      type: query
+      description: Filter by contract identifier
+      disabled: true
+    - name: filterId
+      value: ""
+      type: query
+      description: Filter by filter identifier
+      disabled: true
+    - name: switchId
+      value: ""
+      type: query
+      description: Serial Number or Id of the switch/leaf
+      disabled: true
+    - name: offset
+      value: ""
+      type: query
+      description: Number of records to skip for pagination
+      disabled: true
+    - name: max
+      value: ""
+      type: query
+      description: Number of records to return
+      disabled: true
+    - name: sort
+      value: ""
+      type: query
+      description: |
+        Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+        Ascending order by default: "field1"
+        Specific order for one field: "field1:asc" or "field1:desc"
+        Specific order with multiple fields: "field1:asc,field2:desc"
+      disabled: true
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: groupBySecurityGroupContractFilter
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/policyCam/hitCounts"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: groupBy
+          value: tenant
+          type: query
+          description: Criteria to group the hit counts by
+        - name: groupBy
+          value: securityGroup
+          type: query
+          description: Criteria to group the hit counts by
+          disabled: true
+        - name: groupBy
+          value: contract
+          type: query
+          description: Criteria to group the hit counts by
+          disabled: true
+        - name: groupBy
+          value: filter
+          type: query
+          description: Criteria to group the hit counts by
+          disabled: true
+        - name: groupBy
+          value: switch
+          type: query
+          description: Criteria to group the hit counts by
+          disabled: true
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
+        - name: securityGroupType
+          value: EPG
+          type: query
+          description: Type of security group (EPG or ESG)
+          disabled: true
+        - name: securityGroupType
+          value: ESG
+          type: query
+          description: Type of security group (EPG or ESG)
+          disabled: true
+        - name: collectionTimestamp
+          value: ""
+          type: query
+          description: Timestamp when the data was collected from the switch
+          disabled: true
+        - name: tenant
+          value: ""
+          type: query
+          description: Filter by  source or destination tenant name
+          disabled: true
+        - name: srcTenant
+          value: ""
+          type: query
+          description: Filter by source tenant name
+          disabled: true
+        - name: dstTenant
+          value: ""
+          type: query
+          description: Filter by destination tenant name
+          disabled: true
+        - name: securityGroupId
+          value: ""
+          type: query
+          description: Filter by source  or destination security group identifier
+          disabled: true
+        - name: srcSecurityGroupId
+          value: ""
+          type: query
+          description: Filter by source security group identifier
+          disabled: true
+        - name: dstSecurityGroupId
+          value: ""
+          type: query
+          description: Filter by destination security group identifier
+          disabled: true
+        - name: contractId
+          value: ""
+          type: query
+          description: Filter by contract identifier
+          disabled: true
+        - name: filterId
+          value: ""
+          type: query
+          description: Filter by filter identifier
+          disabled: true
+        - name: switchId
+          value: ""
+          type: query
+          description: Serial Number or Id of the switch/leaf
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
+          disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "hits": [
+              {
+                "action": "permit",
+                "contract": {
+                  "identifier": "uni/tn-Prod/brc-WebToDb",
+                  "name": "WebToDb",
+                  "tenantName": "Prod"
+                },
+                "cumulativeHitCount": 1000000,
+                "destination": {
+                  "securityGroupIdentifier": "uni/tn-Prod/ap-App1/epg-DB",
+                  "securityGroupName": "DB",
+                  "securityGroupType": "EPG",
+                  "tenantIdentifier": "uni/tn-Prod",
+                  "tenantName": "Prod",
+                  "vrf": "Prod-VRF",
+                  "vrfTenantName": "Prod"
+                },
+                "filter": {
+                  "identifier": "uni/tn-Prod/flt-SQL",
+                  "name": "SQL",
+                  "tenantName": "Prod"
+                },
+                "hitCountLast2Hours": 10000,
+                "hitCountLastDay": 50000,
+                "hitCountLastMonth": 900000,
+                "hitCountLastWeek": 250000,
+                "source": {
+                  "securityGroupIdentifier": "uni/tn-Prod/ap-App1/epg-Web",
+                  "securityGroupName": "Web",
+                  "securityGroupType": "EPG",
+                  "tenantIdentifier": "uni/tn-Prod",
+                  "tenantName": "Prod",
+                  "vrf": "Prod-VRF",
+                  "vrfTenantName": "Prod"
+                },
+                "tcamEntryCount": 4
+              }
+            ],
+            "meta": {
+              "remaining": 0,
+              "total": 100
+            }
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/policyCam/hitCounts"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: groupBy
+          value: tenant
+          type: query
+          description: Criteria to group the hit counts by
+        - name: groupBy
+          value: securityGroup
+          type: query
+          description: Criteria to group the hit counts by
+          disabled: true
+        - name: groupBy
+          value: contract
+          type: query
+          description: Criteria to group the hit counts by
+          disabled: true
+        - name: groupBy
+          value: filter
+          type: query
+          description: Criteria to group the hit counts by
+          disabled: true
+        - name: groupBy
+          value: switch
+          type: query
+          description: Criteria to group the hit counts by
+          disabled: true
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
+        - name: securityGroupType
+          value: EPG
+          type: query
+          description: Type of security group (EPG or ESG)
+          disabled: true
+        - name: securityGroupType
+          value: ESG
+          type: query
+          description: Type of security group (EPG or ESG)
+          disabled: true
+        - name: collectionTimestamp
+          value: ""
+          type: query
+          description: Timestamp when the data was collected from the switch
+          disabled: true
+        - name: tenant
+          value: ""
+          type: query
+          description: Filter by  source or destination tenant name
+          disabled: true
+        - name: srcTenant
+          value: ""
+          type: query
+          description: Filter by source tenant name
+          disabled: true
+        - name: dstTenant
+          value: ""
+          type: query
+          description: Filter by destination tenant name
+          disabled: true
+        - name: securityGroupId
+          value: ""
+          type: query
+          description: Filter by source  or destination security group identifier
+          disabled: true
+        - name: srcSecurityGroupId
+          value: ""
+          type: query
+          description: Filter by source security group identifier
+          disabled: true
+        - name: dstSecurityGroupId
+          value: ""
+          type: query
+          description: Filter by destination security group identifier
+          disabled: true
+        - name: contractId
+          value: ""
+          type: query
+          description: Filter by contract identifier
+          disabled: true
+        - name: filterId
+          value: ""
+          type: query
+          description: Filter by filter identifier
+          disabled: true
+        - name: switchId
+          value: ""
+          type: query
+          description: Serial Number or Id of the switch/leaf
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
+          disabled: true
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/policyCam/hitCounts"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: groupBy
+          value: tenant
+          type: query
+          description: Criteria to group the hit counts by
+        - name: groupBy
+          value: securityGroup
+          type: query
+          description: Criteria to group the hit counts by
+          disabled: true
+        - name: groupBy
+          value: contract
+          type: query
+          description: Criteria to group the hit counts by
+          disabled: true
+        - name: groupBy
+          value: filter
+          type: query
+          description: Criteria to group the hit counts by
+          disabled: true
+        - name: groupBy
+          value: switch
+          type: query
+          description: Criteria to group the hit counts by
+          disabled: true
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
+        - name: securityGroupType
+          value: EPG
+          type: query
+          description: Type of security group (EPG or ESG)
+          disabled: true
+        - name: securityGroupType
+          value: ESG
+          type: query
+          description: Type of security group (EPG or ESG)
+          disabled: true
+        - name: collectionTimestamp
+          value: ""
+          type: query
+          description: Timestamp when the data was collected from the switch
+          disabled: true
+        - name: tenant
+          value: ""
+          type: query
+          description: Filter by  source or destination tenant name
+          disabled: true
+        - name: srcTenant
+          value: ""
+          type: query
+          description: Filter by source tenant name
+          disabled: true
+        - name: dstTenant
+          value: ""
+          type: query
+          description: Filter by destination tenant name
+          disabled: true
+        - name: securityGroupId
+          value: ""
+          type: query
+          description: Filter by source  or destination security group identifier
+          disabled: true
+        - name: srcSecurityGroupId
+          value: ""
+          type: query
+          description: Filter by source security group identifier
+          disabled: true
+        - name: dstSecurityGroupId
+          value: ""
+          type: query
+          description: Filter by destination security group identifier
+          disabled: true
+        - name: contractId
+          value: ""
+          type: query
+          description: Filter by contract identifier
+          disabled: true
+        - name: filterId
+          value: ""
+          type: query
+          description: Filter by filter identifier
+          disabled: true
+        - name: switchId
+          value: ""
+          type: query
+          description: Serial Number or Id of the switch/leaf
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
+          disabled: true
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 403 Response
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/policyCam/hitCounts"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: groupBy
+          value: tenant
+          type: query
+          description: Criteria to group the hit counts by
+        - name: groupBy
+          value: securityGroup
+          type: query
+          description: Criteria to group the hit counts by
+          disabled: true
+        - name: groupBy
+          value: contract
+          type: query
+          description: Criteria to group the hit counts by
+          disabled: true
+        - name: groupBy
+          value: filter
+          type: query
+          description: Criteria to group the hit counts by
+          disabled: true
+        - name: groupBy
+          value: switch
+          type: query
+          description: Criteria to group the hit counts by
+          disabled: true
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
+        - name: securityGroupType
+          value: EPG
+          type: query
+          description: Type of security group (EPG or ESG)
+          disabled: true
+        - name: securityGroupType
+          value: ESG
+          type: query
+          description: Type of security group (EPG or ESG)
+          disabled: true
+        - name: collectionTimestamp
+          value: ""
+          type: query
+          description: Timestamp when the data was collected from the switch
+          disabled: true
+        - name: tenant
+          value: ""
+          type: query
+          description: Filter by  source or destination tenant name
+          disabled: true
+        - name: srcTenant
+          value: ""
+          type: query
+          description: Filter by source tenant name
+          disabled: true
+        - name: dstTenant
+          value: ""
+          type: query
+          description: Filter by destination tenant name
+          disabled: true
+        - name: securityGroupId
+          value: ""
+          type: query
+          description: Filter by source  or destination security group identifier
+          disabled: true
+        - name: srcSecurityGroupId
+          value: ""
+          type: query
+          description: Filter by source security group identifier
+          disabled: true
+        - name: dstSecurityGroupId
+          value: ""
+          type: query
+          description: Filter by destination security group identifier
+          disabled: true
+        - name: contractId
+          value: ""
+          type: query
+          description: Filter by contract identifier
+          disabled: true
+        - name: filterId
+          value: ""
+          type: query
+          description: Filter by filter identifier
+          disabled: true
+        - name: switchId
+          value: ""
+          type: query
+          description: Serial Number or Id of the switch/leaf
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
+          disabled: true
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 404 Response
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/policyCam/hitCounts"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: groupBy
+          value: tenant
+          type: query
+          description: Criteria to group the hit counts by
+        - name: groupBy
+          value: securityGroup
+          type: query
+          description: Criteria to group the hit counts by
+          disabled: true
+        - name: groupBy
+          value: contract
+          type: query
+          description: Criteria to group the hit counts by
+          disabled: true
+        - name: groupBy
+          value: filter
+          type: query
+          description: Criteria to group the hit counts by
+          disabled: true
+        - name: groupBy
+          value: switch
+          type: query
+          description: Criteria to group the hit counts by
+          disabled: true
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
+        - name: securityGroupType
+          value: EPG
+          type: query
+          description: Type of security group (EPG or ESG)
+          disabled: true
+        - name: securityGroupType
+          value: ESG
+          type: query
+          description: Type of security group (EPG or ESG)
+          disabled: true
+        - name: collectionTimestamp
+          value: ""
+          type: query
+          description: Timestamp when the data was collected from the switch
+          disabled: true
+        - name: tenant
+          value: ""
+          type: query
+          description: Filter by  source or destination tenant name
+          disabled: true
+        - name: srcTenant
+          value: ""
+          type: query
+          description: Filter by source tenant name
+          disabled: true
+        - name: dstTenant
+          value: ""
+          type: query
+          description: Filter by destination tenant name
+          disabled: true
+        - name: securityGroupId
+          value: ""
+          type: query
+          description: Filter by source  or destination security group identifier
+          disabled: true
+        - name: srcSecurityGroupId
+          value: ""
+          type: query
+          description: Filter by source security group identifier
+          disabled: true
+        - name: dstSecurityGroupId
+          value: ""
+          type: query
+          description: Filter by destination security group identifier
+          disabled: true
+        - name: contractId
+          value: ""
+          type: query
+          description: Filter by contract identifier
+          disabled: true
+        - name: filterId
+          value: ""
+          type: query
+          description: Filter by filter identifier
+          disabled: true
+        - name: switchId
+          value: ""
+          type: query
+          description: Serial Number or Id of the switch/leaf
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
+          disabled: true
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 500 Response
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/policyCam/hitCounts"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: groupBy
+          value: tenant
+          type: query
+          description: Criteria to group the hit counts by
+        - name: groupBy
+          value: securityGroup
+          type: query
+          description: Criteria to group the hit counts by
+          disabled: true
+        - name: groupBy
+          value: contract
+          type: query
+          description: Criteria to group the hit counts by
+          disabled: true
+        - name: groupBy
+          value: filter
+          type: query
+          description: Criteria to group the hit counts by
+          disabled: true
+        - name: groupBy
+          value: switch
+          type: query
+          description: Criteria to group the hit counts by
+          disabled: true
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
+        - name: securityGroupType
+          value: EPG
+          type: query
+          description: Type of security group (EPG or ESG)
+          disabled: true
+        - name: securityGroupType
+          value: ESG
+          type: query
+          description: Type of security group (EPG or ESG)
+          disabled: true
+        - name: collectionTimestamp
+          value: ""
+          type: query
+          description: Timestamp when the data was collected from the switch
+          disabled: true
+        - name: tenant
+          value: ""
+          type: query
+          description: Filter by  source or destination tenant name
+          disabled: true
+        - name: srcTenant
+          value: ""
+          type: query
+          description: Filter by source tenant name
+          disabled: true
+        - name: dstTenant
+          value: ""
+          type: query
+          description: Filter by destination tenant name
+          disabled: true
+        - name: securityGroupId
+          value: ""
+          type: query
+          description: Filter by source  or destination security group identifier
+          disabled: true
+        - name: srcSecurityGroupId
+          value: ""
+          type: query
+          description: Filter by source security group identifier
+          disabled: true
+        - name: dstSecurityGroupId
+          value: ""
+          type: query
+          description: Filter by destination security group identifier
+          disabled: true
+        - name: contractId
+          value: ""
+          type: query
+          description: Filter by contract identifier
+          disabled: true
+        - name: filterId
+          value: ""
+          type: query
+          description: Filter by filter identifier
+          disabled: true
+        - name: switchId
+          value: ""
+          type: query
+          description: Serial Number or Id of the switch/leaf
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
+          disabled: true
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }

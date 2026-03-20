@@ -1,0 +1,926 @@
+info:
+  name: List all active endpoints
+  type: http
+  seq: 12
+  tags:
+    - Endpoints
+
+http:
+  method: GET
+  url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/endpointLocator/activeEndpoints"
+  params:
+    - name: clusterName
+      value: ""
+      type: query
+      description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+      disabled: true
+    - name: endpointId
+      value: ""
+      type: query
+      description: Unique identifier of an endpoint
+      disabled: true
+    - name: securityGroupTag
+      value: ""
+      type: query
+      description: Security Group Tag
+      disabled: true
+    - name: addressType
+      value: IPv4
+      type: query
+      description: Address type
+      disabled: true
+    - name: addressType
+      value: IPv6
+      type: query
+      description: Address type
+      disabled: true
+    - name: addressType
+      value: MAC
+      type: query
+      description: Address type
+      disabled: true
+    - name: isDualStack
+      value: ""
+      type: query
+      description: Flag to indicate that this endpoint has both a IPv4 address and IPv6 address
+      disabled: true
+    - name: isVpcConnected
+      value: ""
+      type: query
+      description: Flag to indicate that this endpoint is connected to both switches of a VPC pair
+      disabled: true
+    - name: mac
+      value: ""
+      type: query
+      description: MAC address of the endpoints
+      disabled: true
+    - name: ip
+      value: ""
+      type: query
+      description: IP address of the endpoints
+      disabled: true
+    - name: vrf
+      value: ""
+      type: query
+      description: Name of the VRF that the endpoints belong to
+      disabled: true
+    - name: l3Vni
+      value: ""
+      type: query
+      description: VRF ID. This is 0 if and only if the endpoint is MAC only
+      disabled: true
+    - name: vlanId
+      value: ""
+      type: query
+      description: vlan that the endpoints belong to
+      disabled: true
+    - name: switchName
+      value: ""
+      type: query
+      description: Name of the switch that the endpoints are attached to
+      disabled: true
+    - name: switchPort
+      value: ""
+      type: query
+      description: Switch interface that the endpoints are attached to
+      disabled: true
+    - name: l2Vni
+      value: ""
+      type: query
+      description: Network ID
+      disabled: true
+    - name: tenantName
+      value: ""
+      type: query
+      description: Name of the tenant associated with the endpoint
+      disabled: true
+    - name: fabricName
+      value: ""
+      type: query
+      description: Name of the fabric
+      disabled: true
+    - name: startDate
+      value: ""
+      type: query
+      description: Start date
+      disabled: true
+    - name: endDate
+      value: ""
+      type: query
+      description: End date
+      disabled: true
+    - name: max
+      value: ""
+      type: query
+      description: Number of records to return
+      disabled: true
+    - name: offset
+      value: ""
+      type: query
+      description: Number of records to skip for pagination
+      disabled: true
+    - name: sort
+      value: ""
+      type: query
+      description: |
+        Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+        Ascending order by default: "field1"
+        Specific order for one field: "field1:asc" or "field1:desc"
+        Specific order with multiple fields: "field1:asc,field2:desc"
+      disabled: true
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: OK
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/endpointLocator/activeEndpoints"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: endpointId
+          value: ""
+          type: query
+          description: Unique identifier of an endpoint
+          disabled: true
+        - name: securityGroupTag
+          value: ""
+          type: query
+          description: Security Group Tag
+          disabled: true
+        - name: addressType
+          value: IPv4
+          type: query
+          description: Address type
+          disabled: true
+        - name: addressType
+          value: IPv6
+          type: query
+          description: Address type
+          disabled: true
+        - name: addressType
+          value: MAC
+          type: query
+          description: Address type
+          disabled: true
+        - name: isDualStack
+          value: ""
+          type: query
+          description: Flag to indicate that this endpoint has both a IPv4 address and IPv6 address
+          disabled: true
+        - name: isVpcConnected
+          value: ""
+          type: query
+          description: Flag to indicate that this endpoint is connected to both switches of a VPC pair
+          disabled: true
+        - name: mac
+          value: ""
+          type: query
+          description: MAC address of the endpoints
+          disabled: true
+        - name: ip
+          value: ""
+          type: query
+          description: IP address of the endpoints
+          disabled: true
+        - name: vrf
+          value: ""
+          type: query
+          description: Name of the VRF that the endpoints belong to
+          disabled: true
+        - name: l3Vni
+          value: ""
+          type: query
+          description: VRF ID. This is 0 if and only if the endpoint is MAC only
+          disabled: true
+        - name: vlanId
+          value: ""
+          type: query
+          description: vlan that the endpoints belong to
+          disabled: true
+        - name: switchName
+          value: ""
+          type: query
+          description: Name of the switch that the endpoints are attached to
+          disabled: true
+        - name: switchPort
+          value: ""
+          type: query
+          description: Switch interface that the endpoints are attached to
+          disabled: true
+        - name: l2Vni
+          value: ""
+          type: query
+          description: Network ID
+          disabled: true
+        - name: tenantName
+          value: ""
+          type: query
+          description: Name of the tenant associated with the endpoint
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
+          disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "endpoints": [
+              {
+                "addressType": "IPv4",
+                "attachedSwitches": [
+                  {
+                    "operationTimestamp": "2024-07-31 10:00:00+00:00",
+                    "switchManagementIp": "192.168.126.152",
+                    "switchName": "leaf1",
+                    "switchNextHopIp": "10.3.0.2",
+                    "switchPort": "Eth1/27"
+                  }
+                ],
+                "cluster": "10.3.0.2:0",
+                "endpointId": "IPv4:192.168.34.10:30017",
+                "fabricName": "fab1",
+                "ip": "192.168.34.10",
+                "isDualStack": false,
+                "isVpcConnected": false,
+                "l2Vni": 30017,
+                "l3Vni": 50001,
+                "mac": "00:50:56:9d:5e:5d",
+                "originIps": [
+                  {
+                    "address": "10.2.0.3"
+                  }
+                ],
+                "routeDistinguisher": "10.2.0.2:32801",
+                "securityGroupTag": 10000,
+                "sequenceNumber": 0,
+                "vlanId": 34,
+                "vrfName": "myvrf_50000"
+              },
+              {
+                "addressType": "IPv6",
+                "attachedSwitches": [
+                  {
+                    "operationTimestamp": "2024-07-31 10:00:00+00:00",
+                    "switchManagementIp": "192.168.126.152",
+                    "switchName": "leaf1",
+                    "switchNextHopIp": "10.3.0.2",
+                    "switchPort": "Eth1/27"
+                  }
+                ],
+                "cluster": "10.3.0.2:0",
+                "endpointId": "IPv6:2001::192:168:34:11:30017",
+                "fabricName": "fab1",
+                "ip": "200::192:168:34:11",
+                "isDualStack": false,
+                "isVpcConnected": false,
+                "l2Vni": 30017,
+                "l3Vni": 50001,
+                "mac": "00:50:56:9d:5e:6d",
+                "originIps": [
+                  {
+                    "address": "10.2.0.3"
+                  }
+                ],
+                "routeDistinguisher": "10.2.0.2:32801",
+                "securityGroupTag": 10000,
+                "sequenceNumber": 0,
+                "vlanId": 34,
+                "vrfName": "myvrf_50000"
+              },
+              {
+                "addressType": "IPv6",
+                "attachedSwitches": [
+                  {
+                    "operationTimestamp": "2024-07-31 10:00:00+00:00",
+                    "switchManagementIp": "192.168.126.152",
+                    "switchName": "leaf1",
+                    "switchNextHopIp": "10.3.0.2",
+                    "switchPort": "Eth1/27"
+                  }
+                ],
+                "cluster": "10.3.0.2:0",
+                "endpointId": "MAC:00:50:56:9d:5e:5d:30017",
+                "fabricName": "fab1",
+                "ip": "",
+                "isDualStack": false,
+                "isVpcConnected": false,
+                "l2Vni": 30017,
+                "l3Vni": 50001,
+                "mac": "00:50:56:9d:5e:5d",
+                "originIps": [
+                  {
+                    "address": "10.2.0.3"
+                  }
+                ],
+                "routeDistinguisher": "10.2.0.2:32801",
+                "securityGroupTag": 10000,
+                "sequenceNumber": 0,
+                "vlanId": 34,
+                "vrfName": ""
+              }
+            ]
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/endpointLocator/activeEndpoints"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: endpointId
+          value: ""
+          type: query
+          description: Unique identifier of an endpoint
+          disabled: true
+        - name: securityGroupTag
+          value: ""
+          type: query
+          description: Security Group Tag
+          disabled: true
+        - name: addressType
+          value: IPv4
+          type: query
+          description: Address type
+          disabled: true
+        - name: addressType
+          value: IPv6
+          type: query
+          description: Address type
+          disabled: true
+        - name: addressType
+          value: MAC
+          type: query
+          description: Address type
+          disabled: true
+        - name: isDualStack
+          value: ""
+          type: query
+          description: Flag to indicate that this endpoint has both a IPv4 address and IPv6 address
+          disabled: true
+        - name: isVpcConnected
+          value: ""
+          type: query
+          description: Flag to indicate that this endpoint is connected to both switches of a VPC pair
+          disabled: true
+        - name: mac
+          value: ""
+          type: query
+          description: MAC address of the endpoints
+          disabled: true
+        - name: ip
+          value: ""
+          type: query
+          description: IP address of the endpoints
+          disabled: true
+        - name: vrf
+          value: ""
+          type: query
+          description: Name of the VRF that the endpoints belong to
+          disabled: true
+        - name: l3Vni
+          value: ""
+          type: query
+          description: VRF ID. This is 0 if and only if the endpoint is MAC only
+          disabled: true
+        - name: vlanId
+          value: ""
+          type: query
+          description: vlan that the endpoints belong to
+          disabled: true
+        - name: switchName
+          value: ""
+          type: query
+          description: Name of the switch that the endpoints are attached to
+          disabled: true
+        - name: switchPort
+          value: ""
+          type: query
+          description: Switch interface that the endpoints are attached to
+          disabled: true
+        - name: l2Vni
+          value: ""
+          type: query
+          description: Network ID
+          disabled: true
+        - name: tenantName
+          value: ""
+          type: query
+          description: Name of the tenant associated with the endpoint
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
+          disabled: true
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/endpointLocator/activeEndpoints"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: endpointId
+          value: ""
+          type: query
+          description: Unique identifier of an endpoint
+          disabled: true
+        - name: securityGroupTag
+          value: ""
+          type: query
+          description: Security Group Tag
+          disabled: true
+        - name: addressType
+          value: IPv4
+          type: query
+          description: Address type
+          disabled: true
+        - name: addressType
+          value: IPv6
+          type: query
+          description: Address type
+          disabled: true
+        - name: addressType
+          value: MAC
+          type: query
+          description: Address type
+          disabled: true
+        - name: isDualStack
+          value: ""
+          type: query
+          description: Flag to indicate that this endpoint has both a IPv4 address and IPv6 address
+          disabled: true
+        - name: isVpcConnected
+          value: ""
+          type: query
+          description: Flag to indicate that this endpoint is connected to both switches of a VPC pair
+          disabled: true
+        - name: mac
+          value: ""
+          type: query
+          description: MAC address of the endpoints
+          disabled: true
+        - name: ip
+          value: ""
+          type: query
+          description: IP address of the endpoints
+          disabled: true
+        - name: vrf
+          value: ""
+          type: query
+          description: Name of the VRF that the endpoints belong to
+          disabled: true
+        - name: l3Vni
+          value: ""
+          type: query
+          description: VRF ID. This is 0 if and only if the endpoint is MAC only
+          disabled: true
+        - name: vlanId
+          value: ""
+          type: query
+          description: vlan that the endpoints belong to
+          disabled: true
+        - name: switchName
+          value: ""
+          type: query
+          description: Name of the switch that the endpoints are attached to
+          disabled: true
+        - name: switchPort
+          value: ""
+          type: query
+          description: Switch interface that the endpoints are attached to
+          disabled: true
+        - name: l2Vni
+          value: ""
+          type: query
+          description: Network ID
+          disabled: true
+        - name: tenantName
+          value: ""
+          type: query
+          description: Name of the tenant associated with the endpoint
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
+          disabled: true
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 403 Response
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/endpointLocator/activeEndpoints"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: endpointId
+          value: ""
+          type: query
+          description: Unique identifier of an endpoint
+          disabled: true
+        - name: securityGroupTag
+          value: ""
+          type: query
+          description: Security Group Tag
+          disabled: true
+        - name: addressType
+          value: IPv4
+          type: query
+          description: Address type
+          disabled: true
+        - name: addressType
+          value: IPv6
+          type: query
+          description: Address type
+          disabled: true
+        - name: addressType
+          value: MAC
+          type: query
+          description: Address type
+          disabled: true
+        - name: isDualStack
+          value: ""
+          type: query
+          description: Flag to indicate that this endpoint has both a IPv4 address and IPv6 address
+          disabled: true
+        - name: isVpcConnected
+          value: ""
+          type: query
+          description: Flag to indicate that this endpoint is connected to both switches of a VPC pair
+          disabled: true
+        - name: mac
+          value: ""
+          type: query
+          description: MAC address of the endpoints
+          disabled: true
+        - name: ip
+          value: ""
+          type: query
+          description: IP address of the endpoints
+          disabled: true
+        - name: vrf
+          value: ""
+          type: query
+          description: Name of the VRF that the endpoints belong to
+          disabled: true
+        - name: l3Vni
+          value: ""
+          type: query
+          description: VRF ID. This is 0 if and only if the endpoint is MAC only
+          disabled: true
+        - name: vlanId
+          value: ""
+          type: query
+          description: vlan that the endpoints belong to
+          disabled: true
+        - name: switchName
+          value: ""
+          type: query
+          description: Name of the switch that the endpoints are attached to
+          disabled: true
+        - name: switchPort
+          value: ""
+          type: query
+          description: Switch interface that the endpoints are attached to
+          disabled: true
+        - name: l2Vni
+          value: ""
+          type: query
+          description: Network ID
+          disabled: true
+        - name: tenantName
+          value: ""
+          type: query
+          description: Name of the tenant associated with the endpoint
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
+          disabled: true
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 500 Response
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/endpointLocator/activeEndpoints"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: endpointId
+          value: ""
+          type: query
+          description: Unique identifier of an endpoint
+          disabled: true
+        - name: securityGroupTag
+          value: ""
+          type: query
+          description: Security Group Tag
+          disabled: true
+        - name: addressType
+          value: IPv4
+          type: query
+          description: Address type
+          disabled: true
+        - name: addressType
+          value: IPv6
+          type: query
+          description: Address type
+          disabled: true
+        - name: addressType
+          value: MAC
+          type: query
+          description: Address type
+          disabled: true
+        - name: isDualStack
+          value: ""
+          type: query
+          description: Flag to indicate that this endpoint has both a IPv4 address and IPv6 address
+          disabled: true
+        - name: isVpcConnected
+          value: ""
+          type: query
+          description: Flag to indicate that this endpoint is connected to both switches of a VPC pair
+          disabled: true
+        - name: mac
+          value: ""
+          type: query
+          description: MAC address of the endpoints
+          disabled: true
+        - name: ip
+          value: ""
+          type: query
+          description: IP address of the endpoints
+          disabled: true
+        - name: vrf
+          value: ""
+          type: query
+          description: Name of the VRF that the endpoints belong to
+          disabled: true
+        - name: l3Vni
+          value: ""
+          type: query
+          description: VRF ID. This is 0 if and only if the endpoint is MAC only
+          disabled: true
+        - name: vlanId
+          value: ""
+          type: query
+          description: vlan that the endpoints belong to
+          disabled: true
+        - name: switchName
+          value: ""
+          type: query
+          description: Name of the switch that the endpoints are attached to
+          disabled: true
+        - name: switchPort
+          value: ""
+          type: query
+          description: Switch interface that the endpoints are attached to
+          disabled: true
+        - name: l2Vni
+          value: ""
+          type: query
+          description: Network ID
+          disabled: true
+        - name: tenantName
+          value: ""
+          type: query
+          description: Name of the tenant associated with the endpoint
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
+          disabled: true
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }

@@ -2,6 +2,8 @@ info:
   name: Get information of Virtual Machines
   type: http
   seq: 77
+  tags:
+    - Integrations
 
 http:
   method: GET
@@ -28,7 +30,15 @@ http:
       description: Security Group ID query parameter
       disabled: true
     - name: granularity
-      value: ""
+      value: vm
+      type: query
+      description: |
+        Granularity of the VM response:
+        - vm: Aggregate all links for a VM into a single row
+        - vmInterface: One row per switch/interface attachment (default)
+      disabled: true
+    - name: granularity
+      value: vmInterface
       type: query
       description: |
         Granularity of the VM response:
@@ -71,7 +81,15 @@ examples:
           description: Security Group ID query parameter
           disabled: true
         - name: granularity
-          value: ""
+          value: vm
+          type: query
+          description: |
+            Granularity of the VM response:
+            - vm: Aggregate all links for a VM into a single row
+            - vmInterface: One row per switch/interface attachment (default)
+          disabled: true
+        - name: granularity
+          value: vmInterface
           type: query
           description: |
             Granularity of the VM response:
@@ -79,6 +97,7 @@ examples:
             - vmInterface: One row per switch/interface attachment (default)
           disabled: true
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -89,46 +108,54 @@ examples:
           {
             "vms": [
               {
-                "state": "",
-                "fabricName": "",
-                "switchName": "",
-                "computeId": "",
-                "computeName": "",
-                "vmId": "",
-                "vmName": "",
-                "vmHostname": "",
-                "tenantName": "",
-                "ipCollections": [],
-                "macCollections": [],
-                "vlanId": "",
-                "vSwitch": "",
-                "physicalNic": "",
-                "switchInterfaceName": "",
-                "torName": "",
-                "torInterfaceName": "",
-                "torPortChannelId": 0,
-                "virtualPortChannelId": 0,
-                "portChannelId": 0,
-                "guestOs": "",
-                "datacenter": "",
-                "clusterName": "",
-                "cpuUtilization": "",
-                "memoryUtilization": "",
-                "diskUsage": "",
-                "networkState": "",
-                "vCenterIp": "",
-                "networkName": "",
-                "vrfName": "",
-                "securityGroupIds": [],
-                "securityGroupNames": [],
-                "configuredSecurityGroupId": 0,
-                "configuredSecurityGroupName": "",
-                "vmNicName": "",
-                "portGroupName": "",
-                "distributedPortGroupName": "",
-                "vmInstanceUuid": "",
-                "vmVnicId": "",
-                "userAlerts": ""
+                "state": "connected",
+                "fabricName": "MyFabric",
+                "switchName": "padkrish-9-245",
+                "computeId": "HostSystem:host-1340",
+                "computeName": "ucsEsxi1",
+                "vmId": "VirtualMachine:vm-1350",
+                "vmName": "WebServer_VM1",
+                "vmHostname": "webserver.mydomain.com",
+                "tenantName": "TenantA",
+                "ipCollections": [
+                  "10.1.1.2"
+                ],
+                "macCollections": [
+                  "00:30:66:9d:80:69"
+                ],
+                "vlanId": "61",
+                "vSwitch": "vSwitch3",
+                "physicalNic": "vmnic4",
+                "switchInterfaceName": "Ethernet1/5",
+                "torName": "tor-1",
+                "torInterfaceName": "Ethernet1/43",
+                "torPortChannelId": 501,
+                "virtualPortChannelId": 1,
+                "portChannelId": 501,
+                "guestOs": "Ubuntu linux (64-bit)",
+                "datacenter": "DC1",
+                "clusterName": "cluster1",
+                "cpuUtilization": "8.53GHz",
+                "memoryUtilization": "2.05GB",
+                "diskUsage": "54GB",
+                "networkState": "connected",
+                "vCenterIp": "192.268.19.45",
+                "networkName": "MyNetwork",
+                "vrfName": "MyVRF",
+                "securityGroupIds": [
+                  108
+                ],
+                "securityGroupNames": [
+                  "tenantSales~SG_10000"
+                ],
+                "configuredSecurityGroupId": 108,
+                "configuredSecurityGroupName": "tenantSales~SG_10000",
+                "vmNicName": "Network adapter 1",
+                "portGroupName": "DualPort_PG50",
+                "distributedPortGroupName": "DVS_PG_150",
+                "vmInstanceUuid": "50184181-5802-194c-029d-f34779e0caa5",
+                "vmVnicId": "172.29.21.19050184181-5802-194c-029d-f34779e0caa500:50:56:98:b6:e4",
+                "userAlerts": "IP, VRF modified, please reset the Security Group ID"
               }
             ]
           }
@@ -159,7 +186,15 @@ examples:
           description: Security Group ID query parameter
           disabled: true
         - name: granularity
-          value: ""
+          value: vm
+          type: query
+          description: |
+            Granularity of the VM response:
+            - vm: Aggregate all links for a VM into a single row
+            - vmInterface: One row per switch/interface attachment (default)
+          disabled: true
+        - name: granularity
+          value: vmInterface
           type: query
           description: |
             Granularity of the VM response:
@@ -167,6 +202,7 @@ examples:
             - vmInterface: One row per switch/interface attachment (default)
           disabled: true
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -206,7 +242,15 @@ examples:
           description: Security Group ID query parameter
           disabled: true
         - name: granularity
-          value: ""
+          value: vm
+          type: query
+          description: |
+            Granularity of the VM response:
+            - vm: Aggregate all links for a VM into a single row
+            - vmInterface: One row per switch/interface attachment (default)
+          disabled: true
+        - name: granularity
+          value: vmInterface
           type: query
           description: |
             Granularity of the VM response:
@@ -214,6 +258,7 @@ examples:
             - vmInterface: One row per switch/interface attachment (default)
           disabled: true
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -253,7 +298,15 @@ examples:
           description: Security Group ID query parameter
           disabled: true
         - name: granularity
-          value: ""
+          value: vm
+          type: query
+          description: |
+            Granularity of the VM response:
+            - vm: Aggregate all links for a VM into a single row
+            - vmInterface: One row per switch/interface attachment (default)
+          disabled: true
+        - name: granularity
+          value: vmInterface
           type: query
           description: |
             Granularity of the VM response:
@@ -261,6 +314,7 @@ examples:
             - vmInterface: One row per switch/interface attachment (default)
           disabled: true
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -300,7 +354,15 @@ examples:
           description: Security Group ID query parameter
           disabled: true
         - name: granularity
-          value: ""
+          value: vm
+          type: query
+          description: |
+            Granularity of the VM response:
+            - vm: Aggregate all links for a VM into a single row
+            - vmInterface: One row per switch/interface attachment (default)
+          disabled: true
+        - name: granularity
+          value: vmInterface
           type: query
           description: |
             Granularity of the VM response:
@@ -308,6 +370,7 @@ examples:
             - vmInterface: One row per switch/interface attachment (default)
           disabled: true
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

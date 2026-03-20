@@ -2,6 +2,8 @@ info:
   name: List the logical links
   type: http
   seq: 9
+  tags:
+    - Links
 
 http:
   method: GET
@@ -35,12 +37,17 @@ http:
     - name: sort
       value: ""
       type: query
-      description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+      description: |
+        Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+        Ascending order by default: "field1"
+        Specific order for one field: "field1:asc" or "field1:desc"
+        Specific order with multiple fields: "field1:asc,field2:desc"
       disabled: true
     - name: filter
       value: ""
       type: query
       description: Lucene format filter - Filter the response based on this filter field
+      disabled: true
   auth: inherit
 
 settings:
@@ -84,13 +91,19 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -101,13 +114,14 @@ examples:
           {
             "logicalLinks": [
               {
-                "dstFabricName": "ebgp-fab",
+                "dstFabricName": "fab1",
                 "dstInterfaceName": "Ethernet1/9",
                 "dstLinkAddress": "10.4.101.1-Vlan3600",
                 "dstSwitchId": "FDO224226Y9",
                 "dstSwitchInfo": {
                   "isVdc": false,
                   "switchModelName": "N9K-C93180YC-EX",
+                  "switchRole": "leaf",
                   "vdcId": 0
                 },
                 "dstSwitchName": "sml_N9K-FX2-7",
@@ -118,15 +132,12 @@ examples:
                 "linkId": "LINK-8540",
                 "linkState": "full",
                 "linkType": "OSPF",
-                "srcFabricName": "ebgp-fab",
+                "srcFabricName": "fab1",
                 "srcInterfaceName": "Ethernet1/2",
                 "srcLinkAddress": "10.4.101.2-Vlan3600",
                 "srcSwitchId": "FDO22422CZC",
                 "srcSwitchInfo": {
-                  "interfaceAdminStatus": "up",
                   "interfaceName": "Ethernet1/47",
-                  "interfaceOpReason": "none",
-                  "interfaceOpStatus": "up",
                   "isVdc": false,
                   "switchModelName": "N9K-C93180YC-EX",
                   "switchRole": "spine",
@@ -136,13 +147,14 @@ examples:
                 "uptime": "9d 07:10:36"
               },
               {
-                "dstFabricName": "ebgp-fab",
+                "dstFabricName": "fab1",
                 "dstInterfaceName": "Ethernet1/9",
                 "dstLinkAddress": "10.4.101.1-Vlan3603",
                 "dstSwitchId": "FDO224226Y9",
                 "dstSwitchInfo": {
                   "isVdc": false,
                   "switchModelName": "N9K-C93180YC-EX",
+                  "switchRole": "leaf",
                   "vdcId": 0
                 },
                 "dstSwitchName": "sml_N9K-FX2-7",
@@ -158,9 +170,6 @@ examples:
                 "srcLinkAddress": "10.4.101.2-Vlan3602",
                 "srcSwitchId": "FDO22422CZC",
                 "srcSwitchInfo": {
-                  "interfaceAdminStatus": "up",
-                  "interfaceOpReason": "none",
-                  "interfaceOpStatus": "up",
                   "isVdc": false,
                   "switchModelName": "N9K-C93180YC-EX",
                   "switchRole": "spine",
@@ -211,13 +220,19 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -264,13 +279,19 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -317,13 +338,19 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -370,13 +397,19 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -423,13 +456,19 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
     response:
+      status: 409
       statusText: Conflict
       headers:
         - name: Content-Type
@@ -476,13 +515,19 @@ examples:
         - name: sort
           value: ""
           type: query
-          description: Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
           disabled: true
         - name: filter
           value: ""
           type: query
           description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

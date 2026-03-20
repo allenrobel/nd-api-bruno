@@ -2,6 +2,8 @@ info:
   name: Get data of hosts in a vcenter
   type: http
   seq: 82
+  tags:
+    - Integrations
 
 http:
   method: GET
@@ -51,6 +53,7 @@ examples:
           description: Compute's host name
           disabled: true
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -59,180 +62,79 @@ examples:
         type: json
         data: |-
           {
-            "hosts": [
-              {
-                "id": "",
-                "name": "",
-                "icon": "",
-                "tier": 0,
-                "css": "",
-                "badge": "",
-                "renderFabricCloud": false,
-                "nodeFocus": false,
-                "data": {
-                  "type": "",
-                  "subType": "",
-                  "id": "",
-                  "name": "",
-                  "dataCenter": "",
-                  "cluster": "",
-                  "vCenter": "",
-                  "connectionState": "",
-                  "powerState": "",
-                  "ipAddresses": [],
-                  "macAddress": [],
-                  "hardware": {
-                    "vendor": "",
-                    "model": "",
-                    "uuid": "",
-                    "otherIdentifyingData": [
-                      {
-                        "identifierType": "",
-                        "identifierValue": ""
-                      }
-                    ],
-                    "memorySize": 0,
-                    "cpuModel": "",
-                    "cpuFrequency": 0,
-                    "numCpuPkgs": 0,
-                    "numCpuCores": 0,
-                    "numCpuThreads": 0,
-                    "numNics": 0,
-                    "numHBAs": 0
-                  },
-                  "product": {
-                    "name": "",
-                    "fullName": "",
-                    "vendor": "",
-                    "version": "",
-                    "patchLevel": "",
-                    "build": "",
-                    "localeVersion": "",
-                    "localeBuild": "",
-                    "osType": "",
-                    "productLineId": "",
-                    "apiType": "",
-                    "apiVersion": "",
-                    "instanceUuid": "",
-                    "licenseProductName": "",
-                    "licenseProductVersion": ""
-                  },
-                  "phyNics": [
-                    {
-                      "name": "",
-                      "mac": "",
-                      "speed": 0,
-                      "duplex": false,
-                      "neighbor": {
-                        "source": "",
-                        "type": "",
-                        "subType": "",
-                        "id": "",
-                        "port": "",
-                        "name": "",
-                        "managementAddr": "",
-                        "switchId": "",
-                        "fabricName": "",
-                        "computeId": "",
-                        "physicalNic": "",
-                        "vpcId": 0,
-                        "portChannel": "",
-                        "fexEnabled": false,
-                        "fexId": "",
-                        "fexName": "",
-                        "fexSerialNumber": "",
-                        "fiEnabled": false,
-                        "fiNeighborSerialNumber": "",
-                        "fiNeighborName": "",
-                        "fiNeighborInterface": "",
-                        "fiNeighborFabric": "",
-                        "fabricConnected": false,
-                        "originalId": "",
-                        "originalName": "",
-                        "vpcEnable": false,
-                        "tor": false,
-                        "torNeighborCollection": [
-                          {
-                            "name": "",
-                            "switchId": "",
-                            "interface": "",
-                            "portChannel": "",
-                            "vpcId": 0
-                          }
-                        ]
-                      }
-                    }
-                  ],
-                  "vSwitches": [
-                    {
-                      "type": "",
-                      "subType": "",
-                      "name": "",
-                      "physicalNicIds": []
-                    }
-                  ],
-                  "networks": [
-                    {
-                      "name": "",
-                      "switchNet": "",
-                      "fabric": "",
-                      "singleVlan": 0,
-                      "deployed": false,
-                      "id": "",
-                      "switchId": "",
-                      "vlan": ""
-                    }
-                  ],
-                  "dVSUplinks": [
-                    {
-                      "dvsUuid": "",
-                      "uplinks": [
-                        {
-                          "id": "",
-                          "name": "",
-                          "physicalNics": []
-                        }
-                      ]
-                    }
-                  ],
-                  "dVSwitches": [
-                    {
-                      "type": "",
-                      "subType": "",
-                      "id": "",
-                      "name": "",
-                      "uuid": "",
-                      "computeIds": [],
-                      "computeNames": [],
-                      "productName": "",
-                      "productVendor": "",
-                      "productVersion": "",
-                      "productBuild": "",
-                      "productFwdClass": ""
-                    }
-                  ],
-                  "dVSPortGroups": [
-                    {
-                      "name": "",
-                      "switchNetwork": "",
-                      "fabricName": "",
-                      "singleVlan": 0,
-                      "deployed": false,
-                      "id": "",
-                      "switchId": "",
-                      "switchName": "",
-                      "ports": [
-                        {
-                          "id": "",
-                          "name": "",
-                          "vlan": ""
-                        }
-                      ]
-                    }
-                  ]
+            "badge": "vCenter",
+            "css": "n9k healthscore90",
+            "data": {
+              "cluster": "cluster1",
+              "connectionState": "connected",
+              "dataCenter": "DC1",
+              "hardware": {
+                "cpuFrequency": 2600,
+                "cpuModel": "Intel(R) Xeon(R) CPU E5-2690 v4 @ 2.60GHz",
+                "memorySize": 51200,
+                "model": "PowerEdge R740",
+                "numCpuCores": 24,
+                "numCpuPkgs": 2,
+                "numCpuThreads": 48,
+                "numHBAs": 2,
+                "numNics": 4,
+                "uuid": "123e4567-e89b-12d3-a456-426614174000",
+                "vendor": "Dell"
+              },
+              "id": "HostSystem:host-26",
+              "ipAddresses": [
+                "172.25.235.27"
+              ],
+              "macAddress": [
+                "00:50:56:98:b6:e4"
+              ],
+              "name": "ucsEsxi1",
+              "networks": [
+                {
+                  "deployed": true,
+                  "fabric": "nd-dev2",
+                  "id": "network-101",
+                  "name": "VM_Network_A"
                 }
-              }
-            ]
+              ],
+              "phyNics": [
+                {
+                  "duplex": true,
+                  "mac": "00:50:56:98:b6:e4",
+                  "name": "vmnic0",
+                  "neighbor": {
+                    "id": "FLM28280097",
+                    "name": "dev2-leaf1",
+                    "source": "CDP"
+                  },
+                  "speed": 10000
+                }
+              ],
+              "powerState": "poweredOn",
+              "product": {
+                "name": "VMware ESXi",
+                "version": "7.0.3"
+              },
+              "subType": "ESXi",
+              "type": "host",
+              "vCenter": "192.268.19.45",
+              "vSwitches": [
+                {
+                  "name": "vSwitch3",
+                  "physicalNicIds": [
+                    "vmnic0",
+                    "vmnic1"
+                  ],
+                  "type": "standard"
+                }
+              ]
+            },
+            "icon": "virtual-infra-compute",
+            "id": "HostSystem:host-26/172.25.235.50",
+            "name": "172.25.235.27",
+            "nodeFocus": false,
+            "renderFabricCloud": true,
+            "tier": 1
           }
   - name: 400 Response
     description: Bad Request
@@ -255,6 +157,7 @@ examples:
           description: Compute's host name
           disabled: true
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -288,6 +191,7 @@ examples:
           description: Compute's host name
           disabled: true
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -321,6 +225,7 @@ examples:
           description: Compute's host name
           disabled: true
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -354,6 +259,7 @@ examples:
           description: Compute's host name
           disabled: true
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -387,6 +293,7 @@ examples:
           description: Compute's host name
           disabled: true
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

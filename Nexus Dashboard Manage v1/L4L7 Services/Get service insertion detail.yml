@@ -2,6 +2,8 @@ info:
   name: Get service insertion detail
   type: http
   seq: 21
+  tags:
+    - L4L7 Services
 
 http:
   method: GET
@@ -38,6 +40,7 @@ examples:
           type: path
           description: Name of the fabric
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -63,7 +66,6 @@ examples:
               "status": "deployed",
               "statusDetails": [
                 {
-                  "statusDetail": null,
                   "type": "serviceVrf",
                   "name": "ServiceVRF_50001",
                   "status": "deployed"
@@ -85,6 +87,7 @@ examples:
           type: path
           description: Name of the fabric
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -101,32 +104,28 @@ examples:
               },
               "insertionName": "ServiceIns1",
               "enabled": true,
-              "sourceVrf": "Sales",
+              "sourceVrf": "sales",
               "useCase": "perimeterService"
             },
             "deploymentStatus": {
               "status": "deployed",
               "statusDetails": [
                 {
-                  "statusDetail": null,
                   "type": "serviceVrf",
                   "name": "ServiceVRF_50001",
                   "status": "deployed"
                 },
                 {
-                  "statusDetail": null,
                   "type": "serviceVrf",
                   "name": "ServiceVRF_50002",
                   "status": "deployed"
                 },
                 {
-                  "statusDetail": null,
                   "type": "serviceNetwork",
                   "name": "TenantNetwork_30001",
                   "status": "deployed"
                 },
                 {
-                  "statusDetail": null,
                   "type": "serviceNetwork",
                   "name": "TenantNetwork_30002",
                   "status": "deployed"
@@ -148,6 +147,7 @@ examples:
           type: path
           description: Name of the fabric
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -204,7 +204,6 @@ examples:
               "status": "deployed",
               "statusDetails": [
                 {
-                  "statusDetail": null,
                   "type": "serviceVrf",
                   "name": "ServiceVRF_50001",
                   "status": "deployed"
@@ -226,6 +225,7 @@ examples:
           type: path
           description: Name of the fabric
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -279,9 +279,68 @@ examples:
               "status": "deployed",
               "statusDetails": [
                 {
-                  "statusDetail": null,
                   "type": "serviceVrf",
                   "name": "ServiceVRF_50001",
+                  "status": "deployed"
+                }
+              ]
+            }
+          }
+  - name: Route peering service use case
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/insertions/:insertionName"
+      method: GET
+      params:
+        - name: insertionName
+          value: ""
+          type: path
+          description: Service insertion name
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "serviceInsertion": {
+              "insertionData": {
+                "destinationVrf": "Sales",
+                "useCase": "routePeeringService",
+                "functionName": "function1"
+              },
+              "insertionName": "ServiceIns1",
+              "enabled": true,
+              "sourceVrf": "Sales",
+              "useCase": "routePeeringService"
+            },
+            "deploymentStatus": {
+              "status": "deployed",
+              "statusDetails": [
+                {
+                  "type": "serviceVrf",
+                  "name": "ServiceVRF_50001",
+                  "status": "deployed"
+                },
+                {
+                  "type": "serviceVrf",
+                  "name": "ServiceVRF_50002",
+                  "status": "deployed"
+                },
+                {
+                  "type": "serviceNetwork",
+                  "name": "TenantNetwork_30001",
+                  "status": "deployed"
+                },
+                {
+                  "type": "serviceNetwork",
+                  "name": "TenantNetwork_30002",
                   "status": "deployed"
                 }
               ]
@@ -302,6 +361,7 @@ examples:
           type: path
           description: Name of the fabric
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -329,6 +389,7 @@ examples:
           type: path
           description: Name of the fabric
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -356,6 +417,7 @@ examples:
           type: path
           description: Name of the fabric
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -383,6 +445,7 @@ examples:
           type: path
           description: Name of the fabric
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -410,6 +473,7 @@ examples:
           type: path
           description: Name of the fabric
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

@@ -2,6 +2,8 @@ info:
   name: Update a policy group
   type: http
   seq: 15
+  tags:
+    - Policies
 
 http:
   method: PUT
@@ -27,7 +29,7 @@ http:
       disabled: true
   body:
     type: json
-    data: ""
+    data: "{}"
   auth: inherit
 
 settings:
@@ -63,8 +65,9 @@ examples:
           disabled: true
       body:
         type: json
-        data: ""
+        data: "{}"
     response:
+      status: 204
       statusText: No Content
       body:
         type: text
@@ -95,8 +98,9 @@ examples:
           disabled: true
       body:
         type: json
-        data: ""
+        data: "{}"
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -135,8 +139,9 @@ examples:
           disabled: true
       body:
         type: json
-        data: ""
+        data: "{}"
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -175,8 +180,9 @@ examples:
           disabled: true
       body:
         type: json
-        data: ""
+        data: "{}"
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -215,8 +221,9 @@ examples:
           disabled: true
       body:
         type: json
-        data: ""
+        data: "{}"
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -255,8 +262,9 @@ examples:
           disabled: true
       body:
         type: json
-        data: ""
+        data: "{}"
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

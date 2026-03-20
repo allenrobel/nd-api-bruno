@@ -2,6 +2,8 @@ info:
   name: Update service insertion
   type: http
   seq: 22
+  tags:
+    - L4L7 Services
 
 http:
   method: PUT
@@ -19,11 +21,15 @@ http:
     type: json
     data: |-
       {
-        "sourceVrf": "",
-        "enabled": false,
-        "insertionName": "",
-        "lastUpdateTimestamp": "",
-        "insertionData": ""
+        "enabled": true,
+        "insertionName": "ServiceIns3",
+        "insertionData": {
+          "destinationVrf": "Vrf2",
+          "functionName": "FWFunc4",
+          "useCase": "perimeterService"
+        },
+        "sourceVrf": "Vrf1",
+        "useCase": "perimeterService"
       }
   auth: inherit
 
@@ -64,6 +70,7 @@ examples:
             "useCase": "serviceAsGW"
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -108,10 +115,11 @@ examples:
             },
             "insertionName": "ServiceIns1",
             "enabled": true,
-            "sourceVrf": "Sales",
+            "sourceVrf": "sales",
             "useCase": "perimeterService"
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -127,7 +135,7 @@ examples:
             },
             "insertionName": "ServiceIns1",
             "enabled": true,
-            "sourceVrf": "Sales",
+            "sourceVrf": "sales",
             "useCase": "perimeterService"
           }
   - name: Service chain (ePBR) use case
@@ -191,6 +199,7 @@ examples:
             "useCase": "redirectToServiceChain"
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -300,6 +309,7 @@ examples:
             "useCase": "redirectToSingleService"
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -348,6 +358,53 @@ examples:
             "sourceVrf": "Sales",
             "useCase": "redirectToSingleService"
           }
+  - name: Route peering service use case
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/insertions/:insertionName"
+      method: PUT
+      params:
+        - name: insertionName
+          value: ""
+          type: path
+          description: Service insertion name
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "insertionData": {
+              "destinationVrf": "Sales",
+              "useCase": "routePeeringService",
+              "functionName": "function1"
+            },
+            "insertionName": "ServiceIns1",
+            "enabled": true,
+            "sourceVrf": "Sales",
+            "useCase": "routePeeringService"
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "insertionData": {
+              "destinationVrf": "Sales",
+              "useCase": "routePeeringService",
+              "functionName": "function1"
+            },
+            "insertionName": "ServiceIns1",
+            "enabled": true,
+            "sourceVrf": "Sales",
+            "useCase": "routePeeringService"
+          }
   - name: 400 Response (Service as a Gateway use case)
     description: Bad Request
     request:
@@ -379,6 +436,7 @@ examples:
             "useCase": "serviceAsGW"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -416,10 +474,11 @@ examples:
             },
             "insertionName": "ServiceIns1",
             "enabled": true,
-            "sourceVrf": "Sales",
+            "sourceVrf": "sales",
             "useCase": "perimeterService"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -494,6 +553,7 @@ examples:
             "useCase": "redirectToServiceChain"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -565,6 +625,49 @@ examples:
             "useCase": "redirectToSingleService"
           }
     response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 400 Response (Route peering service use case)
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/insertions/:insertionName"
+      method: PUT
+      params:
+        - name: insertionName
+          value: ""
+          type: path
+          description: Service insertion name
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "insertionData": {
+              "destinationVrf": "Sales",
+              "useCase": "routePeeringService",
+              "functionName": "function1"
+            },
+            "insertionName": "ServiceIns1",
+            "enabled": true,
+            "sourceVrf": "Sales",
+            "useCase": "routePeeringService"
+          }
+    response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -608,6 +711,7 @@ examples:
             "useCase": "serviceAsGW"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -645,10 +749,11 @@ examples:
             },
             "insertionName": "ServiceIns1",
             "enabled": true,
-            "sourceVrf": "Sales",
+            "sourceVrf": "sales",
             "useCase": "perimeterService"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -723,6 +828,7 @@ examples:
             "useCase": "redirectToServiceChain"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -794,6 +900,49 @@ examples:
             "useCase": "redirectToSingleService"
           }
     response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 401 Response (Route peering service use case)
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/insertions/:insertionName"
+      method: PUT
+      params:
+        - name: insertionName
+          value: ""
+          type: path
+          description: Service insertion name
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "insertionData": {
+              "destinationVrf": "Sales",
+              "useCase": "routePeeringService",
+              "functionName": "function1"
+            },
+            "insertionName": "ServiceIns1",
+            "enabled": true,
+            "sourceVrf": "Sales",
+            "useCase": "routePeeringService"
+          }
+    response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -837,6 +986,7 @@ examples:
             "useCase": "serviceAsGW"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -874,10 +1024,11 @@ examples:
             },
             "insertionName": "ServiceIns1",
             "enabled": true,
-            "sourceVrf": "Sales",
+            "sourceVrf": "sales",
             "useCase": "perimeterService"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -952,6 +1103,7 @@ examples:
             "useCase": "redirectToServiceChain"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -1023,6 +1175,49 @@ examples:
             "useCase": "redirectToSingleService"
           }
     response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 403 Response (Route peering service use case)
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/insertions/:insertionName"
+      method: PUT
+      params:
+        - name: insertionName
+          value: ""
+          type: path
+          description: Service insertion name
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "insertionData": {
+              "destinationVrf": "Sales",
+              "useCase": "routePeeringService",
+              "functionName": "function1"
+            },
+            "insertionName": "ServiceIns1",
+            "enabled": true,
+            "sourceVrf": "Sales",
+            "useCase": "routePeeringService"
+          }
+    response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -1066,6 +1261,7 @@ examples:
             "useCase": "serviceAsGW"
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -1103,10 +1299,11 @@ examples:
             },
             "insertionName": "ServiceIns1",
             "enabled": true,
-            "sourceVrf": "Sales",
+            "sourceVrf": "sales",
             "useCase": "perimeterService"
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -1181,6 +1378,7 @@ examples:
             "useCase": "redirectToServiceChain"
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -1252,6 +1450,49 @@ examples:
             "useCase": "redirectToSingleService"
           }
     response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 404 Response (Route peering service use case)
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/insertions/:insertionName"
+      method: PUT
+      params:
+        - name: insertionName
+          value: ""
+          type: path
+          description: Service insertion name
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "insertionData": {
+              "destinationVrf": "Sales",
+              "useCase": "routePeeringService",
+              "functionName": "function1"
+            },
+            "insertionName": "ServiceIns1",
+            "enabled": true,
+            "sourceVrf": "Sales",
+            "useCase": "routePeeringService"
+          }
+    response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -1295,6 +1536,7 @@ examples:
             "useCase": "serviceAsGW"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type
@@ -1332,10 +1574,11 @@ examples:
             },
             "insertionName": "ServiceIns1",
             "enabled": true,
-            "sourceVrf": "Sales",
+            "sourceVrf": "sales",
             "useCase": "perimeterService"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type
@@ -1410,6 +1653,7 @@ examples:
             "useCase": "redirectToServiceChain"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type
@@ -1481,6 +1725,49 @@ examples:
             "useCase": "redirectToSingleService"
           }
     response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }
+  - name: 500 Response (Route peering service use case)
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/fabrics/:fabricName/l4l7Services/insertions/:insertionName"
+      method: PUT
+      params:
+        - name: insertionName
+          value: ""
+          type: path
+          description: Service insertion name
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "insertionData": {
+              "destinationVrf": "Sales",
+              "useCase": "routePeeringService",
+              "functionName": "function1"
+            },
+            "insertionName": "ServiceIns1",
+            "enabled": true,
+            "sourceVrf": "Sales",
+            "useCase": "routePeeringService"
+          }
+    response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

@@ -2,6 +2,8 @@ info:
   name: Associate access or ToR switches
   type: http
   seq: 1
+  tags:
+    - Access-ToR Associations
 
 http:
   method: POST
@@ -25,7 +27,17 @@ http:
     type: json
     data: |-
       [
-        {}
+        {
+          "accessOrTorSwitchId": "99A8ORYAJ2R",
+          "aggregationOrLeafPeerSwitchId": "97UGR7ATD6J",
+          "aggregationOrLeafSwitchId": "9ZNI940AB7M",
+          "resources": {
+            "accessOrTorPortChannelId": 500,
+            "aggregationOrLeafPeerPortChannelId": 1,
+            "aggregationOrLeafPortChannelId": 1,
+            "aggregationOrLeafVpcId": 1
+          }
+        }
       ]
   auth: inherit
 
@@ -92,6 +104,7 @@ examples:
             }
           ]
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -156,6 +169,7 @@ examples:
             }
           ]
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -210,6 +224,7 @@ examples:
             }
           ]
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -262,6 +277,7 @@ examples:
             }
           ]
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -330,6 +346,7 @@ examples:
             }
           ]
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -376,6 +393,7 @@ examples:
             }
           ]
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -425,6 +443,7 @@ examples:
             }
           ]
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -477,6 +496,7 @@ examples:
             }
           ]
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -545,6 +565,7 @@ examples:
             }
           ]
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -591,6 +612,7 @@ examples:
             }
           ]
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -640,6 +662,7 @@ examples:
             }
           ]
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -692,6 +715,7 @@ examples:
             }
           ]
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -760,6 +784,7 @@ examples:
             }
           ]
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -806,6 +831,7 @@ examples:
             }
           ]
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -855,6 +881,7 @@ examples:
             }
           ]
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type
@@ -907,6 +934,7 @@ examples:
             }
           ]
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type
@@ -975,6 +1003,7 @@ examples:
             }
           ]
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type
@@ -1021,6 +1050,7 @@ examples:
             }
           ]
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

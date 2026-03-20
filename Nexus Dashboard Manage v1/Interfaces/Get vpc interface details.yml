@@ -1,7 +1,9 @@
 info:
-  name: Get vpc interface details
+  name: Get vPC interface details
   type: http
-  seq: 25
+  seq: 24
+  tags:
+    - Interfaces
 
 http:
   method: GET
@@ -57,6 +59,7 @@ examples:
           type: path
           description: Name of the interface
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -78,6 +81,7 @@ examples:
                 "deletable": true,
                 "description": "Connected to host-20",
                 "discovered": true,
+                "discoveredConfigMode": "trunk",
                 "displayName": "vPC member",
                 "duplex": "half",
                 "editAllowed": true,
@@ -87,12 +91,12 @@ examples:
                 "fex": false,
                 "groupAssociationSupported": true,
                 "hasDeletedOverlay": false,
+                "intendedConfigMode": "access",
                 "interfaceGroup": "ig1",
                 "interfaceName": "Port-channel100",
                 "interfaceType": "portChannel",
                 "ip": "10.127.117.32/24",
                 "markDeleted": false,
-                "mode": "access",
                 "mtu": 1500,
                 "nativeVlanId": 100,
                 "neighbors": [
@@ -112,6 +116,7 @@ examples:
                 "policyId": "POLICY-1806060",
                 "policyType": "vpcTrunkPo",
                 "portMode": "on",
+                "portType": "access",
                 "protocol": "lacp",
                 "rbacAccessible": true,
                 "simulatePvst": "Default",
@@ -166,6 +171,7 @@ examples:
           type: path
           description: Name of the interface
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -202,6 +208,7 @@ examples:
           type: path
           description: Name of the interface
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -238,6 +245,7 @@ examples:
           type: path
           description: Name of the interface
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -274,6 +282,7 @@ examples:
           type: path
           description: Name of the interface
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

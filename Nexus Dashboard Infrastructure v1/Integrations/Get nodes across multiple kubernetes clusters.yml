@@ -2,6 +2,8 @@ info:
   name: Get nodes across multiple kubernetes clusters
   type: http
   seq: 41
+  tags:
+    - Integrations
 
 http:
   method: GET
@@ -83,6 +85,7 @@ examples:
           description: end Index of List
           disabled: true
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -91,62 +94,39 @@ examples:
         type: json
         data: |-
           {
-            "data": [
-              {
-                "nodeUuid": "",
-                "nodeName": "",
-                "hostName": "",
-                "ipAddress": "",
-                "clusterName": "",
-                "clusterType": "",
-                "clusterVersion": "",
-                "role": "",
-                "nodeType": "",
-                "phase": "",
-                "osName": "",
-                "osImage": "",
-                "containerRuntime": "",
-                "primaryIP": "",
-                "createTimestamp": "",
-                "inbandActive": false,
-                "inbandStatus": "",
-                "neighbors": [
-                  {
-                    "id": "",
-                    "fabricName": "",
-                    "switchName": "",
-                    "ifName": "",
-                    "ifType": "",
-                    "mgmtIp": "",
-                    "ipAddress": "",
-                    "vlan": "",
-                    "operStatus": "",
-                    "adminStatus": "",
-                    "switchId": "",
-                    "vSwitchId": "",
-                    "vSwitchPortGroupId": "",
-                    "vSwitchPortGroupName": "",
-                    "dVSwitchId": "",
-                    "dVPortGroupId": "",
-                    "dVPortGroupName": "",
-                    "phyNicId": "",
-                    "phyNicName": "",
-                    "switchInterfaceName": "",
-                    "vpcId": "",
-                    "portChannel": ""
-                  }
-                ],
-                "managed": false,
-                "fabricName": "",
-                "switchName": "",
-                "vlan": "",
-                "switchInterface": "",
-                "vpcId": "",
-                "portChannel": "",
-                "integrationId": "",
-                "switchId": ""
-              }
-            ]
+            "example": {
+              "data": [
+                {
+                  "clusterName": "os-1",
+                  "clusterType": "openShift",
+                  "clusterVersion": "v1.32.1",
+                  "containerRuntime": "containerd://1.7.13",
+                  "createTimestamp": "2025-02-06 12:59:12 +0000 UTC",
+                  "fabricName": "nd-dev2",
+                  "hostName": "dev2-os-1-w1",
+                  "inbandActive": true,
+                  "inbandStatus": "OK",
+                  "integrationId": "openshift-1.1.1.1",
+                  "ipAddress": "192.168.1.3",
+                  "managed": true,
+                  "neighbors": [],
+                  "nodeName": "dev2-os-1-w1",
+                  "nodeType": "virtual",
+                  "nodeUuid": "3a0456de-156e-421c-8afc-4f859c8a0174",
+                  "osImage": "Ubuntu 22.04.5 LTS",
+                  "osName": "linux",
+                  "phase": "Ready",
+                  "portChannel": "",
+                  "primaryIP": "192.168.1.2",
+                  "role": "worker",
+                  "switchId": "FLM28280097",
+                  "switchInterface": "Ethernet1/3",
+                  "switchName": "dev2-leaf1",
+                  "vlan": "320",
+                  "vpcId": ""
+                }
+              ]
+            }
           }
   - name: 400 Response
     description: Bad Request
@@ -185,6 +165,7 @@ examples:
           description: end Index of List
           disabled: true
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -234,6 +215,7 @@ examples:
           description: end Index of List
           disabled: true
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -283,6 +265,7 @@ examples:
           description: end Index of List
           disabled: true
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -332,6 +315,7 @@ examples:
           description: end Index of List
           disabled: true
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -381,6 +365,7 @@ examples:
           description: end Index of List
           disabled: true
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

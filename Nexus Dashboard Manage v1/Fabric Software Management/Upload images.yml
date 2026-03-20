@@ -2,6 +2,8 @@ info:
   name: Upload images
   type: http
   seq: 6
+  tags:
+    - Fabric Software Management
 
 http:
   method: POST
@@ -16,8 +18,8 @@ http:
     type: json
     data: |-
       {
-        "filePath": "",
-        "remoteServerName": ""
+        "filePath": "/root/my/file/path/snmp-2.0.1.0-9.3.2.src.rpm",
+        "remoteServerName": "testscp193"
       }
   auth: inherit
 
@@ -47,6 +49,7 @@ examples:
             "remoteServerName": "testscp193"
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -76,6 +79,7 @@ examples:
             "remoteServerName": "testscp193"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -107,6 +111,7 @@ examples:
             "remoteServerName": "testscp193"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -138,6 +143,7 @@ examples:
             "remoteServerName": "testscp193"
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -169,6 +175,7 @@ examples:
             "remoteServerName": "testscp193"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

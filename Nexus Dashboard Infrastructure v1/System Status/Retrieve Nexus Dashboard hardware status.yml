@@ -2,6 +2,8 @@ info:
   name: Retrieve Nexus Dashboard hardware status
   type: http
   seq: 6
+  tags:
+    - System Status
 
 http:
   method: GET
@@ -43,6 +45,7 @@ examples:
           description: Node Name
           disabled: true
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -139,6 +142,7 @@ examples:
           description: Node Name
           disabled: true
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -168,6 +172,7 @@ examples:
           description: Node Name
           disabled: true
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -197,6 +202,7 @@ examples:
           description: Node Name
           disabled: true
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -226,6 +232,7 @@ examples:
           description: Node Name
           disabled: true
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

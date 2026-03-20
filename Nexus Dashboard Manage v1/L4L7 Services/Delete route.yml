@@ -2,6 +2,8 @@ info:
   name: Delete route
   type: http
   seq: 32
+  tags:
+    - L4L7 Services
 
 http:
   method: DELETE
@@ -39,6 +41,7 @@ examples:
           type: path
           description: Name of the fabric
     response:
+      status: 204
       statusText: No Content
       body:
         type: text
@@ -58,6 +61,7 @@ examples:
           type: path
           description: Name of the fabric
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -85,6 +89,7 @@ examples:
           type: path
           description: Name of the fabric
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -112,6 +117,7 @@ examples:
           type: path
           description: Name of the fabric
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -139,6 +145,7 @@ examples:
           type: path
           description: Name of the fabric
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -166,6 +173,7 @@ examples:
           type: path
           description: Name of the fabric
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

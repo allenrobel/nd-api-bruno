@@ -2,6 +2,8 @@ info:
   name: Get ticket configuration preview
   type: http
   seq: 10
+  tags:
+    - Change Control
 
 http:
   method: GET
@@ -41,6 +43,7 @@ examples:
           type: path
           description: Change Control Ticket Id
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -51,7 +54,7 @@ examples:
           {
             "items": [
               {
-                "briefCount": 7,
+                "briefCount": 3,
                 "deployMode": "config",
                 "diffConfigs": [
                   {
@@ -77,7 +80,9 @@ examples:
                     ],
                     "entityName": "SWITCH",
                     "entityStatus": "outOfSync",
-                    "entityType": "SWITCH"
+                    "entityType": "SWITCH",
+                    "secondaryEntityName": "",
+                    "secondaryEntityType": ""
                   },
                   {
                     "commands": [
@@ -86,23 +91,25 @@ examples:
                     ],
                     "entityName": "SWITCH",
                     "entityStatus": "outOfSync",
-                    "entityType": "SWITCH"
+                    "entityType": "SWITCH",
+                    "secondaryEntityName": "",
+                    "secondaryEntityType": ""
                   }
                 ],
-                "expectedConfig": [
+                "expectedConfigs": [
                   "..."
                 ],
                 "fabricName": "MyFabric",
-                "pendingConfig": [
+                "pendingConfigs": [
                   "feature bgp",
                   "no feature dhcp",
                   "configure terminal"
                 ],
-                "runningConfig": [
+                "runningConfigs": [
                   "..."
                 ],
                 "status": "outOfSync",
-                "statusMessage": "outOfSync",
+                "statusMessage": "Out of Sync",
                 "switchId": "SAL18432P2T",
                 "switchIp": "1.1.1.1",
                 "switchName": "Leaf1",
@@ -126,6 +133,7 @@ examples:
           type: path
           description: Change Control Ticket Id
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -154,6 +162,7 @@ examples:
           type: path
           description: Change Control Ticket Id
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -182,6 +191,7 @@ examples:
           type: path
           description: Change Control Ticket Id
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -210,6 +220,7 @@ examples:
           type: path
           description: Change Control Ticket Id
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -238,6 +249,7 @@ examples:
           type: path
           description: Change Control Ticket Id
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

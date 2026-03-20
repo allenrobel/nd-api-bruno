@@ -1,0 +1,845 @@
+info:
+  name: Get advisory level summary
+  type: http
+  seq: 3
+  tags:
+    - Anomalies and Advisories
+
+http:
+  method: GET
+  url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/advisories/summary"
+  params:
+    - name: clusterName
+      value: ""
+      type: query
+      description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+      disabled: true
+    - name: fabricName
+      value: ""
+      type: query
+      description: Name of the fabric
+      disabled: true
+    - name: filter
+      value: ""
+      type: query
+      description: Lucene format filter - Filter the response based on this filter field
+      disabled: true
+    - name: nodeName
+      value: ""
+      type: query
+      description: Name of the fabric node, limit the anomaly score to given nodeName
+      disabled: true
+    - name: offset
+      value: ""
+      type: query
+      description: Number of records to skip for pagination
+      disabled: true
+    - name: max
+      value: ""
+      type: query
+      description: Number of records to return
+      disabled: true
+    - name: endDate
+      value: ""
+      type: query
+      description: End date
+      disabled: true
+    - name: sort
+      value: ""
+      type: query
+      description: |
+        Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+        Ascending order by default: "field1"
+        Specific order for one field: "field1:asc" or "field1:desc"
+        Specific order with multiple fields: "field1:asc,field2:desc"
+      disabled: true
+    - name: startDate
+      value: ""
+      type: query
+      description: Start date
+      disabled: true
+    - name: fabricStatus
+      value: all
+      type: query
+      description: Filter by fabric status (online, offline, all)
+      disabled: true
+    - name: fabricStatus
+      value: online
+      type: query
+      description: Filter by fabric status (online, offline, all)
+      disabled: true
+    - name: fabricStatus
+      value: offline
+      type: query
+      description: Filter by fabric status (online, offline, all)
+      disabled: true
+    - name: groupBy
+      value: ""
+      type: query
+      description: Aggregate records by this field
+      disabled: true
+    - name: featureSet
+      value: fabricManagement
+      type: query
+      description: Which feature set version are we filtering for
+      disabled: true
+    - name: featureSet
+      value: telemetry
+      type: query
+      description: Which feature set version are we filtering for
+      disabled: true
+    - name: featureSet
+      value: orchestration
+      type: query
+      description: Which feature set version are we filtering for
+      disabled: true
+    - name: snapshotFabricName
+      value: ""
+      type: query
+      description: Name of the snapshot fabric, used for demos or test purposes only
+      disabled: true
+    - name: includeSystemAdvisories
+      value: ""
+      type: query
+      description: When true, System advisories for the Nexus Dashboard cluster will be included.
+      disabled: true
+    - name: includeSuspendedAlerts
+      value: ""
+      type: query
+      description: If true, include suspended alerts in the response. If false or not provided, do not return suspended alerts in the response.
+      disabled: true
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: OK
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/advisories/summary"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
+        - name: nodeName
+          value: ""
+          type: query
+          description: Name of the fabric node, limit the anomaly score to given nodeName
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: fabricStatus
+          value: all
+          type: query
+          description: Filter by fabric status (online, offline, all)
+          disabled: true
+        - name: fabricStatus
+          value: online
+          type: query
+          description: Filter by fabric status (online, offline, all)
+          disabled: true
+        - name: fabricStatus
+          value: offline
+          type: query
+          description: Filter by fabric status (online, offline, all)
+          disabled: true
+        - name: groupBy
+          value: ""
+          type: query
+          description: Aggregate records by this field
+          disabled: true
+        - name: featureSet
+          value: fabricManagement
+          type: query
+          description: Which feature set version are we filtering for
+          disabled: true
+        - name: featureSet
+          value: telemetry
+          type: query
+          description: Which feature set version are we filtering for
+          disabled: true
+        - name: featureSet
+          value: orchestration
+          type: query
+          description: Which feature set version are we filtering for
+          disabled: true
+        - name: snapshotFabricName
+          value: ""
+          type: query
+          description: Name of the snapshot fabric, used for demos or test purposes only
+          disabled: true
+        - name: includeSystemAdvisories
+          value: ""
+          type: query
+          description: When true, System advisories for the Nexus Dashboard cluster will be included.
+          disabled: true
+        - name: includeSuspendedAlerts
+          value: ""
+          type: query
+          description: If true, include suspended alerts in the response. If false or not provided, do not return suspended alerts in the response.
+          disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "totalAdvisoryScore": 83,
+            "advisoryScore": 83,
+            "advisories": [
+              {
+                "category": "hardwareEndOfLife",
+                "advisoryCount": 1,
+                "advisoryScore": 83
+              },
+              {
+                "category": "security",
+                "advisoryCount": 1,
+                "advisoryScore": 61
+              }
+            ],
+            "totalAdvisoryCount": 2
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/advisories/summary"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
+        - name: nodeName
+          value: ""
+          type: query
+          description: Name of the fabric node, limit the anomaly score to given nodeName
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: fabricStatus
+          value: all
+          type: query
+          description: Filter by fabric status (online, offline, all)
+          disabled: true
+        - name: fabricStatus
+          value: online
+          type: query
+          description: Filter by fabric status (online, offline, all)
+          disabled: true
+        - name: fabricStatus
+          value: offline
+          type: query
+          description: Filter by fabric status (online, offline, all)
+          disabled: true
+        - name: groupBy
+          value: ""
+          type: query
+          description: Aggregate records by this field
+          disabled: true
+        - name: featureSet
+          value: fabricManagement
+          type: query
+          description: Which feature set version are we filtering for
+          disabled: true
+        - name: featureSet
+          value: telemetry
+          type: query
+          description: Which feature set version are we filtering for
+          disabled: true
+        - name: featureSet
+          value: orchestration
+          type: query
+          description: Which feature set version are we filtering for
+          disabled: true
+        - name: snapshotFabricName
+          value: ""
+          type: query
+          description: Name of the snapshot fabric, used for demos or test purposes only
+          disabled: true
+        - name: includeSystemAdvisories
+          value: ""
+          type: query
+          description: When true, System advisories for the Nexus Dashboard cluster will be included.
+          disabled: true
+        - name: includeSuspendedAlerts
+          value: ""
+          type: query
+          description: If true, include suspended alerts in the response. If false or not provided, do not return suspended alerts in the response.
+          disabled: true
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/advisories/summary"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
+        - name: nodeName
+          value: ""
+          type: query
+          description: Name of the fabric node, limit the anomaly score to given nodeName
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: fabricStatus
+          value: all
+          type: query
+          description: Filter by fabric status (online, offline, all)
+          disabled: true
+        - name: fabricStatus
+          value: online
+          type: query
+          description: Filter by fabric status (online, offline, all)
+          disabled: true
+        - name: fabricStatus
+          value: offline
+          type: query
+          description: Filter by fabric status (online, offline, all)
+          disabled: true
+        - name: groupBy
+          value: ""
+          type: query
+          description: Aggregate records by this field
+          disabled: true
+        - name: featureSet
+          value: fabricManagement
+          type: query
+          description: Which feature set version are we filtering for
+          disabled: true
+        - name: featureSet
+          value: telemetry
+          type: query
+          description: Which feature set version are we filtering for
+          disabled: true
+        - name: featureSet
+          value: orchestration
+          type: query
+          description: Which feature set version are we filtering for
+          disabled: true
+        - name: snapshotFabricName
+          value: ""
+          type: query
+          description: Name of the snapshot fabric, used for demos or test purposes only
+          disabled: true
+        - name: includeSystemAdvisories
+          value: ""
+          type: query
+          description: When true, System advisories for the Nexus Dashboard cluster will be included.
+          disabled: true
+        - name: includeSuspendedAlerts
+          value: ""
+          type: query
+          description: If true, include suspended alerts in the response. If false or not provided, do not return suspended alerts in the response.
+          disabled: true
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 403 Response
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/advisories/summary"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
+        - name: nodeName
+          value: ""
+          type: query
+          description: Name of the fabric node, limit the anomaly score to given nodeName
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: fabricStatus
+          value: all
+          type: query
+          description: Filter by fabric status (online, offline, all)
+          disabled: true
+        - name: fabricStatus
+          value: online
+          type: query
+          description: Filter by fabric status (online, offline, all)
+          disabled: true
+        - name: fabricStatus
+          value: offline
+          type: query
+          description: Filter by fabric status (online, offline, all)
+          disabled: true
+        - name: groupBy
+          value: ""
+          type: query
+          description: Aggregate records by this field
+          disabled: true
+        - name: featureSet
+          value: fabricManagement
+          type: query
+          description: Which feature set version are we filtering for
+          disabled: true
+        - name: featureSet
+          value: telemetry
+          type: query
+          description: Which feature set version are we filtering for
+          disabled: true
+        - name: featureSet
+          value: orchestration
+          type: query
+          description: Which feature set version are we filtering for
+          disabled: true
+        - name: snapshotFabricName
+          value: ""
+          type: query
+          description: Name of the snapshot fabric, used for demos or test purposes only
+          disabled: true
+        - name: includeSystemAdvisories
+          value: ""
+          type: query
+          description: When true, System advisories for the Nexus Dashboard cluster will be included.
+          disabled: true
+        - name: includeSuspendedAlerts
+          value: ""
+          type: query
+          description: If true, include suspended alerts in the response. If false or not provided, do not return suspended alerts in the response.
+          disabled: true
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 404 Response
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/advisories/summary"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
+        - name: nodeName
+          value: ""
+          type: query
+          description: Name of the fabric node, limit the anomaly score to given nodeName
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: fabricStatus
+          value: all
+          type: query
+          description: Filter by fabric status (online, offline, all)
+          disabled: true
+        - name: fabricStatus
+          value: online
+          type: query
+          description: Filter by fabric status (online, offline, all)
+          disabled: true
+        - name: fabricStatus
+          value: offline
+          type: query
+          description: Filter by fabric status (online, offline, all)
+          disabled: true
+        - name: groupBy
+          value: ""
+          type: query
+          description: Aggregate records by this field
+          disabled: true
+        - name: featureSet
+          value: fabricManagement
+          type: query
+          description: Which feature set version are we filtering for
+          disabled: true
+        - name: featureSet
+          value: telemetry
+          type: query
+          description: Which feature set version are we filtering for
+          disabled: true
+        - name: featureSet
+          value: orchestration
+          type: query
+          description: Which feature set version are we filtering for
+          disabled: true
+        - name: snapshotFabricName
+          value: ""
+          type: query
+          description: Name of the snapshot fabric, used for demos or test purposes only
+          disabled: true
+        - name: includeSystemAdvisories
+          value: ""
+          type: query
+          description: When true, System advisories for the Nexus Dashboard cluster will be included.
+          disabled: true
+        - name: includeSuspendedAlerts
+          value: ""
+          type: query
+          description: If true, include suspended alerts in the response. If false or not provided, do not return suspended alerts in the response.
+          disabled: true
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 500 Response
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/advisories/summary"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
+        - name: nodeName
+          value: ""
+          type: query
+          description: Name of the fabric node, limit the anomaly score to given nodeName
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: fabricStatus
+          value: all
+          type: query
+          description: Filter by fabric status (online, offline, all)
+          disabled: true
+        - name: fabricStatus
+          value: online
+          type: query
+          description: Filter by fabric status (online, offline, all)
+          disabled: true
+        - name: fabricStatus
+          value: offline
+          type: query
+          description: Filter by fabric status (online, offline, all)
+          disabled: true
+        - name: groupBy
+          value: ""
+          type: query
+          description: Aggregate records by this field
+          disabled: true
+        - name: featureSet
+          value: fabricManagement
+          type: query
+          description: Which feature set version are we filtering for
+          disabled: true
+        - name: featureSet
+          value: telemetry
+          type: query
+          description: Which feature set version are we filtering for
+          disabled: true
+        - name: featureSet
+          value: orchestration
+          type: query
+          description: Which feature set version are we filtering for
+          disabled: true
+        - name: snapshotFabricName
+          value: ""
+          type: query
+          description: Name of the snapshot fabric, used for demos or test purposes only
+          disabled: true
+        - name: includeSystemAdvisories
+          value: ""
+          type: query
+          description: When true, System advisories for the Nexus Dashboard cluster will be included.
+          disabled: true
+        - name: includeSuspendedAlerts
+          value: ""
+          type: query
+          description: If true, include suspended alerts in the response. If false or not provided, do not return suspended alerts in the response.
+          disabled: true
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }

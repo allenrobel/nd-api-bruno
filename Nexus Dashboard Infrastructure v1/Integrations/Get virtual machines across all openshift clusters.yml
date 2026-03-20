@@ -2,6 +2,8 @@ info:
   name: Get virtual machines across all openshift clusters
   type: http
   seq: 57
+  tags:
+    - Integrations
 
 http:
   method: GET
@@ -93,6 +95,7 @@ examples:
           description: Virtual Machine Instance UUID
           disabled: true
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -103,36 +106,40 @@ examples:
           {
             "data": [
               {
-                "state": "",
-                "fabricName": "",
-                "switchName": "",
-                "computeId": "",
-                "computeName": "",
-                "vmId": "",
-                "vmName": "",
-                "vmHostname": "",
-                "tenantName": "",
-                "ipCollections": [],
-                "macCollections": [],
-                "vlanId": "",
-                "vSwitch": "",
-                "physicalNic": "",
-                "switchInterfaceName": "",
-                "virtualPortChannelId": 0,
-                "portChannelId": 0,
-                "guestOs": "",
-                "datacenter": "",
-                "clusterName": "",
-                "cpuUtilization": "",
-                "memoryUtilization": "",
-                "diskUsage": "",
-                "networkState": "",
-                "vCenterIp": "",
-                "networkName": "",
-                "vrfName": "",
-                "vmNicName": "",
-                "portGroupName": "",
-                "distributedPortGroupName": ""
+                "state": "connected",
+                "fabricName": "MyFabric",
+                "switchName": "padkrish-9-245",
+                "computeId": "FAED",
+                "computeName": "ocp-node-1",
+                "vmId": "fe6e6c74-b548-45aa-bcb1-fda9dfd3aaca",
+                "vmName": "centos-stream9-lime-nightingale-22",
+                "vmHostname": "centos-stream9-lime-nightingale-22",
+                "tenantName": "TenantA",
+                "ipCollections": [
+                  "10.1.1.2"
+                ],
+                "macCollections": [
+                  "00:30:66:9d:80:69"
+                ],
+                "vlanId": "61",
+                "vSwitch": "vSwitch3",
+                "physicalNic": "vmnic4",
+                "switchInterfaceName": "Ethernet1/5",
+                "virtualPortChannelId": 1,
+                "portChannelId": 501,
+                "guestOs": "Ubuntu linux (64-bit)",
+                "datacenter": "DC1",
+                "clusterName": "cluster1",
+                "cpuUtilization": "8.53GHz",
+                "memoryUtilization": "2.05GB",
+                "diskUsage": "54GB",
+                "networkState": "connected",
+                "vCenterIp": "192.268.19.45",
+                "networkName": "MyNetwork",
+                "vrfName": "MyVRF",
+                "vmNicName": "Network adapter 1",
+                "portGroupName": "DualPort_PG50",
+                "distributedPortGroupName": "DVS_PG_150"
               }
             ]
           }
@@ -178,6 +185,7 @@ examples:
           description: Virtual Machine Instance UUID
           disabled: true
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -232,6 +240,7 @@ examples:
           description: Virtual Machine Instance UUID
           disabled: true
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -286,6 +295,7 @@ examples:
           description: Virtual Machine Instance UUID
           disabled: true
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -340,6 +350,7 @@ examples:
           description: Virtual Machine Instance UUID
           disabled: true
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -394,6 +405,7 @@ examples:
           description: Virtual Machine Instance UUID
           disabled: true
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

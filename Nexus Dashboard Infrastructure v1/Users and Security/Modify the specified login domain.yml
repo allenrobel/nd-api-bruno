@@ -2,6 +2,8 @@ info:
   name: Modify the specified login domain
   type: http
   seq: 19
+  tags:
+    - Users and Security
 
 http:
   method: PUT
@@ -20,10 +22,45 @@ http:
     type: json
     data: |-
       {
-        "description": "",
-        "domain": "",
-        "realm": "",
-        "servers": ""
+        "description": "Single Provider LDAP AD Group Payload",
+        "domain": "LDAPWithADGroup",
+        "realm": "LDAP",
+        "servers": {
+          "ldap": {
+            "adGroup": {
+              "Configured AD Group": {
+                "domains": {
+                  "all": {
+                    "roles": [
+                      "Approver"
+                    ]
+                  }
+                }
+              }
+            },
+            "option": "LDAPGroupMap",
+            "providers": {
+              "1.2.3.4": {
+                "attribute": "Configured attribute",
+                "baseDN": "Configured BaseDN",
+                "bindDN": "Configured BindDN",
+                "description": "LDAP Provider",
+                "filterDN": "(sAMAccountName={username})",
+                "key": "XXXXXXXXXX",
+                "monitor": false,
+                "monitorPassword": "",
+                "monitorUsername": "",
+                "port": 389,
+                "priority": 0,
+                "retries": 5,
+                "sslCert": "",
+                "sslEnabled": false,
+                "sslStrictnessLevel": "Strict",
+                "timeout": 50
+              }
+            }
+          }
+        }
       }
   auth: inherit
 
@@ -94,6 +131,7 @@ examples:
             }
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -202,6 +240,7 @@ examples:
             }
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -274,6 +313,7 @@ examples:
             }
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -346,6 +386,7 @@ examples:
             }
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -418,6 +459,7 @@ examples:
             }
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -490,6 +532,7 @@ examples:
             }
           }
     response:
+      status: 429
       statusText: Too Many Requests
       headers:
         - name: Content-Type
@@ -562,6 +605,7 @@ examples:
             }
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

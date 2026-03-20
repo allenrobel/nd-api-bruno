@@ -2,6 +2,8 @@ info:
   name: Software management upgrade versions
   type: http
   seq: 12
+  tags:
+    - Fabric Software Management
 
 http:
   method: GET
@@ -18,7 +20,12 @@ http:
       description: Name of the fabric
       disabled: true
     - name: deviceType
-      value: ""
+      value: controller
+      type: query
+      description: Device type
+      disabled: true
+    - name: deviceType
+      value: switch
       type: query
       description: Device type
       disabled: true
@@ -28,7 +35,12 @@ http:
       description: Software version for controller upgrade
       disabled: true
     - name: platformType
-      value: ""
+      value: aci
+      type: query
+      description: Platform type of the switches
+      disabled: true
+    - name: platformType
+      value: nx-os
       type: query
       description: Platform type of the switches
       disabled: true
@@ -58,7 +70,12 @@ examples:
           description: Name of the fabric
           disabled: true
         - name: deviceType
-          value: ""
+          value: controller
+          type: query
+          description: Device type
+          disabled: true
+        - name: deviceType
+          value: switch
           type: query
           description: Device type
           disabled: true
@@ -68,11 +85,17 @@ examples:
           description: Software version for controller upgrade
           disabled: true
         - name: platformType
-          value: ""
+          value: aci
+          type: query
+          description: Platform type of the switches
+          disabled: true
+        - name: platformType
+          value: nx-os
           type: query
           description: Platform type of the switches
           disabled: true
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -106,7 +129,12 @@ examples:
           description: Name of the fabric
           disabled: true
         - name: deviceType
-          value: ""
+          value: controller
+          type: query
+          description: Device type
+          disabled: true
+        - name: deviceType
+          value: switch
           type: query
           description: Device type
           disabled: true
@@ -116,11 +144,17 @@ examples:
           description: Software version for controller upgrade
           disabled: true
         - name: platformType
-          value: ""
+          value: aci
+          type: query
+          description: Platform type of the switches
+          disabled: true
+        - name: platformType
+          value: nx-os
           type: query
           description: Platform type of the switches
           disabled: true
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -150,7 +184,12 @@ examples:
           description: Name of the fabric
           disabled: true
         - name: deviceType
-          value: ""
+          value: controller
+          type: query
+          description: Device type
+          disabled: true
+        - name: deviceType
+          value: switch
           type: query
           description: Device type
           disabled: true
@@ -160,11 +199,17 @@ examples:
           description: Software version for controller upgrade
           disabled: true
         - name: platformType
-          value: ""
+          value: aci
+          type: query
+          description: Platform type of the switches
+          disabled: true
+        - name: platformType
+          value: nx-os
           type: query
           description: Platform type of the switches
           disabled: true
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -194,7 +239,12 @@ examples:
           description: Name of the fabric
           disabled: true
         - name: deviceType
-          value: ""
+          value: controller
+          type: query
+          description: Device type
+          disabled: true
+        - name: deviceType
+          value: switch
           type: query
           description: Device type
           disabled: true
@@ -204,11 +254,17 @@ examples:
           description: Software version for controller upgrade
           disabled: true
         - name: platformType
-          value: ""
+          value: aci
+          type: query
+          description: Platform type of the switches
+          disabled: true
+        - name: platformType
+          value: nx-os
           type: query
           description: Platform type of the switches
           disabled: true
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -238,7 +294,12 @@ examples:
           description: Name of the fabric
           disabled: true
         - name: deviceType
-          value: ""
+          value: controller
+          type: query
+          description: Device type
+          disabled: true
+        - name: deviceType
+          value: switch
           type: query
           description: Device type
           disabled: true
@@ -248,11 +309,17 @@ examples:
           description: Software version for controller upgrade
           disabled: true
         - name: platformType
-          value: ""
+          value: aci
+          type: query
+          description: Platform type of the switches
+          disabled: true
+        - name: platformType
+          value: nx-os
           type: query
           description: Platform type of the switches
           disabled: true
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

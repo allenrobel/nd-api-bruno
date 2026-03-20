@@ -2,6 +2,8 @@ info:
   name: Bulk create layer-3 outs
   type: http
   seq: 45
+  tags:
+    - Routing Policies
 
 http:
   method: POST
@@ -18,19 +20,96 @@ http:
       {
         "l3Outs": [
           {
-            "name": "",
-            "attach": false,
-            "fabric1Name": "",
-            "fabric2Name": "",
-            "vrf1Name": "",
-            "vrf2Name": "",
-            "tenant1Name": "",
-            "tenant2Name": "",
-            "configuredFabrics": "",
-            "lastUpdateTimestamp": "",
-            "ipVersion": "",
-            "connectivityDetails": {},
-            "routingDetails": {}
+            "attach": true,
+            "configuredFabrics": "both",
+            "connectivityDetails": {
+              "links": [
+                {
+                  "ipv4MaskLength": 30,
+                  "mtu": 9216,
+                  "switch1Details": {
+                    "interfaceName": "Ethernet1/1",
+                    "ipv4Address": "10.10.10.1",
+                    "switchId": "FDO245206N6"
+                  },
+                  "switch2Details": {
+                    "interfaceName": "Ethernet1/2",
+                    "ipv4Address": "10.10.10.2",
+                    "switchId": "FDO245206N7"
+                  }
+                }
+              ],
+              "routingInterfaceType": "routed"
+            },
+            "fabric1Name": "FabricA",
+            "fabric2Name": "FabricB",
+            "ipVersion": "ipv4",
+            "name": "L3Out1",
+            "routingDetails": {
+              "fabric1Details": {
+                "ipv4PeeringDetails": {
+                  "ipv4RouteMapIn": "routeMapIn1",
+                  "ipv4RouteMapOut": "routeMapOut1"
+                },
+                "localAsn": "65001"
+              },
+              "fabric2Details": {
+                "asOverride": true,
+                "holdInterval": 200,
+                "ipv4PeeringDetails": {
+                  "ipv4RouteMapIn": "routeMapIn2",
+                  "ipv4RouteMapOut": "routeMapOut2"
+                },
+                "keepAliveInterval": 60,
+                "logNeighborChange": true
+              },
+              "routingProtocol": "bgp"
+            },
+            "vrf1Name": "VRF1",
+            "vrf2Name": "VRF2"
+          },
+          {
+            "attach": true,
+            "configuredFabrics": "fabric1",
+            "connectivityDetails": {
+              "links": [
+                {
+                  "dot1qId": 200,
+                  "ipv6PrefixLength": 126,
+                  "mtu": 9216,
+                  "switch1Details": {
+                    "interfaceName": "Ethernet2/1.200",
+                    "ipv6Address": "2001:db8:10::1",
+                    "switchId": "FDO245206N8"
+                  },
+                  "switch2Details": {
+                    "interfaceName": "Ethernet2/2.200",
+                    "ipv6Address": "2001:db8:10::2",
+                    "switchId": "FDO245206N9"
+                  }
+                }
+              ],
+              "routingInterfaceType": "subInterface"
+            },
+            "fabric1Name": "FabricC",
+            "fabric2Name": "FabricD",
+            "ipVersion": "ipv6",
+            "name": "L3Out2",
+            "routingDetails": {
+              "fabric1StaticRoutes": [
+                {
+                  "ipPrefix": "0::/0",
+                  "ipVersion": "ipv6",
+                  "nextHop": "2001:db8:10::2",
+                  "switchIds": [
+                    "FDO245206N8"
+                  ]
+                }
+              ],
+              "routingProtocol": "static"
+            },
+            "vrf1Name": "VRF3",
+            "vrf2Name": "VRF4"
           }
         ]
       }
@@ -154,6 +233,7 @@ examples:
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -237,6 +317,7 @@ examples:
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -364,6 +445,7 @@ examples:
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -443,6 +525,7 @@ examples:
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -566,6 +649,7 @@ examples:
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -645,6 +729,7 @@ examples:
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -768,6 +853,7 @@ examples:
             ]
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -847,6 +933,7 @@ examples:
             ]
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -970,6 +1057,7 @@ examples:
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -1049,6 +1137,7 @@ examples:
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -1172,6 +1261,7 @@ examples:
             ]
           }
     response:
+      status: 409
       statusText: Conflict
       headers:
         - name: Content-Type
@@ -1251,6 +1341,7 @@ examples:
             ]
           }
     response:
+      status: 409
       statusText: Conflict
       headers:
         - name: Content-Type
@@ -1374,6 +1465,7 @@ examples:
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type
@@ -1453,6 +1545,7 @@ examples:
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

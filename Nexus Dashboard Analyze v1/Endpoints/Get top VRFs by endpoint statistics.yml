@@ -1,0 +1,630 @@
+info:
+  name: Get top VRFs by endpoint statistics
+  type: http
+  seq: 9
+  tags:
+    - Endpoints
+
+http:
+  method: GET
+  url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivity/endpoints/statistics"
+  params:
+    - name: clusterName
+      value: ""
+      type: query
+      description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+      disabled: true
+    - name: fabricName
+      value: ""
+      type: query
+      description: Name of the fabric
+      disabled: true
+    - name: filter
+      value: ""
+      type: query
+      description: Lucene format filter - Filter the response based on this filter field
+      disabled: true
+    - name: max
+      value: ""
+      type: query
+      description: Number of records to return
+      disabled: true
+    - name: endpointStatisticName
+      value: totalEndpoints
+      type: query
+      description: The endpointStatisticName to get the top nodes by.
+      disabled: true
+    - name: endpointStatisticName
+      value: totalIPv4Endpoints
+      type: query
+      description: The endpointStatisticName to get the top nodes by.
+      disabled: true
+    - name: endpointStatisticName
+      value: totalIPv6Endpoints
+      type: query
+      description: The endpointStatisticName to get the top nodes by.
+      disabled: true
+    - name: endpointStatisticName
+      value: totalDualStackEndpoints
+      type: query
+      description: The endpointStatisticName to get the top nodes by.
+      disabled: true
+    - name: endpointStatisticName
+      value: totalDualHomeEndpoints
+      type: query
+      description: The endpointStatisticName to get the top nodes by.
+      disabled: true
+    - name: endpointStatisticName
+      value: totalL2Endpoints
+      type: query
+      description: The endpointStatisticName to get the top nodes by.
+      disabled: true
+    - name: endpointStatisticName
+      value: totalL3Endpoints
+      type: query
+      description: The endpointStatisticName to get the top nodes by.
+      disabled: true
+    - name: startDate
+      value: ""
+      type: query
+      description: Start date
+      disabled: true
+    - name: endDate
+      value: ""
+      type: query
+      description: End date
+      disabled: true
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: OK
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivity/endpoints/statistics"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: endpointStatisticName
+          value: totalEndpoints
+          type: query
+          description: The endpointStatisticName to get the top nodes by.
+          disabled: true
+        - name: endpointStatisticName
+          value: totalIPv4Endpoints
+          type: query
+          description: The endpointStatisticName to get the top nodes by.
+          disabled: true
+        - name: endpointStatisticName
+          value: totalIPv6Endpoints
+          type: query
+          description: The endpointStatisticName to get the top nodes by.
+          disabled: true
+        - name: endpointStatisticName
+          value: totalDualStackEndpoints
+          type: query
+          description: The endpointStatisticName to get the top nodes by.
+          disabled: true
+        - name: endpointStatisticName
+          value: totalDualHomeEndpoints
+          type: query
+          description: The endpointStatisticName to get the top nodes by.
+          disabled: true
+        - name: endpointStatisticName
+          value: totalL2Endpoints
+          type: query
+          description: The endpointStatisticName to get the top nodes by.
+          disabled: true
+        - name: endpointStatisticName
+          value: totalL3Endpoints
+          type: query
+          description: The endpointStatisticName to get the top nodes by.
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "endpointStatistics": [
+              {
+                "endpointStatisticName": "totalEndpoints",
+                "fabricName": "fabric1",
+                "statistics": [
+                  {
+                    "timestamp": "2024-07-26T10:00:00.00Z",
+                    "value": 100
+                  },
+                  {
+                    "timestamp": "2024-07-27T10:00:00.00Z",
+                    "value": 150
+                  }
+                ],
+                "tenantName": "tenant1",
+                "trending": "up",
+                "value": "150",
+                "vrfName": "ctx1_changed"
+              },
+              {
+                "endpointStatisticName": "totalEndpoints",
+                "fabricName": "fabric1",
+                "statistics": [
+                  {
+                    "timestamp": "2024-07-26T06:58:49.445Z",
+                    "value": 200
+                  },
+                  {
+                    "timestamp": "2024-07-27T06:58:49.445Z",
+                    "value": 180
+                  }
+                ],
+                "tenantName": "tenant2",
+                "trending": "down",
+                "value": "180",
+                "vrfName": "vrf2"
+              }
+            ]
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivity/endpoints/statistics"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: endpointStatisticName
+          value: totalEndpoints
+          type: query
+          description: The endpointStatisticName to get the top nodes by.
+          disabled: true
+        - name: endpointStatisticName
+          value: totalIPv4Endpoints
+          type: query
+          description: The endpointStatisticName to get the top nodes by.
+          disabled: true
+        - name: endpointStatisticName
+          value: totalIPv6Endpoints
+          type: query
+          description: The endpointStatisticName to get the top nodes by.
+          disabled: true
+        - name: endpointStatisticName
+          value: totalDualStackEndpoints
+          type: query
+          description: The endpointStatisticName to get the top nodes by.
+          disabled: true
+        - name: endpointStatisticName
+          value: totalDualHomeEndpoints
+          type: query
+          description: The endpointStatisticName to get the top nodes by.
+          disabled: true
+        - name: endpointStatisticName
+          value: totalL2Endpoints
+          type: query
+          description: The endpointStatisticName to get the top nodes by.
+          disabled: true
+        - name: endpointStatisticName
+          value: totalL3Endpoints
+          type: query
+          description: The endpointStatisticName to get the top nodes by.
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivity/endpoints/statistics"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: endpointStatisticName
+          value: totalEndpoints
+          type: query
+          description: The endpointStatisticName to get the top nodes by.
+          disabled: true
+        - name: endpointStatisticName
+          value: totalIPv4Endpoints
+          type: query
+          description: The endpointStatisticName to get the top nodes by.
+          disabled: true
+        - name: endpointStatisticName
+          value: totalIPv6Endpoints
+          type: query
+          description: The endpointStatisticName to get the top nodes by.
+          disabled: true
+        - name: endpointStatisticName
+          value: totalDualStackEndpoints
+          type: query
+          description: The endpointStatisticName to get the top nodes by.
+          disabled: true
+        - name: endpointStatisticName
+          value: totalDualHomeEndpoints
+          type: query
+          description: The endpointStatisticName to get the top nodes by.
+          disabled: true
+        - name: endpointStatisticName
+          value: totalL2Endpoints
+          type: query
+          description: The endpointStatisticName to get the top nodes by.
+          disabled: true
+        - name: endpointStatisticName
+          value: totalL3Endpoints
+          type: query
+          description: The endpointStatisticName to get the top nodes by.
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 403 Response
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivity/endpoints/statistics"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: endpointStatisticName
+          value: totalEndpoints
+          type: query
+          description: The endpointStatisticName to get the top nodes by.
+          disabled: true
+        - name: endpointStatisticName
+          value: totalIPv4Endpoints
+          type: query
+          description: The endpointStatisticName to get the top nodes by.
+          disabled: true
+        - name: endpointStatisticName
+          value: totalIPv6Endpoints
+          type: query
+          description: The endpointStatisticName to get the top nodes by.
+          disabled: true
+        - name: endpointStatisticName
+          value: totalDualStackEndpoints
+          type: query
+          description: The endpointStatisticName to get the top nodes by.
+          disabled: true
+        - name: endpointStatisticName
+          value: totalDualHomeEndpoints
+          type: query
+          description: The endpointStatisticName to get the top nodes by.
+          disabled: true
+        - name: endpointStatisticName
+          value: totalL2Endpoints
+          type: query
+          description: The endpointStatisticName to get the top nodes by.
+          disabled: true
+        - name: endpointStatisticName
+          value: totalL3Endpoints
+          type: query
+          description: The endpointStatisticName to get the top nodes by.
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 404 Response
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivity/endpoints/statistics"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: endpointStatisticName
+          value: totalEndpoints
+          type: query
+          description: The endpointStatisticName to get the top nodes by.
+          disabled: true
+        - name: endpointStatisticName
+          value: totalIPv4Endpoints
+          type: query
+          description: The endpointStatisticName to get the top nodes by.
+          disabled: true
+        - name: endpointStatisticName
+          value: totalIPv6Endpoints
+          type: query
+          description: The endpointStatisticName to get the top nodes by.
+          disabled: true
+        - name: endpointStatisticName
+          value: totalDualStackEndpoints
+          type: query
+          description: The endpointStatisticName to get the top nodes by.
+          disabled: true
+        - name: endpointStatisticName
+          value: totalDualHomeEndpoints
+          type: query
+          description: The endpointStatisticName to get the top nodes by.
+          disabled: true
+        - name: endpointStatisticName
+          value: totalL2Endpoints
+          type: query
+          description: The endpointStatisticName to get the top nodes by.
+          disabled: true
+        - name: endpointStatisticName
+          value: totalL3Endpoints
+          type: query
+          description: The endpointStatisticName to get the top nodes by.
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 500 Response
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivity/endpoints/statistics"
+      method: GET
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+        - name: endpointStatisticName
+          value: totalEndpoints
+          type: query
+          description: The endpointStatisticName to get the top nodes by.
+          disabled: true
+        - name: endpointStatisticName
+          value: totalIPv4Endpoints
+          type: query
+          description: The endpointStatisticName to get the top nodes by.
+          disabled: true
+        - name: endpointStatisticName
+          value: totalIPv6Endpoints
+          type: query
+          description: The endpointStatisticName to get the top nodes by.
+          disabled: true
+        - name: endpointStatisticName
+          value: totalDualStackEndpoints
+          type: query
+          description: The endpointStatisticName to get the top nodes by.
+          disabled: true
+        - name: endpointStatisticName
+          value: totalDualHomeEndpoints
+          type: query
+          description: The endpointStatisticName to get the top nodes by.
+          disabled: true
+        - name: endpointStatisticName
+          value: totalL2Endpoints
+          type: query
+          description: The endpointStatisticName to get the top nodes by.
+          disabled: true
+        - name: endpointStatisticName
+          value: totalL3Endpoints
+          type: query
+          description: The endpointStatisticName to get the top nodes by.
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }

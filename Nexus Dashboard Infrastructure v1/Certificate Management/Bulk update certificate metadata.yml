@@ -2,6 +2,8 @@ info:
   name: Bulk update certificate metadata
   type: http
   seq: 4
+  tags:
+    - Certificate Management
 
 http:
   method: POST
@@ -17,16 +19,22 @@ http:
     data: |-
       [
         {
-          "attachedSubjects": [],
-          "certificateDetail": "",
-          "certificateName": "",
-          "certificateType": "",
-          "expiresOn": "",
-          "ips": [],
-          "status": "",
-          "statusMessage": "",
-          "updateTime": "",
-          "version": 0
+          "attachedSubjects": [
+            "bootstrapServer"
+          ],
+          "certificateName": "test.pem",
+          "certificateType": "system"
+        },
+        {
+          "attachedSubjects": [
+            "switch1"
+          ],
+          "certificateName": "test1.crt",
+          "certificateType": "fabric",
+          "ips": [
+            "10.1.1.1",
+            "10.2.2.2"
+          ]
         }
       ]
   auth: inherit
@@ -73,6 +81,7 @@ examples:
             }
           ]
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -131,6 +140,7 @@ examples:
             }
           ]
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -178,6 +188,7 @@ examples:
             }
           ]
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -225,6 +236,7 @@ examples:
             }
           ]
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -272,6 +284,7 @@ examples:
             }
           ]
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

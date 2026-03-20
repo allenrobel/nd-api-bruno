@@ -2,6 +2,8 @@ info:
   name: Replace security association
   type: http
   seq: 10
+  tags:
+    - Security and Segmentation
 
 http:
   method: PUT
@@ -24,16 +26,15 @@ http:
     type: json
     data: |-
       {
-        "name": "",
-        "tenantName": "",
-        "displayName": "",
-        "description": "",
-        "contractName": "",
-        "srcSecurityGroupName": "",
-        "srcVrfName": "",
-        "dstSecurityGroupName": "",
-        "dstVrfName": "",
-        "attach": false
+        "attach": true,
+        "contractName": "tenantSales~deny-http",
+        "displayName": "MySecurityAssociation_10000",
+        "dstSecurityGroupName": "tenantSales~SG_20000",
+        "dstVrfName": "tenantSales~MyVRF_50000",
+        "name": "tenantSales~SA_10000",
+        "srcSecurityGroupName": "tenantSales~SG_10000",
+        "srcVrfName": "tenantSales~MyVRF_50000",
+        "tenantName": "tenantSales"
       }
   auth: inherit
 
@@ -78,6 +79,7 @@ examples:
             "tenantName": "tenantSales"
           }
     response:
+      status: 204
       statusText: No Content
       body:
         type: text
@@ -115,6 +117,7 @@ examples:
             "srcVrfName": "MyVRF_50000"
           }
     response:
+      status: 204
       statusText: No Content
       body:
         type: text
@@ -153,6 +156,7 @@ examples:
             "tenantName": "tenantSales"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -198,6 +202,7 @@ examples:
             "srcVrfName": "MyVRF_50000"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -244,6 +249,7 @@ examples:
             "tenantName": "tenantSales"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -289,6 +295,7 @@ examples:
             "srcVrfName": "MyVRF_50000"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -335,6 +342,7 @@ examples:
             "tenantName": "tenantSales"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -380,6 +388,7 @@ examples:
             "srcVrfName": "MyVRF_50000"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -426,6 +435,7 @@ examples:
             "tenantName": "tenantSales"
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -471,6 +481,7 @@ examples:
             "srcVrfName": "MyVRF_50000"
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -517,6 +528,7 @@ examples:
             "tenantName": "tenantSales"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type
@@ -562,6 +574,7 @@ examples:
             "srcVrfName": "MyVRF_50000"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

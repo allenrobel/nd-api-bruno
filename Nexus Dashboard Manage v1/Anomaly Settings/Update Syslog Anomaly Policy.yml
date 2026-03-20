@@ -2,6 +2,8 @@ info:
   name: Update Syslog Anomaly Policy
   type: http
   seq: 20
+  tags:
+    - Anomaly Settings
 
 http:
   method: PUT
@@ -20,21 +22,19 @@ http:
     type: json
     data: |-
       {
-        "anomalyType": "",
-        "commonAnomaly": {
-          "details": "",
-          "forwarding": "",
-          "isActive": false
-        },
-        "identifier": "",
-        "impact": "",
-        "policyName": "",
-        "recommendation": "",
-        "severity": "",
-        "syslogClear": "",
-        "syslogRaise": "",
-        "trigger": "",
-        "whatIsWrong": ""
+        "anomalyType": "syslog",
+        "details": "Policy to monitor",
+        "forwarding": "email",
+        "identifier": "$(ID)",
+        "impact": "Data connectivity for downed VLAN is affected",
+        "isActive": true,
+        "policyName": "Interface State",
+        "recommendation": "Bring up affected VLAN",
+        "severity": "minor",
+        "syslogClear": "PORT-5-IF_UP: $(VSAN) Interface $(ID) is up in mode $(MODE)",
+        "syslogRaise": "PORT-5-IF_DOWN_ADMIN_DOWN: $(VSAN) Interface $(ID) is down (Administratively down)",
+        "trigger": "A downed VLAN caused this issue",
+        "whatIsWrong": "A Port interface is down"
       }
   auth: inherit
 
@@ -79,6 +79,7 @@ examples:
             "whatIsWrong": "A Port interface is down"
           }
     response:
+      status: 204
       statusText: No Content
       body:
         type: text
@@ -117,6 +118,7 @@ examples:
             "whatIsWrong": "A Port interface is down"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -163,6 +165,7 @@ examples:
             "whatIsWrong": "A Port interface is down"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -209,6 +212,7 @@ examples:
             "whatIsWrong": "A Port interface is down"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -255,6 +259,7 @@ examples:
             "whatIsWrong": "A Port interface is down"
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -301,6 +306,7 @@ examples:
             "whatIsWrong": "A Port interface is down"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

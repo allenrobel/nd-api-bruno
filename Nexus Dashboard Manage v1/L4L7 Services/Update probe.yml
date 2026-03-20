@@ -2,6 +2,8 @@ info:
   name: Update probe
   type: http
   seq: 29
+  tags:
+    - L4L7 Services
 
 http:
   method: PUT
@@ -19,10 +21,18 @@ http:
     type: json
     data: |-
       {
-        "lastUpdateTimestamp": "",
-        "probeData": "",
-        "probeName": "",
-        "vrfName": ""
+        "probeData": {
+          "delayDown": 30,
+          "delayUp": 30,
+          "frequency": 8,
+          "probeDataType": "default",
+          "probe": true,
+          "protocol": "icmp",
+          "threshold": 6000,
+          "timeout": 7000
+        },
+        "probeName": "probe1",
+        "vrfName": "Vrf1"
       }
   auth: inherit
 
@@ -57,7 +67,7 @@ examples:
                 "delayDown": "30",
                 "delayUp": "30",
                 "probe": "true",
-                "frequency": "10",
+                "frequency": "8",
                 "httpGet": "",
                 "port": "443",
                 "protocol": "icmp",
@@ -73,6 +83,7 @@ examples:
             "vrfName": "Vrf1"
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -88,7 +99,7 @@ examples:
                 "delayDown": "30",
                 "delayUp": "30",
                 "probe": "true",
-                "frequency": "10",
+                "frequency": "8",
                 "httpGet": "",
                 "port": "443",
                 "protocol": "icmp",
@@ -123,17 +134,18 @@ examples:
             "probeData": {
               "delayDown": 30,
               "delayUp": 30,
-              "frequency": 10,
+              "frequency": 8,
               "probeDataType": "default",
               "probe": true,
               "protocol": "icmp",
-              "threshold": 10,
-              "timeout": 30
+              "threshold": 6000,
+              "timeout": 7000
             },
             "probeName": "probe1",
             "vrfName": "Vrf1"
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -145,12 +157,12 @@ examples:
             "probeData": {
               "delayDown": 30,
               "delayUp": 30,
-              "frequency": 10,
+              "frequency": 8,
               "probeDataType": "default",
               "probe": true,
               "protocol": "icmp",
-              "threshold": 10,
-              "timeout": 30
+              "threshold": 6000,
+              "timeout": 7000
             },
             "probeName": "probe1",
             "vrfName": "Vrf1"
@@ -180,7 +192,7 @@ examples:
                 "delayDown": "30",
                 "delayUp": "30",
                 "probe": "true",
-                "frequency": "10",
+                "frequency": "8",
                 "httpGet": "",
                 "port": "443",
                 "protocol": "icmp",
@@ -196,6 +208,7 @@ examples:
             "vrfName": "Vrf1"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -229,17 +242,18 @@ examples:
             "probeData": {
               "delayDown": 30,
               "delayUp": 30,
-              "frequency": 10,
+              "frequency": 8,
               "probeDataType": "default",
               "probe": true,
               "protocol": "icmp",
-              "threshold": 10,
-              "timeout": 30
+              "threshold": 6000,
+              "timeout": 7000
             },
             "probeName": "probe1",
             "vrfName": "Vrf1"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -277,7 +291,7 @@ examples:
                 "delayDown": "30",
                 "delayUp": "30",
                 "probe": "true",
-                "frequency": "10",
+                "frequency": "8",
                 "httpGet": "",
                 "port": "443",
                 "protocol": "icmp",
@@ -293,6 +307,7 @@ examples:
             "vrfName": "Vrf1"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -326,17 +341,18 @@ examples:
             "probeData": {
               "delayDown": 30,
               "delayUp": 30,
-              "frequency": 10,
+              "frequency": 8,
               "probeDataType": "default",
               "probe": true,
               "protocol": "icmp",
-              "threshold": 10,
-              "timeout": 30
+              "threshold": 6000,
+              "timeout": 7000
             },
             "probeName": "probe1",
             "vrfName": "Vrf1"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -374,7 +390,7 @@ examples:
                 "delayDown": "30",
                 "delayUp": "30",
                 "probe": "true",
-                "frequency": "10",
+                "frequency": "8",
                 "httpGet": "",
                 "port": "443",
                 "protocol": "icmp",
@@ -390,6 +406,7 @@ examples:
             "vrfName": "Vrf1"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -423,17 +440,18 @@ examples:
             "probeData": {
               "delayDown": 30,
               "delayUp": 30,
-              "frequency": 10,
+              "frequency": 8,
               "probeDataType": "default",
               "probe": true,
               "protocol": "icmp",
-              "threshold": 10,
-              "timeout": 30
+              "threshold": 6000,
+              "timeout": 7000
             },
             "probeName": "probe1",
             "vrfName": "Vrf1"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -471,7 +489,7 @@ examples:
                 "delayDown": "30",
                 "delayUp": "30",
                 "probe": "true",
-                "frequency": "10",
+                "frequency": "8",
                 "httpGet": "",
                 "port": "443",
                 "protocol": "icmp",
@@ -487,6 +505,7 @@ examples:
             "vrfName": "Vrf1"
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -520,17 +539,18 @@ examples:
             "probeData": {
               "delayDown": 30,
               "delayUp": 30,
-              "frequency": 10,
+              "frequency": 8,
               "probeDataType": "default",
               "probe": true,
               "protocol": "icmp",
-              "threshold": 10,
-              "timeout": 30
+              "threshold": 6000,
+              "timeout": 7000
             },
             "probeName": "probe1",
             "vrfName": "Vrf1"
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -568,7 +588,7 @@ examples:
                 "delayDown": "30",
                 "delayUp": "30",
                 "probe": "true",
-                "frequency": "10",
+                "frequency": "8",
                 "httpGet": "",
                 "port": "443",
                 "protocol": "icmp",
@@ -584,6 +604,7 @@ examples:
             "vrfName": "Vrf1"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type
@@ -617,17 +638,18 @@ examples:
             "probeData": {
               "delayDown": 30,
               "delayUp": 30,
-              "frequency": 10,
+              "frequency": 8,
               "probeDataType": "default",
               "probe": true,
               "protocol": "icmp",
-              "threshold": 10,
-              "timeout": 30
+              "threshold": 6000,
+              "timeout": 7000
             },
             "probeName": "probe1",
             "vrfName": "Vrf1"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

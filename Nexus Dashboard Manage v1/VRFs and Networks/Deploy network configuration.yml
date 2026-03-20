@@ -2,6 +2,8 @@ info:
   name: Deploy network configuration
   type: http
   seq: 1
+  tags:
+    - VRFs and Networks
 
 http:
   method: POST
@@ -25,9 +27,13 @@ http:
     type: json
     data: |-
       {
-        "networkNames": [],
-        "switchFabricNames": [],
-        "switchIds": []
+        "networkNames": [
+          "MyNetwork_30000",
+          "MyNetwork_30001"
+        ],
+        "switchIds": [
+          "99X70W9ORI1"
+        ]
       }
   auth: inherit
 
@@ -62,14 +68,15 @@ examples:
         data: |-
           {
             "networkNames": [
-              "MyNetwork_30001",
-              "MyNetwork_30002"
+              "MyNetwork_30000",
+              "MyNetwork_30001"
             ],
             "switchIds": [
               "99X70W9ORI1"
             ]
           }
     response:
+      status: 202
       statusText: Accepted
       headers:
         - name: Content-Type
@@ -104,8 +111,8 @@ examples:
         data: |-
           {
             "networkNames": [
-              "MyNetwork_30002",
-              "MyNetwork_30001"
+              "MyNetwork_30001",
+              "MyNetwork_30000"
             ],
             "switchIds": [
               "99X70W9ORI1",
@@ -113,6 +120,7 @@ examples:
             ]
           }
     response:
+      status: 202
       statusText: Accepted
       headers:
         - name: Content-Type
@@ -147,14 +155,15 @@ examples:
         data: |-
           {
             "networkNames": [
-              "MyNetwork_30001",
-              "MyNetwork_30002"
+              "MyNetwork_30000",
+              "MyNetwork_30001"
             ],
             "switchIds": [
               "99X70W9ORI1"
             ]
           }
     response:
+      status: 202
       statusText: Accepted
       headers:
         - name: Content-Type
@@ -189,8 +198,8 @@ examples:
         data: |-
           {
             "networkNames": [
-              "MyNetwork_30002",
-              "MyNetwork_30001"
+              "MyNetwork_30001",
+              "MyNetwork_30000"
             ],
             "switchIds": [
               "99X70W9ORI1",
@@ -198,6 +207,7 @@ examples:
             ]
           }
     response:
+      status: 202
       statusText: Accepted
       headers:
         - name: Content-Type
@@ -233,14 +243,15 @@ examples:
         data: |-
           {
             "networkNames": [
-              "MyNetwork_30001",
-              "MyNetwork_30002"
+              "MyNetwork_30000",
+              "MyNetwork_30001"
             ],
             "switchIds": [
               "99X70W9ORI1"
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -278,8 +289,8 @@ examples:
         data: |-
           {
             "networkNames": [
-              "MyNetwork_30002",
-              "MyNetwork_30001"
+              "MyNetwork_30001",
+              "MyNetwork_30000"
             ],
             "switchIds": [
               "99X70W9ORI1",
@@ -287,6 +298,7 @@ examples:
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -324,14 +336,15 @@ examples:
         data: |-
           {
             "networkNames": [
-              "MyNetwork_30001",
-              "MyNetwork_30002"
+              "MyNetwork_30000",
+              "MyNetwork_30001"
             ],
             "switchIds": [
               "99X70W9ORI1"
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -369,8 +382,8 @@ examples:
         data: |-
           {
             "networkNames": [
-              "MyNetwork_30002",
-              "MyNetwork_30001"
+              "MyNetwork_30001",
+              "MyNetwork_30000"
             ],
             "switchIds": [
               "99X70W9ORI1",
@@ -378,6 +391,7 @@ examples:
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -415,14 +429,15 @@ examples:
         data: |-
           {
             "networkNames": [
-              "MyNetwork_30001",
-              "MyNetwork_30002"
+              "MyNetwork_30000",
+              "MyNetwork_30001"
             ],
             "switchIds": [
               "99X70W9ORI1"
             ]
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -460,8 +475,8 @@ examples:
         data: |-
           {
             "networkNames": [
-              "MyNetwork_30002",
-              "MyNetwork_30001"
+              "MyNetwork_30001",
+              "MyNetwork_30000"
             ],
             "switchIds": [
               "99X70W9ORI1",
@@ -469,6 +484,7 @@ examples:
             ]
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -506,14 +522,15 @@ examples:
         data: |-
           {
             "networkNames": [
-              "MyNetwork_30001",
-              "MyNetwork_30002"
+              "MyNetwork_30000",
+              "MyNetwork_30001"
             ],
             "switchIds": [
               "99X70W9ORI1"
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -551,8 +568,8 @@ examples:
         data: |-
           {
             "networkNames": [
-              "MyNetwork_30002",
-              "MyNetwork_30001"
+              "MyNetwork_30001",
+              "MyNetwork_30000"
             ],
             "switchIds": [
               "99X70W9ORI1",
@@ -560,6 +577,7 @@ examples:
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -597,14 +615,15 @@ examples:
         data: |-
           {
             "networkNames": [
-              "MyNetwork_30001",
-              "MyNetwork_30002"
+              "MyNetwork_30000",
+              "MyNetwork_30001"
             ],
             "switchIds": [
               "99X70W9ORI1"
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type
@@ -642,8 +661,8 @@ examples:
         data: |-
           {
             "networkNames": [
-              "MyNetwork_30002",
-              "MyNetwork_30001"
+              "MyNetwork_30001",
+              "MyNetwork_30000"
             ],
             "switchIds": [
               "99X70W9ORI1",
@@ -651,6 +670,7 @@ examples:
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

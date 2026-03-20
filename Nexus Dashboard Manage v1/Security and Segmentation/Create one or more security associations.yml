@@ -2,6 +2,8 @@ info:
   name: Create one or more security associations
   type: http
   seq: 7
+  tags:
+    - Security and Segmentation
 
 http:
   method: POST
@@ -22,16 +24,12 @@ http:
       {
         "securityAssociations": [
           {
-            "name": "",
-            "tenantName": "",
-            "displayName": "",
-            "description": "",
-            "contractName": "",
-            "srcSecurityGroupName": "",
-            "srcVrfName": "",
-            "dstSecurityGroupName": "",
-            "dstVrfName": "",
-            "attach": false
+            "contractName": "deny-icmp",
+            "dstSecurityGroupName": "SG_20000",
+            "dstVrfName": "MyVRF_50000",
+            "name": "SA_10000",
+            "srcSecurityGroupName": "SG_10000",
+            "srcVrfName": "MyVRF_50000"
           }
         ]
       }
@@ -74,6 +72,7 @@ examples:
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -131,6 +130,7 @@ examples:
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -177,6 +177,7 @@ examples:
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -239,6 +240,7 @@ examples:
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -291,6 +293,7 @@ examples:
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -345,6 +348,7 @@ examples:
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -388,6 +392,7 @@ examples:
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -442,6 +447,7 @@ examples:
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -485,6 +491,7 @@ examples:
             ]
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -539,6 +546,7 @@ examples:
             ]
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -582,6 +590,7 @@ examples:
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -636,6 +645,7 @@ examples:
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -679,6 +689,7 @@ examples:
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type
@@ -733,6 +744,7 @@ examples:
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

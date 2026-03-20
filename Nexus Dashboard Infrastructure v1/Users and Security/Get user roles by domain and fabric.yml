@@ -2,6 +2,8 @@ info:
   name: Get user roles by domain and fabric
   type: http
   seq: 36
+  tags:
+    - Users and Security
 
 http:
   method: GET
@@ -33,6 +35,7 @@ examples:
           description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
           disabled: true
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -92,6 +95,7 @@ examples:
           description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
           disabled: true
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

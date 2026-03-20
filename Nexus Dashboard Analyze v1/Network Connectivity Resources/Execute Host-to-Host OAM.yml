@@ -1,0 +1,854 @@
+info:
+  name: Execute Host-to-Host OAM
+  type: http
+  seq: 46
+  tags:
+    - Network Connectivity Resources
+
+http:
+  method: POST
+  url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivityAnalysis/oam/:fabricName/hostToHost"
+  params:
+    - name: clusterName
+      value: ""
+      type: query
+      description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+      disabled: true
+    - name: fabricName
+      value: ""
+      type: path
+      description: Name of the fabric
+  body:
+    type: json
+    data: |-
+      {
+        "dstHostIpAddress": "42.0.12.25",
+        "dstPort": 20,
+        "isLayer2Mode": false,
+        "protocolType": 6,
+        "srcHostIpAddress": "42.0.11.22",
+        "srcPort": 20,
+        "vrfName": "tenant-vrf-1"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: OAM operation completed successfully
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivityAnalysis/oam/:fabricName/hostToHost"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "dstHostIpAddress": "10.127.122.37",
+            "dstPort": 20,
+            "isLayer2Mode": false,
+            "protocolType": 6,
+            "srcHostIpAddress": "10.127.122.61",
+            "srcPort": 20,
+            "vrfName": "MyVRF_50001"
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "forwardPaths": {
+              "description": "Success",
+              "errorPath": [],
+              "flag": true,
+              "id": "22",
+              "oamCli": "pathtrace nve ip unknown vrf vrf01 payload ip 42.0.12.26 42.0.11.23 payload-end req-stats;show ngoam pathtrace database session 22 detail",
+              "path": [
+                {
+                  "egressInterface": {
+                    "if_name": "Eth1/15",
+                    "if_state": "UP"
+                  },
+                  "hopIP": "5.0.1.1",
+                  "hopIndex": "0",
+                  "hopSwitchName": "r4-FX2-09",
+                  "ingressInterface": {
+                    "if_name": "",
+                    "if_state": ""
+                  }
+                },
+                {
+                  "egressInterface": {
+                    "if_name": "Eth1/97",
+                    "if_state": "UP",
+                    "rx_bandwidth": "40000000",
+                    "rx_bcast": "3",
+                    "rx_byte_rate": "2596470",
+                    "rx_bytes": "364473334875",
+                    "rx_discards": "0",
+                    "rx_errors": "0",
+                    "rx_len": "84",
+                    "rx_load": "10",
+                    "rx_mcast": "106697",
+                    "rx_pkt_rate": "14347",
+                    "rx_ucast": "2007516492",
+                    "rx_unknown": "0",
+                    "tx_bandwidth": "40000000",
+                    "tx_bcast": "2",
+                    "tx_byte_rate": "584220",
+                    "tx_bytes": "82697059516",
+                    "tx_discards": "0",
+                    "tx_errors": "0",
+                    "tx_len": "76",
+                    "tx_load": "10",
+                    "tx_mcast": "4555508",
+                    "tx_pkt_rate": "3290",
+                    "tx_ucast": "466638662"
+                  },
+                  "hopIP": "10.44.1.14",
+                  "hopIndex": "1",
+                  "hopSwitchName": "r4-FX2-44",
+                  "ingressInterface": {
+                    "if_name": "Eth1/106",
+                    "if_state": "UP",
+                    "rx_bandwidth": "100000000",
+                    "rx_bcast": "2",
+                    "rx_byte_rate": "900290",
+                    "rx_bytes": "125119985019",
+                    "rx_discards": "0",
+                    "rx_errors": "0",
+                    "rx_len": "84",
+                    "rx_load": "10",
+                    "rx_mcast": "5068447",
+                    "rx_pkt_rate": "5016",
+                    "rx_ucast": "700672156",
+                    "rx_unknown": "0",
+                    "tx_bandwidth": "100000000",
+                    "tx_bcast": "3",
+                    "tx_byte_rate": "1664659",
+                    "tx_bytes": "235486344323",
+                    "tx_discards": "0",
+                    "tx_errors": "0",
+                    "tx_len": "76",
+                    "tx_load": "10",
+                    "tx_mcast": "768070",
+                    "tx_pkt_rate": "9201",
+                    "tx_ucast": "1289254779"
+                  }
+                },
+                {
+                  "egressInterface": {
+                    "if_name": "Vlan12",
+                    "if_state": "UP",
+                    "rx_bandwidth": "1000000",
+                    "rx_bcast": "0",
+                    "rx_byte_rate": "0",
+                    "rx_bytes": "0",
+                    "rx_discards": "0",
+                    "rx_errors": "0",
+                    "rx_len": "84",
+                    "rx_load": "10",
+                    "rx_mcast": "288230376151711744",
+                    "rx_pkt_rate": "0",
+                    "rx_ucast": "4037195590963560474",
+                    "rx_unknown": "0",
+                    "tx_bandwidth": "1000000",
+                    "tx_bcast": "0",
+                    "tx_byte_rate": "0",
+                    "tx_bytes": "4283258902",
+                    "tx_discards": "0",
+                    "tx_errors": "336922880",
+                    "tx_len": "76",
+                    "tx_load": "10",
+                    "tx_mcast": "0",
+                    "tx_pkt_rate": "0",
+                    "tx_ucast": "720575940429611008"
+                  },
+                  "hopIP": "10.251.1.7",
+                  "hopIndex": "2",
+                  "hopSwitchName": "r4-GX2-20",
+                  "ingressInterface": {
+                    "if_name": "Eth1/21",
+                    "if_state": "UP",
+                    "rx_bandwidth": "40000000",
+                    "rx_bcast": "2",
+                    "rx_byte_rate": "470229",
+                    "rx_bytes": "66169712901",
+                    "rx_discards": "0",
+                    "rx_errors": "0",
+                    "rx_len": "84",
+                    "rx_load": "10",
+                    "rx_mcast": "1221740",
+                    "rx_pkt_rate": "2670",
+                    "rx_ucast": "373632104",
+                    "rx_unknown": "0",
+                    "tx_bandwidth": "40000000",
+                    "tx_bcast": "3",
+                    "tx_byte_rate": "595220",
+                    "tx_bytes": "87919966981",
+                    "tx_discards": "0",
+                    "tx_errors": "0",
+                    "tx_len": "76",
+                    "tx_load": "10",
+                    "tx_mcast": "171917",
+                    "tx_pkt_rate": "3266",
+                    "tx_ucast": "485278764"
+                  }
+                }
+              ],
+              "pathError": false,
+              "response": "Codes: '!' - success, 'Q' - request not sent, '.' - timeout,\n\n'D' - Destination Unreachable, 'X' - unknown return code,\n\n'm' - malformed request(parameter problem),\n\n'c' - Corrupted Data/Test, '#' - Duplicate response,\n\n'v' - Other - Use verbose to see the result\n\n\nPath trace Request to peer ip 10.251.1.7 source ip\n10.251.1.6\n\nSender handle: 22\n\n\nHop   Code   ReplyIP   IngressI/f  EgressI/f   State\n\n======================================================\n  1 !Reply from 10.44.1.14, Eth1/106  Eth1/97  UP / UP\n  2 !Reply from 10.251.1.7, Eth1/21  Vlan12  UP / UP\n",
+              "srcSwitchName": "r4-FX2-09",
+              "vrfName": "vrf01"
+            },
+            "reversePathTopology": {
+              "edgeList": [
+                {
+                  "data": {
+                    "destIf": "Ethernet1/102",
+                    "destMgmtIp": "172.28.161.244",
+                    "destSwitch": "r4-FX2-44",
+                    "fabricName": "Site101",
+                    "interfaceType": "underlayPhysical",
+                    "isPlanned": false,
+                    "linkType": "ethisl",
+                    "srcIf": "Ethernet1/15",
+                    "srcMgmtIp": "172.28.161.208",
+                    "srcSwitch": "r4-FX2-08"
+                  },
+                  "destId": "FDO24180S16",
+                  "healthStatus": "healthy",
+                  "id": "LINK-UUID-9770",
+                  "isInterrupted": false,
+                  "srcId": "FDO222800VZ"
+                },
+                {
+                  "data": {
+                    "destIf": "Ethernet1/21",
+                    "destMgmtIp": "172.28.161.211",
+                    "destSwitch": "r4-GX2-11",
+                    "fabricName": "Site101",
+                    "interfaceType": "underlayPhysical",
+                    "isPlanned": false,
+                    "linkType": "ethisl",
+                    "srcIf": "Ethernet1/104",
+                    "srcMgmtIp": "172.28.161.244",
+                    "srcSwitch": "r4-FX2-44"
+                  },
+                  "destId": "FDO270502JD",
+                  "healthStatus": "healthy",
+                  "id": "LINK-UUID-9670",
+                  "isInterrupted": false,
+                  "srcId": "FDO24180S16"
+                }
+              ],
+              "nodeGroupMap": {},
+              "nodeList": [
+                {
+                  "data": {
+                    "fabricName": "Site101",
+                    "ipAddress": "172.28.161.208",
+                    "isNonNexus": false,
+                    "logicalName": "r4-FX2-08",
+                    "mode": "Normal",
+                    "model": "N9K-C9336C-FX2",
+                    "peer": null,
+                    "peerSerialNumber": null,
+                    "release": "10.5(3)",
+                    "role": "leaf",
+                    "serialNumber": "FDO222800VZ",
+                    "sourceInterface": "",
+                    "sourceVrf": "",
+                    "status": "ok",
+                    "switchDbID": 1220,
+                    "switchId": "1220",
+                    "switchName": "r4-FX2-08",
+                    "switchRole": "leaf",
+                    "upTimeStr": "1 day, 10:17:53",
+                    "vdcId": -1,
+                    "vdcMac": null,
+                    "version": null
+                  },
+                  "displayName": "r4-FX2-08",
+                  "healthStatus": "unknown",
+                  "id": "FDO222800VZ",
+                  "memberClusterIds": [],
+                  "tierLevel": 1,
+                  "view": "switch"
+                },
+                {
+                  "data": {
+                    "fabricName": "Site101",
+                    "ipAddress": "172.28.161.244",
+                    "isNonNexus": false,
+                    "logicalName": "r4-FX2-44",
+                    "mode": "Normal",
+                    "model": "N9K-C93216TC-FX2",
+                    "peer": null,
+                    "peerSerialNumber": null,
+                    "release": "10.5(3)",
+                    "role": "border gateway spine",
+                    "serialNumber": "FDO24180S16",
+                    "sourceInterface": "",
+                    "sourceVrf": "",
+                    "status": "ok",
+                    "switchDbID": 1070,
+                    "switchId": "1070",
+                    "switchName": "r4-FX2-44",
+                    "switchRole": "border gateway spine",
+                    "upTimeStr": "1 day, 10:17:53",
+                    "vdcId": -1,
+                    "vdcMac": null,
+                    "version": null
+                  },
+                  "displayName": "r4-FX2-44",
+                  "healthStatus": "unknown",
+                  "id": "FDO24180S16",
+                  "memberClusterIds": [],
+                  "tierLevel": 2,
+                  "view": "switch"
+                },
+                {
+                  "data": {
+                    "fabricName": "Site101",
+                    "ipAddress": "172.28.161.211",
+                    "isNonNexus": false,
+                    "logicalName": "r4-GX2-11",
+                    "mode": "Normal",
+                    "model": "N9K-C9332D-GX2B",
+                    "peer": null,
+                    "peerSerialNumber": null,
+                    "release": "10.5(3)",
+                    "role": "leaf",
+                    "serialNumber": "FDO270502JD",
+                    "sourceInterface": "",
+                    "sourceVrf": "",
+                    "status": "ok",
+                    "switchDbID": 1020,
+                    "switchId": "1020",
+                    "switchName": "r4-GX2-11",
+                    "switchRole": "leaf",
+                    "upTimeStr": "1 day, 10:18:11",
+                    "vdcId": -1,
+                    "vdcMac": null,
+                    "version": null
+                  },
+                  "displayName": "r4-GX2-11",
+                  "healthStatus": "unknown",
+                  "id": "FDO270502JD",
+                  "memberClusterIds": [],
+                  "tierLevel": 3,
+                  "view": "switch"
+                }
+              ]
+            },
+            "reversePaths": {
+              "description": "Success",
+              "errorPath": [],
+              "flag": true,
+              "id": "21",
+              "oamCli": "pathtrace nve ip unknown vrf vrf01 payload ip 42.0.11.23 42.0.12.26 payload-end req-stats;show ngoam pathtrace database session 21 detail",
+              "path": [
+                {
+                  "egressInterface": {
+                    "if_name": "Eth1/21",
+                    "if_state": "UP"
+                  },
+                  "hopIP": "5.0.1.1",
+                  "hopIndex": "0",
+                  "hopSwitchName": "r4-GX2-11",
+                  "ingressInterface": {
+                    "if_name": "",
+                    "if_state": ""
+                  }
+                },
+                {
+                  "egressInterface": {
+                    "if_name": "Eth1/102",
+                    "if_state": "UP",
+                    "rx_bandwidth": "100000000",
+                    "rx_bcast": "3",
+                    "rx_byte_rate": "606754",
+                    "rx_bytes": "88515542899",
+                    "rx_discards": "0",
+                    "rx_errors": "0",
+                    "rx_len": "84",
+                    "rx_load": "10",
+                    "rx_mcast": "4530282",
+                    "rx_pkt_rate": "3339",
+                    "rx_ucast": "498174346",
+                    "rx_unknown": "0",
+                    "tx_bandwidth": "100000000",
+                    "tx_bcast": "3",
+                    "tx_byte_rate": "2205699",
+                    "tx_bytes": "306183721074",
+                    "tx_discards": "0",
+                    "tx_errors": "0",
+                    "tx_len": "76",
+                    "tx_load": "10",
+                    "tx_mcast": "246144",
+                    "tx_pkt_rate": "12272",
+                    "tx_ucast": "1708740399"
+                  },
+                  "hopIP": "10.44.1.29",
+                  "hopIndex": "1",
+                  "hopSwitchName": "r4-FX2-44",
+                  "ingressInterface": {
+                    "if_name": "Eth1/104",
+                    "if_state": "UP",
+                    "rx_bandwidth": "40000000",
+                    "rx_bcast": "2",
+                    "rx_byte_rate": "1558414",
+                    "rx_bytes": "218513419859",
+                    "rx_discards": "0",
+                    "rx_errors": "0",
+                    "rx_len": "84",
+                    "rx_load": "10",
+                    "rx_mcast": "257265",
+                    "rx_pkt_rate": "8826",
+                    "rx_ucast": "1231188542",
+                    "rx_unknown": "0",
+                    "tx_bandwidth": "40000000",
+                    "tx_bcast": "3",
+                    "tx_byte_rate": "1236928",
+                    "tx_bytes": "173298651023",
+                    "tx_discards": "0",
+                    "tx_errors": "0",
+                    "tx_len": "76",
+                    "tx_load": "10",
+                    "tx_mcast": "4528473",
+                    "tx_pkt_rate": "6947",
+                    "tx_ucast": "971654799"
+                  }
+                },
+                {
+                  "egressInterface": {
+                    "if_name": "Vlan11",
+                    "if_state": "UP",
+                    "rx_bandwidth": "1000000",
+                    "rx_bcast": "0",
+                    "rx_byte_rate": "0",
+                    "rx_bytes": "0",
+                    "rx_discards": "0",
+                    "rx_errors": "0",
+                    "rx_len": "84",
+                    "rx_load": "10",
+                    "rx_mcast": "288230376151711744",
+                    "rx_pkt_rate": "0",
+                    "rx_ucast": "4037195590962774042",
+                    "rx_unknown": "0",
+                    "tx_bandwidth": "1000000",
+                    "tx_bcast": "79228162514264064",
+                    "tx_byte_rate": "0",
+                    "tx_bytes": "79232493605",
+                    "tx_discards": "0",
+                    "tx_errors": "2617245952",
+                    "tx_len": "76",
+                    "tx_load": "10",
+                    "tx_mcast": "0",
+                    "tx_pkt_rate": "0",
+                    "tx_ucast": "720575940429611008"
+                  },
+                  "hopIP": "10.251.1.6",
+                  "hopIndex": "2",
+                  "hopSwitchName": "r4-FX2-08",
+                  "ingressInterface": {
+                    "if_name": "Eth1/15",
+                    "if_state": "UP",
+                    "rx_bandwidth": "100000000",
+                    "rx_bcast": "3",
+                    "rx_byte_rate": "2203814",
+                    "rx_bytes": "306186547080",
+                    "rx_discards": "0",
+                    "rx_errors": "0",
+                    "rx_len": "84",
+                    "rx_load": "10",
+                    "rx_mcast": "246144",
+                    "rx_pkt_rate": "12261",
+                    "rx_ucast": "1708755146",
+                    "rx_unknown": "0",
+                    "tx_bandwidth": "100000000",
+                    "tx_bcast": "3",
+                    "tx_byte_rate": "600543",
+                    "tx_bytes": "88516338281",
+                    "tx_discards": "0",
+                    "tx_errors": "0",
+                    "tx_len": "76",
+                    "tx_load": "10",
+                    "tx_mcast": "4530292",
+                    "tx_pkt_rate": "3331",
+                    "tx_ucast": "498178817"
+                  }
+                }
+              ],
+              "pathError": false,
+              "response": "\nCodes: '!' - success, 'Q' - request not sent, '.' - timeout,\n\n'D' - Destination Unreachable, 'X' - unknown return code,\n\n'm' - malformed request(parameter problem),\n\n'c' - Corrupted Data/Test, '#' - Duplicate response,\n\n'v' - Other - Use verbose to see the result\n\n\nPath trace Request to peer ip 10.251.1.6 source ip\n10.251.1.7\n\nSender handle: 21\n\n\nHop   Code   ReplyIP   IngressI/f  EgressI/f   State\n\n======================================================\n  1 !Reply from 10.44.1.29, Eth1/104  Eth1/102  UP / UP\n  2 !Reply from 10.251.1.6, Eth1/15  Vlan11  UP / UP\n",
+              "srcSwitchName": "r4-GX2-11",
+              "vrfName": "vrf01"
+            },
+            "topology": {
+              "edgeList": [
+                {
+                  "data": {
+                    "destIf": "Ethernet1/106",
+                    "destMgmtIp": "172.28.161.244",
+                    "destSwitch": "r4-FX2-44",
+                    "fabricName": "Site101",
+                    "interfaceType": "underlayPhysical",
+                    "isPlanned": false,
+                    "linkType": "ethisl",
+                    "srcIf": "Ethernet1/15",
+                    "srcMgmtIp": "172.28.161.209",
+                    "srcSwitch": "r4-FX2-09"
+                  },
+                  "destId": "FDO24180S16",
+                  "healthStatus": "healthy",
+                  "id": "LINK-UUID-10060",
+                  "isInterrupted": false,
+                  "srcId": "FDO222747NN"
+                },
+                {
+                  "data": {
+                    "destIf": "Ethernet1/21",
+                    "destMgmtIp": "172.28.161.220",
+                    "destSwitch": "r4-GX2-20",
+                    "fabricName": "Site101",
+                    "interfaceType": "underlayPhysical",
+                    "isPlanned": false,
+                    "linkType": "ethisl",
+                    "srcIf": "Ethernet1/97",
+                    "srcMgmtIp": "172.28.161.244",
+                    "srcSwitch": "r4-FX2-44"
+                  },
+                  "destId": "FDO270241YK",
+                  "healthStatus": "healthy",
+                  "id": "LINK-UUID-10160",
+                  "isInterrupted": false,
+                  "srcId": "FDO24180S16"
+                }
+              ],
+              "nodeGroupMap": {},
+              "nodeList": [
+                {
+                  "data": {
+                    "fabricName": "Site101",
+                    "ipAddress": "172.28.161.209",
+                    "isNonNexus": false,
+                    "logicalName": "r4-FX2-09",
+                    "mode": "Normal",
+                    "model": "N9K-C9336C-FX2",
+                    "peer": null,
+                    "peerSerialNumber": null,
+                    "release": "10.5(3)",
+                    "role": "leaf",
+                    "serialNumber": "FDO222747NN",
+                    "sourceInterface": "",
+                    "sourceVrf": "",
+                    "status": "ok",
+                    "switchDbID": 1270,
+                    "switchId": "1270",
+                    "switchName": "r4-FX2-09",
+                    "switchRole": "leaf",
+                    "upTimeStr": "1 day, 10:17:28",
+                    "vdcId": -1,
+                    "vdcMac": null,
+                    "version": null
+                  },
+                  "displayName": "r4-FX2-09",
+                  "healthStatus": "unknown",
+                  "id": "FDO222747NN",
+                  "memberClusterIds": [],
+                  "tierLevel": 1,
+                  "view": "switch"
+                },
+                {
+                  "data": {
+                    "fabricName": "Site101",
+                    "ipAddress": "172.28.161.244",
+                    "isNonNexus": false,
+                    "logicalName": "r4-FX2-44",
+                    "mode": "Normal",
+                    "model": "N9K-C93216TC-FX2",
+                    "peer": null,
+                    "peerSerialNumber": null,
+                    "release": "10.5(3)",
+                    "role": "border gateway spine",
+                    "serialNumber": "FDO24180S16",
+                    "sourceInterface": "",
+                    "sourceVrf": "",
+                    "status": "ok",
+                    "switchDbID": 1070,
+                    "switchId": "1070",
+                    "switchName": "r4-FX2-44",
+                    "switchRole": "border gateway spine",
+                    "upTimeStr": "1 day, 10:17:28",
+                    "vdcId": -1,
+                    "vdcMac": null,
+                    "version": null
+                  },
+                  "displayName": "r4-FX2-44",
+                  "healthStatus": "unknown",
+                  "id": "FDO24180S16",
+                  "memberClusterIds": [],
+                  "tierLevel": 2,
+                  "view": "switch"
+                },
+                {
+                  "data": {
+                    "fabricName": "Site101",
+                    "ipAddress": "172.28.161.220",
+                    "isNonNexus": false,
+                    "logicalName": "r4-GX2-20",
+                    "mode": "Normal",
+                    "model": "N9K-C9332D-GX2B",
+                    "peer": null,
+                    "peerSerialNumber": null,
+                    "release": "10.5(3)",
+                    "role": "leaf",
+                    "serialNumber": "FDO270241YK",
+                    "sourceInterface": "",
+                    "sourceVrf": "",
+                    "status": "ok",
+                    "switchDbID": 1120,
+                    "switchId": "1120",
+                    "switchName": "r4-GX2-20",
+                    "switchRole": "leaf",
+                    "upTimeStr": "1 day, 10:17:40",
+                    "vdcId": -1,
+                    "vdcMac": null,
+                    "version": null
+                  },
+                  "displayName": "r4-GX2-20",
+                  "healthStatus": "unknown",
+                  "id": "FDO270241YK",
+                  "memberClusterIds": [],
+                  "tierLevel": 3,
+                  "view": "switch"
+                }
+              ]
+            }
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivityAnalysis/oam/:fabricName/hostToHost"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "dstHostIpAddress": "10.127.122.37",
+            "dstPort": 20,
+            "isLayer2Mode": false,
+            "protocolType": 6,
+            "srcHostIpAddress": "10.127.122.61",
+            "srcPort": 20,
+            "vrfName": "MyVRF_50001"
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivityAnalysis/oam/:fabricName/hostToHost"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "dstHostIpAddress": "10.127.122.37",
+            "dstPort": 20,
+            "isLayer2Mode": false,
+            "protocolType": 6,
+            "srcHostIpAddress": "10.127.122.61",
+            "srcPort": 20,
+            "vrfName": "MyVRF_50001"
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 403 Response
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivityAnalysis/oam/:fabricName/hostToHost"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "dstHostIpAddress": "10.127.122.37",
+            "dstPort": 20,
+            "isLayer2Mode": false,
+            "protocolType": 6,
+            "srcHostIpAddress": "10.127.122.61",
+            "srcPort": 20,
+            "vrfName": "MyVRF_50001"
+          }
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 404 Response
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivityAnalysis/oam/:fabricName/hostToHost"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "dstHostIpAddress": "10.127.122.37",
+            "dstPort": 20,
+            "isLayer2Mode": false,
+            "protocolType": 6,
+            "srcHostIpAddress": "10.127.122.61",
+            "srcPort": 20,
+            "vrfName": "MyVRF_50001"
+          }
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 500 Response
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/connectivityAnalysis/oam/:fabricName/hostToHost"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: fabricName
+          value: ""
+          type: path
+          description: Name of the fabric
+      body:
+        type: json
+        data: |-
+          {
+            "dstHostIpAddress": "10.127.122.37",
+            "dstPort": 20,
+            "isLayer2Mode": false,
+            "protocolType": 6,
+            "srcHostIpAddress": "10.127.122.61",
+            "srcPort": 20,
+            "vrfName": "MyVRF_50001"
+          }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }

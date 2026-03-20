@@ -1,7 +1,9 @@
 info:
   name: Get VPC pair details
   type: http
-  seq: 38
+  seq: 40
+  tags:
+    - Inventory
 
 http:
   method: GET
@@ -49,6 +51,7 @@ examples:
           type: path
           description: Name of the fabric
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -90,6 +93,7 @@ examples:
           type: path
           description: Name of the fabric
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -166,6 +170,7 @@ examples:
           type: path
           description: Name of the fabric
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -198,6 +203,7 @@ examples:
           type: path
           description: Name of the fabric
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -230,6 +236,7 @@ examples:
           type: path
           description: Name of the fabric
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -262,6 +269,7 @@ examples:
           type: path
           description: Name of the fabric
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -294,6 +302,7 @@ examples:
           type: path
           description: Name of the fabric
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

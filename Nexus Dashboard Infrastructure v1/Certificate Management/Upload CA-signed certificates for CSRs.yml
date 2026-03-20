@@ -2,6 +2,8 @@ info:
   name: Upload CA-signed certificates for CSRs
   type: http
   seq: 19
+  tags:
+    - Certificate Management
 
 http:
   method: POST
@@ -18,14 +20,19 @@ http:
       {
         "csrBindCertificate": [
           {
-            "certificate": "",
-            "certificateName": "",
-            "certificateType": "",
-            "key": ""
+            "certificate": "LS0tLS1CRUdJTiBFTkNSWVBURUQgUFJJVkFURSBLRVktLS0tLQo...",
+            "certificateName": "webServer.pem"
+          },
+          {
+            "certificate": "LS0tLS1CRUdJTiBFTkNSWVBURUQgUFJJVkFURSBLRVktLS0tLQo...",
+            "certificateName": "appServer.pem"
           }
         ],
         "csrBindIntermediateCertificate": [
-          {}
+          {
+            "certificate": "LS0tLS1CRUdJTiBFTkNSWVBURUQgQ0VSVElGSUNBVEUtLS0tLQo...",
+            "certificateName": "intermediateCert.pem"
+          }
         ]
       }
   auth: inherit
@@ -70,6 +77,7 @@ examples:
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -125,6 +133,7 @@ examples:
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -170,6 +179,7 @@ examples:
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -215,6 +225,7 @@ examples:
             ]
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -260,6 +271,7 @@ examples:
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

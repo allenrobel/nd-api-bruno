@@ -1,7 +1,7 @@
 info:
   name: Fabric Management
   type: folder
-  seq: 9
+  seq: 1
 
 request:
   auth: inherit

@@ -1,7 +1,9 @@
 info:
   name: Delete the switches
   type: http
-  seq: 59
+  seq: 61
+  tags:
+    - Inventory
 
 http:
   method: POST
@@ -18,15 +20,17 @@ http:
       description: Change Control Ticket Id
       disabled: true
     - name: force
-      value: ""
+      value: "false"
       type: query
       description: True forces deletion of the switch(es)
-      disabled: true
   body:
     type: json
     data: |-
       {
-        "switchIds": []
+        "switchIds": [
+          "SAL1948TRTT",
+          "SAL1947TRAB"
+        ]
       }
   auth: inherit
 
@@ -54,10 +58,9 @@ examples:
           description: Change Control Ticket Id
           disabled: true
         - name: force
-          value: ""
+          value: "false"
           type: query
           description: True forces deletion of the switch(es)
-          disabled: true
       body:
         type: json
         data: |-
@@ -68,6 +71,7 @@ examples:
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -106,10 +110,9 @@ examples:
           description: Change Control Ticket Id
           disabled: true
         - name: force
-          value: ""
+          value: "false"
           type: query
           description: True forces deletion of the switch(es)
-          disabled: true
       body:
         type: json
         data: |-
@@ -120,6 +123,7 @@ examples:
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -149,10 +153,9 @@ examples:
           description: Change Control Ticket Id
           disabled: true
         - name: force
-          value: ""
+          value: "false"
           type: query
           description: True forces deletion of the switch(es)
-          disabled: true
       body:
         type: json
         data: |-
@@ -163,6 +166,7 @@ examples:
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -192,10 +196,9 @@ examples:
           description: Change Control Ticket Id
           disabled: true
         - name: force
-          value: ""
+          value: "false"
           type: query
           description: True forces deletion of the switch(es)
-          disabled: true
       body:
         type: json
         data: |-
@@ -206,6 +209,7 @@ examples:
             ]
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -235,10 +239,9 @@ examples:
           description: Change Control Ticket Id
           disabled: true
         - name: force
-          value: ""
+          value: "false"
           type: query
           description: True forces deletion of the switch(es)
-          disabled: true
       body:
         type: json
         data: |-
@@ -249,6 +252,7 @@ examples:
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -278,10 +282,9 @@ examples:
           description: Change Control Ticket Id
           disabled: true
         - name: force
-          value: ""
+          value: "false"
           type: query
           description: True forces deletion of the switch(es)
-          disabled: true
       body:
         type: json
         data: |-
@@ -292,6 +295,7 @@ examples:
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

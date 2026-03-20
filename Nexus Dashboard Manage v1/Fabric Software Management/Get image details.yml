@@ -2,6 +2,8 @@ info:
   name: Get image details
   type: http
   seq: 4
+  tags:
+    - Fabric Software Management
 
 http:
   method: GET
@@ -11,6 +13,51 @@ http:
       value: ""
       type: query
       description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+      disabled: true
+    - name: platform
+      value: n3k
+      type: query
+      description: Name of the switch platforms
+      disabled: true
+    - name: platform
+      value: n5k
+      type: query
+      description: Name of the switch platforms
+      disabled: true
+    - name: platform
+      value: n6k
+      type: query
+      description: Name of the switch platforms
+      disabled: true
+    - name: platform
+      value: n7k
+      type: query
+      description: Name of the switch platforms
+      disabled: true
+    - name: platform
+      value: n77
+      type: query
+      description: Name of the switch platforms
+      disabled: true
+    - name: platform
+      value: n9k
+      type: query
+      description: Name of the switch platforms
+      disabled: true
+    - name: platform
+      value: cat9k
+      type: query
+      description: Name of the switch platforms
+      disabled: true
+    - name: platform
+      value: cat8k
+      type: query
+      description: Name of the switch platforms
+      disabled: true
+    - name: platform
+      value: mds
+      type: query
+      description: Name of the switch platforms
       disabled: true
   auth: inherit
 
@@ -32,7 +79,53 @@ examples:
           type: query
           description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
           disabled: true
+        - name: platform
+          value: n3k
+          type: query
+          description: Name of the switch platforms
+          disabled: true
+        - name: platform
+          value: n5k
+          type: query
+          description: Name of the switch platforms
+          disabled: true
+        - name: platform
+          value: n6k
+          type: query
+          description: Name of the switch platforms
+          disabled: true
+        - name: platform
+          value: n7k
+          type: query
+          description: Name of the switch platforms
+          disabled: true
+        - name: platform
+          value: n77
+          type: query
+          description: Name of the switch platforms
+          disabled: true
+        - name: platform
+          value: n9k
+          type: query
+          description: Name of the switch platforms
+          disabled: true
+        - name: platform
+          value: cat9k
+          type: query
+          description: Name of the switch platforms
+          disabled: true
+        - name: platform
+          value: cat8k
+          type: query
+          description: Name of the switch platforms
+          disabled: true
+        - name: platform
+          value: mds
+          type: query
+          description: Name of the switch platforms
+          disabled: true
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -93,7 +186,53 @@ examples:
           type: query
           description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
           disabled: true
+        - name: platform
+          value: n3k
+          type: query
+          description: Name of the switch platforms
+          disabled: true
+        - name: platform
+          value: n5k
+          type: query
+          description: Name of the switch platforms
+          disabled: true
+        - name: platform
+          value: n6k
+          type: query
+          description: Name of the switch platforms
+          disabled: true
+        - name: platform
+          value: n7k
+          type: query
+          description: Name of the switch platforms
+          disabled: true
+        - name: platform
+          value: n77
+          type: query
+          description: Name of the switch platforms
+          disabled: true
+        - name: platform
+          value: n9k
+          type: query
+          description: Name of the switch platforms
+          disabled: true
+        - name: platform
+          value: cat9k
+          type: query
+          description: Name of the switch platforms
+          disabled: true
+        - name: platform
+          value: cat8k
+          type: query
+          description: Name of the switch platforms
+          disabled: true
+        - name: platform
+          value: mds
+          type: query
+          description: Name of the switch platforms
+          disabled: true
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -117,7 +256,53 @@ examples:
           type: query
           description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
           disabled: true
+        - name: platform
+          value: n3k
+          type: query
+          description: Name of the switch platforms
+          disabled: true
+        - name: platform
+          value: n5k
+          type: query
+          description: Name of the switch platforms
+          disabled: true
+        - name: platform
+          value: n6k
+          type: query
+          description: Name of the switch platforms
+          disabled: true
+        - name: platform
+          value: n7k
+          type: query
+          description: Name of the switch platforms
+          disabled: true
+        - name: platform
+          value: n77
+          type: query
+          description: Name of the switch platforms
+          disabled: true
+        - name: platform
+          value: n9k
+          type: query
+          description: Name of the switch platforms
+          disabled: true
+        - name: platform
+          value: cat9k
+          type: query
+          description: Name of the switch platforms
+          disabled: true
+        - name: platform
+          value: cat8k
+          type: query
+          description: Name of the switch platforms
+          disabled: true
+        - name: platform
+          value: mds
+          type: query
+          description: Name of the switch platforms
+          disabled: true
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -141,7 +326,53 @@ examples:
           type: query
           description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
           disabled: true
+        - name: platform
+          value: n3k
+          type: query
+          description: Name of the switch platforms
+          disabled: true
+        - name: platform
+          value: n5k
+          type: query
+          description: Name of the switch platforms
+          disabled: true
+        - name: platform
+          value: n6k
+          type: query
+          description: Name of the switch platforms
+          disabled: true
+        - name: platform
+          value: n7k
+          type: query
+          description: Name of the switch platforms
+          disabled: true
+        - name: platform
+          value: n77
+          type: query
+          description: Name of the switch platforms
+          disabled: true
+        - name: platform
+          value: n9k
+          type: query
+          description: Name of the switch platforms
+          disabled: true
+        - name: platform
+          value: cat9k
+          type: query
+          description: Name of the switch platforms
+          disabled: true
+        - name: platform
+          value: cat8k
+          type: query
+          description: Name of the switch platforms
+          disabled: true
+        - name: platform
+          value: mds
+          type: query
+          description: Name of the switch platforms
+          disabled: true
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -165,7 +396,53 @@ examples:
           type: query
           description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
           disabled: true
+        - name: platform
+          value: n3k
+          type: query
+          description: Name of the switch platforms
+          disabled: true
+        - name: platform
+          value: n5k
+          type: query
+          description: Name of the switch platforms
+          disabled: true
+        - name: platform
+          value: n6k
+          type: query
+          description: Name of the switch platforms
+          disabled: true
+        - name: platform
+          value: n7k
+          type: query
+          description: Name of the switch platforms
+          disabled: true
+        - name: platform
+          value: n77
+          type: query
+          description: Name of the switch platforms
+          disabled: true
+        - name: platform
+          value: n9k
+          type: query
+          description: Name of the switch platforms
+          disabled: true
+        - name: platform
+          value: cat9k
+          type: query
+          description: Name of the switch platforms
+          disabled: true
+        - name: platform
+          value: cat8k
+          type: query
+          description: Name of the switch platforms
+          disabled: true
+        - name: platform
+          value: mds
+          type: query
+          description: Name of the switch platforms
+          disabled: true
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

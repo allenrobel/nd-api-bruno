@@ -1,7 +1,9 @@
 info:
-  name: API to get cluster configuration.
+  name: API to get cluster configuration
   type: http
   seq: 1
+  tags:
+    - System Bootstrap
 
 http:
   method: GET
@@ -33,6 +35,7 @@ examples:
           description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
           disabled: true
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -77,8 +80,7 @@ examples:
             "externalServiceStatusList": [
               {
                 "allocatedIp": "192.0.0.200",
-                "description": "Telemetry collector-1",
-                "name": "cisco-nir-collectorpersistent1-service",
+                "name": "Telemetry collector-1",
                 "service": "cisco-nir/flow-collector"
               }
             ],
@@ -131,6 +133,7 @@ examples:
           description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
           disabled: true
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -155,6 +158,7 @@ examples:
           description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
           disabled: true
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -179,6 +183,7 @@ examples:
           description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
           disabled: true
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -203,6 +208,7 @@ examples:
           description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
           disabled: true
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

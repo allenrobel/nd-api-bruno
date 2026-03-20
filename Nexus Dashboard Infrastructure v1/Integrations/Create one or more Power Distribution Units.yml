@@ -2,6 +2,8 @@ info:
   name: Create one or more Power Distribution Units
   type: http
   seq: 64
+  tags:
+    - Integrations
 
 http:
   method: POST
@@ -26,15 +28,8 @@ http:
       {
         "units": [
           {
-            "authPassword": "",
-            "authProtocol": "",
-            "communityString": "",
-            "ip": "",
-            "privPassword": "",
-            "privProtocol": "",
-            "securityLevel": "",
-            "snmpProtocolVersion": "",
-            "username": ""
+            "ip": "172.23.48.23",
+            "snmpProtocolVersion": "V2"
           }
         ]
       }
@@ -78,6 +73,7 @@ examples:
             ]
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -88,18 +84,18 @@ examples:
           {
             "results": [
               {
-                "message": "",
+                "message": "Error in creating Power Distribution Unit",
                 "pduData": {
-                  "authProtocol": "",
-                  "communityString": "",
-                  "fabricName": "",
-                  "integrationId": "",
-                  "ip": "",
-                  "privProtocol": "",
-                  "securityLevel": "",
-                  "snmpProtocolVersion": ""
+                  "authProtocol": "SHA",
+                  "communityString": "public",
+                  "fabricName": "us-west-1",
+                  "integrationId": "pduCollector-172-23-48-41-us-west-1",
+                  "ip": "172.23.48.23",
+                  "privProtocol": "AES-192",
+                  "securityLevel": "authPriv",
+                  "snmpProtocolVersion": "V2"
                 },
-                "status": ""
+                "status": "success"
               }
             ]
           }
@@ -134,6 +130,7 @@ examples:
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -144,18 +141,18 @@ examples:
           {
             "results": [
               {
-                "message": "",
+                "message": "Error in creating Power Distribution Unit",
                 "pduData": {
-                  "authProtocol": "",
-                  "communityString": "",
-                  "fabricName": "",
-                  "integrationId": "",
-                  "ip": "",
-                  "privProtocol": "",
-                  "securityLevel": "",
-                  "snmpProtocolVersion": ""
+                  "authProtocol": "SHA",
+                  "communityString": "public",
+                  "fabricName": "us-west-1",
+                  "integrationId": "pduCollector-172-23-48-41-us-west-1",
+                  "ip": "172.23.48.23",
+                  "privProtocol": "AES-192",
+                  "securityLevel": "authPriv",
+                  "snmpProtocolVersion": "V2"
                 },
-                "status": ""
+                "status": "success"
               }
             ]
           }
@@ -190,6 +187,7 @@ examples:
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -233,6 +231,7 @@ examples:
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -276,6 +275,7 @@ examples:
             ]
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -319,6 +319,7 @@ examples:
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

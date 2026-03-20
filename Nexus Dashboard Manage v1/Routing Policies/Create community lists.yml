@@ -2,6 +2,8 @@ info:
   name: Create community lists
   type: http
   seq: 10
+  tags:
+    - Routing Policies
 
 http:
   method: POST
@@ -21,7 +23,63 @@ http:
     data: |-
       {
         "communityLists": [
-          {}
+          {
+            "entries": [
+              {
+                "action": "permit",
+                "blackhole": false,
+                "communityNumbers": [
+                  "100:1",
+                  "200:2"
+                ],
+                "gracefulShutdown": false,
+                "internet": false,
+                "localAsn": false,
+                "noAdvertise": false,
+                "noExport": false,
+                "sequenceNumber": 10
+              }
+            ],
+            "name": "communityList1",
+            "type": "standard"
+          },
+          {
+            "entries": [
+              {
+                "action": "permit",
+                "communityNumberRegex": "11:22",
+                "sequenceNumber": 10
+              },
+              {
+                "action": "deny",
+                "communityNumberRegex": "11:23",
+                "sequenceNumber": 20
+              }
+            ],
+            "name": "communityList2",
+            "type": "expanded"
+          },
+          {
+            "entries": [
+              {
+                "action": "permit",
+                "blackhole": false,
+                "communityNumbers": [
+                  "100:1",
+                  "200:2"
+                ],
+                "gracefulShutdown": false,
+                "internet": false,
+                "localAsn": false,
+                "noAdvertise": false,
+                "noExport": false,
+                "sequenceNumber": 10
+              }
+            ],
+            "name": "communityList3",
+            "tenantName": "tenantSales",
+            "type": "standard"
+          }
         ]
       }
   auth: inherit
@@ -113,6 +171,7 @@ examples:
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -219,6 +278,7 @@ examples:
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -311,6 +371,7 @@ examples:
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -403,6 +464,7 @@ examples:
             ]
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -495,6 +557,7 @@ examples:
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -587,6 +650,7 @@ examples:
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

@@ -2,6 +2,8 @@ info:
   name: onboard a vcenter for visibility
   type: http
   seq: 76
+  tags:
+    - Integrations
 
 http:
   method: POST
@@ -16,10 +18,10 @@ http:
     type: json
     data: |-
       {
-        "hostname": "",
-        "integrationName": "",
-        "password": "",
-        "username": ""
+        "hostname": "10.1.1.1",
+        "integrationName": "d30-vCenter1",
+        "password": "pass",
+        "username": "administrator@vsphere.local"
       }
   auth: inherit
 
@@ -51,6 +53,7 @@ examples:
             "username": "administrator@vsphere.local"
           }
     response:
+      status: 200
       statusText: OK
       headers:
         - name: Content-Type
@@ -59,13 +62,13 @@ examples:
         type: json
         data: |-
           {
-            "hostname": "",
-            "integrationId": "",
-            "integrationName": "",
-            "lastUpdateTime": "",
-            "status": "",
-            "username": "",
-            "version": ""
+            "hostname": "1.1.1.1",
+            "integrationId": "vcenter-1.1.1.1",
+            "integrationName": "d30-vCenter1",
+            "lastUpdateTime": "2024-06-22T10:00:00.00Z",
+            "status": "ok",
+            "username": "administrator@vsphere.local",
+            "version": "7.0.3"
           }
   - name: 400 Response
     description: Bad Request
@@ -88,6 +91,7 @@ examples:
             "username": "administrator@vsphere.local"
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -121,6 +125,7 @@ examples:
             "username": "administrator@vsphere.local"
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -154,6 +159,7 @@ examples:
             "username": "administrator@vsphere.local"
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -187,6 +193,7 @@ examples:
             "username": "administrator@vsphere.local"
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

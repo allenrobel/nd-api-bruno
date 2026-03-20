@@ -1,0 +1,709 @@
+info:
+  name: List traffic trends by category
+  type: http
+  seq: 36
+  tags:
+    - Flow Analytics
+
+http:
+  method: GET
+  url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/traffic/trends"
+  params:
+    - name: fabricName
+      value: ""
+      type: query
+      description: Name of the fabric
+    - name: statisticName
+      value: congestion
+      type: query
+      description: Name of the stats to be returned
+    - name: statisticName
+      value: inLatency
+      type: query
+      description: Name of the stats to be returned
+      disabled: true
+    - name: statisticName
+      value: outLatency
+      type: query
+      description: Name of the stats to be returned
+      disabled: true
+    - name: statisticName
+      value: drops
+      type: query
+      description: Name of the stats to be returned
+      disabled: true
+    - name: statisticName
+      value: performanceMetrics
+      type: query
+      description: Name of the stats to be returned
+      disabled: true
+    - name: statisticName
+      value: performanceScore
+      type: query
+      description: Name of the stats to be returned
+      disabled: true
+    - name: statisticName
+      value: bytes
+      type: query
+      description: Name of the stats to be returned
+      disabled: true
+    - name: clusterName
+      value: ""
+      type: query
+      description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+      disabled: true
+    - name: filter
+      value: ""
+      type: query
+      description: Lucene format filter - Filter the response based on this filter field
+      disabled: true
+    - name: startDate
+      value: ""
+      type: query
+      description: Start date
+      disabled: true
+    - name: endDate
+      value: ""
+      type: query
+      description: End date
+      disabled: true
+    - name: sort
+      value: ""
+      type: query
+      description: |
+        Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+        Ascending order by default: "field1"
+        Specific order for one field: "field1:asc" or "field1:desc"
+        Specific order with multiple fields: "field1:asc,field2:desc"
+      disabled: true
+    - name: offset
+      value: ""
+      type: query
+      description: Number of records to skip for pagination
+      disabled: true
+    - name: max
+      value: ""
+      type: query
+      description: Number of records to return
+      disabled: true
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: statName=inLatency
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/traffic/trends"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: statisticName
+          value: congestion
+          type: query
+          description: Name of the stats to be returned
+        - name: statisticName
+          value: inLatency
+          type: query
+          description: Name of the stats to be returned
+          disabled: true
+        - name: statisticName
+          value: outLatency
+          type: query
+          description: Name of the stats to be returned
+          disabled: true
+        - name: statisticName
+          value: drops
+          type: query
+          description: Name of the stats to be returned
+          disabled: true
+        - name: statisticName
+          value: performanceMetrics
+          type: query
+          description: Name of the stats to be returned
+          disabled: true
+        - name: statisticName
+          value: performanceScore
+          type: query
+          description: Name of the stats to be returned
+          disabled: true
+        - name: statisticName
+          value: bytes
+          type: query
+          description: Name of the stats to be returned
+          disabled: true
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "categories": [
+              {
+                "name": "Web",
+                "startValue": 10,
+                "latestValue": 5,
+                "trending": "down",
+                "changePercentage": 50,
+                "minimum": 5,
+                "maximum": 10,
+                "average": 6.4,
+                "unit": "us"
+              }
+            ],
+            "meta": {
+              "counts": {
+                "total": 1,
+                "remaining": 0
+              }
+            }
+          }
+  - name: statName=performanceScore
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/traffic/trends"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: statisticName
+          value: congestion
+          type: query
+          description: Name of the stats to be returned
+        - name: statisticName
+          value: inLatency
+          type: query
+          description: Name of the stats to be returned
+          disabled: true
+        - name: statisticName
+          value: outLatency
+          type: query
+          description: Name of the stats to be returned
+          disabled: true
+        - name: statisticName
+          value: drops
+          type: query
+          description: Name of the stats to be returned
+          disabled: true
+        - name: statisticName
+          value: performanceMetrics
+          type: query
+          description: Name of the stats to be returned
+          disabled: true
+        - name: statisticName
+          value: performanceScore
+          type: query
+          description: Name of the stats to be returned
+          disabled: true
+        - name: statisticName
+          value: bytes
+          type: query
+          description: Name of the stats to be returned
+          disabled: true
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "categories": [
+              {
+                "name": "Web",
+                "startValue": 24,
+                "latestValue": 30,
+                "trending": "up",
+                "changePercentage": 25,
+                "minimum": 20,
+                "maximum": 40,
+                "average": 30,
+                "unit": "score"
+              }
+            ],
+            "meta": {
+              "counts": {
+                "total": 1,
+                "remaining": 0
+              }
+            }
+          }
+  - name: 400 Response
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/traffic/trends"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: statisticName
+          value: congestion
+          type: query
+          description: Name of the stats to be returned
+        - name: statisticName
+          value: inLatency
+          type: query
+          description: Name of the stats to be returned
+          disabled: true
+        - name: statisticName
+          value: outLatency
+          type: query
+          description: Name of the stats to be returned
+          disabled: true
+        - name: statisticName
+          value: drops
+          type: query
+          description: Name of the stats to be returned
+          disabled: true
+        - name: statisticName
+          value: performanceMetrics
+          type: query
+          description: Name of the stats to be returned
+          disabled: true
+        - name: statisticName
+          value: performanceScore
+          type: query
+          description: Name of the stats to be returned
+          disabled: true
+        - name: statisticName
+          value: bytes
+          type: query
+          description: Name of the stats to be returned
+          disabled: true
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/traffic/trends"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: statisticName
+          value: congestion
+          type: query
+          description: Name of the stats to be returned
+        - name: statisticName
+          value: inLatency
+          type: query
+          description: Name of the stats to be returned
+          disabled: true
+        - name: statisticName
+          value: outLatency
+          type: query
+          description: Name of the stats to be returned
+          disabled: true
+        - name: statisticName
+          value: drops
+          type: query
+          description: Name of the stats to be returned
+          disabled: true
+        - name: statisticName
+          value: performanceMetrics
+          type: query
+          description: Name of the stats to be returned
+          disabled: true
+        - name: statisticName
+          value: performanceScore
+          type: query
+          description: Name of the stats to be returned
+          disabled: true
+        - name: statisticName
+          value: bytes
+          type: query
+          description: Name of the stats to be returned
+          disabled: true
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 403 Response
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/traffic/trends"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: statisticName
+          value: congestion
+          type: query
+          description: Name of the stats to be returned
+        - name: statisticName
+          value: inLatency
+          type: query
+          description: Name of the stats to be returned
+          disabled: true
+        - name: statisticName
+          value: outLatency
+          type: query
+          description: Name of the stats to be returned
+          disabled: true
+        - name: statisticName
+          value: drops
+          type: query
+          description: Name of the stats to be returned
+          disabled: true
+        - name: statisticName
+          value: performanceMetrics
+          type: query
+          description: Name of the stats to be returned
+          disabled: true
+        - name: statisticName
+          value: performanceScore
+          type: query
+          description: Name of the stats to be returned
+          disabled: true
+        - name: statisticName
+          value: bytes
+          type: query
+          description: Name of the stats to be returned
+          disabled: true
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 500 Response
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{analyzePath}}/traffic/trends"
+      method: GET
+      params:
+        - name: fabricName
+          value: ""
+          type: query
+          description: Name of the fabric
+        - name: statisticName
+          value: congestion
+          type: query
+          description: Name of the stats to be returned
+        - name: statisticName
+          value: inLatency
+          type: query
+          description: Name of the stats to be returned
+          disabled: true
+        - name: statisticName
+          value: outLatency
+          type: query
+          description: Name of the stats to be returned
+          disabled: true
+        - name: statisticName
+          value: drops
+          type: query
+          description: Name of the stats to be returned
+          disabled: true
+        - name: statisticName
+          value: performanceMetrics
+          type: query
+          description: Name of the stats to be returned
+          disabled: true
+        - name: statisticName
+          value: performanceScore
+          type: query
+          description: Name of the stats to be returned
+          disabled: true
+        - name: statisticName
+          value: bytes
+          type: query
+          description: Name of the stats to be returned
+          disabled: true
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: filter
+          value: ""
+          type: query
+          description: Lucene format filter - Filter the response based on this filter field
+          disabled: true
+        - name: startDate
+          value: ""
+          type: query
+          description: Start date
+          disabled: true
+        - name: endDate
+          value: ""
+          type: query
+          description: End date
+          disabled: true
+        - name: sort
+          value: ""
+          type: query
+          description: |
+            Sort the records by the declared fields in either ascending (default) or descending (:desc) order
+            Ascending order by default: "field1"
+            Specific order for one field: "field1:asc" or "field1:desc"
+            Specific order with multiple fields: "field1:asc,field2:desc"
+          disabled: true
+        - name: offset
+          value: ""
+          type: query
+          description: Number of records to skip for pagination
+          disabled: true
+        - name: max
+          value: ""
+          type: query
+          description: Number of records to return
+          disabled: true
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }

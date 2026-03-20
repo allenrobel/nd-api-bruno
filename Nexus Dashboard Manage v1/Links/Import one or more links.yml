@@ -2,6 +2,8 @@ info:
   name: Import one or more links
   type: http
   seq: 2
+  tags:
+    - Links
 
 http:
   method: POST
@@ -26,7 +28,8 @@ settings:
   maxRedirects: 5
 
 examples:
-  - name: CreatedOneLink
+  - name: CreatedOneLink (ebgpVrfLite)
+    description: Import eBGP VRF lite links via CSV
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/import"
       method: POST
@@ -42,6 +45,7 @@ examples:
           description: Change Control Ticket Id
           disabled: true
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -53,12 +57,13 @@ examples:
             "links": [
               {
                 "linkId": "LINK-UUID-8540",
-                "message": "LINK-UUID-8540 create successful",
+                "message": "LINK-UUID-8540 created successfully",
                 "status": "success"
               }
             ]
           }
-  - name: CreatedTwoLinks
+  - name: CreatedOneLink (layer3DciVrfLite)
+    description: Import layer3 DCI VRF lite links via CSV
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/import"
       method: POST
@@ -74,6 +79,7 @@ examples:
           description: Change Control Ticket Id
           disabled: true
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -85,17 +91,528 @@ examples:
             "links": [
               {
                 "linkId": "LINK-UUID-8540",
-                "message": "LINK-UUID-8541 create successful",
+                "message": "LINK-UUID-8540 created successfully",
+                "status": "success"
+              }
+            ]
+          }
+  - name: CreatedOneLink (multisiteOverlay)
+    description: Import multisite overlay links via CSV
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/import"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+    response:
+      status: 207
+      statusText: Multi-Status
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "links": [
+              {
+                "linkId": "LINK-UUID-8540",
+                "message": "LINK-UUID-8540 created successfully",
+                "status": "success"
+              }
+            ]
+          }
+  - name: CreatedOneLink (multisiteUnderlay)
+    description: Import multisite underlay links via CSV
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/import"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+    response:
+      status: 207
+      statusText: Multi-Status
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "links": [
+              {
+                "linkId": "LINK-UUID-8540",
+                "message": "LINK-UUID-8540 created successfully",
+                "status": "success"
+              }
+            ]
+          }
+  - name: CreatedOneLink (numbered)
+    description: Import numbered links via CSV
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/import"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+    response:
+      status: 207
+      statusText: Multi-Status
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "links": [
+              {
+                "linkId": "LINK-UUID-8540",
+                "message": "LINK-UUID-8540 created successfully",
+                "status": "success"
+              }
+            ]
+          }
+  - name: CreatedOneLink (preprovision)
+    description: Import preprovision links via CSV
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/import"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+    response:
+      status: 207
+      statusText: Multi-Status
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "links": [
+              {
+                "linkId": "LINK-UUID-8540",
+                "message": "LINK-UUID-8540 created successfully",
+                "status": "success"
+              }
+            ]
+          }
+  - name: CreatedOneLink (unnumbered)
+    description: Import unnumbered links via CSV
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/import"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+    response:
+      status: 207
+      statusText: Multi-Status
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "links": [
+              {
+                "linkId": "LINK-UUID-8540",
+                "message": "LINK-UUID-8540 created successfully",
+                "status": "success"
+              }
+            ]
+          }
+  - name: CreatedOneLink (userDefined)
+    description: Import user defined links via CSV
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/import"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+    response:
+      status: 207
+      statusText: Multi-Status
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "links": [
+              {
+                "linkId": "LINK-UUID-8540",
+                "message": "LINK-UUID-8540 created successfully",
+                "status": "success"
+              }
+            ]
+          }
+  - name: CreatedTwoLinks (ebgpVrfLite)
+    description: Import eBGP VRF lite links via CSV
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/import"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+    response:
+      status: 207
+      statusText: Multi-Status
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "links": [
+              {
+                "linkId": "LINK-UUID-8540",
+                "message": "LINK-UUID-8541 created successfully",
                 "status": "success"
               },
               {
-                "linkId": "LINK-UUID-8541",
-                "message": "LINK-UUID-8541 failed due to a database error.",
+                "linkId": "",
+                "message": "FDO20372FH8~Ethernet1/8~FDO21351QGE~Ethernet1/4: PTI POLICY-14240 already associated for the link LINK-UUID-15010. Edit the link to update.",
                 "status": "failure"
               }
             ]
           }
-  - name: 400 Response
+  - name: CreatedTwoLinks (layer3DciVrfLite)
+    description: Import layer3 DCI VRF lite links via CSV
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/import"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+    response:
+      status: 207
+      statusText: Multi-Status
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "links": [
+              {
+                "linkId": "LINK-UUID-8540",
+                "message": "LINK-UUID-8541 created successfully",
+                "status": "success"
+              },
+              {
+                "linkId": "",
+                "message": "FDO20372FH8~Ethernet1/8~FDO21351QGE~Ethernet1/4: PTI POLICY-14240 already associated for the link LINK-UUID-15010. Edit the link to update.",
+                "status": "failure"
+              }
+            ]
+          }
+  - name: CreatedTwoLinks (multisiteOverlay)
+    description: Import multisite overlay links via CSV
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/import"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+    response:
+      status: 207
+      statusText: Multi-Status
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "links": [
+              {
+                "linkId": "LINK-UUID-8540",
+                "message": "LINK-UUID-8541 created successfully",
+                "status": "success"
+              },
+              {
+                "linkId": "",
+                "message": "FDO20372FH8~Ethernet1/8~FDO21351QGE~Ethernet1/4: PTI POLICY-14240 already associated for the link LINK-UUID-15010. Edit the link to update.",
+                "status": "failure"
+              }
+            ]
+          }
+  - name: CreatedTwoLinks (multisiteUnderlay)
+    description: Import multisite underlay links via CSV
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/import"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+    response:
+      status: 207
+      statusText: Multi-Status
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "links": [
+              {
+                "linkId": "LINK-UUID-8540",
+                "message": "LINK-UUID-8541 created successfully",
+                "status": "success"
+              },
+              {
+                "linkId": "",
+                "message": "FDO20372FH8~Ethernet1/8~FDO21351QGE~Ethernet1/4: PTI POLICY-14240 already associated for the link LINK-UUID-15010. Edit the link to update.",
+                "status": "failure"
+              }
+            ]
+          }
+  - name: CreatedTwoLinks (numbered)
+    description: Import numbered links via CSV
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/import"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+    response:
+      status: 207
+      statusText: Multi-Status
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "links": [
+              {
+                "linkId": "LINK-UUID-8540",
+                "message": "LINK-UUID-8541 created successfully",
+                "status": "success"
+              },
+              {
+                "linkId": "",
+                "message": "FDO20372FH8~Ethernet1/8~FDO21351QGE~Ethernet1/4: PTI POLICY-14240 already associated for the link LINK-UUID-15010. Edit the link to update.",
+                "status": "failure"
+              }
+            ]
+          }
+  - name: CreatedTwoLinks (preprovision)
+    description: Import preprovision links via CSV
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/import"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+    response:
+      status: 207
+      statusText: Multi-Status
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "links": [
+              {
+                "linkId": "LINK-UUID-8540",
+                "message": "LINK-UUID-8541 created successfully",
+                "status": "success"
+              },
+              {
+                "linkId": "",
+                "message": "FDO20372FH8~Ethernet1/8~FDO21351QGE~Ethernet1/4: PTI POLICY-14240 already associated for the link LINK-UUID-15010. Edit the link to update.",
+                "status": "failure"
+              }
+            ]
+          }
+  - name: CreatedTwoLinks (unnumbered)
+    description: Import unnumbered links via CSV
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/import"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+    response:
+      status: 207
+      statusText: Multi-Status
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "links": [
+              {
+                "linkId": "LINK-UUID-8540",
+                "message": "LINK-UUID-8541 created successfully",
+                "status": "success"
+              },
+              {
+                "linkId": "",
+                "message": "FDO20372FH8~Ethernet1/8~FDO21351QGE~Ethernet1/4: PTI POLICY-14240 already associated for the link LINK-UUID-15010. Edit the link to update.",
+                "status": "failure"
+              }
+            ]
+          }
+  - name: CreatedTwoLinks (userDefined)
+    description: Import user defined links via CSV
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/import"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+    response:
+      status: 207
+      statusText: Multi-Status
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "links": [
+              {
+                "linkId": "LINK-UUID-8540",
+                "message": "LINK-UUID-8541 created successfully",
+                "status": "success"
+              },
+              {
+                "linkId": "",
+                "message": "FDO20372FH8~Ethernet1/8~FDO21351QGE~Ethernet1/4: PTI POLICY-14240 already associated for the link LINK-UUID-15010. Edit the link to update.",
+                "status": "failure"
+              }
+            ]
+          }
+  - name: 400 Response (ebgpVrfLite)
     description: Bad Request
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/import"
@@ -112,6 +629,7 @@ examples:
           description: Change Control Ticket Id
           disabled: true
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -124,7 +642,217 @@ examples:
             "description": "The server could not understand the request due to incorrect syntax.",
             "code": 400
           }
-  - name: 401 Response
+  - name: 400 Response (layer3DciVrfLite)
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/import"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 400 Response (multisiteOverlay)
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/import"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 400 Response (multisiteUnderlay)
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/import"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 400 Response (numbered)
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/import"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 400 Response (preprovision)
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/import"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 400 Response (unnumbered)
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/import"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 400 Response (userDefined)
+    description: Bad Request
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/import"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Bad Request",
+            "description": "The server could not understand the request due to incorrect syntax.",
+            "code": 400
+          }
+  - name: 401 Response (ebgpVrfLite)
     description: Unauthorized
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/import"
@@ -141,6 +869,7 @@ examples:
           description: Change Control Ticket Id
           disabled: true
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -153,7 +882,217 @@ examples:
             "description": "Indicates that the request requires user authentication information.",
             "code": 401
           }
-  - name: 403 Response
+  - name: 401 Response (layer3DciVrfLite)
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/import"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 401 Response (multisiteOverlay)
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/import"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 401 Response (multisiteUnderlay)
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/import"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 401 Response (numbered)
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/import"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 401 Response (preprovision)
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/import"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 401 Response (unnumbered)
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/import"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 401 Response (userDefined)
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/import"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Unauthorized",
+            "description": "Indicates that the request requires user authentication information.",
+            "code": 401
+          }
+  - name: 403 Response (ebgpVrfLite)
     description: Forbidden
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/import"
@@ -170,6 +1109,7 @@ examples:
           description: Change Control Ticket Id
           disabled: true
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -182,7 +1122,217 @@ examples:
             "description": "The client does not have access rights to the content.",
             "code": 403
           }
-  - name: 404 Response
+  - name: 403 Response (layer3DciVrfLite)
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/import"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 403 Response (multisiteOverlay)
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/import"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 403 Response (multisiteUnderlay)
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/import"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 403 Response (numbered)
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/import"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 403 Response (preprovision)
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/import"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 403 Response (unnumbered)
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/import"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 403 Response (userDefined)
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/import"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Forbidden",
+            "description": "The client does not have access rights to the content.",
+            "code": 403
+          }
+  - name: 404 Response (ebgpVrfLite)
     description: Not Found
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/import"
@@ -199,6 +1349,7 @@ examples:
           description: Change Control Ticket Id
           disabled: true
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -211,7 +1362,217 @@ examples:
             "description": "The server cannot find the requested resource.",
             "code": 404
           }
-  - name: 409 Response
+  - name: 404 Response (layer3DciVrfLite)
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/import"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 404 Response (multisiteOverlay)
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/import"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 404 Response (multisiteUnderlay)
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/import"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 404 Response (numbered)
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/import"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 404 Response (preprovision)
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/import"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 404 Response (unnumbered)
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/import"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 404 Response (userDefined)
+    description: Not Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/import"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Not Found",
+            "description": "The server cannot find the requested resource.",
+            "code": 404
+          }
+  - name: 409 Response (ebgpVrfLite)
     description: Conflict
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/import"
@@ -228,6 +1589,7 @@ examples:
           description: Change Control Ticket Id
           disabled: true
     response:
+      status: 409
       statusText: Conflict
       headers:
         - name: Content-Type
@@ -240,7 +1602,217 @@ examples:
             "description": "The request could not be completed due to a conflict with the current state of the resource.",
             "code": 409
           }
-  - name: 500 Response
+  - name: 409 Response (layer3DciVrfLite)
+    description: Conflict
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/import"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+    response:
+      status: 409
+      statusText: Conflict
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Conflict",
+            "description": "The request could not be completed due to a conflict with the current state of the resource.",
+            "code": 409
+          }
+  - name: 409 Response (multisiteOverlay)
+    description: Conflict
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/import"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+    response:
+      status: 409
+      statusText: Conflict
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Conflict",
+            "description": "The request could not be completed due to a conflict with the current state of the resource.",
+            "code": 409
+          }
+  - name: 409 Response (multisiteUnderlay)
+    description: Conflict
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/import"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+    response:
+      status: 409
+      statusText: Conflict
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Conflict",
+            "description": "The request could not be completed due to a conflict with the current state of the resource.",
+            "code": 409
+          }
+  - name: 409 Response (numbered)
+    description: Conflict
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/import"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+    response:
+      status: 409
+      statusText: Conflict
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Conflict",
+            "description": "The request could not be completed due to a conflict with the current state of the resource.",
+            "code": 409
+          }
+  - name: 409 Response (preprovision)
+    description: Conflict
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/import"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+    response:
+      status: 409
+      statusText: Conflict
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Conflict",
+            "description": "The request could not be completed due to a conflict with the current state of the resource.",
+            "code": 409
+          }
+  - name: 409 Response (unnumbered)
+    description: Conflict
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/import"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+    response:
+      status: 409
+      statusText: Conflict
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Conflict",
+            "description": "The request could not be completed due to a conflict with the current state of the resource.",
+            "code": 409
+          }
+  - name: 409 Response (userDefined)
+    description: Conflict
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/import"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+    response:
+      status: 409
+      statusText: Conflict
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Conflict",
+            "description": "The request could not be completed due to a conflict with the current state of the resource.",
+            "code": 409
+          }
+  - name: 500 Response (ebgpVrfLite)
     description: Internal Server Error
     request:
       url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/import"
@@ -257,6 +1829,217 @@ examples:
           description: Change Control Ticket Id
           disabled: true
     response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }
+  - name: 500 Response (layer3DciVrfLite)
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/import"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }
+  - name: 500 Response (multisiteOverlay)
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/import"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }
+  - name: 500 Response (multisiteUnderlay)
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/import"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }
+  - name: 500 Response (numbered)
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/import"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }
+  - name: 500 Response (preprovision)
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/import"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }
+  - name: 500 Response (unnumbered)
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/import"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal Server Error",
+            "description": "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "code": 500
+          }
+  - name: 500 Response (userDefined)
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{managePath}}/linkActions/import"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: ticketId
+          value: ""
+          type: query
+          description: Change Control Ticket Id
+          disabled: true
+    response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type

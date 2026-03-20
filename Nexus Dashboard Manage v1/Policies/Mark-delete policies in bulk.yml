@@ -2,6 +2,8 @@ info:
   name: Mark-delete policies in bulk
   type: http
   seq: 6
+  tags:
+    - Policies
 
 http:
   method: POST
@@ -25,7 +27,10 @@ http:
     type: json
     data: |-
       {
-        "policyIds": []
+        "policyIds": [
+          "POLICY-121110",
+          "POLICY-121120"
+        ]
       }
   auth: inherit
 
@@ -66,6 +71,7 @@ examples:
             ]
           }
     response:
+      status: 207
       statusText: Multi-Status
       headers:
         - name: Content-Type
@@ -117,6 +123,7 @@ examples:
             ]
           }
     response:
+      status: 400
       statusText: Bad Request
       headers:
         - name: Content-Type
@@ -159,6 +166,7 @@ examples:
             ]
           }
     response:
+      status: 401
       statusText: Unauthorized
       headers:
         - name: Content-Type
@@ -201,6 +209,7 @@ examples:
             ]
           }
     response:
+      status: 403
       statusText: Forbidden
       headers:
         - name: Content-Type
@@ -243,6 +252,7 @@ examples:
             ]
           }
     response:
+      status: 404
       statusText: Not Found
       headers:
         - name: Content-Type
@@ -285,6 +295,7 @@ examples:
             ]
           }
     response:
+      status: 500
       statusText: Internal Server Error
       headers:
         - name: Content-Type
