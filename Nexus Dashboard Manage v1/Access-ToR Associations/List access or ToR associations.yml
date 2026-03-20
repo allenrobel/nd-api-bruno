@@ -20,7 +20,7 @@ http:
       description: Serial number of the aggregation or leaf VPC peer switch. When includeCandidates is false, this can be used along with aggregationOrLeafSwitchId to optionally filter the responses to only include associations for the specified vpc pair.
       disabled: true
     - name: fabricName
-      value: ""
+      value: fabric_1
       type: path
       description: Name of the fabric
     - name: aggregationOrLeafSwitchId
