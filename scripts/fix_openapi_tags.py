@@ -14,8 +14,8 @@ Also updates tag references in operation objects to match.
 Idempotent: safe to run multiple times on the same file.
 
 Usage:
-    python scripts/fix_openapi_tags.py schemas/4.2.1.10/manage_download.json
-    python scripts/fix_openapi_tags.py schemas/4.2.1.10/manage_download.json -o schemas/4.2.1.10/manage_tags_fixed.json
+    python scripts/fix_openapi_tags.py schemas/4.2.1.10/manage.json
+    python scripts/fix_openapi_tags.py schemas/4.2.1.10/manage.json -o schemas/4.2.1.10/manage_tags_fixed.json
 """
 
 import argparse
