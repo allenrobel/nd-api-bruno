@@ -1,0 +1,121 @@
+info:
+  name: Verify External Service
+  type: http
+  seq: 6
+
+http:
+  method: POST
+  url: "{{controllerProtocol}}{{controllerIp}}/bootstrap/verifyexternalservice"
+  body:
+    type: json
+    data: |-
+      {
+        "externalServices": [
+          {
+            "target": "Data",
+            "pool": [
+              "192.168.12.50",
+              "192.168.12.51",
+              "192.168.12.52"
+            ]
+          }
+        ],
+        "nodes": [
+          {
+            "id": "1",
+            "hostName": "nd-4-2-1-10-node1",
+            "serialNumber": "518FBB1F13C5",
+            "role": "Master",
+            "dataNetwork": {
+              "ipSubnet": "192.168.12.14/24",
+              "gateway": "192.168.12.1",
+              "ipv6Subnet": "",
+              "gatewayv6": ""
+            },
+            "managementNetwork": {
+              "ipSubnet": "192.168.7.7/24",
+              "gateway": "192.168.7.1",
+              "ipv6Subnet": "",
+              "gatewayv6": ""
+            },
+            "nodeController": {
+              "id": "vnode",
+              "ipAddress": "192.168.7.7",
+              "loginUser": "rescue-user"
+            },
+            "bgpConfig": {},
+            "clusterLeader": false,
+            "self": true,
+            "mgmtIp": "192.168.7.7/24",
+            "dataIp": "192.168.12.14/24",
+            "notDeletable": false
+          }
+        ],
+        "enableBgp": false
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: "200"
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}/bootstrap/verifyexternalservice"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "externalServices": [
+              {
+                "target": "Data",
+                "pool": [
+                  "192.168.12.50",
+                  "192.168.12.51",
+                  "192.168.12.52"
+                ]
+              }
+            ],
+            "nodes": [
+              {
+                "id": "1",
+                "hostName": "nd-4-2-1-10-node1",
+                "serialNumber": "518FBB1F13C5",
+                "role": "Master",
+                "dataNetwork": {
+                  "ipSubnet": "192.168.12.14/24",
+                  "gateway": "192.168.12.1",
+                  "ipv6Subnet": "",
+                  "gatewayv6": ""
+                },
+                "managementNetwork": {
+                  "ipSubnet": "192.168.7.7/24",
+                  "gateway": "192.168.7.1",
+                  "ipv6Subnet": "",
+                  "gatewayv6": ""
+                },
+                "nodeController": {
+                  "id": "vnode",
+                  "ipAddress": "192.168.7.7",
+                  "loginUser": "rescue-user"
+                },
+                "bgpConfig": {},
+                "clusterLeader": false,
+                "self": true,
+                "mgmtIp": "192.168.7.7/24",
+                "dataIp": "192.168.12.14/24",
+                "notDeletable": false
+              }
+            ],
+            "enableBgp": false
+          }
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: ""

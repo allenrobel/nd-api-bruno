@@ -1,0 +1,60 @@
+info:
+  name: Verify Remote Services
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{controllerProtocol}}{{controllerIp}}/bootstrap/verifyremoteservices"
+  body:
+    type: json
+    data: |-
+      {
+        "nameServers": [
+          "192.168.7.1"
+        ],
+        "ntpConfig": {
+          "servers": [
+            {
+              "host": "192.168.7.6",
+              "prefer": true
+            }
+          ]
+        }
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: "200"
+    description: Success response
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}/bootstrap/verifyremoteservices"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "nameServers": [
+              "192.168.7.1"
+            ],
+            "ntpConfig": {
+              "servers": [
+                {
+                  "host": "192.168.7.6",
+                  "prefer": true
+                }
+              ]
+            }
+          }
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: ""

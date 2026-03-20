@@ -1,0 +1,42 @@
+info:
+  name: Persona
+  type: http
+  seq: 5
+
+http:
+  method: POST
+  url: "{{controllerProtocol}}{{controllerIp}}/v2/bootstrap/persona"
+  body:
+    type: json
+    data: |-
+      {
+        "persona": "LAN",
+        "minExternalIPS": 3
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: "500"
+    description: Number of nodes are 0
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}/v2/bootstrap/persona"
+      method: POST
+      body:
+        type: json
+        data: |-
+          {
+            "persona": "LAN",
+            "minExternalIPS": 3
+          }
+    response:
+      status: 200
+      statusText: OK
+      body:
+        type: text
+        data: ""

@@ -1,0 +1,90 @@
+info:
+  name: Bootstrap Cluster Node 2
+  type: http
+  seq: 8
+
+http:
+  method: POST
+  url: "{{controllerProtocol}}{{controllerIp}}/v2/bootstrap/cluster"
+  body:
+    type: json
+    data: |-
+      {
+          "clusterConfig": {
+              "ntpConfig": {
+                  "servers": [
+                      {
+                          "host": "192.168.7.6",
+                          "prefer": true
+                      }
+                  ]
+              },
+              "name": "ND-4-2-1-10-n2",
+              "deploymentScaleProfile": {},
+              "persona": "LAN",
+              "searchDomains": [
+                  "arobel.com"
+              ],
+              "ignoreHosts": [
+                  "localhost"
+              ],
+              "nameServers": [
+                  "192.168.7.1"
+              ],
+              "proxyServers": [],
+              "appNetwork": "172.17.0.1/16",
+              "serviceNetwork": "100.80.0.0/16",
+              "externalServices": [
+                  {
+                      "target": "Management",
+                      "pool": [
+                          "192.168.7.60",
+                          "192.168.7.61",
+                          "192.168.7.62"
+                      ]
+                  },
+                  {
+                      "target": "Data",
+                      "pool": [
+                          "192.168.14.50",
+                          "192.168.14.51",
+                          "192.168.14.52"
+                      ]
+                  }
+              ],
+              "deploymentMode": "ndfc"
+          },
+          "nodes": [
+              {
+                  "hostName": "ND-4-2-1-10-n2",
+                  "clusterLeader": true,
+                  "role": "Master",
+                  "self": true,
+                  "dataNetwork": {
+                      "ipSubnet": "192.168.14.14/24",
+                      "gateway": "192.168.14.1",
+                      "ipv6Subnet": "",
+                      "gatewayv6": ""
+                  },
+                  "managementNetwork": {
+                      "ipSubnet": "192.168.7.8/24",
+                      "gateway": "192.168.7.1",
+                      "ipv6Subnet": "",
+                      "gatewayv6": ""
+                  },
+                  "bgpConfig": {},
+                  "nodeController": {
+                      "id": "vnode",
+                      "loginUser": "rescue-user"
+                  },
+                  "serialNumber": "E88811733034"
+              }
+          ]
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
