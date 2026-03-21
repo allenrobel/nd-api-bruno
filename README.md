@@ -22,10 +22,13 @@ Remove this if you do not want Claude to have this level of access.
 
 | Collection | Base Path | Endpoints | Description |
 |---|---|---|---|
+| `Nexus Dashboard Analyze v1` | `/api/v1/analyze` | ~327 | Network analytics: anomalies, advisories, compliance, flows, energy management |
 | `Nexus Dashboard Infrastructure v1` | `/api/v1/infra` | ~280 | System management: health, certificates, auth, backups, integrations |
 | `Nexus Dashboard Manage v1` | `/api/v1/manage` | ~492 | Fabric/network management: ACI/DCNM fabrics, inventory, policies |
 | `Nexus Dashboard OneManage v1` | `/api/v1/oneManage` | ~132 | Unified management: multi-cluster analytics, resource management |
-| `Schema` | — | 8 | Login, logout, and OpenAPI schema retrieval for all APIs |
+| `Nexus Dashboard Bootstrap` | `/v2/bootstrap` | 8 | Cluster bootstrapping: cluster setup, persona, subnet/service verification |
+| `Login` | `/login`, `/api/v1/infra/login` | 2 | Login requests (legacy and current) |
+| `Schema` | — | 6 | Logout and OpenAPI schema retrieval for all APIs |
 
 ## Prerequisites
 
