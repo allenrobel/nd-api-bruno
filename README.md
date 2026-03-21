@@ -133,6 +133,17 @@ The script performs four steps:
 
 The script is idempotent and safe to run multiple times.
 
+#### 2a. Questions and Answers
+
+Question. Why include a `{{ControllerProtocol}}` variable?  Isn't it always `https://`?
+
+Answer. We wanted the collections in `nd-api-bruno` to support [nd-mock](https://github.com/allenrobel/nd-mock),
+which is a FastAPI implementation of a simulated Nexus Dashboard controller's REST API.
+
+Without going through hoops, FastAPI uses `http://` rather than `https://`. Since we use `nd-api-bruno` to develop
+[nd-mock](https://github.com/allenrobel/nd-mock), we wanted to be able to switch between environments for mock
+(FastAPI) ND controllers versus real ND controllers.
+
 ### Path variable mapping
 
 The script auto-detects the path variable from the collection's environment file. If the environment file has already been cleaned, use `--path-var`:
