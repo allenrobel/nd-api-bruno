@@ -146,16 +146,113 @@ The script auto-detects the path variable from the collection's environment file
 
 ## Project Structure
 
-```
-nd-api-bruno/
-├── Schema/                              # Login, logout, schema retrieval
-├── Nexus Dashboard Infrastructure v1/   # /api/v1/infra endpoints
-├── Nexus Dashboard Manage v1/           # /api/v1/manage endpoints
-├── Nexus Dashboard OneManage v1/        # /api/v1/oneManage endpoints
-├── schemas/                             # Saved OpenAPI spec JSON files
-├── scripts/
-│   └── post_import_convert.py           # Post-import conversion script
-└── README.md
+``` bash
+nd-api-bruno
+├── assets
+│   └── images
+├── CLAUDE.md
+├── Login
+│   ├── Login Legacy.yml
+│   ├── Login.yml
+│   └── opencollection.yml
+├── Nexus Dashboard Analyze v1
+│   ├── AI Infrastructure and Analytics
+│   ├── Anomalies and Advisories
+│   ├── Compliance Conformance and Update Analysis
+│   ├── Dashboards and Explorer
+│   ├── Endpoints
+│   ├── Energy Management
+│   ├── environments
+│   ├── Flow Analytics
+│   ├── Job and Report Management
+│   ├── Network Connectivity Resources
+│   ├── opencollection.yml
+│   ├── Resources Summary
+│   └── Services and Segmentation
+├── Nexus Dashboard Bootstrap
+│   ├── Bootstrap Cluster Node 2.yml
+│   ├── Bootstrap Cluster.yml
+│   ├── Cluster syscfg.yml
+│   ├── Cluster.yml
+│   ├── opencollection.yml
+│   ├── Persona.yml
+│   ├── Verify Cluster Subnets.yml
+│   ├── Verify External Service.yml
+│   └── VerifyRemoteServices.yml
+├── Nexus Dashboard Infrastructure v1
+│   ├── Authentication
+│   ├── Backup and Restore
+│   ├── Certificate Management
+│   ├── environments
+│   ├── History and Logs
+│   ├── Integrations
+│   ├── License Management
+│   ├── Multi Tenancy
+│   ├── Multi-Cluster Connectivity
+│   ├── opencollection.yml
+│   ├── System Bootstrap
+│   ├── System Settings
+│   ├── System Software
+│   ├── System Status
+│   ├── Tech Support
+│   └── Users and Security
+├── Nexus Dashboard Manage v1
+│   ├── Access-ToR Associations
+│   ├── AI Infrastructure and Analytics
+│   ├── Anomaly Settings
+│   ├── Change Control
+│   ├── Configuration Compliance
+│   ├── Configuration Deployment
+│   ├── Device Credentials
+│   ├── Endpoints
+│   ├── environments
+│   ├── Fabric Management
+│   ├── Fabric Software Management
+│   ├── Flows
+│   ├── Interfaces
+│   ├── Inventory
+│   ├── L4L7 Services
+│   ├── Links
+│   ├── Multi Tenancy
+│   ├── opencollection.yml
+│   ├── Policies
+│   ├── Resource Management
+│   ├── Routing Policies
+│   ├── Security and Segmentation
+│   ├── Template Library
+│   └── VRFs and Networks
+├── Nexus Dashboard OneManage v1
+│   ├── Advisories and Anomalies
+│   ├── APIC API Proxy
+│   ├── environments
+│   ├── Fabric Management
+│   ├── History and Logs
+│   ├── Inventory
+│   ├── Links
+│   ├── Multi-Cluster Analytics
+│   ├── opencollection.yml
+│   ├── Resource Management
+│   ├── Security and Segmentation
+│   └── VRFs and Networks
+├── pyproject.toml
+├── README.md
+├── Schema
+│   ├── Analyze.yml
+│   ├── environments
+│   ├── Infra.yml
+│   ├── Logout.yml
+│   ├── Manage.yml
+│   ├── One Manage.yml
+│   ├── opencollection.yml
+│   └── Orchestration.yml
+├── schemas
+│   ├── 4.2.1.10
+│   └── 4.2.1.4
+├── scripts
+│   ├── fix_openapi_refs.py
+│   ├── fix_openapi_tags.py
+│   └── post_import_convert.py
+└── uv.lock
 ```
 
 Each collection contains:
