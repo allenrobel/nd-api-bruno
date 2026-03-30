@@ -1,1 +1,12 @@
 name: Nexus Dashboard Infrastructure APIs
+variables:
+  - name: nd_username
+    value: admin
+  - secret: true
+    name: nd_password
+  - name: nd_domain
+    value: radius
+  - secret: true
+    name: nd_auth_token
+  - name: nd_token_expires
+    value: ""
