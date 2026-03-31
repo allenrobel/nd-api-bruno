@@ -1,0 +1,6 @@
+name: Login
+variables:
+  - secret: true
+    name: nd_auth_token
+  - secret: true
+    name: nd_token_expires
