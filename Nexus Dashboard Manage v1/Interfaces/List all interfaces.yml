@@ -15,11 +15,11 @@ http:
       description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
       disabled: true
     - name: fabricName
-      value: ""
+      value: fabric_1
       type: path
       description: Name of the fabric
     - name: switchId
-      value: ""
+      value: 9NIE7U0ZXHZ
       type: path
       description: For ACI fabrics, the node ID. For NX-OS fabrics, the switch serial number.
     - name: max

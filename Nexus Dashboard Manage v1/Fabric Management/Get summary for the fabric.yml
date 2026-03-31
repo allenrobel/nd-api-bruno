@@ -15,7 +15,7 @@ http:
       description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
       disabled: true
     - name: fabricName
-      value: ""
+      value: fabric_1
       type: path
       description: Name of the fabric
   auth: inherit
