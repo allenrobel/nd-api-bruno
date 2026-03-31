@@ -1,0 +1,238 @@
+info:
+  name: User login
+  type: http
+  seq: 3
+  tags:
+    - Authentication
+
+http:
+  method: POST
+  url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/login"
+  params:
+    - name: clusterName
+      value: ""
+      type: query
+      description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+      disabled: true
+    - name: oidcRedirect
+      value: ""
+      type: query
+      description: Set to 'true' for OIDC redirect flow
+      disabled: true
+  body:
+    type: json
+    data: |-
+      {
+        "domain": "{{nd_domain}}",
+        "userName": "{{nd_username}}",
+        "userPasswd": "{{nd_password}}"
+      }
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        // Copied from Infra collection - Nexus Dashboard has a single Login endpoint
+        // that authenticates across all schemas (Infra, Manage, Analyze, OneManage)
+        // Parse the response
+        const data = res.body;
+        // console.log(typeof res.body, res.body);
+        // const data = JSON.parse(res.body);
+
+        // Set the token as a collection variable
+        bru.setVar("nd_auth_token", data.token);
+
+        // Optional: Store expiration time if returned
+        if (data.expiresAt) {
+          bru.setVar("nd_token_expires", data.expiresAt);
+        }
+
+        console.log("Authentication token captured and stored");
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: 200 Response
+    description: OK
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/login"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: oidcRedirect
+          value: ""
+          type: query
+          description: Set to 'true' for OIDC redirect flow
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "domain": "local",
+            "userName": "admin",
+            "userPasswd": "********"
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "jwttoken": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImI0Z2Mwb2R0Y2Q1eDlxeXVxcjFsMDdjdWViY2VrYm52IiwidHlwIjoiSldUIn0...",
+            "rbac": "[{\"domain\":\"all\",\"rolesMap\":{\"super-admin\":{}}}]",
+            "statusCode": 200,
+            "token": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImI0Z2Mwb2R0Y2Q1eDlxeXVxcjFsMDdjdWViY2VrYm52IiwidHlwIjoiSldUIn0...",
+            "username": "admin",
+            "usertype": "local"
+          }
+  - name: 302 Response
+    description: Found
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/login"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: oidcRedirect
+          value: ""
+          type: query
+          description: Set to 'true' for OIDC redirect flow
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "domain": "local",
+            "userName": "admin",
+            "userPasswd": "********"
+          }
+    response:
+      status: 302
+      statusText: Found
+      body:
+        type: text
+        data: ""
+  - name: 401 Response
+    description: Unauthorized
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/login"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: oidcRedirect
+          value: ""
+          type: query
+          description: Set to 'true' for OIDC redirect flow
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "domain": "local",
+            "userName": "admin",
+            "userPasswd": "********"
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Invalid Username/Password, or Account is locked"
+          }
+  - name: 403 Response
+    description: Forbidden
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/login"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: oidcRedirect
+          value: ""
+          type: query
+          description: Set to 'true' for OIDC redirect flow
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "domain": "local",
+            "userName": "admin",
+            "userPasswd": "********"
+          }
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Password has expired. Please update your password."
+          }
+  - name: 500 Response
+    description: Internal Server Error
+    request:
+      url: "{{controllerProtocol}}{{controllerIp}}{{infraPath}}/login"
+      method: POST
+      params:
+        - name: clusterName
+          value: ""
+          type: query
+          description: Name of the target Nexus Dashboard cluster to execute this API, in a multi-cluster deployment
+          disabled: true
+        - name: oidcRedirect
+          value: ""
+          type: query
+          description: Set to 'true' for OIDC redirect flow
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+            "domain": "local",
+            "userName": "admin",
+            "userPasswd": "********"
+          }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "message": "Internal server error"
+          }
