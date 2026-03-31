@@ -5,7 +5,7 @@
         "matcher": "Edit|Write",
         "hooks": [
           {
-            "type": "intercept",
+            "type": "command",
             "command": "echo \"$CLAUDE_TOOL_INPUT\" | grep -q '\\.env' && echo 'BLOCK: Do not edit .env files — they contain credentials' && exit 1 || exit 0"
           }
         ]
@@ -16,7 +16,7 @@
         "matcher": "Edit|Write",
         "hooks": [
           {
-            "type": "notification",
+            "type": "command",
             "command": "FILE=$(echo \"$CLAUDE_TOOL_INPUT\" | jq -r '.file_path // .filePath // empty'); [ -n \"$FILE\" ] && echo \"$FILE\" | grep -q '\\.yml$' && python3 -c \"import yaml; yaml.safe_load(open('$FILE'))\" 2>&1 || true"
           }
         ]
